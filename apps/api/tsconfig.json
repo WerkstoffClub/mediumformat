@@ -14,8 +14,8 @@
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@mf/shared": ["../../packages/shared/src/index.ts"],
-      "@mf/shared/*": ["../../packages/shared/src/*"]
+      "@mf/shared": ["../../packages/shared/dist/index.d.ts"],
+      "@mf/shared/*": ["../../packages/shared/dist/*"]
     }
   }
 }
