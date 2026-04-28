@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './hooks/useAuth';
 import { AppShell } from './layouts/AppShell';
 import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 function ProtectedRoutes() {
   const { user, loading } = useAuth();
@@ -22,7 +23,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoutes />}>
-          {/* Pages added in Tasks 11 & 12 */}
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
