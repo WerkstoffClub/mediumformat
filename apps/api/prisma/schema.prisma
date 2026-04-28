@@ -42,6 +42,19 @@ enum StoreLocation {
   CONSIGNMENT
 }
 
+enum PostCategory {
+  STAFF_PICKS
+  HIGHLIGHTS
+  NEWS
+  INTERVIEW
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -51,6 +64,27 @@ model User {
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  posts        Post[]
+}
+
+model Post {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  title       String
+  excerpt     String?
+  body        String
+  coverUrl    String?
+  category    PostCategory @default(NEWS)
+  status      PostStatus   @default(DRAFT)
+  publishedAt DateTime?
+  author      User         @relation(fields: [authorId], references: [id])
+  authorId    String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([category])
 }
 
 model Release {
@@ -76,6 +110,5 @@ model Release {
   updatedAt         DateTime        @updatedAt
 
   @@index([artist, title])
-  @@index([barcode])
-  @@index([discogsId])
+  // barcode and discogsId already have implicit indexes via @unique
 }
