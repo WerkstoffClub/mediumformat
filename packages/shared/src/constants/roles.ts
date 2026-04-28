@@ -6,7 +6,7 @@ export enum Role {
   CUSTOMER    = 'CUSTOMER',
 }
 
-export const STAFF_ROLES: Role[] = [
+export const STAFF_ROLES: readonly Role[] = [
   Role.ADMIN,
   Role.MANAGER,
   Role.SHOPKEEPER,
