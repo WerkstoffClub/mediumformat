@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  SHOPKEEPER
+  WHOLESALER
+  CUSTOMER
+}
+
+enum RecordFormat {
+  LP
+  TWO_LP
+  THREE_LP
+  TWELVE_INCH
+  SEVEN_INCH
+  CD
+  TWO_CD
+  MERCH
+}
+
+enum RecordCondition {
+  M
+  VGP
+  VG
+  GP
+  G
+  F
+  P
+}
+
+enum StoreLocation {
+  MAIN_STORE
+  WAREHOUSE
+  CONSIGNMENT
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         Role     @default(CUSTOMER)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Release {
+  id                String          @id @default(cuid())
+  artist            String
+  title             String
+  label             String?
+  catNumber         String?
+  year              Int?
+  format            RecordFormat
+  genre             String?
+  condition         RecordCondition
+  priceIdr          Int
+  stock             Int             @default(0)
+  notes             String?
+  imageUrl          String?
+  barcode           String?         @unique
+  storeLocation     StoreLocation   @default(MAIN_STORE)
+  shelfLocation     String?
+  lowStockThreshold Int             @default(2)
+  discogsId         String?         @unique
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([artist, title])
+  @@index([barcode])
+  @@index([discogsId])
+}
