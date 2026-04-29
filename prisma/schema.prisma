@@ -1,0 +1,640 @@
+// Medium Format - Prisma schema
+// Single source of truth for the admin dashboard + website + workers.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// Users & Auth
+// ============================================================
+
+enum Role {
+  ADMIN
+  STAFF
+  SHOPKEEPER
+  WHOLESALER
+  CUSTOMER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  passwordHash  String?
+  name          String?
+  phone         String?
+  role          Role      @default(CUSTOMER)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts        Account[]
+  sessions        Session[]
+  customerProfile CustomerProfile?
+  addresses       Address[]
+  orders          Order[]
+  wantlist        Wantlist[]
+  messagesSent    Message[]         @relation("MessageSender")
+  posSessions    PosSession[]
+  stockMovements StockMovement[]
+  newsPosts      NewsPost[]
+  auditLogs      AuditLog[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model CustomerProfile {
+  userId           String   @id
+  defaultAddressId String?
+  notes            String?
+  vip              Boolean  @default(false)
+  wholesaleApproved Boolean @default(false)
+  createdAt        DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Address {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  phone     String
+  line1     String
+  line2     String?
+  city      String
+  province  String
+  postal    String
+  country   String   @default("ID")
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders Order[]
+}
+
+// ============================================================
+// Catalog
+// ============================================================
+
+enum ProductType {
+  RELEASE
+  MERCH
+  BOOK
+  ACCESSORY
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum MediaCondition {
+  M
+  NM
+  VG_PLUS
+  VG
+  G_PLUS
+  G
+  F
+  P
+}
+
+enum SleeveCondition {
+  M
+  NM
+  VG_PLUS
+  VG
+  G_PLUS
+  G
+  F
+  P
+  GENERIC
+  NO_SLEEVE
+}
+
+// Cached Discogs release metadata. Many Variants can map to the same Release
+// (different conditions, pressings).
+model Release {
+  id              String   @id @default(cuid())
+  discogsId       Int?     @unique
+  title           String
+  artistsJson     Json
+  labelsJson      Json
+  year            Int?
+  country         String?
+  genres          String[]
+  styles          String[]
+  formatsJson     Json
+  catno           String?
+  extBarcode      String?
+  coverUrl        String?
+  bandcampUrl     String?
+  rawJson         Json?
+  lastSyncedAt    DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  products Product[]
+  tracks   Track[]
+}
+
+model Track {
+  id                String   @id @default(cuid())
+  releaseId         String
+  side              String?
+  position          String
+  title             String
+  durationSec       Int?
+  artistsJson       Json?
+  previewSource     String?  // APPLE | YOUTUBE | BANDCAMP | MANUAL | NONE
+  previewUrl        String?
+  previewExternalId String?
+  previewLocked     Boolean  @default(false)
+  lastResolvedAt    DateTime?
+  sortOrder         Int      @default(0)
+
+  release Release @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+
+  @@index([releaseId])
+}
+
+model Product {
+  id            String        @id @default(cuid())
+  type          ProductType
+  releaseId     String?
+  title         String
+  slug          String        @unique
+  descriptionMd String?
+  heroImage     String?
+  status        ProductStatus @default(DRAFT)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  release  Release?  @relation(fields: [releaseId], references: [id])
+  variants Variant[]
+
+  @@index([type])
+  @@index([status])
+}
+
+// A sellable SKU. Each variant is what stock is tracked against.
+model Variant {
+  id                 String           @id @default(cuid())
+  productId          String
+  sku                String           @unique
+  internalBarcode    String?          @unique
+  extBarcode         String?
+  conditionMedia     MediaCondition?
+  conditionSleeve    SleeveCondition?
+  color              String?
+  pressingYear       Int?
+  priceIdr           Decimal          @db.Decimal(14, 2)
+  wholesalePriceIdr  Decimal?         @db.Decimal(14, 2)
+  weightG            Int              @default(350)
+  taxRate            Decimal          @default(0.11) @db.Decimal(5, 4)
+  notes              String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  product         Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  stock           Stock[]
+  movements       StockMovement[]
+  channelListings ChannelListing[]
+  orderItems      OrderItem[]
+
+  @@index([productId])
+}
+
+// ============================================================
+// Inventory
+// ============================================================
+
+enum LocationType {
+  STORE
+  WAREHOUSE
+}
+
+model Location {
+  id        String       @id @default(cuid())
+  name      String
+  type      LocationType
+  isDefault Boolean      @default(false)
+  createdAt DateTime     @default(now())
+
+  stock       Stock[]
+  movements   StockMovement[]
+  posSessions PosSession[]
+}
+
+// On-hand and reserved stock per (variant, location). Reservations are made
+// during checkout/POS to prevent oversell across channels.
+model Stock {
+  variantId  String
+  locationId String
+  onHand     Int    @default(0)
+  reserved   Int    @default(0)
+
+  variant  Variant  @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  location Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@id([variantId, locationId])
+  @@index([locationId])
+}
+
+enum StockMovementReason {
+  RECEIVING
+  SALE
+  RETURN
+  ADJUSTMENT
+  TRANSFER_IN
+  TRANSFER_OUT
+  STOCKTAKE
+  DAMAGE
+  WRITE_OFF
+}
+
+model StockMovement {
+  id         String              @id @default(cuid())
+  variantId  String
+  locationId String
+  delta      Int
+  reason     StockMovementReason
+  refType    String?
+  refId      String?
+  userId     String?
+  note       String?
+  createdAt  DateTime            @default(now())
+
+  variant  Variant  @relation(fields: [variantId], references: [id])
+  location Location @relation(fields: [locationId], references: [id])
+  user     User?    @relation(fields: [userId], references: [id])
+
+  @@index([variantId])
+  @@index([locationId])
+  @@index([refType, refId])
+}
+
+// ============================================================
+// Channels
+// ============================================================
+
+enum ChannelType {
+  WEBSITE
+  POS
+  DISCOGS
+  TOKOPEDIA
+  SHOPEE
+}
+
+model Channel {
+  id         String      @id @default(cuid())
+  type       ChannelType
+  name       String
+  configJson Json?
+  enabled    Boolean     @default(true)
+  createdAt  DateTime    @default(now())
+
+  listings ChannelListing[]
+  orders   Order[]
+}
+
+enum ListingStatus {
+  DRAFT
+  FOR_SALE
+  SOLD
+  SUSPENDED
+  DELETED
+  ERROR
+}
+
+model ChannelListing {
+  id                 String        @id @default(cuid())
+  variantId          String
+  channelId          String
+  externalId         String?
+  status             ListingStatus @default(DRAFT)
+  priceOverrideIdr   Decimal?      @db.Decimal(14, 2)
+  commentsText       String?
+  allowOffers        Boolean       @default(false)
+  minOfferIdr        Decimal?      @db.Decimal(14, 2)
+  lastOutboundSyncAt DateTime?
+  lastInboundSyncAt  DateTime?
+  syncError          String?
+  rawJson            Json?
+
+  variant Variant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@unique([variantId, channelId])
+  @@index([channelId, status])
+}
+
+// ============================================================
+// Orders
+// ============================================================
+
+enum OrderStatus {
+  DRAFT
+  PENDING_PAYMENT
+  PAID
+  PACKED
+  SHIPPED
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+model Order {
+  id                 String      @id @default(cuid())
+  number             String      @unique
+  channelId          String
+  customerId         String?
+  externalOrderId    String?
+  status             OrderStatus @default(DRAFT)
+  currency           String      @default("IDR")
+  subtotal           Decimal     @db.Decimal(14, 2)
+  tax                Decimal     @default(0) @db.Decimal(14, 2)
+  shippingFee        Decimal     @default(0) @db.Decimal(14, 2)
+  discount           Decimal     @default(0) @db.Decimal(14, 2)
+  channelFeeAmount   Decimal     @default(0) @db.Decimal(14, 2)
+  paymentFeeAmount   Decimal     @default(0) @db.Decimal(14, 2)
+  total              Decimal     @db.Decimal(14, 2)
+  shippingAddressId  String?
+  notes              String?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  channel         Channel     @relation(fields: [channelId], references: [id])
+  customer        User?       @relation(fields: [customerId], references: [id])
+  shippingAddress Address?    @relation(fields: [shippingAddressId], references: [id])
+  items           OrderItem[]
+  payments        Payment[]
+  shipments       Shipment[]
+
+  @@index([status])
+  @@index([channelId, createdAt])
+}
+
+model OrderItem {
+  id                String  @id @default(cuid())
+  orderId           String
+  variantId         String
+  qty               Int
+  unitPriceIdr      Decimal @db.Decimal(14, 2)
+  nameSnapshot      String
+  conditionSnapshot String?
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variant Variant @relation(fields: [variantId], references: [id])
+
+  @@index([orderId])
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  EXPIRED
+}
+
+model Payment {
+  id         String        @id @default(cuid())
+  orderId    String
+  gateway    String        // 'XENDIT' | 'CASH' | 'BANK_TRANSFER' | 'POS_CARD' | etc.
+  gatewayRef String?
+  method     String?       // 'QRIS' | 'OVO' | 'VA_BCA' | ...
+  status     PaymentStatus @default(PENDING)
+  amount     Decimal       @db.Decimal(14, 2)
+  paidAt     DateTime?
+  rawJson    Json?
+  createdAt  DateTime      @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+enum ShipmentStatus {
+  PENDING
+  LABEL_CREATED
+  PICKED_UP
+  IN_TRANSIT
+  DELIVERED
+  RETURNED
+  CANCELLED
+}
+
+model Shipment {
+  id          String         @id @default(cuid())
+  orderId     String
+  courier     String
+  service     String?
+  awb         String?
+  labelUrl    String?
+  status      ShipmentStatus @default(PENDING)
+  shippedAt   DateTime?
+  deliveredAt DateTime?
+  rawJson     Json?
+  createdAt   DateTime       @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+// ============================================================
+// POS sessions / cashbox
+// ============================================================
+
+model PosSession {
+  id           String    @id @default(cuid())
+  locationId   String
+  openedById   String
+  openedAt     DateTime  @default(now())
+  closedAt     DateTime?
+  openingFloat Decimal   @default(0) @db.Decimal(14, 2)
+  closingCount Decimal?  @db.Decimal(14, 2)
+  notes        String?
+
+  location Location @relation(fields: [locationId], references: [id])
+  openedBy User     @relation(fields: [openedById], references: [id])
+
+  @@index([locationId, openedAt])
+}
+
+// ============================================================
+// CRM
+// ============================================================
+
+model Wantlist {
+  id         String   @id @default(cuid())
+  userId     String
+  releaseId  String?
+  queryJson  Json?
+  maxPriceIdr Decimal? @db.Decimal(14, 2)
+  notified   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model MessageThread {
+  id         String   @id @default(cuid())
+  customerId String?
+  channel    String?  // 'WEBSITE' | 'DISCOGS' | 'TOKOPEDIA' | 'SHOPEE'
+  externalId String?
+  subject    String?
+  closed     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  messages Message[]
+}
+
+model Message {
+  id              String   @id @default(cuid())
+  threadId        String
+  senderUserId    String?
+  senderRole      String   // 'STAFF' | 'CUSTOMER'
+  body            String   @db.Text
+  attachmentsJson Json?
+  createdAt       DateTime @default(now())
+
+  thread       MessageThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  senderUser   User?         @relation("MessageSender", fields: [senderUserId], references: [id])
+
+  @@index([threadId])
+}
+
+// ============================================================
+// Marketing
+// ============================================================
+
+enum PromoType {
+  PCT
+  FIXED
+  FREE_SHIP
+}
+
+model Promo {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  type        PromoType
+  value       Decimal   @db.Decimal(14, 2)
+  minTotalIdr Decimal?  @db.Decimal(14, 2)
+  startsAt    DateTime?
+  endsAt      DateTime?
+  usageLimit  Int?
+  usedCount   Int       @default(0)
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+}
+
+enum NewsStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model NewsPost {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  bodyMd      String     @db.Text
+  excerpt     String?
+  heroImage   String?
+  authorId    String?
+  status      NewsStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  author User? @relation(fields: [authorId], references: [id])
+
+  @@index([status, publishedAt])
+}
+
+// ============================================================
+// Shipping policies (per channel + region)
+// ============================================================
+
+model ShippingPolicy {
+  id                String  @id @default(cuid())
+  channel           String  // 'WEBSITE' | 'DISCOGS' | 'TOKOPEDIA' | 'SHOPEE'
+  region            String  // 'ID' | 'SE_ASIA' | 'ASIA' | 'EU' | 'US' | 'ROW'
+  formatWeightClass String  // 'LP' | '2LP' | '12_INCH' | '7_INCH' | 'CD' | 'CASSETTE'
+  baseIdr           Decimal @db.Decimal(14, 2)
+  perKgIdr          Decimal @default(0) @db.Decimal(14, 2)
+  currency          String  @default("IDR")
+
+  @@unique([channel, region, formatWeightClass])
+}
+
+// ============================================================
+// System
+// ============================================================
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entity     String
+  entityId   String?
+  beforeJson Json?
+  afterJson  Json?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([entity, entityId])
+  @@index([userId, createdAt])
+}
+
+model Setting {
+  key       String   @id
+  valueJson Json
+  updatedAt DateTime @updatedAt
+}
