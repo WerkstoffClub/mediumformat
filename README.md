@@ -23,7 +23,7 @@ cp .env.example .env.local
 npm install
 npx prisma migrate dev
 npm run db:seed     # creates admin user + default channels + sample news
-npm run dev         # http://localhost:3000
+npm run dev         # http://localhost:8000
 npm run worker      # in a second terminal
 ```
 
