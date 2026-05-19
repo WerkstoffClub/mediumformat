@@ -2,6 +2,21 @@
 
 Things we know we'll need to decide. Resolve, then move to [[06-History/Decisions]].
 
+## Q-007 · Staging environment
+
+- Today: single production VPS, no staging.
+- Question: do we want a staging environment? Cheapest approach: second
+  small VPS running the same compose stack from a `staging` branch, with
+  its own `staging.mediumformat.info` subdomain. Or skip it and rely on
+  local dev + careful PRs.
+
+## Q-006 · Deploy notifications
+
+- Today: GHA emails the committer on workflow failure. No success
+  notifications.
+- Question: post to Slack / Discord on deploy success + failure? Worth it
+  once there's a team. For a one-developer project, email is fine.
+
 ## Q-005 · Image storage
 
 - Today: local `public/uploads/` mounted into both `app` and `worker`.

@@ -14,12 +14,18 @@
 > The `mail` record is **DNS only** so Let's Encrypt's HTTP-01 challenge can
 > reach our origin directly.
 
-## Image source
+## Image source + deploy trigger
 
 The `app` and `worker` containers run the same image,
-`ghcr.io/werkstoffclub/mediumformat:latest`, built by GitHub Actions on every
-push to `main` and pulled on the VPS via `scripts/deploy.sh`. The VPS never
-builds in production. See [[Image Build Pipeline]].
+`ghcr.io/werkstoffclub/mediumformat:latest`, built by GitHub Actions on
+every push to `main` and pulled on the VPS via `scripts/deploy.sh`. The
+VPS never builds in production.
+
+The same workflow then SSHes to the VPS and runs `scripts/deploy.sh`
+automatically, so `git push origin main` is the entire deploy.
+
+See [[Image Build Pipeline]] for the build job and [[CI Deploy]] for the
+deploy job.
 
 ## Container layout
 

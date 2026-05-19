@@ -40,6 +40,7 @@ five channels off a single catalog/inventory database.
 - [[04-Deployment/DNS & Cloudflare]]
 - [[04-Deployment/TLS & Let's Encrypt]]
 - [[04-Deployment/Image Build Pipeline]]
+- [[04-Deployment/CI Deploy]]
 - [[04-Deployment/Deploy Runbook]]
 - [[04-Deployment/Environment Variables]]
 
@@ -68,3 +69,14 @@ five channels off a single catalog/inventory database.
 | `https://mediumformat.info/admin` | Admin dashboard |
 | `https://mail.mediumformat.info` | Listmonk newsletter admin |
 | `vps.rocketsystem.cloud` (`31.97.220.192`) | Host (SSH `deploy@…`) |
+
+## How a deploy works
+
+- **Day to day**: `git push origin main` — GitHub Actions builds the image,
+  pushes to GHCR, SSHes to the VPS, runs `./scripts/deploy.sh`. See
+  [[04-Deployment/CI Deploy]].
+- **First time**: [[04-Deployment/Preflight]] → [[04-Deployment/First Boot - bootstrap-vps.sh]]
+  → set GitHub secrets per [[04-Deployment/CI Deploy]].
+- **Hotfix on the box**: `ssh deploy@vps.rocketsystem.cloud && cd /opt/mediumformat && ./scripts/deploy.sh`.
+- **Rollback**: edit `APP_IMAGE` in `/opt/mediumformat/.env` to a pinned
+  tag, then `docker compose pull && docker compose up -d`.

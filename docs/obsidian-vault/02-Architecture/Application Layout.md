@@ -76,9 +76,15 @@ mediumformat/
 │   ├── schema.prisma               # single source of truth
 │   └── seed.ts                     # `npm run db:seed`
 │
+├── .github/
+│   └── workflows/
+│       └── build-image.yml         # build → push GHCR → ssh VPS → deploy
+│
 ├── scripts/
+│   ├── preflight.sh                # read-only VPS sanity check
+│   ├── bootstrap-vps.sh            # one-shot fresh-VPS bootstrap
 │   ├── init-letsencrypt.sh         # one-shot TLS bootstrap on the VPS
-│   ├── deploy.sh                   # pull + rebuild + migrate + up
+│   ├── deploy.sh                   # pull image (or build) + migrate + up
 │   └── backup.sh                   # nightly pg_dump → rclone r2
 │
 ├── nginx/

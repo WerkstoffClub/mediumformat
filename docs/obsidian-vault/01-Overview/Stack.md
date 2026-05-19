@@ -51,12 +51,16 @@
 ## Deployment
 
 - **Docker Compose** on a self-managed VPS (`vps.rocketsystem.cloud`).
-- **nginx-alpine** as TLS terminator + reverse proxy in front of the Next.js
-  container.
+- **GitHub Actions** builds the image on push to `main`, pushes to GHCR,
+  then SSHes into the VPS and runs `scripts/deploy.sh`. `git push main`
+  is the entire deploy.
+- **nginx-alpine** as TLS terminator + reverse proxy in front of the
+  Next.js container.
 - **Let's Encrypt** via `certbot` sidecar; auto-renews every 12h.
 - **Cloudflare** in front (proxy / WAF / cache / DNS).
 
-See [[04-Deployment/Production Topology]].
+See [[04-Deployment/Production Topology]], [[04-Deployment/Image Build Pipeline]],
+[[04-Deployment/CI Deploy]].
 
 ## Why these choices
 

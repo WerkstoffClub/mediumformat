@@ -50,6 +50,13 @@
 - Branch: `feature/<short-summary>` for human-driven work.
 - Commits: imperative subject, no scope prefix, no ticket number.
 - Squash-merge into main.
+- **⚠️ `main` auto-deploys.** Every push (or merge) to `main` triggers
+  the GHA workflow that builds the image and SSHes into the VPS to run
+  `./scripts/deploy.sh`. Never push to `main` directly for non-trivial
+  changes — open a PR, review, merge.
+- Use `git tag vX.Y.Z` for releases. Tags build a tagged image but do
+  not auto-deploy; pin a release on the VPS by setting `APP_IMAGE` in
+  `.env` (see [[04-Deployment/Image Build Pipeline]]).
 
 ## Secrets
 

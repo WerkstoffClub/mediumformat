@@ -3,7 +3,17 @@
 > This is the **subsequent deploy** runbook — for first-time setup see
 > [[VPS Setup]] and [[DNS & Cloudflare]] and [[TLS & Let's Encrypt]].
 
-## Standard deploy
+## Standard deploy — push to main
+
+```bash
+git push origin main
+```
+
+That's it. GitHub Actions builds the image, pushes to GHCR, then SSHes
+into the VPS and runs `./scripts/deploy.sh`. See [[CI Deploy]] for the
+workflow and [[Image Build Pipeline]] for the build step.
+
+## Manual deploy (hotfix / non-main branch)
 
 ```bash
 ssh deploy@vps.rocketsystem.cloud

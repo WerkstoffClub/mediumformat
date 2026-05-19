@@ -2,6 +2,24 @@
 
 Reverse-chronological. Each entry is a single working session.
 
+## 2026-05-19 — CI-driven deploy
+
+- Added a `deploy` job to `.github/workflows/build-image.yml`, gated on
+  `github.ref == 'refs/heads/main'` and `needs: build`. SSHes to
+  `deploy@vps.rocketsystem.cloud` and runs `./scripts/deploy.sh`. Uses
+  raw `ssh` with known-hosts pinning + a dedicated CI keypair — no
+  third-party actions. Concurrency group `vps-deploy`,
+  `cancel-in-progress: false` so simultaneous deploys queue instead of
+  half-running.
+- Wrote [[CI Deploy]] documenting the four GitHub secrets (`VPS_HOST`,
+  `VPS_USER`, `VPS_SSH_PRIVATE_KEY`, `VPS_KNOWN_HOSTS`), the dedicated
+  CI key generation, the `ssh-keyscan` step for the known-hosts pin,
+  failure modes, and the key-rotation procedure.
+- Updated [[Deploy Runbook]] — `git push origin main` is now the
+  standard deploy. Manual `./scripts/deploy.sh` is documented as the
+  hotfix / non-main path.
+- Updated [[Production Topology]] to mention the auto-deploy trigger.
+
 ## 2026-05-19 — Document everything + production deploy plan
 
 - Built this Obsidian vault (`docs/obsidian-vault/`) covering vision, stack,
