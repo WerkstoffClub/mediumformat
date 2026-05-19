@@ -17,6 +17,19 @@ Inspired by common-ground.io, adapted for Indonesia.
 
 ## Local development
 
+**One-shot setup** (requires Docker + Node 20+):
+
+```bash
+./scripts/local-dev.sh         # boots Postgres+Redis, migrates, seeds, runs dev+worker
+./scripts/local-dev.sh logs    # tail dev/worker logs
+./scripts/local-dev.sh stop    # tear it all down
+```
+
+It prints the seeded admin email/password on first run. Re-running is
+idempotent.
+
+**Manual setup:**
+
 ```bash
 cp .env.example .env
 # fill DATABASE_URL, REDIS_URL, AUTH_SECRET, SEED_ADMIN_PASSWORD

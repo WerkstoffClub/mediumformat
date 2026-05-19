@@ -49,3 +49,6 @@ next-env.d.ts
 /certbot-www
 /certbot-certs
 /backups
+
+# local-dev.sh state (PIDs, logs)
+/.local-dev
