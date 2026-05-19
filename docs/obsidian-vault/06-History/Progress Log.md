@@ -2,6 +2,22 @@
 
 Reverse-chronological. Each entry is a single working session.
 
+## 2026-05-19 — Pre-deploy consolidation
+
+- Pulled the initial Prisma migration
+  (`prisma/migrations/20260519193538_init/`) plus
+  `migration_lock.toml` from `claude/local-deployment-setup-l4m5H` so
+  `prisma migrate deploy` has something to apply. Schemas matched on
+  both branches, so the migration is valid as-is.
+- Confirmed there is no `main` branch on the remote yet — the CI deploy
+  workflow is gated on `refs/heads/main`, so until `main` exists no
+  auto-deploy can fire. Plan: create `main` pointing at the last shared
+  commit (`1145eea`), then open a PR from this branch into it. Merging
+  the PR makes that the production line going forward.
+- Did NOT touch `claude/local-deployment-setup-l4m5H` itself — that
+  branch's local-dev work is separate; the only piece this prod branch
+  needed was the migration directory.
+
 ## 2026-05-19 — VPS hostname correction
 
 - Reverted my earlier "fix" — VPS hostname is `port.rocketsystem.cloud`,
