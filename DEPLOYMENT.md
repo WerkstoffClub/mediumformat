@@ -1,10 +1,10 @@
 # Deployment
 
-## 1. VPS preparation — `port.rocketsystem.cloud` (31.97.220.192)
+## 1. VPS preparation — `vps.rocketsystem.cloud` (31.97.220.192)
 
 ```bash
-# As root, first connect:
-ssh root@31.97.220.192
+# As root, first connect (hostname or IP both work):
+ssh root@vps.rocketsystem.cloud
 
 # Update + create deploy user with sudo + ssh key:
 apt update && apt -y upgrade
@@ -32,7 +32,7 @@ curl -fsSL https://get.docker.com | sh
 usermod -aG docker deploy
 ```
 
-From now on connect as `ssh deploy@31.97.220.192`.
+From now on connect as `ssh deploy@vps.rocketsystem.cloud`.
 
 ## 2. Cloudflare DNS for mediumformat.info
 
@@ -129,7 +129,10 @@ Cloudflare R2 bucket.
 ## 7. Subsequent deploys
 
 ```bash
-ssh deploy@31.97.220.192
+ssh deploy@vps.rocketsystem.cloud
 cd /opt/mediumformat
 ./scripts/deploy.sh
 ```
+
+> See `docs/obsidian-vault/` for an extended Obsidian-formatted runbook,
+> domain glossary, data-model walk-through and progress log.
