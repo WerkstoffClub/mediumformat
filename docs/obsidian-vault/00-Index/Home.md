@@ -34,9 +34,12 @@ five channels off a single catalog/inventory database.
 
 ### Deploying
 - [[04-Deployment/Production Topology]]
+- [[04-Deployment/Preflight]]
 - [[04-Deployment/VPS Setup]]
+- [[04-Deployment/First Boot - bootstrap-vps.sh]]
 - [[04-Deployment/DNS & Cloudflare]]
 - [[04-Deployment/TLS & Let's Encrypt]]
+- [[04-Deployment/Image Build Pipeline]]
 - [[04-Deployment/Deploy Runbook]]
 - [[04-Deployment/Environment Variables]]
 

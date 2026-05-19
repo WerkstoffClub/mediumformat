@@ -18,12 +18,18 @@ git fetch --all --prune
 git checkout main
 git pull --ff-only
 
-docker compose build app worker
+# Pull the image GitHub Actions built for this SHA; fall back to a local
+# build if the pull fails (private package without docker login, GHA
+# hasn't built yet, etc).
+docker compose pull app worker || docker compose build app worker
+
 docker compose run --rm app npx prisma migrate deploy
 docker compose up -d
 ```
 
 `up -d` only recreates containers whose image changed, so DB / Redis stay up.
+
+See [[Image Build Pipeline]] for how the image gets built upstream.
 
 ## Deploying a branch (e.g. for staging on the same box)
 

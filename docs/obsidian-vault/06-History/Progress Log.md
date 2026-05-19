@@ -12,6 +12,27 @@ Reverse-chronological. Each entry is a single working session.
   → `vps.rocketsystem.cloud`.
 - Tracked the deploy target: VPS `vps.rocketsystem.cloud` (`31.97.220.192`),
   production domain `mediumformat.info`.
+- Added `scripts/bootstrap-vps.sh` — single idempotent root script that
+  takes a fresh VPS to a live deploy in ~5 min. Writes generated secrets
+  to `/root/mediumformat-secrets.txt` (mode 0600).
+- Fixed `scripts/init-letsencrypt.sh` — was binding `$(pwd)/certbot-certs`
+  as a host path, while the rest of the stack used named Docker volumes.
+  Certs would have been issued into the wrong location and nginx would
+  not have found them. Now uses `docker compose run --rm --entrypoint
+  certbot certbot certonly --standalone` to inherit the named volumes.
+- Nginx: dropped unused `admin.mediumformat.info` SAN (admin lives at
+  `/admin` on the apex). Added a 301 from `https://www.mediumformat.info`
+  to the apex for one canonical hostname.
+- Added `scripts/preflight.sh` — read-only sanity check that prints OS /
+  CPU / RAM / disk, DNS resolution, port availability, and outbound
+  connectivity. Run before bootstrap.
+- Added a GitHub Actions build-and-push pipeline
+  (`.github/workflows/build-image.yml`) that pushes
+  `ghcr.io/werkstoffclub/mediumformat:<tags>` on every push to main.
+  Updated `docker-compose.yml` to declare both `image:` and `build:` so
+  the VPS pulls in prod and devs build locally. Updated `deploy.sh` and
+  `bootstrap-vps.sh` to pull-first with local-build fallback. This
+  matters because `next build` peaks ~1.5 GB and would OOM a 2 GB VPS.
 - Branch: `claude/document-and-deploy-setup-dOnw6`.
 
 Open follow-ups (carried to backlog):

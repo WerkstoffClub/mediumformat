@@ -11,6 +11,9 @@ production bring-up; for subsequent deploys see [[Deploy Runbook]].
    [[DNS & Cloudflare]].
 2. **Root SSH** access to the box (`ssh root@vps.rocketsystem.cloud`).
 3. **Your laptop's public key** in hand (`cat ~/.ssh/id_ed25519.pub`).
+4. **Preflight passed** — see [[Preflight]]. If RAM is < 4 GB, also set up
+   the [[Image Build Pipeline]] first so the VPS pulls the image instead
+   of building it.
 
 ## One-liner
 

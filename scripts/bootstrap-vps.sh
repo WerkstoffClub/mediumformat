@@ -170,7 +170,15 @@ else
   echo "  cert already present, skipping issuance"
 fi
 
-docker compose up -d --build
+# Prefer the image pre-built by GitHub Actions; fall back to local build
+# if the pull fails (private package without auth, or first deploy before
+# the workflow has run).
+if ! docker compose pull app worker 2>/dev/null; then
+  echo "  pulling image failed — building locally instead"
+  docker compose build app worker
+fi
+
+docker compose up -d
 docker compose run --rm app npx prisma migrate deploy
 docker compose run --rm app npm run db:seed || true
 
