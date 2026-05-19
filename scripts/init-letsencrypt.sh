@@ -13,12 +13,16 @@ EMAIL="${ADMIN_EMAIL:?set ADMIN_EMAIL=...}"
 # Stop nginx if running so port 80 is free for standalone challenge.
 docker compose stop nginx 2>/dev/null || true
 
-docker run --rm \
-  -v "$(pwd)/certbot-certs:/etc/letsencrypt" \
-  -v "$(pwd)/certbot-www:/var/www/certbot" \
+# Use `docker compose run` so we inherit the same NAMED volumes
+# (certbot-certs, certbot-www) that the long-running certbot service and
+# the nginx service mount. A separate `docker run -v ./certbot-certs:...`
+# binds the host path instead and the certs never reach nginx.
+docker compose run --rm \
   -p 80:80 \
-  certbot/certbot:latest certonly --standalone \
-  --email "$EMAIL" --agree-tos --no-eff-email \
-  $(printf -- "-d %s " "${DOMAINS[@]}")
+  --entrypoint certbot \
+  certbot certonly --standalone \
+    --email "$EMAIL" --agree-tos --no-eff-email --non-interactive \
+    --keep-until-expiring \
+    $(printf -- "-d %s " "${DOMAINS[@]}")
 
 docker compose up -d
