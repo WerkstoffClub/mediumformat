@@ -53,7 +53,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   deploy:
-    name: Deploy to vps.rocketsystem.cloud
+    name: Deploy to port.rocketsystem.cloud
     needs: build
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest

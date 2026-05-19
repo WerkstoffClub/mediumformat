@@ -7,7 +7,7 @@
 | `mediumformat.info` (apex) | Cloudflare proxy → `31.97.220.192` | Public site + admin |
 | `www.mediumformat.info` | Cloudflare proxy → `31.97.220.192` | redirects to apex |
 | `mail.mediumformat.info` | DNS only → `31.97.220.192` | Listmonk admin (grey cloud for LE renewal) |
-| `vps.rocketsystem.cloud` | `31.97.220.192` | SSH-only hostname (registrar) |
+| `port.rocketsystem.cloud` | `31.97.220.192` | SSH-only hostname (registrar) |
 
 > The DNS apex / www records are **proxied** (orange cloud) so Cloudflare can
 > handle TLS at the edge, cache static assets, and apply WAF.

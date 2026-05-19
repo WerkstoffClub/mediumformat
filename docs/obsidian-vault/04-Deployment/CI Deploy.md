@@ -9,7 +9,7 @@ git push origin main
 GitHub Actions: build linux/amd64 image, push to GHCR
         │
         ▼
-GitHub Actions: ssh deploy@vps.rocketsystem.cloud, run ./scripts/deploy.sh
+GitHub Actions: ssh deploy@port.rocketsystem.cloud, run ./scripts/deploy.sh
         │
         ▼
 docker compose pull && prisma migrate deploy && docker compose up -d
@@ -54,7 +54,7 @@ Two files:
 ### 2. Authorise the CI key on the VPS
 
 ```bash
-ssh deploy@vps.rocketsystem.cloud
+ssh deploy@port.rocketsystem.cloud
 echo '<paste contents of mediumformat_ci.pub here>' >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 exit
@@ -63,14 +63,14 @@ exit
 Verify from your laptop:
 
 ```bash
-ssh -i ~/.ssh/mediumformat_ci deploy@vps.rocketsystem.cloud whoami
+ssh -i ~/.ssh/mediumformat_ci deploy@port.rocketsystem.cloud whoami
 # should print: deploy
 ```
 
 ### 3. Capture the VPS's SSH host key
 
 ```bash
-ssh-keyscan -t ed25519,rsa vps.rocketsystem.cloud
+ssh-keyscan -t ed25519,rsa port.rocketsystem.cloud
 ```
 
 Save that output — it goes into the `VPS_KNOWN_HOSTS` secret. Without it
@@ -82,7 +82,7 @@ GitHub → Repo → Settings → Secrets and variables → Actions → New secre
 
 | Secret | Value |
 |---|---|
-| `VPS_HOST` | `vps.rocketsystem.cloud` |
+| `VPS_HOST` | `port.rocketsystem.cloud` |
 | `VPS_USER` | `deploy` |
 | `VPS_SSH_PRIVATE_KEY` | full contents of `~/.ssh/mediumformat_ci` (including `BEGIN`/`END` lines) |
 | `VPS_KNOWN_HOSTS` | output of `ssh-keyscan` from step 3 |
@@ -114,7 +114,7 @@ ssh-keygen -t ed25519 -C "github-actions-mediumformat" \
   -f ~/.ssh/mediumformat_ci_v2 -N ""
 
 # 2. Add the new public key on the VPS
-ssh deploy@vps.rocketsystem.cloud
+ssh deploy@port.rocketsystem.cloud
 cat >> ~/.ssh/authorized_keys
 <paste new public key, Ctrl-D>
 
@@ -131,7 +131,7 @@ git commit --allow-empty -m "ci: verify new deploy key" && git push
 If GitHub is down or you need to deploy from a non-main branch:
 
 ```bash
-ssh deploy@vps.rocketsystem.cloud
+ssh deploy@port.rocketsystem.cloud
 cd /opt/mediumformat
 git checkout <branch>
 ./scripts/deploy.sh

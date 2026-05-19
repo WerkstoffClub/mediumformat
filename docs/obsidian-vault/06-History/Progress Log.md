@@ -2,11 +2,23 @@
 
 Reverse-chronological. Each entry is a single working session.
 
+## 2026-05-19 — VPS hostname correction
+
+- Reverted my earlier "fix" — VPS hostname is `port.rocketsystem.cloud`,
+  not `vps.rocketsystem.cloud`. I'd assumed `port` was a typo in the
+  original `DEPLOYMENT.md` based on the user's first prompt; it was the
+  user's prompt that was inexact. Swept every reference back via
+  `find ... -exec sed -i 's|vps.rocketsystem.cloud|port.rocketsystem.cloud|g'`
+  across `scripts/`, `.github/`, `DEPLOYMENT.md` and the vault.
+- Lesson logged in [[07-Memory/Conventions]]: do not "fix" identifiers
+  that look like typos without confirming — registrar / provider
+  hostnames can have any shape.
+
 ## 2026-05-19 — CI-driven deploy
 
 - Added a `deploy` job to `.github/workflows/build-image.yml`, gated on
   `github.ref == 'refs/heads/main'` and `needs: build`. SSHes to
-  `deploy@vps.rocketsystem.cloud` and runs `./scripts/deploy.sh`. Uses
+  `deploy@port.rocketsystem.cloud` and runs `./scripts/deploy.sh`. Uses
   raw `ssh` with known-hosts pinning + a dedicated CI keypair — no
   third-party actions. Concurrency group `vps-deploy`,
   `cancel-in-progress: false` so simultaneous deploys queue instead of
@@ -26,9 +38,7 @@ Reverse-chronological. Each entry is a single working session.
   data model, every feature, every deploy step.
 - Confirmed nginx + docker-compose are already pinned to `mediumformat.info`
   (no functional change needed).
-- Fixed the VPS hostname typo in `DEPLOYMENT.md`: `port.rocketsystem.cloud`
-  → `vps.rocketsystem.cloud`.
-- Tracked the deploy target: VPS `vps.rocketsystem.cloud` (`31.97.220.192`),
+- Tracked the deploy target: VPS `port.rocketsystem.cloud` (`31.97.220.192`),
   production domain `mediumformat.info`.
 - Added `scripts/bootstrap-vps.sh` — single idempotent root script that
   takes a fresh VPS to a live deploy in ~5 min. Writes generated secrets

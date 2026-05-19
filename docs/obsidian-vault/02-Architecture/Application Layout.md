@@ -114,7 +114,7 @@ mediumformat/
 
 ```
                   ┌────────────────────────────────────────────┐
-                  │  vps.rocketsystem.cloud (31.97.220.192)     │
+                  │  port.rocketsystem.cloud (31.97.220.192)     │
                   │                                            │
         80/443 ───►  nginx ──► app   (Next.js, port 3000)      │
                   │              └─► postgres                  │

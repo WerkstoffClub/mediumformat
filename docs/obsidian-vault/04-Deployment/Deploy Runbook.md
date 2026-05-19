@@ -16,7 +16,7 @@ workflow and [[Image Build Pipeline]] for the build step.
 ## Manual deploy (hotfix / non-main branch)
 
 ```bash
-ssh deploy@vps.rocketsystem.cloud
+ssh deploy@port.rocketsystem.cloud
 cd /opt/mediumformat
 ./scripts/deploy.sh
 ```

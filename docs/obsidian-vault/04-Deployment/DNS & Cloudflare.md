@@ -21,7 +21,7 @@ Cloudflare → DNS → Records:
 | A | `mail` | `31.97.220.192` | **DNS only (grey)** | Listmonk; LE HTTP-01 needs direct origin |
 | TXT | `mediumformat.info` | `v=spf1 -all` | DNS only | placeholder until SMTP wiring |
 
-`vps.rocketsystem.cloud` itself is set by the VPS provider — don't try to
+`port.rocketsystem.cloud` itself is set by the VPS provider — don't try to
 manage that record.
 
 ## 3. SSL/TLS

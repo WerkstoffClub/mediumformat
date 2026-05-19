@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-shot VPS bootstrap for vps.rocketsystem.cloud (31.97.220.192).
+# One-shot VPS bootstrap for port.rocketsystem.cloud (31.97.220.192).
 # Run as root on a fresh Ubuntu/Debian box once mediumformat.info DNS
 # already points at this server in Cloudflare.
 #

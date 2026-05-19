@@ -18,7 +18,7 @@ npx prisma migrate dev --name add_foo_to_bar
 ## Applying in production
 
 ```bash
-ssh deploy@vps.rocketsystem.cloud
+ssh deploy@port.rocketsystem.cloud
 cd /opt/mediumformat
 git pull
 docker compose run --rm app npx prisma migrate deploy

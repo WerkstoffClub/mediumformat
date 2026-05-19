@@ -50,7 +50,7 @@
 
 ## Deployment
 
-- **Docker Compose** on a self-managed VPS (`vps.rocketsystem.cloud`).
+- **Docker Compose** on a self-managed VPS (`port.rocketsystem.cloud`).
 - **GitHub Actions** builds the image on push to `main`, pushes to GHCR,
   then SSHes into the VPS and runs `scripts/deploy.sh`. `git push main`
   is the entire deploy.

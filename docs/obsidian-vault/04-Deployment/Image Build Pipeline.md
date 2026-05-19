@@ -73,7 +73,7 @@ push to main
 GitHub Actions: build linux/amd64 image, push :latest + :main + :sha-xxx
    │
    ▼
-On the VPS:  ssh deploy@vps.rocketsystem.cloud
+On the VPS:  ssh deploy@port.rocketsystem.cloud
              cd /opt/mediumformat
              ./scripts/deploy.sh    ← pulls image, migrates, restarts
 ```

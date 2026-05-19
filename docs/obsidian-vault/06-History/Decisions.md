@@ -33,7 +33,7 @@ and the VPS never needs Node/npm/build tooling installed.
 
 > 2026-05-19
 
-**Decision**: keep the stack on a single `vps.rocketsystem.cloud` VM,
+**Decision**: keep the stack on a single `port.rocketsystem.cloud` VM,
 orchestrated by `docker compose`. No Kubernetes, no Portainer UI, no
 Coolify / Dokku.
 
@@ -92,7 +92,7 @@ BullMQ gives retries + backoff + visibility for free.
 
 > 2026-04-29
 
-**Decision**: Docker Compose on `vps.rocketsystem.cloud` behind Cloudflare.
+**Decision**: Docker Compose on `port.rocketsystem.cloud` behind Cloudflare.
 
 **Why**:
 

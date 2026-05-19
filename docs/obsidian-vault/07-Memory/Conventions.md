@@ -62,3 +62,13 @@
 
 - Never commit `.env*` (gitignored).
 - Rotate `AUTH_SECRET` only with downtime planned — all JWTs invalidate.
+
+## Identifiers
+
+- The VPS hostname is **`port.rocketsystem.cloud`**, not
+  `vps.rocketsystem.cloud`. It looks like a typo; it isn't. Don't "fix"
+  it. (Logged because we did exactly that once.)
+- Production domain is **`mediumformat.info`** (apex). `www.` redirects
+  to apex.
+- Listmonk admin lives at **`mail.mediumformat.info`** (grey-cloud in
+  Cloudflare so Let's Encrypt HTTP-01 can reach it).

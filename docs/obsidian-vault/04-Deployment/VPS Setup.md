@@ -1,12 +1,12 @@
-# VPS Setup — `vps.rocketsystem.cloud`
+# VPS Setup — `port.rocketsystem.cloud`
 
-> Host: `vps.rocketsystem.cloud` → `31.97.220.192`
+> Host: `port.rocketsystem.cloud` → `31.97.220.192`
 > Run these once, when the box is fresh.
 
 ## 1. Connect as root
 
 ```bash
-ssh root@vps.rocketsystem.cloud
+ssh root@port.rocketsystem.cloud
 # or by IP:
 ssh root@31.97.220.192
 ```
@@ -32,7 +32,7 @@ sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd
 systemctl restart ssh
 ```
 
-From now on connect as **`ssh deploy@vps.rocketsystem.cloud`**.
+From now on connect as **`ssh deploy@port.rocketsystem.cloud`**.
 
 ## 4. Firewall
 

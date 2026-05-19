@@ -9,7 +9,7 @@ production bring-up; for subsequent deploys see [[Deploy Runbook]].
 1. **DNS is live** — `mediumformat.info`, `www.mediumformat.info` (proxied)
    and `mail.mediumformat.info` (grey cloud) all set up in Cloudflare per
    [[DNS & Cloudflare]].
-2. **Root SSH** access to the box (`ssh root@vps.rocketsystem.cloud`).
+2. **Root SSH** access to the box (`ssh root@port.rocketsystem.cloud`).
 3. **Your laptop's public key** in hand (`cat ~/.ssh/id_ed25519.pub`).
 4. **Preflight passed** — see [[Preflight]]. If RAM is < 4 GB, also set up
    the [[Image Build Pipeline]] first so the VPS pulls the image instead
@@ -20,7 +20,7 @@ production bring-up; for subsequent deploys see [[Deploy Runbook]].
 From your laptop:
 
 ```bash
-ssh root@vps.rocketsystem.cloud
+ssh root@port.rocketsystem.cloud
 ```
 
 Then, on the VPS as root:
@@ -73,7 +73,7 @@ Idempotent: every step skips if it's already done.
 You typed your root password in clear text earlier. Rotate it now:
 
 ```bash
-ssh root@vps.rocketsystem.cloud
+ssh root@port.rocketsystem.cloud
 passwd
 ```
 

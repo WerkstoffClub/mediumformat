@@ -68,7 +68,7 @@ five channels off a single catalog/inventory database.
 | `https://www.mediumformat.info` | redirects → root |
 | `https://mediumformat.info/admin` | Admin dashboard |
 | `https://mail.mediumformat.info` | Listmonk newsletter admin |
-| `vps.rocketsystem.cloud` (`31.97.220.192`) | Host (SSH `deploy@…`) |
+| `port.rocketsystem.cloud` (`31.97.220.192`) | Host (SSH `deploy@…`) |
 
 ## How a deploy works
 
@@ -77,6 +77,6 @@ five channels off a single catalog/inventory database.
   [[04-Deployment/CI Deploy]].
 - **First time**: [[04-Deployment/Preflight]] → [[04-Deployment/First Boot - bootstrap-vps.sh]]
   → set GitHub secrets per [[04-Deployment/CI Deploy]].
-- **Hotfix on the box**: `ssh deploy@vps.rocketsystem.cloud && cd /opt/mediumformat && ./scripts/deploy.sh`.
+- **Hotfix on the box**: `ssh deploy@port.rocketsystem.cloud && cd /opt/mediumformat && ./scripts/deploy.sh`.
 - **Rollback**: edit `APP_IMAGE` in `/opt/mediumformat/.env` to a pinned
   tag, then `docker compose pull && docker compose up -d`.

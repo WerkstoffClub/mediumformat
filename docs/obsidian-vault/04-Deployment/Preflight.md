@@ -7,7 +7,7 @@ depend on.
 ## Usage
 
 ```bash
-ssh root@vps.rocketsystem.cloud
+ssh root@port.rocketsystem.cloud
 # clone shallow + run, or curl-pipe-bash:
 curl -fsSL https://raw.githubusercontent.com/WerkstoffClub/mediumformat/claude/document-and-deploy-setup-dOnw6/scripts/preflight.sh | bash
 ```

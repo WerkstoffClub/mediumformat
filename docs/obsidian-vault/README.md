@@ -14,7 +14,7 @@ edits sync via git like any other source file.
 - **01-Overview** — product vision, stack, roadmap
 - **02-Architecture** — app layout, data model, routes, jobs, integrations
 - **03-Features** — one note per feature area
-- **04-Deployment** — production deploy on `vps.rocketsystem.cloud` → `mediumformat.info`
+- **04-Deployment** — production deploy on `port.rocketsystem.cloud` → `mediumformat.info`
 - **05-Operations** — local dev, migrations, workers, monitoring
 - **06-History** — progress log, commit history, decisions
 - **07-Memory** — glossary, conventions, project knowledge
