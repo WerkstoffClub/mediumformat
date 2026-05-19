@@ -18,14 +18,21 @@ Inspired by common-ground.io, adapted for Indonesia.
 ## Local development
 
 ```bash
-cp .env.example .env.local
-# fill DATABASE_URL, REDIS_URL, AUTH_SECRET
+cp .env.example .env
+# fill DATABASE_URL, REDIS_URL, AUTH_SECRET, SEED_ADMIN_PASSWORD
+# (Prisma CLI reads .env; Next.js reads both .env and .env.local)
 npm install
-npx prisma migrate dev
-npm run db:seed     # creates admin user + default channels + sample news
-npm run dev         # http://localhost:8000
-npm run worker      # in a second terminal
+npx prisma migrate deploy   # or `migrate dev` if you're iterating on schema.prisma
+npm run db:seed             # creates admin user + default channels + sample news
+npm run dev                 # http://localhost:8000
+npm run worker              # in a second terminal
 ```
+
+Postgres 16 + Redis 7 need to be running first — either via your OS package
+manager (`pg_ctlcluster 16 main start`, `redis-server --daemonize yes`) or via
+the included `docker-compose.yml` (`docker compose up -d postgres redis`).
+The default `DATABASE_URL` expects a `mediumformat` role + database; create
+them with `createuser -P mediumformat && createdb -O mediumformat mediumformat`.
 
 Sign in at `/admin/login` with the email + password printed by the seed.
 
