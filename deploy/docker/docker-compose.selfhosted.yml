@@ -1,0 +1,42 @@
+# ==========================================================================
+# Medium Format — static prototype, self-contained Portainer stack.
+#
+# One Caddy container serves the site and AUTO-PROVISIONS Let's Encrypt TLS
+# for mediumformat.info + www. No host nginx, no certbot.
+#
+# Deploy this via Portainer:  Stacks → Add stack → Web editor → paste this file.
+# It bind-mounts content + config from /opt/stacks/mediumformat on the VPS
+# (put them there first with deploy/docker/sync.sh — see README.md).
+#
+# PORTABLE: to move to another VPS, copy /opt/stacks/mediumformat AND the
+# `caddy_data` volume (holds issued certs + ACME account), repoint DNS, then
+# recreate this stack. Migration steps are in deploy/docker/README.md.
+# ==========================================================================
+
+services:
+  web:
+    image: caddy:2-alpine
+    container_name: mediumformat-web
+    restart: unless-stopped
+    ports:
+      - "80:80"     # HTTP — Caddy redirects to HTTPS + serves ACME challenges
+      - "443:443"   # HTTPS
+    volumes:
+      # Site content + Caddy config — synced to the VPS by sync.sh (read-only).
+      - /opt/stacks/mediumformat/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /opt/stacks/mediumformat/site:/srv:ro
+      # Persistent state — DO NOT DELETE. caddy_data holds the TLS certs and the
+      # ACME account; losing it forces re-issuance (subject to LE rate limits).
+      - caddy_data:/data
+      - caddy_config:/config
+    healthcheck:
+      # Liveness via Caddy's local admin API (bound to 127.0.0.1:2019 in-container).
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:2019/config/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  caddy_data:
+  caddy_config:

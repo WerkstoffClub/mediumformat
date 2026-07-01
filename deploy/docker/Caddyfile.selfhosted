@@ -1,0 +1,57 @@
+# ==========================================================================
+# Medium Format — container Caddyfile (automatic HTTPS via Let's Encrypt).
+# Mounted read-only at /etc/caddy/Caddyfile. Serves /srv (bind-mounted site).
+#
+# The ACME email below is used for the Let's Encrypt account + expiry notices.
+# Change it to a real inbox you control before first deploy.
+# ==========================================================================
+
+{
+	email admin@mediumformat.info
+	# --- First-run / testing: uncomment to use Let's Encrypt STAGING (untrusted
+	# certs, but no rate limits). Remove it once DNS + serving are confirmed,
+	# then redeploy to get a real cert. ---
+	# acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+mediumformat.info, www.mediumformat.info {
+	root * /srv
+	encode gzip zstd
+
+	# Pretty URLs: /mockup-cart → mockup-cart.html
+	try_files {path} {path}.html {path}/ =404
+	file_server
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+
+	# www → apex
+	@www host www.mediumformat.info
+	redir @www https://mediumformat.info{uri} permanent
+
+	# --- Security headers (mirrors the nginx/host kit; prototype uses inline
+	# <style>/<script>, so CSP allows 'unsafe-inline'. Switch to nonce-based
+	# CSP when the real React/Nest app replaces these static pages). ---
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'"
+		-Server
+	}
+
+	# HTML revalidates (prototype changes often); static assets cache a week.
+	@html path *.html
+	header @html Cache-Control "no-cache"
+	@assets path *.svg *.png *.ico *.webmanifest *.xml *.txt
+	header @assets Cache-Control "public, max-age=604800"
+
+	log {
+		output stdout
+		format console
+	}
+}

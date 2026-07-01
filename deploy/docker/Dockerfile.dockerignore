@@ -1,0 +1,13 @@
+# Trim the build context to just the web root (Dockerfile builds from repo root).
+# Everything is excluded, then the web-root set is re-included.
+*
+!index.html
+!404.html
+!favicon.svg
+!robots.txt
+!sitemap.xml
+!site.webmanifest
+!mockup-*.html
+!design-system/
+!design-system/**
+!deploy/docker/Caddyfile.selfhosted

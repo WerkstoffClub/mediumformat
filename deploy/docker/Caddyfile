@@ -1,0 +1,55 @@
+# ==========================================================================
+# Medium Format — container Caddyfile, running BEHIND Traefik.
+#
+# Traefik terminates TLS (cert resolver "myresolver") and handles HTTP→HTTPS
+# and www→apex redirects. Caddy here is just a plain HTTP file server on :80,
+# reached over the internal `proxy_public` network. Mounted read-only at
+# /etc/caddy/Caddyfile, serving /srv (the bind-mounted site).
+#
+# (For a bare VPS with no proxy, use Caddyfile.selfhosted — it does its own
+# automatic HTTPS. See README.md.)
+# ==========================================================================
+
+{
+	admin off
+	auto_https off
+}
+
+:80 {
+	root * /srv
+	encode gzip zstd
+
+	# Pretty URLs: /mockup-cart → mockup-cart.html
+	try_files {path} {path}.html {path}/ =404
+	file_server
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+
+	# --- Security headers. HSTS is safe here: Traefik serves the response over
+	# HTTPS, so the client receives it on a secure connection. Prototype uses
+	# inline <style>/<script>, so CSP allows 'unsafe-inline' (switch to a
+	# nonce-based CSP when the real React/Nest app replaces these pages). ---
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'"
+		-Server
+	}
+
+	# HTML revalidates (prototype changes often); static assets cache a week.
+	@html path *.html
+	header @html Cache-Control "no-cache"
+	@assets path *.svg *.png *.ico *.webmanifest *.xml *.txt
+	header @assets Cache-Control "public, max-age=604800"
+
+	log {
+		output stdout
+		format console
+	}
+}

@@ -1,0 +1,51 @@
+# ==========================================================================
+# Medium Format — static prototype, behind the shared Traefik on vps.lacak.live.
+#
+# This box already runs Traefik v3 (network `proxy_public`, entrypoint
+# `websecure`, cert resolver `myresolver` via Let's Encrypt TLS challenge).
+# This stack adds a small Caddy file-server container with Traefik labels —
+# NO published ports, NO own TLS. Traefik terminates HTTPS + redirects.
+# Pattern mirrors the existing /opt/stacks/lacak-web stack.
+#
+# Deploy (matches how the other stacks on this box run):
+#     scp/rsync this folder to /opt/stacks/mediumformat   (sync.sh does the site)
+#     cd /opt/stacks/mediumformat && docker compose up -d
+#
+# For a FUTURE VPS with no reverse proxy, use docker-compose.selfhosted.yml
+# instead (self-contained Caddy that owns 80/443 + auto-HTTPS). See README.md.
+# ==========================================================================
+
+services:
+  web:
+    image: caddy:2-alpine
+    container_name: mediumformat-web
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges=true
+    networks:
+      - proxy_public
+    volumes:
+      - /opt/stacks/mediumformat/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /opt/stacks/mediumformat/site:/srv:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy_public"
+      - "traefik.http.routers.mediumformat.rule=Host(`mediumformat.info`) || Host(`www.mediumformat.info`)"
+      - "traefik.http.routers.mediumformat.entrypoints=websecure"
+      - "traefik.http.routers.mediumformat.tls.certresolver=myresolver"
+      - "traefik.http.services.mediumformat.loadbalancer.server.port=80"
+      # www → apex redirect (mirrors lacak-web). $$ escapes $ for compose.
+      - "traefik.http.middlewares.mediumformat-www.redirectregex.regex=^https://www\\.mediumformat\\.info/(.*)"
+      - "traefik.http.middlewares.mediumformat-www.redirectregex.replacement=https://mediumformat.info/$${1}"
+      - "traefik.http.middlewares.mediumformat-www.redirectregex.permanent=true"
+      - "traefik.http.routers.mediumformat.middlewares=mediumformat-www"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+networks:
+  proxy_public:
+    external: true
