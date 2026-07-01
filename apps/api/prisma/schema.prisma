@@ -106,9 +106,150 @@ model Release {
   shelfLocation     String?
   lowStockThreshold Int             @default(2)
   discogsId         String?         @unique
+  dealposProductId  String?
+  dealposVariantId  String?         @unique
+  costIdr           Int?
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 
   @@index([artist, title])
   // barcode and discogsId already have implicit indexes via @unique
+}
+
+// ---------------------------------------------------------------------------
+// DealPOS mirror tables — populated by the dealpos sync module, read by finance
+// ---------------------------------------------------------------------------
+
+model DpOutlet {
+  id        String  @id
+  name      String
+  code      String?
+  suspended Boolean @default(false)
+}
+
+model DpSupplier {
+  name   String  @id
+  code   String?
+  phone  String?
+  mobile String?
+  email  String?
+}
+
+model DpCustomer {
+  id        String    @id
+  name      String
+  code      String?
+  mobile    String?
+  email     String?
+  birthDate DateTime?
+  joinDate  DateTime?
+}
+
+model DpPaymentMethod {
+  id        Int     @id
+  name      String
+  type      String?
+  suspended Boolean @default(false)
+}
+
+model DpInvoice {
+  id            String             @id
+  number        String             @unique
+  outlet        String?
+  customerName  String?
+  tag           String?
+  date          DateTime
+  created       DateTime
+  amount        Decimal            @db.Decimal(18, 2)
+  gross         Decimal?           @db.Decimal(18, 2)
+  discountTotal Decimal?           @db.Decimal(18, 2)
+  tax           Decimal?           @db.Decimal(18, 2)
+  sales         Decimal?           @db.Decimal(18, 2)
+  surcharge     Decimal?           @db.Decimal(18, 2)
+  paymentStatus String?
+  fulfillment   String?
+  isVoid        Boolean            @default(false)
+  lines         DpInvoiceLine[]
+  payments      DpInvoicePayment[]
+
+  @@index([date])
+  @@index([tag])
+  @@index([outlet])
+}
+
+model DpInvoiceLine {
+  id             String    @id @default(cuid())
+  invoice        DpInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoiceId      String
+  variantId      String?
+  name           String
+  code           String?
+  quantity       Decimal   @db.Decimal(18, 3)
+  cost           Decimal?  @db.Decimal(18, 2)
+  price          Decimal   @db.Decimal(18, 2)
+  discountAmount Decimal?  @db.Decimal(18, 2)
+  sales          Decimal?  @db.Decimal(18, 2)
+  tax            Decimal?  @db.Decimal(18, 2)
+
+  @@index([invoiceId])
+  @@index([variantId])
+  @@index([code])
+}
+
+model DpInvoicePayment {
+  id        String    @id @default(cuid())
+  invoice   DpInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoiceId String
+  date      DateTime?
+  amount    Decimal   @db.Decimal(18, 2)
+  method    String
+  code      String?
+  note      String?
+
+  @@index([invoiceId])
+  @@index([method])
+}
+
+model DpBill {
+  id            String       @id
+  number        String
+  outlet        String?
+  supplierName  String?
+  type          String?
+  date          DateTime
+  due           DateTime?
+  created       DateTime?
+  amount        Decimal      @db.Decimal(18, 2)
+  gross         Decimal?     @db.Decimal(18, 2)
+  tax           Decimal?     @db.Decimal(18, 2)
+  purchase      Decimal?     @db.Decimal(18, 2)
+  delivery      String?
+  paymentStatus String?
+  lines         DpBillLine[]
+
+  @@index([date])
+  @@index([supplierName])
+}
+
+model DpBillLine {
+  id        String   @id @default(cuid())
+  bill      DpBill   @relation(fields: [billId], references: [id], onDelete: Cascade)
+  billId    String
+  variantId String?
+  name      String
+  code      String?
+  quantity  Decimal  @db.Decimal(18, 3)
+  price     Decimal  @db.Decimal(18, 2)
+  discount  Decimal? @db.Decimal(18, 2)
+
+  @@index([billId])
+  @@index([variantId])
+}
+
+model SyncState {
+  entity    String    @id
+  status    String    @default("idle")
+  message   String?
+  cursor    String?
+  lastRunAt DateTime?
 }

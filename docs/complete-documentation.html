@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<title>Medium Format — Complete Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+  --ink:#000000;--body:#3f3f3f;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+  --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+  --ch-website:#6366F1;--ch-pos:#0EA5E9;--ch-tokopedia:#22C55E;--ch-shopee:#F97316;
+  --ch-discogs:#9CA3AF;--ch-bandcamp:#14B8A6;--ch-ebay:#EAB308;--ch-event:#EC4899;
+  --ui:"Geist","Helvetica Neue",Arial,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;
+}
+@page{size:A4;margin:16mm 15mm;}
+*{box-sizing:border-box}
+body{margin:0;font:400 10.5px/1.55 var(--ui);color:var(--body);background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+h1,h2,h3,h4{color:var(--ink);letter-spacing:-.02em;margin:0}
+.mono{font-family:var(--mono)}
+section{page-break-before:always;padding-top:4mm}
+section:first-of-type{page-break-before:avoid}
+.secno{font:500 10px/1 var(--mono);color:var(--mute);letter-spacing:.14em;text-transform:uppercase}
+h2.sec{font:600 22px/1.1 var(--ui);letter-spacing:-.04em;margin:6px 0 4px}
+.lead{color:var(--mute);font-size:12px;max-width:150mm;margin:0 0 16px}
+h3{font:600 14px/1.2 var(--ui);margin:18px 0 7px}
+h4{font:600 11.5px/1.2 var(--ui);margin:13px 0 5px}
+p{margin:0 0 8px}
+ul{margin:0 0 8px;padding-left:16px}li{margin:2px 0}
+.pill{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--hairline);border-radius:999px;padding:2px 9px;font:500 10px/1.4 var(--ui)}
+.tag{display:inline-flex;align-items:center;gap:5px;font:400 10px/1.4 var(--mono);border:1px solid var(--hairline);border-radius:4px;padding:1px 7px}
+.tag::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+table{width:100%;border-collapse:collapse;margin:4px 0 12px;font-size:10px}
+th,td{text-align:left;padding:6px 9px;border-bottom:1px solid var(--hairline);vertical-align:top}
+th{font:600 9px/1.3 var(--ui);text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+td:first-child{color:var(--ink);font-weight:500}
+.grid{display:grid;gap:8px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--hairline);border-radius:8px;padding:11px 13px;break-inside:avoid}
+.card .k{font:600 10px/1.2 var(--ui);color:var(--ink)}
+.card .v{font-family:var(--mono);font-size:9.5px;color:var(--mute);margin-top:2px}
+.sw{border:1px solid var(--hairline);border-radius:7px;overflow:hidden;break-inside:avoid}
+.sw .chip{height:38px}.sw .m{padding:6px 8px}
+.sw .nm{font:600 10px/1.2 var(--ui);color:var(--ink)}.sw .hx{font:400 9px/1.2 var(--mono);color:var(--mute)}
+.hdrbar{background:var(--raised);color:var(--ink);border-bottom:1px solid var(--hairline);padding:7px 12px;border-radius:6px 6px 0 0;font:600 10px/1 var(--ui);text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between}
+.panel{border:1px solid var(--hairline);border-top:none;border-radius:0 0 8px 8px;padding:10px 12px;font-size:10px;color:var(--mute)}
+.note{border-left:2px solid var(--ink);background:var(--raised);padding:8px 12px;font-size:10px;border-radius:0 6px 6px 0;margin:8px 0}
+code{font-family:var(--mono);font-size:9.5px;background:var(--raised);padding:1px 5px;border-radius:3px}
+.b-success{color:var(--success)}.b-info{color:var(--info)}.b-warning{color:var(--warning)}.b-danger{color:var(--danger)}
+/* cover */
+.cover{height:257mm;display:flex;flex-direction:column;justify-content:space-between;page-break-after:always}
+.cover .mark{width:96px;height:96px;color:var(--ink)}
+.cover h1{font:600 46px/1 var(--ui);letter-spacing:-.06em;margin:18px 0 10px}
+.cover .sub{font-size:15px;color:var(--mute);max-width:150mm}
+.cover .meta{font:500 11px/1.7 var(--mono);color:var(--mute);text-transform:uppercase;letter-spacing:.1em}
+.toc{columns:2;column-gap:16mm;font-size:11px}
+.toc a{color:var(--ink);text-decoration:none;display:block;padding:3px 0;border-bottom:1px solid var(--hairline)}
+.toc .n{font-family:var(--mono);color:var(--mute);margin-right:8px}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div>
+    <span class="mark"><svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M858.21,130.64c-53.14-66.98-130.64-83.97-212.83-81.02-25.27.91-46.84,2.92-65.66,5.82-22.46-5.24-46.36-6.78-70.85-5.9-144.29,5.17-131.46,57.34-223.49,99.9-100.65,46.56-92.46,129.42-125.95,175.35-49.06,67.27-68.46,143.78-62.64,226.59,1.02,14.48,3.33,28.3,6.95,41.41-7.49,40.09-9.63,81.66-6.62,124.51,5.51,78.44,39.27,142.57,105.31,186.44,23.67,15.72,46.2,41.64,66.06,62.8,111.62,118.98,233.6,49.34,285.88,40.01,94.53-16.87,175.2-53.51,244.66-121.56,33.1-32.43,55.07-73.46,79.26-114.18,17.31-29.13,40.36-55.02,53.07-87.61,66.75-171.18,96.6-429.31-73.14-552.56ZM247.28,694.57c-2.68-2.86-46.16-25.29-42.52-23.83,56.1,22.5,109.06-5.34,135.22-10.01,61.55-10.98,114.09-34.85,159.32-79.16,21.55-21.12,35.86-47.84,51.62-74.36,11.27-18.97,26.28-35.83,34.56-57.05,40.9-104.89,108.09-250.09,18.17-334.9,10.35,7.07,19.93,15.85,28.53,26.62.18.23.4.44.64.61,110.13,80.36,90.69,248.21,47.27,359.56-8.27,21.22-23.29,38.08-34.56,57.05-15.76,26.52-30.06,53.24-51.62,74.36-45.24,44.31-97.77,68.18-159.32,79.16-34.04,6.07-114.62,59.42-187.3-18.06ZM873.17,650.54c-11.01,28.23-30.98,50.66-45.98,75.9-20.96,35.28-39.99,70.83-68.67,98.93-60.18,58.96-130.08,90.71-211.97,105.32-45.29,8.08-150.98,68.42-247.68-34.67-.06-.06-.12-.13-.18-.19-3.56-3.8-40.36-36.05-35.52-34.11,74.64,29.93,145.1-7.11,179.9-13.32,81.9-14.61,151.79-46.36,211.97-105.32,28.68-28.09,47.71-63.64,68.67-98.93,14.99-25.24,34.97-47.67,45.98-75.9,54.41-139.56,121.41-319.5,1.78-432.33,13.78,9.41,30.33,19.61,41.77,33.94.24.31,1.86,1.51,2.17,1.74,146.52,106.92,115.52,330.78,57.75,478.94Z"/></svg></span>
+    <h1>Medium Format<span style="font-size:20px;vertical-align:super">®</span></h1>
+    <div class="sub">Complete platform &amp; design-system documentation — the independent record shop in Jakarta, and the software that runs it: storefront, back-office and POS.</div>
+  </div>
+  <div class="meta">Design System v2.1 · Monochrome<br>Prototype build · 22 screens · desktop + mobile<br>Confidential © 2026</div>
+</div>
+
+<!-- TOC -->
+<section>
+  <div class="secno">Contents</div><h2 class="sec">Contents</h2>
+  <div class="toc">
+    <a href="#"><span class="n">01</span>Overview &amp; surfaces</a>
+    <a href="#"><span class="n">02</span>Design system — colour</a>
+    <a href="#"><span class="n">03</span>Typography, spacing, elevation</a>
+    <a href="#"><span class="n">04</span>Components &amp; header bars</a>
+    <a href="#"><span class="n">05</span>Screen inventory (22)</a>
+    <a href="#"><span class="n">06</span>Feature: Locations &amp; shelves</a>
+    <a href="#"><span class="n">07</span>Feature: Barcode labels</a>
+    <a href="#"><span class="n">08</span>Feature: Channel colour key</a>
+    <a href="#"><span class="n">09</span>Feature: POS payments — EDC + Xendit</a>
+    <a href="#"><span class="n">10</span>Responsive &amp; theming</a>
+    <a href="#"><span class="n">11</span>Prototype, preview &amp; hub</a>
+    <a href="#"><span class="n">12</span>Deployment</a>
+    <a href="#"><span class="n">13</span>Files &amp; handoff</a>
+  </div>
+</section>
+
+<!-- 01 -->
+<section>
+  <div class="secno">01 / Overview</div><h2 class="sec">Overview &amp; surfaces</h2>
+  <p class="lead">Medium Format is an independent record shop in Jakarta and the platform that operates it. The system is strictly black &amp; white — a near-black canvas in the dark theme, white in the light theme, one neutral grey scale between. Geist sets every word; Geist Mono sets the figures that must align (prices, catalogue numbers, barcodes, IDs). Colour appears only to signal status, plus a per-channel key for scannability.</p>
+  <div class="grid g3">
+    <div class="card"><div class="k">Storefront</div><div class="v">Public catalogue</div><p style="margin-top:6px;font-size:10px">Dark-first commerce: release grid, filters, release detail, cart, Xendit checkout, account, news. Now-Playing bar carries the brand.</p></div>
+    <div class="card"><div class="k">Back-office</div><div class="v">11-module console</div><p style="margin-top:6px;font-size:10px">Dense operational tool: dashboard, inventory, locations, orders, customers, vouchers, newsletter, POs, news, channels, preferences.</p></div>
+    <div class="card"><div class="k">POS</div><div class="v">In-store terminal</div><p style="margin-top:6px;font-size:10px">Touch point-of-sale: product browser, cart, and a checkout with bank EDC terminals + Xendit gateway + cash.</p></div>
+  </div>
+  <div class="note"><b>Character:</b> plain, modern, understated. The only mark with expression is the logomark — a record seen side-on. Everything else stays quiet so the records and artwork are what you look at.</div>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="secno">02 / Colour</div><h2 class="sec">Colour</h2>
+  <p class="lead">Black and white carry the whole system; there is no brand accent colour — the interactive accent is simply the opposite of the background. A small status set marks stock and order state; a channel key (v2.1) is the one sanctioned exception for scannability.</p>
+  <h4>Surface — dark (default) / light</h4>
+  <div class="grid g4">
+    <div class="sw"><div class="chip" style="background:#000;border-bottom:1px solid #e4e4e4"></div><div class="m"><div class="nm">Canvas</div><div class="hx">#000000 / #FFFFFF</div></div></div>
+    <div class="sw"><div class="chip" style="background:#0E0E0E"></div><div class="m"><div class="nm">Surface</div><div class="hx">#0E0E0E / #FFFFFF</div></div></div>
+    <div class="sw"><div class="chip" style="background:#1A1A1A"></div><div class="m"><div class="nm">Raised</div><div class="hx">#1A1A1A / #F5F5F5</div></div></div>
+    <div class="sw"><div class="chip" style="background:#2A2A2A"></div><div class="m"><div class="nm">Hairline</div><div class="hx">#2A2A2A / #E4E4E4</div></div></div>
+  </div>
+  <h4>Status — stock &amp; orders only</h4>
+  <div class="grid g4">
+    <div class="sw"><div class="chip" style="background:#22C55E"></div><div class="m"><div class="nm">Success</div><div class="hx">#22C55E</div></div></div>
+    <div class="sw"><div class="chip" style="background:#3B82F6"></div><div class="m"><div class="nm">Info</div><div class="hx">#3B82F6</div></div></div>
+    <div class="sw"><div class="chip" style="background:#F59E0B"></div><div class="m"><div class="nm">Warning</div><div class="hx">#F59E0B</div></div></div>
+    <div class="sw"><div class="chip" style="background:#EF4444"></div><div class="m"><div class="nm">Danger</div><div class="hx">#EF4444</div></div></div>
+  </div>
+  <h4>Channel colour key <span style="font-weight:400;color:var(--mute);font-size:10px">— v2.1, channel indicators only (coloured dot + text on a neutral pill)</span></h4>
+  <div class="grid g4" style="grid-template-columns:repeat(4,1fr);gap:6px">
+    <span class="tag" style="color:var(--ch-website)">Website</span>
+    <span class="tag" style="color:var(--ch-pos)">POS</span>
+    <span class="tag" style="color:var(--ch-tokopedia)">Tokopedia</span>
+    <span class="tag" style="color:var(--ch-shopee)">Shopee</span>
+    <span class="tag" style="color:var(--ch-discogs)">Discogs</span>
+    <span class="tag" style="color:var(--ch-bandcamp)">Bandcamp</span>
+    <span class="tag" style="color:var(--ch-ebay)">eBay</span>
+    <span class="tag" style="color:var(--ch-event)">Event</span>
+  </div>
+  <div class="note">Colour discipline: the brand is monochrome. Status colour marks only stock/order state. The channel key never signals status and never decorates — it only distinguishes sales channels in dense multi-channel lists.</div>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="secno">03 / Foundations</div><h2 class="sec">Typography, spacing &amp; elevation</h2>
+  <h3>Type scale</h3>
+  <table>
+    <tr><th>Token</th><th>Size / Weight / Line</th><th>Face</th><th>Use</th></tr>
+    <tr><td>display-xl</td><td class="mono">40 / 600 / 48</td><td>Geist</td><td>Storefront hero</td></tr>
+    <tr><td>display-lg</td><td class="mono">32 / 600 / 40</td><td>Geist</td><td>Page hero</td></tr>
+    <tr><td>h1</td><td class="mono">24 / 600 / 32</td><td>Geist</td><td>Page titles</td></tr>
+    <tr><td>h2</td><td class="mono">20 / 600 / 28</td><td>Geist</td><td>Section headings</td></tr>
+    <tr><td>h3</td><td class="mono">16 / 600 / 24</td><td>Geist</td><td>Release title on cards</td></tr>
+    <tr><td>body</td><td class="mono">14 / 400 / 20</td><td>Geist</td><td>Default UI text</td></tr>
+    <tr><td>label</td><td class="mono">12 / 500 / 16 · UPPER</td><td>Geist</td><td>Field labels, badges</td></tr>
+    <tr><td>mono-price</td><td class="mono">14 / 500 / 20</td><td>Geist Mono</td><td>IDR price (USD secondary)</td></tr>
+    <tr><td>mono-meta</td><td class="mono">12 / 400 / 16</td><td>Geist Mono</td><td>Cat#, SKU, barcode, order ID</td></tr>
+  </table>
+  <div class="grid g2">
+    <div>
+      <h4>Spacing (base 4)</h4>
+      <p style="font-size:10px">xxs 4 · xs 8 · sm 12 · <b>md 16</b> · lg 20 · <b>xl 24</b> · 2xl 32 · 3xl 40 · 4xl 48 · 5xl 64. Card padding 16–20; page gutters 24–32.</p>
+      <h4>Radius</h4>
+      <p style="font-size:10px">sm 4 · <b>md 6</b> (buttons/inputs) · <b>lg 8</b> (cards/covers) · xl 12 (modals) · pill 999 (chips/badges) · full 9999 (avatars).</p>
+    </div>
+    <div>
+      <h4>Elevation</h4>
+      <p style="font-size:10px">Depth comes from surface steps + hairlines, not heavy shadow. Shadow appears only on things that float:</p>
+      <ul>
+        <li><b>0 Flat</b> — default; surface + hairline</li>
+        <li><b>1 Drop</b> — 0 1 2 rgba(0,0,0,.5); dropdowns</li>
+        <li><b>2 Float</b> — 0 4 12 rgba(0,0,0,.6); Now-Playing, sticky bars</li>
+        <li><b>3 Dialog</b> — 0 8 24 rgba(0,0,0,.7); modals, sheets</li>
+        <li><b>Focus</b> — 2px ring in the accent colour</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="secno">04 / Components</div><h2 class="sec">Components &amp; header bars</h2>
+  <div class="grid g2">
+    <div>
+      <h4>Buttons</h4>
+      <ul>
+        <li><b>Primary</b> — accent fill / accent-text; radius 6; one per view</li>
+        <li><b>Secondary</b> — transparent, 1px hairline, ink text</li>
+        <li><b>Ghost</b> — text only, hover raised</li>
+        <li><b>Destructive</b> — danger text, 1px danger 40%</li>
+      </ul>
+      <h4>Chips, badges &amp; tags</h4>
+      <ul>
+        <li><b>Filter chip</b> — pill; active = accent outline + ink</li>
+        <li><b>Status badge</b> — pill + 12% tint + dot <span class="b-success">●</span><span class="b-info">●</span><span class="b-warning">●</span><span class="b-danger">●</span></li>
+        <li><b>Condition grade</b> — neutral mono pill (M/VG+/VG/G+/G)</li>
+        <li><b>Channel tag</b> — coloured dot + text (channel key)</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Signature components</h4>
+      <ul>
+        <li><b>Release card</b> — 1:1 vinyl-groove cover, artist/title/price, stock badge, audio-preview dot</li>
+        <li><b>Now-Playing bar</b> — fixed bottom, Level-2 float, accent scrubber</li>
+        <li><b>Back-office sidebar</b> — 11 modules, icon+label, Orders pending dot</li>
+        <li><b>Barcode label</b> — printable item label (v2.1)</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Panel / section header bar <span style="font-weight:400;color:var(--mute);font-size:11px">(v2.1)</span></h3>
+  <p style="font-size:10px">The labelled strip atop a content panel/card is a solid accent bar — <b>black bar + white text in light, inverted in dark</b> (it follows <code>--accent</code>/<code>--accent-text</code>). Applies to panel/section headers only — not page titles, table column rows, sidebar/topbar/nav, or dialog headers. Status badges &amp; channel tags inside a header keep their own colour.</p>
+  <div style="max-width:120mm">
+    <div class="hdrbar"><span>Revenue &amp; net margin</span><span style="opacity:.6">3M · 6M · 12M</span></div>
+    <div class="panel">Panel body sits below the accent header, on surface with a hairline. Tabs on the bar dim to ~55%; the active tab flips to an inverted chip.</div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section>
+  <div class="secno">05 / Screens</div><h2 class="sec">Screen inventory</h2>
+  <p class="lead">22 screens, each built desktop + mobile (44 files) in the monochrome system, plus a prototype hub and a single-file preview.</p>
+  <div class="grid g3">
+    <div>
+      <h4>Storefront</h4>
+      <table><tr><th>Screen</th><th>File</th></tr>
+      <tr><td>Catalogue</td><td class="mono">storefront</td></tr>
+      <tr><td>Release detail</td><td class="mono">release</td></tr>
+      <tr><td>Cart</td><td class="mono">cart</td></tr>
+      <tr><td>Checkout</td><td class="mono">checkout</td></tr>
+      <tr><td>Confirmation</td><td class="mono">confirmation</td></tr>
+      <tr><td>Account</td><td class="mono">account</td></tr>
+      <tr><td>News article</td><td class="mono">journal</td></tr></table>
+    </div>
+    <div>
+      <h4>Back-office</h4>
+      <table><tr><th>Screen</th><th>File</th></tr>
+      <tr><td>Dashboard</td><td class="mono">dashboard</td></tr>
+      <tr><td>Inventory</td><td class="mono">inventory</td></tr>
+      <tr><td>Locations</td><td class="mono">locations</td></tr>
+      <tr><td>Add/edit release</td><td class="mono">release-edit</td></tr>
+      <tr><td>Orders</td><td class="mono">orders</td></tr>
+      <tr><td>Order detail</td><td class="mono">order-detail</td></tr>
+      <tr><td>Customers</td><td class="mono">customers</td></tr>
+      <tr><td>Vouchers</td><td class="mono">vouchers</td></tr>
+      <tr><td>Newsletter</td><td class="mono">newsletter</td></tr>
+      <tr><td>Purchase orders</td><td class="mono">purchase-orders</td></tr>
+      <tr><td>News updates</td><td class="mono">news</td></tr>
+      <tr><td>Channels</td><td class="mono">channels</td></tr>
+      <tr><td>Preferences</td><td class="mono">preferences</td></tr></table>
+    </div>
+    <div>
+      <h4>POS</h4>
+      <table><tr><th>Screen</th><th>File</th></tr>
+      <tr><td>POS sale</td><td class="mono">pos</td></tr>
+      <tr><td>POS checkout</td><td class="mono">pos-checkout</td></tr></table>
+      <h4>System</h4>
+      <table><tr><th>Screen</th><th>File</th></tr>
+      <tr><td>Prototype hub</td><td class="mono">index</td></tr>
+      <tr><td>All-screens preview</td><td class="mono">preview</td></tr>
+      <tr><td>Not found</td><td class="mono">404</td></tr></table>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section>
+  <div class="secno">06 / Feature</div><h2 class="sec">Locations &amp; shelves</h2>
+  <p class="lead">Stock is tracked across multiple physical locations, each with its own shelves. Reached from Inventory → Locations.</p>
+  <ul>
+    <li><b>Location management</b> — add / edit / remove locations (Main Store, Warehouse, Pop-up, Consignment), each with type, address, item count, shelf count and low-stock figure.</li>
+    <li><b>Shelf editor</b> — add/remove shelves per location (A1, A2, C2, Crate 1…).</li>
+    <li><b>Stock-by-shelf monitor</b> — every item's location + shelf + qty + stock status, filterable by location.</li>
+    <li><b>Per-location allocation on the release form</b> — the Add/Edit release "Stock &amp; location" section allocates quantity across locations + shelves, with a live total ("N across M locations").</li>
+    <li>Item labels print the item's location · shelf (see §07).</li>
+  </ul>
+</section>
+
+<!-- 07 -->
+<section>
+  <div class="secno">07 / Feature</div><h2 class="sec">Barcode labels</h2>
+  <p class="lead">Every inventory row can print a physical item label for shelf tracking.</p>
+  <ul>
+    <li>Row action <b>Print barcode</b> opens a print-ready label: Medium Format mark, scannable barcode, SKU (mono), artist — title, cat# · condition · price, and the item's location · shelf.</li>
+    <li>The label always renders <b>black-on-white</b> (prints correctly regardless of theme); a print stylesheet isolates just the label.</li>
+    <li>SKU is derived deterministically per release; barcode encodes the SKU.</li>
+    <li>Available on both desktop and the mobile inventory cards.</li>
+  </ul>
+</section>
+
+<!-- 08 -->
+<section>
+  <div class="secno">08 / Feature</div><h2 class="sec">Channel colour key</h2>
+  <p class="lead">To make dense multi-channel lists (orders, inventory, customers, dashboard) scannable, each sales channel carries a fixed hue — the one sanctioned exception to monochrome discipline.</p>
+  <table>
+    <tr><th>Channel</th><th>Hue</th><th>Channel</th><th>Hue</th></tr>
+    <tr><td><span class="tag" style="color:var(--ch-website)">Website</span></td><td class="mono">#6366F1</td><td><span class="tag" style="color:var(--ch-discogs)">Discogs</span></td><td class="mono">#9CA3AF</td></tr>
+    <tr><td><span class="tag" style="color:var(--ch-pos)">POS</span></td><td class="mono">#0EA5E9</td><td><span class="tag" style="color:var(--ch-bandcamp)">Bandcamp</span></td><td class="mono">#14B8A6</td></tr>
+    <tr><td><span class="tag" style="color:var(--ch-tokopedia)">Tokopedia</span></td><td class="mono">#22C55E</td><td><span class="tag" style="color:var(--ch-ebay)">eBay</span></td><td class="mono">#EAB308</td></tr>
+    <tr><td><span class="tag" style="color:var(--ch-shopee)">Shopee</span></td><td class="mono">#F97316</td><td><span class="tag" style="color:var(--ch-event)">Event</span></td><td class="mono">#EC4899</td></tr>
+  </table>
+  <p style="font-size:10px">Rendered as a coloured dot + coloured text on a neutral pill in tables, and as a tinted icon on the Channels integration cards. Tokens live under <code>color.channel.*</code> in <code>tokens.json</code>.</p>
+</section>
+
+<!-- 09 -->
+<section>
+  <div class="secno">09 / Feature</div><h2 class="sec">POS payments — EDC + Xendit</h2>
+  <p class="lead">The POS checkout offers two clearly separated payment families plus cash.</p>
+  <div class="grid g2">
+    <div class="card">
+      <div class="k">A · Card terminal (EDC)</div>
+      <p style="font-size:10px;margin-top:6px">Physical acquirer terminals: <b>BCA, Mandiri, BNI, BRI, CIMB Niaga, Permata</b>. Selecting a bank runs the terminal flow: insert/tap/swipe → reading → processing → <span class="b-success">Approved</span> panel with Approval Code, RRN/Ref, Batch, Trace, masked PAN, scheme (Visa/Mastercard/GPN) and entry mode. A <span class="b-danger">Declined</span> path is included.</p>
+    </div>
+    <div class="card">
+      <div class="k">B · Xendit (online gateway)</div>
+      <p style="font-size:10px;margin-top:6px">"Secured by Xendit": <b>QRIS</b> (scan block), <b>Virtual Account</b> (BCA/Mandiri/BNI), <b>e-wallet</b> (GoPay/OVO/DANA/ShopeePay), and <b>card</b>. Each shows an appropriate waiting/confirmed state.</p>
+    </div>
+  </div>
+  <p style="font-size:10px">Cash supports amount-tendered → change due. Completing a sale prints a receipt showing the payment method used (e.g. "EDC · BCA · Visa chip" or "QRIS · Xendit"). The storefront checkout uses Xendit for online orders.</p>
+</section>
+
+<!-- 10 -->
+<section>
+  <div class="secno">10 / Responsive</div><h2 class="sec">Responsive &amp; theming</h2>
+  <table>
+    <tr><th>Breakpoint</th><th>Width</th><th>Key changes</th></tr>
+    <tr><td>Mobile</td><td class="mono">&lt; 640</td><td>Grid 2-up; filter rail → drawer; sidebar → hamburger; tables → stacked cards; Now-Playing pinned</td></tr>
+    <tr><td>Tablet</td><td class="mono">640–1024</td><td>Grid 3–4-up; sidebar → icons; tables scroll</td></tr>
+    <tr><td>Desktop</td><td class="mono">1024–1280</td><td>Grid 5-up; full sidebar with labels</td></tr>
+    <tr><td>Wide</td><td class="mono">≥ 1280</td><td>Grid 6-up; content caps ~1280 and centres</td></tr>
+  </table>
+  <p style="font-size:10px"><b>Theme</b> — dark is the default across storefront and back-office; the light theme is toggled from the topbar and stored per browser (<code>localStorage['mf-theme']</code>). Every value inverts through <code>--accent</code>/<code>--accent-text</code>. <b>Touch</b> — controls render ≥ 44px on touch viewports. Dedicated phone-framed mobile mockups accompany every screen.</p>
+</section>
+
+<!-- 11 -->
+<section>
+  <div class="secno">11 / Prototype</div><h2 class="sec">Prototype, preview &amp; hub</h2>
+  <ul>
+    <li><code>index.html</code> — <b>prototype hub</b>: every screen grouped by surface, Desktop/Mobile toggle, and wired click-through flows (catalogue → release → cart → checkout → confirmation; POS → charge → EDC → receipt; orders → detail → inventory).</li>
+    <li><code>preview.html</code> — <b>single-file preview</b>: all 22 screens in one place with a Desktop/Mobile toggle, Stage + Gallery views, and open-in-tab.</li>
+    <li>All pages self-contained HTML5; only external dependency is Google Fonts. Pages cross-link so the real flows can be walked before development.</li>
+  </ul>
+</section>
+
+<!-- 12 -->
+<section>
+  <div class="secno">12 / Deployment</div><h2 class="sec">Deployment</h2>
+  <p class="lead">The static prototype deploys to <b>mediumformat.info</b> on the VPS at vps.lacak.live.</p>
+  <ul>
+    <li><code>deploy/nginx/mediumformat.info.conf</code> — HTTP→HTTPS, HSTS + security headers, CSP, gzip, caching, pretty URLs, 404 handling. A <code>Caddyfile</code> alternative provides automatic HTTPS.</li>
+    <li><code>deploy/deploy.sh</code> — one-command rsync-over-SSH deploy (config in <code>deploy/deploy.env</code>). <code>deploy/README.md</code> is the full runbook (DNS, certbot, deploy).</li>
+    <li>Web-root assets: <code>favicon.svg</code> (theme-aware), <code>robots.txt</code>, <code>sitemap.xml</code>, <code>site.webmanifest</code>, branded <code>404.html</code>.</li>
+  </ul>
+  <div class="note">Follow-up for the real product: replace the static pages with the <code>apps/api</code> (NestJS) + <code>apps/backoffice</code> (React) app; move to a nonce-based CSP and self-hosted fonts.</div>
+</section>
+
+<!-- 13 -->
+<section>
+  <div class="secno">13 / Files</div><h2 class="sec">Files &amp; design handoff</h2>
+  <table>
+    <tr><th>File</th><th>Purpose</th></tr>
+    <tr><td class="mono">DESIGN.md</td><td>Canonical design specification</td></tr>
+    <tr><td class="mono">design-system/tokens.json</td><td>W3C DTCG tokens — import to OpenDesign / Penpot / Figma (Tokens Studio). v2.1 adds channel colours.</td></tr>
+    <tr><td class="mono">design-system/tokens.css</td><td>CSS custom properties + recipes (channel key, panel header bar)</td></tr>
+    <tr><td class="mono">design-system/opendesign-handoff.html</td><td>OpenDesign handoff — components, screens &amp; specs</td></tr>
+    <tr><td class="mono">design-system/IMPORT.md</td><td>How to import the tokens</td></tr>
+    <tr><td class="mono">index.html / preview.html</td><td>Prototype hub / single-file preview</td></tr>
+    <tr><td class="mono">mockup-*.html</td><td>44 screen mockups (desktop + mobile)</td></tr>
+    <tr><td class="mono">CLAUDE.md</td><td>Working conventions for the codebase</td></tr>
+  </table>
+  <p style="font-size:10px;color:var(--mute);margin-top:16px">Medium Format — Confidential © 2026. Design system derived from the Medium Format brand assets (2026) and Platform Design Specification. Format follows the DESIGN.md convention.</p>
+</section>
+
+</body>
+</html>
