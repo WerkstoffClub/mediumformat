@@ -1,0 +1,374 @@
+<h2 style="font-family:Inter,-apple-system,sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin:0 0 4px;">Backoffice — Main Dashboard</h2>
+<p class="subtitle" style="font-family:Inter,-apple-system,sans-serif;font-size:12px;color:#555;margin:0 0 10px;">What you see after logging in — daily operations at a glance</p>
+
+<style>
+  * { box-sizing: border-box; }
+  .shell {
+    display: flex;
+    height: 580px;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: Inter, -apple-system, sans-serif;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  /* Sidebar */
+  .sidebar {
+    width: 180px;
+    min-width: 180px;
+    background: #090909;
+    border-right: 1px solid #1a1a1a;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-logo {
+    padding: 14px 16px 12px;
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid #1a1a1a;
+    letter-spacing: -0.03em;
+  }
+  .sidebar-logo span { color: #fff; opacity: 0.5; }
+  .sidebar-nav { padding: 8px 0; flex: 1; overflow-y: auto; }
+  .nav-group-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #404040;
+    padding: 10px 16px 4px;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: color 100ms, background 100ms;
+  }
+  .nav-link:hover { color: #ccc; background: #141414; }
+  .nav-link.active { color: #fff; background: #141414; border-left-color: #ffffff; }
+  .nav-link .icon { width: 14px; text-align: center; font-size: 11px; }
+  .nav-badge {
+    margin-left: auto;
+    background: rgba(224,92,106,0.15);
+    color: #e05c6a;
+    font-size: 9px;
+    border-radius: 100px;
+    padding: 1px 6px;
+    font-weight: 700;
+  }
+  /* Main area */
+  .main { flex: 1; background: #090909; overflow-y: auto; display: flex; flex-direction: column; }
+  .topbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #1a1a1a;
+    background: #090909;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .topbar-title { font-size: 14px; font-weight: 700; color: #fff; flex: 1; letter-spacing: -0.03em; }
+  .topbar-date { color: #555; font-size: 11px; }
+  .topbar-store {
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid #262626;
+    border-radius: 100px;
+    color: #666;
+    background: #141414;
+  }
+  .topbar-avatar {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: #1c1c1c;
+    border: 1px solid #262626;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: #999;
+  }
+  /* Content area */
+  .content { padding: 16px 20px; flex: 1; }
+
+  /* Stats row */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+  .stat-card {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: border-color 150ms;
+  }
+  .stat-card:hover { border-color: #333; }
+  .stat-card.gradient-violet {
+    background: linear-gradient(135deg, #6a4cf5, #4c2b9a);
+    border-color: transparent;
+  }
+  .stat-card.gradient-orange {
+    background: linear-gradient(135deg, #ff7a3d, #e04a1a);
+    border-color: transparent;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  .stat-card.gradient-violet .stat-label,
+  .stat-card.gradient-orange .stat-label { color: rgba(255,255,255,0.65); }
+  .stat-value { font-size: 22px; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.04em; }
+  .stat-sub { font-size: 10px; color: #666; margin-top: 5px; }
+  .stat-card.gradient-violet .stat-sub,
+  .stat-card.gradient-orange .stat-sub { color: rgba(255,255,255,0.6); }
+  .stat-up { color: #22c55e; }
+  .stat-down { color: #e05c6a; }
+  .stat-card.gradient-violet .stat-up,
+  .stat-card.gradient-orange .stat-up { color: rgba(255,255,255,0.85); }
+
+  /* Two-column layout */
+  .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 12px; }
+
+  /* Panel */
+  .panel {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .panel-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid #1a1a1a;
+    font-weight: 700;
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    gap: 8px;
+  }
+  .panel-header .ph-right { margin-left: auto; color: #0099ff; font-size: 10px; font-weight: 400; text-transform: none; letter-spacing: 0; cursor: pointer; }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  th { text-align: left; padding: 6px 14px; color: #999; font-weight: 600; border-bottom: 1px solid #1a1a1a; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; }
+  td { padding: 7px 14px; color: #999; border-bottom: 1px solid #1a1a1a; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: #fff; font-weight: 500; }
+  .s-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .s-pill::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+  .s-pending   { background: rgba(232,168,56,0.12);  color: #e8a838; }
+  .s-processing{ background: rgba(0,153,255,0.12);   color: #0099ff; }
+  .s-shipped   { background: rgba(91,192,222,0.12);  color: #5bc0de; }
+  .s-done      { background: rgba(34,197,94,0.12);   color: #22c55e; }
+  .channel-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 600;
+    background: #1c1c1c;
+    color: #999;
+    border: 1px solid #262626;
+  }
+
+  /* Right column */
+  .right-col { display: flex; flex-direction: column; gap: 12px; }
+
+  /* Channel breakdown */
+  .channel-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; }
+  .channel-name { flex: 1; color: #ccc; font-size: 11px; }
+  .channel-bar-wrap { width: 70px; height: 4px; background: #1c1c1c; border-radius: 2px; overflow: hidden; }
+  .channel-bar { height: 100%; border-radius: 2px; }
+  .channel-val { color: #999; font-size: 10px; width: 52px; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Stock alerts */
+  .alert-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 11px;
+  }
+  .alert-row:last-child { border-bottom: none; }
+  .alert-img { width: 28px; height: 28px; background: #1c1c1c; border: 1px solid #262626; border-radius: 5px; flex-shrink: 0; }
+  .alert-title { color: #ccc; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .alert-stock { color: #e05c6a; font-weight: 700; font-size: 10px; background: rgba(224,92,106,0.1); padding: 2px 6px; border-radius: 4px; }
+</style>
+
+<div class="shell">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">Medium<span>Format</span></div>
+    <div class="sidebar-nav">
+      <div class="nav-group-label">Main</div>
+      <div class="nav-link active"><span class="icon">◈</span> Dashboard</div>
+      <div class="nav-link"><span class="icon">📦</span> Inventory</div>
+      <div class="nav-link"><span class="icon">🛒</span> Orders <span class="nav-badge">7</span></div>
+      <div class="nav-link"><span class="icon">👥</span> Customers</div>
+      <div class="nav-group-label">Channels</div>
+      <div class="nav-link"><span class="icon">🌐</span> Website</div>
+      <div class="nav-link"><span class="icon">🏪</span> POS</div>
+      <div class="nav-link"><span class="icon">🟢</span> Tokopedia</div>
+      <div class="nav-link"><span class="icon">🟠</span> Shopee</div>
+      <div class="nav-link"><span class="icon">🔵</span> Discogs</div>
+      <div class="nav-group-label">Business</div>
+      <div class="nav-link"><span class="icon">💳</span> Payments</div>
+      <div class="nav-link"><span class="icon">🚚</span> Shipping</div>
+      <div class="nav-link"><span class="icon">🏭</span> Wholesale</div>
+      <div class="nav-link"><span class="icon">📣</span> Marketing</div>
+      <div class="nav-link"><span class="icon">📊</span> Analytics</div>
+      <div class="nav-group-label">Config</div>
+      <div class="nav-link"><span class="icon">⚙️</span> Settings</div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Dashboard</div>
+      <div class="topbar-date">Mon, 28 Apr 2026</div>
+      <div class="topbar-store">📍 Medium Format · Jakarta</div>
+      <div class="topbar-avatar">MF</div>
+    </div>
+
+    <div class="content">
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card gradient-violet">
+          <div class="stat-label">Today's Revenue</div>
+          <div class="stat-value">Rp 2.4M</div>
+          <div class="stat-sub stat-up">↑ 18% vs yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Open Orders</div>
+          <div class="stat-value">7</div>
+          <div class="stat-sub stat-down">3 need action</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Items in Stock</div>
+          <div class="stat-value">1,240</div>
+          <div class="stat-sub stat-down">↓ 12 sold today</div>
+        </div>
+        <div class="stat-card gradient-orange">
+          <div class="stat-label">This Month</div>
+          <div class="stat-value">Rp 48M</div>
+          <div class="stat-sub stat-up">↑ 8% vs last month</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <!-- Left: recent orders -->
+        <div>
+          <div class="panel">
+            <div class="panel-header">🛒 Recent Orders <span class="ph-right">View all →</span></div>
+            <table>
+              <thead><tr><th>Order</th><th>Customer</th><th>Channel</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>#1042</td><td>Andi S.</td>
+                  <td><span class="channel-tag">Tokopedia</span></td>
+                  <td>Rp 185K</td>
+                  <td><span class="s-pill s-pending">Pending</span></td>
+                </tr>
+                <tr>
+                  <td>#1041</td><td>Diana R.</td>
+                  <td><span class="channel-tag">Website</span></td>
+                  <td>Rp 420K</td>
+                  <td><span class="s-pill s-processing">Processing</span></td>
+                </tr>
+                <tr>
+                  <td>#1040</td><td>Marco K.</td>
+                  <td><span class="channel-tag">Discogs</span></td>
+                  <td>USD 22</td>
+                  <td><span class="s-pill s-shipped">Shipped</span></td>
+                </tr>
+                <tr>
+                  <td>#1039</td><td>Sari W.</td>
+                  <td><span class="channel-tag">Shopee</span></td>
+                  <td>Rp 95K</td>
+                  <td><span class="s-pill s-done">Done</span></td>
+                </tr>
+                <tr>
+                  <td>#1038</td><td>Walk-in</td>
+                  <td><span class="channel-tag">POS</span></td>
+                  <td>Rp 310K</td>
+                  <td><span class="s-pill s-done">Done</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="right-col">
+          <!-- Sales by channel -->
+          <div class="panel">
+            <div class="panel-header">📡 Sales by Channel</div>
+            <div style="padding: 10px 14px 12px;">
+              <div class="channel-row">
+                <div class="channel-name">Tokopedia</div>
+                <div class="channel-bar-wrap"><div class="channel-bar" style="width:72%;background:#22c55e;"></div></div>
+                <div class="channel-val">Rp 17.2M</div>
+              </div>
+              <div class="channel-row">
+                <div class="channel-name">Website</div>
+                <div class="channel-bar-wrap"><div class="channel-bar" style="width:55%;background:#0099ff;"></div></div>
+                <div class="channel-val">Rp 13.1M</div>
+              </div>
+              <div class="channel-row">
+                <div class="channel-name">Shopee</div>
+                <div class="channel-bar-wrap"><div class="channel-bar" style="width:42%;background:#e8a838;"></div></div>
+                <div class="channel-val">Rp 10.0M</div>
+              </div>
+              <div class="channel-row">
+                <div class="channel-name">POS (Offline)</div>
+                <div class="channel-bar-wrap"><div class="channel-bar" style="width:30%;background:#5bc0de;"></div></div>
+                <div class="channel-val">Rp 7.1M</div>
+              </div>
+              <div class="channel-row">
+                <div class="channel-name">Discogs</div>
+                <div class="channel-bar-wrap"><div class="channel-bar" style="width:14%;background:#e05c6a;"></div></div>
+                <div class="channel-val">Rp 3.4M</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Low stock -->
+          <div class="panel">
+            <div class="panel-header">⚠️ Low Stock <span class="ph-right">View all →</span></div>
+            <div class="alert-row">
+              <div class="alert-img"></div>
+              <div class="alert-title">Radiohead – OK Computer (LP)</div>
+              <div class="alert-stock">1 left</div>
+            </div>
+            <div class="alert-row">
+              <div class="alert-img"></div>
+              <div class="alert-title">Massive Attack – Mezzanine</div>
+              <div class="alert-stock">2 left</div>
+            </div>
+            <div class="alert-row">
+              <div class="alert-img"></div>
+              <div class="alert-title">Portishead – Dummy (LP)</div>
+              <div class="alert-stock">1 left</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

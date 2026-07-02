@@ -1,0 +1,353 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 6,
+    "per_page": 5,
+    "items": 29,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Slowdive+Souvlaki&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=6",
+      "next": "https://api.discogs.com/database/search?q=Slowdive+Souvlaki&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2011",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Music On Vinyl",
+        "Music On Vinyl B.V.",
+        "Music On Vinyl B.V.",
+        "Sony Music Entertainment",
+        "Creation Records Ltd.",
+        "Sony Music Entertainment",
+        "Creation Records Ltd.",
+        "Sony Music Entertainment",
+        "Record Industry",
+        "EMI Music Publishing Ltd.",
+        "Opal Music",
+        "Courtyard Studio",
+        "Protocol Studios",
+        "Whitehouse Recording Studio"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Shoegaze",
+        "Dream Pop"
+      ],
+      "id": 3020028,
+      "barcode": [
+        "8 713748 982256",
+        "8713748982256",
+        "BIEM/STEMRA",
+        "87678 1A MOVLP 202",
+        "87678 1B MOVLP 202",
+        "87678 2A MOVLP 202",
+        "87678 2B MOVLP 202"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 9478,
+      "master_url": "https://api.discogs.com/masters/9478",
+      "uri": "/release/3020028-Slowdive-Souvlaki",
+      "catno": "MOVLP202",
+      "title": "Slowdive - Souvlaki",
+      "thumb": "https://i.discogs.com/eNYSLp_RbAgJaToUx89PLn9wpUIYcdRY4R7rNKoLSZ8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwMjAw/MjgtMTM5NDU2ODQy/MC01MzMwLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/FMy3IrKVVC-PN9TeWz23u500lmHTXOWioO-2aDaGg1w/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwMjAw/MjgtMTM5NDU2ODQy/MC01MzMwLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3020028",
+      "community": {
+        "want": 5342,
+        "have": 20056
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "1993",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Creation Records",
+        "Pinnacle",
+        "Creation Records Ltd.",
+        "Creation Records Ltd.",
+        "EMI Music",
+        "Opal Music",
+        "Protocol Studios",
+        "Courtyard Studio",
+        "Whitehouse Recording Studio",
+        "Broadcrest Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Shoegaze",
+        "Dream Pop"
+      ],
+      "id": 829200,
+      "barcode": [
+        "5017556301395",
+        "5 017556 301395",
+        "CRELP-139 A1 BC2470",
+        "CRELP 139-B1 BC2470",
+        "LC 6306"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 9478,
+      "master_url": "https://api.discogs.com/masters/9478",
+      "uri": "/release/829200-Slowdive-Souvlaki",
+      "catno": "crelp 139",
+      "title": "Slowdive - Souvlaki",
+      "thumb": "https://i.discogs.com/BD-HNZkn5SG7wR87MUoOje__85V1Sjj6s2-ILCnGSH4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTgyOTIw/MC0xNTk1MzY1NzA2/LTUwNzUuanBlZw.jpeg",
+      "cover_image": "https://i.discogs.com/97GvuCdqQM4GeEj_rYRCvQrO5XhQnzmnvPxKRQ9ht0k/rs:fit/g:sm/q:90/h:610/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTgyOTIw/MC0xNTk1MzY1NzA2/LTUwNzUuanBlZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/829200",
+      "community": {
+        "want": 5642,
+        "have": 1366
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Numbered",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Music On Vinyl",
+        "Music On Vinyl B.V.",
+        "Music On Vinyl B.V.",
+        "Sony Music Entertainment",
+        "Creation Records Ltd.",
+        "Creation Records Ltd.",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Creation Records",
+        "Creation Records",
+        "EMI Music",
+        "EMI Music Publishing Ltd.",
+        "Opal Music",
+        "Protocol Studios",
+        "Courtyard Studio",
+        "Whitehouse Recording Studio",
+        "Record Industry"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Dream Pop",
+        "Indie Rock"
+      ],
+      "id": 14248656,
+      "barcode": [
+        "8 719262 012196",
+        "BIEM/STEMRA",
+        "87678 2A MOVLP 202",
+        "87678 2B MOVLP 202"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 9478,
+      "master_url": "https://api.discogs.com/masters/9478",
+      "uri": "/release/14248656-Slowdive-Souvlaki",
+      "catno": "MOVLP202",
+      "title": "Slowdive - Souvlaki",
+      "thumb": "https://i.discogs.com/ECn7NfBr5rQDVBxNV4N0LHdClRTV3PJ63cq7pUdZf7A/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MjQ4/NjU2LTE1NzEwNjky/OTEtOTM3Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/LrjpX7qDzUDrTdPUcCYqy_3H4JSK9_p3rT_eTHC5zQw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MjQ4/NjU2LTE1NzEwNjky/OTEtOTM3Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14248656",
+      "community": {
+        "want": 1624,
+        "have": 1723
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Transparent/Black Marbled, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Numbered",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Stereo"
+      ],
+      "label": [
+        "Sony Music",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Dream Pop"
+      ],
+      "id": 33601581,
+      "barcode": [
+        "1 98028 86051 2",
+        "198028860512",
+        "LC12723",
+        "BIEM/SDRM",
+        "87678 5A MOVLP202",
+        "87678 6B MOVLP202"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 9478,
+      "master_url": "https://api.discogs.com/masters/9478",
+      "uri": "/release/33601581-Slowdive-Souvlaki",
+      "catno": "19802886051",
+      "title": "Slowdive - Souvlaki",
+      "thumb": "https://i.discogs.com/g_4EVC1VpqBYyoTBhEgzZFYjLqlmSa0nvCGeuAD-wTQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNjAx/NTgxLTE3NTgzMDEw/MzctMjk0Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/QEdhvOh4B0GIhAbTXmusCACiHblDxOOVTkG3NNNrjxQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNjAx/NTgxLTE3NTgzMDEw/MzctMjk0Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33601581",
+      "community": {
+        "want": 527,
+        "have": 2136
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2009",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Unofficial Release"
+      ],
+      "label": [
+        "Creation Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Shoegaze",
+        "Dream Pop"
+      ],
+      "id": 2267300,
+      "barcode": [
+        "5017556301395"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 9478,
+      "master_url": "https://api.discogs.com/masters/9478",
+      "uri": "/release/2267300-Slowdive-Souvlaki",
+      "catno": "CRELP 139 PRDJ",
+      "title": "Slowdive - Souvlaki",
+      "thumb": "https://i.discogs.com/D5U7ShqsmpRaOvABLzheRQTn3d4CUHFj6--MxIwq_Bk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyNjcz/MDAtMTQ5NzIwMjE1/OC0yNzg4LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/TH2pM51WYgQaMF_5MzSufIy34jRI7p9Zoi-WezXAxpE/rs:fit/g:sm/q:90/h:601/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyNjcz/MDAtMTQ5NzIwMjE1/OC0yNzg4LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2267300",
+      "community": {
+        "want": 923,
+        "have": 1067
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Unofficial Release"
+          ]
+        }
+      ]
+    }
+  ]
+}

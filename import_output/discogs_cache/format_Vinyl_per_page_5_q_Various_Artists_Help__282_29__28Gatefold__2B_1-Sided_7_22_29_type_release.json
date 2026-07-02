@@ -1,0 +1,108 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2013",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Vinyl",
+        "LP",
+        "Flexi-disc",
+        "7\"",
+        "45 RPM",
+        "Shape",
+        "Single Sided",
+        "All Media",
+        "Compilation",
+        "Limited Edition"
+      ],
+      "label": [
+        "People In A Position To Know",
+        "Gray Sky Micro Press",
+        "Bleeding Gold",
+        "Pirates Press",
+        "GZ Digital Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Country Rock",
+        "Lo-Fi"
+      ],
+      "id": 4249126,
+      "barcode": [
+        "104644E1/A     PIRATES PRESS- PIAPTK-100 A",
+        "104644E2/A     PIRATES PRESS- PIAPTK-100 B",
+        "104644E3/A     PIRATES PRESS- PIAPTK-100 C",
+        "104644E4/A     PIRATES PRESS- PIAPTK-100 D",
+        "PIRATES PRESS- PIAPTK-101"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 533702,
+      "master_url": "https://api.discogs.com/masters/533702",
+      "uri": "/release/4249126-Various-The-Rising-Cost-Of-Livin-High-Lovin-Hard-A-Tribute-To-Kris-Kristofferson",
+      "catno": "PIAPTK-100",
+      "title": "Various - The Rising Cost Of Livin' High & Lovin' Hard A Tribute To Kris Kristofferson",
+      "thumb": "https://i.discogs.com/hxtP31xz58wBXjLfSl5Ac6JVBWE-LcF26n-fJ5wkJMg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQyNDkx/MjYtMTM1OTY3NjYx/Ny01MTgxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/qeDm9vAqH3CWw7PXFKnsvpdMqrfuKN4YgerTAuQnSMg/rs:fit/g:sm/q:90/h:500/w:500/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQyNDkx/MjYtMTM1OTY3NjYx/Ny01MTgxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4249126",
+      "community": {
+        "want": 35,
+        "have": 41
+      },
+      "format_quantity": 3,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red Translucent with White/Blue Splatter",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear Frosted with Red Splatter",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "Flexi-disc",
+          "qty": "1",
+          "text": "Red, Square",
+          "descriptions": [
+            "7\"",
+            "45 RPM",
+            "Shape",
+            "Single Sided"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Hand-Screened Cover",
+          "descriptions": [
+            "Compilation",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

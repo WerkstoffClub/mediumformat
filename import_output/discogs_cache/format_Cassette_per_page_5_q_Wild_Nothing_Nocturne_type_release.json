@@ -1,0 +1,168 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2012",
+      "format": [
+        "Cassette",
+        "Album"
+      ],
+      "label": [
+        "Captured Tracks"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 6241687,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 466348,
+      "master_url": "https://api.discogs.com/masters/466348",
+      "uri": "/release/6241687-Wild-Nothing-Nocturne",
+      "catno": "CT-162",
+      "title": "Wild Nothing - Nocturne",
+      "thumb": "https://i.discogs.com/k0ijuX7YNd7W7Iyht3OJbu24U1HbS-qNDrF0AxDs3IQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYyNDE2/ODctMTU5NDUwMDk2/Ni0yNDE3LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/2auL_llgzDs3X48xgqshbxasQalUvg9KwgrBssiyjNs/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYyNDE2/ODctMTU5NDUwMDk2/Ni0yNDE3LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/6241687",
+      "community": {
+        "want": 135,
+        "have": 152
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Cassette",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Omnian Music Group",
+        "Captured Tracks Records",
+        "Captured Tracks Records",
+        "Brooklyn Steel",
+        "Bonati Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Shoegaze"
+      ],
+      "id": 14428402,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1639733,
+      "master_url": "https://api.discogs.com/masters/1639733",
+      "uri": "/Wild-Nothing-Live-From-Brooklyn-Steel/release/14428402",
+      "catno": "CT-316",
+      "title": "Wild Nothing - Live From Brooklyn Steel",
+      "thumb": "https://i.discogs.com/zdV1gN9WQgqyqOcWsgkr19qnb6zzYOpbq0s9txxEC_s/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NDI4/NDAyLTE1NzQzNDYx/MTktNjA3OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/JbYO8TMuq7UE0fv8zQfnjqkDxQ-AZ5xtuI5CC2K4cbw/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NDI4/NDAyLTE1NzQzNDYx/MTktNjA3OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14428402",
+      "community": {
+        "want": 62,
+        "have": 32
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Germany",
+      "year": "2003",
+      "format": [
+        "Cassette",
+        "Compilation",
+        "Stereo",
+        "Box Set"
+      ],
+      "label": [
+        "Reader's Digest Music",
+        "Verlag Das Beste GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Jazz"
+      ],
+      "style": [
+        "Swing"
+      ],
+      "id": 23801456,
+      "barcode": [
+        "LC 12660",
+        "GEMA"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2700107,
+      "master_url": "https://api.discogs.com/masters/2700107",
+      "uri": "/release/23801456-Various-Swing-Made-In-Germany-Gro%C3%9Fe-Interpreten-Schwungvolle-Hits",
+      "catno": "SWG 071868",
+      "title": "Various - Swing Made In Germany (Große Interpreten Schwungvolle Hits)",
+      "thumb": "https://i.discogs.com/6YVX0EWYEiFUNdFFpxgzCpbEBMw-WChQwteX5fLYEMI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzODAx/NDU2LTE2NTcxNzY0/ODUtNDk2OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/cEsh-3DkVuLqYeg7G8FNARqZux7lx_Vyy5Vf5XcpzxU/rs:fit/g:sm/q:90/h:709/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzODAx/NDU2LTE2NTcxNzY0/ODUtNDk2OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23801456",
+      "community": {
+        "want": 2,
+        "have": 3
+      },
+      "format_quantity": 5,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "5",
+          "descriptions": [
+            "Compilation",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Box Set",
+          "qty": "1"
+        }
+      ]
+    }
+  ]
+}

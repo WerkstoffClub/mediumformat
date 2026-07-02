@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inventory — Location &amp; Barcode — Mobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: #050505; display: flex; justify-content: center; font-family: Inter, -apple-system, sans-serif; }
+    .app { width: 390px; min-height: 100vh; background: #090909; color: #fff; font-size: 13px; padding-bottom: 56px; }
+
+    /* MOBILE HEADER */
+    .mobile-header {
+      height: 52px;
+      background: #090909;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-back { color: #0099ff; font-size: 20px; line-height: 1; cursor: pointer; padding: 4px 4px 4px 0; flex-shrink: 0; }
+    .header-title { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: -0.04em; flex: 1; }
+    .header-add-btn { height: 32px; padding: 0 14px; border-radius: 100px; background: #fff; color: #000; font-size: 12px; font-weight: 700; border: none; cursor: pointer; font-family: inherit; white-space: nowrap; }
+
+    /* SEARCH + FILTER */
+    .search-wrap { padding: 10px 16px; }
+    .search-input { width: 100%; height: 44px; background: #141414; border: 1px solid #262626; border-radius: 8px; color: #fff; font-size: 16px; font-family: inherit; padding: 0 14px; outline: none; }
+    .search-input::placeholder { color: #555; }
+    .search-input:focus { border-color: rgba(0,153,255,0.4); }
+
+    .filter-scroll { padding: 0 16px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+    .filter-scroll::-webkit-scrollbar { display: none; }
+    .chip { height: 32px; padding: 0 12px; border-radius: 100px; background: #141414; border: 1px solid #262626; color: #999; font-size: 11px; font-weight: 600; white-space: nowrap; cursor: pointer; display: flex; align-items: center; flex-shrink: 0; }
+    .chip.active { background: #fff; color: #000; border-color: #fff; }
+
+    .results-count { padding: 6px 16px; font-size: 11px; color: #555; }
+
+    /* RELEASE LIST — SCREEN 1 */
+    .release-list { display: flex; flex-direction: column; }
+    .release-row {
+      min-height: 72px;
+      padding: 12px 16px;
+      background: #141414;
+      border-bottom: 1px solid #0d0d0d;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .release-row.selected-row { background: #1c1c1c; border-left: 3px solid #0099ff; }
+    .release-row:active { background: #1c1c1c; }
+
+    .cover { width: 48px; height: 48px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .rel-meta { flex: 1; min-width: 0; }
+    .rel-artist { font-size: 10px; color: #999; margin-bottom: 2px; }
+    .rel-title { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rel-sub { font-size: 10px; color: #555; margin-top: 2px; }
+    .rel-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+    .rel-price { font-size: 13px; font-weight: 700; color: #fff; }
+    .rel-stock { font-size: 10px; color: #555; }
+
+    .cond-badge { font-size: 9px; padding: 2px 5px; border-radius: 4px; font-weight: 700; }
+    .cond-m    { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+    .cond-vgp  { background: rgba(0,153,255,0.1); color: #0099ff; border: 1px solid rgba(0,153,255,0.2); }
+    .cond-vg   { background: rgba(232,168,56,0.1); color: #e8a838; border: 1px solid rgba(232,168,56,0.2); }
+
+    /* TAP HINT */
+    .tap-hint {
+      padding: 8px 16px;
+      font-size: 10px;
+      color: #0099ff;
+      background: rgba(0,153,255,0.05);
+      border-bottom: 1px solid rgba(0,153,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* SCREEN DIVIDER */
+    .screen-divider {
+      padding: 14px 16px;
+      background: #0d0d0d;
+      border-top: 1px solid #262626;
+      border-bottom: 1px solid #262626;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #555;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* DETAIL SECTION — SCREEN 2 */
+    .detail-section {
+      background: #141414;
+      border-top: 4px solid #0099ff;
+    }
+
+    /* ITEM HEADER */
+    .item-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      position: relative;
+    }
+    .item-cover {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #6a4cf5, #4c2b9a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .item-info { flex: 1; min-width: 0; }
+    .item-artist { font-size: 11px; color: #999; }
+    .item-title { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-top: 2px; }
+    .item-meta { font-size: 10px; color: #555; margin-top: 3px; }
+    .item-status { position: absolute; top: 14px; right: 16px; }
+
+    /* SECTION CARDS */
+    .detail-card {
+      margin: 12px 16px;
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .card-label {
+      padding: 8px 12px;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #555;
+      border-bottom: 1px solid #262626;
+      background: #0d0d0d;
+    }
+    .card-body { padding: 12px; }
+
+    /* BARCODE AREA */
+    .barcode-area {
+      margin: 12px 16px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .barcode-bars {
+      display: flex;
+      gap: 1.5px;
+      align-items: flex-end;
+      height: 48px;
+      width: 100%;
+      justify-content: center;
+    }
+    .bc-bar { background: #111; border-radius: 0; }
+    .barcode-num {
+      font-size: 11px;
+      color: #333;
+      letter-spacing: 0.15em;
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+    }
+    .barcode-actions-row {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px 12px;
+    }
+    .bc-btn {
+      flex: 1;
+      height: 36px;
+      border-radius: 100px;
+      border: 1px solid #262626;
+      background: #141414;
+      color: #999;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    /* STOCK + LOCATION CARD */
+    .stock-label {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .stock-label span { color: #e8a838; }
+    .loc-input {
+      width: 100%;
+      height: 44px;
+      background: #1c1c1c;
+      border: 1px solid #262626;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+      padding: 0 12px;
+      outline: none;
+      margin-bottom: 8px;
+    }
+    .loc-input:focus { border-color: rgba(0,153,255,0.4); }
+    .save-btn {
+      width: 100%;
+      height: 44px;
+      border-radius: 100px;
+      background: #fff;
+      color: #000;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 4px;
+    }
+
+    /* PRICE CARD */
+    .price-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+    }
+    .price-cell {
+      background: #141414;
+      padding: 12px 10px;
+      text-align: center;
+    }
+    .price-cell:first-child { border-radius: 7px 0 0 7px; }
+    .price-cell:last-child { border-radius: 0 7px 7px 0; }
+    .price-label { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .price-value { font-size: 14px; font-weight: 800; color: #fff; }
+    .price-sub { font-size: 9px; color: #555; margin-top: 2px; }
+    .price-highlight { color: #22c55e; }
+
+    /* BOTTOM NAV */
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 390px; height: 56px; background: #090909; border-top: 1px solid #1a1a1a; display: flex; align-items: center; z-index: 200; }
+    .bn-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #555; cursor: pointer; height: 100%; font-size: 10px; font-weight: 600; }
+    .bn-item.active { color: #fff; }
+    .bn-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- MOBILE HEADER -->
+  <header class="mobile-header">
+    <span class="header-back">‹</span>
+    <div class="header-title">Inventory</div>
+    <button class="header-add-btn">+ Add</button>
+  </header>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <input class="search-input" type="search" placeholder="Search artist, title, label, barcode…"/>
+  </div>
+
+  <!-- FILTER CHIPS -->
+  <div class="filter-scroll">
+    <div class="chip active">All</div>
+    <div class="chip">Vinyl</div>
+    <div class="chip">CD</div>
+    <div class="chip">Merch</div>
+    <div class="chip">Low Stock</div>
+    <div class="chip">No Location</div>
+    <div class="chip">No Barcode</div>
+  </div>
+
+  <div class="results-count">1,240 releases</div>
+
+  <!-- ── SCREEN 1: INVENTORY LIST ── -->
+  <main class="release-list">
+
+    <!-- OK Computer (selected) -->
+    <div class="release-row selected-row">
+      <div class="cover" style="background: linear-gradient(135deg, #6a4cf5, #4c2b9a);">🎵</div>
+      <div class="rel-meta">
+        <div class="rel-artist">Radiohead</div>
+        <div class="rel-title">OK Computer</div>
+        <div class="rel-sub">Parlophone · 1997 · LP · NODATA 02</div>
+      </div>
+      <div class="rel-right">
+        <div class="rel-price">Rp 850K</div>
+        <span class="cond-badge cond-m">M</span>
+        <div class="rel-stock" style="color:#e8a838;">1 unit</div>
+      </div>
+    </div>
+
+    <!-- Tap hint below first item -->
+    <div class="tap-hint">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      Tap to view location &amp; barcode detail
+    </div>
+
+    <!-- Mezzanine -->
+    <div class="release-row">
+      <div class="cover" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">🎵</div>
+      <div class="rel-meta">
+        <div class="rel-artist">Massive Attack</div>
+        <div class="rel-title">Mezzanine</div>
+        <div class="rel-sub">Virgin · 1998 · LP · CDV 2864</div>
+      </div>
+      <div class="rel-right">
+        <div class="rel-price">Rp 620K</div>
+        <span class="cond-badge cond-vgp">VG+</span>
+        <div class="rel-stock" style="color:#e8a838;">2 units</div>
+      </div>
+    </div>
+
+    <!-- Selected Ambient Works Vol. II -->
+    <div class="release-row">
+      <div class="cover" style="background: linear-gradient(135deg, #0f3460, #533483);">🎵</div>
+      <div class="rel-meta">
+        <div class="rel-artist">Aphex Twin</div>
+        <div class="rel-title">Selected Ambient Works Vol. II</div>
+        <div class="rel-sub">Warp · 1994 · 2xLP · WARPCD21</div>
+      </div>
+      <div class="rel-right">
+        <div class="rel-price">Rp 1.25M</div>
+        <span class="cond-badge cond-m">M</span>
+        <div class="rel-stock">3 units</div>
+      </div>
+    </div>
+
+    <!-- Dummy -->
+    <div class="release-row">
+      <div class="cover" style="background: linear-gradient(135deg, #2d1b69, #11998e);">🎵</div>
+      <div class="rel-meta">
+        <div class="rel-artist">Portishead</div>
+        <div class="rel-title">Dummy</div>
+        <div class="rel-sub">Go! Discs · 1994 · LP · GOLCD 4</div>
+      </div>
+      <div class="rel-right">
+        <div class="rel-price">Rp 780K</div>
+        <span class="cond-badge cond-m">M</span>
+        <div class="rel-stock">5 units</div>
+      </div>
+    </div>
+
+    <!-- Untrue -->
+    <div class="release-row">
+      <div class="cover" style="background: linear-gradient(135deg, #0d0d0d, #2a2a2a);">🎵</div>
+      <div class="rel-meta">
+        <div class="rel-artist">Burial</div>
+        <div class="rel-title">Untrue</div>
+        <div class="rel-sub">Hyperdub · 2007 · LP · HYP 13</div>
+      </div>
+      <div class="rel-right">
+        <div class="rel-price">Rp 1.1M</div>
+        <span class="cond-badge cond-m">M</span>
+        <div class="rel-stock" style="color:#e05c6a;">0 units</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── SCREEN DIVIDER ── -->
+  <div class="screen-divider">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
+    Item Detail View
+  </div>
+
+  <!-- ── SCREEN 2: ITEM DETAIL ── -->
+  <section class="detail-section">
+
+    <!-- Item Header -->
+    <div class="item-header">
+      <div class="item-cover">🎵</div>
+      <div class="item-info">
+        <div class="item-artist">Radiohead</div>
+        <div class="item-title">OK Computer</div>
+        <div class="item-meta">1997 · Parlophone · LP · NODATA 02</div>
+      </div>
+      <div class="item-status">
+        <span class="cond-badge cond-m" style="font-size:10px;padding:3px 7px;">M</span>
+      </div>
+    </div>
+
+    <!-- Barcode Section -->
+    <div class="card-label" style="margin: 0 16px; margin-top: 12px; border-radius: 8px 8px 0 0; border: 1px solid #262626;">Barcode</div>
+    <div class="barcode-area">
+      <div class="barcode-bars" id="barcode-display"></div>
+      <div class="barcode-num">5099902940526</div>
+    </div>
+    <div class="barcode-actions-row">
+      <button class="bc-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        Scan to Verify
+      </button>
+      <button class="bc-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print Label
+      </button>
+    </div>
+
+    <!-- Stock & Location Card -->
+    <div class="detail-card">
+      <div class="card-label">Stock &amp; Location</div>
+      <div class="card-body">
+        <div class="stock-label">Stock: <span>3 units</span></div>
+        <input class="loc-input" type="text" value="Main Store" placeholder="Store Location"/>
+        <input class="loc-input" type="text" value="Rack A3 / Shelf 2" placeholder="Rack / Shelf"/>
+        <button class="save-btn">Save Location</button>
+      </div>
+    </div>
+
+    <!-- Price Card -->
+    <div style="margin: 0 16px 16px; border: 1px solid #262626; border-radius: 8px; overflow: hidden;">
+      <div class="card-label" style="margin:0;border-radius:0;border:none;">Pricing</div>
+      <div class="price-grid">
+        <div class="price-cell" style="border-right:1px solid #262626;">
+          <div class="price-label">Sell Price</div>
+          <div class="price-value">Rp 850K</div>
+          <div class="price-sub">≈ USD 52</div>
+        </div>
+        <div class="price-cell" style="border-right:1px solid #262626;">
+          <div class="price-label">Cost Price</div>
+          <div class="price-value">Rp 420K</div>
+          <div class="price-sub">≈ USD 26</div>
+        </div>
+        <div class="price-cell">
+          <div class="price-label">Margin</div>
+          <div class="price-value price-highlight">50%</div>
+          <div class="price-sub">+Rp 430K</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Dashboard</span>
+    </div>
+    <div class="bn-item active">
+      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      <span>Inventory</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+      <span>Orders</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg>
+      <span>Channels</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      <span>More</span>
+    </div>
+  </nav>
+
+</div>
+
+<script>
+// Render CODE128-style barcode
+(function() {
+  var container = document.getElementById('barcode-display');
+  if (!container) return;
+
+  // Alternating narrow/wide bars pattern for CODE128 look
+  var patterns = [
+    {w:2,h:100},{w:1,h:80},{w:3,h:100},{w:1,h:70},{w:2,h:100},
+    {w:1,h:85},{w:3,h:100},{w:2,h:60},{w:1,h:100},{w:2,h:80},
+    {w:1,h:100},{w:3,h:70},{w:1,h:100},{w:2,h:90},{w:1,h:100},
+    {w:3,h:75},{w:1,h:100},{w:2,h:65},{w:1,h:100},{w:3,h:80},
+    {w:2,h:100},{w:1,h:55},{w:3,h:100},{w:1,h:90},{w:2,h:100},
+    {w:1,h:70},{w:3,h:100},{w:2,h:85},{w:1,h:100},{w:2,h:60},
+    {w:1,h:100},{w:3,h:75},{w:1,h:100},{w:2,h:50},{w:1,h:100},
+    {w:3,h:80},{w:1,h:100},{w:2,h:65},{w:1,h:100},{w:3,h:90},
+    {w:2,h:100},{w:1,h:55}
+  ];
+
+  var isBar = true;
+  patterns.forEach(function(p) {
+    var el = document.createElement('div');
+    el.style.cssText = [
+      'width:' + p.w + 'px',
+      'height:' + p.h + '%',
+      'flex-shrink:0',
+      'background:' + (isBar ? '#111' : '#fff'),
+      'border-radius:0'
+    ].join(';');
+    container.appendChild(el);
+    isBar = !isBar;
+  });
+})();
+</script>
+</body>
+</html>

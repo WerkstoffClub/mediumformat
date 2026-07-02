@@ -1,0 +1,351 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 6,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Olivia+Dean+Messy&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?q=Olivia+Dean+Messy&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "EMI",
+        "EMI",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V.",
+        "Copyright Control",
+        "Universal Music Publishing",
+        "Tennessee Kid Music",
+        "Kobalt Music Publishing Ltd.",
+        "Spirit Music Publishing",
+        "Sony Songs LLC",
+        "The Sound Of Trying",
+        "The Pool, London",
+        "Studio 17, Bath",
+        "Metropolis Studios",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [],
+      "id": 27535212,
+      "barcode": [
+        "6 02455 21589 5",
+        "602455215895",
+        "LC00542",
+        "BIEM/SDRM",
+        "EMIV2093A1 = MATT @ METROPOLIS = 259467E1 1525298 00602455215895-A",
+        "EMIV2093B1 00602455215895-B 259467E2 1525300",
+        "EMIV 2093 A1 = MATT @ METROPOLIS = 259467E1 1822708 00602455215895-A",
+        "EMIV 2093 B1 00602455215895-B 259467E2 1525300"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3153258,
+      "master_url": "https://api.discogs.com/masters/3153258",
+      "uri": "/release/27535212-Olivia-Dean-Messy",
+      "catno": "EMIV 2093",
+      "title": "Olivia Dean - Messy",
+      "thumb": "https://i.discogs.com/KIHqqxx8wCBFgrIwfJMbrsHM3U7hCQjqRnz7dqEckww/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTM1/MjEyLTE3NzEyNzA2/ODctMjg5Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/x4NgPz5F8JoHGveTajqqTJKRBc8-zOu2ECDWfLK6E98/rs:fit/g:sm/q:90/h:601/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTM1/MjEyLTE3NzEyNzA2/ODctMjg5Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27535212",
+      "community": {
+        "want": 1508,
+        "have": 5178
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Special Edition"
+      ],
+      "label": [
+        "EMI",
+        "The Pool, London",
+        "Studio 17, Bath",
+        "Copyright Control",
+        "Universal Music Publishing",
+        "Tennessee Kid Music",
+        "Kobalt Music Publishing Ltd.",
+        "Spirit Music Publishing",
+        "Sony Songs LLC",
+        "The Sound Of Trying",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Metropolis Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Neo Soul"
+      ],
+      "id": 27540267,
+      "barcode": [
+        "602455215925",
+        "LC00542",
+        "White sticker with Made in Czech Republic on the back",
+        "259467E1 1525298 00602455215895- A  EMIV 2093 A1 = MATT e METROPOLIS =",
+        "00602455215895- B 259467E2 1525300  EMIV 2093 B1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3153258,
+      "master_url": "https://api.discogs.com/masters/3153258",
+      "uri": "/release/27540267-Olivia-Dean-Messy",
+      "catno": "EMIVX 2093",
+      "title": "Olivia Dean - Messy",
+      "thumb": "https://i.discogs.com/KZIX6s6Vcms-UpZGEUGhN9gFIBRo6VreIM2qStq_UwM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTQw/MjY3LTE2ODgxNTIx/ODMtODYxNi5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/NzR5lp8U7Bik6QKzB9Zm78NWzwQIsh0JO6i6WkGSyhc/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTQw/MjY3LTE2ODgxNTIx/ODMtODYxNi5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27540267",
+      "community": {
+        "want": 1128,
+        "have": 761
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Pink [Rose], Signed Insert",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Special Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "EMI",
+        "The Pool, London",
+        "Studio 17, Bath",
+        "Copyright Control",
+        "Universal Music Publishing",
+        "Tennessee Kid Music",
+        "Kobalt Music Publishing Ltd.",
+        "Spirit Music Publishing",
+        "Sony Songs LLC",
+        "The Sound Of Trying",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Metropolis Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [],
+      "id": 36244534,
+      "barcode": [
+        "602455215925",
+        "LC00542",
+        "White sticker with Made in Czech Republic on the back",
+        "259467E1 1525298 00602455215895- A  EMIV 2093 A1 = MATT e METROPOLIS =",
+        "00602455215895- B 259467E2 1525300  EMIV 2093 B1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3153258,
+      "master_url": "https://api.discogs.com/masters/3153258",
+      "uri": "/release/36244534-Olivia-Dean-Messy",
+      "catno": "EMIVX 2093",
+      "title": "Olivia Dean - Messy",
+      "thumb": "https://i.discogs.com/gc9aTf42Mtrmdoq-4yLen4NrE-klcj7zYO2sDpRndjU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MjQ0/NTM0LTE3Njg3MTI4/NDAtNTk2NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/mK8JABnw9QrrjpwKgXA34ZzJ7ybha3HNfFYvZvcKsMk/rs:fit/g:sm/q:90/h:608/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MjQ0/NTM0LTE3Njg3MTI4/NDAtNTk2NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36244534",
+      "community": {
+        "want": 223,
+        "have": 92
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Pink [Rose]",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "EMI",
+        "The Pool, London",
+        "Studio 17, Bath",
+        "Copyright Control",
+        "Universal Music Publishing",
+        "Tennessee Kid Music",
+        "Kobalt Music Publishing Ltd.",
+        "Spirit Music Publishing",
+        "Sony Songs LLC",
+        "The Sound Of Trying",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Metropolis Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Neo Soul"
+      ],
+      "id": 36672607,
+      "barcode": [
+        "0090822941"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3153258,
+      "master_url": "https://api.discogs.com/masters/3153258",
+      "uri": "/release/36672607-Olivia-Dean-Messy",
+      "catno": "EMIVX 2093",
+      "title": "Olivia Dean - Messy",
+      "thumb": "https://i.discogs.com/gWm0X5Q5zT15Jr2vHrznhwA0TXf_BZ6RWU5vpve_4LY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njcy/NjA3LTE3NzI1ODQy/OTgtMjkzMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Ox5FAiBBmjsrhggApgnJ08AIlGrmaTGBy5xYmCwKiYw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njcy/NjA3LTE3NzI1ODQy/OTgtMjkzMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36672607",
+      "community": {
+        "want": 66,
+        "have": 52
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Purple",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Capitol Records",
+        "Capitol Records UK",
+        "Polydor Label Group",
+        "Universal International Music B.V.",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Optimal Media GmbH",
+        "Eventim Apollo",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [],
+      "id": 32617629,
+      "barcode": [
+        "6 02475 22821 9",
+        "602475228219",
+        "LC00309",
+        "BIEM/SDRM",
+        "7522822 JWM 7522821-A BO25823-01 A1",
+        "7522822 JWM 7522821-B BO25823-01 B1",
+        "7522823 JWM 7522821-C BO25823-02 C1",
+        "7522823 JWM 7522821-D BO25823-02 D1 1+"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/32617629-Olivia-Dean-Live-At-Eventim-Apollo",
+      "catno": "7522821",
+      "title": "Olivia Dean - Live At Eventim Apollo",
+      "thumb": "https://i.discogs.com/N-44CKXeNQyAjEb4dsp4DR5Q-dHWdM1kT9j08Y0LUOw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyNjE3/NjI5LTE3MzQ5NDgy/MzktNDczMi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/eLxgRyJQ7VG-mXB9g0wuENe2MM5Cmt8MzGfB7vRHG-k/rs:fit/g:sm/q:90/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyNjE3/NjI5LTE3MzQ5NDgy/MzktNDczMi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/32617629",
+      "community": {
+        "want": 740,
+        "have": 1602
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

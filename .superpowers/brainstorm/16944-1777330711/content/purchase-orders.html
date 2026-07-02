@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Purchase Orders</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #090909; color: #d4d4d4; font-family: Inter, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; }
+
+  .layout { display: flex; height: 100vh; overflow: hidden; }
+
+  /* sidebar */
+  aside { width: 186px; min-width: 186px; background: #090909; border-right: 1px solid #1a1a1a; display: flex; flex-direction: column; }
+  .sidebar-logo { padding: 16px 18px 14px; font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -0.02em; border-bottom: 1px solid #1a1a1a; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 7px 18px; color: #555; font-size: 12.5px; cursor: pointer; border-left: 2px solid transparent; }
+  .nav-item.active { color: #fff; background: #141414; border-left-color: #fff; }
+  .nav-item svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .nav-sep { height: 1px; background: #1a1a1a; margin: 6px 0; }
+
+  /* main */
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .topbar { height: 52px; background: #090909; border-bottom: 1px solid #1a1a1a; display: flex; align-items: center; padding: 0 20px; gap: 12px; }
+  .topbar-title { font-size: 15px; font-weight: 800; color: #fff; flex: 1; }
+
+  /* Buttons */
+  .btn { padding: 6px 16px; font-size: 11px; font-weight: 700; cursor: pointer; border: none; border-radius: 100px; }
+  .btn-primary { background: #fff; color: #000; }
+  .btn-secondary { background: #141414; color: #fff; border: 1px solid #262626; }
+  .btn-sm { padding: 4px 12px; font-size: 10px; border-radius: 100px; font-weight: 700; cursor: pointer; border: none; }
+  .btn-sm-primary { background: #fff; color: #000; }
+  .btn-sm-secondary { background: #141414; color: #fff; border: 1px solid #262626; }
+
+  .body { flex: 1; overflow: hidden; display: flex; }
+
+  /* PO list panel */
+  .po-list-panel { width: 340px; min-width: 340px; background: #090909; border-right: 1px solid #1a1a1a; display: flex; flex-direction: column; overflow: hidden; }
+  .panel-toolbar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid #1a1a1a; }
+  .panel-toolbar input { flex: 1; background: #141414; border: 1px solid #262626; border-radius: 5px; padding: 5px 10px; color: #fff; font-size: 11px; outline: none; }
+  .panel-toolbar input::placeholder { color: #555; }
+  .filter-tabs { display: flex; padding: 0 14px; border-bottom: 1px solid #1a1a1a; }
+  .f-tab { padding: 8px 10px; font-size: 11px; color: #999; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .f-tab.active { color: #fff; border-bottom-color: #fff; }
+  .po-scroll { flex: 1; overflow-y: auto; }
+
+  /* PO row */
+  .po-row { padding: 12px 14px; border-bottom: 1px solid #1a1a1a; cursor: pointer; }
+  .po-row:hover { background: #141414; }
+  .po-row.selected { background: #141414; border-left: 2px solid #fff; }
+  .po-row-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .po-id { font-size: 11px; font-weight: 700; color: #fff; }
+  .po-country-badge { font-size: 9px; padding: 2px 6px; border-radius: 3px; background: #1c1c1c; color: #999; border: 1px solid #262626; font-weight: 700; }
+  .po-status { margin-left: auto; font-size: 9px; padding: 2px 6px; border-radius: 3px; font-weight: 700; }
+  .ps-draft    { background: #1c1c1c; color: #999; }
+  .ps-ordered  { background: rgba(0,153,255,0.1); color: #0099ff; }
+  .ps-transit  { background: rgba(91,192,222,0.1); color: #5bc0de; }
+  .ps-received { background: rgba(34,197,94,0.1); color: #22c55e; }
+  .ps-partial  { background: rgba(232,168,56,0.1); color: #e8a838; }
+  .po-supplier { font-size: 11px; color: #999; margin-bottom: 3px; }
+  .po-meta-row { display: flex; align-items: center; gap: 10px; }
+  .po-meta { font-size: 10px; color: #555; }
+  .po-pay-tag { font-size: 9px; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+  .pay-company  { background: rgba(34,197,94,0.1); color: #22c55e; }
+  .pay-personal { background: rgba(232,168,56,0.1); color: #e8a838; }
+  .pay-reimburse { background: rgba(224,92,106,0.1); color: #e05c6a; }
+
+  /* Detail panel */
+  .po-detail { flex: 1; overflow-y: auto; background: #0a0a0a; }
+  .detail-header { padding: 16px 20px; border-bottom: 1px solid #1a1a1a; display: flex; align-items: flex-start; gap: 12px; }
+  .detail-main { flex: 1; }
+  .detail-id { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.03em; }
+  .detail-supplier { font-size: 12px; color: #999; margin-top: 2px; }
+  .detail-actions { display: flex; gap: 8px; align-items: center; }
+
+  .detail-body { padding: 16px 20px; display: grid; grid-template-columns: 1fr 280px; gap: 16px; }
+
+  /* Info cards */
+  .info-card { background: #141414; border: 1px solid #262626; border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+  .info-card-header { padding: 9px 14px; background: #090909; border-bottom: 1px solid #1a1a1a; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; display: flex; align-items: center; gap: 8px; }
+  .info-card-header .hdr-right { margin-left: auto; color: #0099ff; font-size: 10px; font-weight: 400; cursor: pointer; text-transform: none; letter-spacing: 0; }
+  .info-card-body { padding: 12px 14px; }
+
+  /* Items table */
+  .items-table { width: 100%; border-collapse: collapse; }
+  .items-table th { font-size: 9px; text-transform: uppercase; letter-spacing: 0.07em; color: #555; padding: 5px 10px; text-align: left; background: #090909; border-bottom: 1px solid #1a1a1a; font-weight: 600; }
+  .items-table td { padding: 8px 10px; border-bottom: 1px solid #1a1a1a; font-size: 11px; color: #999; vertical-align: middle; }
+  .items-table tr:last-child td { border-bottom: none; }
+  .item-title { color: #fff; font-weight: 600; font-size: 11px; }
+  .item-artist { color: #555; font-size: 10px; }
+  .item-format { font-size: 9px; background: #1c1c1c; color: #999; padding: 1px 5px; border-radius: 3px; border: 1px solid #262626; }
+  .items-footer { display: flex; justify-content: flex-end; padding: 10px 14px; border-top: 1px solid #1a1a1a; gap: 24px; }
+  .total-line { font-size: 11px; }
+  .total-line .lbl { color: #555; margin-right: 8px; }
+  .total-line .val { color: #fff; font-weight: 700; }
+  .total-line.grand .val { color: #fff; font-size: 14px; font-weight: 800; }
+
+  /* Right sidebar */
+  .right-col { display: flex; flex-direction: column; gap: 12px; }
+
+  .meta-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1a1a1a; font-size: 11px; }
+  .meta-row:last-child { border-bottom: none; }
+  .meta-lbl { color: #555; }
+  .meta-val { color: #999; font-weight: 600; text-align: right; }
+
+  /* Payment tracking */
+  .pay-status-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #1a1a1a; }
+  .pay-status-row:last-child { border-bottom: none; }
+  .pay-icon { width: 28px; height: 28px; border-radius: 6px; background: #1c1c1c; border: 1px solid #262626; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pay-icon svg { width: 13px; height: 13px; stroke: #666; fill: none; stroke-width: 1.6; }
+  .pay-info { flex: 1; }
+  .pay-name { font-size: 11px; color: #999; font-weight: 600; }
+  .pay-detail { font-size: 10px; color: #555; margin-top: 1px; }
+  .reimburse-alert { display: flex; align-items: center; gap: 8px; background: rgba(232,168,56,0.06); border: 1px solid rgba(232,168,56,0.2); border-radius: 6px; padding: 8px 10px; margin-top: 8px; font-size: 10px; color: #e8a838; }
+  .reimburse-alert svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.6; flex-shrink: 0; }
+
+  /* Shipment consolidation */
+  .consolidate-banner { background: #0d1020; border: 1px solid rgba(106,76,245,0.3); border-radius: 8px; padding: 12px 14px; }
+  .c-banner-title { font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .c-banner-body { font-size: 10px; color: #999; line-height: 1.6; margin-bottom: 10px; }
+  .c-banner-meta { display: flex; gap: 12px; margin-bottom: 10px; }
+  .c-meta-val { font-size: 13px; font-weight: 700; color: #fff; }
+  .c-meta-lbl { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
+  .c-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .c-btn { padding: 5px 14px; border-radius: 100px; font-size: 10px; font-weight: 700; cursor: pointer; border: none; }
+  .c-btn-primary { background: #fff; color: #000; }
+  .c-btn-outline { background: #141414; color: #fff; border: 1px solid #262626; }
+
+  /* AI assist badge */
+  .ai-badge { display: flex; align-items: center; gap: 6px; background: rgba(106,76,245,0.1); border: 1px solid rgba(106,76,245,0.3); border-radius: 5px; padding: 5px 10px; font-size: 10px; color: #a09fff; margin-top: 8px; }
+  .ai-badge svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.6; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="sidebar-logo">MediumFormat</div>
+    <div style="padding: 8px 0;">
+      <div class="nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
+      <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</div>
+      <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders</div>
+      <div class="nav-sep"></div>
+      <div class="nav-item active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Purchase Orders</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Purchase Orders</div>
+      <button class="btn btn-secondary">Import Invoices (AI)</button>
+      <button class="btn btn-primary">+ New PO</button>
+    </div>
+
+    <div class="body">
+
+      <!-- PO LIST -->
+      <div class="po-list-panel">
+        <div class="panel-toolbar">
+          <input placeholder="Search supplier, PO number..." />
+        </div>
+        <div class="filter-tabs">
+          <div class="f-tab active">All</div>
+          <div class="f-tab">Draft</div>
+          <div class="f-tab">Ordered</div>
+          <div class="f-tab">In Transit</div>
+          <div class="f-tab">Received</div>
+        </div>
+        <div class="po-scroll">
+
+          <div class="po-row selected">
+            <div class="po-row-top">
+              <div class="po-id">PO-2026-041</div>
+              <div class="po-country-badge">Japan batch</div>
+              <div class="po-status ps-transit">In Transit</div>
+            </div>
+            <div class="po-supplier">Technique Records, Tokyo</div>
+            <div class="po-meta-row">
+              <div class="po-meta">12 items · Rp 4.2M</div>
+              <div class="po-pay-tag pay-company">Company card</div>
+            </div>
+          </div>
+
+          <div class="po-row">
+            <div class="po-row-top">
+              <div class="po-id">PO-2026-040</div>
+              <div class="po-country-badge">UK batch</div>
+              <div class="po-status ps-ordered">Ordered</div>
+            </div>
+            <div class="po-supplier">Rough Trade, London</div>
+            <div class="po-meta-row">
+              <div class="po-meta">8 items · Rp 2.8M</div>
+              <div class="po-pay-tag pay-personal">Personal — Budi</div>
+            </div>
+          </div>
+
+          <div class="po-row">
+            <div class="po-row-top">
+              <div class="po-id">PO-2026-039</div>
+              <div class="po-country-badge">Japan batch</div>
+              <div class="po-status ps-received">Received</div>
+            </div>
+            <div class="po-supplier">Disk Union, Tokyo</div>
+            <div class="po-meta-row">
+              <div class="po-meta">24 items · Rp 7.1M</div>
+              <div class="po-pay-tag pay-company">Company card</div>
+            </div>
+          </div>
+
+          <div class="po-row">
+            <div class="po-row-top">
+              <div class="po-id">PO-2026-038</div>
+              <div class="po-country-badge">US batch</div>
+              <div class="po-status ps-partial">Partial</div>
+            </div>
+            <div class="po-supplier">Other Music Archive, NYC</div>
+            <div class="po-meta-row">
+              <div class="po-meta">6 items · Rp 1.9M</div>
+              <div class="po-pay-tag pay-personal">Personal — Rani</div>
+            </div>
+          </div>
+
+          <div class="po-row">
+            <div class="po-row-top">
+              <div class="po-id">PO-2026-037</div>
+              <div class="po-country-badge">UK batch</div>
+              <div class="po-status ps-draft">Draft</div>
+            </div>
+            <div class="po-supplier">Juno Records, London</div>
+            <div class="po-meta-row">
+              <div class="po-meta">3 items · Rp 890K</div>
+              <div class="po-pay-tag pay-company">Company card</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DETAIL -->
+      <div class="po-detail">
+
+        <div class="detail-header">
+          <div class="detail-main">
+            <div class="detail-id">PO-2026-041 — Japan Batch</div>
+            <div class="detail-supplier">Technique Records, Tokyo &nbsp;·&nbsp; In Transit &nbsp;·&nbsp; Created Apr 20, 2026</div>
+          </div>
+          <div class="detail-actions">
+            <button class="btn btn-secondary">Edit</button>
+            <button class="btn btn-primary">Mark Received</button>
+          </div>
+        </div>
+
+        <div class="detail-body">
+
+          <!-- LEFT -->
+          <div>
+
+            <!-- Items -->
+            <div class="info-card">
+              <div class="info-card-header">
+                Items (12)
+                <div class="hdr-right">+ Add item</div>
+              </div>
+              <table class="items-table">
+                <thead>
+                  <tr><th>Release</th><th>Format</th><th>Qty</th><th>Unit Cost</th><th>Subtotal</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="item-title">Floating Points — Promises</div><div class="item-artist">Luaka Bop</div></td>
+                    <td><span class="item-format">LP</span></td>
+                    <td>3</td>
+                    <td>¥3,200</td>
+                    <td>¥9,600</td>
+                  </tr>
+                  <tr>
+                    <td><div class="item-title">Four Tet — There Is Love in You</div><div class="item-artist">Domino</div></td>
+                    <td><span class="item-format">2xLP</span></td>
+                    <td>2</td>
+                    <td>¥4,800</td>
+                    <td>¥9,600</td>
+                  </tr>
+                  <tr>
+                    <td><div class="item-title">Burial — Antidawn EP</div><div class="item-artist">Hyperdub</div></td>
+                    <td><span class="item-format">12"</span></td>
+                    <td>4</td>
+                    <td>¥2,400</td>
+                    <td>¥9,600</td>
+                  </tr>
+                  <tr>
+                    <td><div class="item-title">Aphex Twin — Drukqs</div><div class="item-artist">Warp</div></td>
+                    <td><span class="item-format">2xCD</span></td>
+                    <td>3</td>
+                    <td>¥2,800</td>
+                    <td>¥8,400</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="items-footer">
+                <div class="total-line"><span class="lbl">Items subtotal</span><span class="val">¥37,200</span></div>
+                <div class="total-line"><span class="lbl">Shipping (est.)</span><span class="val">¥4,500</span></div>
+                <div class="total-line grand"><span class="lbl">Total</span><span class="val">¥41,700 ≈ Rp 4.2M</span></div>
+              </div>
+            </div>
+
+            <!-- Shipment consolidation -->
+            <div class="info-card">
+              <div class="info-card-header">
+                Shipment Consolidation — Japan Batch
+                <div class="hdr-right">View batch</div>
+              </div>
+              <div class="info-card-body">
+                <div class="consolidate-banner">
+                  <div class="c-banner-title">Japan Batch — 2 POs consolidated</div>
+                  <div class="c-banner-body">PO-2026-041 + PO-2026-039 are grouped under one Japan shipment via DHL Express. Packing list compiled from both invoices.</div>
+                  <div class="c-banner-meta">
+                    <div class="c-meta-item"><div class="c-meta-val">36</div><div class="c-meta-lbl">Total items</div></div>
+                    <div class="c-meta-item"><div class="c-meta-val">~12.4 kg</div><div class="c-meta-lbl">Est. weight</div></div>
+                    <div class="c-meta-item"><div class="c-meta-val">40×35×28 cm</div><div class="c-meta-lbl">Est. dimensions</div></div>
+                    <div class="c-meta-item"><div class="c-meta-val">¥11.3M</div><div class="c-meta-lbl">Declared value</div></div>
+                  </div>
+                  <div class="c-actions">
+                    <button class="c-btn c-btn-primary">Export Packing List PDF</button>
+                    <button class="c-btn c-btn-outline">Export to Sheets</button>
+                    <button class="c-btn c-btn-outline">Email Shipper</button>
+                  </div>
+                  <div class="ai-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    AI-assisted: upload invoices to auto-extract items, estimate weight, and draft shipper email (Phase 2)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+          <div class="right-col">
+
+            <!-- PO info -->
+            <div class="info-card">
+              <div class="info-card-header">Purchase Order Info</div>
+              <div class="info-card-body">
+                <div class="meta-row"><span class="meta-lbl">Supplier</span><span class="meta-val">Technique Records</span></div>
+                <div class="meta-row"><span class="meta-lbl">Country</span><span class="meta-val">Japan</span></div>
+                <div class="meta-row"><span class="meta-lbl">Currency</span><span class="meta-val">JPY (¥)</span></div>
+                <div class="meta-row"><span class="meta-lbl">Created by</span><span class="meta-val">Budi (Purchasing)</span></div>
+                <div class="meta-row"><span class="meta-lbl">Order date</span><span class="meta-val">Apr 20, 2026</span></div>
+                <div class="meta-row"><span class="meta-lbl">ETA</span><span class="meta-val">May 5–8, 2026</span></div>
+                <div class="meta-row"><span class="meta-lbl">Tracking</span><span class="meta-val" style="color:#0099ff;cursor:pointer;">DHL 1234567890</span></div>
+              </div>
+            </div>
+
+            <!-- Payment tracking -->
+            <div class="info-card">
+              <div class="info-card-header">Payment Tracking</div>
+              <div class="info-card-body">
+                <div class="pay-status-row">
+                  <div class="pay-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+                  <div class="pay-info">
+                    <div class="pay-name">Company Card — BCA Corporate</div>
+                    <div class="pay-detail">Charged Apr 20 · Rp 4,200,000 · Ref: TXN-88821</div>
+                  </div>
+                  <div style="font-size:9px;padding:2px 6px;border-radius:3px;background:rgba(34,197,94,0.1);color:#22c55e;font-weight:700;">Paid</div>
+                </div>
+
+                <div class="meta-row" style="margin-top:8px;"><span class="meta-lbl">Payment status</span><span class="meta-val" style="color:#22c55e;">Paid — Company</span></div>
+                <div class="meta-row"><span class="meta-lbl">Finance notified</span><span class="meta-val">Yes — Apr 20</span></div>
+                <div class="meta-row"><span class="meta-lbl">Receipt</span><span class="meta-val" style="color:#0099ff;cursor:pointer;">View PDF</span></div>
+              </div>
+            </div>
+
+            <!-- Personal card alert example -->
+            <div class="info-card">
+              <div class="info-card-header">Reimbursement (PO-2026-040)</div>
+              <div class="info-card-body">
+                <div class="pay-status-row">
+                  <div class="pay-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+                  <div class="pay-info">
+                    <div class="pay-name">Personal Card — Budi</div>
+                    <div class="pay-detail">Charged Apr 18 · Rp 2,800,000</div>
+                  </div>
+                  <div style="font-size:9px;padding:2px 6px;border-radius:3px;background:rgba(232,168,56,0.1);color:#e8a838;font-weight:700;">Pending</div>
+                </div>
+                <div class="reimburse-alert">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  Finance notified Apr 18 — reimbursement pending. Ref: REIMB-2026-019
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

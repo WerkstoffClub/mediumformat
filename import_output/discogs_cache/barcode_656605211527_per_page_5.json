@@ -1,0 +1,317 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 6,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605211527&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=656605211527&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2008",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk Rock",
+        "Acoustic"
+      ],
+      "id": 6314659,
+      "barcode": [
+        "6 56605 21152 7"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 97618,
+      "master_url": "https://api.discogs.com/masters/97618",
+      "uri": "/release/6314659-Bon-Iver-For-Emma-Forever-Ago",
+      "catno": "JAG115",
+      "title": "Bon Iver - For Emma, Forever Ago",
+      "thumb": "https://i.discogs.com/X6XJWsJDcv6Nzr6QQIi9G-o5qdzfPnrSWIhrN5Yt7HU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYzMTQ2/NTktMTQzNzkyNjMx/OS0zMjY4LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/RoYGsCC6riyie_Q-M7JZUwhuZ9GCIc5UUkza1vmIJdU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYzMTQ2/NTktMTQzNzkyNjMx/OS0zMjY4LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/6314659",
+      "community": {
+        "want": 305,
+        "have": 1315
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2008",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "4AD",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "April Base Publishing",
+        "Track And Field Recording",
+        "Bellwether Manufacturing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk Rock",
+        "Acoustic"
+      ],
+      "id": 5946976,
+      "barcode": [
+        "6 56605 21152 7",
+        "LC 05807",
+        "ASCAP",
+        "www.BELLWETHERMFG.COM 3WD21<7205>JAG115"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 97618,
+      "master_url": "https://api.discogs.com/masters/97618",
+      "uri": "/release/5946976-Bon-Iver-For-Emma-Forever-Ago",
+      "catno": "cad 2809cd",
+      "title": "Bon Iver - For Emma, Forever Ago",
+      "thumb": "https://i.discogs.com/IPGa0tTiFLZToN4C1WGIU_l9NkML5rq2GmFDt3TWxZs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU5NDY5/NzYtMTQwOTU4NjU5/Ny0yMjExLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/zspRFeENT7e1APRVWwhSxgjaMXWH8PqkS0IJpHbgl2I/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU5NDY5/NzYtMTQwOTU4NjU5/Ny0yMjExLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5946976",
+      "community": {
+        "want": 273,
+        "have": 192
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Stickered",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2011",
+      "format": [
+        "CD",
+        "Album",
+        "Repress"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "Track And Field Recording",
+        "Bellwether Manufacturing",
+        "Optical Experts Manufacturing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk Rock",
+        "Acoustic"
+      ],
+      "id": 8819134,
+      "barcode": [
+        "6 56605 21152 7",
+        "656605211527",
+        "ASCAP",
+        "JAG115CD WWW.BELLWETHERMFG.COM 1571394 01 07/08/2011 06:45:20 PM #49394",
+        "IFPI LN08",
+        "IFPI J103"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 97618,
+      "master_url": "https://api.discogs.com/masters/97618",
+      "uri": "/release/8819134-Bon-Iver-For-Emma-Forever-Ago",
+      "catno": "JAG115",
+      "title": "Bon Iver - For Emma, Forever Ago",
+      "thumb": "https://i.discogs.com/tEZiN7zii4auXzCw_-yxx1uVOtQWV_tiDLJuoF7osPU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTg4MTkx/MzQtMTQ2OTQ0NDg0/Ni0zMTg2LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/TYok2IVkKS_Kud4va-mn61jW7VJcJRJk4hIbB30xGWc/rs:fit/g:sm/q:90/h:528/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTg4MTkx/MzQtMTQ2OTQ0NDg0/Ni0zMTg2LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/8819134",
+      "community": {
+        "want": 233,
+        "have": 180
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Trifold cardboard sleeve",
+          "descriptions": [
+            "Album",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2011",
+      "format": [
+        "CD",
+        "Album",
+        "Repress"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk Rock",
+        "Acoustic"
+      ],
+      "id": 9045066,
+      "barcode": [
+        "6 56605 21152 7",
+        "WWW.BELLWETHERMFG.COM  05X07<7205> JAG115",
+        "JAG115CD WWW.BELLWETHERMFG.COM 1571394 01  11/05/2013 07.28.00 00823162",
+        "IFPI LN09",
+        "IFPI J109"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 97618,
+      "master_url": "https://api.discogs.com/masters/97618",
+      "uri": "/release/9045066-Bon-Iver-For-Emma-Forever-Ago",
+      "catno": "JAG115J",
+      "title": "Bon Iver - For Emma, Forever Ago",
+      "thumb": "https://i.discogs.com/QTuTovgeR-V0hZP5avaGsPpUyayLdkwx5tGc3bnZa8A/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkwNDUw/NjYtMTQ3MzgwNTEw/Ni01OTU3LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/OgWCv0bfHaMxl0eLaLOGq-8uWh36iMuJMxYRQun6qMs/rs:fit/g:sm/q:90/h:351/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkwNDUw/NjYtMTQ3MzgwNTEw/Ni01OTU3LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/9045066",
+      "community": {
+        "want": 207,
+        "have": 21
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2012",
+      "format": [
+        "CD",
+        "Album",
+        "Repress",
+        "Stereo"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "Track And Field Recording",
+        "Bellwether Manufacturing",
+        "Optical Experts Manufacturing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk Rock",
+        "Acoustic"
+      ],
+      "id": 17053611,
+      "barcode": [
+        "6 56605 21152 7",
+        "656605211527",
+        "01/16/2012 12:42:39 PM #63278 IFPI LN08 JAG115CD WWW.BELLWETHERMFG.COM 1571394 01",
+        "IFPI LN08",
+        "IFPI JI19",
+        "11/05/2013 07:28:00.00#23162 IFPI LN09 JAG115CD WWW.BELLWETHERMFG.COM 1571394 01",
+        "IFPI LN09",
+        "IFPI JI23",
+        "07/23/2011 02:53:45 PM #50353 IFPI LN06 JAG115CD WWW.BELLWETHERMFG.COM 1571394 01",
+        "IFPI LN06",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 97618,
+      "master_url": "https://api.discogs.com/masters/97618",
+      "uri": "/release/17053611-Bon-Iver-For-Emma-Forever-Ago",
+      "catno": "JAG115",
+      "title": "Bon Iver - For Emma, Forever Ago",
+      "thumb": "https://i.discogs.com/AQApaYlzmd-rjNANHIYpKscWmLOw1AkjIBJxsvtPG58/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MDUz/NjExLTE2MTEzNTE1/MzMtODc1My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/b2NrzGEHdIqWE-NHON4nTJfoBZDKxXaukAkjuRBKmEk/rs:fit/g:sm/q:90/h:521/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MDUz/NjExLTE2MTEzNTE1/MzMtODc1My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/17053611",
+      "community": {
+        "want": 136,
+        "have": 85
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Trifold cardboard sleeve",
+          "descriptions": [
+            "Album",
+            "Repress",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Repress",
+        "Stereo"
+      ],
+      "label": [
+        "K",
+        "Teaspoon of Kisses Music",
+        "Galiano Island",
+        "The Softies",
+        "Record Technology Incorporated",
+        "Telegraph Mastering",
+        "Cascade Record Pressing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Indie Pop"
+      ],
+      "id": 30481328,
+      "barcode": [
+        "7 89856 11191 6",
+        "BMI",
+        "KLP119 A CP23-0246 A 43329.1 (2)... TELEGRAPH-GONSALVES",
+        "KLP 119 B CP23-0246 B 43329.2 (2)... TELEGRAPH-GONSALVES"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 95459,
+      "master_url": "https://api.discogs.com/masters/95459",
+      "uri": "/release/30481328-The-Softies-Holiday-In-Rhode-Island",
+      "catno": "klp 119",
+      "title": "The Softies - Holiday In Rhode Island",
+      "thumb": "https://i.discogs.com/fVpy1XMVe8-BKP1Vva6Ey1MaSnwL4PAM9Ikf3pNsCKo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwNDgx/MzI4LTE3MzYzNTU1/NTEtNDU2Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/dmKgwNr2MVD1_ZH97_wjMkPLEa9Tuz4zLaoSYdAd0Rk/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwNDgx/MzI4LTE3MzYzNTU1/NTEtNDU2Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/30481328",
+      "community": {
+        "want": 103,
+        "have": 268
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Repress",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

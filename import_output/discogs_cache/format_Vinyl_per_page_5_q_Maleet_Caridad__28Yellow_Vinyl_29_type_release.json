@@ -1,0 +1,64 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "7\"",
+        "45 RPM",
+        "Limited Edition"
+      ],
+      "label": [
+        "Push The Fader"
+      ],
+      "type": "release",
+      "genre": [
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "African"
+      ],
+      "id": 36891571,
+      "barcode": [
+        "5050580869011"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4176526,
+      "master_url": "https://api.discogs.com/masters/4176526",
+      "uri": "/release/36891571-Maleet-Caridad-Osains-Groove",
+      "catno": "PTF010",
+      "title": "Maleet - Caridad / Osain's Groove",
+      "thumb": "https://i.discogs.com/CvM88ldSR7wkcSsl6F9590C92FHWeVKSz3039g40RF0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODkx/NTcxLTE3NzQ2Mjc1/ODUtMjgyOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/u79f6wtryIUe1t-0VO02HjnUM4SfWCvpR8yK9Ims7Cw/rs:fit/g:sm/q:90/h:603/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODkx/NTcxLTE3NzQ2Mjc1/ODUtMjgyOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36891571",
+      "community": {
+        "want": 1,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Sunshine Yellow",
+          "descriptions": [
+            "7\"",
+            "45 RPM",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,363 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 4,
+    "per_page": 5,
+    "items": 19,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605150017&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=4",
+      "next": "https://api.discogs.com/database/search?barcode=656605150017&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Barnes & Noble"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 35268361,
+      "barcode": [
+        "656605150017",
+        "0656605150017",
+        "DOC200LP-A cut 3-11-20 ♡ cm ♡",
+        "DOC200LP-B cm"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1757517,
+      "master_url": "https://api.discogs.com/masters/1757517",
+      "uri": "/release/35268361-Phoebe-Bridgers-Punisher",
+      "catno": "DOC200LP-C13",
+      "title": "Phoebe Bridgers - Punisher",
+      "thumb": "https://i.discogs.com/WHF78g79YKzoJq8OHb8cDG8rEnwGzRxDr1kJ83kkarU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY4/MzYxLTE3NTk0NjE3/MDUtMzg1OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/vLNpQliNA3LZWeDJU7ulUK2wLzdvQYpAhdVkGHmy8CU/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY4/MzYxLTE3NTk0NjE3/MDUtMzg1OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35268361",
+      "community": {
+        "want": 229,
+        "have": 1223
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Deep Blue [The Deep End]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2021",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Sound City Studios",
+        "ARC Studios, Omaha, NE",
+        "Gateway Mastering",
+        "Whatever Mom Music",
+        "Corn Fox Publishing",
+        "Goldmeyn Music",
+        "Bedrooms; Bedrooms And Spiders",
+        "Pizza Money Music",
+        "Sliondelion",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk"
+      ],
+      "id": 17145313,
+      "barcode": [
+        "656605150017",
+        "6 56605 15001 7",
+        "6 5660-53752-5 0",
+        "LC 29265",
+        "ASCAP",
+        "BMI",
+        "DOC200LP 212775E1/A",
+        "DOC200LP 212775E2/A"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1757517,
+      "master_url": "https://api.discogs.com/masters/1757517",
+      "uri": "/release/17145313-Phoebe-Bridgers-Punisher",
+      "catno": "DOC200LP-C9",
+      "title": "Phoebe Bridgers - Punisher",
+      "thumb": "https://i.discogs.com/2Huf6jqfsFStkkfFIOit_K-YjSqdXL6oGmSToEE5ZFU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MTQ1/MzEzLTE2MTE4NDcy/MzItNDg3Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/CTAI-brW5eSCVc4-lS7CsOqdboStlNqzLoLZhb5zY1M/rs:fit/g:sm/q:90/h:612/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MTQ1/MzEzLTE2MTE4NDcy/MzItNDg3Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/17145313",
+      "community": {
+        "want": 2064,
+        "have": 919
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red / Blue Galaxy",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2020",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Sound City Studios",
+        "ARC Studios, Omaha, NE",
+        "Gateway Mastering",
+        "Whatever Mom Music",
+        "Corn Fox Publishing",
+        "Goldmeyn Music",
+        "Bedrooms; Bedrooms And Spiders",
+        "Pizza Money Music",
+        "Sliondelion"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk"
+      ],
+      "id": 18761569,
+      "barcode": [
+        "4526180523093",
+        "6 56605 15001 7",
+        "656605150048",
+        "LC 29265",
+        "ASCAP",
+        "BMI"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1757517,
+      "master_url": "https://api.discogs.com/masters/1757517",
+      "uri": "/release/18761569-Phoebe-Bridgers-Punisher",
+      "catno": "DOC200JCD",
+      "title": "Phoebe Bridgers - Punisher",
+      "thumb": "https://i.discogs.com/-6E1fU2_KHA_xH8FMYR-TcMpwOx4wdD7CKMIdnMVJoM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4NzYx/NTY5LTE2MjEyMzI1/NDEtNzcwOS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/m_W8LVBYzscf-epJFPCdF0oKG8BR9oUI-VwdZDfmXz0/rs:fit/g:sm/q:90/h:522/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4NzYx/NTY5LTE2MjEyMzI1/NDEtNzcwOS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/18761569",
+      "community": {
+        "want": 166,
+        "have": 75
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Sound City Studios",
+        "ARC Studios, Omaha, NE",
+        "Gateway Mastering",
+        "Whatever Mom Music",
+        "Corn Fox Publishing",
+        "Goldmeyn Music",
+        "Bedrooms; Bedrooms And Spiders",
+        "Pizza Money Music",
+        "Sliondelion"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk"
+      ],
+      "id": 18672487,
+      "barcode": [
+        "656605150017",
+        "6 56605 15001 7",
+        "656605150048",
+        "LC 29265",
+        "ASCAP",
+        "BMI",
+        "DOC200LP-A cut 3-11-20 ♡ cm ♡",
+        "DOC200LP-B cm"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/Phoebe-Bridgers-Punisher/release/18672487",
+      "catno": "DOC200",
+      "title": "Phoebe Bridgers - Punisher",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/18672487",
+      "community": {
+        "want": 0,
+        "have": 14
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2021",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Sound City Studios",
+        "ARC Studios, Omaha, NE",
+        "Gateway Mastering",
+        "Whatever Mom Music",
+        "Corn Fox Publishing",
+        "Goldmeyn Music",
+        "Bedrooms; Bedrooms And Spiders",
+        "Pizza Money Music",
+        "Sliondelion",
+        "Urban Outfitters",
+        "Memphis Record Pressing",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk"
+      ],
+      "id": 19132933,
+      "barcode": [
+        "6 1730-80028-2 9",
+        "61730800282 9",
+        "6 56605 15001 7",
+        "656605150017",
+        "DOC200LP 212775E1/A",
+        "DOC200LP 212775E2/B",
+        "#4",
+        "LC 29265",
+        "ASCAP",
+        "BMI"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1757517,
+      "master_url": "https://api.discogs.com/masters/1757517",
+      "uri": "/release/19132933-Phoebe-Bridgers-Punisher",
+      "catno": "DOC200",
+      "title": "Phoebe Bridgers - Punisher",
+      "thumb": "https://i.discogs.com/9H07XKXEpCtXdxFinGflR8tXYuCiImEN7UPrP4imM18/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5MTMy/OTMzLTE2MjM3MDUx/OTEtOTE4OC5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/vTiq-lWDTy0gsLSPwwVwuX8-veLlk-EuiknD-jc9z-M/rs:fit/g:sm/q:90/h:601/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5MTMy/OTMzLTE2MjM3MDUx/OTEtOTE4OC5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/19132933",
+      "community": {
+        "want": 896,
+        "have": 1379
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gold Opaque [Gold Nugget]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

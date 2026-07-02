@@ -1,0 +1,439 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 15,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=The+Strokes+The+New+Abnormal&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?q=The+Strokes+The+New+Abnormal&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "USA & Canada",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "RCA",
+        "Cult Records",
+        "The Strokes Band Music",
+        "BMG Rights Management (US) LLC",
+        "BMG Gold Songs",
+        "BMG Gold Songs",
+        "EMI Songs Ltd.",
+        "EMI Blackwood Music Inc.",
+        "Sony / ATV Music Publishing",
+        "Pvinny Music",
+        "BMG Onyx Songs",
+        "Boneidol Music",
+        "Lucy's Meat Market",
+        "Shangri-La, Malibu, CA",
+        "Studio City Sound",
+        "Mauka View",
+        "Lucy's Meat Market",
+        "Groove Masters",
+        "Joel And Zach's Studio",
+        "Strongroom",
+        "Shangri-La, Malibu, CA",
+        "Marcussen Mastering",
+        "Estate Of Jean-Michel Basquiat",
+        "Artestar",
+        "RCA Records",
+        "RCA Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Record Technology Incorporated"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Synth-pop"
+      ],
+      "id": 15063478,
+      "barcode": [
+        "194397058819",
+        "1 94397 05881 9",
+        "19439-70588-1-SA  34232.1(3)... BG",
+        "19439-70588-1-SB  34232.2(3)... BG",
+        "19439-70588-1SA",
+        "19439-70588-1SB",
+        "ASCAP",
+        "BMI",
+        "GMR"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1712601,
+      "master_url": "https://api.discogs.com/masters/1712601",
+      "uri": "/release/15063478-The-Strokes-The-New-Abnormal",
+      "catno": "19439-70588-1SLV1",
+      "title": "The Strokes - The New Abnormal",
+      "thumb": "https://i.discogs.com/iscP1hgexbiGfMqrJsvMfmD9Fqd-ecmjvTdjpjz3MOQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MDYz/NDc4LTE1OTI2ODcx/MzEtMTk5MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/HqnjP3-V6nDL9wzvP5elDIu2iaKfCn0OEcIocMTI9PI/rs:fit/g:sm/q:90/h:584/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MDYz/NDc4LTE1OTI2ODcx/MzEtMTk5MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15063478",
+      "community": {
+        "want": 3413,
+        "have": 19526
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "RCA",
+        "RCA",
+        "Cult Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "RCA Records",
+        "RCA Records",
+        "GZ Media",
+        "The Strokes Band Music",
+        "BMG Rights Management (US) LLC",
+        "BMG Gold Songs",
+        "EMI Songs Ltd.",
+        "EMI Blackwood Music Inc.",
+        "Sony / ATV Music Publishing",
+        "Pvinny Music",
+        "BMG Onyx Songs",
+        "Boneidol Music",
+        "Lucy's Meat Market",
+        "Shangri-La, Malibu, CA",
+        "Studio City Sound",
+        "Mauka View",
+        "Lucy's Meat Market",
+        "Groove Masters",
+        "Joel And Zach's Studio",
+        "Strongroom",
+        "Shangri-La, Malibu, CA",
+        "Marcussen Mastering",
+        "Record Technology Incorporated"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Synth-pop"
+      ],
+      "id": 15249054,
+      "barcode": [
+        "1 94397 05881 9",
+        "194397058819",
+        "LC00316",
+        "BIEM/GEMA",
+        "19439-70588-1SA",
+        "19439-70588-1SB",
+        "19439-70588-1-SA 201216E1/A 34232.1(3)... BG",
+        "19439-70588-1-SB 34232.2(3)... BG 201216E2/A",
+        "19439-70588-1-SA 990485 201216E1 34232.1(3)... BG",
+        "19439-70588-1-SB 1016118 34232.2(3)... BG 201216E2/A"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1712601,
+      "master_url": "https://api.discogs.com/masters/1712601",
+      "uri": "/release/15249054-The-Strokes-The-New-Abnormal",
+      "catno": "19439-70588-1",
+      "title": "The Strokes - The New Abnormal",
+      "thumb": "https://i.discogs.com/MqHdbNITCV5alMMRzgnY4x7EAvfr8UOYcADMWconMUA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MjQ5/MDU0LTE1ODg2Njkx/OTctODAwNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/xmcyBTtt8N7TNJjpvzmvhh-jC2ASOMBRraWGPTxLycc/rs:fit/g:sm/q:90/h:586/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MjQ5/MDU0LTE1ODg2Njkx/OTctODAwNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15249054",
+      "community": {
+        "want": 1376,
+        "have": 8326
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "RCA",
+        "Cult Records",
+        "The Strokes Band Music",
+        "BMG Rights Management (US) LLC",
+        "BMG Gold Songs",
+        "EMI Songs Ltd.",
+        "EMI Blackwood Music Inc.",
+        "Sony / ATV Music Publishing",
+        "Pvinny Music",
+        "BMG Onyx Songs",
+        "Boneidol Music",
+        "Lucy's Meat Market",
+        "Shangri-La, Malibu, CA",
+        "Studio City Sound",
+        "Mauka View",
+        "Lucy's Meat Market",
+        "Groove Masters",
+        "Joel And Zach's Studio",
+        "Strongroom",
+        "Shangri-La, Malibu, CA",
+        "Marcussen Mastering",
+        "RCA Records",
+        "RCA Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Record Technology Incorporated",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 15233725,
+      "barcode": [
+        "1 94397 05881 9",
+        "194397058819",
+        "194397352412",
+        "BIEM/GEMA",
+        "19439-70588-1SA",
+        "19439-70588-1SB",
+        "19439-70588-1-SA 201216E1/A 34232.1(3)... BG",
+        "19439-70588-1-SB 34232.2(3)... BG 201216E2/A"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1712601,
+      "master_url": "https://api.discogs.com/masters/1712601",
+      "uri": "/release/15233725-The-Strokes-The-New-Abnormal",
+      "catno": "19439-70588-1",
+      "title": "The Strokes - The New Abnormal",
+      "thumb": "https://i.discogs.com/mWEvMOKBlDwXdDaWwyfykamKCXhut5gOQeum58suE6o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MjMz/NzI1LTE2NzE2Mjc0/OTctNjYzMy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/m4Xli6_iMPsFgNHqZit8Uk4yLDhA17QOVJ3vSIaIJZQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MjMz/NzI1LTE2NzE2Mjc0/OTctNjYzMy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15233725",
+      "community": {
+        "want": 1572,
+        "have": 5505
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red Opaque",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Canada",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "RCA",
+        "Cult Records",
+        "The Strokes Band Music",
+        "BMG Rights Management (US) LLC",
+        "BMG Gold Songs",
+        "EMI Songs Ltd.",
+        "EMI Blackwood Music Inc.",
+        "Sony / ATV Music Publishing",
+        "Pvinny Music",
+        "BMG Onyx Songs",
+        "Boneidol Music",
+        "Lucy's Meat Market",
+        "Shangri-La, Malibu, CA",
+        "Studio City Sound",
+        "Mauka View",
+        "Lucy's Meat Market",
+        "Groove Masters",
+        "Joel And Zach's Studio",
+        "Strongroom",
+        "Shangri-La, Malibu, CA",
+        "Marcussen Mastering",
+        "RCA Records",
+        "RCA Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Record Technology Incorporated",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [],
+      "id": 15049564,
+      "barcode": [
+        "1 9439-73524-1 2",
+        "ASCAP",
+        "BMI",
+        "19439-70588-1SA",
+        "19439-70588-1SB",
+        "19439-70588-1-SA 201216E1/A 34232.1(3)... BG A³",
+        "19439-70588-1-SB E3 34232.2(3)... BG 201216E2/A"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1712601,
+      "master_url": "https://api.discogs.com/masters/1712601",
+      "uri": "/release/15049564-The-Strokes-The-New-Abnormal",
+      "catno": "19439-70588-1",
+      "title": "The Strokes - The New Abnormal",
+      "thumb": "https://i.discogs.com/eG-o7bPdzQ922XHt9j7_HtEDB6NuJ5hyFaBPpb7jTb0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MDQ5/NTY0LTE1ODYwMTI1/MzMtNDM2MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/r2yrqd3gBcn5qm3Q7bU9RNRG_sPQMGlyFwhDWI0JK6s/rs:fit/g:sm/q:90/h:586/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MDQ5/NTY0LTE1ODYwMTI1/MzMtNDM2MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15049564",
+      "community": {
+        "want": 1539,
+        "have": 2706
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red Opaque",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Picture Disc"
+      ],
+      "label": [
+        "RCA",
+        "RCA",
+        "Cult Records",
+        "The Strokes Band Music",
+        "BMG Rights Management (US) LLC",
+        "BMG Gold Songs",
+        "EMI Songs Ltd.",
+        "EMI Blackwood Music Inc.",
+        "Sony / ATV Music Publishing",
+        "Pvinny Music",
+        "BMG Onyx Songs",
+        "Boneidol Music",
+        "Lucy's Meat Market",
+        "Shangri-La, Malibu, CA",
+        "Studio City Sound",
+        "Mauka View",
+        "Lucy's Meat Market",
+        "Groove Masters",
+        "Joel And Zach's Studio",
+        "Strongroom",
+        "Shangri-La, Malibu, CA",
+        "Marcussen Mastering",
+        "RCA Records",
+        "RCA Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Record Technology Incorporated",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [],
+      "id": 15114371,
+      "barcode": [
+        "194397126815",
+        "ASCAP",
+        "BMI"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1712601,
+      "master_url": "https://api.discogs.com/masters/1712601",
+      "uri": "/release/15114371-The-Strokes-The-New-Abnormal",
+      "catno": "19439-70588-1|CL1",
+      "title": "The Strokes - The New Abnormal",
+      "thumb": "https://i.discogs.com/87zG8mAo6bs7kXftQT8SMg2vC9qECYe36z0_UomHz_s/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MTE0/MzcxLTE1OTE5ODMx/MTItNjg5Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/gqqON4cNDzzs2GmTXU2705_9NrT0oO5vnjhJxKCcB6A/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MTE0/MzcxLTE1OTE5ODMx/MTItNjg5Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15114371",
+      "community": {
+        "want": 822,
+        "have": 1581
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Picture Disc"
+          ]
+        }
+      ]
+    }
+  ]
+}

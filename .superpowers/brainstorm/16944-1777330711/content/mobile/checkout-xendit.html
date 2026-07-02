@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Checkout — Xendit (Mobile)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #050505;
+    font-family: Inter, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  /* ── DEVICE FRAME ── */
+  .device-frame {
+    width: 390px;
+    min-height: 100vh;
+    background: #090909;
+    color: #fff;
+    position: relative;
+    overflow-x: hidden;
+    padding-bottom: 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: 52px;
+    background: #090909;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+  }
+  .back-link {
+    color: #999;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    min-width: 60px;
+  }
+  .header-title {
+    flex: 1;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+  .step-count {
+    color: #555;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: right;
+  }
+
+  /* ── STEP INDICATOR ── */
+  .step-indicator-wrap {
+    padding: 16px 16px 12px;
+  }
+  .step-row {
+    display: flex;
+    align-items: center;
+  }
+  .step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .step-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-circle.done {
+    background: #22c55e;
+    color: #000;
+  }
+  .step-circle.active {
+    background: #fff;
+    color: #000;
+  }
+  .step-circle.pending {
+    background: #1c1c1c;
+    color: #555;
+    border: 1px solid #262626;
+  }
+  .step-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .step-label.done { color: #22c55e; }
+  .step-label.active { color: #fff; }
+  .step-label.pending { color: #555; }
+  .step-connector {
+    flex: 1;
+    height: 2px;
+    margin: 0 6px;
+    margin-bottom: 14px;
+    background: #262626;
+    border-radius: 1px;
+  }
+  .step-connector.done { background: #22c55e; }
+
+  /* ── CONTENT SECTIONS ── */
+  .content {
+    padding: 0 16px;
+  }
+
+  /* ORDER SUMMARY COLLAPSED */
+  .summary-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #1a1a1a;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+  .summary-toggle-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .summary-toggle-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .summary-toggle-meta {
+    font-size: 11px;
+    color: #555;
+  }
+  .summary-total-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .summary-total-value {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .expand-icon {
+    color: #555;
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+
+  /* ORDER SUMMARY EXPANDED */
+  .summary-expanded {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .summary-expanded.open { display: block; }
+  .summary-expanded-hdr {
+    padding: 12px 14px;
+    border-bottom: 1px solid #262626;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .summary-item:last-child { border-bottom: none; }
+  .summary-cover {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #1a0a3a, #0a0a2e);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    border: 1px solid #262626;
+  }
+  .summary-info { flex: 1; }
+  .summary-item-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .summary-item-artist {
+    font-size: 10px;
+    color: #999;
+    margin-top: 1px;
+  }
+  .summary-item-price {
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  /* SECTION HEADING */
+  .section-heading {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-bottom: 10px;
+  }
+
+  /* INPUTS */
+  .field {
+    margin-bottom: 10px;
+  }
+  .field label {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    color: #999;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    height: 44px;
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 0 14px;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .field textarea {
+    height: 80px;
+    padding: 12px 14px;
+    resize: none;
+    line-height: 1.5;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    border-color: rgba(0,153,255,0.4);
+    box-shadow: 0 0 0 2px rgba(0,153,255,0.08);
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: #555;
+  }
+  .field input:focus::placeholder { color: #444; }
+
+  .fields-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: #1a1a1a;
+    margin: 18px 0;
+  }
+
+  /* SHIPPING METHOD CARDS */
+  .shipping-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
+    padding: 0 14px;
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .shipping-option.selected {
+    border-color: rgba(255,255,255,0.25);
+    background: #1c1c1c;
+  }
+  .shipping-radio {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid #262626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .shipping-radio.checked {
+    border-color: #fff;
+  }
+  .shipping-radio.checked::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .shipping-info { flex: 1; }
+  .shipping-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .shipping-est {
+    font-size: 10px;
+    color: #999;
+    margin-top: 1px;
+  }
+  .shipping-price {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ORDER TOTAL STRIP */
+  .order-total-strip {
+    background: #141414;
+    border-top: 1px solid #262626;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 0 -16px;
+  }
+  .total-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  .total-line .lbl { color: #999; }
+  .total-line .val { color: #fff; }
+  .total-line.grand {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #262626;
+    font-size: 15px;
+    font-weight: 800;
+  }
+  .total-line.grand .val { color: #fff; letter-spacing: -0.02em; }
+
+  /* ── FIXED CTA ── */
+  .cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 390px;
+    background: #090909;
+    border-top: 1px solid #1a1a1a;
+    padding: 12px 16px;
+    z-index: 100;
+  }
+  .cta-btn {
+    width: 100%;
+    height: 52px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    letter-spacing: -0.01em;
+    transition: opacity 0.15s;
+  }
+  .cta-btn:active { opacity: 0.88; }
+</style>
+</head>
+<body>
+
+<div class="device-frame">
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="back-link" href="#">← Back</a>
+    <div class="header-title">Checkout</div>
+    <div class="step-count">2/3</div>
+  </header>
+
+  <!-- STEP INDICATOR -->
+  <div class="step-indicator-wrap">
+    <div class="step-row">
+      <div class="step-item">
+        <div class="step-circle done">✓</div>
+        <div class="step-label done">Cart</div>
+      </div>
+      <div class="step-connector done"></div>
+      <div class="step-item">
+        <div class="step-circle active">2</div>
+        <div class="step-label active">Shipping</div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item">
+        <div class="step-circle pending">3</div>
+        <div class="step-label pending">Payment</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- ORDER SUMMARY (collapsed) -->
+    <div class="summary-toggle" onclick="toggleSummary()">
+      <div class="summary-toggle-left">
+        <div class="summary-toggle-label">Order Summary (2 items)</div>
+        <div class="summary-toggle-meta">OK Computer + Mezzanine</div>
+      </div>
+      <div class="summary-total-pill">
+        <span class="summary-total-value">Rp 1,470K</span>
+        <span class="expand-icon" id="expand-icon">›</span>
+      </div>
+    </div>
+
+    <!-- ORDER SUMMARY (expanded — hidden by default) -->
+    <div class="summary-expanded" id="summary-expanded">
+      <div class="summary-expanded-hdr">Items in your order</div>
+      <div class="summary-item">
+        <div class="summary-cover">🎵</div>
+        <div class="summary-info">
+          <div class="summary-item-title">OK Computer</div>
+          <div class="summary-item-artist">Radiohead · LP · M · 1997</div>
+        </div>
+        <div class="summary-item-price">Rp 850K</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-cover" style="background: linear-gradient(135deg,#2a0a1e,#0a0a1a)">🎵</div>
+        <div class="summary-info">
+          <div class="summary-item-title">Mezzanine</div>
+          <div class="summary-item-artist">Massive Attack · LP · VG+ · 1998</div>
+        </div>
+        <div class="summary-item-price">Rp 620K</div>
+      </div>
+    </div>
+
+    <!-- SHIPPING FORM -->
+    <div class="section-heading">Recipient Details</div>
+    <div class="field">
+      <label>Recipient Name</label>
+      <input type="text" placeholder="Full name" value="Andi Saputra" />
+    </div>
+    <div class="field">
+      <label>Phone Number</label>
+      <input type="tel" placeholder="+62 812-xxxx-xxxx" value="+62 812-3456-7890" />
+    </div>
+    <div class="field">
+      <label>Full Address</label>
+      <textarea placeholder="Street, building, district…">Jl. Kemang Raya No. 12, Bangka, Mampang Prapatan</textarea>
+    </div>
+    <div class="fields-row">
+      <div class="field">
+        <label>Postal Code</label>
+        <input type="text" placeholder="12345" value="12730" inputmode="numeric" />
+      </div>
+      <div class="field">
+        <label>City</label>
+        <input type="text" placeholder="City" value="Jakarta Selatan" />
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SHIPPING METHOD -->
+    <div class="section-heading">Shipping Method</div>
+
+    <div class="shipping-option">
+      <div class="shipping-radio"></div>
+      <div class="shipping-info">
+        <div class="shipping-name">JNE Regular</div>
+        <div class="shipping-est">Est. 3–5 business days</div>
+      </div>
+      <div class="shipping-price">Rp 25K</div>
+    </div>
+
+    <div class="shipping-option selected">
+      <div class="shipping-radio checked"></div>
+      <div class="shipping-info">
+        <div class="shipping-name">JNE YES</div>
+        <div class="shipping-est">Est. 1–2 business days</div>
+      </div>
+      <div class="shipping-price">Rp 45K</div>
+    </div>
+
+    <div class="shipping-option">
+      <div class="shipping-radio"></div>
+      <div class="shipping-info">
+        <div class="shipping-name">Gojek Instant</div>
+        <div class="shipping-est">Within Jakarta · 2–3 hours</div>
+      </div>
+      <div class="shipping-price">Rp 65K</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ORDER TOTAL -->
+    <div class="order-total-strip">
+      <div class="total-line">
+        <span class="lbl">Subtotal</span>
+        <span class="val">Rp 1,470K</span>
+      </div>
+      <div class="total-line">
+        <span class="lbl">Shipping (JNE YES)</span>
+        <span class="val" style="color:#22c55e">Rp 45K</span>
+      </div>
+      <div class="total-line grand">
+        <span class="lbl">Total</span>
+        <span class="val">Rp 1,515K</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FIXED CTA -->
+<div class="cta-bar">
+  <button class="cta-btn">Continue to Payment →</button>
+</div>
+
+<script>
+function toggleSummary() {
+  var expanded = document.getElementById('summary-expanded');
+  var icon = document.getElementById('expand-icon');
+  var isOpen = expanded.classList.contains('open');
+  if (isOpen) {
+    expanded.classList.remove('open');
+    icon.textContent = '›';
+    icon.style.transform = '';
+  } else {
+    expanded.classList.add('open');
+    icon.textContent = '›';
+    icon.style.transform = 'rotate(90deg)';
+  }
+}
+</script>
+
+</body>
+</html>

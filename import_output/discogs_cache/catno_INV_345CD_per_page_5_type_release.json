@@ -1,0 +1,66 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Invada",
+        "Invada Records",
+        "Kangding Ray",
+        "Kangding Ray",
+        "Multiverse Media Publishing"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Techno"
+      ],
+      "id": 36811408,
+      "barcode": [
+        "617308029925",
+        "330555 DISK MANUFACTURING SERVICES",
+        "LBR DF01",
+        "DFM 02"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4010794,
+      "master_url": "https://api.discogs.com/masters/4010794",
+      "uri": "/release/36811408-Kangding-Ray-SIR%C4%80T-Original-Motion-Picture-Soundtrack",
+      "catno": "INV345CD",
+      "title": "Kangding Ray - SIRĀT (Original Motion Picture Soundtrack)",
+      "thumb": "https://i.discogs.com/PQ_-rF4gE3T9TLi2hI2ttj5qZp1V_ODLbhs6LKX6fug/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODEx/NDA4LTE3NzM4NjAx/MzAtMzM5OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/O8vqGQ0DtzXMLp_2suKEbWrRHREQ8_jBWc3G4lOEOec/rs:fit/g:sm/q:90/h:546/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODEx/NDA4LTE3NzM4NjAx/MzAtMzM5OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36811408",
+      "community": {
+        "want": 6,
+        "have": 13
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

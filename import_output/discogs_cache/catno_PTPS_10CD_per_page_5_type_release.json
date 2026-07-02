@@ -1,0 +1,144 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "USA & Europe",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "The Diamond Mine",
+        "Future Sounds",
+        "Profact International",
+        "Profact International"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock",
+        "Experimental",
+        "Indie Rock"
+      ],
+      "id": 27594987,
+      "barcode": [
+        "5 400863 090067",
+        "5400863090067",
+        "459704 @1",
+        "459704 @2",
+        "IFPI LW03",
+        "IFPI AAHP9",
+        "IFPI AAHP5"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3149439,
+      "master_url": "https://api.discogs.com/masters/3149439",
+      "uri": "/release/27594987-Geese-3D-Country",
+      "catno": "PTPS10CD",
+      "title": "Geese (11) - 3D Country",
+      "thumb": "https://i.discogs.com/0-q8-2WakkgdJZhGaKkCBqz7aYrgVu324Kgcz1pHdIs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTk0/OTg3LTE2OTAzNTQ4/MzgtMjg4Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/8nJut5YXv-q6o_QDBmVgjsJoEmibU_2keKSGYJWjYN0/rs:fit/g:sm/q:90/h:541/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTk0/OTg3LTE2OTAzNTQ4/MzgtMjg4Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27594987",
+      "community": {
+        "want": 337,
+        "have": 519
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK & Europe",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "[PIAS]",
+        "The Diamond Mine",
+        "Future Sounds",
+        "Key Production",
+        "TAKT",
+        "TAKT"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock",
+        "Experimental",
+        "Indie Rock",
+        "Art Rock"
+      ],
+      "id": 36332509,
+      "barcode": [
+        "5 400863 090067",
+        "5400863090067",
+        "2100012617727 www.keyproduction.co.uk",
+        "IFPI LK97",
+        "IFPI UU067"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3149439,
+      "master_url": "https://api.discogs.com/masters/3149439",
+      "uri": "/release/36332509-Geese-3D-Country",
+      "catno": "PTPS10CD",
+      "title": "Geese (11) - 3D Country",
+      "thumb": "https://i.discogs.com/XY86YoISEsJCljn2plaB-DJ635dw1vRXGVyX49-d1vU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzMy/NTA5LTE3Njk1MzIx/NzAtNzcyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/lX4SLxDbjyJEAkLaHNxZVG73ZO-T4vhCsYsuCGskLdk/rs:fit/g:sm/q:90/h:350/w:350/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzMy/NTA5LTE3Njk1MzIx/NzAtNzcyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36332509",
+      "community": {
+        "want": 19,
+        "have": 40
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

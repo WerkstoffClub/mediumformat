@@ -1,0 +1,219 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Erskine Records",
+        "Columbia",
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Sony Music UK",
+        "SLS Studios",
+        "The Lodge, New York"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop"
+      ],
+      "id": 36695113,
+      "barcode": [
+        "1 99584 24681 9",
+        "199584246819",
+        "BIEM",
+        "19958433991-BK1",
+        "AL19958424681",
+        "BL19958424681",
+        "2 AL-19958417711",
+        "2 BL-19958417711"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153480,
+      "master_url": "https://api.discogs.com/masters/4153480",
+      "uri": "/release/36695113-Harry-Styles-Kiss-All-The-Time-Disco-Occasionally",
+      "catno": "19958424681",
+      "title": "Harry Styles - Kiss All The Time. Disco, Occasionally.",
+      "thumb": "https://i.discogs.com/IP7n6CsWkkSgfXQcO_q6E2XRdwqZfo9uunvwxitDbys/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njk1/MTEzLTE3NzMyMzMx/MDQtMjU4MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/uAHG-VHalZJ17YFUlg_wc9pMWuVt6HdW_suo5gRtMfY/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njk1/MTEzLTE3NzMyMzMx/MDQtMjU4MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36695113",
+      "community": {
+        "want": 501,
+        "have": 7025
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Pink Opaque [Kiss Pink]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Erskine Records",
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Sony Music UK",
+        "SLS Studios",
+        "The Lodge, New York",
+        "MPO"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop"
+      ],
+      "id": 36695515,
+      "barcode": [
+        "199584246918",
+        "1 99584 24691 8",
+        "19958433991 - BK1",
+        "BIEM",
+        "AL19958424691",
+        "BL19958424691",
+        "2AL19958417711 [MPO logo]®26 387687",
+        "2BL19958417711 [MPO logo]®26 387688"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153480,
+      "master_url": "https://api.discogs.com/masters/4153480",
+      "uri": "/release/36695515-Harry-Styles-Kiss-All-The-Time-Disco-Occasionally",
+      "catno": "19958424691",
+      "title": "Harry Styles - Kiss All The Time. Disco, Occasionally.",
+      "thumb": "https://i.discogs.com/FGbTK3tI9deCeIvbiolTrN6Rap8OyLf7IVOzmM-mZLo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njk1/NTE1LTE3NzI5NzE0/NTUtNDY1Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/4bTup1c1adBcaN2mtP7JlwqVHDz2-MX1yZjLFQgnwbs/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njk1/NTE1LTE3NzI5NzE0/NTUtNDY1Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36695515",
+      "community": {
+        "want": 206,
+        "have": 2878
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Smoke Machine",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Erskine Records",
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Sony Music UK",
+        "Schallplattenfabrik Pallas GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop"
+      ],
+      "id": 36690745,
+      "barcode": [
+        "199584339917",
+        "AL19958417711 -67971- I",
+        "BL19958417711 (2) -67971- IV"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153480,
+      "master_url": "https://api.discogs.com/masters/4153480",
+      "uri": "/release/36690745-Harry-Styles-Kiss-All-The-Time-Disco-Occasionally",
+      "catno": "19958433991",
+      "title": "Harry Styles - Kiss All The Time. Disco, Occasionally.",
+      "thumb": "https://i.discogs.com/3nDgkHehd5Jj0gVOs9U4O6x95jggZ36emNCgW1S2CsI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njkw/NzQ1LTE3NzMyMzA0/NTUtMjUyMy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/33Ycgh0WrVD2OObSdd1lFXgWgjm4FmnQFzTrLzV08wM/rs:fit/g:sm/q:90/h:610/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njkw/NzQ1LTE3NzMyMzA0/NTUtMjUyMy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36690745",
+      "community": {
+        "want": 233,
+        "have": 1986
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Pop-Blue (180g)",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

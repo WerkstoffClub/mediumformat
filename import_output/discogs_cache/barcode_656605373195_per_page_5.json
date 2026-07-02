@@ -1,0 +1,72 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "UK & US",
+      "year": "2021",
+      "format": [
+        "Cassette",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Sound City Studios",
+        "ARC Studios, Omaha, NE",
+        "Dead Oceans, Inc.",
+        "Whatever Mom Music"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk",
+        "Indie Rock"
+      ],
+      "id": 17092467,
+      "barcode": [
+        "6 56605 37319 5",
+        "LC 29265",
+        "ASCAP",
+        "BMI",
+        "DOC200"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1757517,
+      "master_url": "https://api.discogs.com/masters/1757517",
+      "uri": "/release/17092467-Phoebe-Bridgers-Punisher",
+      "catno": "DOC200",
+      "title": "Phoebe Bridgers - Punisher",
+      "thumb": "https://i.discogs.com/Q5hqPIuoHoQ-EqXNAUKXEXkNw2N6Ksd1JgIL0bJmHRw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MDky/NDY3LTE2MTYxODg4/ODYtMTMxMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/bNL2umynDvX1UAz_pzKA7J0OeiThzUAC7wS7FbyDnQA/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MDky/NDY3LTE2MTYxODg4/ODYtMTMxMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/17092467",
+      "community": {
+        "want": 417,
+        "have": 1666
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Green Neon Translucent",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

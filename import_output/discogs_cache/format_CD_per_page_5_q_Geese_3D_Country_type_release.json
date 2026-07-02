@@ -1,0 +1,339 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 12,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Geese+3D+Country&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?q=Geese+3D+Country&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "USA & Europe",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "The Diamond Mine",
+        "Future Sounds",
+        "Profact International",
+        "Profact International"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock",
+        "Experimental",
+        "Indie Rock"
+      ],
+      "id": 27594987,
+      "barcode": [
+        "5 400863 090067",
+        "5400863090067",
+        "459704 @1",
+        "459704 @2",
+        "IFPI LW03",
+        "IFPI AAHP9",
+        "IFPI AAHP5"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3149439,
+      "master_url": "https://api.discogs.com/masters/3149439",
+      "uri": "/release/27594987-Geese-3D-Country",
+      "catno": "PTPS10CD",
+      "title": "Geese (11) - 3D Country",
+      "thumb": "https://i.discogs.com/0-q8-2WakkgdJZhGaKkCBqz7aYrgVu324Kgcz1pHdIs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTk0/OTg3LTE2OTAzNTQ4/MzgtMjg4Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/8nJut5YXv-q6o_QDBmVgjsJoEmibU_2keKSGYJWjYN0/rs:fit/g:sm/q:90/h:541/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTk0/OTg3LTE2OTAzNTQ4/MzgtMjg4Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27594987",
+      "community": {
+        "want": 337,
+        "have": 519
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK & Europe",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "[PIAS]",
+        "The Diamond Mine",
+        "Future Sounds",
+        "Key Production",
+        "TAKT",
+        "TAKT"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock",
+        "Experimental",
+        "Indie Rock",
+        "Art Rock"
+      ],
+      "id": 36332509,
+      "barcode": [
+        "5 400863 090067",
+        "5400863090067",
+        "2100012617727 www.keyproduction.co.uk",
+        "IFPI LK97",
+        "IFPI UU067"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3149439,
+      "master_url": "https://api.discogs.com/masters/3149439",
+      "uri": "/release/36332509-Geese-3D-Country",
+      "catno": "PTPS10CD",
+      "title": "Geese (11) - 3D Country",
+      "thumb": "https://i.discogs.com/XY86YoISEsJCljn2plaB-DJ635dw1vRXGVyX49-d1vU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzMy/NTA5LTE3Njk1MzIx/NzAtNzcyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/lX4SLxDbjyJEAkLaHNxZVG73ZO-T4vhCsYsuCGskLdk/rs:fit/g:sm/q:90/h:350/w:350/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzMy/NTA5LTE3Njk1MzIx/NzAtNzcyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36332509",
+      "community": {
+        "want": 19,
+        "have": 40
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "1994",
+      "format": [
+        "CD",
+        "Album",
+        "Club Edition"
+      ],
+      "label": [
+        "RCA Victor",
+        "BMG Classics",
+        "BMG Direct Marketing, Inc.",
+        "BMG Music",
+        "BMG Music",
+        "BMG Direct Marketing, Inc.",
+        "UMRK",
+        "Windmill Lane Studios",
+        "Barbican Centre",
+        "National Concert Hall, Dublin",
+        "BMG Music",
+        "BMG Music",
+        "BMG Direct Marketing, Inc.",
+        "Denon Digital Industries"
+      ],
+      "type": "release",
+      "genre": [
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Celtic"
+      ],
+      "id": 2345332,
+      "barcode": [
+        "090266149025",
+        "ADD",
+        "2/94 1DA3 100323D"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 994996,
+      "master_url": "https://api.discogs.com/masters/994996",
+      "uri": "/release/2345332-The-Chieftains-With-The-Belfast-Harp-Orchestra-The-Celtic-Harp-A-Tribute-To-Edward-Bunting",
+      "catno": "09026-61490-2",
+      "title": "The Chieftains With The Belfast Harp Orchestra - The Celtic Harp: A Tribute To Edward Bunting",
+      "thumb": "https://i.discogs.com/toVMakXh73dQoi-gGzeB4yrKTynOfln_XCW8EATNmBM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNDUz/MzItMTY3NTg5ODkx/Ny01ODU2LnBuZw.jpeg",
+      "cover_image": "https://i.discogs.com/-4LUdnASZ_PjH_8paGEGvSwn6YY5vrk_LC2j86jQKeE/rs:fit/g:sm/q:90/h:604/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNDUz/MzItMTY3NTg5ODkx/Ny01ODU2LnBuZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2345332",
+      "community": {
+        "want": 10,
+        "have": 166
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Club Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "1993",
+      "format": [
+        "CD",
+        "Album",
+        "Multichannel"
+      ],
+      "label": [
+        "RCA Victor",
+        "BMG Classics",
+        "BMG Music",
+        "BMG Music",
+        "BMG Music",
+        "BMG Music",
+        "UMRK",
+        "Windmill Lane Studios",
+        "Barbican Centre",
+        "National Concert Hall, Dublin"
+      ],
+      "type": "release",
+      "genre": [
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Celtic"
+      ],
+      "id": 10160185,
+      "barcode": [
+        "0 9026-61490-2 5",
+        "BMI",
+        "ADD",
+        "2/94 1DA3 100323D",
+        "2/93 2DA2 09026614902",
+        "1/98 2DB3 09026614902",
+        "1/95 2DA8 09026614902"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 994996,
+      "master_url": "https://api.discogs.com/masters/994996",
+      "uri": "/release/10160185-The-Chieftains-With-The-Belfast-Harp-Orchestra-The-Celtic-Harp-A-Tribute-To-Edward-Bunting",
+      "catno": "09026-61490-2",
+      "title": "The Chieftains With The Belfast Harp Orchestra - The Celtic Harp: A Tribute To Edward Bunting",
+      "thumb": "https://i.discogs.com/uLobt6ZOBtPx7Syt-eR4vxLSfdgl89lPRwzXhPqjYsU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMTYw/MTg1LTE2Nzg5MDI5/NjMtMTc3Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/vt4zXWb5d5njNfHw1X40mAesC-tp2dis9zRquL_QJkY/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMTYw/MTg1LTE2Nzg5MDI5/NjMtMTc3Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10160185",
+      "community": {
+        "want": 7,
+        "have": 131
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Dolby Surround",
+          "descriptions": [
+            "Album",
+            "Multichannel"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "1993",
+      "format": [
+        "CD",
+        "Album",
+        "Club Edition"
+      ],
+      "label": [
+        "RCA Victor",
+        "BMG Direct Marketing, Inc.",
+        "BMG Music",
+        "BMG Music",
+        "UMRK",
+        "Windmill Lane Studios",
+        "Barbican Centre",
+        "National Concert Hall, Dublin",
+        "BMG Music",
+        "BMG Music",
+        "Denon Digital Industries"
+      ],
+      "type": "release",
+      "genre": [
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Celtic"
+      ],
+      "id": 23774396,
+      "barcode": [
+        "100323D 2/95 1DA11",
+        "ADD"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 994996,
+      "master_url": "https://api.discogs.com/masters/994996",
+      "uri": "/release/23774396-The-Chieftains-With-The-Belfast-Harp-Orchestra-The-Celtic-Harp-A-Tribute-To-Edward-Bunting",
+      "catno": "09026-61490-2",
+      "title": "The Chieftains With The Belfast Harp Orchestra - The Celtic Harp: A Tribute To Edward Bunting",
+      "thumb": "https://i.discogs.com/CMSoJ3ou3Zito1LynHTSqiJAkG4E7R1DKo60YMKIhI8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNzc0/Mzk2LTE2NTY4ODgz/NTYtNjUzNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/no6zNg_Oo1kXwq2RJXczPFDBxSaq1XVdGcpv_iB0VRw/rs:fit/g:sm/q:90/h:573/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNzc0/Mzk2LTE2NTY4ODgz/NTYtNjUzNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23774396",
+      "community": {
+        "want": 1,
+        "have": 17
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Club Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

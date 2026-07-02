@@ -1,0 +1,162 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2021",
+      "format": [
+        "Cassette",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 24253577,
+      "barcode": [
+        "656605346472"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1406567,
+      "master_url": "https://api.discogs.com/masters/1406567",
+      "uri": "/release/24253577-Mitski-Be-The-Cowboy",
+      "catno": "DOC150",
+      "title": "Mitski - Be The Cowboy",
+      "thumb": "https://i.discogs.com/CIerDHbGdl40YffOTbYx2BNqK7FcNJfqJ4-BcBJuZzw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0MjUz/NTc3LTE2NjEwMzYz/NDctNjQ5NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/sUm5Zzr7o-BzQLp5oG0crjapY5EhX2hDiRTvJoW8g5g/rs:fit/g:sm/q:90/h:951/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0MjUz/NTc3LTE2NjEwMzYz/NDctNjQ5NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/24253577",
+      "community": {
+        "want": 122,
+        "have": 255
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "White",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2021",
+      "format": [
+        "Cassette",
+        "Album",
+        "Misprint"
+      ],
+      "label": [
+        "Dead Oceans"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 20332246,
+      "barcode": [
+        "656605346472"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1406567,
+      "master_url": "https://api.discogs.com/masters/1406567",
+      "uri": "/release/20332246-Mitski-Be-The-Cowboy",
+      "catno": "DOC150",
+      "title": "Mitski - Be The Cowboy",
+      "thumb": "https://i.discogs.com/s1KVKnr2jCooLV1281v6dk5mYLMULiYtYCTG1Uy8WDk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIwMzMy/MjQ2LTE2NTA1NzQz/MDItNTY1Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ND3oHjlCXHSiy2sC8FnynUd-SMj-MIH3Ji5g6Bcv9gE/rs:fit/g:sm/q:90/h:934/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIwMzMy/MjQ2LTE2NTA1NzQz/MDItNTY1Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/20332246",
+      "community": {
+        "want": 221,
+        "have": 322
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Smoke",
+          "descriptions": [
+            "Album",
+            "Misprint"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "format": [
+        "Cassette",
+        "Album"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 34874927,
+      "label": [
+        "Dead Oceans"
+      ],
+      "type": "release",
+      "barcode": [
+        "656605346472"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1406567,
+      "master_url": "https://api.discogs.com/masters/1406567",
+      "uri": "/release/34874927-Mitski-Be-The-Cowboy",
+      "catno": "DOC150",
+      "title": "Mitski - Be The Cowboy",
+      "thumb": "https://i.discogs.com/9HD9yOZFDeu5CLRkvPcnVVku9MDrnw9KEsL8DU03j9c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODc0/OTI3LTE3NjgyNDk2/NTQtNjcyNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/up-HXkeYopf06cj_Bn-pk8lagxESfS74podkv0RFTfU/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODc0/OTI3LTE3NjgyNDk2/NTQtNjcyNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34874927",
+      "community": {
+        "want": 13,
+        "have": 20
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Green Transparent",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

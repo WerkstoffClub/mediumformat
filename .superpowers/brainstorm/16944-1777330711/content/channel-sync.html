@@ -1,0 +1,260 @@
+<h2>Channel Sync — Tokopedia & Shopee</h2>
+<p class="subtitle">Two-way sync: inventory pushes out, orders pull in, conflicts surfaced for review</p>
+
+<style>
+  * { box-sizing: border-box; }
+  .channels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+  .channel-card { border: 1px solid #262626; border-radius: 12px; overflow: hidden; background: #141414; }
+  .channel-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #1a1a1a; }
+  .channel-logo { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .logo-tokped { background: rgba(0,170,91,0.12); border: 1px solid rgba(0,170,91,0.25); }
+  .logo-shopee { background: rgba(238,77,45,0.12); border: 1px solid rgba(238,77,45,0.25); }
+  .channel-name { font-weight: 800; font-size: 14px; }
+  .name-tokped { color: #00AA5B; }
+  .name-shopee { color: #EE4D2D; }
+  .channel-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-online { background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.5); }
+  .dot-warn { background: #e8a838; }
+  .status-text { color: #999; }
+
+  .channel-body { padding: 14px 16px; }
+
+  /* Stats row */
+  .sync-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  .sync-stat { background: #1c1c1c; border: 1px solid #262626; border-radius: 7px; padding: 8px 10px; text-align: center; }
+  .sync-stat .sv { font-size: 18px; font-weight: 800; color: #fff; }
+  .sync-stat .sl { font-size: 9px; color: #999; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
+
+  /* Sync flow diagram */
+  .sync-flow { display: flex; align-items: center; gap: 0; margin-bottom: 14px; font-size: 11px; }
+  .flow-box { flex: 1; background: #1c1c1c; border: 1px solid #262626; border-radius: 6px; padding: 8px 10px; text-align: center; }
+  .flow-box .fb-title { font-weight: 700; color: #fff; font-size: 11px; }
+  .flow-box .fb-items { color: #999; font-size: 10px; margin-top: 3px; line-height: 1.6; }
+  .flow-arrow { display: flex; flex-direction: column; align-items: center; padding: 0 8px; gap: 4px; }
+  .arrow-line { display: flex; align-items: center; gap: 3px; font-size: 10px; white-space: nowrap; }
+  .arrow-push { color: #22c55e; }
+  .arrow-pull { color: #0099ff; }
+
+  /* Recent sync log */
+  .log-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 8px; }
+  .log-item { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; font-size: 11px; }
+  .log-icon { width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; margin-top: 1px; }
+  .icon-push { background: rgba(34,197,94,0.1); color: #22c55e; }
+  .icon-pull { background: rgba(0,153,255,0.1); color: #0099ff; }
+  .icon-warn { background: rgba(232,168,56,0.1); color: #e8a838; }
+  .icon-err  { background: rgba(224,92,106,0.1); color: #e05c6a; }
+  .log-body { flex: 1; }
+  .log-msg { color: #999; }
+  .log-time { color: #555; font-size: 10px; margin-top: 1px; }
+  .log-action { color: #0099ff; font-size: 10px; cursor: pointer; margin-top: 2px; }
+
+  /* Conflict panel */
+  .conflict-banner { display: flex; align-items: center; gap: 10px; background: rgba(232,168,56,0.06); border: 1px solid rgba(232,168,56,0.2); border-radius: 7px; padding: 10px 12px; margin-bottom: 10px; }
+  .conflict-icon { font-size: 16px; }
+  .conflict-text { flex: 1; font-size: 11px; color: #e8a838; }
+  .conflict-text span { color: #999; display: block; font-size: 10px; margin-top: 2px; }
+  .resolve-btn { background: rgba(232,168,56,0.1); border: 1px solid rgba(232,168,56,0.3); color: #e8a838; border-radius: 100px; padding: 5px 12px; font-size: 10px; font-weight: 700; cursor: pointer; }
+
+  /* Config section */
+  .config-section { border: 1px solid #262626; border-radius: 7px; overflow: hidden; margin-top: 14px; }
+  .config-row { display: flex; align-items: center; padding: 8px 12px; border-bottom: 1px solid #1a1a1a; gap: 10px; }
+  .config-row:last-child { border-bottom: none; }
+  .config-label { flex: 1; font-size: 11px; color: #999; }
+  .config-val { font-size: 11px; color: #999; }
+  .toggle-sm { width: 28px; height: 16px; background: #22c55e; border-radius: 8px; position: relative; flex-shrink: 0; }
+  .toggle-sm-off { background: #333; }
+  .knob-sm { width: 12px; height: 12px; background: #fff; border-radius: 50%; position: absolute; top: 2px; right: 2px; }
+  .knob-sm-off { left: 2px; right: auto; }
+
+  /* Last sync badge */
+  .last-sync { font-size: 10px; color: #555; margin-top: 10px; text-align: right; }
+
+  /* Full-width conflict section */
+  .full-conflict { margin-top: 16px; background: #141414; border: 1px solid rgba(232,168,56,0.2); border-radius: 12px; overflow: hidden; }
+  .full-conflict-header { background: #090909; padding: 10px 16px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #e8a838; border-bottom: 1px solid #1a1a1a; }
+  .conflict-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .conflict-table th { background: #090909; padding: 7px 14px; text-align: left; color: #555; font-weight: 600; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #1a1a1a; }
+  .conflict-table td { padding: 8px 14px; border-bottom: 1px solid #1a1a1a; color: #999; }
+  .conflict-table tr:last-child td { border-bottom: none; }
+  .source-tag { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: 9px; font-weight: 700; margin-right: 3px; }
+  .src-mf  { background: rgba(255,255,255,0.06); color: #fff; }
+  .src-tok { background: rgba(0,170,91,0.12); color: #00AA5B; }
+  .src-sho { background: rgba(238,77,45,0.12); color: #EE4D2D; }
+  .action-btn { padding: 3px 10px; border-radius: 100px; font-size: 9px; font-weight: 700; cursor: pointer; border: none; margin-right: 4px; }
+  .btn-mf { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid #262626; }
+  .btn-chan-tok { background: rgba(0,170,91,0.12); color: #00AA5B; border: 1px solid rgba(0,170,91,0.3); }
+  .btn-chan-sho { background: rgba(238,77,45,0.12); color: #EE4D2D; border: 1px solid rgba(238,77,45,0.3); }
+  .btn-ignore { background: #141414; color: #999; border: 1px solid #262626; }
+</style>
+
+<div class="channels-grid">
+
+  <!-- TOKOPEDIA -->
+  <div class="channel-card">
+    <div class="channel-header">
+      <div class="channel-logo logo-tokped">🟢</div>
+      <div>
+        <div class="channel-name name-tokped">Tokopedia</div>
+        <div style="font-size:10px;color:#555">@mediumformat.id</div>
+      </div>
+      <div class="channel-status">
+        <div class="status-dot dot-online"></div>
+        <div class="status-text">Connected · Syncing</div>
+      </div>
+    </div>
+    <div class="channel-body">
+      <div class="sync-stats">
+        <div class="sync-stat"><div class="sv">842</div><div class="sl">Listed</div></div>
+        <div class="sync-stat"><div class="sv">23</div><div class="sl">Orders (MTD)</div></div>
+        <div class="sync-stat"><div class="sv">2</div><div class="sl" style="color:#e8a838">Conflicts</div></div>
+      </div>
+
+      <div class="sync-flow">
+        <div class="flow-box">
+          <div class="fb-title">Medium Format</div>
+          <div class="fb-items">Stock levels<br>Prices<br>Listings</div>
+        </div>
+        <div class="flow-arrow">
+          <div class="arrow-line arrow-push">→ Push stock / price</div>
+          <div class="arrow-line arrow-pull">← Pull orders</div>
+          <div class="arrow-line arrow-pull">← Pull buyer data</div>
+        </div>
+        <div class="flow-box">
+          <div class="fb-title">Tokopedia</div>
+          <div class="fb-items">Product listings<br>Incoming orders<br>Reviews</div>
+        </div>
+      </div>
+
+      <div class="log-title">Recent Sync Activity</div>
+      <div class="log-item">
+        <div class="log-icon icon-pull">↓</div>
+        <div class="log-body"><div class="log-msg">Order #TK-8821 pulled — Portishead Dummy LP</div><div class="log-time">2 min ago</div></div>
+      </div>
+      <div class="log-item">
+        <div class="log-icon icon-push">↑</div>
+        <div class="log-body"><div class="log-msg">Stock update pushed — 12 items updated</div><div class="log-time">5 min ago</div></div>
+      </div>
+      <div class="log-item">
+        <div class="log-icon icon-warn">!</div>
+        <div class="log-body"><div class="log-msg">Price conflict — OK Computer LP</div><div class="log-time">18 min ago</div><div class="log-action">→ Resolve conflict</div></div>
+      </div>
+      <div class="log-item">
+        <div class="log-icon icon-pull">↓</div>
+        <div class="log-body"><div class="log-msg">Order #TK-8819 pulled — Massive Attack Mezzanine</div><div class="log-time">1 hr ago</div></div>
+      </div>
+
+      <div class="config-section">
+        <div class="config-row"><div class="config-label">Auto-push stock on sale</div><div class="toggle-sm"><div class="knob-sm"></div></div></div>
+        <div class="config-row"><div class="config-label">Auto-push price changes</div><div class="toggle-sm"><div class="knob-sm"></div></div></div>
+        <div class="config-row"><div class="config-label">Auto-fulfill pulled orders</div><div class="toggle-sm toggle-sm-off"><div class="knob-sm knob-sm-off"></div></div></div>
+        <div class="config-row"><div class="config-label">Sync frequency</div><div class="config-val">Every 5 min</div></div>
+      </div>
+      <div class="last-sync">Last sync: 2 min ago · Next: in 3 min</div>
+    </div>
+  </div>
+
+  <!-- SHOPEE -->
+  <div class="channel-card">
+    <div class="channel-header">
+      <div class="channel-logo logo-shopee">🟠</div>
+      <div>
+        <div class="channel-name name-shopee">Shopee</div>
+        <div style="font-size:10px;color:#555">@mediumformat</div>
+      </div>
+      <div class="channel-status">
+        <div class="status-dot dot-online"></div>
+        <div class="status-text">Connected · Syncing</div>
+      </div>
+    </div>
+    <div class="channel-body">
+      <div class="sync-stats">
+        <div class="sync-stat"><div class="sv">614</div><div class="sl">Listed</div></div>
+        <div class="sync-stat"><div class="sv">18</div><div class="sl">Orders (MTD)</div></div>
+        <div class="sync-stat"><div class="sv">0</div><div class="sl">Conflicts</div></div>
+      </div>
+
+      <div class="sync-flow">
+        <div class="flow-box">
+          <div class="fb-title">Medium Format</div>
+          <div class="fb-items">Stock levels<br>Prices<br>Listings</div>
+        </div>
+        <div class="flow-arrow">
+          <div class="arrow-line arrow-push">→ Push stock / price</div>
+          <div class="arrow-line arrow-pull">← Pull orders</div>
+          <div class="arrow-line arrow-pull">← Pull buyer data</div>
+        </div>
+        <div class="flow-box">
+          <div class="fb-title">Shopee</div>
+          <div class="fb-items">Product listings<br>Incoming orders<br>Reviews</div>
+        </div>
+      </div>
+
+      <div class="log-title">Recent Sync Activity</div>
+      <div class="log-item">
+        <div class="log-icon icon-push">↑</div>
+        <div class="log-body"><div class="log-msg">Price update pushed — 3 items repriced</div><div class="log-time">4 min ago</div></div>
+      </div>
+      <div class="log-item">
+        <div class="log-icon icon-pull">↓</div>
+        <div class="log-body"><div class="log-msg">Order #SH-4402 pulled — BOC Music Has the Right…</div><div class="log-time">22 min ago</div></div>
+      </div>
+      <div class="log-item">
+        <div class="log-icon icon-push">↑</div>
+        <div class="log-body"><div class="log-msg">New listing synced — Aphex Twin Ambient Vol II</div><div class="log-time">1 hr ago</div></div>
+      </div>
+      <div class="log-item">
+        <div class="log-icon icon-pull">↓</div>
+        <div class="log-body"><div class="log-msg">Order #SH-4399 pulled — Blue Lines LP</div><div class="log-time">2 hr ago</div></div>
+      </div>
+
+      <div class="config-section">
+        <div class="config-row"><div class="config-label">Auto-push stock on sale</div><div class="toggle-sm"><div class="knob-sm"></div></div></div>
+        <div class="config-row"><div class="config-label">Auto-push price changes</div><div class="toggle-sm"><div class="knob-sm"></div></div></div>
+        <div class="config-row"><div class="config-label">Auto-fulfill pulled orders</div><div class="toggle-sm"><div class="knob-sm"></div></div></div>
+        <div class="config-row"><div class="config-label">Sync frequency</div><div class="config-val">Every 5 min</div></div>
+      </div>
+      <div class="last-sync">Last sync: 4 min ago · Next: in 1 min</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONFLICT RESOLUTION PANEL -->
+<div class="full-conflict">
+  <div class="full-conflict-header">⚠️ Conflicts Requiring Review (2)</div>
+  <table class="conflict-table">
+    <thead>
+      <tr>
+        <th>Release</th>
+        <th>Field</th>
+        <th>Medium Format</th>
+        <th>Tokopedia</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Radiohead — OK Computer LP</td>
+        <td>Price</td>
+        <td><span class="source-tag src-mf">MF</span>Rp 850,000</td>
+        <td><span class="source-tag src-tok">Tokped</span>Rp 799,000 <span style="color:#555;font-size:10px">(manually edited)</span></td>
+        <td>
+          <button class="action-btn btn-mf">Use MF price</button>
+          <button class="action-btn btn-chan-tok">Keep Tokped</button>
+          <button class="action-btn btn-ignore">Ignore</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Portishead — Dummy LP</td>
+        <td>Stock</td>
+        <td><span class="source-tag src-mf">MF</span>5 units</td>
+        <td><span class="source-tag src-tok">Tokped</span>3 units <span style="color:#555;font-size:10px">(stale cache)</span></td>
+        <td>
+          <button class="action-btn btn-mf">Use MF stock</button>
+          <button class="action-btn btn-ignore">Ignore</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

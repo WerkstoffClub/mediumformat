@@ -1,0 +1,101 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Run For Cover Records"
+      ],
+      "type": "master",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Emo",
+        "Punk"
+      ],
+      "id": 4213749,
+      "barcode": [
+        "199438001731",
+        "MKB1861 IFPILZ71 DISCMAKERS"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4213749,
+      "master_url": "https://api.discogs.com/masters/4213749",
+      "uri": "/master/4213749-Basement-Wired",
+      "catno": "288",
+      "title": "Basement (4) - Wired",
+      "thumb": "https://i.discogs.com/i6yk5tnjgeEnf5y1yHtNObcENJ6ySXCVHF71DEGrIrs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MjM1/MTQ4LTE3Nzc3NTA3/NTctNzc0MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/R8pic3H6LeOztOPBl7N4G-h9aAZ_aKsall0BnOSAMP0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MjM1/MTQ4LTE3Nzc3NTA3/NTctNzc0MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/4213749",
+      "community": {
+        "want": 32,
+        "have": 236
+      }
+    },
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Run For Cover Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Emo",
+        "Punk"
+      ],
+      "id": 37235148,
+      "barcode": [
+        "199438001731",
+        "MKB1861 IFPILZ71 DISCMAKERS"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4213749,
+      "master_url": "https://api.discogs.com/masters/4213749",
+      "uri": "/release/37235148-Basement-Wired",
+      "catno": "288",
+      "title": "Basement (4) - Wired",
+      "thumb": "https://i.discogs.com/i6yk5tnjgeEnf5y1yHtNObcENJ6ySXCVHF71DEGrIrs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MjM1/MTQ4LTE3Nzc3NTA3/NTctNzc0MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/R8pic3H6LeOztOPBl7N4G-h9aAZ_aKsall0BnOSAMP0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MjM1/MTQ4LTE3Nzc3NTA3/NTctNzc0MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/37235148",
+      "community": {
+        "want": 0,
+        "have": 2
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,311 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 4,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Young",
+        "Konichiwa Records",
+        "Konichiwa Records",
+        "Konichiwa Records AB",
+        "Konichiwa Records AB",
+        "Young",
+        "Young Songs Limited",
+        "Sony Music Publishing",
+        "Vertical Songs",
+        "Universal Music Publishing Scandinavia",
+        "One Two Many Songs Limited",
+        "Bert's Songs",
+        "Warner/Chappell Music Publishing Ltd.",
+        "Universal Music Publishing",
+        "Robynsongs",
+        "Universal Music Publishing AB",
+        "Universal Music Publishing Group",
+        "Kobalt Music Publishing Ltd.",
+        "MXM Music",
+        "Kobalt Music",
+        "Wolf Cousins",
+        "Warner Chappell Music Scandinavia",
+        "Copyright Control",
+        "Apmamman",
+        "MXM Studios",
+        "Sterling Sound",
+        "SJT Studio",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Electro",
+        "Dance-pop"
+      ],
+      "id": 36903528,
+      "barcode": [
+        "889030046727",
+        "889030916112",
+        "YO467CD AQ54579-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9706"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4174681,
+      "master_url": "https://api.discogs.com/masters/4174681",
+      "uri": "/release/36903528-Robyn-Sexistential",
+      "catno": "YO467CD",
+      "title": "Robyn - Sexistential",
+      "thumb": "https://i.discogs.com/S_ouNFVFW-WrL6bugE_tl6AqNy5IQr4MQpdLIMi4yI4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTAz/NTI4LTE3NzQ3MTU4/NzQtNzg2NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/OTRLriGQMoP3DVn7OETemqjErLnqmC8Z0VMd-p0h6jA/rs:fit/g:sm/q:90/h:582/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTAz/NTI4LTE3NzQ3MTU4/NzQtNzg2NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36903528",
+      "community": {
+        "want": 6,
+        "have": 47
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK & Europe",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Young",
+        "Konichiwa Records",
+        "Konichiwa Records AB",
+        "Konichiwa Records AB",
+        "Young",
+        "Young Songs Limited",
+        "Sony Music Publishing",
+        "Vertical Songs",
+        "Universal Music Publishing Scandinavia",
+        "One Two Many Songs Limited",
+        "Bert's Songs",
+        "Warner/Chappell Music Publishing Ltd.",
+        "Universal Music Publishing",
+        "Robynsongs",
+        "Universal Music Publishing AB",
+        "Universal Music Publishing Group",
+        "Kobalt Music Publishing Ltd.",
+        "MXM Music",
+        "Kobalt Music",
+        "Wolf Cousins",
+        "Warner Chappell Music Scandinavia",
+        "Copyright Control",
+        "Apmamman",
+        "MXM Studios",
+        "Sterling Sound",
+        "SJT Studio",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Electro",
+        "Dance-pop"
+      ],
+      "id": 36932316,
+      "barcode": [
+        "889030046789",
+        "YO467CD AQ54579-01 manufactured by optimal media GmbH",
+        "IFPI L578"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4174681,
+      "master_url": "https://api.discogs.com/masters/4174681",
+      "uri": "/release/36932316-Robyn-Sexistential",
+      "catno": "YO467CDE",
+      "title": "Robyn - Sexistential",
+      "thumb": "https://i.discogs.com/Go0yZqxX6ULPBg7gy7CMPh6yJQ9gIXJyLaOx5sduF5w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTMy/MzE2LTE3NzQ5NTQy/MTItNjQwNi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/TmyLOAkr1wTaanfKoOyrTaawS04HD7lx-0Gor4Bp8wc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTMy/MzE2LTE3NzQ5NTQy/MTItNjQwNi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36932316",
+      "community": {
+        "want": 4,
+        "have": 10
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Young",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Electro",
+        "Dance-pop"
+      ],
+      "id": 36925257,
+      "barcode": [
+        "8 89030 91613 6",
+        "0889030916136",
+        "YO467CD AQ54579-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9706"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4174681,
+      "master_url": "https://api.discogs.com/masters/4174681",
+      "uri": "/release/36925257-Robyn-Sexistential",
+      "catno": "YO467CDWLE",
+      "title": "Robyn - Sexistential",
+      "thumb": "https://i.discogs.com/05kwiRAaQJtDnu_tL5T-oXwFFwVuJIczT86vv2w17to/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTI1/MjU3LTE3NzQ4ODU2/MjItMTk0MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/DCihYVhfOJjh3SsudWPeLk5SKlehnTxpHAxWd1_M_kw/rs:fit/g:sm/q:90/h:452/w:458/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTI1/MjU3LTE3NzQ4ODU2/MjItMTk0MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36925257",
+      "community": {
+        "want": 9,
+        "have": 4
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Hand-stamped Cover",
+          "descriptions": [
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Young",
+        "Konichiwa Records",
+        "Beat Records",
+        "Konichiwa Records AB",
+        "Konichiwa Records AB",
+        "Young",
+        "Young Songs Limited",
+        "Sony Music Publishing",
+        "Vertical Songs",
+        "Universal Music Publishing Scandinavia",
+        "One Two Many Songs Limited",
+        "Bert's Songs",
+        "Warner/Chappell Music Publishing Ltd.",
+        "Universal Music Publishing",
+        "Robynsongs",
+        "Universal Music Publishing AB",
+        "Universal Music Publishing Group",
+        "Kobalt Music Publishing Ltd.",
+        "MXM Music",
+        "Kobalt Music",
+        "Wolf Cousins",
+        "Warner Chappell Music Scandinavia",
+        "Copyright Control",
+        "Apmamman",
+        "MXM Studios",
+        "Sterling Sound",
+        "SJT Studio",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Electro",
+        "Dance-pop"
+      ],
+      "id": 36947769,
+      "barcode": [
+        "4582616195241"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4174681,
+      "master_url": "https://api.discogs.com/masters/4174681",
+      "uri": "/release/36947769-Robyn-%E3%83%AD%E3%83%93%E3%83%B3-Sexistential-%E3%82%BB%E3%82%AF%E3%82%B7%E3%82%B9%E3%83%86%E3%83%B3%E3%82%B7%E3%83%A3%E3%83%AB",
+      "catno": "YO467CDJP",
+      "title": "Robyn = ロビン* - Sexistential = セクシステンシャル",
+      "thumb": "https://i.discogs.com/A-giAXHH4zu8WW0EfM_mxrr6wTTYCvaZhtjmZ14ValI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTQ3/NzY5LTE3NzUwOTA5/MDMtNjc5Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/5rYpEd6uMmKA9zgIsp8Kivppan_bqwfgv5KYJBG-1mg/rs:fit/g:sm/q:90/h:500/w:500/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTQ3/NzY5LTE3NzUwOTA5/MDMtNjc5Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36947769",
+      "community": {
+        "want": 1,
+        "have": 0
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 4,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Box Set"
+      ],
+      "label": [
+        "Erskine Records",
+        "Columbia",
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Sony Music UK",
+        "Sony Music Entertainment"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Pop Rock",
+        "Disco",
+        "Funk",
+        "Synth-pop",
+        "Berlin-School"
+      ],
+      "id": 36834049,
+      "barcode": [
+        "none",
+        "199584177328"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153480,
+      "master_url": "https://api.discogs.com/masters/4153480",
+      "uri": "/release/36834049-Harry-Styles-Kiss-All-The-Time-Disco-Occasionally",
+      "catno": "19958417732",
+      "title": "Harry Styles - Kiss All The Time. Disco, Occasionally.",
+      "thumb": "https://i.discogs.com/tARQY04rS1Ig_fPBQDduamA0Fn87gTGgVOgb83hGxhA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODM0/MDQ5LTE3NzQwODAy/MjEtODY5OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/qQnKLPc7P73RVmLiLkKO2kO6aDvrcBmqIpoXBrOvWXg/rs:fit/g:sm/q:90/h:574/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODM0/MDQ5LTE3NzQwODAy/MjEtODY5OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36834049",
+      "community": {
+        "want": 3,
+        "have": 11
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "Box Set",
+          "qty": "1"
+        }
+      ]
+    },
+    {
+      "country": "Russia",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Unofficial Release"
+      ],
+      "label": [
+        "Erskine Records",
+        "Columbia",
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Sony Music UK",
+        "Sonopress"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Pop Rock",
+        "Disco",
+        "Funk",
+        "Synth-pop",
+        "Berlin-School"
+      ],
+      "id": 37022670,
+      "barcode": [
+        "1 99584 17732 8",
+        "1995841773284",
+        "[Sony Music logo] 58693099/19958417732 21",
+        "IFPI LB 47",
+        "none",
+        "BIEM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153480,
+      "master_url": "https://api.discogs.com/masters/4153480",
+      "uri": "/release/37022670-Harry-Styles-Kiss-All-The-Time-Disco-Occasionally",
+      "catno": "19958417732",
+      "title": "Harry Styles - Kiss All The Time. Disco, Occasionally.",
+      "thumb": "https://i.discogs.com/GGffmH_KKeLyadIPGBvjEOCdoYj5fOwSyS8iaJdIgU0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MDIy/NjcwLTE3NzU3NzE3/NTQtNTM5My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/YIsAvlReL4Z76qLevbUrlSXlfRk_O1Kk_6KJvYJGooc/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MDIy/NjcwLTE3NzU3NzE3/NTQtNTM5My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/37022670",
+      "community": {
+        "want": 0,
+        "have": 0
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Unofficial Release"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Erskine Records",
+        "Columbia",
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Sony Music UK",
+        "Sony Music Entertainment"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Pop Rock",
+        "Disco",
+        "Funk",
+        "Synth-pop",
+        "Berlin-School"
+      ],
+      "id": 36690721,
+      "barcode": [
+        "199584177328"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153480,
+      "master_url": "https://api.discogs.com/masters/4153480",
+      "uri": "/release/36690721-Harry-Styles-Kiss-All-The-Time-Disco-Occasionally",
+      "catno": "19958417732",
+      "title": "Harry Styles - Kiss All The Time. Disco, Occasionally.",
+      "thumb": "https://i.discogs.com/8WgJZDjJoPwxtT33IeZvXq-M2uwSAY1dqu66KulpEmI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njkw/NzIxLTE3NzQ0Nzk2/MTYtMjk2NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/dpQWH86qj1HFNpilFWqDy5fTjeexm6LdIDnzPGEjqso/rs:fit/g:sm/q:90/h:536/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njkw/NzIxLTE3NzQ0Nzk2/MTYtMjk2NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36690721",
+      "community": {
+        "want": 65,
+        "have": 593
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Erskine Records",
+        "Columbia",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Columbia Records",
+        "Columbia Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Pop Rock",
+        "Disco",
+        "Funk",
+        "Synth-pop",
+        "Berlin-School"
+      ],
+      "id": 36699772,
+      "barcode": [
+        "199584177328",
+        "11669-CD-0014 26-015-10-2",
+        "IFPI LY89",
+        "IFPI L820"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153480,
+      "master_url": "https://api.discogs.com/masters/4153480",
+      "uri": "/release/36699772-Harry-Styles-Kiss-All-The-Time-Disco-Occasionally",
+      "catno": "19958417732",
+      "title": "Harry Styles - Kiss All The Time. Disco, Occasionally.",
+      "thumb": "https://i.discogs.com/ytRW4P7WT-I1EQxq2f29d2WQ-xtuDgnkk_227vN6Iak/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njk5/NzcyLTE3NzI4NDQx/OTYtMjg4OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/j0J795B5KozRfEzSi-9LQv5k30FRQasoK86kKFM-mE4/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njk5/NzcyLTE3NzI4NDQx/OTYtMjg4OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36699772",
+      "community": {
+        "want": 22,
+        "have": 270
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 16,
+    "per_page": 5,
+    "items": 79,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?catno=VET+001&type=release&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=16",
+      "next": "https://api.discogs.com/database/search?catno=VET+001&type=release&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Japan",
+      "year": "2002",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Gyokumon",
+        "Vetta Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Space Rock",
+        "Free Improvisation",
+        "Experimental"
+      ],
+      "id": 3772419,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/%E3%83%9E%E3%82%B4-%E3%82%A2%E3%82%A6%E3%83%88%E3%82%B5%E3%82%A4%E3%83%89/release/3772419",
+      "catno": "VET-001",
+      "title": "マゴ* - アウトサイド",
+      "thumb": "https://i.discogs.com/UI8LrHDO9Pswy1kDaTUgFMchbczqrvtvmhIdmkASdFw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3NzI0/MTktMTM0NDg1OTYz/My04MjUzLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/7TQuAb1a8zT9eRw32TXKMJhkQPIUfR5MNw9SDkS_sZ4/rs:fit/g:sm/q:90/h:534/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3NzI0/MTktMTM0NDg1OTYz/My04MjUzLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3772419",
+      "community": {
+        "want": 4,
+        "have": 10
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "1997",
+      "format": [
+        "Vinyl",
+        "12\"",
+        "33 ⅓ RPM",
+        "Promo",
+        "Stereo"
+      ],
+      "label": [
+        "Tape Kingz",
+        "Severe Entertainment",
+        "Da Backyard Studios",
+        "Firehouse Studio, NYC",
+        "Firehouse Studio, NYC",
+        "Tape Kingz Records & Cassettes"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop"
+      ],
+      "style": [
+        "Boom Bap"
+      ],
+      "id": 398613,
+      "barcode": [
+        "VET-001-A DJ MR. CEE ROCK A PARTY",
+        "VET-001-B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 85497,
+      "master_url": "https://api.discogs.com/masters/85497",
+      "uri": "/release/398613-The-Veteranz-Da-Medicine",
+      "catno": "VET 001",
+      "title": "The Veteranz - Da Medicine",
+      "thumb": "https://i.discogs.com/EocSU01owrsOzssMnWptp3WDHxdQc7H2tD7f2B-iWlk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM5ODYx/My0xNjQ0Nzk1MjIz/LTU3ODguanBlZw.jpeg",
+      "cover_image": "https://i.discogs.com/wKava4G-JPK2ShPlAxWEfTaBz-TeBp5__0HPy4IUP8o/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM5ODYx/My0xNjQ0Nzk1MjIz/LTU3ODguanBlZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/398613",
+      "community": {
+        "want": 44,
+        "have": 90
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "12\"",
+            "33 ⅓ RPM",
+            "Promo",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Finland",
+      "year": "1993",
+      "format": [
+        "Vinyl",
+        "7\"",
+        "Single"
+      ],
+      "label": [
+        "Ovet",
+        "Midisound"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop",
+        "Brass & Military"
+      ],
+      "style": [],
+      "id": 6810224,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/6810224-Antero-Raimo-Ovet-Mustikanpoiminta",
+      "catno": "OVET-001",
+      "title": "Antero Raimo & Ovet - Mustikanpoiminta",
+      "thumb": "https://i.discogs.com/sZPK2p3n9TfuGVpL_wcCV_ddbL1GCJJBnUkYiwhZTxY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY4MTAy/MjQtMTQyNzEwNjIz/MC01MzE5LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/VqKKx1IkT1BgbMlF_j5-LyPnpKuiMi3C0HTum6CxDfE/rs:fit/g:sm/q:90/h:320/w:316/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY4MTAy/MjQtMTQyNzEwNjIz/MC01MzE5LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/6810224",
+      "community": {
+        "want": 16,
+        "have": 17
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "7\"",
+            "Single"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Russia",
+      "year": "2018",
+      "format": [
+        "Vinyl",
+        "12\"",
+        "33 ⅓ RPM",
+        "EP"
+      ],
+      "label": [
+        "Svet"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Dub",
+        "Dub Techno",
+        "Deep Techno",
+        "Minimal"
+      ],
+      "id": 12853818,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/Various-Untitled/release/12853818",
+      "catno": "SVET 001",
+      "title": "Various - Untitled",
+      "thumb": "https://i.discogs.com/9j-Q4WSd42v4Nee-_ZtB97iAPWc_rDBV5L1vXO0AuH8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyODUz/ODE4LTE1NDg1ODQ2/MTUtMTIxNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/jWdIZ2j-CBuG_PxhS-ns5NdEK3QI-1sGaZSx2xY5PBc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyODUz/ODE4LTE1NDg1ODQ2/MTUtMTIxNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/12853818",
+      "community": {
+        "want": 50,
+        "have": 58
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "12\"",
+            "33 ⅓ RPM",
+            "EP"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Vetra Records",
+        "The Orchard"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Blues"
+      ],
+      "style": [
+        "Soul",
+        "Neo Soul"
+      ],
+      "id": 34849742,
+      "barcode": [
+        "5056167182344"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3944249,
+      "master_url": "https://api.discogs.com/masters/3944249",
+      "uri": "/release/34849742-Loaded-Honey-Love-Made-Trees",
+      "catno": "VET001",
+      "title": "Loaded Honey - Love Made Trees",
+      "thumb": "https://i.discogs.com/UOQN-JukX7GfOzpPXOomCF0_y9BC9cQJSVzswfpSzEc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODQ5/NzQyLTE3NTU4NjAz/OTAtMjA0OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/wFoDN8imVeQUYcv8w69CNbbDbRQORHZ3YKoqMuOXO_s/rs:fit/g:sm/q:90/h:577/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODQ5/NzQyLTE3NTU4NjAz/OTAtMjA0OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34849742",
+      "community": {
+        "want": 88,
+        "have": 199
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

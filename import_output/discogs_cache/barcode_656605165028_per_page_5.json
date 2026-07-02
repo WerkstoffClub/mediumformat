@@ -1,0 +1,70 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Chicago Mastering Service",
+        "The ADS Group",
+        "The Bomb Shelter Studios",
+        "Sunset Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 28269094,
+      "barcode": [
+        "656605165028",
+        "656605165028",
+        "DOC350CD  6745-CD-5803  23-185-02-2",
+        "IFPI LY89",
+        "IFPI L814"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3239857,
+      "master_url": "https://api.discogs.com/masters/3239857",
+      "uri": "/release/28269094-Mitski-The-Land-Is-Inhospitable-And-So-Are-We",
+      "catno": "DOC 350",
+      "title": "Mitski - The Land Is Inhospitable And So Are We",
+      "thumb": "https://i.discogs.com/u2V924_xitCC5ROEFcaE6SJGCYC9nw0HGLib-kY2KoE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MjY5/MDk0LTE2OTQ5NTky/NDYtOTE5OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/8TqAHE8gN4Ykb3GKPU5tMHlcIPOjcRTKNxKXIO00Wq0/rs:fit/g:sm/q:90/h:521/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MjY5/MDk0LTE2OTQ5NTky/NDYtOTE5OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28269094",
+      "community": {
+        "want": 461,
+        "have": 1396
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 6,
+    "per_page": 5,
+    "items": 28,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=boygenius+the+record&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=6",
+      "next": "https://api.discogs.com/database/search?q=boygenius+the+record&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "12\"",
+        "45 RPM",
+        "EP",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "Matador",
+        "Matador"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [],
+      "id": 15507190,
+      "barcode": [
+        "7 44861 14089 4",
+        "744861140894"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1443762,
+      "master_url": "https://api.discogs.com/masters/1443762",
+      "uri": "/release/15507190-Boygenius-Boygenius",
+      "catno": "OLE1408TE",
+      "title": "Boygenius - Boygenius",
+      "thumb": "https://i.discogs.com/krIfjDTv6iWb7f-O2WCSKmcpxHMvpDWrOB5BLir8GEE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1NTA3/MTkwLTE1OTI2ODM4/MjgtNDMxMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/RhWlUwKxuHgiFoSKvxSdQzGeBc1qENmitCDDE2si1g0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1NTA3/MTkwLTE1OTI2ODM4/MjgtNDMxMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15507190",
+      "community": {
+        "want": 944,
+        "have": 664
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red Translucent",
+          "descriptions": [
+            "12\"",
+            "45 RPM",
+            "EP",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Unknown",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Interscope Records",
+        "Interscope Records",
+        "boygenius",
+        "boygenius",
+        "Universal International Music B.V.",
+        "GZ Media",
+        "GZ Media",
+        "Shangri-La, Malibu, CA",
+        "Sound City Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Soft Rock",
+        "Alternative Rock"
+      ],
+      "id": 26601641,
+      "barcode": [
+        "602455067449",
+        "6 02455 06744 9",
+        "LC 06406",
+        "BIEM/SDRM",
+        "B0037332-01 A -SS- 256119E1 1462912",
+        "B0037332-01-B-RE1 -SS- 257522E2 1488722",
+        "00602455067449"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3038081,
+      "master_url": "https://api.discogs.com/masters/3038081",
+      "uri": "/release/26601641-boygenius-The-Record-",
+      "catno": "00602455066077",
+      "title": "boygenius - The Record ",
+      "thumb": "https://i.discogs.com/7Y_gDCI6qYnQSTjQF6QbSMO9wKzfJsL4IIO9Ld6JagA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NjAx/NjQxLTE2ODAzNTMw/MzAtNTU4Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/fPzgjN72o7AdjuFduNK8a_ggvHsrBF62Ef-je325jZ4/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NjAx/NjQxLTE2ODAzNTMw/MzAtNTU4Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/26601641",
+      "community": {
+        "want": 879,
+        "have": 4726
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue [Blue Jay]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Canada",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Interscope Records",
+        "Target"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Soft Rock",
+        "Alternative Rock"
+      ],
+      "id": 26610605,
+      "barcode": [
+        "6 02455 06740 1",
+        "6 02455 06607 7",
+        "B0037332-01 A -SS- 256119E1 1516192",
+        "B0037332-01-B-RE1 -SS- 257522E2 1516174",
+        "B0037332-01 A -SS- 256119E1 1516187",
+        "B0037332-01-B-RE1 -SS- 257522E2 1516180",
+        "B0037332-01 A -SS- 256119E1 146292",
+        "B0037332-01-RE2 -SS- 257522E2 1719650",
+        "B0037332-01 A -SS- 256119E1 1521741",
+        "B0037332-01-RE2 -SS- 257522E2 1725467"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3038081,
+      "master_url": "https://api.discogs.com/masters/3038081",
+      "uri": "/release/26610605-boygenius-The-Record",
+      "catno": "B0037335-01",
+      "title": "boygenius - The Record",
+      "thumb": "https://i.discogs.com/MipbHzHtUmh26Um1x5lemU98AoOD13ovtAW1qctof0o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NjEw/NjA1LTE2ODA0NTIy/NTgtMjE4Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Bj14XBKMX-yVNy2l9mvI6XAvP9Fn4htNkW59jL9tj-Q/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NjEw/NjA1LTE2ODA0NTIy/NTgtMjE4Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/26610605",
+      "community": {
+        "want": 550,
+        "have": 8272
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Orange Swirl",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "format": [
+        "Vinyl",
+        "12\"",
+        "45 RPM",
+        "EP",
+        "Repress"
+      ],
+      "style": [
+        "Folk"
+      ],
+      "id": 27220887,
+      "label": [
+        "Matador",
+        "Sound City Studios",
+        "Timeless Mastering",
+        "Matador Records",
+        "Matador Records",
+        "Optimal Media GmbH",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "barcode": [
+        "7 44861 14081 8",
+        "744861140818",
+        "OLE 14081 BI44366-01 A1 KR",
+        "OLE 14081 BI44366-01 B1 KR"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1443762,
+      "master_url": "https://api.discogs.com/masters/1443762",
+      "uri": "/release/27220887-Boygenius-Boygenius",
+      "catno": "OLE-1408-1",
+      "title": "Boygenius - Boygenius",
+      "thumb": "https://i.discogs.com/UnywNeU2-WfXn3rYQiQonxSrBmpY8OxnAXhX7HbOJMs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3MjIw/ODg3LTE2ODYxNjcz/NjEtMzA3MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/fVd1rSEr8eMoSNSmJQqU69dSO8QFqMHRjAzj_2S70YQ/rs:fit/g:sm/q:90/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3MjIw/ODg3LTE2ODYxNjcz/NjEtMzA3MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27220887",
+      "community": {
+        "want": 105,
+        "have": 1128
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "12\"",
+            "45 RPM",
+            "EP",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Interscope Records",
+        "Interscope Records",
+        "Universal International Music B.V.",
+        "Shangri-La, Malibu, CA",
+        "Sound City Studios",
+        "Sony Songs",
+        "boygenius",
+        "boygenius",
+        "Interscope Records",
+        "GZ Media",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk Rock"
+      ],
+      "id": 26596523,
+      "barcode": [
+        "6 02455 06743 2",
+        "602455067432",
+        "LC 06406",
+        "BIEM/SDRM",
+        "B0037332-01 A -SS- 256119E1 1533235",
+        "B0037332-01-B-RE1 -SS- 257522E2 1567949"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3038081,
+      "master_url": "https://api.discogs.com/masters/3038081",
+      "uri": "/release/26596523-boygenius-The-Record",
+      "catno": "00602455067432",
+      "title": "boygenius - The Record",
+      "thumb": "https://i.discogs.com/mUy-FeANEnbRsvfTyLy6ePSI-RoSA2hIcivAxklX1A8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NTk2/NTIzLTE2ODAzNDk0/ODgtMTI0Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/sBB96kQu1n5ZE3_PItWIzasflKfkTZt-mbczfelWFYk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NTk2/NTIzLTE2ODAzNDk0/ODgtMTI0Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/26596523",
+      "community": {
+        "want": 574,
+        "have": 4218
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

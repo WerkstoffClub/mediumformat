@@ -1,0 +1,351 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 5,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2012",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Tarquin Studios",
+        "Miner Street Recordings",
+        "Miner Street Recordings",
+        "Tarquin Studios",
+        "Joe Lambert Mastering",
+        "Bellwether Manufacturing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Vocal",
+        "Indie Rock"
+      ],
+      "id": 12881220,
+      "barcode": [
+        "6 56605 22012 3",
+        "656605220123",
+        "IFPI LN08"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 407503,
+      "master_url": "https://api.discogs.com/masters/407503",
+      "uri": "/release/12881220-Sharon-Van-Etten-Tramp",
+      "catno": "JAG201CD",
+      "title": "Sharon Van Etten - Tramp",
+      "thumb": "https://i.discogs.com/VUlCvg0e4CE9MzvT30atm-1IA-_Lsw5YG3pxa7K5Y2E/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyODgx/MjIwLTE1NDM3NTk4/NzItNjc5OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/VGZhFkhbF7epVSnvBHjtikux1zsMzOrpJeTiI78Oumc/rs:fit/g:sm/q:90/h:521/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyODgx/MjIwLTE1NDM3NTk4/NzItNjc5OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/12881220",
+      "community": {
+        "want": 35,
+        "have": 173
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digisleeve",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2012",
+      "format": [
+        "CD",
+        "Album",
+        "CD",
+        "EP",
+        "Limited Edition"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Joe Lambert Mastering",
+        "Miner Street Recordings",
+        "Tarquin Studios",
+        "Tarquin Studios",
+        "Miner Street Recordings",
+        "Rough Trade"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Vocal"
+      ],
+      "id": 3389895,
+      "barcode": [
+        "6 56605 22012 3"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 407503,
+      "master_url": "https://api.discogs.com/masters/407503",
+      "uri": "/release/3389895-Sharon-Van-Etten-Tramp",
+      "catno": "JAG201CD",
+      "title": "Sharon Van Etten - Tramp",
+      "thumb": "https://i.discogs.com/WzrN-_ly9JCiF2msghTyGlK034y4XiWWAKaIcKVL888/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzODk4/OTUtMTM5OTY1Mjkw/MS0yMjk3LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/A067C5x6PA3F4krSR8OSSsfRKkEt3fblQ0VQvpKt3_E/rs:fit/g:sm/q:90/h:522/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzODk4/OTUtMTM5OTY1Mjkw/MS0yMjk3LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3389895",
+      "community": {
+        "want": 80,
+        "have": 175
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "EP",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2012",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Tarquin Studios",
+        "Miner Street Recordings",
+        "Miner Street Recordings",
+        "Tarquin Studios",
+        "Joe Lambert Mastering",
+        "Bellwether Manufacturing",
+        "Optical Experts Manufacturing"
+      ],
+      "type": "master",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Vocal",
+        "Indie Rock"
+      ],
+      "id": 407503,
+      "barcode": [
+        "6 56605 22012 3",
+        "656605220123",
+        "02/17/2012 03:46:41 AM IFPI LN08 JAG201CD WWW.BELLWETHERMFG.COM 01",
+        "02/17/2012 09:03:38.AM #66101 JAG201CD WWW.BELLWETHERMFG.COM 02",
+        "12/12/2011 10:36:20.AM #61171 JAG201CD WWW.BELLWETHERMFG.COM 02",
+        "11/14/2011 09:37:16.AM #59563 JAG201CD WWW.BELLWETHERMFG.COM 01",
+        "IFPI LN08",
+        "IFPI JI39",
+        "IFPI JI02",
+        "IFPI JI23"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 407503,
+      "master_url": "https://api.discogs.com/masters/407503",
+      "uri": "/master/407503-Sharon-Van-Etten-Tramp",
+      "catno": "JAG201",
+      "title": "Sharon Van Etten - Tramp",
+      "thumb": "https://i.discogs.com/8VECVmF35QhdUwL-mfAH-3vfFX25PYQMrAQObXWNIGs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0MDc1/OTEtMTMzMTQ3MzYz/MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/X8dI13_yOzGgAR9y3DVRo07qMoVLL_sZ9JAuEJf13Jg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0MDc1/OTEtMTMzMTQ3MzYz/MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/407503",
+      "community": {
+        "want": 1049,
+        "have": 6868
+      }
+    },
+    {
+      "country": "UK",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "format": [
+        "CD",
+        "Album",
+        "CD",
+        "Album",
+        "All Media",
+        "Compilation"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk Rock"
+      ],
+      "id": 8313155,
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Aaron's Garage",
+        "Tarquin Studios",
+        "Miner Street Recordings",
+        "Miner Street Recordings",
+        "Tarquin Studios",
+        "Joe Lambert Mastering",
+        "Bellwether Manufacturing",
+        "Optical Experts Manufacturing"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 56605 22342 1",
+        "6 56605 22012 3",
+        "JAG201CD WWW.BELLWETHERMFG.COM 02 02/17/2012 09:03:38.AM #66101",
+        "IFPI LN08",
+        "IFPI J139",
+        "JAG234CD WWW.BELLWETHERMFG.COM 02 10/08/2012 06:58:37.AM #85467",
+        "IFPI LN08",
+        "IFPI J102",
+        "LC 29277"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/8313155-Sharon-Van-Etten-Tramp-Tramp-Demos",
+      "catno": "JAG201",
+      "title": "Sharon Van Etten - Tramp / Tramp Demos",
+      "thumb": "https://i.discogs.com/8h3zWWJQyTgpKoGmkXPDsi1DDZFNU837ywVGb_oX6xM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTgzMTMx/NTUtMTQ2OTYzOTY3/MC0yMjQyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/FB6ljA70RwE6nKcNXjf25-H5JdIn4Yi4jWYap1AFous/rs:fit/g:sm/q:90/h:525/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTgzMTMx/NTUtMTQ2OTYzOTY3/MC0yMjQyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/8313155",
+      "community": {
+        "want": 38,
+        "have": 45
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Compilation"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2012",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Tarquin Studios",
+        "Miner Street Recordings",
+        "Miner Street Recordings",
+        "Tarquin Studios",
+        "Joe Lambert Mastering",
+        "Bellwether Manufacturing",
+        "Optical Experts Manufacturing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Vocal",
+        "Indie Rock"
+      ],
+      "id": 3407591,
+      "barcode": [
+        "6 56605 22012 3",
+        "656605220123",
+        "02/17/2012 03:46:41 AM IFPI LN08 JAG201CD WWW.BELLWETHERMFG.COM 01",
+        "02/17/2012 09:03:38.AM #66101 JAG201CD WWW.BELLWETHERMFG.COM 02",
+        "12/12/2011 10:36:20.AM #61171 JAG201CD WWW.BELLWETHERMFG.COM 02",
+        "11/14/2011 09:37:16.AM #59563 JAG201CD WWW.BELLWETHERMFG.COM 01",
+        "IFPI LN08",
+        "IFPI JI39",
+        "IFPI JI02",
+        "IFPI JI23"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 407503,
+      "master_url": "https://api.discogs.com/masters/407503",
+      "uri": "/release/3407591-Sharon-Van-Etten-Tramp",
+      "catno": "JAG201",
+      "title": "Sharon Van Etten - Tramp",
+      "thumb": "https://i.discogs.com/8VECVmF35QhdUwL-mfAH-3vfFX25PYQMrAQObXWNIGs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0MDc1/OTEtMTMzMTQ3MzYz/MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/X8dI13_yOzGgAR9y3DVRo07qMoVLL_sZ9JAuEJf13Jg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0MDc1/OTEtMTMzMTQ3MzYz/MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3407591",
+      "community": {
+        "want": 89,
+        "have": 796
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digisleeve",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Unknown",
+      "year": "2024",
+      "format": [
+        "Cassette",
+        "Album"
+      ],
+      "label": [
+        "Ghostly International"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "City Pop",
+        "Indie Pop"
+      ],
+      "id": 31721624,
+      "barcode": [
+        "804297844374"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3596240,
+      "master_url": "https://api.discogs.com/masters/3596240",
+      "uri": "/release/31721624-Ginger-Root-Shinbangumi",
+      "catno": "GI-443",
+      "title": "Ginger Root - Shinbangumi",
+      "thumb": "https://i.discogs.com/uTjT8T2ft6JpPfb-nb-PtRYEz1Z4FCHQA_g_6gUVtI0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNzIx/NjI0LTE3NjkzODY4/OTktOTcxMi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/jY9mrNmas8J0feUZxDi5iJON4jDrIHsZehn2w56FLoE/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNzIx/NjI0LTE3NjkzODY4/OTktOTcxMi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31721624",
+      "community": {
+        "want": 19,
+        "have": 116
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

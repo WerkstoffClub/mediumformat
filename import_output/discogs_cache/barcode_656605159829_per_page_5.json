@@ -1,0 +1,63 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Dead Oceans"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [],
+      "id": 27345591,
+      "barcode": [
+        "656605159829",
+        "6 5660-51598-2 9"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 306629,
+      "master_url": "https://api.discogs.com/masters/306629",
+      "uri": "/release/27345591-Bright-Eyes-The-Peoples-Key",
+      "catno": "DOC298",
+      "title": "Bright Eyes - The People's Key",
+      "thumb": "https://i.discogs.com/g698897TSU2E4IwGnHGyBSiZQydU4TDm-sBhL4CLTs0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3MzQ1/NTkxLTE2OTM4MDky/NjgtODMyNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/XTrVJJR_Suvn9wctIxeDNlcjgoUZ1ztoYd6OyeInFjA/rs:fit/g:sm/q:90/h:548/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3MzQ1/NTkxLTE2OTM4MDky/NjgtODMyNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27345591",
+      "community": {
+        "want": 11,
+        "have": 14
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "DigiPak",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

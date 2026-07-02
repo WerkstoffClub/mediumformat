@@ -1,0 +1,378 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 5,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Dream Pop"
+      ],
+      "id": 37375077,
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Little Homestead Songs",
+        "Copyright Control",
+        "Courtyard Studio",
+        "Sound Gallery Studios",
+        "Whitehouse Recording Studio",
+        "The Farm II",
+        "Zigzag Music Productions",
+        "Sunset Sound",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 56605 14322 4",
+        "656605143224",
+        "LC 29265",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "IFPI L820"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/release/37375077-Slowdive-Slowdive",
+      "catno": "DOC132",
+      "title": "Slowdive - Slowdive",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/37375077",
+      "community": {
+        "want": 0,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2020",
+      "format": [
+        "CD",
+        "Album",
+        "Repress"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Little Homestead Songs",
+        "Copyright Control",
+        "Courtyard Studio",
+        "Sound Gallery Studios",
+        "Whitehouse Recording Studio",
+        "The Farm II",
+        "Zigzag Music Productions",
+        "Sunset Sound",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Dream Pop"
+      ],
+      "id": 17179039,
+      "barcode": [
+        "6 56605 14322 4",
+        "656605143224",
+        "LC 29265",
+        "DOC132CD 6745-CD-1344 20-191-17-3",
+        "IFPI LB27",
+        "none"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/release/17179039-Slowdive-Slowdive",
+      "catno": "DOC132",
+      "title": "Slowdive - Slowdive",
+      "thumb": "https://i.discogs.com/A6KBwm5jWuYm1GQrN1HrZyUWaxBUlEvnny-GT8HvtGQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MTc5/MDM5LTE2MTIyMDU0/ODItNDUzMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/L2Z7sHbuIrEvRfZh1wNSftfbRrVxbmJda18DJRYq8sQ/rs:fit/g:sm/q:90/h:534/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MTc5/MDM5LTE2MTIyMDU0/ODItNDUzMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/17179039",
+      "community": {
+        "want": 179,
+        "have": 317
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Argentina",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Casa del Puente Discos",
+        "Copyright Control",
+        "Courtyard Studio",
+        "Sound Gallery Studios",
+        "Whitehouse Recording Studio",
+        "The Farm II",
+        "Zigzag Music Productions",
+        "Sunset Sound",
+        "The ADS Group",
+        "Casa del Puente Discos"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Dream Pop"
+      ],
+      "id": 14681178,
+      "barcode": [
+        "6 56605 14322 4",
+        "656605143224",
+        "LC 29265",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "none",
+        "IFPI 3V43"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/release/14681178-Slowdive-Slowdive",
+      "catno": "DOC132",
+      "title": "Slowdive - Slowdive",
+      "thumb": "https://i.discogs.com/r_ZtxkOk0hEYzD66g2MMvENmRr90nQpb3RQf9uIAxPk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0Njgx/MTc4LTE1Nzk1MjE4/ODctNjEzNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/sfnGSsVIvScpISHGARk1Bn3mKFJxtyMeVfz_AEzmNWA/rs:fit/g:sm/q:90/h:337/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0Njgx/MTc4LTE1Nzk1MjE4/ODctNjEzNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14681178",
+      "community": {
+        "want": 136,
+        "have": 35
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Little Homestead Songs",
+        "Copyright Control",
+        "Courtyard Studio",
+        "Sound Gallery Studios",
+        "Whitehouse Recording Studio",
+        "The Farm II",
+        "Zigzag Music Productions",
+        "Sunset Sound",
+        "The ADS Group"
+      ],
+      "type": "master",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Dream Pop"
+      ],
+      "id": 1173913,
+      "barcode": [
+        "6 56605 14322 4",
+        "656605143224",
+        "LC 29265",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "none",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "IFPI 3V43",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "[illegible]",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "IFPI L825",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "IFPI L823",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "IFPI L813",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "IFPI L820",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "IFPI L821"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/master/1173913-Slowdive-Slowdive",
+      "catno": "DOC132",
+      "title": "Slowdive - Slowdive",
+      "thumb": "https://i.discogs.com/gw5dz31W0OzOrP7y9SaGar4wVDZZrQzyGWXksAwjWhg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjI4/NjI2LTE3NzQwOTk0/NzEtOTI1My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/dAj6tlFRVqkCMoN64OmJpTQkf7J8gW8lNyMJUjZqT3o/rs:fit/g:sm/q:90/h:534/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjI4/NjI2LTE3NzQwOTk0/NzEtOTI1My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/1173913",
+      "community": {
+        "want": 10499,
+        "have": 27002
+      }
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Little Homestead Songs",
+        "Copyright Control",
+        "Courtyard Studio",
+        "Sound Gallery Studios",
+        "Whitehouse Recording Studio",
+        "The Farm II",
+        "Zigzag Music Productions",
+        "Sunset Sound",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Dream Pop"
+      ],
+      "id": 10228626,
+      "barcode": [
+        "6 56605 14322 4",
+        "656605143224",
+        "LC 29265",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "none",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "IFPI 3V43",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "[illegible]",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "IFPI L825",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "IFPI L823",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "IFPI L813",
+        "DOC132CD 6745-CD-1344 21-176-20",
+        "IFPI LK13",
+        "IFPI L820",
+        "DOC132CD 6745-CD-1344 17-057-05",
+        "IFPI LK13",
+        "IFPI L821"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/release/10228626-Slowdive-Slowdive",
+      "catno": "DOC132",
+      "title": "Slowdive - Slowdive",
+      "thumb": "https://i.discogs.com/gw5dz31W0OzOrP7y9SaGar4wVDZZrQzyGWXksAwjWhg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjI4/NjI2LTE3NzQwOTk0/NzEtOTI1My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/dAj6tlFRVqkCMoN64OmJpTQkf7J8gW8lNyMJUjZqT3o/rs:fit/g:sm/q:90/h:534/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjI4/NjI2LTE3NzQwOTk0/NzEtOTI1My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10228626",
+      "community": {
+        "want": 782,
+        "have": 2819
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,353 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 9,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=19802990922&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=19802990922&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo",
+        "Box Set",
+        "Limited Edition"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sonopress"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Latin",
+        "Pop",
+        "Classical",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Latin Pop",
+        "Alt-Pop"
+      ],
+      "id": 35763109,
+      "barcode": [
+        "1 98029 90922 7",
+        "0198029909227",
+        "[Sonopress logo] 58654134/19802990922RD1 21",
+        "IFPI LP 73",
+        "IFPI 076Y"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4027879,
+      "master_url": "https://api.discogs.com/masters/4027879",
+      "uri": "/release/35763109-Rosal%C3%ADa-Lux",
+      "catno": "19802990922S1",
+      "title": "Rosalía (3) - Lux",
+      "thumb": "https://i.discogs.com/SqkKICQj2rUHarlPBAfJBQnM2OeIrCM_uLqyjJmpmK4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzYz/MTA5LTE3NjQxMDA1/NjAtNzE0Ny5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/8-0_gXgcEOf3svhj6-JMxypk3rc47AGXWM5JJJdQXco/rs:fit/g:sm/q:90/h:574/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzYz/MTA5LTE3NjQxMDA1/NjAtNzE0Ny5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35763109",
+      "community": {
+        "want": 46,
+        "have": 6
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Box Set",
+          "qty": "1",
+          "text": "Logo Hoodie",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Russia",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Unofficial Release"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Music",
+        "Columbia Records",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sonopress"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Latin",
+        "Pop"
+      ],
+      "style": [
+        "Latin Pop",
+        "Alt-Pop"
+      ],
+      "id": 36010840,
+      "barcode": [
+        "1 98029 90922 7",
+        "0198029909227",
+        "[Sonopress logo] 58654134/19802990922RD1 21",
+        "IFPI LP 73",
+        "none",
+        "BIEM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4027879,
+      "master_url": "https://api.discogs.com/masters/4027879",
+      "uri": "/release/36010840-Rosal%C3%ADa-Lux",
+      "catno": "19802990922",
+      "title": "Rosalía (3) - Lux",
+      "thumb": "https://i.discogs.com/1PKFA3o4XCyZa4Vni8aPbYXJS70LXBMwpf4hnxnGTfg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MDEw/ODQwLTE3NjY2MDc5/OTEtMjkyOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ggqsX43VFFe1lGl7MI4VUy5sOHD1Xf5Y73qgqzO5wRg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MDEw/ODQwLTE3NjY2MDc5/OTEtMjkyOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36010840",
+      "community": {
+        "want": 13,
+        "have": 8
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Unofficial Release"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo",
+        "Box Set",
+        "Limited Edition"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sonopress"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Latin",
+        "Pop",
+        "Classical",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Latin Pop",
+        "Alt-Pop"
+      ],
+      "id": 35943292,
+      "barcode": [
+        "1 98029 90922 7",
+        "0198029909227",
+        "[Sonopress logo] 58654134/19802990922RD1 21",
+        "IFPI LP 73",
+        "IFPI 076Y"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4027879,
+      "master_url": "https://api.discogs.com/masters/4027879",
+      "uri": "/release/35943292-Rosal%C3%ADa-Lux",
+      "catno": "19802990922S1",
+      "title": "Rosalía (3) - Lux",
+      "thumb": "https://i.discogs.com/JMXQvXdJTnL4hsS-x0JsnvNqqjuELKHExuN3-5FFxZI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1OTQz/MjkyLTE3NjU5MDk2/NzgtNTE1Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/LrY-C3pIh9Y_32pFHYW89i9LZrVwscImm3Sgm83gxxg/rs:fit/g:sm/q:90/h:586/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1OTQz/MjkyLTE3NjU5MDk2/NzgtNTE1Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35943292",
+      "community": {
+        "want": 21,
+        "have": 5
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Box Set",
+          "qty": "1",
+          "text": "Photo Tracklist Tee",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK & Europe",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Music"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Latin",
+        "Pop",
+        "Classical",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Latin Pop",
+        "Alt-Pop"
+      ],
+      "id": 35653120,
+      "barcode": [
+        "198029909227"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4027879,
+      "master_url": "https://api.discogs.com/masters/4027879",
+      "uri": "/release/35653120-Rosal%C3%ADa-Lux",
+      "catno": "19802990922",
+      "title": "Rosalía (3) - Lux",
+      "thumb": "https://i.discogs.com/IrjMLXHLyCZqdYj0DuOO6s6gQ51y4QQCH-klskvUZ5Y/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjUz/MTIwLTE3NjgwNTkw/MDgtMjAwNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/3TG1uUx-DV0C00fImzct9t8LU02R6jq3IgPeEnEiyfQ/rs:fit/g:sm/q:90/h:633/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjUz/MTIwLTE3NjgwNTkw/MDgtMjAwNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35653120",
+      "community": {
+        "want": 60,
+        "have": 34
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "With Signed Art Card",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Columbia Records",
+        "Sonopress"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Latin",
+        "Pop",
+        "Classical",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Latin Pop",
+        "Alt-Pop"
+      ],
+      "id": 36711421,
+      "barcode": [
+        "1 98029 90922 7",
+        "0198029909227",
+        "[Sonopress logo] 58654134/19802990922RD1 21",
+        "IFPI LP 73",
+        "IFPI 0740"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4027879,
+      "master_url": "https://api.discogs.com/masters/4027879",
+      "uri": "/release/36711421-Rosal%C3%ADa-Lux",
+      "catno": "19802990922",
+      "title": "Rosalía (3) - Lux",
+      "thumb": "https://i.discogs.com/tmfxx6Q7BpiEINP21rBsIjWmmZI-59g4T9IIQITedO0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzEx/NDIxLTE3NzI5NTQ0/MjMtMzUyNi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/t9O6A6E4Nofp8iFahmvnxEacWhUM9dpUbqVwP00uT0g/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzEx/NDIxLTE3NzI5NTQ0/MjMtMzUyNi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36711421",
+      "community": {
+        "want": 3,
+        "have": 7
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "2nd US Issue",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

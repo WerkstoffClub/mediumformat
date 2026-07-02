@@ -1,0 +1,404 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 221,
+    "per_page": 5,
+    "items": 1101,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Stone+Roses+Stone+Roses&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=221",
+      "next": "https://api.discogs.com/database/search?q=Stone+Roses+Stone+Roses&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2014",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Silvertone Records",
+        "Sony Music Entertainment (UK) Ltd.",
+        "Sony Music Entertainment",
+        "Silvertone Records Ltd.",
+        "Silvertone Records Ltd.",
+        "Imagem London Limited",
+        "Metropolis Mastering",
+        "GZ Digital Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 5581078,
+      "barcode": [
+        "8 88430 41991 9",
+        "888430419919",
+        "LC12723",
+        "BIEM/GEMA",
+        "8843041991 A",
+        "8843041991 B",
+        "100347E1/A A1",
+        "100347E2/A B",
+        "100347E1/A B Ⓜ",
+        "100347E2/B2 Ⓜ",
+        "100347E1/B Ⓜ",
+        "100347E2/B2 Ⓜ",
+        "100347E1/B2",
+        "100347E2/A6",
+        "100347E1/A1 Ⓜ",
+        "100347E2/A9 Ⓜ"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 12458,
+      "master_url": "https://api.discogs.com/masters/12458",
+      "uri": "/release/5581078-The-Stone-Roses-The-Stone-Roses",
+      "catno": "88843041991",
+      "title": "The Stone Roses - The Stone Roses",
+      "thumb": "https://i.discogs.com/RjN32nMixkR5APTZDmDY7o1vZfNhx63KUJZgFJan2II/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU1ODEw/NzgtMTQyMTE2ODY3/NS04NzkxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/WVsSWYX8zoNLrF_Tbk9kNzJk0WjtBh6WPB5KcdM2zNQ/rs:fit/g:sm/q:90/h:592/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU1ODEw/NzgtMTQyMTE2ODY3/NS04NzkxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5581078",
+      "community": {
+        "want": 1863,
+        "have": 16633
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "1989",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Silvertone Records",
+        "Zomba Music Publishers Ltd.",
+        "Silvertone Records Ltd.",
+        "Silvertone Records Ltd.",
+        "SNA"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 156092,
+      "barcode": [
+        "5 013705 116513",
+        "5013705116513",
+        "ORE LP 502 A2 [SNA logo] ",
+        "ORE LP 502 B2 [SNA logo] "
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 12458,
+      "master_url": "https://api.discogs.com/masters/12458",
+      "uri": "/release/156092-The-Stone-Roses-The-Stone-Roses",
+      "catno": "ORE LP 502",
+      "title": "The Stone Roses - The Stone Roses",
+      "thumb": "https://i.discogs.com/MBpNPfC3rbCMuKp5Xni62aVhYJf9SVryoAm0sZT67EE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1NjA5/Mi0xNjEzMzcxMzYy/LTQwMzMuanBlZw.jpeg",
+      "cover_image": "https://i.discogs.com/J6AJ0RvoWIhVlee8UGo0gABomN04-6ffCuj50WEb8O4/rs:fit/g:sm/q:90/h:615/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1NjA5/Mi0xNjEzMzcxMzYy/LTQwMzMuanBlZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/156092",
+      "community": {
+        "want": 5861,
+        "have": 7428
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Embossed Sleeve",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 11638787,
+      "label": [
+        "Silvertone Records",
+        "Sony Music",
+        "Sony Music Entertainment UK Limited",
+        "Silvertone Records Ltd.",
+        "Silvertone Records Ltd.",
+        "Imagem London Limited",
+        "Metropolis Mastering",
+        "GZ Media",
+        "GZ Media",
+        "Sony Music Entertainment"
+      ],
+      "type": "release",
+      "barcode": [
+        "8 88430 41991 9",
+        "888430419919",
+        "LC12723",
+        "BIEM/GEMA",
+        "162899E1/A1 Ⓜ",
+        "100347E2/A9 Ⓜ"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 12458,
+      "master_url": "https://api.discogs.com/masters/12458",
+      "uri": "/release/11638787-The-Stone-Roses-The-Stone-Roses",
+      "catno": "88843041991",
+      "title": "The Stone Roses - The Stone Roses",
+      "thumb": "https://i.discogs.com/PgktGxIyg8mnUtJo6AUMcuTfMLmY02vmx-Q_4gUA_MY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNjM4/Nzg3LTE1MjAwMjE0/NDEtNjU5Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/8ouE7g7l2OLZe8wrQMX8bCfluM3L0GWCzbU9TH6SXFM/rs:fit/g:sm/q:90/h:585/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNjM4/Nzg3LTE1MjAwMjE0/NDEtNjU5Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/11638787",
+      "community": {
+        "want": 744,
+        "have": 11370
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Silvertone Records",
+        "Sony Music",
+        "Clear Classics",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Silvertone Records Ltd.",
+        "Silvertone Records Ltd.",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 16032979,
+      "barcode": [
+        "1 94397 93301 7",
+        "194397933017",
+        "BIEM/GEMA",
+        "LC12723",
+        "19439793301 A",
+        "19439793301 B",
+        "174155E1/D",
+        "174155E2/E",
+        "174155E1/D",
+        "174155E2/H",
+        "174155E1/D",
+        "174155E2/I",
+        "174155E1/I",
+        "174155E2/L",
+        "174155E1/D",
+        "174155E2/K",
+        "174155E1/P",
+        "174155E2/R",
+        "174155E1/T",
+        "174155E2/S",
+        "174155E1/X",
+        "174155E2/T"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 12458,
+      "master_url": "https://api.discogs.com/masters/12458",
+      "uri": "/release/16032979-The-Stone-Roses-The-Stone-Roses",
+      "catno": "19439793301",
+      "title": "The Stone Roses - The Stone Roses",
+      "thumb": "https://i.discogs.com/tftXQ42yAujZthbnOUq4Xr636PpjQlmp-Dn9qpWblIg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2MDMy/OTc5LTE2MTI5MDc0/MjAtMjU0OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/YLZ6sy4dJSBgZ-KcUU-7TeYPzy1pUNsJEBh-ejVy6a8/rs:fit/g:sm/q:90/h:612/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2MDMy/OTc5LTE2MTI5MDc0/MjAtMjU0OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/16032979",
+      "community": {
+        "want": 908,
+        "have": 6733
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear, 180 gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2018",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Repress",
+        "Stereo"
+      ],
+      "label": [
+        "Silvertone Records",
+        "Sony Music",
+        "Silvertone Records Ltd.",
+        "Silvertone Records Ltd.",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment",
+        "Imagem London Limited",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 13708521,
+      "barcode": [
+        "8 88430 41991 9",
+        "888430419919",
+        "LC12723",
+        "BIEM/GEMA",
+        "88843041991 A",
+        "88843041991 B",
+        "174155E1/B",
+        "174155E2/C",
+        "174155E1/A",
+        "174155E2/A",
+        "174155E1/C",
+        "174155E2/D",
+        "174155E1/D",
+        "174155E2/H",
+        "174155E1/D",
+        "174155E2/E",
+        "174155E1/E",
+        "174155E2/K",
+        "174155E1/H",
+        "174155E2/L",
+        "174155E1/I",
+        "174155E2/L",
+        "174155E1/O",
+        "174155E2/R",
+        "174155E1/P",
+        "174155E2/S",
+        "174155E1/T",
+        "174155E2/R",
+        "174155E1/T",
+        "174155E2/S",
+        "174155E1/V",
+        "174155E2/S",
+        "174155E1/K",
+        "174155E2/M",
+        "174155E1/X",
+        "174155E2/X",
+        "174155E1/L",
+        "174155E2/P ",
+        "174155E1/AA   02251670",
+        "174155E2/Z    02187822",
+        "174155E1/AA 02334558",
+        "174155E2/AB   02350727",
+        "174155E1/AC 02441859",
+        "174155E2/AC 02444057",
+        "174155E1/AB   02408224",
+        "174155E2/AB   02398189"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 12458,
+      "master_url": "https://api.discogs.com/masters/12458",
+      "uri": "/release/13708521-The-Stone-Roses-The-Stone-Roses",
+      "catno": "88843041991",
+      "title": "The Stone Roses - The Stone Roses",
+      "thumb": "https://i.discogs.com/9Jisw74FhW0yyJBHjczetv_yOID9wl1SbKpx2JwzBHo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNzA4/NTIxLTE3NjIwNTkz/NjctMzA0NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/dj4xBjvEOqmVSxG9D74jJPUKsQF3elNbXL41iKdux9E/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNzA4/NTIxLTE3NjIwNTkz/NjctMzA0NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/13708521",
+      "community": {
+        "want": 667,
+        "have": 5464
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Repress",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

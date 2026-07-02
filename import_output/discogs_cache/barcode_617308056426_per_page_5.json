@@ -1,0 +1,170 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Vinyl",
+        "12\"",
+        "EP",
+        "All Media",
+        "Deluxe Edition"
+      ],
+      "label": [
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Psychedelic Rock",
+        "Lo-Fi",
+        "Indie Rock"
+      ],
+      "id": 28974124,
+      "barcode": [
+        "617308056426"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 519003,
+      "master_url": "https://api.discogs.com/masters/519003",
+      "uri": "/release/28974124-Unknown-Mortal-Orchestra-II-10th-Anniversary-Edition",
+      "catno": "JAG232",
+      "title": "Unknown Mortal Orchestra - II (10th Anniversary Edition)",
+      "thumb": "https://i.discogs.com/cf47Xdv9QI-E6bMGoUo_m84DEr9j0iVb8eeuj9AoMPc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4OTc0/MTI0LTE3MDA1MjIw/MTAtNDQ4My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/UgW0pupF0dw93bIBZouroEAeNsIvguAUuhpkQwXci1Y/rs:fit/g:sm/q:90/h:581/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4OTc0/MTI0LTE3MDA1MjIw/MTAtNDQ4My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28974124",
+      "community": {
+        "want": 128,
+        "have": 479
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Bonus Tracks",
+          "descriptions": [
+            "12\"",
+            "EP"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Aluminium Anniversary",
+          "descriptions": [
+            "Deluxe Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK & Europe",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "8 ⅓ RPM",
+        "Album",
+        "Reissue",
+        "Vinyl",
+        "12\"",
+        "EP",
+        "All Media",
+        "Deluxe Edition"
+      ],
+      "label": [
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Psychedelic Rock",
+        "Lo-Fi"
+      ],
+      "id": 28973992,
+      "barcode": [
+        "617308056426",
+        "JAG232",
+        "JAG232A J.Lambert@=LM",
+        "JAG232B J.Lambert@=LM",
+        "JAG232DLX A cm 42179.1(3)…",
+        "JAG232DLX B  cm 42179.2(3)…"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 519003,
+      "master_url": "https://api.discogs.com/masters/519003",
+      "uri": "/release/28973992-Unknown-Mortal-Orchestra-II",
+      "catno": "JAG232",
+      "title": "Unknown Mortal Orchestra - II",
+      "thumb": "https://i.discogs.com/h78FRRtGB7GCyftI0pybs2wAOcOiLvhYIcpA2BWDqf8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4OTcz/OTkyLTE3MDA1MjE2/NDAtNjQ2Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/XhTzbZ1LxAi6iqwAjHTQPjkzlM0KdgGB-lhIisuvU_0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4OTcz/OTkyLTE3MDA1MjE2/NDAtNjQ2Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28973992",
+      "community": {
+        "want": 79,
+        "have": 169
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "8 ⅓ RPM",
+            "Album",
+            "Reissue"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Bonus Tracks",
+          "descriptions": [
+            "12\"",
+            "EP"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Aluminum Anniversary",
+          "descriptions": [
+            "Deluxe Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

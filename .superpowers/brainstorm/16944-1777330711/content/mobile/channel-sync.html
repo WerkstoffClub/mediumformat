@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Channel Sync — Mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #050505;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .app {
+    width: 390px;
+    min-height: 100vh;
+    background: #090909;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+    padding-bottom: 72px;
+  }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 52px;
+    background: #090909;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 10px;
+  }
+  .header-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    flex: 1;
+  }
+  .btn-pill {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+  }
+  .btn-primary { background: #fff; color: #000; }
+  .btn-secondary { background: #141414; color: #fff; border: 1px solid #262626; }
+
+  /* Channel cards */
+  .channel-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  .channel-card {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .channel-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .channel-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .logo-tokped { background: rgba(0,170,91,0.12); border: 1px solid rgba(0,170,91,0.25); }
+  .logo-shopee { background: rgba(238,77,45,0.12); border: 1px solid rgba(238,77,45,0.25); }
+
+  .channel-name {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .name-tokped { color: #00AA5B; }
+  .name-shopee { color: #EE4D2D; }
+  .channel-handle { font-size: 10px; color: #555; margin-top: 1px; }
+
+  .channel-live {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: #999;
+    flex-shrink: 0;
+  }
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-online { background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.5); }
+  .dot-warn { background: #e8a838; }
+
+  .channel-body { padding: 12px 14px; }
+
+  /* Stats row */
+  .stats-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .stat-chip {
+    flex: 1;
+    background: #1c1c1c;
+    border: 1px solid #262626;
+    border-radius: 7px;
+    padding: 8px 6px;
+    text-align: center;
+  }
+  .stat-val { font-size: 18px; font-weight: 800; color: #fff; line-height: 1; }
+  .stat-lbl {
+    font-size: 9px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-top: 3px;
+  }
+  .stat-warn .stat-val { color: #e8a838; }
+
+  /* Progress bar */
+  .sync-progress {
+    height: 3px;
+    background: #262626;
+    border-radius: 2px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .sync-progress-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .fill-green { background: #22c55e; width: 92%; }
+  .fill-orange { background: #e8a838; width: 78%; }
+
+  /* Card action row */
+  .card-action-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .card-link {
+    font-size: 11px;
+    color: #0099ff;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .last-sync-text {
+    font-size: 10px;
+    color: #555;
+  }
+
+  /* Log title */
+  .log-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  /* Activity section */
+  .section-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px 6px;
+  }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+  }
+  .section-link { font-size: 11px; color: #0099ff; cursor: pointer; }
+
+  /* Activity log */
+  .activity-list {
+    border-top: 1px solid #1a1a1a;
+    margin: 0 16px;
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .log-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .log-row:last-child { border-bottom: none; }
+  .log-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .icon-push { background: rgba(34,197,94,0.1); color: #22c55e; }
+  .icon-pull { background: rgba(0,153,255,0.1); color: #0099ff; }
+  .icon-warn { background: rgba(232,168,56,0.1); color: #e8a838; }
+  .log-body { flex: 1; min-width: 0; }
+  .log-msg { font-size: 11px; color: #999; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .log-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
+  .log-time { font-size: 10px; color: #555; }
+  .log-action { font-size: 10px; color: #0099ff; cursor: pointer; }
+
+  /* Conflicts section */
+  .conflicts-header-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px 8px;
+  }
+  .conflicts-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #e8a838;
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+  .conflicts-badge {
+    font-size: 9px;
+    font-weight: 700;
+    background: rgba(232,168,56,0.12);
+    color: #e8a838;
+    border: 1px solid rgba(232,168,56,0.3);
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .resolve-all {
+    font-size: 11px;
+    color: #e8a838;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .conflict-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 16px 8px;
+  }
+  .conflict-card {
+    background: #141414;
+    border: 1px solid rgba(232,168,56,0.2);
+    border-radius: 10px;
+    padding: 12px 12px;
+  }
+  .conflict-release {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+  .conflict-type {
+    font-size: 10px;
+    color: #e8a838;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .conflict-values {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .conflict-val-box {
+    flex: 1;
+    background: #1c1c1c;
+    border: 1px solid #262626;
+    border-radius: 6px;
+    padding: 7px 9px;
+  }
+  .conflict-source {
+    font-size: 9px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .src-mf { color: #fff; }
+  .src-tok { color: #00AA5B; }
+  .src-sho { color: #EE4D2D; }
+  .conflict-val-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .conflict-val-note {
+    font-size: 9px;
+    color: #555;
+    margin-top: 1px;
+  }
+  .conflict-actions {
+    display: flex;
+    gap: 6px;
+  }
+  .conflict-btn {
+    flex: 1;
+    height: 30px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid #262626;
+    background: #141414;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .conflict-btn.btn-channel-tok {
+    background: rgba(0,170,91,0.08);
+    color: #00AA5B;
+    border-color: rgba(0,170,91,0.3);
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 390px;
+    height: 56px;
+    background: #090909;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    z-index: 200;
+  }
+  .bn-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #555;
+    cursor: pointer;
+    height: 100%;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .bn-item.active { color: #fff; }
+  .bn-item svg { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">Channel Sync</div>
+    <button class="btn-pill btn-primary">↻ Sync All</button>
+  </div>
+
+  <!-- CHANNEL CARDS -->
+  <div class="channel-cards">
+
+    <!-- TOKOPEDIA -->
+    <div class="channel-card">
+      <div class="channel-card-header">
+        <div class="channel-logo logo-tokped">🟢</div>
+        <div>
+          <div class="channel-name name-tokped">Tokopedia</div>
+          <div class="channel-handle">@mediumformat.id</div>
+        </div>
+        <div class="channel-live">
+          <div class="status-dot dot-online"></div>
+          <span>Live</span>
+        </div>
+      </div>
+      <div class="channel-body">
+        <div class="stats-row">
+          <div class="stat-chip">
+            <div class="stat-val">842</div>
+            <div class="stat-lbl">Listed</div>
+          </div>
+          <div class="stat-chip">
+            <div class="stat-val">23</div>
+            <div class="stat-lbl">Orders MTD</div>
+          </div>
+          <div class="stat-chip stat-warn">
+            <div class="stat-val">2</div>
+            <div class="stat-lbl">Conflicts</div>
+          </div>
+        </div>
+        <div class="sync-progress">
+          <div class="sync-progress-fill fill-green"></div>
+        </div>
+        <div class="card-action-row">
+          <div class="card-link">View Listings →</div>
+          <div class="last-sync-text">Last sync: 2 min ago</div>
+        </div>
+        <div class="log-title">Recent Activity</div>
+        <div class="log-row" style="padding-left:0;padding-right:0;">
+          <div class="log-icon icon-pull">↓</div>
+          <div class="log-body">
+            <div class="log-msg">Order #TK-8821 pulled — Portishead Dummy LP</div>
+            <div class="log-meta"><div class="log-time">2 min ago</div></div>
+          </div>
+        </div>
+        <div class="log-row" style="padding-left:0;padding-right:0;">
+          <div class="log-icon icon-push">↑</div>
+          <div class="log-body">
+            <div class="log-msg">Stock update pushed — 12 items updated</div>
+            <div class="log-meta"><div class="log-time">5 min ago</div></div>
+          </div>
+        </div>
+        <div class="log-row" style="padding-left:0;padding-right:0;border-bottom:none;">
+          <div class="log-icon icon-warn">!</div>
+          <div class="log-body">
+            <div class="log-msg">Price conflict — OK Computer LP</div>
+            <div class="log-meta"><div class="log-time">18 min ago</div><div class="log-action">→ Resolve</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOPEE -->
+    <div class="channel-card">
+      <div class="channel-card-header">
+        <div class="channel-logo logo-shopee">🟠</div>
+        <div>
+          <div class="channel-name name-shopee">Shopee</div>
+          <div class="channel-handle">@mediumformat</div>
+        </div>
+        <div class="channel-live">
+          <div class="status-dot dot-online"></div>
+          <span>Live</span>
+        </div>
+      </div>
+      <div class="channel-body">
+        <div class="stats-row">
+          <div class="stat-chip">
+            <div class="stat-val">614</div>
+            <div class="stat-lbl">Listed</div>
+          </div>
+          <div class="stat-chip">
+            <div class="stat-val">18</div>
+            <div class="stat-lbl">Orders MTD</div>
+          </div>
+          <div class="stat-chip">
+            <div class="stat-val" style="color:#22c55e;">0</div>
+            <div class="stat-lbl">Conflicts</div>
+          </div>
+        </div>
+        <div class="sync-progress">
+          <div class="sync-progress-fill fill-orange"></div>
+        </div>
+        <div class="card-action-row">
+          <div class="card-link">View Listings →</div>
+          <div class="last-sync-text">Last sync: 5 min ago</div>
+        </div>
+        <div class="log-title">Recent Activity</div>
+        <div class="log-row" style="padding-left:0;padding-right:0;">
+          <div class="log-icon icon-push">↑</div>
+          <div class="log-body">
+            <div class="log-msg">Price update pushed — 3 items repriced</div>
+            <div class="log-meta"><div class="log-time">4 min ago</div></div>
+          </div>
+        </div>
+        <div class="log-row" style="padding-left:0;padding-right:0;">
+          <div class="log-icon icon-pull">↓</div>
+          <div class="log-body">
+            <div class="log-msg">Order #SH-4402 pulled — BOC Music Has the Right…</div>
+            <div class="log-meta"><div class="log-time">22 min ago</div></div>
+          </div>
+        </div>
+        <div class="log-row" style="padding-left:0;padding-right:0;border-bottom:none;">
+          <div class="log-icon icon-push">↑</div>
+          <div class="log-body">
+            <div class="log-msg">New listing synced — Aphex Twin Ambient Vol II</div>
+            <div class="log-meta"><div class="log-time">1 hr ago</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RECENT ACTIVITY (combined) -->
+  <div class="section-header-row">
+    <div class="section-title">All Recent Activity</div>
+    <div class="section-link">View all</div>
+  </div>
+  <div class="activity-list" style="margin-bottom:4px;">
+    <div class="log-row">
+      <div class="log-icon icon-pull">↓</div>
+      <div class="log-body">
+        <div class="log-msg">Tokopedia — Order #TK-8819 pulled — Massive Attack Mezzanine</div>
+        <div class="log-meta"><div class="log-time">1 hr ago</div></div>
+      </div>
+    </div>
+    <div class="log-row">
+      <div class="log-icon icon-push">↑</div>
+      <div class="log-body">
+        <div class="log-msg">Shopee — New listing synced — Aphex Twin Ambient Vol II</div>
+        <div class="log-meta"><div class="log-time">1 hr ago</div></div>
+      </div>
+    </div>
+    <div class="log-row">
+      <div class="log-icon icon-pull">↓</div>
+      <div class="log-body">
+        <div class="log-msg">Shopee — Order #SH-4399 pulled — Blue Lines LP</div>
+        <div class="log-meta"><div class="log-time">2 hr ago</div></div>
+      </div>
+    </div>
+    <div class="log-row">
+      <div class="log-icon icon-push">↑</div>
+      <div class="log-body">
+        <div class="log-msg">Tokopedia — Stock update pushed — 12 items updated</div>
+        <div class="log-meta"><div class="log-time">5 min ago</div></div>
+      </div>
+    </div>
+    <div class="log-row">
+      <div class="log-icon icon-warn">!</div>
+      <div class="log-body">
+        <div class="log-msg">Tokopedia — Price conflict flagged — OK Computer LP</div>
+        <div class="log-meta"><div class="log-time">18 min ago</div><div class="log-action">→ Resolve</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFLICTS -->
+  <div class="conflicts-header-row">
+    <div class="conflicts-title">Conflicts</div>
+    <span class="conflicts-badge">2 pending</span>
+    <div class="resolve-all">Resolve All</div>
+  </div>
+
+  <div class="conflict-cards">
+
+    <div class="conflict-card">
+      <div class="conflict-release">Radiohead — OK Computer LP</div>
+      <div class="conflict-type">⚠ Price conflict · Tokopedia</div>
+      <div class="conflict-values">
+        <div class="conflict-val-box">
+          <div class="conflict-source src-mf">MF Local</div>
+          <div class="conflict-val-text">Rp 850,000</div>
+        </div>
+        <div class="conflict-val-box">
+          <div class="conflict-source src-tok">Tokopedia</div>
+          <div class="conflict-val-text">Rp 799,000</div>
+          <div class="conflict-val-note">Manually edited</div>
+        </div>
+      </div>
+      <div class="conflict-actions">
+        <button class="conflict-btn">Keep Local</button>
+        <button class="conflict-btn btn-channel-tok">Use Tokped</button>
+      </div>
+    </div>
+
+    <div class="conflict-card">
+      <div class="conflict-release">Portishead — Dummy LP</div>
+      <div class="conflict-type">⚠ Stock conflict · Tokopedia</div>
+      <div class="conflict-values">
+        <div class="conflict-val-box">
+          <div class="conflict-source src-mf">MF Local</div>
+          <div class="conflict-val-text">5 units</div>
+        </div>
+        <div class="conflict-val-box">
+          <div class="conflict-source src-tok">Tokopedia</div>
+          <div class="conflict-val-text">3 units</div>
+          <div class="conflict-val-note">Stale cache</div>
+        </div>
+      </div>
+      <div class="conflict-actions">
+        <button class="conflict-btn">Keep Local</button>
+        <button class="conflict-btn btn-channel-tok">Use Tokped</button>
+      </div>
+    </div>
+
+    <div class="conflict-card">
+      <div class="conflict-release">Burial — Antidawn EP</div>
+      <div class="conflict-type">⚠ Price conflict · Shopee</div>
+      <div class="conflict-values">
+        <div class="conflict-val-box">
+          <div class="conflict-source src-mf">MF Local</div>
+          <div class="conflict-val-text">Rp 320,000</div>
+        </div>
+        <div class="conflict-val-box">
+          <div class="conflict-source src-sho">Shopee</div>
+          <div class="conflict-val-text">Rp 295,000</div>
+          <div class="conflict-val-note">Promotional price</div>
+        </div>
+      </div>
+      <div class="conflict-actions">
+        <button class="conflict-btn">Keep Local</button>
+        <button class="conflict-btn" style="background:rgba(238,77,45,0.08);color:#EE4D2D;border-color:rgba(238,77,45,0.3);">Use Shopee</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Dashboard</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      <span>Inventory</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+      <span>Orders</span>
+    </div>
+    <div class="bn-item active">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg>
+      <span>Channels</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      <span>More</span>
+    </div>
+  </nav>
+
+</div>
+</body>
+</html>

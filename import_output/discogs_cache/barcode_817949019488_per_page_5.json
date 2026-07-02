@@ -1,0 +1,123 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Japan",
+      "year": "2014",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Captured Tracks",
+        "Jizz Jazz Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Lo-Fi"
+      ],
+      "id": 9800884,
+      "barcode": [
+        "8-17949-01948-8",
+        "4 988044 932203"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 671443,
+      "master_url": "https://api.discogs.com/masters/671443",
+      "uri": "/release/9800884-Mac-DeMarco-Salad-Days",
+      "catno": "CT-193",
+      "title": "Mac DeMarco - Salad Days",
+      "thumb": "https://i.discogs.com/vLMF_gKERNi_-adgY-VCipaBMyWqYCfcal0-Wu2-qVc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTk4MDA4/ODQtMTQ4NjUyMjcz/Ni05ODc0LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/pB7e2kBSdVxHVWe3ZbgqVhLO6oOK9dvyGPB6xNO-wiw/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTk4MDA4/ODQtMTQ4NjUyMjcz/Ni05ODc0LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/9800884",
+      "community": {
+        "want": 284,
+        "have": 98
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2014",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Captured Tracks Records",
+        "Captured Tracks Records",
+        "Jizz Jazz Studios",
+        "The ADS Group",
+        "Bonati Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Lo-Fi"
+      ],
+      "id": 5552351,
+      "barcode": [
+        "817949019488",
+        "CT1932 6745-CD-1226 16-342-11",
+        "IFPI LK13",
+        "IFPI L824",
+        "CT1932 6745-CD-1226 16-342-11",
+        "IFPI LK13",
+        "IFPI L817"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 671443,
+      "master_url": "https://api.discogs.com/masters/671443",
+      "uri": "/release/5552351-Mac-DeMarco-Salad-Days",
+      "catno": "CT-193",
+      "title": "Mac DeMarco - Salad Days",
+      "thumb": "https://i.discogs.com/neVp0z6buvWfWRKapVIcZgmzkw2aWWKZs4eAh4S5i-I/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU1NTIz/NTEtMTQ4ODg2MDYx/Ni04ODEwLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/C8zsqmeDMKhr5MKWub7SP18E1k3a2aTdBP5O1YccaMM/rs:fit/g:sm/q:90/h:531/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU1NTIz/NTEtMTQ4ODg2MDYx/Ni04ODEwLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5552351",
+      "community": {
+        "want": 719,
+        "have": 1664
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

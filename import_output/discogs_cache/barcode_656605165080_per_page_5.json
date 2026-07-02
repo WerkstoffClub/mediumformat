@@ -1,0 +1,69 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Cassette",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Chicago Mastering Service",
+        "Bomb Shelter Studios",
+        "Sunset Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 28273900,
+      "barcode": [
+        "6 5660-51650-8 0",
+        "656605165080",
+        "6 56605 16507 3",
+        "656605165073"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3239857,
+      "master_url": "https://api.discogs.com/masters/3239857",
+      "uri": "/release/28273900-Mitski-The-Land-Is-Inhospitable-And-So-Are-We",
+      "catno": "DOC 350",
+      "title": "Mitski - The Land Is Inhospitable And So Are We",
+      "thumb": "https://i.discogs.com/xJ1QYPWqmnfxG1HOsAomCsHjRXsSp2EJy3rGi7MulsU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4Mjcz/OTAwLTE2OTUyMjM3/OTQtMzk2OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/DqRbnYSMWramG6Rf0hNKg0Guq41NZdkHrmB_18UvChg/rs:fit/g:sm/q:90/h:961/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4Mjcz/OTAwLTE2OTUyMjM3/OTQtMzk2OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28273900",
+      "community": {
+        "want": 140,
+        "have": 267
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Orange Shell",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

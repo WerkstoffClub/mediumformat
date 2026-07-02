@@ -1,0 +1,80 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Good Boy Records",
+        "Good Boy Records",
+        "Good Boy Records",
+        "Real World Studios",
+        "Soho House Studios",
+        "Good Neighbor",
+        "Independent Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Ambient",
+        "Contemporary R&B",
+        "Soul",
+        "Leftfield",
+        "Indie Pop"
+      ],
+      "id": 36766081,
+      "barcode": [
+        "198704834639",
+        "198704834592 A GN1194 gn EC IM",
+        "198704834592 B GN1194 gn EC IM",
+        "198704834592 C GN1194 gn EC IM",
+        "198704834592 D GN1194 gn EC IM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4161256,
+      "master_url": "https://api.discogs.com/masters/4161256",
+      "uri": "/release/36766081-James-Blake-Trying-Times",
+      "catno": "198704834639",
+      "title": "James Blake - Trying Times",
+      "thumb": "https://i.discogs.com/EKME4JcuyMJRu2JuZIMmxh4XYwNfS1Q0NiQs_lhVExc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzY2/MDgxLTE3NzM2NzQz/MjAtNjU0NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/fylsET5l-kIm6uBiS8hPIi2Fo5FzJbSr2hOrsksQhKw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzY2/MDgxLTE3NzM2NzQz/MjAtNjU0NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36766081",
+      "community": {
+        "want": 47,
+        "have": 252
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "White Lightning",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

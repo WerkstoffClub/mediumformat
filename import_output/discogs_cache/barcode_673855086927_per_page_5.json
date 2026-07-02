@@ -1,0 +1,99 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Unknown",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Merge Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Art Rock"
+      ],
+      "id": 33552279,
+      "barcode": [
+        "673855086927"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3796533,
+      "master_url": "https://api.discogs.com/masters/3796533",
+      "uri": "/release/33552279-Destroyer-Dans-Boogie",
+      "catno": "MRG869",
+      "title": "Destroyer (4) - Dan's Boogie",
+      "thumb": "https://i.discogs.com/Ld_zTZqS42xE_MFZ7ozRmpftVqw6QYjHWWcH59Thrvw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNTUy/Mjc5LTE3NDY2ODIw/NDEtMzc3MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/A0dLI71kHuGQFKzVwcHcvBloSNWr6Dcq65fuCwO2nFI/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNTUy/Mjc5LTE3NDY2ODIw/NDEtMzc3MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33552279",
+      "community": {
+        "want": 32,
+        "have": 124
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Unknown",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Merge Records"
+      ],
+      "type": "master",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Art Rock"
+      ],
+      "id": 3796533,
+      "barcode": [
+        "673855086927"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3796533,
+      "master_url": "https://api.discogs.com/masters/3796533",
+      "uri": "/master/3796533-Destroyer-Dans-Boogie",
+      "catno": "MRG869",
+      "title": "Destroyer (4) - Dan's Boogie",
+      "thumb": "https://i.discogs.com/Ld_zTZqS42xE_MFZ7ozRmpftVqw6QYjHWWcH59Thrvw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNTUy/Mjc5LTE3NDY2ODIw/NDEtMzc3MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/A0dLI71kHuGQFKzVwcHcvBloSNWr6Dcq65fuCwO2nFI/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNTUy/Mjc5LTE3NDY2ODIw/NDEtMzc3MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/3796533",
+      "community": {
+        "want": 143,
+        "have": 1267
+      }
+    }
+  ]
+}

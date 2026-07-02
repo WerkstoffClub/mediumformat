@@ -1,0 +1,131 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "War Child",
+        "War Child Records",
+        "War Child Records",
+        "Abbey Road Studios",
+        "Wembley Stadium",
+        "Metropolis Mastering",
+        "Optimal Media Gmbh"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [],
+      "id": 36694906,
+      "barcode": [
+        "1 91400 69162 9",
+        "191400691629",
+        "WARCHILD16CD AQ54158-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9757",
+        "WARCHILD16CD AQ54158-02 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9757"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153960,
+      "master_url": "https://api.discogs.com/masters/4153960",
+      "uri": "/release/36694906-Various-Help2",
+      "catno": "WARCHILD16CD",
+      "title": "Various - Help(2)",
+      "thumb": "https://i.discogs.com/tyF1vGbAUtGeELVWBqK3fFTvFO7cZkHrcMrE4wxZJh8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njk0/OTA2LTE3NzU0NTMy/NTAtMTU2Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/IZM7MZJ38p0zdbG8Ic_W7d3irL-to4T-CXNekGXePb8/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njk0/OTA2LTE3NzU0NTMy/NTAtMTU2Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36694906",
+      "community": {
+        "want": 48,
+        "have": 490
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "2",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "War Child",
+        "War Child Records",
+        "War Child Records",
+        "Abbey Road Studios",
+        "Wembley Stadium",
+        "Metropolis Mastering",
+        "Optimal Media Gmbh"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [],
+      "id": 36744709,
+      "barcode": [
+        "4 582616 19539 5",
+        "4582616195395",
+        "WARCHILD16CD AQ54158-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "WARCHILD16CD AQ54158-02 manufactured by optimal media GmbH",
+        "IFPI L578"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153960,
+      "master_url": "https://api.discogs.com/masters/4153960",
+      "uri": "/release/36744709-Various-Help2",
+      "catno": "WARCHILD16CDJP",
+      "title": "Various - Help(2)",
+      "thumb": "https://i.discogs.com/I0HGzWDPJ0jF09m5WOKZHng0Uy49BFj9Qf_uRWj5uNw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzQ0/NzA5LTE3NzMyNDk2/NTgtMTc3OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/BPsr0GH3oIE-7tIn2GHS093r9Oo5e9hqzHd0CBttcLA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzQ0/NzA5LTE3NzMyNDk2/NTgtMTc3OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36744709",
+      "community": {
+        "want": 12,
+        "have": 6
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "2",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

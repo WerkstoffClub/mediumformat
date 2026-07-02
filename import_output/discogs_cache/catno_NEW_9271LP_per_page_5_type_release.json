@@ -1,0 +1,172 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "New State Music",
+        "Seven",
+        "Universal Island Records Ltd.",
+        "New State Entertainment Ltd.",
+        "New State Entertainment Ltd.",
+        "Universal Music",
+        "EMI Music",
+        "Copyright Control",
+        "Kojam Music Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Downtempo",
+        "Future Jazz"
+      ],
+      "id": 13965784,
+      "barcode": [
+        "8 85012 03643 4",
+        "885012036434",
+        "NEW 9271 LP A-1",
+        "NEW 9271 LP B-1",
+        "NEW 9271 LP C-1",
+        "NEW 9271 LP D-1",
+        "LC 12778"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 46490,
+      "master_url": "https://api.discogs.com/masters/46490",
+      "uri": "/release/13965784-Zero-7-When-It-Falls",
+      "catno": "NEW9271LP",
+      "title": "Zero 7 - When It Falls",
+      "thumb": "https://i.discogs.com/n74U5X0XTLtR4lno5JAqlTQAGPayRzprzZyb6hFwYE8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzOTY1/Nzg0LTE1NjUwNzkz/MTktNDE3MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/9xXoH_2MIfajXn6Jjbo-p6sqTW1_nevL813mCPQFL7I/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzOTY1/Nzg0LTE1NjUwNzkz/MTktNDE3MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/13965784",
+      "community": {
+        "want": 724,
+        "have": 2848
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "180gr ",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "All Media",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "New State Music",
+        "Universal Island Records Ltd.",
+        "New State Entertainment Ltd.",
+        "New State Entertainment Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Downtempo",
+        "Future Jazz"
+      ],
+      "id": 32133540,
+      "barcode": [
+        "8 85012 05085 0",
+        "885012050850",
+        "8 85012 03643 4",
+        "885012036434"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 46490,
+      "master_url": "https://api.discogs.com/masters/46490",
+      "uri": "/release/32133540-Zero-7-When-It-Falls",
+      "catno": "NEW9271LPC",
+      "title": "Zero 7 - When It Falls",
+      "thumb": "https://i.discogs.com/4NRKV3WhDNQCtsX6ITcLJMM_ukyTeeoCv8Utjyeg-7c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMTMz/NTQwLTE3MzA0NzUz/MjYtMjI5My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/15nJCLNhXu-ya_RE1GBRST2lRQX7G6lA0_jfBDrmvOc/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMTMz/NTQwLTE3MzA0NzUz/MjYtMjI5My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/32133540",
+      "community": {
+        "want": 121,
+        "have": 442
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Orange",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Green",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    }
+  ]
+}

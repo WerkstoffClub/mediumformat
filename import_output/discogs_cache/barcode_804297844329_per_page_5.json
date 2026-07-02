@@ -1,0 +1,65 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Ghostly International",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "City Pop",
+        "Indie Pop"
+      ],
+      "id": 31721621,
+      "barcode": [
+        "804297844329",
+        "GI443CD 6745-CD-6478 24-208-09",
+        "IFPI LK13"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3596240,
+      "master_url": "https://api.discogs.com/masters/3596240",
+      "uri": "/release/31721621-Ginger-Root-Shinbangumi",
+      "catno": "GI-443",
+      "title": "Ginger Root - Shinbangumi",
+      "thumb": "https://i.discogs.com/3EOyi5Y4ZPqFpuA0Q0CITtR7Nb5UijmgmXG5iFLMBlg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNzIx/NjIxLTE3MjY3Njkx/ODAtODE0NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/nkrvHhubum2A58E0ZqNpFb9UUwGK8u5bjNA8zJHc57w/rs:fit/g:sm/q:90/h:535/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNzIx/NjIxLTE3MjY3Njkx/ODAtODE0NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31721621",
+      "community": {
+        "want": 50,
+        "have": 147
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

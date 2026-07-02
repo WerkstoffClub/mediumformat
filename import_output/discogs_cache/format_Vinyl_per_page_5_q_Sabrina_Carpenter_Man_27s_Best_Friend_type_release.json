@@ -1,0 +1,392 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 5,
+    "per_page": 5,
+    "items": 24,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Sabrina+Carpenter+Man%27s+Best+Friend&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=5",
+      "next": "https://api.discogs.com/database/search?q=Sabrina+Carpenter+Man%27s+Best+Friend&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "UMG Recordings, Inc.",
+        "Sabalicious Songs",
+        "Songs of Universal, Inc.",
+        "ISIMO Compositions",
+        "Kenny + Betty Tunes",
+        "WC Music Corp",
+        "Don Wyan Music",
+        "Warner-Tamerlane Publishing Corp.",
+        "MixStar Studios",
+        "Nomograph Mastering",
+        "Electric Lady Studios",
+        "Tamarind, Los Angeles",
+        "Hutchinson Sound",
+        "Playpen Studios, Calabasas CA",
+        "Big Mercy Studio",
+        "Audu Music Studio",
+        "Pleasure Hill Recording",
+        "Sterling Sound Nashville",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Country"
+      ],
+      "id": 34952588,
+      "barcode": [
+        "6 02478 32288 4",
+        "602478322884",
+        "LC 00407",
+        "BIEM/SDRM",
+        "BMI",
+        "ASCAP",
+        "00602478322884-A",
+        "00602478322884-B",
+        "602478316616-A (2) JN-H STERLING 0602478316616-A 2254637 02260076 301241E1",
+        "602478322884-B (1) JN-H STERLING 0602478322884-B 2265832 02267752 301242E2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3954800,
+      "master_url": "https://api.discogs.com/masters/3954800",
+      "uri": "/release/34952588-Sabrina-Carpenter-Mans-Best-Friend",
+      "catno": "00602478322884",
+      "title": "Sabrina Carpenter - Man's Best Friend",
+      "thumb": "https://i.discogs.com/sdDbAIc5GUA1BVLvCs2aYZRYlMDfeXvjmkblwbYZeLs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTUy/NTg4LTE3NTY0ODM2/MjktODU1NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/lxAXIWtYTUjIGIvpPJOK9wAZRMV5Awz9fnJz-kNfQd8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTUy/NTg4LTE3NTY0ODM2/MjktODU1NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34952588",
+      "community": {
+        "want": 1934,
+        "have": 6021
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Translucent Burgundy, Alternate Cover",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "UMG Recordings, Inc.",
+        "UMG Commercial Services",
+        "GZ Media",
+        "Sterling Sound Nashville"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Country",
+        "Indie Pop"
+      ],
+      "id": 34966700,
+      "barcode": [
+        "6 02478 33816 8",
+        "602478338168",
+        "602478316616-A",
+        "602478316616-B",
+        "301241E1 02283108 2280322 JN-H STERLING 060247831616-A 602478316616-A (7)",
+        "301241E2 02284749 2280331 JN-H STERLING 060247831616-B 602478316616-B (5)"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3954800,
+      "master_url": "https://api.discogs.com/masters/3954800",
+      "uri": "/release/34966700-Sabrina-Carpenter-Mans-Best-Friend",
+      "catno": "602478338168",
+      "title": "Sabrina Carpenter - Man's Best Friend",
+      "thumb": "https://i.discogs.com/PkXtpoLOPwglFj7iDZX9qsp7zO5_-5h2IwIYmuIM8NM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTY2/NzAwLTE3NTY1OTE1/ODMtMzIzMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/e0kHuz7GIS_JKG20qs33QVUsgIbVkIK7CEPFK0xZKxs/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTY2/NzAwLTE3NTY1OTE1/ODMtMzIzMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34966700",
+      "community": {
+        "want": 601,
+        "have": 6604
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Opaque Light Blue, Signed Insert",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "UMG Recordings, Inc.",
+        "UMG Commercial Services",
+        "Sabalicious Songs",
+        "Songs of Universal, Inc.",
+        "ISIMO Compositions",
+        "Kenny + Betty Tunes",
+        "WC Music Corp",
+        "Don Wyan Music",
+        "Warner-Tamerlane Publishing Corp.",
+        "MixStar Studios",
+        "Nomograph Mastering",
+        "Electric Lady Studios",
+        "Tamarind, Los Angeles",
+        "Hutchinson Sound",
+        "Playpen Studios, Calabasas CA",
+        "Big Mercy Studio",
+        "Audu Music Studio",
+        "Pleasure Hill Recording",
+        "Sterling Sound Nashville",
+        "GZ Media",
+        "Target"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Country",
+        "Synth-pop"
+      ],
+      "id": 34817141,
+      "barcode": [
+        "6 02478 33826 7",
+        "602478338267",
+        "602478338267.1",
+        "BMI",
+        "ASCAP",
+        "602478316616-A",
+        "602478316616-B",
+        "602478316616-A (2) 0602478316616-A JN-H STERLING 2254669 02260037 301241E1",
+        "602478316616-B (4) 0602478316616-B JN-H STERLING 2254643 02268148 301241E2 "
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3954800,
+      "master_url": "https://api.discogs.com/masters/3954800",
+      "uri": "/release/34817141-Sabrina-Carpenter-Mans-Best-Friend",
+      "catno": "602478338267",
+      "title": "Sabrina Carpenter - Man's Best Friend",
+      "thumb": "https://i.discogs.com/0BwyWdlWSQSUpn4y4ItQ5U5BWfkO4zbCqLIWwR3ypbM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODE3/MTQxLTE3NTcwMjE3/MTUtMzc1NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/DH3TfnKB0KoEit3CJ0PFO2dR5zguFhSueUV9yvojVfw/rs:fit/g:sm/q:90/h:607/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODE3/MTQxLTE3NTcwMjE3/MTUtMzc1NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34817141",
+      "community": {
+        "want": 893,
+        "have": 5460
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "White (Iridescent White)",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "UMG Recordings, Inc.",
+        "Universal International Music B.V.",
+        "Sabalicious Songs",
+        "Songs of Universal, Inc.",
+        "ISIMO Compositions",
+        "Kenny + Betty Tunes",
+        "WC Music Corp",
+        "Don Wyan Music",
+        "Warner-Tamerlane Publishing Corp.",
+        "MixStar Studios",
+        "Nomograph Mastering",
+        "Electric Lady Studios",
+        "Tamarind, Los Angeles",
+        "Hutchinson Sound",
+        "Playpen Studios, Calabasas CA",
+        "Big Mercy Studio",
+        "Audu Music Studio",
+        "Pleasure Hill Recording",
+        "Sterling Sound Nashville",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Country",
+        "Synth-pop"
+      ],
+      "id": 34949651,
+      "barcode": [
+        "6 02478 33818 2",
+        "602478338182",
+        "LC00407",
+        "BIEM/SDRM",
+        "BMI",
+        "ASCAP",
+        "00602478316616-A",
+        "00602478316616-B",
+        "301241E1 02261518 2259860  602478316616-A (2)  0602478316616-A  JN•H STERLING",
+        "301241E2 02259230 2254642  602478316616-B (4)  0602478316616-B  JN•H STERLING",
+        "301241E1 02258653 2254639 JN-H STERLING 0602479316616-A 602478316616-A (2)",
+        "301241E2 02258604 2254643 JN-H STERLING 0602478316616-B 602478316616-B (4)"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3954800,
+      "master_url": "https://api.discogs.com/masters/3954800",
+      "uri": "/release/34949651-Sabrina-Carpenter-Mans-Best-Friend",
+      "catno": "602478338182",
+      "title": "Sabrina Carpenter - Man's Best Friend",
+      "thumb": "https://i.discogs.com/_0n0cv96Tlat03dB51hTwbR2sGz8WRNvs1H-68rupQM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTQ5/NjUxLTE3NTY0NjYw/MTctMzkwMi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/PZfMQVjTorwZfs18JENFvTn4EUQswUXLuwbVguAjrLU/rs:fit/g:sm/q:90/h:610/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTQ5/NjUxLTE3NTY0NjYw/MTctMzkwMi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34949651",
+      "community": {
+        "want": 769,
+        "have": 3822
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Opaque Black & White, Alternate Cover",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Island Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Synth-pop",
+        "Country"
+      ],
+      "id": 34952291,
+      "barcode": [
+        "6 02478 33856 4",
+        "LC00407"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3954800,
+      "master_url": "https://api.discogs.com/masters/3954800",
+      "uri": "/release/34952291-Sabrina-Carpenter-Mans-Best-Friend",
+      "catno": "00602478338564",
+      "title": "Sabrina Carpenter - Man's Best Friend",
+      "thumb": "https://i.discogs.com/0bNjJ8XoS5PAC1crAzuWQC42T6yUWBU-QuX2fva9QLg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTUy/MjkxLTE3NTY0NTg0/NzEtNzkzMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/4rhyPelAWntpJTJGdMoF-MX7x0Ey8pPZAA2WoTy00lY/rs:fit/g:sm/q:90/h:606/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTUy/MjkxLTE3NTY0NTg0/NzEtNzkzMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34952291",
+      "community": {
+        "want": 1117,
+        "have": 3902
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Opaque Dusty Rose, Alternate Cover",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

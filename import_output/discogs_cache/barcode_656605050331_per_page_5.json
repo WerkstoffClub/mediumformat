@@ -1,0 +1,73 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Limited Edition"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Secretly Canadian",
+        "Chicago Mastering Service",
+        "Australian Government",
+        "Music Australia"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Dream Pop",
+        "Jangle Pop",
+        "Shoegaze",
+        "Indie Pop"
+      ],
+      "id": 35597014,
+      "barcode": [
+        "656605050331",
+        "SC 503 LP A RE-1 CM",
+        "SC 503 LP B RE-1 CM",
+        "LC 29278"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4029502,
+      "master_url": "https://api.discogs.com/masters/4029502",
+      "uri": "/release/35597014-Hatchie-Liquorice",
+      "catno": "SC 503LP-C1",
+      "title": "Hatchie - Liquorice",
+      "thumb": "https://i.discogs.com/0ww_UjnNqW2RHUTsTOnI8dDWuCZI22mDI9se0GCK8wE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NTk3/MDE0LTE3NjI1NTEw/NjctOTE0NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/jFCWihTDhP_fjuzo7X4D0iFo_HTVxnoNWamp9dCnPtE/rs:fit/g:sm/q:90/h:586/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NTk3/MDE0LTE3NjI1NTEw/NjctOTE0NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35597014",
+      "community": {
+        "want": 33,
+        "have": 235
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Lipstick Red",
+          "descriptions": [
+            "LP",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

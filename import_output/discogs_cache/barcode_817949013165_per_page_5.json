@@ -1,0 +1,314 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 7,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=817949013165&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=817949013165&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "USA & Europe",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album",
+        "CD",
+        "Compilation",
+        "Promo"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Captured Tracks"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 10302361,
+      "barcode": [
+        "817949013165",
+        "8-17949-01316-5",
+        "LC30356",
+        "4059251084877"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1154301,
+      "master_url": "https://api.discogs.com/masters/1154301",
+      "uri": "/release/10302361-Mac-Demarco-This-Old-Dog",
+      "catno": "CT-260",
+      "title": "Mac Demarco - This Old Dog",
+      "thumb": "https://i.discogs.com/1TOIdxQJxLtc33uNyyhw4dhqOiZnKRWmqVHEm5hq_wI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMzAy/MzYxLTE0OTQ5NTU5/NjYtNzc2OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/1eDbA6LutSPq4fm7fG2_QhHkE5xRPbh0WsaFrpQAeko/rs:fit/g:sm/q:90/h:519/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMzAy/MzYxLTE0OTQ5NTU5/NjYtNzc2OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10302361",
+      "community": {
+        "want": 193,
+        "have": 297
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Compilation",
+            "Promo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album",
+        "CD",
+        "Album",
+        "Special Edition"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Captured Tracks",
+        "Captured Tracks",
+        "Jizz Jazz Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 10247263,
+      "barcode": [
+        "8-17949-01316-5"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/10247263-Mac-Demarco-This-Old-Dog",
+      "catno": "CT-260",
+      "title": "Mac Demarco - This Old Dog",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/10247263",
+      "community": {
+        "want": 0,
+        "have": 0
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Special Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album",
+        "CDr",
+        "Album",
+        "Limited Edition",
+        "Special Edition"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Captured Tracks",
+        "Captured Tracks",
+        "Jizz Jazz Studios",
+        "Rough Trade"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 10246359,
+      "barcode": [
+        "8-17949-01316-5"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1154301,
+      "master_url": "https://api.discogs.com/masters/1154301",
+      "uri": "/release/10246359-Mac-Demarco-This-Old-Dog",
+      "catno": "CT-260",
+      "title": "Mac Demarco - This Old Dog",
+      "thumb": "https://i.discogs.com/mSUKkuVMtg6IVRQi_266GCmOTYXA2Vv2r9V5udyQh9w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjQ2/MzU5LTE0OTQwNjUx/NzctOTMzMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/9uiibCj3BG-YjK945TWEmL90Le2EWNNQn5R_UFgydZU/rs:fit/g:sm/q:90/h:595/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjQ2/MzU5LTE0OTQwNjUx/NzctOTMzMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10246359",
+      "community": {
+        "want": 243,
+        "have": 68
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "CDr",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Limited Edition",
+            "Special Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Unknown",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 33988137,
+      "label": [
+        "Captured Tracks"
+      ],
+      "type": "release",
+      "barcode": [
+        "8 17949 01316 5",
+        "CT 260",
+        "IFPI L011",
+        "IFPI AKV11",
+        "IFPI AKY11"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1154301,
+      "master_url": "https://api.discogs.com/masters/1154301",
+      "uri": "/release/33988137-Mac-Demarco-This-Old-Dog",
+      "catno": "CT-260",
+      "title": "Mac Demarco - This Old Dog",
+      "thumb": "https://i.discogs.com/AE09P5byPWeEz6foX-7p9mkvxViu2Nz7IROfZm1FdIE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzOTg4/MTM3LTE3NDczMjU4/MDAtMjA5MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/vHo8tyigHR3RgcRklL9vKLvzBprfEd7AjP1I3IuSwPI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzOTg4/MTM3LTE3NDczMjU4/MDAtMjA5MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33988137",
+      "community": {
+        "want": 40,
+        "have": 67
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Unknown",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Captured Tracks"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock",
+        "Lo-Fi",
+        "Folk",
+        "Jangle Pop"
+      ],
+      "id": 36363511,
+      "barcode": [
+        "8-17949-01316-5",
+        "817949013165",
+        "58632129/CT 260 A TO Z MEDIA 21",
+        "IFPI LP 73",
+        "IFPI 076Y",
+        "LC30356"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1154301,
+      "master_url": "https://api.discogs.com/masters/1154301",
+      "uri": "/release/36363511-Mac-DeMarco-This-Old-Dog",
+      "catno": "CT-260",
+      "title": "Mac DeMarco - This Old Dog",
+      "thumb": "https://i.discogs.com/L3Q6fUKQ4o3esGJTQBg8ltcEG3fRwPvTR_zxOXotkto/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzYz/NTExLTE3NzAyNDkw/NjQtNzU2NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Y-ovxtX_OEgeWZmcSAjvhxHOG-IaW7uQcB2cF0ZZiwU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzYz/NTExLTE3NzAyNDkw/NjQtNzU2NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36363511",
+      "community": {
+        "want": 3,
+        "have": 3
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 23043470,
+      "barcode": [
+        "6 56605 16012 2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2613089,
+      "master_url": "https://api.discogs.com/masters/2613089",
+      "uri": "/release/23043470-Toro-Y-Moi-Mahal",
+      "catno": "DOC300CD",
+      "title": "Toro Y Moi - Mahal",
+      "thumb": "https://i.discogs.com/cUP3t5p6qwF_PlX4uNj1z5Y_mZO3DqCKe3pAFU4bj_c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDQz/NDcwLTE2OTA4Njgx/MjQtMzk3OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/-s7kwfjqQ2O9ToU3EZh1mjpoVoZ4umvfjH_nXnwd1B4/rs:fit/g:sm/q:90/h:519/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDQz/NDcwLTE2OTA4Njgx/MjQtMzk3OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23043470",
+      "community": {
+        "want": 50,
+        "have": 185
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

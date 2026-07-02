@@ -1,0 +1,161 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2022",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Secretly Canadian",
+        "Sonic Ranch Studios",
+        "Nick's Basement",
+        "Federal Prism Studio",
+        "Planet Paulie",
+        "Bonnie Hill Studios, Los Angeles, CA",
+        "The Diamond Mine",
+        "Air Lyndhurst Studios",
+        "RAK Studios",
+        "Subtle McNugget",
+        "Sterling Sound Edgewater, NJ",
+        "Secretly Canadian",
+        "BMG Blue",
+        "Big Deal Notes",
+        "New Clear Winter Music",
+        "Fire Songs",
+        "Seasons Four Music Corp.",
+        "EMI Longitude Music",
+        "Brought To You By Heavy Duty Music",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 24675509,
+      "barcode": [
+        "6 56605 04702 7",
+        "656605047027",
+        "6 740129206 1 0",
+        "ASCAP",
+        "BMI",
+        "PRS",
+        "SC470CD 6745-CD-5253 22-200-00",
+        "IFPI LK13",
+        "IFPI L821"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2797622,
+      "master_url": "https://api.discogs.com/masters/2797622",
+      "uri": "/release/24675509-Yeah-Yeah-Yeahs-Cool-It-Down",
+      "catno": "SC470",
+      "title": "Yeah Yeah Yeahs - Cool It Down",
+      "thumb": "https://i.discogs.com/Arcuw_Jhj98u1uu48SAzvHbjRcF_vCp2u-zyPhFsfU0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0Njc1/NTA5LTE2NjQ1MzY5/MTUtNTcyNy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ZdBDFiW89A6r_p2TWQ6vPNzIjARzWwqsn9oHW6IMSqQ/rs:fit/g:sm/q:90/h:524/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0Njc1/NTA5LTE2NjQ1MzY5/MTUtNTcyNy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/24675509",
+      "community": {
+        "want": 125,
+        "have": 700
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2022",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Sonic Ranch Studios",
+        "Nick's Basement",
+        "Federal Prism Studio",
+        "Planet Paulie",
+        "Bonnie Hill Studios, Los Angeles, CA",
+        "The Diamond Mine",
+        "Air Lyndhurst Studios",
+        "RAK Studios",
+        "Subtle McNugget",
+        "Sterling Sound Edgewater, NJ",
+        "Secretly Canadian",
+        "BMG Blue",
+        "Big Deal Notes",
+        "New Clear Winter Music",
+        "Fire Songs",
+        "Seasons Four Music Corp.",
+        "EMI Longitude Music",
+        "Brought To You By Heavy Duty Music",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 28246795,
+      "barcode": [
+        "6 56605 04702 7",
+        "4 526180 609049",
+        "ASCAP",
+        "BMI",
+        "PRS",
+        "SC470CD 6745-CD-5253 22-200-00",
+        "IFPI LK13",
+        "IFPI L821"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2797622,
+      "master_url": "https://api.discogs.com/masters/2797622",
+      "uri": "/release/28246795-Yeah-Yeah-Yeahs-Cool-It-Down",
+      "catno": "SC470JCD",
+      "title": "Yeah Yeah Yeahs - Cool It Down",
+      "thumb": "https://i.discogs.com/ZSun2PmfNaclRNvIDxKdK5ZYQY4tsG0aCR1memwO3SA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MjQ2/Nzk1LTE2OTQ1Njk0/NDYtMzEwMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/N-pkfTa0mp0zoZFQwdhznkby_NMYGsgp0F6VXUAvli8/rs:fit/g:sm/q:90/h:531/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MjQ2/Nzk1LTE2OTQ1Njk0/NDYtMzEwMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28246795",
+      "community": {
+        "want": 15,
+        "have": 4
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

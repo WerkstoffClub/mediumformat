@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medium Format — Design Handoff v2.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .brand .brand-wordmark{height:20px;width:auto;}
+
+:root{
+  --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+  --ink:#FFF;--body:#B4B4B4;--mute:#6E6E6E;--accent:#FFF;--accent-text:#000;
+  --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+  --ch-website:#6366F1;--ch-pos:#0EA5E9;--ch-tokopedia:#22C55E;--ch-shopee:#F97316;
+  --ch-discogs:#9CA3AF;--ch-bandcamp:#14B8A6;--ch-ebay:#EAB308;--ch-event:#EC4899;
+  --ui:"Geist","Helvetica Neue",Arial,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;
+}
+html[data-theme="light"]{--canvas:#F0F0F0;--surface:#FFF;--raised:#F5F5F5;--hairline:#E4E4E4;--ink:#000;--body:#525252;--mute:#8A8A8A;--accent:#000;--accent-text:#FFF;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--body);font:400 14px/1.55 var(--ui);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+h1,h2,h3{color:var(--ink);letter-spacing:-.03em;margin:0}
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--canvas) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink)}
+.brand .mark{width:23px;height:23px}
+.brand .wm{font:600 15px/1 var(--ui);letter-spacing:-.04em}
+.brand .tag{font:500 10px/1 var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding-left:10px;margin-left:3px;border-left:1px solid var(--hairline)}
+.toggle{font:500 12px/1 var(--ui);color:var(--body);background:transparent;border:1px solid var(--hairline);border-radius:999px;padding:8px 13px;cursor:pointer}
+.hero{padding:44px 0 8px}
+.hero .eyebrow{font:600 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:12px}
+.hero h1{font:600 34px/1.05 var(--ui);letter-spacing:-.05em;margin-bottom:10px}
+.hero p{max-width:640px;font-size:15px}
+.import{margin:20px 0 8px;border:1px solid var(--hairline);border-left:2px solid var(--ink);background:var(--surface);border-radius:0 8px 8px 0;padding:14px 16px;font-size:13px}
+.import b{color:var(--ink)}
+.import code{font-family:var(--mono);font-size:12px;background:var(--raised);padding:1px 6px;border-radius:4px;color:var(--body)}
+section{padding:34px 0;border-top:1px solid var(--hairline)}
+.secno{font:500 11px/1 var(--mono);color:var(--mute);letter-spacing:.14em;text-transform:uppercase}
+h2{font:600 20px/1.1 var(--ui);letter-spacing:-.04em;margin:7px 0 4px}
+.lead{color:var(--mute);font-size:13px;max-width:680px;margin-bottom:20px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+.subhead{font:500 11px/1 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:22px 0 12px}
+.sw{border:1px solid var(--hairline);border-radius:8px;overflow:hidden;background:var(--surface)}
+.sw .chip{height:64px}.sw .m{padding:10px 12px}
+.sw .nm{font:600 12px/1.3 var(--ui);color:var(--ink)}.sw .hx{font:400 11px/1.3 var(--mono);color:var(--mute);text-transform:uppercase}
+.sw .u{font:400 11px/1.4 var(--ui);color:var(--mute);margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--hairline)}
+th{font:500 11px/1 var(--ui);letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+td:first-child{color:var(--ink);font-weight:500}
+.spec{background:var(--surface);border:1px solid var(--hairline);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.spec .demo{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.spec .name{font:600 13px/1 var(--ui);color:var(--ink)}
+.spec .props{font:400 11px/1.5 var(--mono);color:var(--mute)}
+.btn{font:500 14px/20px var(--ui);border-radius:6px;padding:10px 16px;border:1px solid transparent;cursor:pointer}
+.btn-primary{background:var(--accent);color:var(--accent-text)}
+.btn-secondary{background:transparent;color:var(--ink);border-color:var(--hairline)}
+.chip-f{font:400 13px/1.4 var(--ui);border-radius:999px;padding:4px 12px;border:1px solid var(--hairline);color:var(--mute)}
+.chip-f.on{border-color:var(--accent);color:var(--ink)}
+.badge{font:500 12px/16px var(--ui);border-radius:999px;padding:3px 10px;display:inline-flex;align-items:center;gap:6px}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.b-success{color:var(--success);background:rgba(34,197,94,.12)}.b-warning{color:var(--warning);background:rgba(245,158,11,.12)}
+.tagm{display:inline-flex;align-items:center;gap:5px;font:500 11px/1.4 var(--mono);border:1px solid var(--hairline);border-radius:4px;padding:2px 8px}
+.tagm::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+.input{font:400 14px/20px var(--ui);background:var(--raised);color:var(--ink);border:1px solid var(--hairline);border-radius:6px;padding:10px 12px;width:100%}
+.card-demo{background:var(--surface);border:1px solid var(--hairline);border-radius:8px;overflow:hidden;width:170px}
+.card-demo .cov{aspect-ratio:1;background:var(--surface);display:flex;align-items:center;justify-content:center}
+.card-demo .grooves{width:64%;height:64%;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);position:relative}
+html[data-theme="light"] .card-demo .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px)}
+.card-demo .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent)}
+.card-demo .cb{padding:10px 12px}
+.card-demo .ar{font:500 13px/1.3 var(--ui);color:var(--ink)}.card-demo .ti{font:400 12px/1.3 var(--ui);color:var(--mute)}
+.card-demo .pr{font:500 13px/1.3 var(--mono);color:var(--ink);margin-top:8px}
+.hdrbar{background:var(--raised);color:var(--ink);border-bottom:1px solid var(--hairline);padding:11px 14px;border-radius:8px 8px 0 0;font:600 12px/1 var(--ui);text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center}
+.hdrbar .tabs{display:flex;gap:4px}
+.hdrbar .t{font:500 11px/1 var(--ui);color:var(--accent-text);opacity:.55;padding:4px 9px;border-radius:4px}
+.hdrbar .t.on{opacity:1;background:var(--accent-text);color:var(--accent)}
+.panelbody{border:1px solid var(--hairline);border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:12px;color:var(--mute)}
+.screens{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.screens a{display:block;border:1px solid var(--hairline);border-radius:7px;padding:11px 12px;color:var(--body);text-decoration:none;font-size:12px;transition:border-color .15s,color .15s}
+.screens a:hover{border-color:var(--mute);color:var(--ink)}
+.screens a .f{font:400 10px/1.3 var(--mono);color:var(--mute);margin-top:3px}
+footer{padding:34px 0 56px;color:var(--mute);font-size:12px;border-top:1px solid var(--hairline)}
+a.lnk{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--hairline)}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand"><img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Wordmark_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light"><span class="tag">Design Handoff</span></div>
+  <button class="toggle" id="tg">Light theme</button>
+</div></header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Design system v2.1 · OpenDesign handoff</div>
+    <h1>Handoff &amp; specs</h1>
+    <p>Everything a designer needs to rebuild Medium Format in OpenDesign: tokens, type, components and the screen set. Values mirror <span class="mono">tokens.json</span> and <span class="mono">DESIGN.md</span>.</p>
+  </div>
+  <div class="import">
+    <b>Import into OpenDesign</b> — start the daemon (<code>pnpm tools-dev</code>), open the tokens panel and import <code>design-system/tokens.json</code> (W3C DTCG). Every colour, text style, spacing step, radius and shadow arrives as named, themeable styles. Full steps in <code>design-system/IMPORT.md</code>. v2.1 adds the channel colour key (<code>color.channel.*</code>).
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="secno">01 / Colour</div><h2>Colour</h2>
+  <p class="lead">Monochrome carries the system; the accent is the opposite of the background. Status colour marks stock/order state; the channel key distinguishes sales channels.</p>
+  <div class="subhead">Surface (dark default / light)</div>
+  <div class="grid g4">
+    <div class="sw"><div class="chip" style="background:#0E0E0E;border-bottom:1px solid var(--hairline)"></div><div class="m"><div class="nm">Surface</div><div class="hx">#0E0E0E / #FFF</div><div class="u">Cards, panels, sidebar</div></div></div>
+    <div class="sw"><div class="chip" style="background:#1A1A1A"></div><div class="m"><div class="nm">Raised</div><div class="hx">#1A1A1A / #F5F5F5</div><div class="u">Inputs, hovered rows</div></div></div>
+    <div class="sw"><div class="chip" style="background:#2A2A2A"></div><div class="m"><div class="nm">Hairline</div><div class="hx">#2A2A2A / #E4E4E4</div><div class="u">Borders, dividers</div></div></div>
+    <div class="sw"><div class="chip" style="background:#FFF"></div><div class="m"><div class="nm">Ink / Accent</div><div class="hx">#FFF / #000</div><div class="u">Text, primary action</div></div></div>
+  </div>
+  <div class="subhead">Status — stock &amp; orders only</div>
+  <div class="grid g4">
+    <div class="sw"><div class="chip" style="background:#22C55E"></div><div class="m"><div class="nm">Success</div><div class="hx">#22C55E</div></div></div>
+    <div class="sw"><div class="chip" style="background:#3B82F6"></div><div class="m"><div class="nm">Info</div><div class="hx">#3B82F6</div></div></div>
+    <div class="sw"><div class="chip" style="background:#F59E0B"></div><div class="m"><div class="nm">Warning</div><div class="hx">#F59E0B</div></div></div>
+    <div class="sw"><div class="chip" style="background:#EF4444"></div><div class="m"><div class="nm">Danger</div><div class="hx">#EF4444</div></div></div>
+  </div>
+  <div class="subhead">Channel key (v2.1) — channel indicators only</div>
+  <div class="grid g4" style="gap:8px">
+    <span class="tagm" style="color:var(--ch-website)">Website</span>
+    <span class="tagm" style="color:var(--ch-pos)">POS</span>
+    <span class="tagm" style="color:var(--ch-tokopedia)">Tokopedia</span>
+    <span class="tagm" style="color:var(--ch-shopee)">Shopee</span>
+    <span class="tagm" style="color:var(--ch-discogs)">Discogs</span>
+    <span class="tagm" style="color:var(--ch-bandcamp)">Bandcamp</span>
+    <span class="tagm" style="color:var(--ch-ebay)">eBay</span>
+    <span class="tagm" style="color:var(--ch-event)">Event</span>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="secno">02 / Type &amp; foundations</div><h2>Type, spacing, radius</h2>
+  <div class="grid g2" style="align-items:start">
+    <table>
+      <tr><th>Style</th><th>Spec</th></tr>
+      <tr><td>display-xl</td><td class="mono">40/600/48</td></tr>
+      <tr><td>h1</td><td class="mono">24/600/32</td></tr>
+      <tr><td>h2</td><td class="mono">20/600/28</td></tr>
+      <tr><td>h3</td><td class="mono">16/600/24</td></tr>
+      <tr><td>body</td><td class="mono">14/400/20</td></tr>
+      <tr><td>label</td><td class="mono">12/500/16 · UPPER</td></tr>
+      <tr><td>mono-price</td><td class="mono">14/500 · mono</td></tr>
+      <tr><td>mono-meta</td><td class="mono">12/400 · mono</td></tr>
+    </table>
+    <table>
+      <tr><th>Scale</th><th>Values</th></tr>
+      <tr><td>Spacing</td><td class="mono">4·8·12·16·20·24·32·40·48·64</td></tr>
+      <tr><td>Radius</td><td class="mono">sm4 · md6 · lg8 · xl12 · pill999</td></tr>
+      <tr><td>Elevation</td><td class="mono">flat · drop · float · dialog</td></tr>
+      <tr><td>Focus</td><td class="mono">2px accent ring</td></tr>
+      <tr><td>Faces</td><td>Geist · Geist Mono</td></tr>
+    </table>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="secno">03 / Components</div><h2>Component specs</h2>
+  <p class="lead">Redlines mirror the mockups. Buttons radius 6; cards radius 8; pills for chips/badges.</p>
+  <div class="grid g3">
+    <div class="spec"><div class="demo"><button class="btn btn-primary">Add to cart</button><button class="btn btn-secondary">Save</button></div><div><div class="name">Buttons</div><div class="props">radius 6 · pad 10 16 · body-medium · primary = accent fill</div></div></div>
+    <div class="spec"><div class="demo"><span class="chip-f on">All</span><span class="chip-f">LP</span><span class="chip-f">CD</span></div><div><div class="name">Filter chips</div><div class="props">pill · pad 4 12 · active = accent outline + ink</div></div></div>
+    <div class="spec"><div class="demo"><span class="badge b-success">In stock</span><span class="badge b-warning">Low</span></div><div><div class="name">Status badge</div><div class="props">pill · 12% tint · leading dot</div></div></div>
+    <div class="spec"><div class="demo"><span class="tagm" style="color:var(--ch-website)">Website</span><span class="tagm" style="color:var(--ch-shopee)">Shopee</span></div><div><div class="name">Channel tag</div><div class="props">mono · coloured dot + text · neutral pill</div></div></div>
+    <div class="spec"><div class="demo"><input class="input" placeholder="Search artist or title…"></div><div><div class="name">Input</div><div class="props">raised bg · 1px hairline · radius 6 · focus accent</div></div></div>
+    <div class="spec"><div class="demo"><div class="card-demo"><div class="cov"><div class="grooves"></div></div><div class="cb"><div class="ar">Khruangbin</div><div class="ti">Mordechai</div><div class="pr">Rp 525.000</div></div></div></div><div><div class="name">Release card</div><div class="props">1:1 vinyl-groove cover · radius 8 · stock badge</div></div></div>
+  </div>
+  <div class="subhead">Panel / section header bar (v2.1)</div>
+  <div style="max-width:440px">
+    <div class="hdrbar"><span>Revenue &amp; net margin</span><span class="tabs"><span class="t">3M</span><span class="t">6M</span><span class="t on">12M</span></span></div>
+    <div class="panelbody">Accent bar: <span class="mono">background:accent · color:accent-text</span>. Black bar/white text in light, inverted in dark. Active tab flips to an inverted chip. Applies to panel/section headers only.</div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="secno">04 / Screens</div><h2>Screen set</h2>
+  <p class="lead">22 screens, desktop + mobile. Open the <a class="lnk" href="../preview.html">single-file preview</a> or the <a class="lnk" href="../index.html">prototype hub</a> to walk them.</p>
+  <div class="screens">
+    <a href="../mockup-storefront.html">Catalogue<div class="f">storefront</div></a>
+    <a href="../mockup-release.html">Release detail<div class="f">release</div></a>
+    <a href="../mockup-cart.html">Cart<div class="f">cart</div></a>
+    <a href="../mockup-checkout.html">Checkout<div class="f">checkout</div></a>
+    <a href="../mockup-confirmation.html">Confirmation<div class="f">confirmation</div></a>
+    <a href="../mockup-account.html">Account<div class="f">account</div></a>
+    <a href="../mockup-journal.html">News article<div class="f">journal</div></a>
+    <a href="../mockup-dashboard.html">Dashboard<div class="f">dashboard</div></a>
+    <a href="../mockup-inventory.html">Inventory<div class="f">inventory</div></a>
+    <a href="../mockup-locations.html">Locations<div class="f">locations</div></a>
+    <a href="../mockup-release-edit.html">Add/edit release<div class="f">release-edit</div></a>
+    <a href="../mockup-orders.html">Orders<div class="f">orders</div></a>
+    <a href="../mockup-order-detail.html">Order detail<div class="f">order-detail</div></a>
+    <a href="../mockup-customers.html">Customers<div class="f">customers</div></a>
+    <a href="../mockup-vouchers.html">Vouchers<div class="f">vouchers</div></a>
+    <a href="../mockup-newsletter.html">Newsletter<div class="f">newsletter</div></a>
+    <a href="../mockup-purchase-orders.html">Purchase orders<div class="f">purchase-orders</div></a>
+    <a href="../mockup-news.html">News updates<div class="f">news</div></a>
+    <a href="../mockup-channels.html">Channels<div class="f">channels</div></a>
+    <a href="../mockup-preferences.html">Preferences<div class="f">preferences</div></a>
+    <a href="../mockup-pos.html">POS sale<div class="f">pos</div></a>
+    <a href="../mockup-pos-checkout.html">POS checkout<div class="f">pos-checkout</div></a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">Medium Format — Confidential © 2026. Design system v2.1. Source of truth: <span class="mono">DESIGN.md</span>, <span class="mono">design-system/tokens.json</span>. Handoff mirrors the prototype build.</div></footer>
+
+<script>
+const H=document.documentElement,tg=document.getElementById('tg');
+function apply(t){H.setAttribute('data-theme',t);tg.textContent=t==='light'?'Dark theme':'Light theme';}
+apply(localStorage.getItem('mf-theme')||'dark');
+tg.onclick=()=>{const n=H.getAttribute('data-theme')==='light'?'dark':'light';localStorage.setItem('mf-theme',n);apply(n);};
+</script>
+</body>
+</html>

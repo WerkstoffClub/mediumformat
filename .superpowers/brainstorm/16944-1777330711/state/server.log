@@ -1,0 +1,15 @@
+{"type":"server-started","port":50827,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:50827","screen_dir":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content","state_dir":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/state"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/architecture.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/nav-structure.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/dashboard.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/inventory.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/storefront.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/theme-comparison.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/channel-sync.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/checkout-xendit.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/track-preview-manager.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/dashboard-v2.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/purchase-orders.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/inventory-v2.html"}
+{"type":"screen-added","file":"/Users/sonatsu/Documents/Projects/Claude/MediumFormat/.superpowers/brainstorm/16944-1777330711/content/user-roles.html"}
+{"type":"server-stopped","reason":"idle timeout"}

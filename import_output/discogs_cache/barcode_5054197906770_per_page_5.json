@@ -1,0 +1,115 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2024",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue",
+        "Repress",
+        "Stereo",
+        "CD",
+        "Blu-ray",
+        "Album",
+        "Stereo",
+        "Multichannel",
+        "All Media",
+        "Limited Edition"
+      ],
+      "label": [
+        "Parlophone",
+        "Warner Music France",
+        "Warner Music France",
+        "Sonopress",
+        "Sonopress",
+        "Sonopress",
+        "Sonopress"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Downtempo",
+        "Ambient"
+      ],
+      "id": 30067852,
+      "barcode": [
+        "5054197906770",
+        "5 054197 906770",
+        "GEMA BIEM",
+        "[Warner W Logo]56028518/0724384497828 25",
+        "IFPI LP 73",
+        "IFPI 0757",
+        "[Warner W Logo]58424194/5054197906770-2 21",
+        "IFPI  LB47",
+        "IFPI 0707",
+        "58424191/5054197906770-BD D 22",
+        "58424190/5054197906770-BD DO 21",
+        "IFPI L030",
+        "IFPI L030",
+        "IFPI 074C"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1622,
+      "master_url": "https://api.discogs.com/masters/1622",
+      "uri": "/release/30067852-AIR-French-Band-Moon-Safari",
+      "catno": "5054197906770",
+      "title": "AIR French Band* - Moon Safari",
+      "thumb": "https://i.discogs.com/no8CZFV7V50U49N8BwpsvxwpsLUFqlyEtjQDlTCM5nY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwMDY3/ODUyLTE3MTAyNDkx/NjgtNjAxMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/oxvTmGEjROVdAN415ibh_ncfkff2zx02PuS6SEEQD-s/rs:fit/g:sm/q:90/h:534/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwMDY3/ODUyLTE3MTAyNDkx/NjgtNjAxMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/30067852",
+      "community": {
+        "want": 235,
+        "have": 1147
+      },
+      "format_quantity": 3,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue",
+            "Repress",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1"
+        },
+        {
+          "name": "Blu-ray",
+          "qty": "1",
+          "text": "Dolby Atmos",
+          "descriptions": [
+            "Album",
+            "Stereo",
+            "Multichannel"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "25th Anniversary Explorer Edition",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

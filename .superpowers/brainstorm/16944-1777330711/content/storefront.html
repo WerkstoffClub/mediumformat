@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Medium Format — Storefront Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #090909; color: #fff;
+    font-family: Inter, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    padding-bottom: 64px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex; align-items: center; gap: 0;
+    background: #090909; border-bottom: 1px solid #1a1a1a;
+    padding: 0 24px; height: 52px;
+  }
+  .nav-logo {
+    font-weight: 900; font-size: 16px; letter-spacing: -0.04em;
+    color: #fff; margin-right: 32px;
+  }
+  .nav-logo span { color: #0099ff; }
+  .nav-links { display: flex; gap: 0; flex: 1; }
+  .nav-link {
+    padding: 0 14px; height: 52px; display: flex; align-items: center;
+    color: #999; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.08em; cursor: pointer;
+    border-bottom: 2px solid transparent; font-weight: 500;
+  }
+  .nav-link:hover { color: #fff; }
+  .nav-link.active { color: #fff; border-bottom-color: #fff; }
+  .nav-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+  .nav-search {
+    display: flex; align-items: center; gap: 6px; background: #141414;
+    border: 1px solid #262626; border-radius: 6px; padding: 5px 10px;
+  }
+  .nav-search input {
+    background: none; border: none; outline: none; color: #fff;
+    font-size: 12px; width: 160px; font-family: inherit;
+  }
+  .nav-search input::placeholder { color: #555; }
+  /* Cart — white pill */
+  .cart-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 7px 16px; background: #fff; border-radius: 100px;
+    font-size: 11px; font-weight: 700; color: #000; cursor: pointer;
+    border: none; font-family: inherit;
+  }
+  .cart-btn:hover { background: #e8e8e8; }
+
+  /* ── CONTENT ── */
+  .page { display: flex; max-width: 1100px; margin: 0 auto; padding: 20px 20px; gap: 24px; }
+
+  /* ── FILTERS SIDEBAR ── */
+  .filters { width: 180px; min-width: 180px; }
+  .filter-section { margin-bottom: 20px; }
+  .filter-title {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #999; margin-bottom: 8px; font-weight: 600;
+  }
+  .filter-option {
+    display: flex; align-items: center; gap: 7px; padding: 4px 0;
+    color: #999; font-size: 12px; cursor: pointer;
+  }
+  .filter-option:hover { color: #fff; }
+  .filter-option input { accent-color: #0099ff; }
+  .filter-option.checked { color: #fff; }
+
+  /* ── GRID ── */
+  .grid-area { flex: 1; }
+  .grid-toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .grid-count { color: #555; font-size: 12px; flex: 1; }
+  .sort-select {
+    background: #141414; border: 1px solid #262626; color: #999;
+    border-radius: 6px; padding: 5px 8px; font-size: 11px;
+    font-family: inherit; outline: none;
+  }
+  .view-toggle { display: flex; gap: 4px; }
+  .view-btn {
+    padding: 5px 8px; border: 1px solid #262626; background: #141414;
+    border-radius: 5px; color: #555; font-size: 12px; cursor: pointer;
+  }
+  .view-btn.active { background: #1c1c1c; border-color: #262626; color: #fff; }
+
+  .release-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  /* ── RELEASE CARD ── */
+  .release-card {
+    background: #141414; border: 1px solid #262626; border-radius: 10px;
+    overflow: hidden; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .release-card:hover { border-color: #333; }
+
+  /* SPOTLIGHT — currently playing card */
+  .release-card.playing {
+    border-color: rgba(0,153,255,0.3);
+    box-shadow: 0 0 0 1px rgba(0,153,255,0.3), 0 8px 30px rgba(0,153,255,0.1);
+  }
+
+  /* COVER PLACEHOLDER — each card a different gradient */
+  .cover-wrap { position: relative; aspect-ratio: 1; overflow: hidden; }
+  .cover-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .cover-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center;
+    justify-content: center; font-size: 40px;
+  }
+  .cover-grad-1 { background: linear-gradient(135deg, #1a0a3a 0%, #0a0a2e 100%); }
+  .cover-grad-2 { background: linear-gradient(135deg, #2a0a1e 0%, #0a0a1a 100%); }
+  .cover-grad-3 { background: linear-gradient(135deg, #1a1a0a 0%, #0a0f0a 100%); }
+  .cover-grad-4 { background: linear-gradient(135deg, #0a1a2a 0%, #0a0a1a 100%); }
+  .cover-grad-5 { background: linear-gradient(135deg, #1a0a0a 0%, #0f0a0a 100%); }
+  .cover-grad-6 { background: linear-gradient(135deg, #0a1a1a 0%, #0a0f14 100%); }
+
+  /* PREVIEW BADGE — corner */
+  .preview-badge-corner {
+    position: absolute; top: 7px; left: 7px;
+    font-size: 8px; padding: 2px 6px; border-radius: 100px;
+    background: rgba(0,0,0,0.75); color: #0099ff;
+    border: 1px solid rgba(0,153,255,0.2);
+    font-weight: 700; letter-spacing: 0.06em;
+    z-index: 2;
+  }
+  .preview-badge-corner.sold-out {
+    color: #555;
+    border: none;
+  }
+
+  /* PLAY BUTTON OVERLAY */
+  .play-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0); transition: background 0.15s;
+  }
+  .release-card:hover .play-overlay { background: rgba(0,0,0,0.45); }
+  .play-circle {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #0099ff; display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.15s; font-size: 14px; color: #fff;
+    box-shadow: 0 2px 16px rgba(0,153,255,0.5);
+  }
+  .release-card:hover .play-circle { opacity: 1; }
+  .release-card.playing .play-circle { opacity: 1; background: #0099ff; }
+  .release-card.playing .play-overlay { background: rgba(0,0,0,0.2); }
+
+  /* ── WAVEFORM AREA (30s clip strip) ── */
+  .waveform-area {
+    padding: 8px 10px 2px;
+  }
+  .waveform {
+    height: 24px;
+    display: flex; align-items: flex-end; gap: 1.5px;
+    padding: 0 2px;
+  }
+  .waveform-bar {
+    flex-shrink: 0;
+    width: 3px;
+    border-radius: 2px 2px 0 0;
+    background: #2a2a2a;
+  }
+  .waveform-bar.played { background: #0099ff; }
+  .waveform-labels {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 3px;
+  }
+  .waveform-start { font-size: 8px; color: #444; }
+  .waveform-clip-badge {
+    font-size: 8px; color: #0099ff; font-weight: 700; letter-spacing: 0.04em;
+  }
+
+  /* TRACKLIST */
+  .tracklist {
+    max-height: 0; overflow: hidden; transition: max-height 0.2s ease;
+    background: #090909; border-top: 1px solid #1a1a1a;
+  }
+  .release-card.playing .tracklist { max-height: 200px; }
+  .track-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 10px; border-bottom: 1px solid #141414;
+    background: #090909;
+  }
+  .track-row:last-child { border-bottom: none; }
+  .track-num { color: #444; font-size: 10px; width: 14px; text-align: right; flex-shrink: 0; }
+
+  /* ▶ :30 pill — replaces old circle button */
+  .track-preview-pill {
+    display: inline-flex; align-items: center; gap: 3px;
+    padding: 2px 7px; border-radius: 100px;
+    background: #1c1c1c; border: 1px solid #2a2a2a;
+    font-size: 9px; font-weight: 700; color: #555;
+    cursor: pointer; flex-shrink: 0; font-family: inherit;
+  }
+  .track-preview-pill:hover {
+    border-color: rgba(0,153,255,0.3); color: #0099ff;
+  }
+  .track-preview-pill.active {
+    background: rgba(0,153,255,0.12);
+    border-color: rgba(0,153,255,0.35);
+    color: #0099ff;
+  }
+
+  .track-title {
+    flex: 1; color: #999; font-size: 10px; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .track-dur { color: #444; font-size: 10px; flex-shrink: 0; }
+
+  /* CARD BODY */
+  .card-body { padding: 10px 12px; }
+  .card-artist { color: #999; font-size: 10px; margin-bottom: 2px; }
+  .card-title {
+    color: #fff; font-weight: 700; font-size: 12px; margin-bottom: 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    letter-spacing: -0.02em;
+  }
+  .card-title.out-of-stock-title { color: #555; }
+  .card-meta { color: #444; font-size: 10px; margin-bottom: 8px; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .card-price { font-weight: 800; font-size: 13px; color: #fff; letter-spacing: -0.02em; }
+
+  /* ADD TO CART — white pill */
+  .add-cart-btn {
+    background: #fff; color: #000; border: none; border-radius: 100px;
+    padding: 5px 12px; font-size: 10px; font-weight: 700; cursor: pointer;
+    font-family: inherit;
+  }
+  .add-cart-btn:hover { background: #e8e8e8; }
+
+  /* NOTIFY ME — secondary charcoal pill */
+  .out-of-stock-btn {
+    background: #141414; color: #999; border: 1px solid #262626;
+    border-radius: 100px; padding: 5px 12px; font-size: 10px;
+    font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .out-of-stock-btn:hover { background: #1c1c1c; color: #fff; }
+
+  /* ── NOW PLAYING BAR — Juno style ── */
+  .now-playing {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #090909; border-top: 1px solid #1a1a1a;
+    padding: 0 24px; height: 64px;
+    display: flex; align-items: center; gap: 16px; z-index: 100;
+  }
+  .np-cover {
+    width: 40px; height: 40px; border-radius: 4px;
+    background: linear-gradient(135deg, #1a0a3a, #0a0a2e);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0; border: 1px solid #262626;
+  }
+  .np-info { min-width: 0; flex-shrink: 0; max-width: 200px; }
+  .np-track-row { display: flex; align-items: center; gap: 7px; }
+  .np-track {
+    color: #fff; font-size: 12px; font-weight: 600; letter-spacing: -0.02em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .np-preview-badge {
+    font-size: 8px; padding: 2px 5px; border-radius: 100px;
+    background: rgba(0,153,255,0.08); color: #0099ff;
+    border: 1px solid rgba(0,153,255,0.18);
+    font-weight: 700; letter-spacing: 0.06em; flex-shrink: 0;
+  }
+  .np-release {
+    color: #555; font-size: 10px; margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .np-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .np-btn-skip {
+    background: none; border: none; color: #555; font-size: 14px;
+    cursor: pointer; padding: 4px;
+  }
+  .np-btn-skip:hover { color: #fff; }
+  .np-btn-play {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #fff; color: #000; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 11px;
+  }
+  .np-btn-play:hover { background: #e8e8e8; }
+  .np-progress-section {
+    flex: 1; display: flex; align-items: center; gap: 10px; min-width: 0;
+  }
+  .np-waveform {
+    display: flex; align-items: flex-end; gap: 1.5px;
+    flex: 1; height: 28px; min-width: 0;
+  }
+  .np-wave-bar { width: 2.5px; border-radius: 1px 1px 0 0; flex-shrink: 0; }
+  .np-time { font-size: 11px; color: #555; flex-shrink: 0; white-space: nowrap; }
+  .np-time strong { color: #fff; font-weight: 600; }
+  .np-vol {
+    background: none; border: none; color: #555; font-size: 16px;
+    cursor: pointer; flex-shrink: 0; padding: 4px;
+  }
+  .np-vol:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Medium<span>Format</span></div>
+  <div class="nav-links">
+    <div class="nav-link active">New In</div>
+    <div class="nav-link">Vinyl</div>
+    <div class="nav-link">CD</div>
+    <div class="nav-link">Merch</div>
+    <div class="nav-link">Wholesale</div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-search">
+      <span style="color:#555;font-size:12px">🔍</span>
+      <input placeholder="Search releases…" />
+    </div>
+    <button class="cart-btn">🛒 Cart (2)</button>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <div class="filter-section">
+      <div class="filter-title">Format</div>
+      <label class="filter-option checked"><input type="checkbox" checked /> LP / 12"</label>
+      <label class="filter-option"><input type="checkbox" /> 7" Single</label>
+      <label class="filter-option"><input type="checkbox" /> CD</label>
+      <label class="filter-option"><input type="checkbox" /> 2xLP / Box</label>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Genre</div>
+      <label class="filter-option checked"><input type="checkbox" checked /> Electronic</label>
+      <label class="filter-option"><input type="checkbox" /> Rock</label>
+      <label class="filter-option"><input type="checkbox" /> Jazz</label>
+      <label class="filter-option"><input type="checkbox" /> Hip-Hop</label>
+      <label class="filter-option"><input type="checkbox" /> Ambient</label>
+      <label class="filter-option"><input type="checkbox" /> Funk / Soul</label>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Condition</div>
+      <label class="filter-option"><input type="checkbox" /> Mint (M)</label>
+      <label class="filter-option"><input type="checkbox" /> VG+</label>
+      <label class="filter-option"><input type="checkbox" /> VG</label>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Price (IDR)</div>
+      <label class="filter-option"><input type="checkbox" /> Under 300K</label>
+      <label class="filter-option"><input type="checkbox" /> 300K – 600K</label>
+      <label class="filter-option"><input type="checkbox" /> 600K – 1.2M</label>
+      <label class="filter-option"><input type="checkbox" /> Above 1.2M</label>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Preview</div>
+      <label class="filter-option"><input type="checkbox" /> Has audio preview</label>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid-area">
+    <div class="grid-toolbar">
+      <div class="grid-count">1,240 releases</div>
+      <select class="sort-select">
+        <option>Newest First</option>
+        <option>Price: Low → High</option>
+        <option>Price: High → Low</option>
+        <option>Artist A–Z</option>
+      </select>
+      <div class="view-toggle">
+        <div class="view-btn active">⊞</div>
+        <div class="view-btn">≡</div>
+      </div>
+    </div>
+
+    <div class="release-grid">
+
+      <!-- Card 1: PLAYING — OK Computer — spotlight glow -->
+      <div class="release-card playing">
+        <div class="cover-wrap">
+          <div class="cover-placeholder cover-grad-1">🎵</div>
+          <div class="preview-badge-corner">♪ PREVIEW</div>
+          <div class="play-overlay">
+            <div class="play-circle">■</div>
+          </div>
+        </div>
+        <!-- Waveform area — 30s clip strip -->
+        <div class="waveform-area">
+          <div class="waveform" id="card-waveform"></div>
+          <div class="waveform-labels">
+            <span class="waveform-start">0:00</span>
+            <span class="waveform-clip-badge">:30 CLIP</span>
+          </div>
+        </div>
+        <!-- Tracklist -->
+        <div class="tracklist">
+          <div class="track-row">
+            <div class="track-num">A1</div>
+            <div class="track-preview-pill active">▶ :30</div>
+            <div class="track-title">Airbag</div>
+            <div class="track-dur">4:44</div>
+          </div>
+          <div class="track-row">
+            <div class="track-num">A2</div>
+            <div class="track-preview-pill">▶ :30</div>
+            <div class="track-title">Paranoid Android</div>
+            <div class="track-dur">6:23</div>
+          </div>
+          <div class="track-row">
+            <div class="track-num">A3</div>
+            <div class="track-preview-pill">▶ :30</div>
+            <div class="track-title">Subterranean Homesick Alien</div>
+            <div class="track-dur">4:27</div>
+          </div>
+          <div class="track-row">
+            <div class="track-num">B1</div>
+            <div class="track-preview-pill">▶ :30</div>
+            <div class="track-title">Exit Music (For a Film)</div>
+            <div class="track-dur">4:24</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-artist">Radiohead</div>
+          <div class="card-title">OK Computer</div>
+          <div class="card-meta">1997 · LP · M · Parlophone</div>
+          <div class="card-footer">
+            <div class="card-price">Rp 850K</div>
+            <button class="add-cart-btn">+ Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 — Mezzanine -->
+      <div class="release-card">
+        <div class="cover-wrap">
+          <div class="cover-placeholder cover-grad-2">🎵</div>
+          <div class="preview-badge-corner">♪ PREVIEW</div>
+          <div class="play-overlay"><div class="play-circle">▶</div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-artist">Massive Attack</div>
+          <div class="card-title">Mezzanine</div>
+          <div class="card-meta">1998 · LP · VG+ · Virgin</div>
+          <div class="card-footer">
+            <div class="card-price">Rp 620K</div>
+            <button class="add-cart-btn">+ Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 — Dummy -->
+      <div class="release-card">
+        <div class="cover-wrap">
+          <div class="cover-placeholder cover-grad-3">🎵</div>
+          <div class="preview-badge-corner">♪ PREVIEW</div>
+          <div class="play-overlay"><div class="play-circle">▶</div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-artist">Portishead</div>
+          <div class="card-title">Dummy</div>
+          <div class="card-meta">1994 · LP · M · Go! Discs</div>
+          <div class="card-footer">
+            <div class="card-price">Rp 780K</div>
+            <button class="add-cart-btn">+ Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 — Selected Ambient Works -->
+      <div class="release-card">
+        <div class="cover-wrap">
+          <div class="cover-placeholder cover-grad-4">🎵</div>
+          <div class="preview-badge-corner">♪ PREVIEW</div>
+          <div class="play-overlay"><div class="play-circle">▶</div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-artist">Aphex Twin</div>
+          <div class="card-title">Selected Ambient Works Vol. II</div>
+          <div class="card-meta">1994 · 2xLP · M · Warp</div>
+          <div class="card-footer">
+            <div class="card-price">Rp 1.25M</div>
+            <button class="add-cart-btn">+ Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 — out of stock: Burial — Untrue -->
+      <div class="release-card">
+        <div class="cover-wrap">
+          <div class="cover-placeholder cover-grad-5" style="opacity:0.4">🎵</div>
+          <div class="preview-badge-corner sold-out">♪ PREVIEW</div>
+          <div class="play-overlay"><div class="play-circle">▶</div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-artist">Burial</div>
+          <div class="card-title out-of-stock-title">Untrue</div>
+          <div class="card-meta">2007 · LP · M · Hyperdub</div>
+          <div class="card-footer">
+            <div class="card-price" style="color:#555">Sold Out</div>
+            <button class="out-of-stock-btn">Notify Me</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 — Boards of Canada -->
+      <div class="release-card">
+        <div class="cover-wrap">
+          <div class="cover-placeholder cover-grad-6">🎵</div>
+          <div class="preview-badge-corner">♪ PREVIEW</div>
+          <div class="play-overlay"><div class="play-circle">▶</div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-artist">Boards of Canada</div>
+          <div class="card-title">Music Has the Right to Children</div>
+          <div class="card-meta">1998 · LP · VG+ · Warp</div>
+          <div class="card-footer">
+            <div class="card-price">Rp 920K</div>
+            <button class="add-cart-btn">+ Cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- NOW PLAYING BAR — Juno style -->
+<div class="now-playing">
+  <div class="np-cover">🎵</div>
+  <div class="np-info">
+    <div class="np-track-row">
+      <span class="np-track">Airbag</span>
+      <span class="np-preview-badge">30s CLIP</span>
+    </div>
+    <div class="np-release">Radiohead — OK Computer · Bandcamp</div>
+  </div>
+  <div class="np-controls">
+    <button class="np-btn-skip">⏮</button>
+    <button class="np-btn-play">■</button>
+    <button class="np-btn-skip">⏭</button>
+  </div>
+  <div class="np-progress-section">
+    <div class="np-waveform" id="np-waveform"></div>
+    <div class="np-time"><strong>0:14</strong> / 0:30</div>
+  </div>
+  <button class="np-vol">🔊</button>
+</div>
+
+<script>
+(function() {
+  var heights = [55,70,85,45,65,90,55,80,60,75,50,85,70,55,90,65,80,45,75,60,85,55,70,90,50,65,80,45,75,60,85,70,55,90,65,80,45,70,85,55];
+
+  // Card waveform (30 bars, 12 played = ~40%)
+  var cardWf = document.getElementById('card-waveform');
+  if (cardWf) {
+    heights.slice(0, 30).forEach(function(h, i) {
+      var b = document.createElement('div');
+      b.className = 'waveform-bar' + (i < 12 ? ' played' : '');
+      b.style.height = h + '%';
+      cardWf.appendChild(b);
+    });
+  }
+
+  // Now-playing waveform (40 bars, 19 played = 47% of 30s = ~14s)
+  var npWf = document.getElementById('np-waveform');
+  if (npWf) {
+    heights.forEach(function(h, i) {
+      var b = document.createElement('div');
+      b.className = 'np-wave-bar';
+      b.style.height = h + '%';
+      b.style.background = i < 19 ? '#0099ff' : '#2a2a2a';
+      npWf.appendChild(b);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk"
+      ],
+      "id": 5744557,
+      "label": [
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 56605 22011 6"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/5744557-Sharon-Van-Etten-Tramp",
+      "catno": "JAG201",
+      "title": "Sharon Van Etten - Tramp",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/5744557",
+      "community": {
+        "want": 0,
+        "have": 4
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2012",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Aaron's Garage",
+        "Tarquin Studios",
+        "Miner Street Recordings",
+        "Miner Street Recordings",
+        "Tarquin Studios",
+        "Joe Lambert Mastering",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Joe Lambert Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk"
+      ],
+      "id": 3387096,
+      "barcode": [
+        "6 56605 22011 6",
+        "656605220116",
+        "JAG201A J. Lambert @ JLM",
+        "JAG201B J. Lambert @ JLM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 407503,
+      "master_url": "https://api.discogs.com/masters/407503",
+      "uri": "/release/3387096-Sharon-Van-Etten-Tramp",
+      "catno": "JAG201",
+      "title": "Sharon Van Etten - Tramp",
+      "thumb": "https://i.discogs.com/gkJkAqJqTCIEViUV8u7YVSOoSE4ox4S_oyeYQbESkbU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzODcw/OTYtMTU4NjM1MjY3/MS03Mjk0LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/EUVTVqSGKfSz3mH7065iYEeuK_HFjc69m_xotslG6Co/rs:fit/g:sm/q:90/h:602/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzODcw/OTYtMTU4NjM1MjY3/MS03Mjk0LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3387096",
+      "community": {
+        "want": 522,
+        "have": 4742
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

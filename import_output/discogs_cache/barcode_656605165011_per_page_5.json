@@ -1,0 +1,314 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 6,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605165011&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=656605165011&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Chicago Mastering Service"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 28269031,
+      "barcode": [
+        "656605165011",
+        "656605165011",
+        "DOC-350-A ⓎBW230131 #4",
+        "258903E1 1589511",
+        "DOC-350-B ⓎBW230131 #19",
+        "258903E2 1589504"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3239857,
+      "master_url": "https://api.discogs.com/masters/3239857",
+      "uri": "/release/28269031-Mitski-The-Land-Is-Inhospitable-And-So-Are-We",
+      "catno": "DOC 350",
+      "title": "Mitski - The Land Is Inhospitable And So Are We",
+      "thumb": "https://i.discogs.com/ET8QEzK9U5k-FcEE171udMIfef9QiEbA0mpKR0rt68I/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MjY5/MDMxLTE2OTYxODM2/MDMtNzgwOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/oXuztMWWzDBt9hsFYE_NiS_gdH95tD5JwXVRe-tldbw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MjY5/MDMxLTE2OTYxODM2/MDMtNzgwOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28269031",
+      "community": {
+        "want": 706,
+        "have": 3300
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "The Bomb Shelter, Nashville, TN",
+        "The Bomb Shelter, Nashville, TN",
+        "Sunset Sound",
+        "Chicago Mastering Service",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 28302358,
+      "barcode": [
+        "656605165035",
+        "656605165011",
+        "6 56605 16501 1",
+        "DOC-350-A BW 230131 258903E1 1589516",
+        "DOC-350-B BW 230131 258903E2 1589502"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3239857,
+      "master_url": "https://api.discogs.com/masters/3239857",
+      "uri": "/release/28302358-Mitski-The-Land-Is-Inhospitable-And-So-Are-We",
+      "catno": "DOC 350",
+      "title": "Mitski - The Land Is Inhospitable And So Are We",
+      "thumb": "https://i.discogs.com/9t20D9dn58jsPzHehvj16UIxOtq3YlGJweSDUFEv4uM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MzAy/MzU4LTE2OTUzMzU0/OTQtNzkyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/dYEEnAet_PrpXp_0TuacaHFu8ETqezTRQ0NNImADrOI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MzAy/MzU4LTE2OTUzMzU0/OTQtNzkyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28302358",
+      "community": {
+        "want": 433,
+        "have": 3263
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue [Robin Egg]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "The Bomb Shelter, Nashville, TN",
+        "The Bomb Shelter, Nashville, TN",
+        "Sunset Sound",
+        "Chicago Mastering Service",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 29999668,
+      "barcode": [
+        "656605165035",
+        "656605165011",
+        "6 56605 16501 1",
+        "DOC-350-A BW 230131 258903E1 1589516",
+        "DOC-350-B BW 230131 258903E2 1589502"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3239857,
+      "master_url": "https://api.discogs.com/masters/3239857",
+      "uri": "/release/29999668-Mitski-The-Land-Is-Inhospitable-And-So-Are-We",
+      "catno": "DOC 350",
+      "title": "Mitski - The Land Is Inhospitable And So Are We",
+      "thumb": "https://i.discogs.com/a0iSlIkuRZWgr006WDZRpfYe3c0jefL25oIuHMlwFkc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5OTk5/NjY4LTE3MDk1NzMx/OTUtMjMxNy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ObXDdz7fW8rdGlHN785bOkqSl65Kr5S0k6ZMl62LpSc/rs:fit/g:sm/q:90/h:555/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5OTk5/NjY4LTE3MDk1NzMx/OTUtMjMxNy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/29999668",
+      "community": {
+        "want": 143,
+        "have": 534
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue [Robin Egg]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Chicago Mastering Service"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 28267735,
+      "barcode": [
+        "656605165073",
+        "6 56605 16501 1",
+        "DOC-350-A BW 230131",
+        "258903E1 1589515",
+        "DOC-350-B BW 230131",
+        "1616019 258903E2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3239857,
+      "master_url": "https://api.discogs.com/masters/3239857",
+      "uri": "/release/28267735-Mitski-The-Land-Is-Inhospitable-And-So-Are-We",
+      "catno": "DOC 350",
+      "title": "Mitski - The Land Is Inhospitable And So Are We",
+      "thumb": "https://i.discogs.com/X-mWmGDM22h2x6oBq9pnHDVZ1aEdfpCDoz5GjqTNn0M/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MjY3/NzM1LTE2OTUzMDQw/NDgtMzk0NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/B87oslfMeh1a-lXzMhU22Xa6KRlXX1M-eSZ1OGwm87s/rs:fit/g:sm/q:90/h:604/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MjY3/NzM1LTE2OTUzMDQw/NDgtMzk0NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28267735",
+      "community": {
+        "want": 851,
+        "have": 5192
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue [Robin Egg], Die Cut Sleeve",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Repress",
+        "Stereo"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Chicago Mastering Service"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 33341060,
+      "barcode": [
+        "6 56605 16501 1",
+        "DOC-350-A 1514139 ⓎBu230131 258903E1 #9",
+        "DOC-350-B 1514142 ⓎBu230131 258903E2 #9"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3239857,
+      "master_url": "https://api.discogs.com/masters/3239857",
+      "uri": "/release/33341060-Mitski-The-Land-Is-Inhospitable-And-So-Are-We",
+      "catno": "DOC350",
+      "title": "Mitski - The Land Is Inhospitable And So Are We",
+      "thumb": "https://i.discogs.com/6uW5QLp3OE4nJfY9sbj-3hZbhloS22W-NA6SyBfBTDo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzQx/MDYwLTE3NDEzNzcz/NDktNTM5OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ohUGNasdObzCVC7YpBcKVmjJHDkDJHrjspM1kz3jJMc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzQx/MDYwLTE3NDEzNzcz/NDktNTM5OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33341060",
+      "community": {
+        "want": 78,
+        "have": 110
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Repress",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

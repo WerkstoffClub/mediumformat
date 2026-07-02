@@ -1,0 +1,82 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2013",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Bad Boy Entertainment",
+        "Interscope Records",
+        "Bad Boy Entertainment",
+        "Interscope Records",
+        "Bad Boy Entertainment",
+        "Interscope Records",
+        "Daddy's House Recording Studio",
+        "Swisher Suite Studios",
+        "Circle House Studios",
+        "Chicago Recording Company",
+        "Parkland Playhouse",
+        "Daddy's House Recording Studio",
+        "South Beach Studios",
+        "Parkland Playhouse",
+        "Masterdisk",
+        "UMG Recordings, Inc.",
+        "Coke Boys",
+        "Maybach Music Group",
+        "EDC, Germany"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop"
+      ],
+      "style": [
+        "Trap"
+      ],
+      "id": 31774307,
+      "barcode": [
+        "6 02537 40139 0",
+        "LC 06406",
+        "BIEM/SDRM",
+        "06025 374 013-9 01 + 53274483 [Universal logo] MADE IN GERMANY BY EDC A",
+        "IFPI LV27",
+        "none"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 561692,
+      "master_url": "https://api.discogs.com/masters/561692",
+      "uri": "/release/31774307-French-Montana-Excuse-My-French",
+      "catno": "0602537401390",
+      "title": "French Montana - Excuse My French",
+      "thumb": "https://i.discogs.com/_sAMJWAeFaLPUD59w2P4jnXJhwD0-D2aQPZ21eTKKSw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNzc0/MzA3LTE3MjY3NjM1/MTEtNjc4OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/V8f8Vtm0VTMNWj2JBEhLDm6fbzY3PMlaXNsyfBzkWsw/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNzc0/MzA3LTE3MjY3NjM1/MTEtNjc4OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31774307",
+      "community": {
+        "want": 0,
+        "have": 3
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

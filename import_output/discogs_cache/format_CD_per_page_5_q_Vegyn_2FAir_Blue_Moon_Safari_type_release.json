@@ -1,0 +1,76 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Parlophone",
+        "Parlophone",
+        "Warner Music France",
+        "Warner Music France",
+        "Optimal Media GmbH",
+        "Go 4 Music",
+        "Revolvair",
+        "Sony / ATM Music Publishing"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Downtempo",
+        "Synth-pop"
+      ],
+      "id": 33833034,
+      "barcode": [
+        "5 054197 899706",
+        "GEMA",
+        "BIEM",
+        "SCPP",
+        "5054197899706 AO27395-01 manufactured by optimal media GmbH IFPI L577",
+        "IFPI L577",
+        "IFPI 9755"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3816282,
+      "master_url": "https://api.discogs.com/masters/3816282",
+      "uri": "/release/33833034-Vegyn-AIR-Blue-Moon-Safari",
+      "catno": "289970 6",
+      "title": "Vegyn, AIR - Blue Moon Safari",
+      "thumb": "https://i.discogs.com/Te8u7ycOCjQQppwt9a35FgdQNxWGU5w_66MOALyVr28/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzODMz/MDM0LTE3NzAyNzk4/ODQtNDA4OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/jUTCRn79elwSCChkOlDO-H6aVNgdlH9oXgRd6gPFRYU/rs:fit/g:sm/q:90/h:536/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzODMz/MDM0LTE3NzAyNzk4/ODQtNDA4OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33833034",
+      "community": {
+        "want": 69,
+        "have": 122
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

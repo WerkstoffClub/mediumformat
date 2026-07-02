@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navigation — Mobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: #050505; display: flex; justify-content: center; font-family: Inter, -apple-system, sans-serif; }
+
+    .app {
+      width: 390px;
+      min-height: 100vh;
+      background: #090909;
+      position: relative;
+      color: #fff;
+      font-size: 13px;
+      padding-bottom: 72px;
+    }
+
+    /* HEADER */
+    .mobile-header {
+      height: 52px;
+      background: #090909;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-logo {
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: #fff;
+      flex: 1;
+    }
+    .header-logo span { opacity: 0.4; }
+    .header-icon-btn {
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px;
+      color: #555;
+      cursor: pointer;
+    }
+    .header-icon-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .avatar-btn {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: #1c1c1c;
+      border: 1.5px solid #262626;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 800; color: #888;
+      cursor: pointer; flex-shrink: 0;
+    }
+
+    /* SEARCH BAR */
+    .search-bar {
+      margin: 12px 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #141414;
+      border: 1px solid #1e1e1e;
+      border-radius: 10px;
+      padding: 10px 14px;
+      transition: border-color 150ms;
+    }
+    .search-bar:focus-within { border-color: #0099ff; }
+    .search-bar svg { width: 14px; height: 14px; stroke: #3a3a3a; fill: none; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
+    .search-bar input {
+      background: none; border: none; outline: none;
+      color: #fff; font-size: 12px; width: 100%;
+      font-family: inherit;
+    }
+    .search-bar input::placeholder { color: #2e2e2e; }
+
+    /* GREETING */
+    .greeting {
+      padding: 14px 16px 10px;
+    }
+    .greeting-question {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 2px;
+    }
+
+    /* QUICK ACTIONS ROW */
+    .quick-actions {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-bottom: 16px;
+    }
+    .quick-actions::-webkit-scrollbar { display: none; }
+    .qa-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      background: #141414;
+      border: 1px solid #1e1e1e;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+      font-family: inherit;
+    }
+    .qa-btn.primary {
+      background: #fff;
+      color: #000;
+      border-color: transparent;
+    }
+    .qa-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    /* MODULE GRID */
+    .module-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 16px;
+    }
+
+    .module-card {
+      background: #141414;
+      border: 1px solid #1e1e1e;
+      border-radius: 14px;
+      padding: 14px 14px 13px;
+      min-height: 96px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 150ms, background 150ms;
+    }
+    .module-card:hover {
+      border-color: #262626;
+      background: #161616;
+    }
+
+    /* Top accent bar */
+    .module-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 0;
+    }
+
+    /* Module icon circle */
+    .module-icon {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--accent-bg);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+    .module-icon svg {
+      width: 14px; height: 14px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .module-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .module-items {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .module-item {
+      font-size: 10px;
+      color: #555;
+      line-height: 1.4;
+    }
+    .module-badge {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 3px;
+      vertical-align: middle;
+    }
+    .badge-id { background: rgba(232,168,56,0.1); color: #e8a838; border: 1px solid rgba(232,168,56,0.2); }
+    .badge-ext { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+    .badge-new { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid #262626; }
+
+    /* Module color variables */
+    .mod-inventory { --accent: #0099ff; --accent-bg: rgba(0,153,255,0.1); }
+    .mod-orders    { --accent: #22c55e; --accent-bg: rgba(34,197,94,0.1); }
+    .mod-customers { --accent: #5bc0de; --accent-bg: rgba(91,192,222,0.1); }
+    .mod-channels  { --accent: #e8a838; --accent-bg: rgba(232,168,56,0.1); }
+    .mod-payments  { --accent: #e05c6a; --accent-bg: rgba(224,92,106,0.1); }
+    .mod-shipping  { --accent: #5bc0de; --accent-bg: rgba(91,192,222,0.1); }
+    .mod-wholesale { --accent: #e8a838; --accent-bg: rgba(232,168,56,0.1); }
+    .mod-marketing { --accent: #d44df0; --accent-bg: rgba(212,77,240,0.1); }
+    .mod-analytics { --accent: #0099ff; --accent-bg: rgba(0,153,255,0.1); }
+    .mod-website   { --accent: #22c55e; --accent-bg: rgba(34,197,94,0.1); }
+    .mod-settings  { --accent: #555;    --accent-bg: rgba(128,128,128,0.08); }
+
+    /* LEGEND */
+    .legend {
+      margin: 16px 16px 0;
+      padding: 11px 13px;
+      background: #141414;
+      border: 1px solid #1e1e1e;
+      border-radius: 10px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .legend-label {
+      font-size: 10px;
+      color: #484848;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      color: #484848;
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 390px; height: 56px;
+      background: #090909; border-top: 1px solid #1a1a1a;
+      display: flex; align-items: center; z-index: 200;
+    }
+    .bn-item {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 3px; color: #3a3a3a; cursor: pointer;
+      height: 100%; font-size: 10px; font-weight: 600;
+    }
+    .bn-item.active { color: #fff; }
+    .bn-item svg {
+      width: 20px; height: 20px; stroke: currentColor;
+      fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="mobile-header">
+      <div class="header-logo">Medium<span>Format</span></div>
+      <div class="header-icon-btn">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="avatar-btn">MF</div>
+    </header>
+
+    <!-- SEARCH -->
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="Search modules, orders, releases…"/>
+    </div>
+
+    <!-- GREETING -->
+    <div class="greeting">
+      <div class="greeting-question">What would you like to do?</div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+      <button class="qa-btn primary">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Release
+      </button>
+      <button class="qa-btn">
+        <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+        New Order
+      </button>
+      <button class="qa-btn">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Import CSV
+      </button>
+      <button class="qa-btn">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        Sync
+      </button>
+    </div>
+
+    <!-- MODULE GRID -->
+    <div class="module-grid">
+
+      <!-- INVENTORY -->
+      <div class="module-card mod-inventory">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <div class="module-name">Inventory</div>
+        <div class="module-items">
+          <div class="module-item">All Releases</div>
+          <div class="module-item">Add Release</div>
+          <div class="module-item">Low Stock Alerts</div>
+          <div class="module-item">Import from Discogs</div>
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="module-card mod-orders">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+        </div>
+        <div class="module-name">Orders</div>
+        <div class="module-items">
+          <div class="module-item">All Orders</div>
+          <div class="module-item">Pending · Processing</div>
+          <div class="module-item">Refunds / Returns</div>
+          <div class="module-item">Walk-in (POS)</div>
+        </div>
+      </div>
+
+      <!-- CUSTOMERS -->
+      <div class="module-card mod-customers">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="module-name">Customers</div>
+        <div class="module-items">
+          <div class="module-item">All Customers</div>
+          <div class="module-item">Purchase History</div>
+          <div class="module-item">Customer Groups</div>
+          <div class="module-item">Wholesale Accounts</div>
+        </div>
+      </div>
+
+      <!-- CHANNELS -->
+      <div class="module-card mod-channels">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        </div>
+        <div class="module-name">Channels</div>
+        <div class="module-items">
+          <div class="module-item">Own Website · POS</div>
+          <div class="module-item">Tokopedia<span class="module-badge badge-id">ID</span> · Shopee<span class="module-badge badge-id">ID</span></div>
+          <div class="module-item">Discogs<span class="module-badge badge-ext">Ext</span> · Bandcamp<span class="module-badge badge-ext">Ext</span></div>
+          <div class="module-item">Channel Sync Status</div>
+        </div>
+      </div>
+
+      <!-- PAYMENTS -->
+      <div class="module-card mod-payments">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="module-name">Payments</div>
+        <div class="module-items">
+          <div class="module-item">Transactions</div>
+          <div class="module-item">Xendit<span class="module-badge badge-id">ID</span> · Stripe · PayPal</div>
+          <div class="module-item">Refunds</div>
+          <div class="module-item">Payout History</div>
+        </div>
+      </div>
+
+      <!-- SHIPPING -->
+      <div class="module-card mod-shipping">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="module-name">Shipping</div>
+        <div class="module-items">
+          <div class="module-item">Active Shipments</div>
+          <div class="module-item">Rate Calculator</div>
+          <div class="module-item">Biteship<span class="module-badge badge-id">ID</span> · DHL · FedEx</div>
+          <div class="module-item">Tracking Lookup</div>
+        </div>
+      </div>
+
+      <!-- WHOLESALE -->
+      <div class="module-card mod-wholesale">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="module-name">Wholesale</div>
+        <div class="module-items">
+          <div class="module-item">Wholesale Catalogue</div>
+          <div class="module-item">Price Tiers</div>
+          <div class="module-item">Invoice Generator</div>
+          <div class="module-item">Approved Buyers</div>
+        </div>
+      </div>
+
+      <!-- MARKETING -->
+      <div class="module-card mod-marketing">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="module-name">Marketing</div>
+        <div class="module-items">
+          <div class="module-item">Newsletter</div>
+          <div class="module-item">Discount Codes</div>
+          <div class="module-item">WhatsApp Broadcast<span class="module-badge badge-id">ID</span></div>
+          <div class="module-item">New Arrivals Feed</div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS -->
+      <div class="module-card mod-analytics">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="module-name">Analytics</div>
+        <div class="module-items">
+          <div class="module-item">Sales Overview</div>
+          <div class="module-item">Revenue by Channel</div>
+          <div class="module-item">Inventory Turnover</div>
+          <div class="module-item">Export to CSV</div>
+        </div>
+      </div>
+
+      <!-- WEBSITE -->
+      <div class="module-card mod-website">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div class="module-name">Website</div>
+        <div class="module-items">
+          <div class="module-item">Theme Editor</div>
+          <div class="module-item">Pages &amp; Content</div>
+          <div class="module-item">Homepage Banners</div>
+          <div class="module-item">SEO Settings</div>
+        </div>
+      </div>
+
+      <!-- SETTINGS (spans full width at bottom) -->
+      <div class="module-card mod-settings" style="grid-column: span 2;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div class="module-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div class="module-name">Settings</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;">
+              <div class="module-item">Store Profile</div>
+              <div class="module-item">Staff Accounts</div>
+              <div class="module-item">Roles &amp; Permissions</div>
+              <div class="module-item">Tax &amp; IDR Currency</div>
+              <div class="module-item">Notifications</div>
+              <div class="module-item">API Keys</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /module-grid -->
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <span class="legend-label">Legend:</span>
+      <div class="legend-item"><span class="module-badge badge-id">ID</span> Indonesia-specific</div>
+      <div class="legend-item"><span class="module-badge badge-ext">Ext</span> External marketplace</div>
+      <div class="legend-item"><span class="module-badge badge-new">New</span> Beyond scope</div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <div class="bn-item active">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Dashboard</span>
+      </div>
+      <div class="bn-item">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <span>Inventory</span>
+      </div>
+      <div class="bn-item">
+        <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+        <span>Orders</span>
+      </div>
+      <div class="bn-item">
+        <svg viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg>
+        <span>Channels</span>
+      </div>
+      <div class="bn-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+        <span>More</span>
+      </div>
+    </nav>
+
+  </div>
+</body>
+</html>

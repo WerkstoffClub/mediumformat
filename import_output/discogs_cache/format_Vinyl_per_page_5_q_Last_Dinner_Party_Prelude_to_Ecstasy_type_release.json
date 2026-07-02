@@ -1,0 +1,373 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 13,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Last+Dinner+Party+Prelude+to+Ecstasy&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?q=Last+Dinner+Party+Prelude+to+Ecstasy&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "The Last Dinner Party",
+        "The Last Dinner Party",
+        "Universal Music Operations Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Rock"
+      ],
+      "id": 29648242,
+      "barcode": [
+        "6 02458 51904 4",
+        "602458519044",
+        "BIEM/SDRM",
+        "LC 00407"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3381640,
+      "master_url": "https://api.discogs.com/masters/3381640",
+      "uri": "/release/29648242-The-Last-Dinner-Party-Prelude-To-Ecstasy",
+      "catno": "5851904",
+      "title": "The Last Dinner Party - Prelude To Ecstasy",
+      "thumb": "https://i.discogs.com/yxy_GWhMRXCWEhR4N60G1Fz8a_EZixKDtqLq6RnyOig/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjQ4/MjQyLTE3MDcwMDQ1/MzAtNzk3MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/oTWacnDKBX4PDl4h82mKinHms_M-l-wbsv9gvyZRJCQ/rs:fit/g:sm/q:90/h:582/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjQ4/MjQyLTE3MDcwMDQ1/MzAtNzk3MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/29648242",
+      "community": {
+        "want": 872,
+        "have": 4156
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Oxblood Red",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Universal International Music B.V.",
+        "The Last Dinner Party",
+        "The Last Dinner Party",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V.",
+        "Optimal Media GmbH",
+        "Kobalt Music Publishing",
+        "The Church, London",
+        "Sterling Sound Edgewater, NJ",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Rock"
+      ],
+      "id": 29648131,
+      "barcode": [
+        "6 02458 51903 7",
+        "602458519037",
+        "LC 00407",
+        "BIEM/SDRM",
+        "BN05217-01 A1 ST 5851903 VV",
+        "BN05217-01 B1 ST 5851903 VV",
+        "BN05217-01 A1 ST 1=v 5851903",
+        "BN05217-01 B1 ST 5851903 1=+",
+        "BN05217-01 A4 ST 5851903",
+        "BN05217-01 B2 ST 5851903 TIS",
+        "BN05217-01 A1 ST 5851903 2+",
+        "BN05217-01 B1 ST 2| 5851903"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3381640,
+      "master_url": "https://api.discogs.com/masters/3381640",
+      "uri": "/release/29648131-The-Last-Dinner-Party-Prelude-To-Ecstasy",
+      "catno": "5851903",
+      "title": "The Last Dinner Party - Prelude To Ecstasy",
+      "thumb": "https://i.discogs.com/sbAfq-kIeZzwOnD3RNFtuFZaejqk3kF2nzmHw2CTj1I/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjQ4/MTMxLTE3MDY5MTg0/NTktOTkyNy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/jGNDwxQCRZq5NHcv4FVquXBK837uZiVvC5tXA128mWU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjQ4/MTMxLTE3MDY5MTg0/NTktOTkyNy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/29648131",
+      "community": {
+        "want": 666,
+        "have": 4648
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "The Last Dinner Party",
+        "The Last Dinner Party",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V.",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Rock"
+      ],
+      "id": 29670682,
+      "barcode": [
+        "6 02458 51908 2",
+        "0602458519082",
+        "BIEM/SDRM",
+        "LC 00407",
+        "7808337512O",
+        "0 602458 834901 >",
+        "BN05217-01 A1 ST XI|\\  5851903",
+        "BN05217-01 B1 ST XI|\\  5851903",
+        "BN05217-01 A1 ST ϑ1  5851903",
+        "BN05217-01 B1 ST ⊤=∧  5851903"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3381640,
+      "master_url": "https://api.discogs.com/masters/3381640",
+      "uri": "/release/29670682-The-Last-Dinner-Party-Prelude-To-Ecstasy",
+      "catno": "5851908",
+      "title": "The Last Dinner Party - Prelude To Ecstasy",
+      "thumb": "https://i.discogs.com/hz1D6BydsoRw0PSDRkwmO4_g54oUt7kHmGUpT6aW6mk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5Njcw/NjgyLTE3MDcyMzkz/MDctNjU4NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/hverX8tfTNwahzLTMiYFBeb1YowlgLtQc2NHxxXTd8I/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5Njcw/NjgyLTE3MDcyMzkz/MDctNjU4NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/29670682",
+      "community": {
+        "want": 419,
+        "have": 2585
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Smokey Marble",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Picture Disc",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "The Last Dinner Party",
+        "The Last Dinner Party",
+        "Universal Music Operations Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Rock",
+        "Alternative Rock"
+      ],
+      "id": 29671765,
+      "barcode": [
+        "6 02458 51905 1",
+        "602458519051",
+        "LC 00407",
+        "BIEM/SDRM",
+        "00602458519037 A -63713- 3 KR SST",
+        "00602458519037 B -63713- I KR SST"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3381640,
+      "master_url": "https://api.discogs.com/masters/3381640",
+      "uri": "/release/29671765-The-Last-Dinner-Party-Prelude-To-Ecstasy",
+      "catno": "5851905",
+      "title": "The Last Dinner Party - Prelude To Ecstasy",
+      "thumb": "https://i.discogs.com/_ujMKfdsxtBC3bwejRASu5C4YUHaqWwdKtUpuw-pNEQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5Njcx/NzY1LTE3MDY4NzIy/OTEtOTI3OC5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/tndBlhP-1uog35tNjVTvpZWxujE8sx7K6iNbAubY8Zw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5Njcx/NzY1LTE3MDY4NzIy/OTEtOTI3OC5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/29671765",
+      "community": {
+        "want": 262,
+        "have": 1847
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Picture Disc",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "CD",
+        "All Media",
+        "Limited Edition"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Universal Music Operations Ltd.",
+        "The Last Dinner Party",
+        "The Last Dinner Party",
+        "Rough Trade",
+        "Optimal Media GmbH",
+        "Sector 5 Studios",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Rock"
+      ],
+      "id": 29664472,
+      "barcode": [
+        "6 02458 51906 8",
+        "BIEM/SDRM",
+        "LC 00407",
+        "BN05217-01 A1 ST 5851903 II 7",
+        "BN05217-01 B1 ST 5851903 II 7",
+        "5886739 AN07483-01 manufactured by optimal media Gmbh [2 universal logos] ",
+        "IFPI L578"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3381640,
+      "master_url": "https://api.discogs.com/masters/3381640",
+      "uri": "/release/29664472-The-Last-Dinner-Party-Prelude-To-Ecstasy",
+      "catno": "5851906",
+      "title": "The Last Dinner Party - Prelude To Ecstasy",
+      "thumb": "https://i.discogs.com/HRy6BV48UhvcclOlmMl_jDzySm3SWWFnEnwDPylGYjo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjY0/NDcyLTE3MDY5NTg1/MzQtNjYxMy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/nBzVPvFmmaaEUk6CJVNb0OKjze9w3JIusZKIRATen1c/rs:fit/g:sm/q:90/h:602/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjY0/NDcyLTE3MDY5NTg1/MzQtNjYxMy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/29664472",
+      "community": {
+        "want": 309,
+        "have": 1488
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Cream",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Rough Trade Bonus"
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

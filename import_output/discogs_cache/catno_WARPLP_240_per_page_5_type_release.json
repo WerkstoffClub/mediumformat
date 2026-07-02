@@ -1,0 +1,270 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 4,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "1993",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Warp Records",
+        "Warp Records",
+        "Artificial Intelligence",
+        "Warp Records",
+        "Warp Records",
+        "Copyright Control",
+        "The Town House",
+        "Broadcrest Ltd.",
+        "Broadcrest Ltd.",
+        "EMI Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Abstract",
+        "Techno",
+        "Downtempo"
+      ],
+      "id": 4663,
+      "barcode": [
+        "5 021603 080119",
+        "WAPLP-8-A-1 XEPER! TOWNHOUSE BC2399",
+        "WAPLP-8-B1 OOPS! TOWNHOUSE BC2399",
+        "WAPLP-8-C-1 TOWNHOUSE BC2400",
+        "WAPLP-8-D1 TOWNHOUSE BC2400"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 29979,
+      "master_url": "https://api.discogs.com/masters/29979",
+      "uri": "/release/4663-Black-Dog-Productions-Bytes",
+      "catno": "WARP LP8",
+      "title": "Black Dog Productions - Bytes",
+      "thumb": "https://i.discogs.com/7mR95GMKBmWb-VUDUrzNoU_34HcDwSusoNZqe9suCBk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ2NjMt/MTY0ODMwMjk1NC05/ODM1LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/O3pdQXAE6niCBFEuMkWyHbGWSEg56LYSBUbNAMCQPWk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ2NjMt/MTY0ODMwMjk1NC05/ODM1LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4663",
+      "community": {
+        "want": 1840,
+        "have": 1064
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "Warp Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Musique Concrète",
+        "Ambient",
+        "IDM",
+        "Drone",
+        "Glitch",
+        "Abstract",
+        "Experimental"
+      ],
+      "id": 36860992,
+      "barcode": [
+        "4523132164076 "
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 601767,
+      "master_url": "https://api.discogs.com/masters/601767",
+      "uri": "/release/36860992-Oneohtrix-Point-Never-R-Plus-Seven",
+      "catno": "WARPLP240BR",
+      "title": "Oneohtrix Point Never - R Plus Seven",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/36860992",
+      "community": {
+        "want": 4,
+        "have": 1
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2013",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Warp Records",
+        "Warp Records Limited",
+        "Warp Records Limited",
+        "Warp Music",
+        "Greenhouse Studios Iceland",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Musique Concrète",
+        "Ambient",
+        "IDM",
+        "Drone",
+        "Glitch",
+        "Abstract",
+        "Experimental"
+      ],
+      "id": 4945814,
+      "barcode": [
+        "0801061024017",
+        "LC-02070",
+        "WARPLP240A BD16140-01 A1",
+        "WARPLP240B BD16140-01 B1",
+        "WARPLP240C BD16140-02 C1",
+        "WARPLP240D BD16140-02 D1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 601767,
+      "master_url": "https://api.discogs.com/masters/601767",
+      "uri": "/release/4945814-Oneohtrix-Point-Never-R-Plus-Seven",
+      "catno": "WARPLP240",
+      "title": "Oneohtrix Point Never - R Plus Seven",
+      "thumb": "https://i.discogs.com/fz3mNZ0drt6S6KdYFHpLP9Vc8M0aRDrKEkUKwhFQ7lg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5NDU4/MTQtMTQyODUwMjg2/NS04NzMxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/Zxeqc78BJO6vl6vkljLLrdNTbt5uFLhtVBI8mVgRS8s/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5NDU4/MTQtMTQyODUwMjg2/NS04NzMxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4945814",
+      "community": {
+        "want": 2674,
+        "have": 5404
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "1993",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Numbered"
+      ],
+      "label": [
+        "Warp Records",
+        "Artificial Intelligence",
+        "Copyright Control",
+        "The Town House",
+        "Broadcrest Ltd.",
+        "Broadcrest Ltd.",
+        "EMI Records",
+        "Warp Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Techno",
+        "IDM"
+      ],
+      "id": 727198,
+      "barcode": [
+        "5 021603 080102",
+        "5021603080102",
+        "WAPLP-8-A-I XEPER! TOWNHOUSE BC2399",
+        "WAPLP-8-BI OOPS! TOWNHOUSE BC2399",
+        "WAPLP-8-C-I TOWNHOUSE BC2400",
+        "WAPLP-8-DI TOWNHOUSE BC2400"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 29979,
+      "master_url": "https://api.discogs.com/masters/29979",
+      "uri": "/release/727198-Black-Dog-Productions-Bytes",
+      "catno": "WARP LP8 LTD",
+      "title": "Black Dog Productions - Bytes",
+      "thumb": "https://i.discogs.com/vzpg9CLK7D3nL4GXaOKxwRdsn1PPhD5wGeITcH3bE84/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTcyNzE5/OC0xNjc2MzA1NzUw/LTExNDMuanBlZw.jpeg",
+      "cover_image": "https://i.discogs.com/vkG-vCimAY8DSyMCzDIFJ-j678TvRiP22GzN-8m9hx8/rs:fit/g:sm/q:90/h:547/w:539/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTcyNzE5/OC0xNjc2MzA1NzUw/LTExNDMuanBlZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/727198",
+      "community": {
+        "want": 902,
+        "have": 606
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Bronze",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Numbered"
+          ]
+        }
+      ]
+    }
+  ]
+}

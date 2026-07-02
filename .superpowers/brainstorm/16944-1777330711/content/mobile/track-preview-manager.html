@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Track Previews — Mobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: #050505; display: flex; justify-content: center; font-family: Inter, -apple-system, sans-serif; }
+    .app { width: 390px; min-height: 100vh; background: #090909; color: #fff; font-size: 13px; padding-bottom: 24px; }
+
+    /* MOBILE HEADER */
+    .mobile-header {
+      height: 52px;
+      background: #090909;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-back {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #0099ff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .header-back svg { width: 18px; height: 18px; stroke: #0099ff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .header-title { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: -0.04em; flex: 1; }
+    .header-save-btn {
+      height: 32px;
+      padding: 0 16px;
+      border-radius: 100px;
+      background: #fff;
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* RELEASE STRIP */
+    .release-strip {
+      padding: 12px 16px;
+      background: #141414;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .strip-cover {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #6a4cf5, #4c2b9a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .strip-info {}
+    .strip-title { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -0.03em; }
+    .strip-meta { font-size: 11px; color: #999; margin-top: 1px; }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px 8px;
+    }
+    .section-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #555;
+      flex: 1;
+    }
+
+    /* BADGES */
+    .badge { font-size: 9px; padding: 2px 8px; border-radius: 10px; font-weight: 700; white-space: nowrap; }
+    .badge-green { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
+    .badge-blue  { background: rgba(0,153,255,0.1); color: #0099ff; border: 1px solid rgba(0,153,255,0.25); }
+
+    /* SOURCE CARDS */
+    .source-list { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; }
+    .source-card {
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .source-card.active-src { background: #1c1c1c; border-color: rgba(255,255,255,0.15); }
+    .source-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #1c1c1c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .source-info { flex: 1; min-width: 0; }
+    .source-name { font-size: 13px; font-weight: 700; color: #fff; }
+    .source-url { font-size: 10px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .source-how { font-size: 10px; color: #555; margin-top: 1px; }
+    .source-action {}
+
+    .pill-btn {
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .pill-active { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
+    .pill-secondary { background: #141414; color: #999; border: 1px solid #262626; }
+
+    /* DIVIDER */
+    .divider { height: 1px; background: #1a1a1a; margin: 12px 16px; }
+
+    /* MANUAL OVERRIDE */
+    .manual-body { padding: 0 16px; }
+    .manual-input {
+      width: 100%;
+      height: 44px;
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+      padding: 0 14px;
+      outline: none;
+      margin-bottom: 8px;
+    }
+    .manual-input::placeholder { color: #555; }
+    .manual-input:focus { border-color: rgba(0,153,255,0.4); }
+    .add-source-btn {
+      width: 100%;
+      height: 44px;
+      border-radius: 100px;
+      background: #fff;
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .supported-note { font-size: 10px; color: #555; margin-top: 6px; }
+
+    /* TRACKLIST */
+    .tracklist-body {}
+    .tracklist-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px 8px;
+    }
+    .tracklist-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #555;
+      flex: 1;
+    }
+    .resync-link {
+      font-size: 10px;
+      color: #0099ff;
+      cursor: pointer;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(0,153,255,0.2);
+      background: rgba(0,153,255,0.08);
+    }
+
+    .track-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .track-row.track-active { background: rgba(0,153,255,0.04); }
+    .track-num { font-size: 10px; color: #555; width: 24px; flex-shrink: 0; }
+    .play-pill {
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 100px;
+      background: #1c1c1c;
+      border: 1px solid #262626;
+      font-size: 9px;
+      font-weight: 700;
+      color: #999;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .play-pill.active-track { background: rgba(0,153,255,0.1); color: #0099ff; border-color: rgba(0,153,255,0.3); }
+    .track-title { flex: 1; font-size: 11px; color: #fff; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .track-dur { font-size: 10px; color: #555; flex-shrink: 0; }
+    .clip-bar-wrap { flex-shrink: 0; }
+    .clip-bar {
+      width: 40px;
+      height: 3px;
+      background: #262626;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .clip-seg {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      background: #0099ff;
+      border-radius: 2px;
+    }
+    .no-preview-txt { font-size: 10px; color: #333; }
+
+    /* CLIP EDITOR */
+    .clip-editor {
+      margin: 12px 16px;
+      background: #0d0d0d;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .clip-editor-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .clip-editor-title { font-size: 12px; font-weight: 700; color: #fff; flex: 1; }
+    .clip-editor-badge {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 100px;
+      background: rgba(0,153,255,0.08);
+      color: #0099ff;
+      border: 1px solid rgba(0,153,255,0.15);
+      font-weight: 700;
+    }
+    .clip-editor-body { padding: 14px; }
+    .waveform-bar {
+      height: 36px;
+      background: #141414;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      gap: 1px;
+      padding: 4px 4px 0;
+      margin-bottom: 12px;
+    }
+    .clip-overlay {
+      position: absolute;
+      top: 0; height: 100%;
+      border: 1px solid rgba(0,153,255,0.4);
+      border-radius: 2px;
+      background: rgba(0,153,255,0.04);
+      pointer-events: none;
+    }
+    .clip-inputs-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .clip-input-group {}
+    .clip-input-label { font-size: 10px; color: #999; margin-bottom: 4px; }
+    .clip-input {
+      width: 100%;
+      height: 44px;
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+      padding: 0 12px;
+      outline: none;
+    }
+    .clip-input:focus { border-color: rgba(0,153,255,0.4); }
+    .clip-auto-val { font-size: 13px; color: #555; padding: 12px 0 0 2px; }
+    .preview-clip-btn {
+      width: 100%;
+      height: 44px;
+      border-radius: 100px;
+      background: #0099ff;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* INFO NOTE */
+    .info-note {
+      margin: 12px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #0a1a0a;
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 11px;
+      color: #22c55e;
+      line-height: 1.5;
+    }
+    .info-note-icon { color: rgba(34,197,94,0.6); flex-shrink: 0; margin-top: 1px; }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- MOBILE HEADER -->
+  <header class="mobile-header">
+    <div class="header-back">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back
+    </div>
+    <div class="header-title">Track Previews</div>
+    <button class="header-save-btn">Save</button>
+  </header>
+
+  <!-- RELEASE INFO STRIP -->
+  <div class="release-strip">
+    <div class="strip-cover">🎵</div>
+    <div class="strip-info">
+      <div class="strip-title">OK Computer</div>
+      <div class="strip-meta">Radiohead · 1997 · LP · NODATA 02</div>
+    </div>
+  </div>
+
+  <!-- ── AUTO-LINKED SOURCES ── -->
+  <div class="section-header">
+    <div class="section-title">Auto-Linked Sources</div>
+    <span class="badge badge-green">3 found automatically</span>
+  </div>
+
+  <div class="source-list">
+
+    <!-- Bandcamp: ACTIVE -->
+    <div class="source-card active-src">
+      <div class="source-icon">🎵</div>
+      <div class="source-info">
+        <div class="source-name">Bandcamp</div>
+        <div class="source-url">radiohead.bandcamp.com/album/ok-computer</div>
+        <div class="source-how">auto-matched via Discogs artist + title lookup</div>
+      </div>
+      <div class="source-action">
+        <div class="pill-btn pill-active">✓ Active</div>
+      </div>
+    </div>
+
+    <!-- Spotify -->
+    <div class="source-card">
+      <div class="source-icon">🎧</div>
+      <div class="source-info">
+        <div class="source-name">Spotify</div>
+        <div class="source-url">open.spotify.com/album/6dVIqQ8qmQ5GBnJ9shOYss</div>
+        <div class="source-how">auto-matched via Spotify Search API</div>
+      </div>
+      <div class="source-action">
+        <button class="pill-btn pill-secondary">Use</button>
+      </div>
+    </div>
+
+    <!-- YouTube -->
+    <div class="source-card">
+      <div class="source-icon">▶</div>
+      <div class="source-info">
+        <div class="source-name">YouTube</div>
+        <div class="source-url">youtube.com/playlist?list=PLwf… (Official Radiohead)</div>
+        <div class="source-how">auto-matched via YouTube Data API</div>
+      </div>
+      <div class="source-action">
+        <button class="pill-btn pill-secondary">Use</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── MANUAL OVERRIDE ── -->
+  <div class="section-header">
+    <div class="section-title">Manual Override</div>
+  </div>
+  <div class="manual-body">
+    <input
+      class="manual-input"
+      type="url"
+      placeholder="Paste Bandcamp, Spotify, YouTube, SoundCloud or MP3 URL…"
+    />
+    <button class="add-source-btn">+ Add Source</button>
+    <div class="supported-note">Supported: Bandcamp · Spotify · YouTube · SoundCloud · Direct .mp3</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── TRACKLIST ── -->
+  <div class="tracklist-header">
+    <div class="tracklist-title">Tracklist (30s Clips)</div>
+    <div class="resync-link">↻ Re-sync</div>
+  </div>
+
+  <!-- A1 Airbag: active, clip 28–39% -->
+  <div class="track-row track-active">
+    <div class="track-num">A1</div>
+    <div class="play-pill active-track">▶ :30</div>
+    <div class="track-title">Airbag</div>
+    <div class="track-dur">4:44</div>
+    <div class="clip-bar-wrap">
+      <div class="clip-bar">
+        <div class="clip-seg" style="left:28%;width:11%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A2 Paranoid Android: clip 31–39% -->
+  <div class="track-row">
+    <div class="track-num">A2</div>
+    <div class="play-pill">▶ :30</div>
+    <div class="track-title">Paranoid Android</div>
+    <div class="track-dur">6:23</div>
+    <div class="clip-bar-wrap">
+      <div class="clip-bar">
+        <div class="clip-seg" style="left:31%;width:8%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A3 Subterranean: clip 22–33% -->
+  <div class="track-row">
+    <div class="track-num">A3</div>
+    <div class="play-pill">▶ :30</div>
+    <div class="track-title">Subterranean Homesick Alien</div>
+    <div class="track-dur">4:27</div>
+    <div class="clip-bar-wrap">
+      <div class="clip-bar">
+        <div class="clip-seg" style="left:22%;width:11%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B1 Exit Music: clip 17–28% -->
+  <div class="track-row">
+    <div class="track-num">B1</div>
+    <div class="play-pill">▶ :30</div>
+    <div class="track-title">Exit Music (For a Film)</div>
+    <div class="track-dur">4:24</div>
+    <div class="clip-bar-wrap">
+      <div class="clip-bar">
+        <div class="clip-seg" style="left:17%;width:11%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B2 Let Down: no preview -->
+  <div class="track-row">
+    <div class="track-num">B2</div>
+    <div class="no-preview-txt">—</div>
+    <div class="track-title" style="color:#555;">Let Down</div>
+    <div class="track-dur">4:59</div>
+    <div class="clip-bar-wrap">
+      <div class="clip-bar"></div>
+    </div>
+  </div>
+
+  <!-- B3 Karma Police: clip 11–23% -->
+  <div class="track-row">
+    <div class="track-num">B3</div>
+    <div class="play-pill">▶ :30</div>
+    <div class="track-title">Karma Police</div>
+    <div class="track-dur">4:21</div>
+    <div class="clip-bar-wrap">
+      <div class="clip-bar">
+        <div class="clip-seg" style="left:11%;width:12%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CLIP EDITOR — Airbag ── -->
+  <div class="clip-editor">
+    <div class="clip-editor-header">
+      <div class="clip-editor-title">Clip Editor — Airbag</div>
+      <span class="clip-editor-badge">1:20 → 1:50</span>
+    </div>
+    <div class="clip-editor-body">
+
+      <!-- Waveform -->
+      <div class="waveform-bar" id="waveform-bar">
+        <!-- bars generated by JS -->
+      </div>
+
+      <!-- Time inputs -->
+      <div class="clip-inputs-row">
+        <div class="clip-input-group">
+          <div class="clip-input-label">Start Time</div>
+          <input class="clip-input" type="text" value="1:20"/>
+        </div>
+        <div class="clip-input-group">
+          <div class="clip-input-label">End Time</div>
+          <div class="clip-auto-val">1:50 (auto)</div>
+        </div>
+      </div>
+
+      <!-- Preview button -->
+      <button class="preview-clip-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Preview Clip
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ── INFO NOTE ── -->
+  <div class="info-note">
+    <span class="info-note-icon">ℹ</span>
+    <div>Auto-linking runs when a release is imported from Discogs. Each track gets a 30-second preview clip extracted starting at the configured timestamp (default: 0:45). Drag the clip window in the editor above to choose the best 30 seconds.</div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  var bar = document.getElementById('waveform-bar');
+  if (!bar) return;
+
+  var hs = [40,60,75,50,65,80,45,70,85,55,70,40,60,80,55,70,90,50,65,75,45,80,60,50,70,85,55,65,80,45,70,60,90,55,70,80,50,65,75,45,80,60,55,70,85,50,65,80,45,70,75,55,80,60,85,65,50,70,80,55,70,90,45,65,80,55,70,85,50,65,80,55];
+  var clipStart = 0.28, clipEnd = 0.39;
+
+  hs.forEach(function(h, i) {
+    var pct = i / hs.length;
+    var inClip = pct >= clipStart && pct < clipEnd;
+    var b = document.createElement('div');
+    b.style.cssText = [
+      'width:2px',
+      'flex-shrink:0',
+      'border-radius:1px 1px 0 0',
+      'background:' + (inClip ? '#0099ff' : '#2a2a2a'),
+      'height:' + h + '%'
+    ].join(';');
+    bar.appendChild(b);
+  });
+
+  // Clip region overlay
+  var overlay = document.createElement('div');
+  overlay.className = 'clip-overlay';
+  overlay.style.left = '28%';
+  overlay.style.width = '11%';
+  bar.appendChild(overlay);
+})();
+</script>
+</body>
+</html>

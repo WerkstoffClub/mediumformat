@@ -49,7 +49,8 @@ for item in "${INCLUDES[@]}"; do
 done
 
 echo ">> Syncing web root -> ${STACK_DIR}/site"
-rsync -avz $DRYFLAG --delete --delete-excluded --exclude=".DS_Store" \
+# protect backoffice/ — it's deployed by deploy-app.sh, not staged here
+rsync -avz $DRYFLAG --delete --exclude=".DS_Store" --filter="protect backoffice/" \
   -e "ssh -p ${SSH_PORT}" \
   "$STAGE"/ \
   "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/site/"

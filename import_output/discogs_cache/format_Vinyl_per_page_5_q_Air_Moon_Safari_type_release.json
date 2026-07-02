@@ -1,0 +1,373 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 13,
+    "per_page": 5,
+    "items": 62,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Air+Moon+Safari&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=13",
+      "next": "https://api.discogs.com/database/search?q=Air+Moon+Safari&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2015",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Warner Music Group",
+        "Parlophone",
+        "Parlophone",
+        "Warner Music France",
+        "Parlophone",
+        "Warner Music France",
+        "Delabel Editions",
+        "Revolvair",
+        "Studio Around The Golf",
+        "Studio Gang",
+        "Studio Plus XXX",
+        "The Exchange",
+        "Masterpiece",
+        "EMI Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Downtempo",
+        "Synth-pop"
+      ],
+      "id": 7175735,
+      "barcode": [
+        "7 24384 49781 1",
+        "724384497811",
+        "GEMA",
+        "BIEM",
+        "V 2848 A-01-01- MILES. MASTERPIECE.",
+        "V 2848 B-01-01-1 MILES. MASTERPIECE.",
+        "V 2848 A-01-01- MILES. MASTERPIECE.",
+        "V 2848 B-01-01- MILES. MASTERPIECE.",
+        "V 2848 A-01-01-1 MILES. MASTERPIECE.",
+        "V 2848 B-01-01- MILES. MASTERPIECE."
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1622,
+      "master_url": "https://api.discogs.com/masters/1622",
+      "uri": "/release/7175735-AIR-French-Band-Moon-Safari",
+      "catno": "",
+      "title": "AIR French Band* - Moon Safari",
+      "thumb": "https://i.discogs.com/5mhkYEm93aumrXBp2oSCX7IkJlvRxC1XnqXA8q2ZoGk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTcxNzU3/MzUtMTY1ODIyNjUy/Mi00MTc1LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/-wNAvIvZs0r2NdDq-OkICDSuKxfPzfxc5yKVOcCJyrA/rs:fit/g:sm/q:90/h:610/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTcxNzU3/MzUtMTY1ODIyNjUy/Mi00MTc1LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/7175735",
+      "community": {
+        "want": 3176,
+        "have": 14489
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "France",
+      "year": "1998",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Source",
+        "Source",
+        "Source",
+        "Source",
+        "Virgin",
+        "Source",
+        "Source",
+        "Revolvair",
+        "Delabel Editions",
+        "Polygram Editions",
+        "MCA Publishing",
+        "Studio Around The Golf",
+        "Studio Gang",
+        "Abbey Road Studios",
+        "Studio Plus XXX",
+        "The Exchange",
+        "The Exchange",
+        "SNA"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Downtempo",
+        "Synth-pop",
+        "Dream Pop"
+      ],
+      "id": 412038,
+      "barcode": [
+        "7 24384 49781 1",
+        "724384497811",
+        "LC 3098",
+        "PM 264",
+        "bel BIEM",
+        "449 781 A-1 [SNA logo] THE EXCHANGE NILZ",
+        "449 781 B-1 [SNA logo] THE EXCHANGE NILZ"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1622,
+      "master_url": "https://api.discogs.com/masters/1622",
+      "uri": "/release/412038-AIR-French-Band-Moon-Safari",
+      "catno": "7243 8 44978 1 1",
+      "title": "AIR French Band* - Moon Safari",
+      "thumb": "https://i.discogs.com/uqbGNHmMSOCyvJo8-U54IBjkflIiVaZCvdXz0wT33dc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQxMjAz/OC0xNjExOTkyNTgy/LTMxNjQuanBlZw.jpeg",
+      "cover_image": "https://i.discogs.com/KI0YBTf2J12fwhIYXJUXW1GimJD1xeTfLgKiyWAV_Zw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQxMjAz/OC0xNjExOTkyNTgy/LTMxNjQuanBlZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/412038",
+      "community": {
+        "want": 6217,
+        "have": 8167
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "SNA Pressing",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "1998",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Source",
+        "Virgin",
+        "Source",
+        "Source",
+        "Virgin France S.A.",
+        "Revolvair",
+        "Delabel Editions",
+        "Polygram Editions",
+        "MCA Publishing",
+        "Studio Around The Golf",
+        "Studio Gang",
+        "Abbey Road Studios",
+        "Studio Plus XXX",
+        "The Exchange",
+        "Masterpiece",
+        "EMI Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Downtempo"
+      ],
+      "id": 2798033,
+      "barcode": [
+        "7 24384 49781 1",
+        "724384497811",
+        "LC 3098",
+        "bel BIEM",
+        "PM 264",
+        "V 2848",
+        "V 2848 A-01-01- MILES. MASTERPIECE.",
+        "V 2848 B-01-01- MILES. MASTERPIECE.",
+        "V 2848 A-01-01- MILES. MASTERPIECE.",
+        "V 2848 B-01-01-1 MILES. MASTERPIECE."
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1622,
+      "master_url": "https://api.discogs.com/masters/1622",
+      "uri": "/release/2798033-AIR-French-Band-Moon-Safari",
+      "catno": "7243 8 44978 1 1",
+      "title": "AIR French Band* - Moon Safari",
+      "thumb": "https://i.discogs.com/8scZB_6ouxAPdZOZLT51Cqz4foh-G4RGni31sRwNgxQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3OTgw/MzMtMTQzODg2Nzg5/OC0zMTA3LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/WgacjTN6ZHUJPFegL-yniOjGrw0JgK8-humb9VC1uoU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3OTgw/MzMtMTQzODg2Nzg5/OC0zMTA3LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2798033",
+      "community": {
+        "want": 2902,
+        "have": 11046
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Parlophone",
+        "Translab"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Chillwave",
+        "Europop",
+        "Downtempo"
+      ],
+      "id": 31419368,
+      "barcode": [
+        "724384497811",
+        "8449781 2A 0724384497811 A MPZ-TR",
+        "8449781 2B 0724384497811 B MPZ-TR",
+        "GEMA",
+        "BIEM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1622,
+      "master_url": "https://api.discogs.com/masters/1622",
+      "uri": "/release/31419368-AIR-Moon-Safari",
+      "catno": "0724384497811",
+      "title": "AIR - Moon Safari",
+      "thumb": "https://i.discogs.com/XrLzzdMAIL5QaHVghvH0DZQwjQZybt8gFQIA_pDOIW0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNDE5/MzY4LTE3MzQ1Mjcx/ODMtNTEwNi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/QxsMavZoWkfRNKhrkblNR8HwHXZXysy8hFhOCR6_tac/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNDE5/MzY4LTE3MzQ1Mjcx/ODMtNTEwNi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31419368",
+      "community": {
+        "want": 505,
+        "have": 6092
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Club Edition",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "Parlophone",
+        "Vinyl Me, Please. Essentials",
+        "Vinyl Me, Please",
+        "Translab",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Downtempo",
+        "Ambient",
+        "Trip Hop",
+        "Alt-Pop"
+      ],
+      "id": 26016160,
+      "barcode": [
+        "0190296159305 A2 MPZ-TR 1270478 243901E1",
+        "0190296159305 B3 MPZ-TR 1403720 243901E2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1622,
+      "master_url": "https://api.discogs.com/masters/1622",
+      "uri": "/release/26016160-AIR-French-Band-Moon-Safari",
+      "catno": "190296159305",
+      "title": "AIR French Band* - Moon Safari",
+      "thumb": "https://i.discogs.com/vfyk711MCwCmgY1if1RPHgc-T1gDDI_5mkNNZzg1JM0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDE2/MTYwLTE2NzU5ODI2/MzMtMjc1My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/oYAJj9MeHb8UDh3yPQVsm9jihIuTd7AE6ZKxxEB9pSg/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDE2/MTYwLTE2NzU5ODI2/MzMtMjc1My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/26016160",
+      "community": {
+        "want": 1734,
+        "have": 5767
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue / Turquoise Galaxy [\"Sea of Tranquility\"], 180g, Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Club Edition",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    }
+  ]
+}

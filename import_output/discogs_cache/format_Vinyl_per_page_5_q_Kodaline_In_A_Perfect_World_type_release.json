@@ -1,0 +1,316 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 6,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Kodaline+In+A+Perfect+World&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?q=Kodaline+In+A+Perfect+World&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "2013",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "B-Unique Records",
+        "RCA Victor",
+        "Sony Music",
+        "Rockfield Studios",
+        "Vale Studios",
+        "Kilham Studios",
+        "Windmill Lane Studios",
+        "Clooncahir Lodge",
+        "Transmission Studios",
+        "Kilham Studios",
+        "RAK Studios",
+        "Wired Masters",
+        "B-Unique Music",
+        "Sony Music Entertainment UK Limited",
+        "B-Unique Records (UK) Limited",
+        "B-Unique Records (UK) Limited",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 4663580,
+      "barcode": [
+        "8 88837 04761 6",
+        "888837047616",
+        "LC 00316",
+        "BD06222-01A1 88883704761A1",
+        "BD06222-01B1 88883704761B1",
+        "BIEM / GEMA"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 568541,
+      "master_url": "https://api.discogs.com/masters/568541",
+      "uri": "/release/4663580-Kodaline-In-A-Perfect-World",
+      "catno": "88883704761",
+      "title": "Kodaline - In A Perfect World",
+      "thumb": "https://i.discogs.com/Hma8h25s9hyqS1DOJzpkMg0cwJwbLD7TFgrWIWNqO9w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ2NjM1/ODAtMTQyMzExNTAy/Mi00NDkyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/AxsjIOeQnIvOtJjkwlob0T1fPCDVtsJRzBt99EERW7g/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ2NjM1/ODAtMTQyMzExNTAy/Mi00NDkyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4663580",
+      "community": {
+        "want": 824,
+        "have": 2077
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2013",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "RCA Victor"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 6229994,
+      "barcode": [
+        "887654428011"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 568541,
+      "master_url": "https://api.discogs.com/masters/568541",
+      "uri": "/release/6229994-Kodaline-In-A-Perfect-World",
+      "catno": "88765-44280-1",
+      "title": "Kodaline - In A Perfect World",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/6229994",
+      "community": {
+        "want": 340,
+        "have": 586
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Record Store Day",
+        "Deluxe Edition",
+        "Reissue"
+      ],
+      "label": [
+        "B-Unique Records",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 37101444,
+      "barcode": [
+        "199584146614"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 568541,
+      "master_url": "https://api.discogs.com/masters/568541",
+      "uri": "/release/37101444-Kodaline-In-A-Perfect-World",
+      "catno": "19958414661",
+      "title": "Kodaline - In A Perfect World",
+      "thumb": "https://i.discogs.com/KRGE9TVi0eYUdMjQhCi_j9qJoMUWrS8MNt2i_1fDUuA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MTAx/NDQ0LTE3NzY3ODkw/MDItNzI5Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/WwQ2X8P8ar6quczlYPy5kM9wHjdlkgVtedupc5CioA0/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MTAx/NDQ0LTE3NzY3ODkw/MDItNzI5Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/37101444",
+      "community": {
+        "want": 26,
+        "have": 195
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Record Store Day",
+            "Deluxe Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK & Europe",
+      "year": "2012",
+      "format": [
+        "Vinyl",
+        "7\"",
+        "45 RPM",
+        "EP",
+        "Limited Edition"
+      ],
+      "label": [
+        "RCA Victor",
+        "B-Unique Records",
+        "B-Unique Records Ltd.",
+        "B-Unique Records Ltd.",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 3902348,
+      "barcode": [
+        "887254726975",
+        "8 87254 72697 5",
+        "88725472687.A1 101854H1/A PN/F.T.",
+        "88725472687.B1 101854H2/A",
+        "88725472697.A1 101854H3/A",
+        "88725472697.B1 101854H4/A  ",
+        "LC00316",
+        "BIEM/GEMA"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 634473,
+      "master_url": "https://api.discogs.com/masters/634473",
+      "uri": "/release/3902348-Kodaline-The-Kodaline-EP",
+      "catno": "88725472687",
+      "title": "Kodaline - The Kodaline EP",
+      "thumb": "https://i.discogs.com/CSV7JBLg3smfDwoCA2CPseEy2A6WyU9lLLEFg7WYJdY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM5MDIz/NDgtMTM4ODg1NTQ5/Ni05MjE4LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/7Hu146QU8ab11vPRtKD3PxczgEipSiEaYFJurX3-tzs/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM5MDIz/NDgtMTM4ODg1NTQ5/Ni05MjE4LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3902348",
+      "community": {
+        "want": 122,
+        "have": 53
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "7\"",
+            "45 RPM",
+            "EP",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP"
+      ],
+      "label": [
+        "Fantasy"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Indie Rock"
+      ],
+      "id": 28842241,
+      "barcode": [
+        "888072449244",
+        "MRP3896/FAN01812-A 1266549 245026E1 FAN01812-A WELL MADE MUSIC  dp#1",
+        "MRP3896/FAN01812-B 1266550 #5 245026E2 FAN01812-B WELL MADE MUSIC dp#1",
+        "FAN01812"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2828711,
+      "master_url": "https://api.discogs.com/masters/2828711",
+      "uri": "/release/28842241-Kodaline-Our-Roots-Run-Deep",
+      "catno": "FAN01812",
+      "title": "Kodaline - Our Roots Run Deep",
+      "thumb": "https://i.discogs.com/jw32THr-VvdFoWSRosWxuPH264DqXjO26hxiRi3MlSE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4ODQy/MjQxLTE2OTk0ODY3/NDctNDMzOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/qw8uICIzbH1J-coBY7oGJS3_V2K7sJ0Za9PWasyHS0g/rs:fit/g:sm/q:90/h:585/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4ODQy/MjQxLTE2OTk0ODY3/NDctNDMzOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28842241",
+      "community": {
+        "want": 9,
+        "have": 104
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP"
+          ]
+        }
+      ]
+    }
+  ]
+}

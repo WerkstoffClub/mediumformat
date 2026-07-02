@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Inventory — Location & Barcode</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #090909; color: #fff;
+    font-family: Inter, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px; display: flex; height: 100vh; overflow: hidden;
+  }
+
+  /* SIDEBAR */
+  aside {
+    width: 186px; min-width: 186px; background: #090909;
+    border-right: 1px solid #1a1a1a;
+  }
+  .sidebar-logo {
+    padding: 16px 18px 14px; font-size: 15px; font-weight: 800; color: #fff;
+    letter-spacing: -0.04em; border-bottom: 1px solid #1a1a1a;
+  }
+  .sidebar-logo span { color: #0099ff; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px; padding: 7px 18px;
+    color: #999; font-size: 12.5px; cursor: pointer; border-left: 2px solid transparent;
+  }
+  .nav-item.active { color: #fff; background: #141414; border-left-color: #fff; }
+  .nav-item svg {
+    width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor;
+    fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* MAIN */
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* TOPBAR */
+  .topbar {
+    height: 52px; background: #090909; border-bottom: 1px solid #1a1a1a;
+    display: flex; align-items: center; padding: 0 20px; gap: 8px;
+  }
+  .topbar-title { font-size: 15px; font-weight: 800; color: #fff; flex: 1; letter-spacing: -0.04em; }
+
+  /* BUTTONS — pills */
+  .btn {
+    padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 700;
+    cursor: pointer; border: none; font-family: inherit;
+  }
+  .btn-primary { background: #fff; color: #000; }
+  .btn-primary:hover { background: #e8e8e8; }
+  .btn-secondary { background: #141414; border: 1px solid #262626; color: #fff; }
+  .btn-secondary:hover { background: #1c1c1c; }
+
+  /* SCAN BUTTONS — secondary pills */
+  .scan-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 100px; border: 1px solid #262626;
+    background: #141414; color: #fff; font-size: 11px; font-weight: 700;
+    cursor: pointer; white-space: nowrap; font-family: inherit;
+  }
+  .scan-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+  .scan-btn:hover { background: #1c1c1c; }
+
+  /* TOOLBAR */
+  .toolbar {
+    display: flex; align-items: center; gap: 8px; padding: 10px 20px;
+    border-bottom: 1px solid #1a1a1a; flex-wrap: wrap; background: #090909;
+  }
+  .search-box {
+    display: flex; align-items: center; gap: 8px; background: #141414;
+    border: 1px solid #262626; border-radius: 6px; padding: 6px 12px;
+    flex: 1; max-width: 300px;
+  }
+  .search-box svg { width: 13px; height: 13px; stroke: #555; fill: none; stroke-width: 1.8; flex-shrink: 0; }
+  .search-box input {
+    background: none; border: none; outline: none; color: #fff;
+    font-size: 11px; width: 100%; font-family: inherit;
+  }
+  .search-box input::placeholder { color: #444; }
+  .filter-pill {
+    padding: 5px 12px; border-radius: 100px; font-size: 11px; border: 1px solid #262626;
+    background: #141414; color: #999; cursor: pointer; white-space: nowrap;
+  }
+  .filter-pill.active { background: #1c1c1c; border-color: #262626; color: #fff; }
+  .filter-pill:hover:not(.active) { background: #1c1c1c; color: #fff; }
+
+  /* SPLIT LAYOUT */
+  .body { flex: 1; display: flex; overflow: hidden; }
+  .table-area { flex: 1; overflow-y: auto; }
+  .detail-panel {
+    width: 320px; min-width: 320px; border-left: 1px solid #1a1a1a;
+    overflow-y: auto; background: #090909;
+  }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; }
+  thead { position: sticky; top: 0; z-index: 2; }
+  th {
+    background: #090909; text-align: left; padding: 7px 14px; color: #999;
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.07em;
+    font-weight: 600; border-bottom: 1px solid #262626; white-space: nowrap;
+  }
+  td { padding: 9px 14px; border-bottom: 1px solid #1a1a1a; font-size: 11px; vertical-align: middle; color: #999; }
+  tr:hover td { background: #141414; }
+  tr.selected td { background: #141414; }
+
+  .release-cell { display: flex; align-items: center; gap: 10px; }
+  .cover-sq {
+    width: 34px; height: 34px; background: #1c1c1c; border-radius: 4px;
+    flex-shrink: 0; border: 1px solid #262626;
+  }
+  .rel-title { color: #fff; font-weight: 600; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+  .rel-artist { color: #555; font-size: 10px; }
+  .rel-cat { color: #333; font-size: 9px; }
+
+  .fmt-tag {
+    display: inline-block; padding: 1px 6px; border-radius: 4px;
+    font-size: 9px; background: #1c1c1c; color: #555; font-weight: 600;
+    border: 1px solid #262626;
+  }
+
+  /* CONDITION PILLS */
+  .cond-tag { display: inline-block; padding: 2px 7px; border-radius: 100px; font-size: 9px; font-weight: 700; }
+  .cond-m   { background: rgba(34,197,94,0.1);  color: #22c55e; }
+  .cond-vgp { background: rgba(0,153,255,0.12); color: #0099ff; }
+  .cond-vg  { background: rgba(232,168,56,0.12); color: #e8a838; }
+
+  .price-cell { color: #fff; font-weight: 600; font-size: 11px; }
+  .price-sub  { color: #444; font-size: 9px; }
+
+  .stock-ok  { color: #22c55e; font-weight: 700; }
+  .stock-low { color: #e8a838; font-weight: 700; }
+  .stock-out { color: #e05c6a; font-weight: 700; }
+
+  /* LOCATION CELL */
+  .loc-cell { display: flex; flex-direction: column; gap: 2px; }
+  .loc-store { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; color: #777; }
+  .loc-store svg { width: 10px; height: 10px; stroke: #444; fill: none; stroke-width: 1.8; flex-shrink: 0; }
+  .loc-shelf { display: inline-flex; align-items: center; gap: 4px; font-size: 9px; color: #444; }
+  .loc-shelf svg { width: 9px; height: 9px; stroke: #333; fill: none; stroke-width: 1.8; flex-shrink: 0; }
+  .loc-missing { font-size: 9px; color: #333; font-style: italic; }
+
+  /* BARCODE PREVIEW INLINE */
+  .barcode-cell { display: flex; align-items: center; gap: 6px; }
+  .barcode-mini { display: flex; gap: 1px; align-items: flex-end; height: 18px; }
+  .b-bar { width: 1.5px; background: #333; border-radius: 0; }
+  .barcode-num { font-size: 8px; color: #444; letter-spacing: 0.05em; }
+
+  /* CHANNEL DOTS */
+  .ch-dots { display: flex; gap: 3px; }
+  .ch-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  /* ROW ACTIONS */
+  .row-actions { display: flex; gap: 4px; opacity: 0; }
+  tr:hover .row-actions { opacity: 1; }
+  tr.selected .row-actions { opacity: 1; }
+  .ra-btn {
+    padding: 3px 8px; border-radius: 100px; font-size: 9px; font-weight: 700;
+    cursor: pointer; border: 1px solid #262626; background: #141414; color: #666;
+    font-family: inherit;
+  }
+  .ra-btn:hover { color: #fff; border-color: #333; background: #1c1c1c; }
+
+  /* FOOTER */
+  .table-footer {
+    display: flex; align-items: center; padding: 8px 14px;
+    border-top: 1px solid #1a1a1a; font-size: 10px; color: #444;
+    gap: 8px; background: #090909;
+  }
+  .pg-btn {
+    padding: 3px 9px; border-radius: 100px; border: 1px solid #262626;
+    background: #141414; color: #666; font-size: 10px; cursor: pointer;
+    font-family: inherit;
+  }
+  .pg-btn.active { background: #1c1c1c; border-color: #262626; color: #fff; }
+  .pg-btn:hover:not(.active) { background: #1c1c1c; color: #fff; }
+
+  /* ── DETAIL PANEL ── */
+  .dp-header { padding: 14px 16px; border-bottom: 1px solid #1a1a1a; }
+  .dp-cover {
+    width: 100%; aspect-ratio: 1; background: #141414; border-radius: 6px;
+    margin-bottom: 12px; border: 1px solid #262626;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dp-cover svg { width: 32px; height: 32px; stroke: #2a2a2a; fill: none; stroke-width: 1.2; }
+  .dp-title { font-size: 14px; font-weight: 800; color: #fff; letter-spacing: -0.04em; }
+  .dp-artist { font-size: 11px; color: #555; margin-top: 2px; }
+  .dp-meta { font-size: 10px; color: #333; margin-top: 4px; }
+
+  .dp-section { padding: 12px 16px; border-bottom: 1px solid #1a1a1a; }
+  .dp-section-title {
+    font-size: 9px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #999; margin-bottom: 10px;
+  }
+  .dp-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0; border-bottom: 1px solid #141414;
+  }
+  .dp-row:last-child { border-bottom: none; }
+  .dp-lbl { font-size: 11px; color: #555; }
+  .dp-val { font-size: 11px; color: #fff; font-weight: 600; }
+  .dp-edit { font-size: 10px; color: #0099ff; cursor: pointer; }
+
+  /* LOCATION EDITOR */
+  .loc-editor {
+    background: #141414; border: 1px solid #262626; border-radius: 7px; padding: 10px 12px;
+  }
+  .loc-field { margin-bottom: 8px; }
+  .loc-field label {
+    display: block; font-size: 9px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #999; margin-bottom: 5px; font-weight: 600;
+  }
+  .loc-field select, .loc-field input {
+    width: 100%; background: #141414; border: 1px solid #262626;
+    border-radius: 5px; padding: 6px 8px; color: #fff; font-size: 11px;
+    outline: none; font-family: inherit;
+  }
+  .loc-field select:focus, .loc-field input:focus {
+    border-color: rgba(0,153,255,0.4);
+  }
+
+  /* BARCODE SECTION */
+  .barcode-display {
+    background: #fff; border-radius: 6px; padding: 12px;
+    margin-bottom: 10px; display: flex; flex-direction: column; align-items: center;
+  }
+  .barcode-bars { display: flex; gap: 1px; align-items: flex-end; height: 40px; margin-bottom: 6px; }
+  .bc-bar { background: #111; border-radius: 0; }
+  .barcode-num-full { font-size: 10px; color: #333; letter-spacing: 0.12em; font-family: monospace; }
+
+  .barcode-actions { display: flex; gap: 8px; }
+  .bc-action {
+    flex: 1; padding: 6px 0; border-radius: 100px; font-size: 10px; font-weight: 700;
+    cursor: pointer; border: 1px solid #262626; background: #141414; color: #999;
+    text-align: center; font-family: inherit;
+  }
+  .bc-action:hover { color: #fff; border-color: #333; }
+  .bc-action.primary { background: #fff; border-color: #fff; color: #000; }
+  .bc-action.primary:hover { background: #e8e8e8; }
+
+  /* SCAN HINT */
+  .scan-hint {
+    background: #141414; border: 1px solid rgba(0,153,255,0.2); border-radius: 7px;
+    padding: 10px 12px; display: flex; align-items: flex-start; gap: 8px;
+    font-size: 10px; color: #777;
+  }
+  .scan-hint svg { width: 14px; height: 14px; stroke: #0099ff; fill: none; stroke-width: 1.6; flex-shrink: 0; margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="sidebar-logo">Medium<span>Format</span></div>
+  <div style="padding:8px 0;">
+    <div class="nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/></svg>Orders</div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Purchase Orders</div>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">Inventory</div>
+    <div class="scan-btn">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="4" height="16" rx="1"/><rect x="8" y="4" width="2" height="16" rx="1"/><rect x="12" y="4" width="4" height="16" rx="1"/><rect x="18" y="4" width="4" height="16" rx="1"/></svg>
+      Scan Barcode
+    </div>
+    <div class="scan-btn">
+      <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Scan via Phone
+    </div>
+    <button class="btn btn-secondary">Print Labels</button>
+    <button class="btn btn-primary">+ Add Release</button>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="Search artist, title, label, barcode..." />
+    </div>
+    <div class="filter-pill active">All (1,240)</div>
+    <div class="filter-pill">Vinyl</div>
+    <div class="filter-pill">CD</div>
+    <div class="filter-pill">Merch</div>
+    <div class="filter-pill">Low Stock</div>
+    <div class="filter-pill">No Location</div>
+    <div class="filter-pill">No Barcode</div>
+  </div>
+
+  <div class="body">
+    <div class="table-area">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:28px"><input type="checkbox"/></th>
+            <th>Release</th>
+            <th>Format</th>
+            <th>Cond.</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Store Location</th>
+            <th>Shelf / Rack</th>
+            <th>Barcode</th>
+            <th>Channels</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="selected">
+            <td><input type="checkbox" checked/></td>
+            <td><div class="release-cell"><div class="cover-sq"></div><div><div class="rel-title">OK Computer</div><div class="rel-artist">Radiohead</div><div class="rel-cat">NODATA 02</div></div></div></td>
+            <td><span class="fmt-tag">LP</span></td>
+            <td><span class="cond-tag cond-m">M</span></td>
+            <td><div class="price-cell">Rp 850K<div class="price-sub">≈ USD 52</div></div></td>
+            <td><span class="stock-low">1</span></td>
+            <td><div class="loc-store"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Main Store</div></td>
+            <td><div class="loc-shelf"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Rack R · Shelf 2</div></td>
+            <td>
+              <div class="barcode-cell">
+                <div class="barcode-mini">
+                  <div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:80%;width:2px"></div><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:60%"></div><div class="b-bar" style="height:100%;width:2px"></div><div class="b-bar" style="height:80%"></div><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:70%"></div><div class="b-bar" style="height:100%;width:2px"></div><div class="b-bar" style="height:90%"></div><div class="b-bar" style="height:100%"></div>
+                </div>
+                <div class="barcode-num">5099902940526</div>
+              </div>
+            </td>
+            <td><div class="ch-dots"><div class="ch-dot" style="background:#7c6fcd"></div><div class="ch-dot" style="background:#4caf82"></div><div class="ch-dot" style="background:#e8a838"></div><div class="ch-dot" style="background:#5bc0de"></div></div></td>
+            <td><div class="row-actions"><div class="ra-btn">Edit</div><div class="ra-btn">Label</div></div></td>
+          </tr>
+
+          <tr>
+            <td><input type="checkbox"/></td>
+            <td><div class="release-cell"><div class="cover-sq"></div><div><div class="rel-title">Mezzanine</div><div class="rel-artist">Massive Attack</div><div class="rel-cat">CDV 2864</div></div></div></td>
+            <td><span class="fmt-tag">LP</span></td>
+            <td><span class="cond-tag cond-vgp">VG+</span></td>
+            <td><div class="price-cell">Rp 620K<div class="price-sub">≈ USD 38</div></div></td>
+            <td><span class="stock-low">2</span></td>
+            <td><div class="loc-store"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Main Store</div></td>
+            <td><div class="loc-shelf"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Rack M · Shelf 3</div></td>
+            <td><div class="barcode-cell"><div class="barcode-mini"><div class="b-bar" style="height:100%;width:2px"></div><div class="b-bar" style="height:70%"></div><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:85%;width:2px"></div><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:60%"></div><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:90%;width:2px"></div><div class="b-bar" style="height:100%"></div></div><div class="barcode-num">5012981028633</div></div></td>
+            <td><div class="ch-dots"><div class="ch-dot" style="background:#7c6fcd"></div><div class="ch-dot" style="background:#4caf82"></div><div class="ch-dot" style="background:#5bc0de"></div></div></td>
+            <td><div class="row-actions"><div class="ra-btn">Edit</div><div class="ra-btn">Label</div></div></td>
+          </tr>
+
+          <tr>
+            <td><input type="checkbox"/></td>
+            <td><div class="release-cell"><div class="cover-sq"></div><div><div class="rel-title">Selected Ambient Works Vol. II</div><div class="rel-artist">Aphex Twin</div><div class="rel-cat">WARPCD21</div></div></div></td>
+            <td><span class="fmt-tag">2xLP</span></td>
+            <td><span class="cond-tag cond-m">M</span></td>
+            <td><div class="price-cell">Rp 1.25M<div class="price-sub">≈ USD 76</div></div></td>
+            <td><span class="stock-ok">3</span></td>
+            <td><div class="loc-store"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Main Store</div></td>
+            <td><div class="loc-missing">— Not set</div></td>
+            <td><div class="barcode-cell"><div class="barcode-mini"><div class="b-bar" style="height:90%"></div><div class="b-bar" style="height:100%;width:2px"></div><div class="b-bar" style="height:70%"></div><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:55%"></div><div class="b-bar" style="height:100%;width:2px"></div><div class="b-bar" style="height:80%"></div><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:65%"></div></div><div class="barcode-num">5021603054126</div></div></td>
+            <td><div class="ch-dots"><div class="ch-dot" style="background:#7c6fcd"></div><div class="ch-dot" style="background:#5bc0de"></div></div></td>
+            <td><div class="row-actions"><div class="ra-btn">Edit</div><div class="ra-btn">Label</div></div></td>
+          </tr>
+
+          <tr>
+            <td><input type="checkbox"/></td>
+            <td><div class="release-cell"><div class="cover-sq"></div><div><div class="rel-title">Dummy</div><div class="rel-artist">Portishead</div><div class="rel-cat">GOLCD 4</div></div></div></td>
+            <td><span class="fmt-tag">LP</span></td>
+            <td><span class="cond-tag cond-m">M</span></td>
+            <td><div class="price-cell">Rp 780K<div class="price-sub">≈ USD 48</div></div></td>
+            <td><span class="stock-ok">5</span></td>
+            <td><div class="loc-store"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Main Store</div></td>
+            <td><div class="loc-shelf"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>Rack P · Shelf 1</div></td>
+            <td><div class="barcode-cell"><div class="barcode-mini"><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:65%;width:2px"></div><div class="b-bar" style="height:100%"></div><div class="b-bar" style="height:80%"></div><div class="b-bar" style="height:100%;width:2px"></div><div class="b-bar" style="height:55%"></div><div class="b-bar" style="height:100%"></div></div><div class="barcode-num">5016958021290</div></div></td>
+            <td><div class="ch-dots"><div class="ch-dot" style="background:#7c6fcd"></div><div class="ch-dot" style="background:#4caf82"></div><div class="ch-dot" style="background:#e8a838"></div><div class="ch-dot" style="background:#5bc0de"></div><div class="ch-dot" style="background:#e05c6a"></div></div></td>
+            <td><div class="row-actions"><div class="ra-btn">Edit</div><div class="ra-btn">Label</div></div></td>
+          </tr>
+
+          <tr>
+            <td><input type="checkbox"/></td>
+            <td><div class="release-cell"><div class="cover-sq"></div><div><div class="rel-title">Untrue</div><div class="rel-artist">Burial</div><div class="rel-cat">HYP 13</div></div></div></td>
+            <td><span class="fmt-tag">LP</span></td>
+            <td><span class="cond-tag cond-m">M</span></td>
+            <td><div class="price-cell">Rp 1.1M<div class="price-sub">≈ USD 68</div></div></td>
+            <td><span class="stock-out">0</span></td>
+            <td><div class="loc-missing">— Not set</div></td>
+            <td><div class="loc-missing">— Not set</div></td>
+            <td><div class="loc-missing">— No barcode</div></td>
+            <td><div class="ch-dots"><div class="ch-dot" style="background:#7c6fcd"></div></div></td>
+            <td><div class="row-actions"><div class="ra-btn">Edit</div><div class="ra-btn">Label</div></div></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="table-footer">
+        <span>Showing 1–20 of 1,240</span>
+        <div style="flex:1"></div>
+        <button class="pg-btn">‹</button>
+        <button class="pg-btn active">1</button>
+        <button class="pg-btn">2</button>
+        <button class="pg-btn">3</button>
+        <button class="pg-btn">…</button>
+        <button class="pg-btn">›</button>
+      </div>
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel">
+      <div class="dp-header">
+        <div class="dp-cover">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="dp-title">OK Computer</div>
+        <div class="dp-artist">Radiohead</div>
+        <div class="dp-meta">1997 · Parlophone · LP · Rock · NODATA 02</div>
+      </div>
+
+      <!-- Location -->
+      <div class="dp-section">
+        <div class="dp-section-title">Item Location</div>
+        <div class="loc-editor">
+          <div class="loc-field">
+            <label>Store Location</label>
+            <select>
+              <option selected>Main Store</option>
+              <option>Warehouse</option>
+              <option>Consignment</option>
+            </select>
+          </div>
+          <div class="loc-field">
+            <label>In-Store — Rack / Shelf</label>
+            <input value="Rack R · Shelf 2" placeholder="e.g. Rack A · Shelf 3" />
+          </div>
+          <div style="margin-top:8px;display:flex;gap:8px;">
+            <button class="btn btn-primary" style="flex:1;font-size:10px;">Save Location</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barcode -->
+      <div class="dp-section">
+        <div class="dp-section-title">Barcode</div>
+        <div class="barcode-display">
+          <div class="barcode-bars">
+            <div class="bc-bar" style="width:2px;height:100%"></div><div class="bc-bar" style="width:1px;height:80%"></div><div class="bc-bar" style="width:3px;height:100%"></div><div class="bc-bar" style="width:1px;height:70%"></div><div class="bc-bar" style="width:2px;height:100%"></div><div class="bc-bar" style="width:1px;height:85%"></div><div class="bc-bar" style="width:3px;height:100%"></div><div class="bc-bar" style="width:2px;height:60%"></div><div class="bc-bar" style="width:1px;height:100%"></div><div class="bc-bar" style="width:2px;height:80%"></div><div class="bc-bar" style="width:1px;height:100%"></div><div class="bc-bar" style="width:3px;height:70%"></div><div class="bc-bar" style="width:1px;height:100%"></div><div class="bc-bar" style="width:2px;height:90%"></div><div class="bc-bar" style="width:1px;height:100%"></div><div class="bc-bar" style="width:3px;height:75%"></div><div class="bc-bar" style="width:1px;height:100%"></div><div class="bc-bar" style="width:2px;height:65%"></div><div class="bc-bar" style="width:1px;height:100%"></div><div class="bc-bar" style="width:3px;height:80%"></div><div class="bc-bar" style="width:2px;height:100%"></div>
+          </div>
+          <div class="barcode-num-full">5099902940526</div>
+        </div>
+        <div class="barcode-actions">
+          <div class="bc-action primary">Print Label</div>
+          <div class="bc-action">Download PNG</div>
+          <div class="bc-action">Copy</div>
+        </div>
+      </div>
+
+      <!-- Scan via phone hint -->
+      <div class="dp-section">
+        <div class="dp-section-title">POS — Mobile Scanner</div>
+        <div class="scan-hint">
+          <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          Open the POS scanner on any phone at <strong style="color:#0099ff;">pos.mediumformat.id/scan</strong> — point the camera at any barcode to instantly look up or check out an item. No dedicated hardware needed.
+        </div>
+      </div>
+
+      <!-- Quick info -->
+      <div class="dp-section">
+        <div class="dp-section-title">Stock & Pricing</div>
+        <div class="dp-row"><span class="dp-lbl">Stock</span><span class="dp-val stock-low">1 unit</span></div>
+        <div class="dp-row"><span class="dp-lbl">Price (website)</span><span class="dp-val">Rp 850,000</span></div>
+        <div class="dp-row"><span class="dp-lbl">Price (Tokopedia)</span><span class="dp-val">Rp 893,000 <span style="font-size:9px;color:#555;">+5%</span></span></div>
+        <div class="dp-row"><span class="dp-lbl">Price (Shopee)</span><span class="dp-val">Rp 901,000 <span style="font-size:9px;color:#555;">+6%</span></span></div>
+        <div class="dp-row"><span class="dp-lbl">Condition</span><span class="dp-val">Mint (M)</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

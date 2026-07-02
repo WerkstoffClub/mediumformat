@@ -1,0 +1,74 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "12\"",
+        "33 ⅓ RPM",
+        "EP",
+        "Compilation",
+        "Limited Edition"
+      ],
+      "label": [
+        "Beats In Space Records",
+        "...In Space",
+        "Beats In Space Records, LLC",
+        "Calyx Mastering",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "House",
+        "Experimental"
+      ],
+      "id": 13195142,
+      "barcode": [
+        "747742391088",
+        "BIS 036 A3 33⅓RPM FMW ▷ LOOP-O ▷ CALYX 2018 179523E1/A",
+        "BIS 036 B HL@CALYX FOR LUPO 179523E2/A"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/13195142-Powder-Powder-In-Space",
+      "catno": "BIS036",
+      "title": "Powder (16) - Powder In Space",
+      "thumb": "https://i.discogs.com/0L54S4MumNBUk_epAG3jM4y0kUlgA281f3GnKyXb6XI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMTk1/MTQyLTE1ODMwODg5/MTAtOTYwMi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/7PxwLWXVuTlpy2QLomVRSG2cKa38X8vLSsKKNhP5HY0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMTk1/MTQyLTE1ODMwODg5/MTAtOTYwMi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/13195142",
+      "community": {
+        "want": 309,
+        "have": 349
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "12\"",
+            "33 ⅓ RPM",
+            "EP",
+            "Compilation",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

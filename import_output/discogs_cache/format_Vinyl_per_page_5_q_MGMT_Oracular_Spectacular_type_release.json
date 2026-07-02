@@ -1,0 +1,372 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 14,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=MGMT+Oracular+Spectacular&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?q=MGMT+Oracular+Spectacular&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2008",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia",
+        "Sony BMG Music Entertainment",
+        "RED Distribution",
+        "Columbia Records",
+        "Sony BMG Music Entertainment",
+        "Sony BMG Music Entertainment",
+        "Old Man Future",
+        "Sadguitarius",
+        "Tarbox Road Studios",
+        "Context Studios",
+        "Sterling Sound",
+        "Nashville Record Productions",
+        "United Record Pressing"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Synth-pop",
+        "Indie Rock"
+      ],
+      "id": 1304590,
+      "barcode": [
+        "8 8697-19512-1 9",
+        "886971951219",
+        "AL88697195121",
+        "BL88697195121",
+        "88697 158342-RE-1-A  WG/NRP  ⓤ",
+        "88697 158342-RE-1-B  WG/NRP  ⓤ",
+        "ⓤ",
+        "SESAC"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 26303,
+      "master_url": "https://api.discogs.com/masters/26303",
+      "uri": "/release/1304590-MGMT-Oracular-Spectacular",
+      "catno": "88697 19512 1",
+      "title": "MGMT - Oracular Spectacular",
+      "thumb": "https://i.discogs.com/kn9dGgqwwzY5G7t6pauSffnmGuR_HHGNiwRvIZnNAjU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMDQ1/OTAtMTU5OTkyNTc0/OC03MDM3LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/mAiSUnmCqTh6lW-CErKL4gE5EZHSM0uuZp3-GKZHnXI/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMDQ1/OTAtMTU5OTkyNTc0/OC03MDM3LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/1304590",
+      "community": {
+        "want": 6061,
+        "have": 12732
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2014",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "Old Man Future",
+        "Sadguitarius",
+        "Old Man Future",
+        "Sadguitarius",
+        "Sony Music Entertainment",
+        "Columbia Records",
+        "Tarbox Road Studios",
+        "Context Studios",
+        "Sterling Sound",
+        "Record Industry"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Psychedelic Rock",
+        "Indie Pop"
+      ],
+      "id": 6986924,
+      "barcode": [
+        "888430453210",
+        "8 88430 45321 0",
+        "88843045321A",
+        "88843045321B",
+        "88843045321 92772 3A MOVLP 567",
+        "88843045321 92772 4B MOVLP 567",
+        "88843045321 B 92772 3A MOVLP 567",
+        "88843045321 B 92772 4B MOVLP 567",
+        "SESAC"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 26303,
+      "master_url": "https://api.discogs.com/masters/26303",
+      "uri": "/release/6986924-MGMT-Oracular-Spectacular",
+      "catno": "88843045321",
+      "title": "MGMT - Oracular Spectacular",
+      "thumb": "https://i.discogs.com/TB-a1zeZXGol5qtZEoxagheskYKsRor32ZP4GFEZSEo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY5ODY5/MjQtMTUxMjA2NDY5/NC0xNjA4LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/fnuY2Bgy_4yJDJz4zMUQ7pcvN6d3KMagbeD4wsPVJYQ/rs:fit/g:sm/q:90/h:603/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY5ODY5/MjQtMTUxMjA2NDY5/NC0xNjA4LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/6986924",
+      "community": {
+        "want": 2338,
+        "have": 14223
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2008",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Sony BMG Music Entertainment",
+        "Optimal Media Production",
+        "Optimal Media Production"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Indie Pop",
+        "Synth-pop",
+        "Psychedelic Rock"
+      ],
+      "id": 1584186,
+      "barcode": [
+        "886971951219",
+        "8 8697 195121 9",
+        "B824198-01 A1 HL",
+        "B824198-01 B1 HL",
+        "B824198-01 A3 HL 3+",
+        "B824198-01 B2 HL",
+        "B824198-01 A3 HL 3T",
+        "B824198-01 B2 HL 5IT",
+        "B824198-01 A1 HL",
+        "B824198-01 B2 HL",
+        "B824198-01 A3 HL   3IX",
+        "B824 198-01 B3 HL   3=",
+        "LC 00162",
+        "BIEM / GEMA"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 26303,
+      "master_url": "https://api.discogs.com/masters/26303",
+      "uri": "/release/1584186-MGMT-Oracular-Spectacular",
+      "catno": "88697 19512 1",
+      "title": "MGMT - Oracular Spectacular",
+      "thumb": "https://i.discogs.com/xoK7uHYPvUUsaJHS17Y2n1RYloGIY3dVp_dxgGETptg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1ODQx/ODYtMTYzOTYwNDEx/Ny00NzEwLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/q5_oBy3f7sxpAa1awhjxrbwL1oaaQA-w3OGTCOZLogo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1ODQx/ODYtMTYzOTYwNDEx/Ny00NzEwLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/1584186",
+      "community": {
+        "want": 2972,
+        "have": 11643
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2014",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Record Store Day",
+        "Limited Edition",
+        "Numbered",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Music Entertainment",
+        "Old Man Future",
+        "Sadguitarius",
+        "Tarbox Road Studios",
+        "Context Studios",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 5610164,
+      "barcode": [
+        "8 88430 45321 0",
+        "(Side A): 92772  2A     MOVLP  568",
+        "(Side B): 92772  3B     MOVLP  567     88843045321"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 26303,
+      "master_url": "https://api.discogs.com/masters/26303",
+      "uri": "/release/5610164-MGMT-Oracular-Spectacular",
+      "catno": "88843045321",
+      "title": "MGMT - Oracular Spectacular",
+      "thumb": "https://i.discogs.com/xJQctVUN5xYG1YRycLNK4Qtys0u-epiKskV8MxG-uxA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU2MTAx/NjQtMTU2MDEwMDg0/NC02NzI4LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/2J5CjdPXoFIdlrN6TU2mTFCH6At1r4xJe_H0ci5bBTw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU2MTAx/NjQtMTU2MDEwMDg0/NC02NzI4LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5610164",
+      "community": {
+        "want": 1617,
+        "have": 5099
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Record Store Day",
+            "Limited Edition",
+            "Numbered",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Record Store Day",
+        "Reissue"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia",
+        "Columbia",
+        "RSD Essentials"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 24626966,
+      "barcode": [
+        "194399781616",
+        "1 9439-97816-1 6",
+        "CMBO-781616"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 26303,
+      "master_url": "https://api.discogs.com/masters/26303",
+      "uri": "/release/24626966-MGMT-Oracular-Spectacular",
+      "catno": "88843045321",
+      "title": "MGMT - Oracular Spectacular",
+      "thumb": "https://i.discogs.com/C8wJhtYUDrgc3tSnWmPxZdgtBlfauyqD2YFctInK5Ds/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NjI2/OTY2LTE2OTU4Nzgz/NjctNjY4NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/H8FEy2vqoCbux3RkF6x94Iq-x5eZY1Fq7LkyeVhFvKI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NjI2/OTY2LTE2OTU4Nzgz/NjctNjY4NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/24626966",
+      "community": {
+        "want": 1567,
+        "have": 3280
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Hot Pink",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Record Store Day",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

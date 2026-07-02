@@ -1,0 +1,354 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 14,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605143217&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?barcode=656605143217&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "USA & Europe",
+      "year": "2021",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Little Homestead Songs",
+        "Copyright Control",
+        "Courtyard Studio",
+        "Sound Gallery Studios",
+        "Whitehouse Recording Studio",
+        "The Farm II",
+        "Zigzag Music Productions",
+        "Sunset Sound",
+        "Down In The Valley",
+        "Josey Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Dream Pop"
+      ],
+      "id": 21004720,
+      "barcode": [
+        "656605143217",
+        "LC 28265"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/release/21004720-Slowdive-Slowdive",
+      "catno": "DOC132",
+      "title": "Slowdive - Slowdive",
+      "thumb": "https://i.discogs.com/2pC5LCneWyP8u70JzckggbSKRRXyHkClhcqsJKsc_xw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMDA0/NzIwLTE2MzcxMDgy/NDItOTU0Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/tujiQ4D9XmfsHMtLe9sT9_0Sn4Yw4EduFXI0m-z5Xoo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMDA0/NzIwLTE2MzcxMDgy/NDItOTU0Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/21004720",
+      "community": {
+        "want": 369,
+        "have": 531
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Violet",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Dream Pop"
+      ],
+      "id": 28008234,
+      "barcode": [
+        "6 56605 14321 7",
+        "6 74012 92398 7",
+        "4 526180 657859"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/release/28008234-Slowdive-Slowdive",
+      "catno": "DOC132JLP-C6",
+      "title": "Slowdive - Slowdive",
+      "thumb": "https://i.discogs.com/Wu0V7B4gxuKDsChkJ4Xr2A3KtA3UMNRw4Z2EAv78cYw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MDA4/MjM0LTE2OTIzNjcx/OTgtNDA5Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/OzOSmZEsSWNuPpsQB-dE2A8_TwJdIWXg7o7wZUKdMik/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MDA4/MjM0LTE2OTIzNjcx/OTgtNDA5Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28008234",
+      "community": {
+        "want": 163,
+        "have": 50
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red [Apple Opaque]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Ultra-Vybe, Inc."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Dream Pop"
+      ],
+      "id": 28413859,
+      "barcode": [
+        "6 56605 14321 7",
+        "6 74012 92398 7",
+        "4 526180 666523"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/release/28413859-Slowdive-Slowdive",
+      "catno": "DOC132JLP-C6",
+      "title": "Slowdive - Slowdive",
+      "thumb": "https://i.discogs.com/C1Gcl0xCaKSYu-WUeq-s535tF2hSmVOmnt4LRISDVQM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NDEz/ODU5LTE2OTU4MjIy/MDEtOTg3MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/IYAbts2wL5uHAsIb0Wy08JDhrl_qXKNSrFk1AtVn2lI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NDEz/ODU5LTE2OTU4MjIy/MDEtOTg3MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28413859",
+      "community": {
+        "want": 126,
+        "have": 13
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red [Apple Opaque]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK, Europe & US",
+      "year": "2017",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Little Homestead Songs",
+        "Copyright Control",
+        "Courtyard Studio",
+        "Sound Gallery Studios",
+        "Whitehouse Recording Studio",
+        "The Farm II",
+        "Zigzag Music Productions",
+        "Sunset Sound",
+        "Bonati Mastering",
+        "Bonati Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Indie Rock"
+      ],
+      "id": 13862599,
+      "barcode": [
+        "6 56605 14321 7",
+        "656605143217",
+        "6 5660 - 51432 - 3 1",
+        "656605143231",
+        "DOC132LP A BONATI MASTERING NYC",
+        "DOC132LP B BONATI MASTERING NYC",
+        "LC 29265"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/13862599-Slowdive-Slowdive",
+      "catno": "DOC132",
+      "title": "Slowdive - Slowdive",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/13862599",
+      "community": {
+        "want": 0,
+        "have": 4
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "AUTOGRAPHED SILVER",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK, Europe & US",
+      "year": "2017",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Little Homestead Songs",
+        "Copyright Control",
+        "Courtyard Studio",
+        "Sound Gallery Studios",
+        "Whitehouse Recording Studio",
+        "The Farm II",
+        "Zigzag Music Productions",
+        "Sunset Sound",
+        "Bonati Mastering",
+        "Bonati Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Indie Rock",
+        "Dream Pop"
+      ],
+      "id": 10229694,
+      "barcode": [
+        "6 56605 14321 7",
+        "656605143217",
+        "6 5660 - 51432 - 3 1",
+        "656605143231",
+        "DOC132LP A BONATI MASTERING NYC",
+        "DOC132LP B BONATI MASTERING NYC",
+        "LC 29265"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1173913,
+      "master_url": "https://api.discogs.com/masters/1173913",
+      "uri": "/release/10229694-Slowdive-Slowdive",
+      "catno": "DOC132",
+      "title": "Slowdive - Slowdive",
+      "thumb": "https://i.discogs.com/RdQWHQf2A0kUzms6KZp_7ViMKc_GjWCRPcjOvGVLN3A/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjI5/Njk0LTE3MDQ2NDgx/MTktNzU0Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/QBJ_AMdEppovzPQrDVpTUQUaFJAdpkAWeUK-iFeDV0I/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjI5/Njk0LTE3MDQ2NDgx/MTktNzU0Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10229694",
+      "community": {
+        "want": 1465,
+        "have": 5841
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Silver",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

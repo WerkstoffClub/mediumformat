@@ -1,0 +1,378 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 13,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Tyler%2C+The+Creator+IGOR&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?q=Tyler%2C+The+Creator+IGOR&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "Columbia Records",
+        "Columbia Records",
+        "The Mix Room",
+        "Bernie Grundman Mastering",
+        "Westlake Studios",
+        "Coldwater Studios",
+        "Shangri-La, Malibu, CA",
+        "Conway Studios",
+        "Chalice Recording Studios",
+        "Villa Batell, Lake Como, Italy",
+        "Paramount Recording Studios",
+        "O'Sheila Studios, Atlanta, GA",
+        "Bernie Grundman Mastering",
+        "United Record Pressing"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop",
+        "Funk / Soul"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Neo Soul"
+      ],
+      "id": 14215683,
+      "barcode": [
+        "190759652213",
+        "1 90759 65221 3",
+        "ALI9075965221 SS",
+        "BLI9075965221 SS",
+        "BMI",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1591877,
+      "master_url": "https://api.discogs.com/masters/1591877",
+      "uri": "/release/14215683-TylerCreator-Igor",
+      "catno": "19075965221",
+      "title": "Tyler, The Creator - Igor",
+      "thumb": "https://i.discogs.com/cZwS6IBTwYAEY80W11Fd5DLjAf7q7uNI9m-gJw5etJs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MjE1/NjgzLTE3MzE3MDc3/NDgtMTk0Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/_xo94Vv8X5amfpirg4wncr-BnboID1TjXWEMUEy8OAU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MjE1/NjgzLTE3MzE3MDc3/NDgtMTk0Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14215683",
+      "community": {
+        "want": 10161,
+        "have": 67701
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold ",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Music",
+        "Columbia Records",
+        "Columbia Records",
+        "Columbia Records",
+        "Columbia Records",
+        "Conway Studios",
+        "Shangri-La, Malibu, CA",
+        "Coldwater Studios",
+        "Westlake Studios",
+        "Chalice Recording Studios",
+        "Paramount Recording Studios",
+        "O'Sheila Studios, Atlanta, GA",
+        "Villa Batell, Lake Como, Italy",
+        "The Mix Room",
+        "Bernie Grundman Mastering",
+        "A Boy Is A Gun",
+        "Ascapuzi",
+        "Cash Carti Music",
+        "Third Side Music",
+        "Soundway Publishing Ltd.",
+        "Bibi Mascel",
+        "Catherine's Peak Music",
+        "Chuck Brown Music",
+        "Dovahkee Music Publishing",
+        "Please Gimme My Publishing",
+        "Mick Ware",
+        "Locamotion Publishing",
+        "Omori Music Int'l",
+        "City Man Music",
+        "Irving Music",
+        "Bernie Grundman Mastering",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop",
+        "Funk / Soul"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Neo Soul"
+      ],
+      "id": 14210644,
+      "barcode": [
+        "1 90759 65221 3",
+        "190759652213",
+        "BIEM/GEMA",
+        "LC00162",
+        "AL19075965221 BJ78034-01 A1 SS",
+        "BL19075965221 BJ78034-01 B1 SS"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1591877,
+      "master_url": "https://api.discogs.com/masters/1591877",
+      "uri": "/release/14210644-TylerCreator-Igor",
+      "catno": "19075965221",
+      "title": "Tyler, The Creator - Igor",
+      "thumb": "https://i.discogs.com/8Tod0q_3EcNRVSR5Y7WbIL0cLuJc7nIFmzOJAkN4ZAw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MjEw/NjQ0LTE3NTg0NjM2/MzctMzY4Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/bs8y3iCJwofPpZIJnZNvEImVpP2_BfLdbewsBA-NT4o/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MjEw/NjQ0LTE3NTg0NjM2/MzctMzY4Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14210644",
+      "community": {
+        "want": 4809,
+        "have": 29027
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "The Mix Room",
+        "Bernie Grundman Mastering",
+        "GOLFWANG",
+        "Memphis Record Pressing",
+        "GZ Media",
+        "Bernie Grundman Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop",
+        "Funk / Soul"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Neo Soul"
+      ],
+      "id": 14219559,
+      "barcode": [
+        "1 90759 65231 2",
+        "190759652312",
+        "194892E1/A  MRP2018/19075965221-A | AL19075965221 SS A8",
+        "194892E2/A1  MRP2018/19075965221-B | BL19075965221 SS B12"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1591877,
+      "master_url": "https://api.discogs.com/masters/1591877",
+      "uri": "/release/14219559-TylerCreator-Igor",
+      "catno": "19075965231",
+      "title": "Tyler, The Creator - Igor",
+      "thumb": "https://i.discogs.com/bl74oPuwbSsUkNSqEJiOElwkQHNUQlwPPaXp3gIa9FE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MjE5/NTU5LTE1NzAyMjA0/NTItODgwNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/AYFueUmsLFPqFibchPD2NbzJNv1ILTKrUNUodFlkDL0/rs:fit/g:sm/q:90/h:605/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MjE5/NTU5LTE1NzAyMjA0/NTItODgwNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14219559",
+      "community": {
+        "want": 8190,
+        "have": 10195
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Mint",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Columbia"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop",
+        "Funk / Soul"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Neo Soul"
+      ],
+      "id": 14176877,
+      "barcode": [
+        "190759652213",
+        "AL19075965221 SS",
+        "BL19075965221 SS",
+        "AL 19075965221 Ⅲ -SS-",
+        "BL 19075965221 -SS-"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1591877,
+      "master_url": "https://api.discogs.com/masters/1591877",
+      "uri": "/release/14176877-TylerCreator-Igor",
+      "catno": "19075965221",
+      "title": "Tyler, The Creator - Igor",
+      "thumb": "https://i.discogs.com/UWBvIbbhITdax03WDu525FeKr41nhCVeh6tncVI6bd0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MTc2/ODc3LTE1NjkyOTU1/NDAtMzc0Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/e2lPdnkaOmnKIU7VzKH1SWHV8cKHhrIf5I7pPyCLtoU/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MTc2/ODc3LTE1NjkyOTU1/NDAtMzc0Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14176877",
+      "community": {
+        "want": 2913,
+        "have": 10864
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold, Poster",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "Columbia Records",
+        "Columbia Records",
+        "The Mix Room",
+        "Bernie Grundman Mastering",
+        "Westlake Studios",
+        "Coldwater Studios",
+        "Shangri-La, Malibu, CA",
+        "Conway Studios",
+        "Chalice Recording Studios",
+        "Villa Batell, Lake Como, Italy",
+        "Paramount Recording Studios",
+        "O'Sheila Studios, Atlanta, GA",
+        "Vantiva, Guadalajara, Mexico"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop",
+        "Funk / Soul"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Neo Soul"
+      ],
+      "id": 22765403,
+      "barcode": [
+        "190759652213",
+        "1 90759 65221 3",
+        "19075965221-A CB",
+        "(1201533) 02010103",
+        "19075965221-B -SS-",
+        "01010202",
+        "BMI",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1591877,
+      "master_url": "https://api.discogs.com/masters/1591877",
+      "uri": "/release/22765403-TylerCreator-Igor",
+      "catno": "19075965221",
+      "title": "Tyler, The Creator - Igor",
+      "thumb": "https://i.discogs.com/CzKARYxK3WuADGNNUQe9l2Gpu6pkmPrI29Jw5h9cWhE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyNzY1/NDAzLTE2ODU0Mjgw/ODMtMTQ5OS5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/wud2l7S6StbK2sPxyp07qcB6nP3pUHihwCOvjC-bbeg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyNzY1/NDAzLTE2ODU0Mjgw/ODMtMTQ5OS5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/22765403",
+      "community": {
+        "want": 1109,
+        "have": 7496
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold ",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

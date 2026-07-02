@@ -1,0 +1,283 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 20,
+    "per_page": 5,
+    "items": 98,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?catno=CAT+015&type=release&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=20",
+      "next": "https://api.discogs.com/database/search?catno=CAT+015&type=release&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Sweden",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "12\"",
+        "33 ⅓ RPM",
+        "EP"
+      ],
+      "label": [
+        "Cataleya Music",
+        "Cataleya Music",
+        "Cataleya Music",
+        "Analogcut Mastering",
+        "Mother Tongue Records",
+        "Mother Tongue Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "House",
+        "Deep House"
+      ],
+      "id": 36821377,
+      "barcode": [
+        "CAT-015 A",
+        "ANALOGCUT CAT-015 B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/36821377-Vick-Lavender-The-Esthetic-EP",
+      "catno": "CAT 015",
+      "title": "Vick Lavender - The Esthetic EP",
+      "thumb": "https://i.discogs.com/RxP8BhXJMjmcTUerTb1K6fsdvxzjoJfC0Op1UmcOEgY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODIx/Mzc3LTE3NzQzNzc4/NjAtMjE0Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/D3uUa92Gvdw0h8zlWHyhd_r2hu6hr6Bhif7Di3y3Iso/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODIx/Mzc3LTE3NzQzNzc4/NjAtMjE0Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36821377",
+      "community": {
+        "want": 3,
+        "have": 5
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "12\"",
+            "33 ⅓ RPM",
+            "EP"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "1985",
+      "format": [
+        "Vinyl",
+        "LP"
+      ],
+      "label": [
+        "Catero Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Jazz"
+      ],
+      "style": [
+        "Easy Listening",
+        "Swing"
+      ],
+      "id": 3950007,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2348437,
+      "master_url": "https://api.discogs.com/masters/2348437",
+      "uri": "/release/3950007-Laurie-Antonioli-Soul-Eyes",
+      "catno": "CAT-015",
+      "title": "Laurie Antonioli - Soul Eyes",
+      "thumb": "https://i.discogs.com/atKc28Kvcfka0duTho9pZ342z-y1Yqy20w06V6U9N9I/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM5NTAw/MDctMTM1MDI0MTIy/MS03NTM5LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/iIjPmLSOwA_5BWfSUjdV1FmJNrT7RNkgXneTCXa1Bls/rs:fit/g:sm/q:90/h:592/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM5NTAw/MDctMTM1MDI0MTIy/MS03NTM5LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3950007",
+      "community": {
+        "want": 11,
+        "have": 15
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "1995",
+      "format": [
+        "Vinyl",
+        "12\"",
+        "45 RPM"
+      ],
+      "label": [
+        "Rephlex"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Rhythmic Noise",
+        "Dark Ambient",
+        "Industrial",
+        "IDM"
+      ],
+      "id": 1177245,
+      "barcode": [
+        "IF YOU CANT HEAR IT, YOU'RE NOT LISTENING. CAT 015 C1 A PORKY PRIME CUT",
+        "PORKY. CAT 015 Y1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 11896,
+      "master_url": "https://api.discogs.com/masters/11896",
+      "uri": "/release/1177245-Cylob-Industrial-Folk-Songs",
+      "catno": "CAT 015",
+      "title": "Cylob - Industrial Folk Songs",
+      "thumb": "https://i.discogs.com/yV0PKIAHvvnZTsvt_uWf-dkf7CEt8XYxyOQMOEtlF2w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNzcy/NDUtMTE5ODUxNTM0/Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/pE7Xrc42DFSFRp5nzZnvAag5PyvyrddX8kpngewigbw/rs:fit/g:sm/q:90/h:600/w:589/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNzcy/NDUtMTE5ODUxNTM0/Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/1177245",
+      "community": {
+        "want": 262,
+        "have": 187
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "12\"",
+            "45 RPM"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "France",
+      "year": "2016",
+      "format": [
+        "Vinyl",
+        "7\"",
+        "45 RPM",
+        "Single",
+        "Reissue",
+        "Stereo"
+      ],
+      "label": [
+        "Cat Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [],
+      "id": 16107657,
+      "barcode": [
+        "3770005054151"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1337675,
+      "master_url": "https://api.discogs.com/masters/1337675",
+      "uri": "/Johnny-Hallyday-Souvenirs-Souvenirs-Hey-Pony/release/16107657",
+      "catno": "CAT 015",
+      "title": "Johnny Hallyday - Souvenirs, Souvenirs / Hey Pony",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/16107657",
+      "community": {
+        "want": 3,
+        "have": 0
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "7\"",
+            "45 RPM",
+            "Single",
+            "Reissue",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "France",
+      "year": "2016",
+      "format": [
+        "Vinyl",
+        "7\"",
+        "45 RPM",
+        "Single",
+        "Reissue",
+        "Stereo"
+      ],
+      "label": [
+        "Cat Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [],
+      "id": 16107645,
+      "barcode": [
+        "3770005054151"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1337675,
+      "master_url": "https://api.discogs.com/masters/1337675",
+      "uri": "/Johnny-Hallyday-Souvenirs-Souvenirs-Hey-Pony/release/16107645",
+      "catno": "CAT 015",
+      "title": "Johnny Hallyday - Souvenirs, Souvenirs / Hey Pony",
+      "thumb": "https://i.discogs.com/3MwjnuFId8QvXojikXsKSHtzX_4VDEDkGlth6w2yF1s/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2MTA3/NjQ1LTE2MDkzNDc4/NjEtNTI1MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/3tA4ebatvKu86-b9NQJFMk2-fP973KJlNAzAFQSBKik/rs:fit/g:sm/q:90/h:605/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2MTA3/NjQ1LTE2MDkzNDc4/NjEtNTI1MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/16107645",
+      "community": {
+        "want": 3,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red",
+          "descriptions": [
+            "7\"",
+            "45 RPM",
+            "Single",
+            "Reissue",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

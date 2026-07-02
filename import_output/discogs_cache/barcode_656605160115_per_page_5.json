@@ -1,0 +1,318 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 8,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605160115&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=656605160115&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Company Studio"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 23120453,
+      "barcode": [
+        "6 56605 16011 5",
+        "656605160115  ",
+        "6 5660 - 51601 - 8 4",
+        "656605160184"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2613089,
+      "master_url": "https://api.discogs.com/masters/2613089",
+      "uri": "/release/23120453-Toro-Y-Moi-Mahal",
+      "catno": "DOC300LP",
+      "title": "Toro Y Moi - Mahal",
+      "thumb": "https://i.discogs.com/WbkQMvSbutJ9_d_6Eh1QWEfoQogZYeuelXqisN_D4OE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMTIw/NDUzLTE2NzAwNDgz/OTMtMTE0My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ePa3BXu3U9v5RENEJZsegXJIJWkpMWO3Va7pa16HRX0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMTIw/NDUzLTE2NzAwNDgz/OTMtMTE0My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23120453",
+      "community": {
+        "want": 77,
+        "have": 318
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Company Studio",
+        "Urban Outfitters"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 23285726,
+      "barcode": [
+        "6 56605 16011 5",
+        "656605160115",
+        "DOC300LP - A",
+        "DOC300LP - B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2613089,
+      "master_url": "https://api.discogs.com/masters/2613089",
+      "uri": "/release/23285726-Toro-Y-Moi-Mahal",
+      "catno": "DOC300LP",
+      "title": "Toro Y Moi - Mahal",
+      "thumb": "https://i.discogs.com/joAwy8eT-1pu1qC-yVTYXmkdxKVmuaEC2bihIidBeSo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMjg1/NzI2LTE2NTMwMDAz/OTUtMjM4NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/aaS6cOl6lDY9KsIKZVvIUcwAsbx06PxMBploqQ-mlPM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMjg1/NzI2LTE2NTMwMDAz/OTUtMjM4NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23285726",
+      "community": {
+        "want": 82,
+        "have": 254
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear [Crystal]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Company Studio",
+        "The HoneyMoon Suite",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 23017991,
+      "barcode": [
+        "6 5660-51601-3 9",
+        "656605160139",
+        "6 56605 16011 5",
+        "656605160115",
+        "DOC300LP-A",
+        "DOC300LP-B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2613089,
+      "master_url": "https://api.discogs.com/masters/2613089",
+      "uri": "/release/23017991-Toro-Y-Moi-Mahal",
+      "catno": "DOC300LP",
+      "title": "Toro Y Moi - Mahal",
+      "thumb": "https://i.discogs.com/18muGrHipfOXRTfBce9E9ImpJ-OI3WW1ZgDA4PgWiv4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDE3/OTkxLTE2NTA5Nzkw/MTgtMzc0MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Dd_DiOgA8Q8yhP_64YnMCDclFxulBPyp2E3jlmLpb0o/rs:fit/g:sm/q:90/h:607/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDE3/OTkxLTE2NTA5Nzkw/MTgtMzc0MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23017991",
+      "community": {
+        "want": 305,
+        "have": 2531
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Silver",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans",
+        "Company Studio",
+        "The HoneyMoon Suite",
+        "Sterling Sound"
+      ],
+      "type": "master",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 2613089,
+      "barcode": [
+        "6 5660-51601-3 9",
+        "656605160139",
+        "6 56605 16011 5",
+        "656605160115",
+        "DOC300LP-A",
+        "DOC300LP-B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2613089,
+      "master_url": "https://api.discogs.com/masters/2613089",
+      "uri": "/master/2613089-Toro-Y-Moi-Mahal",
+      "catno": "DOC300LP",
+      "title": "Toro Y Moi - Mahal",
+      "thumb": "https://i.discogs.com/18muGrHipfOXRTfBce9E9ImpJ-OI3WW1ZgDA4PgWiv4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDE3/OTkxLTE2NTA5Nzkw/MTgtMzc0MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Dd_DiOgA8Q8yhP_64YnMCDclFxulBPyp2E3jlmLpb0o/rs:fit/g:sm/q:90/h:607/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDE3/OTkxLTE2NTA5Nzkw/MTgtMzc0MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/2613089",
+      "community": {
+        "want": 1299,
+        "have": 6296
+      }
+    },
+    {
+      "country": "UK & US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Rough Trade Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Psychedelic Rock"
+      ],
+      "id": 23122331,
+      "barcode": [
+        "656605160153",
+        "656605160115",
+        "DOC300LP-A",
+        "DOC300LP-B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2613089,
+      "master_url": "https://api.discogs.com/masters/2613089",
+      "uri": "/release/23122331-Toro-Y-Moi-Mahal-",
+      "catno": "DOC300LP",
+      "title": "Toro Y Moi - Mahal ",
+      "thumb": "https://i.discogs.com/4T232_-oIeCIyMF5OIsI-3mTmJCFi67Rpsl0VmA-3G4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMTIy/MzMxLTE2NTE3Njc4/ODYtMTY0OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/7tt__yVCgDQIqIxwOQITm63bx-KrTsSwrUNs4_EpjU8/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMTIy/MzMxLTE2NTE3Njc4/ODYtMTY0OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23122331",
+      "community": {
+        "want": 127,
+        "have": 201
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue & White Splatter ",
+          "descriptions": [
+            "LP",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

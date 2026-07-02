@@ -1,0 +1,359 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 8,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605230016&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=656605230016&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2017",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Turntable Lab",
+        "TTL Editions"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Leftfield",
+        "Folk Rock",
+        "Experimental",
+        "Indie Pop"
+      ],
+      "id": 11161490,
+      "barcode": [
+        "656605233345",
+        "656605230016"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/release/11161490-Bon-Iver-22-A-Million",
+      "catno": "JAG333",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/ODW5YsbCjaVomVVJHx2imohs1cTUFC58Xo3670lHk4M/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMTYx/NDkwLTE1MTEyMTAz/MjMtNjM3MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ml3pkPz1FcFfZivfiGfwsvquiWrH4i6Bc4knsIZ7W_Q/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMTYx/NDkwLTE1MTEyMTAz/MjMtNjM3MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/11161490",
+      "community": {
+        "want": 688,
+        "have": 2108
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Cream",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2016",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Vinyl",
+        "12\"",
+        "Single",
+        "All Media",
+        "Limited Edition"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 9134691,
+      "barcode": [
+        "656605230030 ",
+        "656605230016",
+        "656605229911"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/release/9134691-Bon-Iver-22-A-Million",
+      "catno": "JAG300",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/rmL2kOtKPvBuisLSVmn0UjT1ysLl9tWdgri5-t0mf38/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxMzQ2/OTEtMTQ3NTM2NzM5/OS03OTAwLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/g7gRbJbT-j5aRZDXAFy5O6-37bWedfGwu9yQxvr5_is/rs:fit/g:sm/q:90/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxMzQ2/OTEtMTQ3NTM2NzM5/OS03OTAwLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/9134691",
+      "community": {
+        "want": 664,
+        "have": 2012
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "White",
+          "descriptions": [
+            "12\"",
+            "Single"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2016",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Vinyl",
+        "12\"",
+        "Single",
+        "All Media",
+        "Limited Edition"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 9195441,
+      "barcode": [
+        "656605230030 ",
+        "656605230016",
+        "656605229911",
+        "16-0434NL A JAG300 LP",
+        "16-0434NL B JAG300 LP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/release/9195441-Bon-Iver-22-A-Million",
+      "catno": "JAG300",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/zNLCmM17yP-HhdJ6D03TP4liQ_xc26Pi2-r2ShCgiuo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxOTU0/NDEtMTQ5ODkxNTIz/My02OTEyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/x_4Q-vVkqDiR3Q-97TQ5fsLw7ALqL8Yssc3fLHkfyAk/rs:fit/g:sm/q:90/h:613/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxOTU0/NDEtMTQ5ODkxNTIz/My02OTEyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/9195441",
+      "community": {
+        "want": 538,
+        "have": 1404
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "12\"",
+            "Single"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2017",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Bon Iver",
+        "April Base Publishing",
+        "Salt Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 11122494,
+      "barcode": [
+        "6 56605 23001 6",
+        "656605230016",
+        "ASCAP",
+        "656605233314",
+        "JAG-300 Are “1 OF 1 IS 1”",
+        "JAG-300 B “21 29 14 43 12 13 15 25” Salt"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/release/11122494-Bon-Iver-22-A-Million",
+      "catno": "JAG300",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/GszDlfvdpG-LJGvY9Xlc_YvK6ZKzYB1IuJ0t8kI84SQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMTIy/NDk0LTE2MjU5NDU4/MzgtOTQ3MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Z-NDBuFo0_gu6t31Y_WheYJ5o4VAmQz6cBdfspGrO1o/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMTIy/NDk0LTE2MjU5NDU4/MzgtOTQ3MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/11122494",
+      "community": {
+        "want": 705,
+        "have": 499
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Orange",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2016",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Bon Iver",
+        "SST Brüggemann GmbH",
+        "MPO",
+        "April Base Publishing",
+        "Atlantic Records UK",
+        "Universal Music Group",
+        "Rhino Entertainment Company",
+        "Warner Music UK Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 9150523,
+      "barcode": [
+        "6 56605 23001 6",
+        "656605230016",
+        "ASCAP ",
+        "PRS BMI",
+        "16-0434NL A JAG300 LP MPO K SST Feminism",
+        "16-0434NL B JAG300 LP MPO K SST To Pondra"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/release/9150523-Bon-Iver-22-A-Million",
+      "catno": "JAG300",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/qjCzWl0TR6N2Pblf0lGb1nJ1VPmLIajI7zs1c2WYDSY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxNTA1/MjMtMTcwNjAzMDk2/NS0zOTA2LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/ee9XwjwaoxXsruxIlPAKFhdtt_eLcE4zz-UmlP6qIss/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxNTA1/MjMtMTcwNjAzMDk2/NS0zOTA2LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/9150523",
+      "community": {
+        "want": 1056,
+        "have": 7489
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

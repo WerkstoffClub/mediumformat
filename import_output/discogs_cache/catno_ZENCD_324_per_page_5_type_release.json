@@ -1,0 +1,121 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Ninja Tune",
+        "Ninja Tune",
+        "Ninja Tune",
+        "Sony Music Publishing"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Electro House"
+      ],
+      "id": 36855622,
+      "barcode": [
+        "5054429209143",
+        "lc-12885"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4175668,
+      "master_url": "https://api.discogs.com/masters/4175668",
+      "uri": "/release/36855622-Fcukers-%C3%96",
+      "catno": "zencd324",
+      "title": "Fcukers - Ö",
+      "thumb": "https://i.discogs.com/giNZvu1JPl6sCjkZV8MQakQCYtYddsvf0aDaBm81DtE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODU1/NjIyLTE3NzQyODA4/ODctOTgyNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/wbTry0Uo79e3sJdu-II1QcxTjMgzLleuSND0K7x5Ytg/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODU1/NjIyLTE3NzQyODA4/ODctOTgyNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36855622",
+      "community": {
+        "want": 0,
+        "have": 2
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "1995",
+      "format": [
+        "CD",
+        "Compilation"
+      ],
+      "label": [
+        "Ninja Tune",
+        "Ninja Tune",
+        "Ninja Tune",
+        "Vital",
+        "Ablex",
+        "Ninja Cuts"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Hip Hop"
+      ],
+      "style": [
+        "Trip Hop",
+        "Jazzy Hip-Hop",
+        "Instrumental"
+      ],
+      "id": 13531337,
+      "barcode": [
+        "5 021392 066127",
+        "ABLEX 83249 ZENCD15 1:1:1:1",
+        "IFPI L041"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 26276,
+      "master_url": "https://api.discogs.com/masters/26276",
+      "uri": "/release/13531337-Various-Ninja-Cuts-Funkjazztical-Tricknology",
+      "catno": "ZEN CD15",
+      "title": "Various - Ninja Cuts - Funkjazztical Tricknology",
+      "thumb": "https://i.discogs.com/aeVesBZunEBHCxgLm1xeq4oVj_O9Qtaky3wvrUADv-Y/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNTMx/MzM3LTE1NTYwMTA2/NTktMzA5MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/3Wy8GDlB3HIPliLC-wqVifhOHxJEnHrX8Oe38Z_4F7k/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNTMx/MzM3LTE1NTYwMTA2/NTktMzA5MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/13531337",
+      "community": {
+        "want": 28,
+        "have": 46
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Compilation"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Unknown",
+      "year": "2013",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Joe Lambert Mastering",
+        "Bellwether Manufacturing",
+        "Optical Experts Manufacturing"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Lo-Fi",
+        "Psychedelic Rock",
+        "Indie Rock"
+      ],
+      "id": 4244724,
+      "barcode": [
+        "6 56605 22322 3",
+        "LC 29277",
+        "10/30/2012 02:56:32 AM #87299 IFPI LN08 JAGCD232 WWW.BELLWETHERMFG.COM 01",
+        "IFPI LN08",
+        "IFPI 1055",
+        "IFPI JI05",
+        "IFPI JI19"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 519003,
+      "master_url": "https://api.discogs.com/masters/519003",
+      "uri": "/release/4244724-Unknown-Mortal-Orchestra-II",
+      "catno": "JAG232",
+      "title": "Unknown Mortal Orchestra - II",
+      "thumb": "https://i.discogs.com/IlDQkGv-K1wxBDSq36sOI0LPXe2Kpf5XNyUKmrJMJoo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQyNDQ3/MjQtMTQzMjk4NDI4/NS04OTMxLnBuZw.jpeg",
+      "cover_image": "https://i.discogs.com/eYHoMZMgu8KF5cVXtXfYwZnCZ5e83B8GXvGvVisiWto/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQyNDQ3/MjQtMTQzMjk4NDI4/NS04OTMxLnBuZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4244724",
+      "community": {
+        "want": 183,
+        "have": 813
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

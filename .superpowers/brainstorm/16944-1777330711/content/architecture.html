@@ -1,0 +1,232 @@
+<h2>Medium Format — System Architecture</h2>
+<p class="subtitle">Full platform overview: modules, integrations, and data flows</p>
+
+<style>
+  .arch-wrap { font-family: Inter, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 8px 0; }
+  .arch-row { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .arch-box {
+    border: 1px solid #262626;
+    border-radius: 10px;
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 140px;
+    background: #141414;
+  }
+  .arch-box.core { border-color: #6a4cf5; }
+  .arch-box.channel { border-color: #22c55e; }
+  .arch-box.payment { border-color: #e8a838; }
+  .arch-box.shipping { border-color: #5bc0de; }
+  .arch-box.integration { border-color: #e05c6a; }
+  .arch-box h4 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .arch-box.core h4 { color: #6a4cf5; }
+  .arch-box.channel h4 { color: #22c55e; }
+  .arch-box.payment h4 { color: #e8a838; }
+  .arch-box.shipping h4 { color: #5bc0de; }
+  .arch-box.integration h4 { color: #e05c6a; }
+  .arch-box ul { margin: 0; padding-left: 16px; font-size: 12px; line-height: 1.8; color: #999; }
+  .arch-section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin: 4px 0 6px;
+    padding-left: 2px;
+  }
+  .arrow-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #262626;
+    font-size: 18px;
+    margin: 4px 0;
+    gap: 40px;
+  }
+  .center-box {
+    border: 1px solid #6a4cf5;
+    border-radius: 16px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #6a4cf5, #4c2b9a);
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+  .center-box h3 { margin: 0 0 4px; color: #fff; font-size: 16px; }
+  .center-box p { margin: 0; color: rgba(255,255,255,0.65); font-size: 12px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #999; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+</style>
+
+<div class="arch-wrap">
+
+  <!-- CORE ENGINE -->
+  <div class="arch-section-label">Core Engine</div>
+  <div style="margin-bottom:12px;">
+    <div class="center-box">
+      <h3>Medium Format Backoffice</h3>
+      <p>Inventory · Orders · Customers · Analytics · Wholesale · Staff Management</p>
+    </div>
+  </div>
+
+  <div class="arrow-row">↕ &nbsp;&nbsp;&nbsp;&nbsp;↕&nbsp;&nbsp;&nbsp;&nbsp;↕&nbsp;&nbsp;&nbsp;&nbsp;↕&nbsp;&nbsp;&nbsp;&nbsp;↕&nbsp;&nbsp;&nbsp;&nbsp;↕</div>
+
+  <!-- SALES CHANNELS -->
+  <div class="arch-section-label">Sales Channels</div>
+  <div class="arch-row">
+    <div class="arch-box channel">
+      <h4>Own Website</h4>
+      <ul>
+        <li>Customizable eshop</li>
+        <li>Track previews</li>
+        <li>Discogs metadata</li>
+        <li>Custom domain</li>
+      </ul>
+    </div>
+    <div class="arch-box channel">
+      <h4>POS (Offline)</h4>
+      <ul>
+        <li>iOS + Android app</li>
+        <li>Barcode scanning</li>
+        <li>Walk-in orders</li>
+        <li>Real-time sync</li>
+      </ul>
+    </div>
+    <div class="arch-box channel">
+      <h4>Tokopedia</h4>
+      <ul>
+        <li>Listing sync</li>
+        <li>Order import</li>
+        <li>Stock sync</li>
+        <li>Auto-fulfill</li>
+      </ul>
+    </div>
+    <div class="arch-box channel">
+      <h4>Shopee</h4>
+      <ul>
+        <li>Listing sync</li>
+        <li>Order import</li>
+        <li>Stock sync</li>
+        <li>Auto-fulfill</li>
+      </ul>
+    </div>
+    <div class="arch-box channel">
+      <h4>Discogs</h4>
+      <ul>
+        <li>Catalog import</li>
+        <li>Marketplace listing</li>
+        <li>Order sync</li>
+      </ul>
+    </div>
+    <div class="arch-box channel">
+      <h4>Meta / eBay</h4>
+      <ul>
+        <li>FB/IG Marketplace</li>
+        <li>eBay listings</li>
+        <li>Google Merchant</li>
+        <li>Bandcamp import</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="arrow-row">↕&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↕&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↕</div>
+
+  <!-- PAYMENTS & SHIPPING -->
+  <div class="arch-section-label">Payments & Shipping</div>
+  <div class="arch-row">
+    <div class="arch-box payment">
+      <h4>Payments — Xendit</h4>
+      <ul>
+        <li>Virtual Account (BCA, BNI, BRI, Mandiri, Permata)</li>
+        <li>E-wallet: GoPay, OVO, DANA, ShopeePay, LinkAja</li>
+        <li>QRIS</li>
+        <li>Credit/debit card</li>
+        <li>Paylater (Kredivo, Akulaku)</li>
+        <li>Retail: Indomaret, Alfamart</li>
+      </ul>
+    </div>
+    <div class="arch-box payment">
+      <h4>Payments — International</h4>
+      <ul>
+        <li>Stripe (card, Apple/Google Pay)</li>
+        <li>PayPal</li>
+        <li>For Discogs / int'l orders</li>
+      </ul>
+    </div>
+    <div class="arch-box shipping">
+      <h4>Shipping — Local (ID)</h4>
+      <ul>
+        <li>JNE, JNT, SiCepat</li>
+        <li>Anteraja, Ninja Xpress</li>
+        <li>GoSend, GrabExpress</li>
+        <li>Biteship aggregator</li>
+        <li>Rate calculation</li>
+        <li>Tracking integration</li>
+      </ul>
+    </div>
+    <div class="arch-box shipping">
+      <h4>Shipping — International</h4>
+      <ul>
+        <li>DHL Express</li>
+        <li>FedEx</li>
+        <li>EMS POS Indonesia</li>
+        <li>Rate calculation</li>
+        <li>Tracking integration</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="arrow-row">↕&nbsp;&nbsp;&nbsp;&nbsp;↕&nbsp;&nbsp;&nbsp;&nbsp;↕</div>
+
+  <!-- INTEGRATIONS -->
+  <div class="arch-section-label">External Integrations & Data Sources</div>
+  <div class="arch-row">
+    <div class="arch-box integration">
+      <h4>Discogs API</h4>
+      <ul>
+        <li>Release metadata</li>
+        <li>Tracklist + artwork</li>
+        <li>Wantlist matching</li>
+        <li>Price suggestions</li>
+      </ul>
+    </div>
+    <div class="arch-box integration">
+      <h4>Audio Previews</h4>
+      <ul>
+        <li>Bandcamp embed</li>
+        <li>Spotify preview</li>
+        <li>YouTube embed</li>
+        <li>SoundCloud embed</li>
+        <li>Direct upload (MP3)</li>
+      </ul>
+    </div>
+    <div class="arch-box integration">
+      <h4>Google</h4>
+      <ul>
+        <li>Google Merchant</li>
+        <li>Google Maps listing</li>
+        <li>YouTube listings</li>
+        <li>Analytics</li>
+      </ul>
+    </div>
+    <div class="arch-box integration">
+      <h4>Communication</h4>
+      <ul>
+        <li>WhatsApp Business</li>
+        <li>Email (newsletter)</li>
+        <li>Order notifications</li>
+        <li>Customer CRM</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#6a4cf5"></div> Core System</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div> Sales Channels</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e8a838"></div> Payments</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#5bc0de"></div> Shipping</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e05c6a"></div> External Integrations</div>
+  </div>
+
+</div>

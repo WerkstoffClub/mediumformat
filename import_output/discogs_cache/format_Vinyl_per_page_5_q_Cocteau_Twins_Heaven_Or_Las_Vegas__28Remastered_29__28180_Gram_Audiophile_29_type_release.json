@@ -1,0 +1,352 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 6,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Cocteau+Twins+Heaven+Or+Las+Vegas+%28Remastered%29+%28180+Gram+Audiophile%29&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?q=Cocteau+Twins+Heaven+Or+Las+Vegas+%28Remastered%29+%28180+Gram+Audiophile%29&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "UK, Europe & US",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "4AD",
+        "4AD",
+        "4AD",
+        "Universal Music Publishing Ltd.",
+        "September Sound",
+        "MPO"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Ethereal"
+      ],
+      "id": 17255134,
+      "barcode": [
+        "652637 342017",
+        "652637342017",
+        "MPO CAD 3420 A2 -LvC-",
+        "MPO CAD 3420 B |...|",
+        "[MPO logo]® 20 177106"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5104,
+      "master_url": "https://api.discogs.com/masters/5104",
+      "uri": "/release/17255134-Cocteau-Twins-Heaven-Or-Las-Vegas",
+      "catno": "CAD 3420",
+      "title": "Cocteau Twins - Heaven Or Las Vegas",
+      "thumb": "https://i.discogs.com/1RWfIqRhcyMcPy6B63GwvO-w6LZoGHgSCTgg3t7vyBc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MjU1/MTM0LTE2MTMxNTg5/ODctMjk5OS5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/_AlubGk1QoumPHi4n7qJ4Yh_pe1U2YqljkuuIwv2t5I/rs:fit/g:sm/q:90/h:500/w:501/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3MjU1/MTM0LTE2MTMxNTg5/ODctMjk5OS5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/17255134",
+      "community": {
+        "want": 1866,
+        "have": 4588
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Remastered",
+        "Repress"
+      ],
+      "label": [
+        "4AD",
+        "4AD",
+        "4AD",
+        "Universal Music Publishing Ltd.",
+        "September Sound",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Ethereal",
+        "Dream Pop"
+      ],
+      "id": 23123066,
+      "barcode": [
+        "652637 342017",
+        "652637342017",
+        "CAD3420 130250E1/B",
+        "CAD3420 130250E2/B ",
+        "CAD3420 130250E1/C",
+        "CAD3420 130250E1/C",
+        "CAD3420 130250E1/H",
+        "CAD3420 130250E2/D",
+        "CAD3420 130250E1/E",
+        "CAD3420 130250E2/C",
+        "CAD3420 130250E1/L",
+        "CAD3420 130250E2/E",
+        "CAD3420 130250E1/M",
+        "CAD3420 130250E2/E",
+        "CAD3420 130250E1/M 02174005",
+        "CAD3420 130250E2/H"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5104,
+      "master_url": "https://api.discogs.com/masters/5104",
+      "uri": "/release/23123066-Cocteau-Twins-Heaven-Or-Las-Vegas",
+      "catno": "CAD 3420",
+      "title": "Cocteau Twins - Heaven Or Las Vegas",
+      "thumb": "https://i.discogs.com/eODEcdU7e_k7c-QSskE0hvVCnoj4zn0G4FMevHAq84U/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMTIz/MDY2LTE2NTQzODYx/MDQtNzIwMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/u-0LkJcGdiGlxzQu1-aXJ1I6Mh-t906ot8sVjUGW5wY/rs:fit/g:sm/q:90/h:605/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMTIz/MDY2LTE2NTQzODYx/MDQtNzIwMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23123066",
+      "community": {
+        "want": 818,
+        "have": 2011
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180 gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Remastered",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK, Europe & US",
+      "year": "2015",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "4AD",
+        "4AD",
+        "4AD",
+        "Universal Music Publishing Ltd.",
+        "September Sound",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Ethereal",
+        "Goth Rock"
+      ],
+      "id": 19191604,
+      "barcode": [
+        "652637 342017",
+        "652637342017",
+        "CAD3420 130250E1/A",
+        "CAD3420 130250E2/A"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5104,
+      "master_url": "https://api.discogs.com/masters/5104",
+      "uri": "/release/19191604-Cocteau-Twins-Heaven-Or-Las-Vegas",
+      "catno": "Cad 3420",
+      "title": "Cocteau Twins - Heaven Or Las Vegas",
+      "thumb": "https://i.discogs.com/TYTIeIbwnSYu7sg-ureQV078phHO8-VIXblSfnruLVw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5MTkx/NjA0LTE2MjU3NzUy/ODUtMzQ5Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/WRC_mDe7Cy8X3G4KSEmEcp_EF4T-I5d-JWdyAQhbAcM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5MTkx/NjA0LTE2MjU3NzUy/ODUtMzQ5Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/19191604",
+      "community": {
+        "want": 707,
+        "have": 1065
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "4AD",
+        "4AD",
+        "4AD",
+        "Universal Music Publishing Ltd.",
+        "September Sound",
+        "MPO"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Ethereal"
+      ],
+      "id": 24304007,
+      "barcode": [
+        "652637 342017",
+        "652637342017",
+        "MPO CAD 3420 A2 -LvC-",
+        "MPO CAD 3420 B |...|",
+        "[MPO logo]® 21 234288",
+        "[MPO logo]® 21 234391"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5104,
+      "master_url": "https://api.discogs.com/masters/5104",
+      "uri": "/release/24304007-Cocteau-Twins-Heaven-Or-Las-Vegas",
+      "catno": "CAD 3420",
+      "title": "Cocteau Twins - Heaven Or Las Vegas",
+      "thumb": "https://i.discogs.com/XX4m9sKUo3WMfIY-iHpLhNk_EIWq7AuTk6z_BAeVCOU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0MzA0/MDA3LTE2OTQzMzI3/MzctMjM4My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/YpkhYtC8Tl4RyjLgw-LMZynBt7g3NraXvyBLFNg6iDs/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0MzA0/MDA3LTE2OTQzMzI3/MzctMjM4My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/24304007",
+      "community": {
+        "want": 791,
+        "have": 1009
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK, Europe & US",
+      "year": "2020",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "4AD",
+        "4AD",
+        "4AD",
+        "Universal Music Publishing Ltd.",
+        "September Sound",
+        "MPO"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Ethereal"
+      ],
+      "id": 25657609,
+      "barcode": [
+        "652637 342017",
+        "652637342017",
+        "MPO CAD 3420 A2 -LvC-",
+        "[MPO logo]® 21 207712",
+        "MPO CAD 3420 B |...|",
+        "[MPO logo]® 21 207740"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5104,
+      "master_url": "https://api.discogs.com/masters/5104",
+      "uri": "/release/25657609-Cocteau-Twins-Heaven-Or-Las-Vegas",
+      "catno": "CAD 3420",
+      "title": "Cocteau Twins - Heaven Or Las Vegas",
+      "thumb": "https://i.discogs.com/Sji2GEEAzokkb7VxBP8_Gy5JzOG_yX7nSyFWpDNbMpI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NjU3/NjA5LTE3NDA2ODI1/NDEtMzM1OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/cCZL_QhxLxZokM1eCOllis7Ve8N63vE6kfZjRNEll7s/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NjU3/NjA5LTE3NDA2ODI1/NDEtMzM1OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/25657609",
+      "community": {
+        "want": 514,
+        "have": 730
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    }
+  ]
+}

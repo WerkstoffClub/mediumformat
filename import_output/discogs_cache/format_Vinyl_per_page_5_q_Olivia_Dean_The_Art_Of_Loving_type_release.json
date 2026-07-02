@@ -1,0 +1,344 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 4,
+    "per_page": 5,
+    "items": 18,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Olivia+Dean+The+Art+Of+Loving&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=4",
+      "next": "https://api.discogs.com/database/search?q=Olivia+Dean+The+Art+Of+Loving&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Capitol Records",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V.",
+        "Sony Music Publishing",
+        "Kobalt Music Group",
+        "Universal Music Publishing",
+        "The House Of Loving",
+        "Wadeson Street Studios",
+        "Air Edel Studios",
+        "RAK Studios",
+        "OTM",
+        "Electric Lady Studios",
+        "Rollover Studios",
+        "Warner Chappell Music",
+        "Kenny + Betty Tunes",
+        "Copyright Control",
+        "Universal/MCA Music",
+        "Concord Music Publishing",
+        "Dust Index",
+        "Ragland Publications"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Neo Soul"
+      ],
+      "id": 35207368,
+      "barcode": [
+        "00602478163326",
+        "LC00309",
+        "BIEM/SDRM",
+        "7816332 A1",
+        "7816332 B1",
+        "7816332 A1 -66372- STZ",
+        "7816332 B1 -66372- III",
+        "7816332 A1 -66372-VV STZ",
+        "7816332 B1 -66372- I"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35207368-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "602478163326-A",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/frlDG9neALJDb2dYjGHD-t_HE5fy2cDpj0ltqT763WI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjA3/MzY4LTE3NjA3OTk5/MzgtNjU1MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ei3NRSkqM0gxFf0HrF9DI4CX9K6NoD_SlWUlukbWC2I/rs:fit/g:sm/q:90/h:603/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjA3/MzY4LTE3NjA3OTk5/MzgtNjU1MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35207368",
+      "community": {
+        "want": 4513,
+        "have": 11492
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Capitol Records",
+        "Capitol Records",
+        "Capitol Records UK",
+        "Polydor Label Group",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V."
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Neo Soul",
+        "Contemporary R&B"
+      ],
+      "id": 35211694,
+      "barcode": [
+        "6 02478 369384",
+        "602478369384",
+        "LC00309",
+        "BIEM/SDRM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35211694-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "7836938",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/379O81uEnMidkoTtqAgk9F2FZeoXFysrNHDhbjFHVio/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjEx/Njk0LTE3NzI0MDQ1/NTQtNjY4MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/mOU_FzcBj9ZB0LFcPIFXcq09D0FHucx8kPkI4487-ls/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjEx/Njk0LTE3NzI0MDQ1/NTQtNjY4MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35211694",
+      "community": {
+        "want": 1158,
+        "have": 5214
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Lilac",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Capitol Records",
+        "Capitol Records",
+        "Capitol Records UK",
+        "Polydor Label Group",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V."
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Contemporary R&B",
+        "Neo Soul"
+      ],
+      "id": 35215981,
+      "barcode": [
+        "602478163388",
+        "LC00309",
+        "BIEM/SDRM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35215981-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "7816338",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/LirasmyYAZJQkLy03hkx-eIm7h7uOZoXVqWBbi0LiEc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjE1/OTgxLTE3NjkyODc1/MDktMTEzMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/pl8zw-jEERuQL_PE8Wo1OuTfghNleOruPFsJ_rSzr5U/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjE1/OTgxLTE3NjkyODc1/MDktMTEzMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35215981",
+      "community": {
+        "want": 743,
+        "have": 2085
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Orange [Sunset Orange], Alternative Cover",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Capitol Records",
+        "Capitol Records",
+        "Capitol Records UK",
+        "Polydor Label Group",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V."
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 35203987,
+      "barcode": [
+        "602478163340",
+        "LC00309",
+        "BIEM/SDRM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35203987-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "7816334",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/0GcDlj1NnEItp-FKpldZo04xdphzGoGPfzxI6Zkc0ik/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjAz/OTg3LTE3NzEwMzE0/OTEtOTM1NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/lX34zjmchfv_GmgbXcgGCWg4NX62ymDuhObSBnzT4GM/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjAz/OTg3LTE3NzEwMzE0/OTEtOTM1NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35203987",
+      "community": {
+        "want": 945,
+        "have": 1536
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Deep Red",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Numbered"
+      ],
+      "label": [
+        "Capitol Records",
+        "Blood Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 35207554,
+      "barcode": [
+        "LC00309",
+        "BIEM/SDRM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35207554-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "00602478163418",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/MOmdYmGx_NDZbIZZ7W_QMcYxSNuFxJrtTyZ96taM_hQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjA3/NTU0LTE3NTg4OTE2/NTUtNzg1NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/21ccmMq29LDK4rpYT7DrPZcejPttrvpbpxbcU7rMfJA/rs:fit/g:sm/q:90/h:608/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjA3/NTU0LTE3NTg4OTE2/NTUtNzg1NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35207554",
+      "community": {
+        "want": 961,
+        "have": 1230
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Pink & White Swirl",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Numbered"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Secretly Canadian"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Dream Pop",
+        "Jangle Pop",
+        "Shoegaze",
+        "Indie Pop"
+      ],
+      "id": 35652184,
+      "barcode": [
+        "656605050317"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4029502,
+      "master_url": "https://api.discogs.com/masters/4029502",
+      "uri": "/release/35652184-Hatchie-Liquorice",
+      "catno": "SC 503LP",
+      "title": "Hatchie - Liquorice",
+      "thumb": "https://i.discogs.com/W43sUo6yWxClHjC3ri4ysJDdFJwQTyQQg2t0zNKrsWw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjUy/MTg0LTE3NjMwNDY0/NjQtNzY0NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/PiWYOCTvnP69Mu6tSjJT_zcjItkvuJ6cotnDCYtn2nk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjUy/MTg0LTE3NjMwNDY0/NjQtNzY0NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35652184",
+      "community": {
+        "want": 9,
+        "have": 32
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Liquorice Black",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

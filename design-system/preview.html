@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medium Format — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#000;--white:#fff;
+  --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+  --t-ink:#FFFFFF;--t-body:#B4B4B4;--t-mute:#6E6E6E;
+  --accent:#FFFFFF;--accent-text:#000000;
+  --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+  --success-t:rgba(34,197,94,.13);--info-t:rgba(59,130,246,.13);--warning-t:rgba(245,158,11,.13);--danger-t:rgba(239,68,68,.13);
+  --ui:"Geist","Helvetica Neue",Arial,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;
+}
+html[data-theme="light"]{
+  --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+  --t-ink:#000000;--t-body:#525252;--t-mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--t-body);font:400 14px/20px var(--ui);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--canvas) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brandmark{display:flex;align-items:center;gap:7px;color:var(--t-ink)}
+.brandmark .icon{width:23px;height:23px}
+.brandmark .name{font:600 15px/1 var(--ui);letter-spacing:.01em}
+.brandmark .name sup{font-size:8px;vertical-align:super}
+.toggle{font:500 12px/1 var(--ui);letter-spacing:.04em;text-transform:uppercase;color:var(--t-body);background:transparent;border:1px solid var(--hairline);border-radius:999px;padding:8px 14px;cursor:pointer}
+.toggle:hover{border-color:var(--t-mute)}
+.hero{padding:72px 0 44px;border-bottom:1px solid var(--hairline)}
+.hero .lockup{display:flex;align-items:center;gap:19px;color:var(--t-ink);margin-bottom:26px}
+.hero .lockup .icon{width:78px;height:78px;flex:none}
+.hero .lockup .wm{font:600 52px/1 var(--ui);letter-spacing:-.06em}
+.hero .lockup .wm sup{font-size:18px;vertical-align:super;font-weight:500}
+.eyebrow{font:600 12px/16px var(--ui);letter-spacing:.2em;text-transform:uppercase;color:var(--t-mute);margin-bottom:16px}
+.hero h1{font:600 22px/30px var(--ui);color:var(--t-ink);margin:0 0 12px;max-width:720px;letter-spacing:-.04em}
+.hero p{font:400 16px/24px var(--ui);max-width:660px;margin:0}
+section{padding:56px 0;border-bottom:1px solid var(--hairline)}
+.sec-no{font:500 12px/16px var(--mono);color:var(--t-ink);letter-spacing:.1em}
+h2{font:600 20px/28px var(--ui);color:var(--t-ink);margin:8px 0 8px;letter-spacing:-.04em}
+.lead{max-width:690px;margin:0 0 28px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.cols-3,.cols-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}}
+.subhead{font:500 12px/16px var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--t-mute);margin:28px 0 14px}
+.sw{border:1px solid var(--hairline);border-radius:8px;overflow:hidden;background:var(--surface)}
+.sw .chip{height:84px}.sw .meta{padding:12px 14px}
+.sw .nm{font:600 13px/18px var(--ui);color:var(--t-ink)}
+.sw .hex{font:400 12px/16px var(--mono);color:var(--t-mute);margin-top:3px;text-transform:uppercase}
+.sw .use{font:400 12px/16px var(--ui);color:var(--t-mute);margin-top:8px}
+.typerow{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-top:1px solid var(--hairline);flex-wrap:wrap}
+.typerow .tk{font:400 12px/16px var(--mono);color:var(--t-mute);min-width:118px}
+.typerow .spec{font:400 12px/16px var(--mono);color:var(--t-mute);min-width:150px}
+.typerow .ex{color:var(--t-ink);flex:1;min-width:200px}
+.panel{background:var(--surface);border:1px solid var(--hairline);border-radius:8px;padding:20px}
+.btn{font:500 14px/20px var(--ui);border-radius:6px;padding:10px 16px;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--accent);color:var(--accent-text)}
+.btn-secondary{background:transparent;color:var(--t-ink);border-color:var(--hairline)}
+.btn-ghost{background:transparent;color:var(--t-body)}
+.btn-destructive{background:transparent;color:var(--danger);border-color:rgba(239,68,68,.4)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.chip{font:400 13px/18px var(--ui);border-radius:999px;padding:4px 12px;border:1px solid var(--hairline);color:var(--t-mute);background:transparent;cursor:pointer}
+.chip.active{border-color:var(--accent);color:var(--t-ink)}
+.badge{font:500 12px/16px var(--ui);border-radius:999px;padding:3px 10px;display:inline-flex;align-items:center;gap:6px}
+.dot{width:6px;height:6px;border-radius:50%}
+.b-success{color:var(--success);background:var(--success-t)}.b-success .dot{background:var(--success)}
+.b-info{color:var(--info);background:var(--info-t)}.b-info .dot{background:var(--info)}
+.b-warning{color:var(--warning);background:var(--warning-t)}.b-warning .dot{background:var(--warning)}
+.b-danger{color:var(--danger);background:var(--danger-t)}.b-danger .dot{background:var(--danger)}
+.input{font:400 14px/20px var(--ui);background:var(--raised);color:var(--t-ink);border:1px solid var(--hairline);border-radius:6px;padding:10px 12px;width:100%}
+.input::placeholder{color:var(--t-mute)}.input:focus{outline:none;border-color:var(--accent)}
+.lab{font:500 12px/16px var(--ui);letter-spacing:.04em;text-transform:uppercase;color:var(--t-mute);display:block;margin-bottom:8px}
+.tag{font:400 12px/16px var(--mono);border-radius:999px;padding:3px 9px;border:1px solid var(--hairline);color:var(--t-body)}
+.release{background:var(--surface);border:1px solid var(--hairline);border-radius:8px;overflow:hidden;max-width:240px}
+.release .cover{position:relative;aspect-ratio:1;background:var(--surface);display:flex;align-items:center;justify-content:center}
+.release .cover .grooves{width:64%;height:64%;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px)}
+html[data-theme="light"] .release .cover .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px)}
+.release .cover .grooves:after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent)}
+.release .play{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--canvas) 50%,transparent)}
+.release .stock{position:absolute;top:10px;left:10px}
+.release .body{padding:12px 14px}
+.release .artist{font:500 14px/20px var(--ui);color:var(--t-ink)}
+.release .title{font:400 13px/18px var(--ui);color:var(--t-mute);margin:2px 0 10px}
+.release .price{font:500 14px/20px var(--mono);color:var(--t-ink)}
+.release .usd{font:400 12px/16px var(--mono);color:var(--t-mute)}
+.nowplaying{background:var(--surface);border:1px solid var(--hairline);border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.5);padding:12px 16px;display:flex;align-items:center;gap:14px}
+.nowplaying .thumb{width:42px;height:42px;border-radius:6px;background:var(--raised);flex:none}
+.nowplaying .tinfo{min-width:150px}.nowplaying .tt{font:500 14px/20px var(--ui);color:var(--t-ink)}.nowplaying .ts{font:400 12px/16px var(--ui);color:var(--t-mute)}
+.nowplaying .scrub{flex:1;height:4px;border-radius:4px;background:var(--hairline);position:relative;min-width:80px}
+.nowplaying .scrub:after{content:"";position:absolute;left:0;top:0;bottom:0;width:38%;background:var(--accent);border-radius:4px}
+.nowplaying .ctrls{display:flex;gap:14px;color:var(--t-ink)}.nowplaying .ctrls .pp{color:var(--accent)}
+.scaleblock{background:var(--surface);border:1px solid var(--hairline);border-radius:8px;padding:14px;text-align:center}
+.scaleblock .bar{background:var(--accent);height:14px;border-radius:3px;margin:0 auto 10px}
+.scaleblock .k{font:500 13px/18px var(--ui);color:var(--t-ink)}.scaleblock .v{font:400 12px/16px var(--mono);color:var(--t-mute)}
+.radiusbox{background:var(--raised);border:1px solid var(--hairline);height:64px}
+.elev{background:var(--surface);border:1px solid var(--hairline);border-radius:8px;padding:18px;font:400 13px/18px var(--ui);color:var(--t-body)}
+.elev .t{font:500 13px/18px var(--ui);color:var(--t-ink);margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font:400 13px/18px var(--ui)}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--hairline)}
+th{font:500 12px/16px var(--ui);letter-spacing:.04em;text-transform:uppercase;color:var(--t-mute)}
+td{color:var(--t-body)}td:first-child{color:var(--t-ink);font-weight:500}
+footer{padding:40px 0;color:var(--t-mute);font:400 12px/18px var(--ui)}
+.note{font:400 12px/16px var(--ui);color:var(--t-mute);margin-top:10px}
+code{font-family:var(--mono);font-size:.9em}
+</style></head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brandmark"><span class="icon"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1080 1080">
+  
+  <defs>
+    <style>
+      .st0 {
+        fill: currentColor;
+      }
+    </style>
+  </defs>
+  <path class="st0" d="M858.21,130.64c-53.14-66.98-130.64-83.97-212.83-81.02-25.27.91-46.84,2.92-65.66,5.82-22.46-5.24-46.36-6.78-70.85-5.9-144.29,5.17-131.46,57.34-223.49,99.9-100.65,46.56-92.46,129.42-125.95,175.35-49.06,67.27-68.46,143.78-62.64,226.59,1.02,14.48,3.33,28.3,6.95,41.41-7.49,40.09-9.63,81.66-6.62,124.51,5.51,78.44,39.27,142.57,105.31,186.44,23.67,15.72,46.2,41.64,66.06,62.8,111.62,118.98,233.6,49.34,285.88,40.01,94.53-16.87,175.2-53.51,244.66-121.56,33.1-32.43,55.07-73.46,79.26-114.18,17.31-29.13,40.36-55.02,53.07-87.61,66.75-171.18,96.6-429.31-73.14-552.56ZM247.28,694.57c-2.68-2.86-46.16-25.29-42.52-23.83,56.1,22.5,109.06-5.34,135.22-10.01,61.55-10.98,114.09-34.85,159.32-79.16,21.55-21.12,35.86-47.84,51.62-74.36,11.27-18.97,26.28-35.83,34.56-57.05,40.9-104.89,108.09-250.09,18.17-334.9,10.35,7.07,19.93,15.85,28.53,26.62.18.23.4.44.64.61,110.13,80.36,90.69,248.21,47.27,359.56-8.27,21.22-23.29,38.08-34.56,57.05-15.76,26.52-30.06,53.24-51.62,74.36-45.24,44.31-97.77,68.18-159.32,79.16-34.04,6.07-114.62,59.42-187.3-18.06ZM873.17,650.54c-11.01,28.23-30.98,50.66-45.98,75.9-20.96,35.28-39.99,70.83-68.67,98.93-60.18,58.96-130.08,90.71-211.97,105.32-45.29,8.08-150.98,68.42-247.68-34.67-.06-.06-.12-.13-.18-.19-3.56-3.8-40.36-36.05-35.52-34.11,74.64,29.93,145.1-7.11,179.9-13.32,81.9-14.61,151.79-46.36,211.97-105.32,28.68-28.09,47.71-63.64,68.67-98.93,14.99-25.24,34.97-47.67,45.98-75.9,54.41-139.56,121.41-319.5,1.78-432.33,13.78,9.41,30.33,19.61,41.77,33.94.24.31,1.86,1.51,2.17,1.74,146.52,106.92,115.52,330.78,57.75,478.94Z"/>
+</svg></span><span class="name">Medium Format<sup>®</sup></span></div>
+  <button class="toggle" id="tg"><span id="tgl">Light</span> theme</button>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="lockup"><span class="icon"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1080 1080">
+  
+  <defs>
+    <style>
+      .st0 {
+        fill: currentColor;
+      }
+    </style>
+  </defs>
+  <path class="st0" d="M858.21,130.64c-53.14-66.98-130.64-83.97-212.83-81.02-25.27.91-46.84,2.92-65.66,5.82-22.46-5.24-46.36-6.78-70.85-5.9-144.29,5.17-131.46,57.34-223.49,99.9-100.65,46.56-92.46,129.42-125.95,175.35-49.06,67.27-68.46,143.78-62.64,226.59,1.02,14.48,3.33,28.3,6.95,41.41-7.49,40.09-9.63,81.66-6.62,124.51,5.51,78.44,39.27,142.57,105.31,186.44,23.67,15.72,46.2,41.64,66.06,62.8,111.62,118.98,233.6,49.34,285.88,40.01,94.53-16.87,175.2-53.51,244.66-121.56,33.1-32.43,55.07-73.46,79.26-114.18,17.31-29.13,40.36-55.02,53.07-87.61,66.75-171.18,96.6-429.31-73.14-552.56ZM247.28,694.57c-2.68-2.86-46.16-25.29-42.52-23.83,56.1,22.5,109.06-5.34,135.22-10.01,61.55-10.98,114.09-34.85,159.32-79.16,21.55-21.12,35.86-47.84,51.62-74.36,11.27-18.97,26.28-35.83,34.56-57.05,40.9-104.89,108.09-250.09,18.17-334.9,10.35,7.07,19.93,15.85,28.53,26.62.18.23.4.44.64.61,110.13,80.36,90.69,248.21,47.27,359.56-8.27,21.22-23.29,38.08-34.56,57.05-15.76,26.52-30.06,53.24-51.62,74.36-45.24,44.31-97.77,68.18-159.32,79.16-34.04,6.07-114.62,59.42-187.3-18.06ZM873.17,650.54c-11.01,28.23-30.98,50.66-45.98,75.9-20.96,35.28-39.99,70.83-68.67,98.93-60.18,58.96-130.08,90.71-211.97,105.32-45.29,8.08-150.98,68.42-247.68-34.67-.06-.06-.12-.13-.18-.19-3.56-3.8-40.36-36.05-35.52-34.11,74.64,29.93,145.1-7.11,179.9-13.32,81.9-14.61,151.79-46.36,211.97-105.32,28.68-28.09,47.71-63.64,68.67-98.93,14.99-25.24,34.97-47.67,45.98-75.9,54.41-139.56,121.41-319.5,1.78-432.33,13.78,9.41,30.33,19.61,41.77,33.94.24.31,1.86,1.51,2.17,1.74,146.52,106.92,115.52,330.78,57.75,478.94Z"/>
+</svg></span><span class="wm">Medium Format<sup>®</sup></span></div>
+  <div class="eyebrow">Design System · v2.0 · DESIGN.md</div>
+  <h1>An independent record shop in Jakarta, and the platform that runs it.</h1>
+  <p>Black and white, one typeface, and a single mark. Geist sets the words; Geist Mono sets the numbers. Toggle the theme top-right — every value below is live.</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="sec-no">01 / COLOUR</div><h2>Colour</h2>
+  <p class="lead">Black and white carry the whole system. There is no brand accent colour — the interactive accent is simply the opposite of the background. A small status set marks stock and order state, and nothing else.</p>
+  <div class="subhead">Brand</div>
+  <div class="grid cols-3">__SW(black)__ __SW(white)__</div>
+  <div class="subhead">Surface — dark (default)</div>
+  <div class="grid cols-4">__SW(canvas)__ __SW(surface)__ __SW(raised)__ __SW(hairline)__</div>
+  <div class="subhead">Text</div>
+  <div class="grid cols-4">__SW(t-ink)__ __SW(t-body)__ __SW(t-mute)__</div>
+  <div class="subhead">Status — stock &amp; orders only</div>
+  <div class="grid cols-4">__SW(success)__ __SW(info)__ __SW(warning)__ __SW(danger)__</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-no">02 / TYPE</div><h2>Typography</h2>
+  <p class="lead">Geist sets every word; Geist Mono sets figures that must align. SemiBold for headings, Medium for emphasis, Regular for body.</p>
+  <div id="typescale"></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-no">03 / BUTTONS</div><h2>Buttons &amp; chips</h2>
+  <p class="lead">One filled button per view points to the main action — white on dark, black on light. Filters and status use pills so they read as a separate family.</p>
+  <div class="panel"><div class="row">
+    <button class="btn btn-primary">Add to cart</button>
+    <button class="btn btn-secondary">Save draft</button>
+    <button class="btn btn-ghost">Cancel</button>
+    <button class="btn btn-destructive">Refund order</button>
+  </div>
+  <div class="row" style="margin-top:18px">
+    <span class="chip active">All</span><span class="chip">LP</span><span class="chip">12&quot;</span><span class="chip">7&quot;</span><span class="chip">CD</span><span class="chip">Has preview</span>
+  </div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-no">04 / CARDS</div><h2>Cards &amp; signature components</h2>
+  <p class="lead">Cards round to 8px and lean on surface contrast plus a hairline, not shadow. The release card and the Now Playing bar carry the brand even without the logo.</p>
+  <div class="grid cols-2" style="align-items:start">
+    <div class="release">
+      <div class="cover"><div class="grooves"></div><span class="play">▶</span>
+        <span class="stock"><span class="badge b-success"><span class="dot"></span>In stock</span></span></div>
+      <div class="body"><div class="artist">Khruangbin</div><div class="title">Mordechai · Dead Oceans</div>
+        <div class="price">Rp 485.000 <span class="usd">≈ $30</span></div></div>
+    </div>
+    <div>
+      <div class="nowplaying"><span class="thumb"></span>
+        <span class="tinfo"><div class="tt">White Gloves</div><div class="ts">Khruangbin · Bandcamp</div></span>
+        <span class="scrub"></span><span class="ctrls"><span>⏮</span><span class="pp">⏸</span><span>⏭</span></span></div>
+      <div class="row" style="margin-top:18px">
+        <span class="badge b-warning"><span class="dot"></span>Pending</span>
+        <span class="badge b-info"><span class="dot"></span>Processing</span>
+        <span class="badge b-success"><span class="dot"></span>Delivered</span>
+        <span class="badge b-danger"><span class="dot"></span>Refunded</span></div>
+      <div class="row" style="margin-top:14px">
+        <span class="tag">VG+</span><span class="tag">CAT# DOC120</span><span class="tag">Tokopedia</span><span class="tag">Discogs</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-no">05 / FORMS</div><h2>Form elements</h2>
+  <p class="lead">Inputs sit on the raised surface with a 6px radius and an accent focus border. Labels are 12px uppercase mute, above the field.</p>
+  <div class="panel grid cols-2">
+    <div><span class="lab">Artist</span><input class="input" placeholder="Search artist or title…"></div>
+    <div><span class="lab">Catalogue number</span><input class="input" placeholder="e.g. DOC120"></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-no">06 / SPACING</div><h2>Spacing</h2>
+  <p class="lead">Base unit 4px. Card padding 16–20; page gutters 24–32.</p>
+  <div class="grid cols-4" id="spacing"></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-no">07 / RADIUS</div><h2>Border radius</h2>
+  <p class="lead">Mostly soft-square. The pill is reserved for filters and status; cards sit at 8px.</p>
+  <div class="grid cols-4" id="radius"></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-no">08 / ELEVATION</div><h2>Elevation</h2>
+  <p class="lead">Depth comes from surface steps and hairlines. Shadow appears only on things that float.</p>
+  <div class="grid cols-4">
+    <div class="elev"><div class="t">0 — Flat</div>Default. Surface + hairline.</div>
+    <div class="elev" style="box-shadow:0 1px 2px rgba(0,0,0,.5)"><div class="t">1 — Drop</div>Dropdowns, popovers.</div>
+    <div class="elev" style="box-shadow:0 4px 12px rgba(0,0,0,.6)"><div class="t">2 — Float</div>Now Playing, sticky bars.</div>
+    <div class="elev" style="box-shadow:0 8px 24px rgba(0,0,0,.7)"><div class="t">3 — Dialog</div>Modals, command palette.</div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-no">10 / RESPONSIVE</div><h2>Responsive</h2>
+  <p class="lead">Mobile-first. Public storefront, dense back-office, native POS — each collapses differently.</p>
+  <table>
+    <tr><th>Name</th><th>Width</th><th>Key changes</th></tr>
+    <tr><td>Mobile</td><td>&lt; 640</td><td>Grid 2-up · filter rail → drawer · sidebar → hamburger · tables → stacked cards</td></tr>
+    <tr><td>Tablet</td><td>640–1024</td><td>Grid 3–4-up · sidebar collapses to icons · tables scroll</td></tr>
+    <tr><td>Desktop</td><td>1024–1280</td><td>Grid 5-up · full sidebar with labels</td></tr>
+    <tr><td>Wide</td><td>≥ 1280</td><td>Grid 6-up · content caps ~1280 and centres</td></tr>
+  </table>
+</div></section>
+
+<footer><div class="wrap">Medium Format — Confidential © 2026. Full reference in <code>DESIGN.md</code>, <code>tokens.json</code> and <code>tokens.css</code>. Format follows the DESIGN.md convention (getdesign.md).</div></footer>
+
+<script>
+const SW={
+ black:["Black","#000000","Logo on light, primary action on the light theme","#fff"],
+ white:["White","#FFFFFF","Logo on dark, primary action on the dark theme","#000"],
+ canvas:["Canvas","#000000","App / page background","#B4B4B4"],
+ surface:["Surface","#0E0E0E","Cards, sidebar, panels","#B4B4B4"],
+ raised:["Surface Raised","#1A1A1A","Inputs, hovered rows, chips","#B4B4B4"],
+ hairline:["Hairline","#2A2A2A","Borders, dividers","#fff"],
+ "t-ink":["Ink","#FFFFFF","Headings, primary text","#000"],
+ "t-body":["Body","#B4B4B4","Body / secondary text","#000"],
+ "t-mute":["Mute","#6E6E6E","Placeholders, metadata","#fff"],
+ success:["Success","#22C55E","In stock · Delivered · Paid","#000"],
+ info:["Info","#3B82F6","Processing · Packed · Synced","#000"],
+ warning:["Warning","#F59E0B","Pending · Low stock","#000"],
+ danger:["Danger","#EF4444","Cancelled · Refunded · Out","#000"],
+};
+document.body.innerHTML=document.body.innerHTML.replace(/__SW\(([^)]+)\)__/g,(m,k)=>{
+ const [nm,hex,use]=SW[k];
+ const border=(hex==='#000000')?'border-bottom:1px solid var(--hairline)':'';
+ return `<div class="sw"><div class="chip" style="background:${hex};${border}"></div><div class="meta"><div class="nm">${nm}</div><div class="hex">${hex}</div><div class="use">${use}</div></div></div>`;
+});
+const TS=[["display-xl","40 / 600 / 48","Storefront hero",40,600],["display-lg","32 / 600 / 40","Page hero",32,600],
+ ["h1","24 / 600 / 32","Page titles",24,600],["h2","20 / 600 / 28","Section headings",20,600],
+ ["h3","16 / 600 / 24","Release title",16,600],["body-lg","16 / 400 / 24","Lead paragraphs",16,400],
+ ["body","14 / 400 / 20","Default UI text",14,400],["body-medium","14 / 500 / 20","Button labels",14,500],
+ ["small","13 / 400 / 18","Captions",13,400],["label","12 / 500 / 16 · UPPER","Field labels",12,500]];
+document.getElementById('typescale').innerHTML=TS.map(r=>{
+ const up=r[0]==='label'?'text-transform:uppercase;letter-spacing:.04em':'';
+ return `<div class="typerow"><span class="tk">${r[0]}</span><span class="spec">${r[1]}</span><span class="ex" style="font-size:${r[3]}px;font-weight:${r[4]};${up}">Records, the way they should be sold</span></div>`;
+}).join('')+
+ `<div class="typerow"><span class="tk">mono-price</span><span class="spec">14 / 500 · mono</span><span class="ex" style="font-family:var(--mono);font-weight:500">Rp 485.000</span></div>`+
+ `<div class="typerow"><span class="tk">mono-meta</span><span class="spec">12 / 400 · mono</span><span class="ex" style="font-family:var(--mono);font-size:12px;color:var(--t-mute)">CAT# DOC120 · 8 991002 110017</span></div>`;
+const SP=[["xxs",4],["xs",8],["sm",12],["md",16],["lg",20],["xl",24],["2xl",32],["3xl",40]];
+document.getElementById('spacing').innerHTML=SP.map(s=>`<div class="scaleblock"><div class="bar" style="width:${s[1]}px"></div><div class="k">${s[0]}</div><div class="v">${s[1]}px</div></div>`).join('');
+const RA=[["sm",4],["md",6],["lg",8],["xl",12],["pill",999],["full",9999]];
+document.getElementById('radius').innerHTML=RA.map(r=>`<div class="scaleblock"><div class="radiusbox" style="border-radius:${Math.min(r[1],32)}px"></div><div class="k" style="margin-top:10px">${r[0]}</div><div class="v">${r[1]>900?r[1]:r[1]+'px'}</div></div>`).join('');
+const tg=document.getElementById('tg'),tgl=document.getElementById('tgl'),H=document.documentElement;
+tg.onclick=()=>{const l=H.getAttribute('data-theme')==='light';H.setAttribute('data-theme',l?'dark':'light');tgl.textContent=l?'Light':'Dark';};
+</script>
+</body></html>

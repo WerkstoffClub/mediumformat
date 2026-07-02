@@ -1,0 +1,163 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "45 RPM",
+        "Vinyl",
+        "LP",
+        "45 RPM",
+        "All Media",
+        "Album"
+      ],
+      "label": [
+        "A24 Music",
+        "Beat Records",
+        "A24 Music",
+        "A24 Music",
+        "A24 Music",
+        "Beat Records",
+        "Electric Lady Studios",
+        "Synchron Stage, Vienna",
+        "CNSO Studios",
+        "Kensaltown East Studios, New York",
+        "Electric Lady Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Soundtrack",
+        "Synthwave"
+      ],
+      "id": 36763195,
+      "barcode": [
+        "6 17308 01708 3",
+        "617308017083"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4146985,
+      "master_url": "https://api.discogs.com/masters/4146985",
+      "uri": "/release/36763195-Daniel-Lopatin-Marty-Supreme-Original-Motion-Picture-Soundtrack",
+      "catno": "A24M052",
+      "title": "Daniel Lopatin - Marty Supreme (Original Motion Picture Soundtrack)",
+      "thumb": "https://i.discogs.com/QWMdoRWD0R8oHoAazHdfyHl1zZFiYRJvhRk2wAY6bJY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzYz/MTk1LTE3NzM0NTEw/OTYtODc2My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/p6lhvw9Y-_gR4IL_IcdKAuS8Bm2Bc9sMhZbfq3RHdG4/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzYz/MTk1LTE3NzM0NTEw/OTYtODc2My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36763195",
+      "community": {
+        "want": 91,
+        "have": 670
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear",
+          "descriptions": [
+            "LP",
+            "45 RPM"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "45 RPM"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "A24 Music",
+        "Beat Records",
+        "A24 Music",
+        "A24 Music",
+        "A24 Music",
+        "Beat Records",
+        "Electric Lady Studios",
+        "Synchron Stage, Vienna",
+        "CNSO Studios",
+        "Kensaltown East Studios, New York",
+        "Electric Lady Studios",
+        "Rough Trade"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Soundtrack",
+        "Synthwave"
+      ],
+      "id": 36837901,
+      "barcode": [
+        "6 17308 01708 3",
+        "617308017083"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4146985,
+      "master_url": "https://api.discogs.com/masters/4146985",
+      "uri": "/release/36837901-Daniel-Lopatin-Marty-Supreme-Original-Motion-Picture-Soundtrack",
+      "catno": "A24M052",
+      "title": "Daniel Lopatin - Marty Supreme (Original Motion Picture Soundtrack)",
+      "thumb": "https://i.discogs.com/Q5NSi-KbhKVaFa31UbSuWs9QAa6XyIYBtluSc4d4ov0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODM3/OTAxLTE3NzU1OTk4/MDQtNDQ5My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ZHgXkKz95a4mDFm62lRK0snfN0X47KrDLFzzbz4Tls0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODM3/OTAxLTE3NzU1OTk4/MDQtNDQ5My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36837901",
+      "community": {
+        "want": 9,
+        "have": 32
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Ping Pong Orange",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

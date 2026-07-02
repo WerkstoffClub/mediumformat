@@ -1,0 +1,163 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Asthmatic Kitty Records",
+        "Bellwether Manufacturing",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "New Jerusalem Music",
+        "New Jerusalem Music",
+        "Disque Americ",
+        "Disque Americ"
+      ],
+      "type": "master",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Art Rock",
+        "Folk Rock",
+        "Leftfield"
+      ],
+      "id": 281160,
+      "barcode": [
+        "6 56605 60772 6",
+        "656605607726",
+        "ASCAP",
+        "0FV68<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 811F",
+        "0FAD8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8112",
+        "0FAD8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 812C",
+        "0FAG8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8149",
+        "0FBG8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8112",
+        "0FAD8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8149",
+        "0FAC8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8112"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 281160,
+      "master_url": "https://api.discogs.com/masters/281160",
+      "uri": "/master/281160-Sufjan-Stevens-The-Age-Of-Adz",
+      "catno": "AKR077",
+      "title": "Sufjan Stevens - The Age Of Adz",
+      "thumb": "https://i.discogs.com/s82cuUC5RvKTG6COjjfMbgTC0mO8yF7OJVkbjo2xL-M/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0OTA2/NDMtMTMwMTAzMTUw/Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/i-gEjV-4xuU-HokhFn7iWeUVV2AN_TbzSBniJ54SmAs/rs:fit/g:sm/q:90/h:528/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0OTA2/NDMtMTMwMTAzMTUw/Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/281160",
+      "community": {
+        "want": 4061,
+        "have": 13189
+      }
+    },
+    {
+      "country": "US",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Asthmatic Kitty Records",
+        "Bellwether Manufacturing",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "New Jerusalem Music",
+        "New Jerusalem Music",
+        "Disque Americ",
+        "Disque Americ"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Art Rock",
+        "Folk Rock",
+        "Leftfield"
+      ],
+      "id": 2490643,
+      "barcode": [
+        "6 56605 60772 6",
+        "656605607726",
+        "ASCAP",
+        "0FV68<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 811F",
+        "0FAD8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8112",
+        "0FAD8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 812C",
+        "0FAG8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8149",
+        "0FBG8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8112",
+        "0FAD8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8149",
+        "0FAC8<7205>AKR077 WWW.BELLWETHERMFG.COM",
+        "IFPI L489",
+        "IFPI 8112"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 281160,
+      "master_url": "https://api.discogs.com/masters/281160",
+      "uri": "/release/2490643-Sufjan-Stevens-The-Age-Of-Adz",
+      "catno": "AKR077",
+      "title": "Sufjan Stevens - The Age Of Adz",
+      "thumb": "https://i.discogs.com/s82cuUC5RvKTG6COjjfMbgTC0mO8yF7OJVkbjo2xL-M/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0OTA2/NDMtMTMwMTAzMTUw/Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/i-gEjV-4xuU-HokhFn7iWeUVV2AN_TbzSBniJ54SmAs/rs:fit/g:sm/q:90/h:528/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0OTA2/NDMtMTMwMTAzMTUw/Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2490643",
+      "community": {
+        "want": 410,
+        "have": 2989
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

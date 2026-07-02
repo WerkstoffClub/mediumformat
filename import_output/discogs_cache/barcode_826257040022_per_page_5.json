@@ -1,0 +1,130 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Japan",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Rhymesayers Entertainment",
+        "Rhymesayers Entertainment",
+        "Ultra-Vybe, Inc.",
+        "Big Nothing",
+        "Rhymesayers Entertainment, LLC",
+        "Rhymesayers Entertainment, LLC"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop"
+      ],
+      "style": [
+        "Conscious",
+        "Jazzy Hip-Hop",
+        "Boom Bap"
+      ],
+      "id": 33576582,
+      "barcode": [
+        "4526180710929",
+        "826257040022"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 8478,
+      "master_url": "https://api.discogs.com/masters/8478",
+      "uri": "/release/33576582-MF-Doom-MMFood-20th-Anniversary-Edition",
+      "catno": "RSE400JCD",
+      "title": "MF Doom - MM..Food (20th Anniversary Edition)",
+      "thumb": "https://i.discogs.com/YImqWdWSDKjPa5cCvVM6WrzgzUC_26n672Hupu1iyhE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNTc2/NTgyLTE3NDM1Mjcw/MDgtNTE5Ni5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/r2J2-3fV6FfzwpmRiKjrrrgnIH3rqonKqGIBUf85ebY/rs:fit/g:sm/q:90/h:607/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNTc2/NTgyLTE3NDM1Mjcw/MDgtNTE5Ni5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33576582",
+      "community": {
+        "want": 86,
+        "have": 70
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2024",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Rhymesayers Entertainment",
+        "Rhymesayers Entertainment, LLC",
+        "Rhymesayers Entertainment, LLC"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop"
+      ],
+      "style": [
+        "Conscious",
+        "Jazzy Hip-Hop",
+        "Boom Bap"
+      ],
+      "id": 32285751,
+      "barcode": [
+        "826257040022",
+        "316985 RSE0400-2 LBR DF01",
+        "DFM 02"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 8478,
+      "master_url": "https://api.discogs.com/masters/8478",
+      "uri": "/release/32285751-MF-Doom-MMFood",
+      "catno": "RSE0400-2",
+      "title": "MF Doom - MM..Food",
+      "thumb": "https://i.discogs.com/6E4mfZIPKVzXw7cKO0ZVAm6Iw2MyOfVDM-eO32WtWfs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMjg1/NzUxLTE3MzE1Nzg5/NDMtODgwNy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Oqdf_UEhEQgweVD_5HBaIyemTNu4f7KXrTPQeLFInVE/rs:fit/g:sm/q:90/h:609/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMjg1/NzUxLTE3MzE1Nzg5/NDMtODgwNy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/32285751",
+      "community": {
+        "want": 236,
+        "have": 1272
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "20th Anniversary",
+          "descriptions": [
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Purchase Orders — Mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #050505;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .app {
+    width: 390px;
+    min-height: 100vh;
+    background: #090909;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+    padding-bottom: 72px;
+  }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 52px;
+    background: #090909;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 10px;
+  }
+  .header-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    flex: 1;
+  }
+  .btn-pill {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+  }
+  .btn-primary { background: #fff; color: #000; }
+  .btn-secondary { background: #141414; color: #fff; border: 1px solid #262626; }
+
+  /* Filter tabs */
+  .filter-tabs {
+    display: flex;
+    overflow-x: auto;
+    padding: 0 16px;
+    border-bottom: 1px solid #1a1a1a;
+    height: 40px;
+    align-items: center;
+    gap: 2px;
+    scrollbar-width: none;
+  }
+  .filter-tabs::-webkit-scrollbar { display: none; }
+  .f-tab {
+    padding: 0 12px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .f-tab.active { color: #fff; border-bottom-color: #fff; }
+
+  /* PO List */
+  .po-list { display: flex; flex-direction: column; }
+
+  .po-row {
+    padding: 12px 16px;
+    border-bottom: 1px solid #1a1a1a;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+  }
+  .po-row.selected {
+    background: #141414;
+    border-left-color: #fff;
+  }
+
+  .po-row-top {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+  }
+  .po-id {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .po-country-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #1c1c1c;
+    color: #999;
+    border: 1px solid #262626;
+    font-weight: 700;
+  }
+  .po-status {
+    margin-left: auto;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .ps-draft    { background: #1c1c1c; color: #999; }
+  .ps-ordered  { background: rgba(0,153,255,0.1); color: #0099ff; }
+  .ps-transit  { background: rgba(91,192,222,0.1); color: #5bc0de; }
+  .ps-received { background: rgba(34,197,94,0.1); color: #22c55e; }
+  .ps-partial  { background: rgba(232,168,56,0.1); color: #e8a838; }
+
+  .po-supplier {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 4px;
+  }
+  .po-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .po-meta { font-size: 10px; color: #555; }
+  .po-pay-tag {
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .pay-company  { background: rgba(34,197,94,0.1); color: #22c55e; }
+  .pay-personal { background: rgba(232,168,56,0.1); color: #e8a838; }
+
+  /* Tap hint */
+  .tap-hint {
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 10px;
+    color: #555;
+    font-style: italic;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  /* Divider */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #555;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: #0d0d0d;
+    border-top: 2px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1a1a1a;
+  }
+
+  /* PO Detail */
+  .detail-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .detail-id-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .detail-id {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+  }
+  .detail-supplier {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+  .detail-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .btn-sm-pill {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+  }
+
+  /* Info grid */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .info-cell {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .info-cell-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  .info-cell-value {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  /* Items section */
+  .section-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .section-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+  }
+  .section-link {
+    font-size: 10px;
+    color: #0099ff;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  /* Item rows */
+  .item-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid #1a1a1a;
+    gap: 10px;
+  }
+  .item-info { flex: 1; min-width: 0; }
+  .item-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .item-sub {
+    font-size: 10px;
+    color: #999;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .item-format {
+    font-size: 9px;
+    background: #1c1c1c;
+    color: #999;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid #262626;
+  }
+  .item-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+  .item-total {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .item-unit {
+    font-size: 10px;
+    color: #555;
+  }
+  .qty-badge {
+    font-size: 9px;
+    background: #1c1c1c;
+    color: #999;
+    padding: 1px 6px;
+    border-radius: 10px;
+    border: 1px solid #262626;
+    font-weight: 700;
+  }
+
+  /* Grand total */
+  .grand-total-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #141414;
+    border-top: 1px solid #262626;
+  }
+  .grand-total-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .grand-total-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  /* AI banner */
+  .ai-banner {
+    margin: 12px 16px;
+    background: rgba(106,76,245,0.08);
+    border: 1px solid rgba(106,76,245,0.2);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ai-banner-text {
+    flex: 1;
+    font-size: 11px;
+    color: #a09fff;
+    line-height: 1.5;
+  }
+  .ai-banner-link {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6a4cf5;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .ai-star {
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 390px;
+    height: 56px;
+    background: #090909;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    z-index: 200;
+  }
+  .bn-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #555;
+    cursor: pointer;
+    height: 100%;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .bn-item.active { color: #fff; }
+  .bn-item svg { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">Purchase Orders</div>
+    <button class="btn-pill btn-primary">＋ New PO</button>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="filter-tabs">
+    <div class="f-tab active">All</div>
+    <div class="f-tab">Draft</div>
+    <div class="f-tab">Ordered</div>
+    <div class="f-tab">In Transit</div>
+    <div class="f-tab">Received</div>
+  </div>
+
+  <!-- PO LIST -->
+  <div class="po-list">
+
+    <div class="po-row selected">
+      <div class="po-row-top">
+        <div class="po-id">PO-2026-041</div>
+        <div class="po-country-badge">Japan batch</div>
+        <div class="po-status ps-transit">In Transit</div>
+      </div>
+      <div class="po-supplier">Technique Records, Tokyo</div>
+      <div class="po-meta-row">
+        <div class="po-meta">12 items · Rp 4.2M</div>
+        <div class="po-pay-tag pay-company">Company card</div>
+        <div class="po-meta">Apr 20, 2026</div>
+      </div>
+    </div>
+
+    <div class="tap-hint">Tap a row to view detail ↓</div>
+
+    <div class="po-row">
+      <div class="po-row-top">
+        <div class="po-id">PO-2026-040</div>
+        <div class="po-country-badge">UK batch</div>
+        <div class="po-status ps-ordered">Ordered</div>
+      </div>
+      <div class="po-supplier">Rough Trade, London</div>
+      <div class="po-meta-row">
+        <div class="po-meta">8 items · Rp 2.8M</div>
+        <div class="po-pay-tag pay-personal">Personal — Budi</div>
+      </div>
+    </div>
+
+    <div class="po-row">
+      <div class="po-row-top">
+        <div class="po-id">PO-2026-039</div>
+        <div class="po-country-badge">Japan batch</div>
+        <div class="po-status ps-received">Received</div>
+      </div>
+      <div class="po-supplier">Disk Union, Tokyo</div>
+      <div class="po-meta-row">
+        <div class="po-meta">24 items · Rp 7.1M</div>
+        <div class="po-pay-tag pay-company">Company card</div>
+      </div>
+    </div>
+
+    <div class="po-row">
+      <div class="po-row-top">
+        <div class="po-id">PO-2026-038</div>
+        <div class="po-country-badge">US batch</div>
+        <div class="po-status ps-partial">Partial</div>
+      </div>
+      <div class="po-supplier">Other Music Archive, NYC</div>
+      <div class="po-meta-row">
+        <div class="po-meta">6 items · Rp 1.9M</div>
+        <div class="po-pay-tag pay-personal">Personal — Rani</div>
+      </div>
+    </div>
+
+    <div class="po-row">
+      <div class="po-row-top">
+        <div class="po-id">PO-2026-037</div>
+        <div class="po-country-badge">UK batch</div>
+        <div class="po-status ps-draft">Draft</div>
+      </div>
+      <div class="po-supplier">Juno Records, London</div>
+      <div class="po-meta-row">
+        <div class="po-meta">3 items · Rp 890K</div>
+        <div class="po-pay-tag pay-company">Company card</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DETAIL SECTION DIVIDER -->
+  <div class="section-divider">PO-2026-041 Detail</div>
+
+  <!-- DETAIL HEADER -->
+  <div class="detail-header">
+    <div class="detail-id-row">
+      <div class="detail-id">PO-2026-041</div>
+      <div class="po-status ps-transit" style="font-size:10px;padding:3px 8px;">In Transit</div>
+    </div>
+    <div class="detail-supplier">Technique Records, Tokyo &nbsp;·&nbsp; Created Apr 20, 2026</div>
+    <div class="detail-actions">
+      <button class="btn-sm-pill btn-primary" style="background:#fff;color:#000;">Mark Received</button>
+      <button class="btn-sm-pill btn-secondary" style="background:#141414;color:#fff;border:1px solid #262626;">Edit</button>
+    </div>
+  </div>
+
+  <!-- INFO GRID -->
+  <div class="info-grid">
+    <div class="info-cell">
+      <div class="info-cell-label">Supplier</div>
+      <div class="info-cell-value">Technique Records, Japan</div>
+    </div>
+    <div class="info-cell">
+      <div class="info-cell-label">Payment</div>
+      <div class="info-cell-value">Company Account</div>
+    </div>
+    <div class="info-cell">
+      <div class="info-cell-label">Est. Delivery</div>
+      <div class="info-cell-value">May 5–8, 2026</div>
+    </div>
+    <div class="info-cell">
+      <div class="info-cell-label">Items</div>
+      <div class="info-cell-value">12 records</div>
+    </div>
+  </div>
+
+  <!-- ITEMS -->
+  <div class="section-header-row">
+    <div class="section-title">Items (12)</div>
+    <div class="section-link">+ Add item</div>
+  </div>
+
+  <div class="item-row">
+    <div class="item-info">
+      <div class="item-title">Floating Points — Promises</div>
+      <div class="item-sub">
+        <span class="item-format">LP</span>
+        <span style="color:#555;">Luaka Bop</span>
+      </div>
+    </div>
+    <span class="qty-badge">×3</span>
+    <div class="item-right">
+      <div class="item-total">¥9,600</div>
+      <div class="item-unit">¥3,200 / ea</div>
+    </div>
+  </div>
+
+  <div class="item-row">
+    <div class="item-info">
+      <div class="item-title">Four Tet — There Is Love in You</div>
+      <div class="item-sub">
+        <span class="item-format">2xLP</span>
+        <span style="color:#555;">Domino</span>
+      </div>
+    </div>
+    <span class="qty-badge">×2</span>
+    <div class="item-right">
+      <div class="item-total">¥9,600</div>
+      <div class="item-unit">¥4,800 / ea</div>
+    </div>
+  </div>
+
+  <div class="item-row">
+    <div class="item-info">
+      <div class="item-title">Burial — Antidawn EP</div>
+      <div class="item-sub">
+        <span class="item-format">12"</span>
+        <span style="color:#555;">Hyperdub</span>
+      </div>
+    </div>
+    <span class="qty-badge">×4</span>
+    <div class="item-right">
+      <div class="item-total">¥9,600</div>
+      <div class="item-unit">¥2,400 / ea</div>
+    </div>
+  </div>
+
+  <div class="item-row">
+    <div class="item-info">
+      <div class="item-title">Aphex Twin — Drukqs</div>
+      <div class="item-sub">
+        <span class="item-format">2xCD</span>
+        <span style="color:#555;">Warp</span>
+      </div>
+    </div>
+    <span class="qty-badge">×3</span>
+    <div class="item-right">
+      <div class="item-total">¥8,400</div>
+      <div class="item-unit">¥2,800 / ea</div>
+    </div>
+  </div>
+
+  <!-- GRAND TOTAL -->
+  <div class="grand-total-row">
+    <div class="grand-total-label">Grand Total</div>
+    <div class="grand-total-value">¥41,700 ≈ Rp 4.2M</div>
+  </div>
+
+  <!-- AI BANNER -->
+  <div class="ai-banner">
+    <span class="ai-star">✦</span>
+    <div class="ai-banner-text">AI suggests consolidating 3 similar Japan batch POs into one shipment</div>
+    <div class="ai-banner-link">Review →</div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Dashboard</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      <span>Inventory</span>
+    </div>
+    <div class="bn-item active">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+      <span>Orders</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg>
+      <span>Channels</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      <span>More</span>
+    </div>
+  </nav>
+
+</div>
+</body>
+</html>

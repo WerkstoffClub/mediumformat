@@ -1,0 +1,62 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2026",
+      "format": [
+        "Cassette",
+        "Album"
+      ],
+      "label": [
+        "Young",
+        "Konichiwa Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Electro"
+      ],
+      "id": 36904896,
+      "barcode": [
+        "889030046741"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4174681,
+      "master_url": "https://api.discogs.com/masters/4174681",
+      "uri": "/release/36904896-Robyn-Sexistential",
+      "catno": "YO467MCE",
+      "title": "Robyn - Sexistential",
+      "thumb": "https://i.discogs.com/ed2B3MF6TtsAqqKXLehQO2gPWUpt_JKqqmMBhxSjpPA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTA0/ODk2LTE3NzU0MDA0/NTctMjc4Ny5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/7ovnxzewr1jhEaoR5JLhMTvptpenCxzSCUKg3_er_j8/rs:fit/g:sm/q:90/h:806/w:512/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTA0/ODk2LTE3NzU0MDA0/NTctMjc4Ny5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36904896",
+      "community": {
+        "want": 4,
+        "have": 15
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

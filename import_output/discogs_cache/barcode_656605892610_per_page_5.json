@@ -1,0 +1,367 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 10,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605892610&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=656605892610&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Unknown",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Mispress",
+        "Reissue"
+      ],
+      "style": [
+        "Folk Rock"
+      ],
+      "id": 16331040,
+      "label": [
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Sufjan Stevens Music",
+        "The Buddy Project",
+        "St. Paul's Episcopal Church, Brooklyn",
+        "The New Jerusalem Recreational Room, Clarksboro, NJ",
+        "Carroll Music Studios, NY",
+        "West West Side Music",
+        "Cohearent Audio"
+      ],
+      "type": "release",
+      "barcode": [
+        "656605892610",
+        "AKR-014-A KPG@CA",
+        "AKR-014-B KPG@CA",
+        "AKR-014-C KPG@CA",
+        "AKR-014-D KPG@CA",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/16331040-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/7N17tBxvtOS2TI9LKpxXzdnFlyjsmmccBtd1DjxkCCU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2MzMx/MDQwLTE2MjA5Mzg3/MzMtOTA3My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/yZk-YowU5RjHxMooY1Yu7TIidngiUxDmo9dzzg0ShAU/rs:fit/g:sm/q:90/h:611/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2MzMx/MDQwLTE2MjA5Mzg3/MzMtOTA3My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/16331040",
+      "community": {
+        "want": 380,
+        "have": 3385
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "CA",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Mispress",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2015",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Mispress",
+        "Remastered"
+      ],
+      "label": [
+        "Asthmatic Kitty Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock"
+      ],
+      "id": 7095158,
+      "barcode": [
+        "6 56605 89261 0",
+        "Side 1: AKR-014-A RE-1",
+        "Side 2: AKR-014-B RE-1 ",
+        "Side 3: AKR-007-C RE-1",
+        "Side 4: AKR-014-D RE-1 "
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/7095158-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/8xWfClseBkaMiOzDZ_iqCQ_myiFD-xWh1pHHVNlmHX0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTcwOTUx/NTgtMTQzMzYxMzA3/Mi02NDkxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/XbL4y9-l2c6qWNoB5mCdkRwmtQhyDslhhBWrSNdnD5g/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTcwOTUx/NTgtMTQzMzYxMzA3/Mi02NDkxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/7095158",
+      "community": {
+        "want": 615,
+        "have": 1357
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "MI",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Mispress",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2015",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Remastered"
+      ],
+      "label": [
+        "Asthmatic Kitty Records",
+        "SAE Mastering",
+        "Record Technology Incorporated"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock"
+      ],
+      "id": 6935962,
+      "barcode": [
+        "6 5660 58926 1 0",
+        "AKR-014-A RE-1, 23137.1 ",
+        "AKR-014-B RE-1, 23137.2 ",
+        "AKR-014-C RE-1, 23137.3 ",
+        "AKR-014-D RE-1, 23137.4 ",
+        "SAE MASTERING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/6935962-Sufjan-Stevens-Illinois",
+      "catno": "AKR014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/R4Palw0i-yRe-tVQChzfkN0OwIsY2sMdxuMX3d6YJAs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY5MzU5/NjItMTQyOTg5NTc5/Mi03OTYwLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/Xsz9Z3SWEj928oUCGkK2gzpvky3Ms94lpGdv2Tt887c/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY5MzU5/NjItMTQyOTg5NTc5/Mi03OTYwLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/6935962",
+      "community": {
+        "want": 965,
+        "have": 4509
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "SAE",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2016",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "New Jerusalem Music",
+        "The Buddy Project",
+        "St. Paul's Episcopal Church, Brooklyn",
+        "The New Jerusalem Recreational Room, Clarksboro, NJ",
+        "Carroll Music Studios, NY",
+        "Cohearent Audio",
+        "Record Technology Incorporated"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock"
+      ],
+      "id": 11076713,
+      "barcode": [
+        "656605892610",
+        "AKR-014-A KPG@CA 14855.1(2)",
+        "AKR-014-B KPG@CA 14855.2(2)",
+        "AKR-014-C KPG@CA 14855.3(2)",
+        "AKR-014-D KPG@CA 14855.4(2)",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/11076713-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/gOJt97jBLnH7d51EEtS1B4oXd6FEx7WGizpAeo6Ekvc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMDc2/NzEzLTE1MjcyNjM1/NjctNTcyOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/bzYKuHCEITzBvKTBfOR5r33aTv7LvkAW6QP74SqVntw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMDc2/NzEzLTE1MjcyNjM1/NjctNTcyOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/11076713",
+      "community": {
+        "want": 1253,
+        "have": 6534
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "CA",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2013",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Vinyl",
+        "LP",
+        "Album",
+        "All Media",
+        "Album",
+        "Limited Edition",
+        "Repress"
+      ],
+      "label": [
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "New Jerusalem Music",
+        "The Buddy Project",
+        "St. Paul's Episcopal Church, Brooklyn",
+        "The New Jerusalem Recreational Room, Clarksboro, NJ",
+        "Carroll Music Studios, NY",
+        "West West Side Music",
+        "AcousTech Mastering",
+        "Record Technology Incorporated",
+        "Newbury Comics"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Pop",
+        "Theme"
+      ],
+      "id": 5177461,
+      "barcode": [
+        "6 56605 89261 0",
+        "AKR-014LP-A, 14855.1(2) ",
+        "AKR-014LP-B, 14855.2(2)",
+        "AKR-014LP-B [Scratched out] C, 14855.3(2)",
+        "AKR-014LP-D, 14855.4(2)",
+        "KG@ATM",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/5177461-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/BCNAOYR8G1WUJdAtTnkB5huNOqxTnB1YKWTYxvqMcvI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTUxNzc0/NjEtMTU0ODA0OTM3/MC0yNjIwLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/ANFLuynVM8SD3QxFGoQCyiefkDSdrk9uXuAmIwz6gV4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTUxNzc0/NjEtMTU0ODA0OTM3/MC0yNjIwLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5177461",
+      "community": {
+        "want": 981,
+        "have": 524
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Green",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Limited Edition",
+            "Repress"
+          ]
+        }
+      ]
+    }
+  ]
+}

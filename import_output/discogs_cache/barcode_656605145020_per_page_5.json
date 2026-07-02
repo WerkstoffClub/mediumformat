@@ -1,0 +1,204 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "USA, Canada & Europe",
+      "year": "2024",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Retro City Studios",
+        "Gradwell House",
+        "Red Bull Studios, Los Angeles, CA",
+        "Sterling Sound",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 33363914,
+      "barcode": [
+        "6 56605 14502 0",
+        "656605145020",
+        "LC 29265",
+        "DOC150CD 6745-CD-2215 22-115-04-3",
+        "IFPI L027",
+        "IFPI L817"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1406567,
+      "master_url": "https://api.discogs.com/masters/1406567",
+      "uri": "/release/33363914-Mitski-Be-The-Cowboy",
+      "catno": "DOC150CD",
+      "title": "Mitski - Be The Cowboy",
+      "thumb": "https://i.discogs.com/cBUo_oub0JXMaMt2gPG2flU8QIGIWXcnn-wU38ihGs0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzYz/OTE0LTE3NDUyNTE1/NzYtMzIyNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/v6-qpQb-zDsjXCzSmdo5aWw3ICS1UOrP2LHwCc31x7g/rs:fit/g:sm/q:90/h:535/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzYz/OTE0LTE3NDUyNTE1/NzYtMzIyNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33363914",
+      "community": {
+        "want": 74,
+        "have": 139
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2019",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Ultra-Vybe",
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Retro City Studios",
+        "Gradwell House",
+        "Red Bull Studios, Los Angeles, CA",
+        "Sterling Sound",
+        "Big Nothing",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Indie Rock"
+      ],
+      "id": 23746592,
+      "barcode": [
+        "4 526180 490210",
+        "4526180490210",
+        "6 56605 14502 0",
+        "656605145020",
+        "DOC150CD 6745-CD-2215 18-162-12-3",
+        "IFPI L027",
+        "IFPI L825",
+        "LC 29265"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1406567,
+      "master_url": "https://api.discogs.com/masters/1406567",
+      "uri": "/release/23746592-Mitski-Be-The-Cowboy",
+      "catno": "DOC150CDJ",
+      "title": "Mitski - Be The Cowboy",
+      "thumb": "https://i.discogs.com/AuQXt1HLQMIWLpBaHEZw-4sXHhuCl-UXm6gWq9XVBcg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNzQ2/NTkyLTE2ODk4NzU2/NDgtNDkyMS5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/WTDgmJc04iOu7Emnnf4X_qDiwhXdyN9sbcHU2HnhUhw/rs:fit/g:sm/q:90/h:527/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNzQ2/NTkyLTE2ODk4NzU2/NDgtNDkyMS5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23746592",
+      "community": {
+        "want": 72,
+        "have": 18
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA, Canada & Europe",
+      "year": "2018",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Retro City Studios",
+        "Gradwell House",
+        "Red Bull Studios, Los Angeles, CA",
+        "Sterling Sound",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 12384951,
+      "barcode": [
+        "6 56605 14502 0",
+        "656605145020",
+        "LC 29265",
+        "DOC150CD 6745-CD-2215 18-162-12-3",
+        "none",
+        "IFPI L823",
+        "DOC150CD 6745-CD-2215 18-162-12-3",
+        "IFPI L077",
+        "DOC150CD 6745-CD-2215 18-162-12-3",
+        "IFPI L027",
+        "IFPI L825"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1406567,
+      "master_url": "https://api.discogs.com/masters/1406567",
+      "uri": "/release/12384951-Mitski-Be-The-Cowboy",
+      "catno": "DOC150CD",
+      "title": "Mitski - Be The Cowboy",
+      "thumb": "https://i.discogs.com/VhboxgtpLif8pga56tsHaP_7rwFjhbAhmHbzVtC_Ug0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyMzg0/OTUxLTE1MzQxODU0/MDMtNzg0OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/irae7Eu2yvvySaS69NC3RyUCnpsx6B2JVdUNEnKVF2w/rs:fit/g:sm/q:90/h:510/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyMzg0/OTUxLTE1MzQxODU0/MDMtNzg0OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/12384951",
+      "community": {
+        "want": 895,
+        "have": 2176
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

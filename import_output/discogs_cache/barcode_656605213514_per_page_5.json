@@ -1,0 +1,334 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 7,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605213514&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=656605213514&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2013",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Newbury Comics"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Rock",
+        "Acoustic",
+        "Folk"
+      ],
+      "id": 4991248,
+      "barcode": [
+        "656605213514"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 345153,
+      "master_url": "https://api.discogs.com/masters/345153",
+      "uri": "/release/4991248-Bon-Iver-Bon-Iver-Bon-Iver",
+      "catno": "JAG135",
+      "title": "Bon Iver - Bon Iver, Bon Iver",
+      "thumb": "https://i.discogs.com/cH8J44swZz6wqNB1t9xWND6OuinbGoA1RJ_JGxJ0830/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5OTEy/NDgtMTM4MTg3NTE3/OS04NzQxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/6OpwqNRZQMh5T61ejWmdL7r5dyv7JgmuJAnyFzsvp4E/rs:fit/g:sm/q:90/h:400/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5OTEy/NDgtMTM4MTg3NTE3/OS04NzQxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4991248",
+      "community": {
+        "want": 1412,
+        "have": 2649
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "White",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Stereo"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Rock"
+      ],
+      "id": 22063357,
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "April Base Publishing",
+        "April Base",
+        "April Base",
+        "April Base",
+        "Sterling Sound",
+        "Record Technology Incorporated"
+      ],
+      "type": "release",
+      "barcode": [
+        "ASCAP",
+        "6 56605 21351 4",
+        "656605213514",
+        "JAG 135LP A RE5 CM 38984.1(3)...",
+        "JAG 135LP B RE5 ♡CM♡ 38984.2(3)..."
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 345153,
+      "master_url": "https://api.discogs.com/masters/345153",
+      "uri": "/release/22063357-Bon-Iver-Bon-Iver-Bon-Iver",
+      "catno": "JAG135",
+      "title": "Bon Iver - Bon Iver, Bon Iver",
+      "thumb": "https://i.discogs.com/YLGiIkzJKmVuwMh-xwILfbyDVlIu1pgrAlbtwOcdJ7Q/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyMDYz/MzU3LTE3MzU1MDYz/MDEtMjI1Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/DiFGivz9fGwSzcanEQa4oF5_uFPrqaFANxcVZSoPtO4/rs:fit/g:sm/q:90/h:622/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyMDYz/MzU3LTE3MzU1MDYz/MDEtMjI1Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/22063357",
+      "community": {
+        "want": 246,
+        "have": 1516
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2011",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "April Base Publishing",
+        "April Base",
+        "April Base",
+        "April Base",
+        "Sterling Sound",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Rock"
+      ],
+      "id": 28115611,
+      "barcode": [
+        "ASCAP",
+        "6 56605 21351 4",
+        "656605213514",
+        "JAG-135LP-A-RE2 RJ STERLING 23108.1",
+        "JAG-135LP-B-RE2 RJ STERLING 23108.2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 345153,
+      "master_url": "https://api.discogs.com/masters/345153",
+      "uri": "/release/28115611-Bon-Iver-Bon-Iver-Bon-Iver",
+      "catno": "JAG135",
+      "title": "Bon Iver - Bon Iver, Bon Iver",
+      "thumb": "https://i.discogs.com/8UVyIdaDmcdrtPsxalzMIeFjvjv2uQ1HqZ7WBY2ZeE8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTE1/NjExLTE3MzkwODE4/OTUtNzM2NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/9OlLgyDuHFVG88bqx9NSioiWp_9o4TjrABc7z-aG1bs/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTE1/NjExLTE3MzkwODE4/OTUtNzM2NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28115611",
+      "community": {
+        "want": 120,
+        "have": 263
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2017",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "April Base Publishing",
+        "April Base",
+        "April Base",
+        "April Base",
+        "Sterling Sound",
+        "Record Technology Incorporated"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Rock"
+      ],
+      "id": 10440942,
+      "barcode": [
+        "6 56605 21351 4",
+        "656605213514",
+        "JAG-135LP-A-RE4 RJ STERLING 27134.1(2)...",
+        "JAG-135LP-B-RE4 RJ STERLING 27134.2(2)...",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 345153,
+      "master_url": "https://api.discogs.com/masters/345153",
+      "uri": "/release/10440942-Bon-Iver-Bon-Iver-Bon-Iver",
+      "catno": "JAG135",
+      "title": "Bon Iver - Bon Iver, Bon Iver",
+      "thumb": "https://i.discogs.com/diU982-qmw5ycyKpBnpafTnXMYOF4rOXMt10tMfarLw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNDQw/OTQyLTE0OTc0OTQ3/NTgtOTMwMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/v08NfhbUbg4MtFVjlxogR9MjCWvV3mMepqatFJy3qlA/rs:fit/g:sm/q:90/h:601/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNDQw/OTQyLTE0OTc0OTQ3/NTgtOTMwMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10440942",
+      "community": {
+        "want": 716,
+        "have": 2519
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2011",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "April Base",
+        "April Base",
+        "April Base",
+        "Sterling Sound",
+        "Sterling Sound",
+        "April Base Publishing"
+      ],
+      "type": "master",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Rock"
+      ],
+      "id": 345153,
+      "barcode": [
+        "ASCAP",
+        "6 56605 21351 4",
+        "656605213514",
+        "JAG-135LP-A RE1 RJ STERLING",
+        "JAG-135LP-B RE1 RJ STERLING",
+        "JAG-135LP-A RE2 RJ STERLING",
+        "JAG-135LP-B RE2 RJ STERLING",
+        "JAG-135LP-A-RE3 RJ STERLING",
+        "JAG-135LPB-RE3 RJ STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 345153,
+      "master_url": "https://api.discogs.com/masters/345153",
+      "uri": "/master/345153-Bon-Iver-Bon-Iver-Bon-Iver",
+      "catno": "JAG135",
+      "title": "Bon Iver - Bon Iver, Bon Iver",
+      "thumb": "https://i.discogs.com/nDjlypvqhcygdMLHTwvE-opFxAWruWjjZEqt41P-Fp4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NDA4/NzYtMTc2NjI1MTYx/OC04NjI0LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/6SUIFbK5-a4CuWQLFNQl4k1gdrafsy7Wtm_wYTRU1RY/rs:fit/g:sm/q:90/h:606/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NDA4/NzYtMTc2NjI1MTYx/OC04NjI0LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/masters/345153",
+      "community": {
+        "want": 18327,
+        "have": 67966
+      }
+    }
+  ]
+}

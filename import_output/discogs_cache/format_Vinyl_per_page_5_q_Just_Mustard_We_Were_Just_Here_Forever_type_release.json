@@ -1,0 +1,1021 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "1982",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Box Set",
+        "Compilation",
+        "Limited Edition",
+        "Numbered"
+      ],
+      "label": [
+        "Mobile Fidelity Sound Lab",
+        "EMI",
+        "Capitol Records",
+        "Original Master Recording",
+        "EMI Records Ltd.",
+        "Capitol Records, Inc.",
+        "EMI Records Ltd.",
+        "Mobile Fidelity Sound Lab, Inc.",
+        "Mobile Fidelity Sound Lab, Inc.",
+        "Northern Songs Ltd.",
+        "Shapiro Bernstein & Co. Ltd.",
+        "Aldon Music",
+        "Charles Bens",
+        "Ardmore & Beechwood Ltd.",
+        "Dick James Music",
+        "Ludix Music Ltd.",
+        "Ambassador Music Ltd.",
+        "Sherwin Music",
+        "Jewel Music",
+        "Dominion Music",
+        "Leeds Music",
+        "Belinda (London) Ltd.",
+        "Jaep Music Ltd.",
+        "Frank Music",
+        "Chappell Music",
+        "Southern Music",
+        "Aberbach (London) Ltd.",
+        "Knox Music",
+        "Macmelodies Ltd.",
+        "Venice Music Ltd.",
+        "Lark Music",
+        "Essex Music",
+        "Harrisongs",
+        "Startling Music",
+        "Victor Company Of Japan, Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Beat",
+        "Rock & Roll",
+        "Pop Rock",
+        "Psychedelic Rock"
+      ],
+      "id": 2914755,
+      "barcode": [
+        "MFSL 1-101 A",
+        "MFSL 1-101 B",
+        "MFSL 1-102 A",
+        "MFSL 1-102 B",
+        "MFSL 1-103 A",
+        "MFSL 1-103 B",
+        "MFSL 1-104 A",
+        "MFSL 1-104 B",
+        "MFSL 1-105 A",
+        "MFSL 1-105 B",
+        "MFSL 1-106 A",
+        "MFSL 1-106 B",
+        "MFSL 1-107 A",
+        "MFSL 1-107 B",
+        "MFSL 1-100 A",
+        "MFSL 1-100 B",
+        "MFSL 2-072-1A",
+        "MFSL 2-072-1B",
+        "MFSL 2-072-2C",
+        "MFSL 2-072-2D",
+        "MFSL 1-108 A",
+        "MFSL 1-108 B",
+        "MFSL 1-023 A",
+        "MFSL 1-023 B",
+        "MFSL 1-047 A",
+        "MFSL 1-047 B",
+        "MFSL 1-109 A",
+        "MFSL 1-109 B",
+        "BIEM",
+        "NCB",
+        "Mecolico",
+        "BMI",
+        "ASCAP",
+        "MFSL 1-101",
+        "MFSL 1-102",
+        "MFSL 1-103",
+        "MFSL 1-104",
+        "MFSL 1-105",
+        "MFSL 1-106",
+        "MFSL 1-107",
+        "MFSL 1-100",
+        "MFSL 2-072",
+        "MFSL 2-072",
+        "MFSL 1-108",
+        "MFSL 1-023",
+        "MFSL 1-047",
+        "MFSL 1-109",
+        "MSFL-1-101-A1 H 1 1 1 ✣ S SR 2",
+        "MSFL-1- 101-B1 H 1 1 1 ✣ SR/2",
+        "MSFL-1-102 -A1 H 1 1 1 ✣ S T SR/2",
+        "MSFL-1-102-B1 H 1 1 1 ✣ SR/2",
+        "MFSL-1-103-A4 H 1 4 1 ✣ S T SR 2 ORTOFON",
+        "MFSL-1-103-B4 H 1 4 1 ✣ SR 2 ORTOFON",
+        "MSFL-1-104-A1 H 1 1 1 ✣ T SR 2",
+        "MSFL-1-104-B3 H 1 3 1 ✣ SR 2 ORTOFON",
+        "MFSL-1-105 A2 H 1 2 1 ⁜ ⁜ U SR 2",
+        "MFSL-1-105-B4 H 1 4 1 ⁜ ⁜ SR 2 ORTOFON",
+        "MFSL-1-106-A1 H 1 1 1 ✣ S T SR 2",
+        "MFSL-1-106·B3 H 1 3 1 ✣ SR/2",
+        "MFSL-1-107-A1 H 1 1 1 ✣ T SR/2",
+        "MFSL-1-107-B1 H 1 1 1 ✣ SR 2",
+        "MFSL-1-100-A2 H 1 2 1 ✣ T SR 2 ORTOFON",
+        "MFSL-1-100-B3 H 1 3 1 ✣ SR 2 ORTOFON",
+        "MFSL-2-0721-A3 H 1 3 2 ✣ T SR 2 ORTOFON",
+        "MFSL-2-072-B5 H 1 51 ✣ SR 2 ORTOFON",
+        "MFSL-2-0723-C2- H 1 2 1 ✣ P SR/2 ORTOFON",
+        "MFSL-2-0724-D3- H 1 3 1 ⁜ ⁜ SR 2 ORTOFON",
+        "MFSL-1-108 A1 H 1 2 1 ✣ U SR/2",
+        "MFSL-1-108-B2 H 1 2 1 SR 2",
+        "MFSL1-023 - A11 SR/2 1 1 1 1 ✣ [symbol]",
+        "MFSL1-023 – B2 SR/2 1 2 1 ⁜",
+        "MFSL-1-047-A1 T SR/2 ORTOFON H 1 1 2 ✣ [ ]",
+        "MFSL-1-047-B2 T SR/2 ORTOFON H 1 2 1 ⁜ ✣",
+        "MFSL-1-109-A1 H 1 1 2 ✣ T SR/2",
+        "MFSL-1-109-5̶5̶ B5 SR/2 H 1 5 2 ⁜ SR 2 ORTOFON"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2201920,
+      "master_url": "https://api.discogs.com/masters/2201920",
+      "uri": "/release/2914755-The-Beatles-The-Collection",
+      "catno": "BC-1",
+      "title": "The Beatles - The Collection",
+      "thumb": "https://i.discogs.com/YlK0s7u-5W6ly5tX37JjcPjM0PVwFF7d6C3FdTobmyk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5MTQ3/NTUtMTU3MjAyNDE4/MS0xMTc2LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/zLIh77kO7KkhKJORRcersyrhUAs1w7Nu6u8xrGlFuho/rs:fit/g:sm/q:90/h:640/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5MTQ3/NTUtMTU3MjAyNDE4/MS0xMTc2LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2914755",
+      "community": {
+        "want": 1578,
+        "have": 1509
+      },
+      "format_quantity": 14,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Box Set",
+          "qty": "1",
+          "descriptions": [
+            "Compilation",
+            "Limited Edition",
+            "Numbered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2017",
+      "format": [
+        "Box Set",
+        "Compilation",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Compilation",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Compilation",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Stereo",
+        "Mono",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Mono",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Compilation",
+        "Reissue",
+        "Stereo",
+        "Mono",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Compilation",
+        "Reissue",
+        "Stereo",
+        "Vinyl",
+        "LP",
+        "Album",
+        "Compilation",
+        "Reissue",
+        "Remastered",
+        "Stereo",
+        "Mono"
+      ],
+      "label": [
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "DeAgostini",
+        "The Beatles Vinyl Collection"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Pop Rock"
+      ],
+      "id": 36127873,
+      "barcode": [
+        "0602547048509",
+        "0602547048455",
+        "724383444519",
+        "724383444816",
+        "0602547567901",
+        "724383445110",
+        "0602547048448",
+        "5099969943515"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/36127873-The-Beatles-The-Complete-Deagostini-Beatles-Collection",
+      "catno": "PCS 7088",
+      "title": "The Beatles - The Complete Deagostini Beatles Collection",
+      "thumb": "https://i.discogs.com/J4A35lbwSX77qCRaoT56SQbW7fwVv6_Ep_jn_E0sLWw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MTI3/ODczLTE3Njk2ODIz/MjktMjQ0NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/5bRRLAG19BtYRlv-ZbAJ4yT7_Ko9hY8D8ZajSFi2Opo/rs:fit/g:sm/q:90/h:474/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MTI3/ODczLTE3Njk2ODIz/MjktMjQ0NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36127873",
+      "community": {
+        "want": 12,
+        "have": 9
+      },
+      "format_quantity": 39,
+      "formats": [
+        {
+          "name": "Box Set",
+          "qty": "1",
+          "descriptions": [
+            "Compilation"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Compilation",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Compilation",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "3",
+          "text": "Tri-Fold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "3",
+          "text": "Tr-Fold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Stereo",
+            "Mono"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "3",
+          "text": "Tri-Fold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "3",
+          "text": "Tri-Fold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Mono"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Compilation",
+            "Reissue",
+            "Stereo",
+            "Mono"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "3",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Compilation",
+            "Reissue",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Gatefold, 180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Compilation",
+            "Reissue",
+            "Remastered",
+            "Stereo",
+            "Mono"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "1982",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Remastered",
+        "Box Set",
+        "Compilation"
+      ],
+      "label": [
+        "Mobile Fidelity Sound Lab",
+        "Original Master Recording",
+        "EMI Records Ltd.",
+        "Capitol Records, Inc.",
+        "EMI Records Ltd.",
+        "MFSL, Inc.",
+        "MFSL, Inc.",
+        "Northern Songs Ltd.",
+        "Shapiro Bernstein & Co. Ltd.",
+        "Aldon Music",
+        "Charles Bens",
+        "Ardmore & Beechwood Ltd.",
+        "Dick James Music",
+        "Ludix Music Ltd.",
+        "Ambassador Music Ltd.",
+        "Sherwin Music",
+        "Jewel Music",
+        "Dominion Music",
+        "Leeds Music",
+        "Belinda (London) Ltd.",
+        "Jaep Music Ltd.",
+        "Frank Music",
+        "Chappell Music",
+        "Southern Music",
+        "Aberbach (London) Ltd.",
+        "Knox Music",
+        "Macmelodies Ltd.",
+        "Venice Music Ltd.",
+        "Lark Music",
+        "Essex Music",
+        "Harrisongs",
+        "Startling Music",
+        "EMI",
+        "Capitol Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Beat",
+        "Rock & Roll",
+        "Pop Rock",
+        "Psychedelic Rock"
+      ],
+      "id": 4708783,
+      "barcode": [
+        "MFSL 1-101",
+        "MFSL 1-101 A",
+        "MFSL 1-101 B",
+        "MFSL 1-102",
+        "MFSL 1-102 A",
+        "MFSL 1-102 B",
+        "MFSL 1-103",
+        "MFSL 1-103 A",
+        "MFSL 1-103 B",
+        "MFSL 1-104",
+        "MFSL 1-104 A",
+        "MFSL 1-104 B",
+        "MFSL 1-105",
+        "MFSL 1-105 A",
+        "MFSL 1-105 B",
+        "MFSL 1-106",
+        "MFSL 1-106 A",
+        "MFSL 1-106 B",
+        "MFSL 1-107",
+        "MFSL 1-107 A",
+        "MFSL 1-107 B",
+        "MFSL 1-100",
+        "MFSL 1-100 A",
+        "MFSL 1-100 B",
+        "MFSL 2-072",
+        "MFSL 2-072-1A",
+        "MFSL 2-072-1B",
+        "MFSL 2-072",
+        "MFSL 2-072-2C",
+        "MFSL 2-072-2D",
+        "MFSL 1-108",
+        "MFSL 1-108 A",
+        "MFSL 1-108 B",
+        "MFSL 1-023",
+        "MFSL 1-023 A",
+        "MFSL 1-023 B",
+        "MFSL 1-047",
+        "MFSL 1-047 A",
+        "MFSL 1-047 B",
+        "MFSL 1-109",
+        "MFSL 1-109 A",
+        "MFSL 1-109 B",
+        "BIEM",
+        "NCB",
+        "Mecolico",
+        "BMI",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/4708783-Beatles-The-Collection",
+      "catno": "BC-1",
+      "title": "The Beatles - The Collection",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/4708783",
+      "community": {
+        "want": 0,
+        "have": 0
+      },
+      "format_quantity": 14,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "14",
+          "descriptions": [
+            "LP",
+            "Remastered"
+          ]
+        },
+        {
+          "name": "Box Set",
+          "qty": "1",
+          "descriptions": [
+            "Compilation"
+          ]
+        }
+      ]
+    }
+  ]
+}

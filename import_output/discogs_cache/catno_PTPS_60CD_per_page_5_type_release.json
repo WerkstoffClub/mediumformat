@@ -1,0 +1,142 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "USA & Europe",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Partisan Records",
+        "Play It Again Sam",
+        "Geese",
+        "Partisan Records",
+        "Play It Again Sam",
+        "Geese",
+        "Key Production",
+        "TAKT",
+        "TAKT"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Art Rock"
+      ],
+      "id": 35208358,
+      "barcode": [
+        "5 400863 188009",
+        "5400863188009",
+        "2100012388443 www.keyproduction.co.uk",
+        "IFPI LK97",
+        "IFPI UU067",
+        "IFPI AEW54",
+        "IFPI 9R95",
+        "IFPI AEW11"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984367,
+      "master_url": "https://api.discogs.com/masters/3984367",
+      "uri": "/release/35208358-Geese-Getting-Killed",
+      "catno": "PTPS60CD",
+      "title": "Geese (11) - Getting Killed",
+      "thumb": "https://i.discogs.com/tsQDUdEhwBq6CNssJvwRyfB-wVSSwgJ3ySJ0QKg6QCs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjA4/MzU4LTE3NjM0OTY1/NTktOTI0MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/LwzZ9H8jKxw9suDMWY9WHNta1z3CWcbuyPXSDfeFK3Y/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjA4/MzU4LTE3NjM0OTY1/NTktOTI0MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35208358",
+      "community": {
+        "want": 461,
+        "have": 1361
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Partisan Records",
+        "Partisan Records",
+        "Play It Again Sam",
+        "Play It Again Sam",
+        "Geese",
+        "Geese",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Art Rock"
+      ],
+      "id": 36293485,
+      "barcode": [
+        "5400863188009",
+        "PTPS60CD 22680-CD-0050 26-005-23-2",
+        "IFPI LY89",
+        "IFPI L817"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984367,
+      "master_url": "https://api.discogs.com/masters/3984367",
+      "uri": "/release/36293485-Geese-Getting-Killed",
+      "catno": "PTPS60CD",
+      "title": "Geese (11) - Getting Killed",
+      "thumb": "https://i.discogs.com/DrSPbjeDBuWf5pCGVdp6pnng0tiQO7-Rl3_Wogu_qvo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Mjkz/NDg1LTE3NjkxNzI4/ODktNzExMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/LYUQuMTefCNsfHs4oUS5lRN5P8H-MqukIwiOLd_wkRY/rs:fit/g:sm/q:90/h:545/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Mjkz/NDg1LTE3NjkxNzI4/ODktNzExMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36293485",
+      "community": {
+        "want": 36,
+        "have": 58
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "The ADS Group",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

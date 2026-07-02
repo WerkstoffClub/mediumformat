@@ -1,0 +1,104 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Big Crown Records",
+        "Big Crown Records",
+        "Studio Pelikan, Surabaya"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul"
+      ],
+      "style": [
+        "Soul"
+      ],
+      "id": 37385886,
+      "barcode": [
+        "349223020212"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4230396,
+      "master_url": "https://api.discogs.com/masters/4230396",
+      "uri": "/release/37385886-Thee-Marloes-Di-Hotel-Malibu",
+      "catno": "BC202-LP",
+      "title": "Thee Marloes - Di Hotel Malibu",
+      "thumb": "https://i.discogs.com/h2ZgpjWqdqJp0qO-EEqbAB_81VMZIC50wcufIhrRXFA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3Mzg1/ODg2LTE3NzkyMDc4/MzItMjYyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/X4IzcnM0V1QED16wRSg6uxDDM5a1R_VCV2HT1BSxuhg/rs:fit/g:sm/q:90/h:585/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3Mzg1/ODg2LTE3NzkyMDc4/MzItMjYyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/37385886",
+      "community": {
+        "want": 0,
+        "have": 0
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Big Crown Records",
+        "Big Crown Records",
+        "Studio Pelikan, Surabaya"
+      ],
+      "type": "master",
+      "genre": [
+        "Funk / Soul"
+      ],
+      "style": [
+        "Soul"
+      ],
+      "id": 4230396,
+      "barcode": [
+        "349223020212"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4230396,
+      "master_url": "https://api.discogs.com/masters/4230396",
+      "uri": "/master/4230396-Thee-Marloes-Di-Hotel-Malibu",
+      "catno": "BC202-LP",
+      "title": "Thee Marloes - Di Hotel Malibu",
+      "thumb": "https://i.discogs.com/h2ZgpjWqdqJp0qO-EEqbAB_81VMZIC50wcufIhrRXFA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3Mzg1/ODg2LTE3NzkyMDc4/MzItMjYyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/X4IzcnM0V1QED16wRSg6uxDDM5a1R_VCV2HT1BSxuhg/rs:fit/g:sm/q:90/h:585/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3Mzg1/ODg2LTE3NzkyMDc4/MzItMjYyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/4230396",
+      "community": {
+        "want": 0,
+        "have": 14
+      }
+    }
+  ]
+}

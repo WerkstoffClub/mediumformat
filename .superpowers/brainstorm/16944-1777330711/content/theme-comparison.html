@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Theme Comparison</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #090909;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    padding: 24px;
+  }
+  h2 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 6px;
+  }
+  .subtitle { color: #999; font-size: 12px; margin-bottom: 24px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .theme-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #fff;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tag {
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+  .tag-dark {
+    background: #1c1c1c;
+    color: #999;
+    border: 1px solid #262626;
+  }
+  .tag-light {
+    background: #e8e8e8;
+    color: #666;
+    border: 1px solid #ccc;
+  }
+
+  /* ─── SHARED CARD LAYOUT ─── */
+  .preview-shell { border-radius: 10px; overflow: hidden; border: 1px solid; }
+
+  /* ─── DARK THEME (Framer system) ─── */
+  .dark-shell { border-color: #262626; }
+
+  .dark-nav {
+    background: #090909;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 0 16px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .dark-logo {
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin-right: 24px;
+  }
+  .dark-nav-link {
+    padding: 0 10px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    color: #999;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .dark-nav-link.active {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+  }
+  .dark-theme-toggle { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  .toggle-pill {
+    width: 36px;
+    height: 20px;
+    background: #1c1c1c;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #262626;
+  }
+  .toggle-knob {
+    width: 14px;
+    height: 14px;
+    background: #999;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+  }
+  .toggle-label { font-size: 10px; color: #999; }
+
+  .dark-body { background: #090909; padding: 14px; }
+
+  .dark-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 12px; }
+
+  .dark-stat {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .dark-stat.revenue-card {
+    background: linear-gradient(135deg, #6a4cf5, #4c2b9a);
+    border-color: transparent;
+  }
+  .dark-stat .lbl {
+    font-size: 9px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 3px;
+  }
+  .dark-stat.revenue-card .lbl { color: rgba(255,255,255,0.65); }
+  .dark-stat .val { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: -0.03em; }
+  .dark-stat .sub { font-size: 9px; color: #22c55e; margin-top: 2px; }
+  .dark-stat .sub-warn { font-size: 9px; color: #e8a838; margin-top: 2px; }
+  .dark-stat .sub-muted { font-size: 9px; color: #999; margin-top: 2px; }
+  .dark-stat.revenue-card .sub { color: rgba(255,255,255,0.7); }
+
+  .dark-panel {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .dark-panel-hdr {
+    padding: 9px 12px;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .dark-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 11px;
+  }
+  .dark-row:last-child { border-bottom: none; }
+  .dark-row .name { flex: 1; color: #fff; }
+  .dark-row .amount { color: #999; font-size: 11px; }
+
+  .pill { padding: 2px 7px; border-radius: 100px; font-size: 9px; font-weight: 700; }
+  .pill-green  { background: rgba(34,197,94,0.12);  color: #22c55e; }
+  .pill-yellow { background: rgba(232,168,56,0.12); color: #e8a838; }
+  .pill-blue   { background: rgba(91,192,222,0.12); color: #5bc0de; }
+  .pill-violet { background: rgba(106,76,245,0.15); color: #a89fdd; }
+
+  /* ─── LIGHT THEME ─── */
+  .light-shell { border-color: #d0d0d0; }
+
+  .light-nav {
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0 16px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .light-logo {
+    font-weight: 800;
+    font-size: 14px;
+    color: #111;
+    letter-spacing: -0.03em;
+    margin-right: 24px;
+  }
+  .light-logo span { color: #0099ff; }
+  .light-nav-link {
+    padding: 0 10px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    color: #999;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .light-nav-link.active { color: #111; border-bottom: 2px solid #0099ff; }
+  .light-theme-toggle { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  .light-toggle-pill {
+    width: 36px;
+    height: 20px;
+    background: #0099ff;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+  }
+  .light-toggle-knob {
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 18px;
+  }
+  .light-toggle-label { font-size: 10px; color: #aaa; }
+
+  .light-body { background: #f5f5f5; padding: 14px; }
+
+  .light-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 12px; }
+
+  .light-stat {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 7px;
+    padding: 10px 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .light-stat .lbl { font-size: 9px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+  .light-stat .val { font-size: 17px; font-weight: 800; color: #111; letter-spacing: -0.03em; }
+  .light-stat .sub { font-size: 9px; color: #3d9c66; margin-top: 2px; }
+  .light-stat .sub-warn { font-size: 9px; color: #c07010; margin-top: 2px; }
+  .light-stat .sub-muted { font-size: 9px; color: #aaa; margin-top: 2px; }
+
+  .light-panel {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .light-panel-hdr {
+    padding: 9px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #111;
+  }
+  .light-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 11px;
+  }
+  .light-row:last-child { border-bottom: none; }
+  .light-row .name { flex: 1; color: #333; }
+  .light-row .amount { color: #888; font-size: 11px; }
+
+  .lpill-green  { background: #e6f7ee; color: #2d8a55; padding: 2px 7px; border-radius: 100px; font-size: 9px; font-weight: 700; }
+  .lpill-blue   { background: #e0f2ff; color: #0077cc; padding: 2px 7px; border-radius: 100px; font-size: 9px; font-weight: 700; }
+  .lpill-yellow { background: #fdf3e0; color: #b07a10; padding: 2px 7px; border-radius: 100px; font-size: 9px; font-weight: 700; }
+  .lpill-purple { background: #ede9fb; color: #5b4fc7; padding: 2px 7px; border-radius: 100px; font-size: 9px; font-weight: 700; }
+
+  /* Note */
+  .note {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #999;
+    background: #141414;
+    line-height: 1.6;
+  }
+  .note strong { color: #0099ff; font-weight: 600; }
+  .note code {
+    background: #1c1c1c;
+    color: #999;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+</style>
+</head>
+<body>
+<h2>Theme Switcher — Dark vs Light</h2>
+<p class="subtitle">Both themes share the same layout. Users toggle per-session; preference is saved. Shown: Dashboard view.</p>
+
+<div class="split">
+
+  <!-- DARK -->
+  <div>
+    <div class="theme-label"><span>🌙 Dark Theme</span> <span class="tag tag-dark">Default</span></div>
+    <div class="preview-shell dark-shell">
+      <div class="dark-nav">
+        <div class="dark-logo">MediumFormat</div>
+        <div class="dark-nav-link active">Dashboard</div>
+        <div class="dark-nav-link">Inventory</div>
+        <div class="dark-nav-link">Orders</div>
+        <div class="dark-theme-toggle">
+          <span class="toggle-label">🌙</span>
+          <div class="toggle-pill"><div class="toggle-knob"></div></div>
+          <span class="toggle-label">☀️</span>
+        </div>
+      </div>
+      <div class="dark-body">
+        <div class="dark-stats">
+          <div class="dark-stat revenue-card">
+            <div class="lbl">Revenue Today</div>
+            <div class="val">Rp 2.4M</div>
+            <div class="sub">↑ 18% vs yesterday</div>
+          </div>
+          <div class="dark-stat">
+            <div class="lbl">Open Orders</div>
+            <div class="val">7</div>
+            <div class="sub-warn">3 need action</div>
+          </div>
+          <div class="dark-stat">
+            <div class="lbl">In Stock</div>
+            <div class="val">1,240</div>
+            <div class="sub-muted">↓ 12 sold today</div>
+          </div>
+        </div>
+        <div class="dark-panel">
+          <div class="dark-panel-hdr">🛒 Recent Orders</div>
+          <div class="dark-row"><span class="name">Andi S. — OK Computer LP</span><span class="pill pill-yellow">Pending</span><span class="amount">Rp 850K</span></div>
+          <div class="dark-row"><span class="name">Diana R. — Mezzanine LP</span><span class="pill pill-violet">Processing</span><span class="amount">Rp 620K</span></div>
+          <div class="dark-row"><span class="name">Marco K. — Dummy LP</span><span class="pill pill-blue">Shipped</span><span class="amount">USD 48</span></div>
+          <div class="dark-row"><span class="name">Walk-in POS — 2 items</span><span class="pill pill-green">Done</span><span class="amount">Rp 310K</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHT -->
+  <div>
+    <div class="theme-label" style="color:#fff;"><span>☀️ Light Theme</span> <span class="tag tag-light">Toggle on</span></div>
+    <div class="preview-shell light-shell">
+      <div class="light-nav">
+        <div class="light-logo">Medium<span>Format</span></div>
+        <div class="light-nav-link active">Dashboard</div>
+        <div class="light-nav-link">Inventory</div>
+        <div class="light-nav-link">Orders</div>
+        <div class="light-theme-toggle">
+          <span class="light-toggle-label">🌙</span>
+          <div class="light-toggle-pill"><div class="light-toggle-knob"></div></div>
+          <span class="light-toggle-label">☀️</span>
+        </div>
+      </div>
+      <div class="light-body">
+        <div class="light-stats">
+          <div class="light-stat"><div class="lbl">Revenue Today</div><div class="val">Rp 2.4M</div><div class="sub">↑ 18% vs yesterday</div></div>
+          <div class="light-stat"><div class="lbl">Open Orders</div><div class="val">7</div><div class="sub-warn">3 need action</div></div>
+          <div class="light-stat"><div class="lbl">In Stock</div><div class="val">1,240</div><div class="sub-muted">↓ 12 sold today</div></div>
+        </div>
+        <div class="light-panel">
+          <div class="light-panel-hdr">🛒 Recent Orders</div>
+          <div class="light-row"><span class="name">Andi S. — OK Computer LP</span><span class="lpill-yellow">Pending</span><span class="amount">Rp 850K</span></div>
+          <div class="light-row"><span class="name">Diana R. — Mezzanine LP</span><span class="lpill-purple">Processing</span><span class="amount">Rp 620K</span></div>
+          <div class="light-row"><span class="name">Marco K. — Dummy LP</span><span class="lpill-blue">Shipped</span><span class="amount">USD 48</span></div>
+          <div class="light-row"><span class="name">Walk-in POS — 2 items</span><span class="lpill-green">Done</span><span class="amount">Rp 310K</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="note">
+  <strong>Implementation note:</strong> Theme preference stored in <code>localStorage</code> per user. Backoffice defaults to Dark; the customer-facing storefront mirrors the same toggle. CSS custom properties (variables) handle the full token swap — no duplicate stylesheets needed.
+</div>
+
+</body>
+</html>

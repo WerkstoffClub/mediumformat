@@ -1,0 +1,322 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 12,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605153216&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?barcode=656605153216&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Germany",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "HHV"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Shoegaze",
+        "Dream Pop"
+      ],
+      "id": 31316622,
+      "barcode": [
+        "6 56605 15321 6",
+        "6 17308 07811 4"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3220669,
+      "master_url": "https://api.discogs.com/masters/3220669",
+      "uri": "/release/31316622-Slowdive-Everything-Is-Alive",
+      "catno": "DOC232",
+      "title": "Slowdive - Everything Is Alive",
+      "thumb": "https://i.discogs.com/UBOTnob-ESghU0yrpjNkUBIFoYqqkt9bInZ9hVXZ1LU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMzE2/NjIyLTE3MjE5Mjc4/NzQtMTI3Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/kYg_6giQoBiehA4M8_8KT9g7Z8oWMzpJzfP6VWlZV94/rs:fit/g:sm/q:90/h:590/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMzE2/NjIyLTE3MjE5Mjc4/NzQtMTI3Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31316622",
+      "community": {
+        "want": 97,
+        "have": 247
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Tan Translucent",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Shoegaze",
+        "Dream Pop"
+      ],
+      "id": 28131346,
+      "barcode": [
+        "LC 29265",
+        "656605153254",
+        "6 56605 15321 6"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3220669,
+      "master_url": "https://api.discogs.com/masters/3220669",
+      "uri": "/release/28131346-Slowdive-Everything-Is-Alive",
+      "catno": "DOC232",
+      "title": "Slowdive - Everything Is Alive",
+      "thumb": "https://i.discogs.com/0FHUkLLTFotDARHV8KubR0_D5LvhLjV-Rl0F_ATCyYg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTMx/MzQ2LTE2OTU2Nzcx/OTgtMzg1NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/alVTO5xMlYeherju1SoSF4b55DtZFLU2hmVHgxZtLk0/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTMx/MzQ2LTE2OTU2Nzcx/OTgtMzg1NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28131346",
+      "community": {
+        "want": 290,
+        "have": 2236
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Pink [Pale Pink]",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Platomania.nl"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Dream Pop",
+        "Shoegaze"
+      ],
+      "id": 28138786,
+      "barcode": [
+        "6 56605 15321 6",
+        "656605153216",
+        "6 56605 15320 9",
+        "656605153209",
+        "LC 29265",
+        "DOC232LP A CM 1580722 259794E1",
+        "DOC232LP B CM 1580977 259794E2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3220669,
+      "master_url": "https://api.discogs.com/masters/3220669",
+      "uri": "/release/28138786-Slowdive-Everything-Is-Alive",
+      "catno": "DOC232",
+      "title": "Slowdive - Everything Is Alive",
+      "thumb": "https://i.discogs.com/IXCbNGPQsyPI8hHVR-qpe59XGo1mc6fZySrN_pDse90/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTM4/Nzg2LTE2OTM1NjQw/MzgtMzA3Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/B5_84rZLhd37k5xTVFLJG3PuWGJyT-zzsb7IrACuzbY/rs:fit/g:sm/q:90/h:589/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTM4/Nzg2LTE2OTM1NjQw/MzgtMzA3Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28138786",
+      "community": {
+        "want": 235,
+        "have": 335
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red [Apple Red]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Ultra-Vybe, Inc."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Dream Pop",
+        "Shoegaze"
+      ],
+      "id": 28414036,
+      "barcode": [
+        "6 56605 15321 6",
+        "656605153216",
+        "6 56605 15320 9",
+        "656605153209",
+        "LC 29265",
+        "DOC232LP A CM 1580722 259794E1",
+        "DOC232LP B CM 1580977 259794E2",
+        "4526180662884"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3220669,
+      "master_url": "https://api.discogs.com/masters/3220669",
+      "uri": "/release/28414036-Slowdive-Everything-Is-Alive",
+      "catno": "DOC232JLP",
+      "title": "Slowdive - Everything Is Alive",
+      "thumb": "https://i.discogs.com/zXp3DDIYPxmQwBdALCHks7Um4kZguB50iRwbOyfgKQY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NDE0/MDM2LTE2OTU4MjI4/MTUtOTI3OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/PI9HGlLMMai4Zw5g3TiCu70QpCLUr4klf1HTkK_o9Ag/rs:fit/g:sm/q:90/h:614/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NDE0/MDM2LTE2OTU4MjI4/MTUtOTI3OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28414036",
+      "community": {
+        "want": 167,
+        "have": 74
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red [Apple Red]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "GZ Media",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Courtyard Studio",
+        "The Farm II",
+        "Chapel Studios",
+        "Subtle McNugget",
+        "Taloowa Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Dream Pop",
+        "Shoegaze"
+      ],
+      "id": 28107166,
+      "barcode": [
+        "6 56605 15321 6",
+        "656605153216",
+        "LC 29265",
+        "259794E1 1532436 DOC232LP A CM",
+        "259794E2 1580977 DOC232LP B CM",
+        "259794E1 1532436 DOC232LP A CM",
+        "259794E2 1917663 DOC232LP B CM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3220669,
+      "master_url": "https://api.discogs.com/masters/3220669",
+      "uri": "/release/28107166-Slowdive-Everything-Is-Alive",
+      "catno": "DOC232",
+      "title": "Slowdive - Everything Is Alive",
+      "thumb": "https://i.discogs.com/P1GMnaAF0VzBS0MQnMJ-kkdkBr7XTw5YojI6zcUzS5k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTA3/MTY2LTE2OTM5MTYx/NTEtOTIyMi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/IZFUTXgcA4qvPUkjuYibisBWpyw4pk-IqxltfReuof4/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTA3/MTY2LTE2OTM5MTYx/NTEtOTIyMi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28107166",
+      "community": {
+        "want": 402,
+        "have": 2868
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

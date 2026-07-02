@@ -1,0 +1,135 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "AWGE",
+        "RCA Records",
+        "RCA Records",
+        "A$AP Rocky Recordings LLC",
+        "Sony Music",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Sony Music UK",
+        "RCA"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop"
+      ],
+      "style": [
+        "Trap",
+        "Memphis Rap",
+        "Cloud Rap",
+        "Experimental",
+        "Psychedelic"
+      ],
+      "id": 37020267,
+      "barcode": [
+        "199584310824",
+        "1 99584 31082 4"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4100995,
+      "master_url": "https://api.discogs.com/masters/4100995",
+      "uri": "/release/37020267-AAP-Rocky-Dont-Be-Dumb",
+      "catno": "19958-43108-2",
+      "title": "A$AP Rocky* - Don't Be Dumb",
+      "thumb": "https://i.discogs.com/8IZHGRv1k7yKRp7J9c6GdrLE9SZy9mLcTVcZstb3ESA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MDIw/MjY3LTE3NzU3NTQ2/NDktNjk2MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/a7uJvmHaE30MjA64Q2-r1y1o_1_uXhw3iArwZos7QXc/rs:fit/g:sm/q:90/h:529/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MDIw/MjY3LTE3NzU3NTQ2/NDktNjk2MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/37020267",
+      "community": {
+        "want": 3,
+        "have": 6
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Group Cover",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "AWGE",
+        "RCA Records",
+        "RCA Records",
+        "A$AP Rocky Recordings LLC",
+        "CD Video Manufacturing"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop"
+      ],
+      "style": [
+        "Trap",
+        "Memphis Rap",
+        "Cloud Rap",
+        "Experimental",
+        "Psychedelic"
+      ],
+      "id": 36308788,
+      "barcode": [
+        "199584310824",
+        "SONOPRESS 58693958/19958431082RD1 21",
+        "IFPI LB 45",
+        "IFPI 0740"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4100995,
+      "master_url": "https://api.discogs.com/masters/4100995",
+      "uri": "/release/36308788-AAP-Rocky-And-Tim-Burton-Dont-Be-Dumb",
+      "catno": "none",
+      "title": "A$AP Rocky* And Tim Burton (2) - Don't Be Dumb",
+      "thumb": "https://i.discogs.com/lDlIfUEv3bZJ1ewnupbLScFj4lE1QamOmqc90QiN_EQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzA4/Nzg4LTE3NzEyMTcx/NDctMTU4My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/9p7x2OHROiDeX4RyrTdWNOFJMWK98JUDp8PzJ-WDRRE/rs:fit/g:sm/q:90/h:527/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzA4/Nzg4LTE3NzEyMTcx/NDctMTU4My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36308788",
+      "community": {
+        "want": 45,
+        "have": 138
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Group Cover",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,388 @@
+<h2>Track Preview Manager</h2>
+<p class="subtitle">Per-release: auto-linked sources with manual override. Shown inside the edit release drawer.</p>
+
+<style>
+  * { box-sizing: border-box; }
+
+  .drawer { background: #090909; border: 1px solid #262626; border-radius: 12px; overflow: hidden; max-width: 720px; }
+  .drawer-header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid #1a1a1a; background: #090909; }
+  .drawer-cover { width: 48px; height: 48px; background: #141414; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; border: 1px solid #262626; }
+  .drawer-info { flex: 1; }
+  .drawer-title { font-size: 15px; font-weight: 800; color: #fff; }
+  .drawer-artist { font-size: 12px; color: #999; }
+  .drawer-meta { font-size: 10px; color: #555; margin-top: 2px; }
+  .drawer-close { color: #999; font-size: 18px; cursor: pointer; padding: 4px 8px; }
+  .drawer-close:hover { color: #fff; }
+
+  .tabs { display: flex; border-bottom: 1px solid #1a1a1a; }
+  .tab { padding: 10px 16px; font-size: 12px; color: #999; cursor: pointer; border-bottom: 2px solid transparent; background: transparent; }
+  .tab.active { color: #fff; border-bottom-color: #fff; }
+
+  .tab-body { padding: 18px; }
+
+  /* Auto-link status */
+  .auto-section { margin-bottom: 20px; }
+  .auto-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .auto-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; flex: 1; }
+  .auto-badge { font-size: 9px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+  .badge-auto { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
+  .badge-manual { background: rgba(0,153,255,0.1); color: #0099ff; border: 1px solid rgba(0,153,255,0.25); }
+  .badge-none { background: #1c1c1c; color: #999; border: 1px solid #262626; }
+
+  .source-list { display: flex; flex-direction: column; gap: 8px; }
+  .source-row { display: flex; align-items: center; gap: 10px; background: #141414; border: 1px solid #262626; border-radius: 8px; padding: 10px 12px; }
+  .source-row.active-source { background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); }
+  .source-row.inactive { opacity: 0.5; }
+
+  .source-icon { width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; background: #1c1c1c; }
+
+  .source-info { flex: 1; }
+  .source-name { font-size: 12px; font-weight: 700; color: #fff; }
+  .source-url  { font-size: 10px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+  .source-how  { font-size: 10px; color: #555; }
+
+  .source-actions { display: flex; align-items: center; gap: 6px; }
+  .use-btn { padding: 4px 10px; font-size: 10px; font-weight: 700; cursor: pointer; border: none; font-family: inherit; }
+  .use-btn.primary { background: #fff; color: #000; border-radius: 100px; }
+  .use-btn.secondary { background: #141414; color: #999; border: 1px solid #262626; border-radius: 100px; }
+  .use-btn.active-lbl { background: #1c1c1c; color: #fff; border: 1px solid #262626; border-radius: 100px; cursor: default; }
+  .remove-btn { color: #555; font-size: 12px; cursor: pointer; padding: 4px 6px; border-radius: 4px; }
+  .remove-btn:hover { color: #e05c6a; background: rgba(224,92,106,0.1); }
+
+  .divider { height: 1px; background: #1a1a1a; margin: 16px 0; }
+
+  /* Manual URL input */
+  .manual-section { }
+  .manual-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 10px; }
+  .url-input-row { display: flex; gap: 8px; }
+  .url-input { flex: 1; background: #141414; border: 1px solid #262626; border-radius: 6px; padding: 8px 12px; color: #fff; font-size: 12px; outline: none; }
+  .url-input:focus { border-color: rgba(0,153,255,0.4); }
+  .url-input::placeholder { color: #555; }
+  .url-add-btn { background: #fff; border: none; border-radius: 100px; color: #000; padding: 8px 16px; font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+
+  /* Tracklist section */
+  .tracklist-section { margin-top: 20px; }
+  .tracklist-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .tracklist-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; flex: 1; }
+  .discogs-sync-btn { font-size: 10px; color: #0099ff; cursor: pointer; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(0,153,255,0.2); background: rgba(0,153,255,0.08); }
+
+  .track-table { width: 100%; border-collapse: collapse; }
+  .track-table th { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: #555; padding: 4px 8px; text-align: left; border-bottom: 1px solid #1a1a1a; }
+  .track-table td { padding: 7px 8px; border-bottom: 1px solid #141414; font-size: 11px; color: #999; vertical-align: middle; }
+  .track-table tr:last-child td { border-bottom: none; }
+  .track-num { color: #555; width: 24px; }
+  .preview-src-select { background: #141414; border: 1px solid #262626; border-radius: 4px; color: #999; font-size: 10px; padding: 3px 6px; outline: none; }
+  .preview-play { color: #0099ff; cursor: pointer; padding: 3px 8px; border-radius: 100px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); font-size: 10px; font-weight: 700; display: inline-block; }
+  .preview-none { color: #555; font-size: 10px; }
+
+  /* Clip window cells */
+  .clip-cell { display: flex; flex-direction: column; gap: 3px; }
+  .clip-timeline-bar {
+    width: 80px; height: 4px; background: #262626; border-radius: 2px;
+    position: relative;
+  }
+  .clip-window {
+    position: absolute; height: 100%; background: #0099ff;
+    border-radius: 2px; top: 0;
+  }
+  .clip-timestamps { font-size: 9px; color: #555; }
+
+  /* Edit clip link */
+  .clip-edit-link {
+    font-size: 9px; color: #0099ff; cursor: pointer;
+    text-decoration: none; margin-left: 4px;
+  }
+  .clip-edit-link:hover { text-decoration: underline; }
+
+  /* Info note */
+  .info-note { display: flex; align-items: flex-start; gap: 8px; background: #0a1a0a; border: 1px solid rgba(34,197,94,0.2); border-radius: 7px; padding: 10px 14px; margin-top: 16px; font-size: 11px; color: #22c55e; }
+  .info-note span { color: rgba(34,197,94,0.6); }
+
+  /* Clip Editor panel */
+  .clip-editor {
+    margin-top: 14px; background: #0d0d0d; border: 1px solid #1a1a1a;
+    border-radius: 8px; overflow: hidden;
+  }
+  .clip-editor-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-bottom: 1px solid #1a1a1a;
+  }
+  .clip-editor-title { font-size: 11px; font-weight: 700; color: #fff; }
+  .clip-editor-badge {
+    font-size: 9px; padding: 2px 6px; border-radius: 100px;
+    background: rgba(0,153,255,0.08); color: #0099ff;
+    border: 1px solid rgba(0,153,255,0.15); font-weight: 700;
+  }
+  .clip-editor-close {
+    background: #1c1c1c; border: 1px solid #262626; color: #999;
+    border-radius: 100px; font-size: 9px; padding: 3px 8px; cursor: pointer;
+    font-family: inherit;
+  }
+  .clip-editor-body { padding: 14px; }
+  .clip-editor-track-bar {
+    height: 32px; background: #141414; border-radius: 4px;
+    position: relative; overflow: hidden; margin-bottom: 12px;
+    display: flex; align-items: flex-end; gap: 1px; padding: 4px 4px 0;
+  }
+  .clip-editor-controls { display: flex; align-items: flex-start; gap: 16px; }
+  .clip-start-input {
+    background: #141414; border: 1px solid #262626; border-radius: 5px;
+    color: #fff; font-size: 12px; padding: 5px 8px; outline: none;
+    width: 64px; font-family: inherit;
+  }
+  .clip-start-input:focus { border-color: rgba(0,153,255,0.4); }
+</style>
+
+<div class="drawer">
+  <div class="drawer-header">
+    <div class="drawer-cover">🎵</div>
+    <div class="drawer-info">
+      <div class="drawer-title">OK Computer</div>
+      <div class="drawer-artist">Radiohead</div>
+      <div class="drawer-meta">1997 · Parlophone · LP · Rock · Cat# NODATA 02</div>
+    </div>
+    <div class="drawer-close">✕</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab">Details</div>
+    <div class="tab">Pricing &amp; Stock</div>
+    <div class="tab active">🎵 Track Previews</div>
+    <div class="tab">Channels</div>
+  </div>
+
+  <div class="tab-body">
+
+    <!-- AUTO-LINKED SOURCES -->
+    <div class="auto-section">
+      <div class="auto-header">
+        <div class="auto-title">Auto-Linked Sources</div>
+        <span class="auto-badge badge-auto">3 found automatically</span>
+      </div>
+
+      <div class="source-list">
+
+        <!-- Bandcamp: ACTIVE -->
+        <div class="source-row active-source">
+          <div class="source-icon">🎵</div>
+          <div class="source-info">
+            <div class="source-name">Bandcamp</div>
+            <div class="source-url">radiohead.bandcamp.com/album/ok-computer</div>
+            <div class="source-how">Auto-matched via Discogs artist + title lookup</div>
+          </div>
+          <div class="source-actions">
+            <div class="use-btn active-lbl">✓ Active Source</div>
+            <div class="remove-btn">✕</div>
+          </div>
+        </div>
+
+        <!-- Spotify: available -->
+        <div class="source-row">
+          <div class="source-icon">🎧</div>
+          <div class="source-info">
+            <div class="source-name">Spotify</div>
+            <div class="source-url">open.spotify.com/album/6dVIqQ8qmQ5GBnJ9shOYss</div>
+            <div class="source-how">Auto-matched via Spotify Search API</div>
+          </div>
+          <div class="source-actions">
+            <div class="use-btn secondary">Use instead</div>
+            <div class="remove-btn">✕</div>
+          </div>
+        </div>
+
+        <!-- YouTube: available -->
+        <div class="source-row">
+          <div class="source-icon">▶</div>
+          <div class="source-info">
+            <div class="source-name">YouTube</div>
+            <div class="source-url">youtube.com/playlist?list=PLwf… (Official Radiohead)</div>
+            <div class="source-how">Auto-matched via YouTube Data API</div>
+          </div>
+          <div class="source-actions">
+            <div class="use-btn secondary">Use instead</div>
+            <div class="remove-btn">✕</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- MANUAL OVERRIDE -->
+    <div class="manual-section">
+      <div class="manual-title">Manual Override — Add Custom Link</div>
+      <div class="url-input-row">
+        <input class="url-input" placeholder="Paste Bandcamp, Spotify, YouTube, SoundCloud, or direct MP3 URL…" />
+        <button class="url-add-btn">+ Add Source</button>
+      </div>
+      <div style="font-size:10px;color:#555;margin-top:6px;">Supported: Bandcamp · Spotify · YouTube · SoundCloud · Direct .mp3 upload</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- TRACKLIST -->
+    <div class="tracklist-section">
+      <div class="tracklist-header">
+        <div class="tracklist-title">Tracklist (from Discogs)</div>
+        <div class="discogs-sync-btn">↻ Re-sync from Discogs</div>
+      </div>
+      <table class="track-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Source</th>
+            <th>Clip Window</th>
+            <th>Test</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- A1 Airbag: 4:44 = 284s, start 1:20 = 80s → left=28%, width=11% -->
+          <tr>
+            <td class="track-num">A1</td>
+            <td>Airbag</td>
+            <td>4:44</td>
+            <td><select class="preview-src-select"><option>Bandcamp (auto)</option><option>Spotify</option><option>YouTube</option><option>None</option></select></td>
+            <td>
+              <div class="clip-cell">
+                <div class="clip-timeline-bar">
+                  <div class="clip-window" style="left:28%;width:11%;"></div>
+                </div>
+                <div class="clip-timestamps">1:20 → 1:50<a class="clip-edit-link">edit</a></div>
+              </div>
+            </td>
+            <td><div class="preview-play">▶ :30</div></td>
+          </tr>
+          <!-- A2 Paranoid Android: 6:23 = 383s, start 2:00 = 120s → left=31%, width=8% -->
+          <tr>
+            <td class="track-num">A2</td>
+            <td>Paranoid Android</td>
+            <td>6:23</td>
+            <td><select class="preview-src-select"><option>Bandcamp (auto)</option><option>Spotify</option><option>YouTube</option><option>None</option></select></td>
+            <td>
+              <div class="clip-cell">
+                <div class="clip-timeline-bar">
+                  <div class="clip-window" style="left:31%;width:8%;"></div>
+                </div>
+                <div class="clip-timestamps">2:00 → 2:30<a class="clip-edit-link">edit</a></div>
+              </div>
+            </td>
+            <td><div class="preview-play">▶ :30</div></td>
+          </tr>
+          <!-- A3 Subterranean: 4:27 = 267s, start 1:00 = 60s → left=22%, width=11% -->
+          <tr>
+            <td class="track-num">A3</td>
+            <td>Subterranean Homesick Alien</td>
+            <td>4:27</td>
+            <td><select class="preview-src-select"><option>Bandcamp (auto)</option></select></td>
+            <td>
+              <div class="clip-cell">
+                <div class="clip-timeline-bar">
+                  <div class="clip-window" style="left:22%;width:11%;"></div>
+                </div>
+                <div class="clip-timestamps">1:00 → 1:30<a class="clip-edit-link">edit</a></div>
+              </div>
+            </td>
+            <td><div class="preview-play">▶ :30</div></td>
+          </tr>
+          <!-- B1 Exit Music: 4:24 = 264s, start 0:45 = 45s → left=17%, width=11% -->
+          <tr>
+            <td class="track-num">B1</td>
+            <td>Exit Music (For a Film)</td>
+            <td>4:24</td>
+            <td><select class="preview-src-select"><option>Bandcamp (auto)</option></select></td>
+            <td>
+              <div class="clip-cell">
+                <div class="clip-timeline-bar">
+                  <div class="clip-window" style="left:17%;width:11%;"></div>
+                </div>
+                <div class="clip-timestamps">0:45 → 1:15<a class="clip-edit-link">edit</a></div>
+              </div>
+            </td>
+            <td><div class="preview-play">▶ :30</div></td>
+          </tr>
+          <!-- B2 Let Down: no preview -->
+          <tr>
+            <td class="track-num">B2</td>
+            <td>Let Down</td>
+            <td>4:59</td>
+            <td><select class="preview-src-select"><option selected>None</option><option>Bandcamp (auto)</option></select></td>
+            <td><div class="preview-none">— No clip</div></td>
+            <td><div class="preview-none">— No preview</div></td>
+          </tr>
+          <!-- B3 Karma Police: 4:21 = 261s, start 0:30 = 30s → left=11%, width=12% -->
+          <tr>
+            <td class="track-num">B3</td>
+            <td>Karma Police</td>
+            <td>4:21</td>
+            <td><select class="preview-src-select"><option>YouTube (auto)</option><option>Bandcamp</option><option>None</option></select></td>
+            <td>
+              <div class="clip-cell">
+                <div class="clip-timeline-bar">
+                  <div class="clip-window" style="left:11%;width:12%;"></div>
+                </div>
+                <div class="clip-timestamps">0:30 → 1:00<a class="clip-edit-link">edit</a></div>
+              </div>
+            </td>
+            <td><div class="preview-play">▶ :30</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CLIP EDITOR — example for Airbag -->
+    <div class="clip-editor">
+      <div class="clip-editor-header">
+        <div class="clip-editor-title">Clip Editor — Airbag</div>
+        <div class="clip-editor-badge">30s clip · starts at 1:20</div>
+        <div style="flex:1"></div>
+        <button class="clip-editor-close">✕ Close</button>
+      </div>
+      <div class="clip-editor-body">
+        <div class="clip-editor-track-bar" id="clip-editor-bar"></div>
+        <div class="clip-editor-controls">
+          <div>
+            <div style="font-size:10px;color:#999;margin-bottom:4px">Start Time</div>
+            <input class="clip-start-input" type="text" value="1:20" />
+          </div>
+          <div>
+            <div style="font-size:10px;color:#999;margin-bottom:4px">End Time</div>
+            <div style="font-size:12px;color:#555;padding:6px 0">1:50 (auto)</div>
+          </div>
+          <div style="display:flex;align-items:flex-end;gap:8px;">
+            <button class="use-btn primary">▶ Preview Clip</button>
+            <button class="use-btn secondary">↻ AI Pick Best 30s</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-note">
+      <span>ℹ</span>
+      <div>Auto-linking runs when a release is imported from Discogs. Each track gets a 30-second preview clip. The system extracts the clip starting at the configured timestamp (default: 0:45 into the track). You can drag the clip window above to choose the best 30 seconds.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var bar = document.getElementById('clip-editor-bar');
+  if (!bar) return;
+  var hs = [40,60,75,50,65,80,45,70,85,55,70,40,60,80,55,70,90,50,65,75,45,80,60,50,70,85,55,65,80,45,70,60,90,55,70,80,50,65,75,45,80,60,55,70,85,50,65,80,45,70,75,55,80,60,85,65,50,70,80,55,70,90,45,65,80,55,70,85,50,65,80,55];
+  var clipStart = 0.28, clipEnd = 0.39;
+  hs.forEach(function(h, i) {
+    var pct = i / hs.length;
+    var inClip = pct >= clipStart && pct < clipEnd;
+    var b = document.createElement('div');
+    b.style.cssText = 'width:2px;flex-shrink:0;border-radius:1px 1px 0 0;background:' + (inClip ? '#0099ff' : '#2a2a2a') + ';height:' + h + '%';
+    bar.appendChild(b);
+  });
+  // Clip region overlay
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:absolute;top:0;left:28%;width:11%;height:100%;border:1px solid rgba(0,153,255,0.4);border-radius:2px;background:rgba(0,153,255,0.04);pointer-events:none;';
+  bar.appendChild(overlay);
+})();
+</script>

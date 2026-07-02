@@ -1,0 +1,457 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 15,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Taylor+Swift+The+Life+of+a+Showgirl&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?q=Taylor+Swift+The+Life+of+a+Showgirl&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Republic Records",
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "UMG Commercial Services",
+        "TASRM Publishing",
+        "Songs of Universal, Inc.",
+        "MXM Music",
+        "Kobalt Songs Music Publishing",
+        "Big Geoff Overseas Ltd.",
+        "Warner Chappell Music Ltd.",
+        "MXM Studios",
+        "Shellback Studios",
+        "MXM Productions",
+        "Taylor Swift Productions, Inc.",
+        "Shellback Studios",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "MixStar Studios",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "Sterling Sound Nashville",
+        "Conectiv, Guadalajara, Mexico",
+        "Conectiv, Guadalajara, Mexico"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Downtempo",
+        "Soft Rock",
+        "Dance-pop"
+      ],
+      "id": 35238409,
+      "barcode": [
+        "6 02478 22526 0",
+        "602478225260",
+        "BMI",
+        "STIM",
+        "GMR",
+        "00602478225260-A (4) (1296591) 01010222 RKS STERLING",
+        "00602478225260-B (4) RKS STERLING (1296592) 01010103",
+        "00602478225260-A (5) (1296591) 02020372 RKS STERLING",
+        "00602478225260-B (6) (1296592) 03010239 RKS STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3990556,
+      "master_url": "https://api.discogs.com/masters/3990556",
+      "uri": "/release/35238409-Taylor-Swift-The-Life-Of-A-Showgirl",
+      "catno": "00602478225260.2",
+      "title": "Taylor Swift - The Life Of A Showgirl",
+      "thumb": "https://i.discogs.com/BtJT6AYqAUBMstbFGzX1pbtqdyHYxs4K9J7QcHXOI5I/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjM4/NDA5LTE3NjkxMTE3/MTQtOTgyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/wsY72AxMzhZPRIG24U1sVAamgzNC9ID5oeIBXkuyBAw/rs:fit/g:sm/q:90/h:603/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjM4/NDA5LTE3NjkxMTE3/MTQtOTgyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35238409",
+      "community": {
+        "want": 1141,
+        "have": 28194
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Orange Translucent With Gold Glitter [Portofino Orange Glitter], Sweat And Vanilla Perfume Edition",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "UMG Commercial Services",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "TASRM Publishing",
+        "Songs of Universal, Inc.",
+        "MXM Music",
+        "Kobalt Songs Music Publishing",
+        "Big Geoff Overseas Ltd.",
+        "Warner Chappell Music Ltd.",
+        "MXM Studios",
+        "Shellback Studios",
+        "MXM Productions",
+        "Taylor Swift Productions, Inc.",
+        "MixStar Studios",
+        "Shellback Studios",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "Studio 112",
+        "Sterling Sound Nashville",
+        "Conectiv, Guadalajara, Mexico",
+        "Conectiv, Guadalajara, Mexico",
+        "Target"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Downtempo",
+        "Soft Rock",
+        "Dance-pop"
+      ],
+      "id": 35268739,
+      "barcode": [
+        "6 02478 22533 8",
+        "602478225338",
+        "BMI",
+        "STIM",
+        "GMR",
+        "00602478225260 - A (5) (1296591) 02020933 RKS STERLING",
+        "00602478225260 - B (4) (1296592) 01020232 RKS STERLING",
+        "00602478225260 - A (6) (1296591) 03020321 RKS STERLING",
+        "00602478225260 - B (5) RKS STERLING (1296592) 02020419"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3990556,
+      "master_url": "https://api.discogs.com/masters/3990556",
+      "uri": "/release/35268739-Taylor-Swift-The-Life-Of-A-Showgirl",
+      "catno": "00602478225338",
+      "title": "Taylor Swift - The Life Of A Showgirl",
+      "thumb": "https://i.discogs.com/s7MY8GRmIiGeICjMw1UB7huhVQ4AH5eLKxKiw48mEJ4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY4/NzM5LTE3NTk1MTI2/OTEtNjIxOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/SG6ZUnkAnhpOuLwNVmpu59qglPJwebQhBuAf5r3ifiA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY4/NzM5LTE3NTk1MTI2/OTEtNjIxOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35268739",
+      "community": {
+        "want": 731,
+        "have": 18071
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Opaque Pink And Pale Yellow Pearlescent With Gold Shimmer [Summertime Spritz Pink Shimmer], The Crowd Is Your King Edition",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "UMG Commercial Services",
+        "TASRM Publishing",
+        "Songs of Universal, Inc.",
+        "MXM Music",
+        "Kobalt Songs Music Publishing",
+        "Big Geoff Overseas Ltd.",
+        "Warner Chappell Music Ltd.",
+        "MXM Studios",
+        "Shellback Studios",
+        "MXM Productions",
+        "Taylor Swift Productions, Inc.",
+        "Shellback Studios",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "MixStar Studios",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "Sterling Sound Nashville",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Downtempo",
+        "Soft Rock",
+        "Dance-pop"
+      ],
+      "id": 35269855,
+      "barcode": [
+        "6 02478 22528 4",
+        "602478225284",
+        "BMI",
+        "STIM",
+        "GMR",
+        "00602478225260-A (1) BP38022-01 A1 RKS STERLING 7822526 ⋀X1",
+        "00602478225260-B (1) BP38022-01 B1 RKS STERLING 7822526 9=="
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3990556,
+      "master_url": "https://api.discogs.com/masters/3990556",
+      "uri": "/release/35269855-Taylor-Swift-The-Life-Of-A-Showgirl",
+      "catno": "00602478225284",
+      "title": "Taylor Swift - The Life Of A Showgirl",
+      "thumb": "https://i.discogs.com/rHpqDCap5ihgb2idX-DsZrVfJe8vazu_2ve5HueqK4Q/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY5/ODU1LTE3NTk4NTg0/NzYtODczNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ZOKBLtZBuBbByMjlCh_qW6TPeA3Dpesssz29Yomlk3M/rs:fit/g:sm/q:90/h:602/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY5/ODU1LTE3NTk4NTg0/NzYtODczNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35269855",
+      "community": {
+        "want": 975,
+        "have": 11555
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Violet With Black And Gold Marbling And Gold Glitter [Violet Shimmer Marbled], The Shiny Bug Edition",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "UMG Commercial Services",
+        "TASRM Publishing",
+        "Songs of Universal, Inc.",
+        "MXM Music",
+        "Kobalt Songs Music Publishing",
+        "Big Geoff Overseas Ltd.",
+        "Warner Chappell Music Ltd.",
+        "MXM Studios",
+        "Shellback Studios",
+        "MXM Productions",
+        "Taylor Swift Productions, Inc.",
+        "Shellback Studios",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "MixStar Studios",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "Sterling Sound Nashville",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Downtempo",
+        "Soft Rock",
+        "Dance-pop"
+      ],
+      "id": 35269831,
+      "barcode": [
+        "6 02478 22527 7",
+        "602478225277",
+        "BMI",
+        "STIM",
+        "GMR",
+        "00602478225260-A (1) BP38022-01 A1 RKS STERLING 7822526 1ꓕ|",
+        "00602478225260-B (1) BP38022-01 B1 RKS STERLING 7822526 |V2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3990556,
+      "master_url": "https://api.discogs.com/masters/3990556",
+      "uri": "/release/35269831-Taylor-Swift-The-Life-Of-A-Showgirl",
+      "catno": "00602478225277",
+      "title": "Taylor Swift - The Life Of A Showgirl",
+      "thumb": "https://i.discogs.com/aOhCSIPfxs11chHeV8ON9f6YePZ1XVPJVNCE-tQl2nE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY5/ODMxLTE3NTk4NTgz/NjctMTQxOS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/oFWLVyzAARPkWwOKHZ_ZRZ0wgTLRFCwnCOJey1-Aa7Y/rs:fit/g:sm/q:90/h:590/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY5/ODMxLTE3NTk4NTgz/NjctMTQxOS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35269831",
+      "community": {
+        "want": 981,
+        "have": 11643
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Green Translucent With Black Marbling [Wintergreen & Onyx Marbled], The Shiny Bug Edition",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "UMG Commercial Services",
+        "TASRM Publishing",
+        "Songs of Universal, Inc.",
+        "MXM Music",
+        "Kobalt Songs Music Publishing",
+        "Big Geoff Overseas Ltd.",
+        "Warner Chappell Music Ltd.",
+        "MXM Studios",
+        "Shellback Studios",
+        "MXM Productions",
+        "Taylor Swift Productions, Inc.",
+        "Shellback Studios",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "IMRSV Studios, Stockholm",
+        "Studio 112",
+        "MixStar Studios",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "Sterling Sound Nashville",
+        "Conectiv, Guadalajara, Mexico",
+        "Conectiv, Guadalajara, Mexico"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Downtempo",
+        "Soft Rock",
+        "Dance-pop"
+      ],
+      "id": 35269804,
+      "barcode": [
+        "6 02478 22531 4",
+        "602478225314",
+        "BMI",
+        "STIM",
+        "GMR",
+        "RKS STERLING 00602478225260-A (6) (1296591) 03020545",
+        "00602478225260-B (4) RKS STERLING (1296592) 01010529"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3990556,
+      "master_url": "https://api.discogs.com/masters/3990556",
+      "uri": "/release/35269804-Taylor-Swift-The-Life-Of-A-Showgirl",
+      "catno": "00602478225314",
+      "title": "Taylor Swift - The Life Of A Showgirl",
+      "thumb": "https://i.discogs.com/ls0mfvjVJwSRYQ8zqBVV-bHvtaap3nwP4ROemYAyM0U/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY5/ODA0LTE3NTk4NTg4/NDYtNjA3Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/zAHPdX572c3-_e_m-y_n0juc39T4j7-f7q_G__8Co8w/rs:fit/g:sm/q:90/h:601/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjY5/ODA0LTE3NTk4NTg4/NDYtNjA3Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35269804",
+      "community": {
+        "want": 955,
+        "have": 10621
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear With Red And Orange Splatter [Red Lipstick & Lace Transparent], The Tiny Bubbles In Champagne Edition",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

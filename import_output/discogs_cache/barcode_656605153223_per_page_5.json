@@ -1,0 +1,136 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Courtyard Studio",
+        "The Farm II",
+        "Chapel Studios",
+        "Subtle McNugget",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Shoegaze",
+        "Dream Pop"
+      ],
+      "id": 28131169,
+      "barcode": [
+        "6 56605 15322 3",
+        "656605153223",
+        "LC 29265",
+        "DOC232CD 6745-CD-5806 23-176-14-2",
+        "IFPI LY89",
+        "IFPI L817"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3220669,
+      "master_url": "https://api.discogs.com/masters/3220669",
+      "uri": "/release/28131169-Slowdive-Everything-Is-Alive",
+      "catno": "DOC232",
+      "title": "Slowdive - Everything Is Alive",
+      "thumb": "https://i.discogs.com/0pxiGdGX8qb3zpn2cSRMcdUD8lOyEuLgS5u57cF5c2w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTMx/MTY5LTE3NzQxMDA2/MDUtNjQzOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/TNz_EStBNpnRouHdbMAlkB-nKim7L5C4ayCvJHUggCk/rs:fit/g:sm/q:90/h:533/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MTMx/MTY5LTE3NzQxMDA2/MDUtNjQzOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28131169",
+      "community": {
+        "want": 260,
+        "have": 1492
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Courtyard Studio",
+        "The Farm II",
+        "Chapel Studios",
+        "Subtle McNugget",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Shoegaze",
+        "Dream Pop"
+      ],
+      "id": 30603574,
+      "barcode": [
+        "6 56605 15322 3",
+        "656605153223",
+        "LC 29265",
+        "DOC232CD 6745-CD-5806 23-176-14-2",
+        "IFPI LY89",
+        "IFPI L817",
+        "IFPI L823"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3220669,
+      "master_url": "https://api.discogs.com/masters/3220669",
+      "uri": "/release/30603574-Slowdive-Everything-Is-Alive",
+      "catno": "DOC232",
+      "title": "Slowdive - Everything Is Alive",
+      "thumb": "https://i.discogs.com/CdBqfi27Lz-fMrtN4aeb-3xIb_bgq0TQADJcYNTIffs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwNjAz/NTc0LTE3MTUwMDg5/NDgtNDEzOS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Lai9bdnWzWYBRl00J0ejMUsWBpf5LPhGmvqjez-iGmc/rs:fit/g:sm/q:90/h:527/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwNjAz/NTc0LTE3MTUwMDg5/NDgtNDEzOS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/30603574",
+      "community": {
+        "want": 81,
+        "have": 248
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

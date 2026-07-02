@@ -1,0 +1,65 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Cassette",
+        "Album"
+      ],
+      "label": [
+        "Run For Cover Records",
+        "Run For Cover Records",
+        "Studio 4 Recording",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Indie Rock",
+        "Alternative Rock"
+      ],
+      "id": 33587376,
+      "barcode": [
+        "810097919662"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 827602,
+      "master_url": "https://api.discogs.com/masters/827602",
+      "uri": "/release/33587376-Turnover-Peripheral-Vision",
+      "catno": "RFC122",
+      "title": "Turnover (3) - Peripheral Vision",
+      "thumb": "https://i.discogs.com/Z1p4GWlCVc80chcQwmA1r_WYB4dPKlQCnBLImjyDor8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNTg3/Mzc2LTE3NzA3Mzkw/NDMtNDYxOS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Thm5dyUJIUIDf4Ogj0bVzZ1vgYTCZQ9BEG1CgFGGa2A/rs:fit/g:sm/q:90/h:946/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNTg3/Mzc2LTE3NzA3Mzkw/NDMtNDYxOS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33587376",
+      "community": {
+        "want": 17,
+        "have": 24
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Green Tint",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

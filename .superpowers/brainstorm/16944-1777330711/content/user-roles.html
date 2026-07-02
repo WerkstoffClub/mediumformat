@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>User Roles & Permissions</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #090909;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    padding: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.04em;
+    margin-bottom: 4px;
+  }
+  .subtitle { font-size: 12px; color: #999; margin-bottom: 24px; }
+
+  /* Role cards */
+  .role-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 24px; }
+
+  .role-card {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    padding: 14px;
+    border-top-width: 4px;
+  }
+  .role-card.r-admin    { border-top-color: #0099ff; }
+  .role-card.r-manager  { border-top-color: #22c55e; }
+  .role-card.r-shop     { border-top-color: #e8a838; }
+  .role-card.r-wholesale{ border-top-color: #d44df0; }
+  .role-card.r-customer { border-top-color: #999; }
+
+  .role-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #1c1c1c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .role-avatar svg { width: 18px; height: 18px; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+  .ra-admin    svg { stroke: #0099ff; }
+  .ra-manager  svg { stroke: #22c55e; }
+  .ra-shop     svg { stroke: #e8a838; }
+  .ra-wholesale svg { stroke: #d44df0; }
+  .ra-customer svg { stroke: #999; }
+
+  .role-name { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .role-desc { font-size: 10px; color: #999; line-height: 1.5; }
+  .role-login {
+    font-size: 9px;
+    font-weight: 600;
+    margin-top: 8px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    display: inline-block;
+    background: #141414;
+    border: 1px solid #262626;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+
+  /* Matrix table */
+  .matrix-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 700px; }
+
+  .section-header td {
+    background: #090909;
+    padding: 8px 14px;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  thead th {
+    background: #090909;
+    padding: 10px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #999;
+    border-bottom: 1px solid #1a1a1a;
+    white-space: nowrap;
+    text-align: center;
+  }
+  thead th:first-child { text-align: left; width: 220px; }
+  thead th.h-admin    { color: #0099ff; }
+  thead th.h-manager  { color: #22c55e; }
+  thead th.h-shop     { color: #e8a838; }
+  thead th.h-wholesale{ color: #d44df0; }
+  thead th.h-customer { color: #999; }
+
+  tbody tr:hover td { background: #141414; }
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+  }
+  td:first-child { text-align: left; color: #fff; padding-left: 14px; }
+
+  /* Permission indicators */
+  .p-full  { color: #22c55e; font-size: 16px; font-weight: 900; }
+  .p-read  { color: #0099ff; font-size: 11px; font-weight: 700; }
+  .p-own   { color: #e8a838; font-size: 10px; font-weight: 700; }
+  .p-none  { color: #262626; font-size: 14px; }
+  .p-custom {
+    font-size: 9px;
+    color: #0099ff;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(0,153,255,0.1);
+    border: 1px solid rgba(0,153,255,0.3);
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    padding: 12px 14px;
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #999; }
+  .legend-sym { font-size: 13px; font-weight: 700; width: 20px; text-align: center; }
+</style>
+</head>
+<body>
+
+<h2>User Roles & Permissions</h2>
+<p class="subtitle">Five roles across two portals — Backoffice (staff) and Storefront (customers/wholesale).</p>
+
+<!-- Role Cards -->
+<div class="role-cards">
+  <div class="role-card r-admin">
+    <div class="role-avatar ra-admin">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="role-name">Admin</div>
+    <div class="role-desc">Full access to everything. Configures integrations, manages staff, and controls all settings.</div>
+    <div class="role-login">Backoffice</div>
+  </div>
+
+  <div class="role-card r-manager">
+    <div class="role-avatar ra-manager">
+      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+    </div>
+    <div class="role-name">Store Manager / Purchasing</div>
+    <div class="role-desc">Full operational access. Manages inventory, POs, orders, and shipping. Cannot change integrations or staff.</div>
+    <div class="role-login">Backoffice</div>
+  </div>
+
+  <div class="role-card r-shop">
+    <div class="role-avatar ra-shop">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    </div>
+    <div class="role-name">Shopkeeper</div>
+    <div class="role-desc">Processes walk-in POS sales, scans barcodes, views inventory. Cannot edit catalog or access finance.</div>
+    <div class="role-login">Backoffice (limited)</div>
+  </div>
+
+  <div class="role-card r-wholesale">
+    <div class="role-avatar ra-wholesale">
+      <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+    </div>
+    <div class="role-name">Wholesaler</div>
+    <div class="role-desc">Approved B2B buyer. Sees wholesale catalogue with tiered pricing. Places and tracks their own orders.</div>
+    <div class="role-login">Wholesale Portal</div>
+  </div>
+
+  <div class="role-card r-customer">
+    <div class="role-avatar ra-customer">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="role-name">Customer</div>
+    <div class="role-desc">Standard retail buyer. Browses storefront, places orders, tracks deliveries, manages wishlist.</div>
+    <div class="role-login">Storefront</div>
+  </div>
+</div>
+
+<!-- Matrix -->
+<div class="matrix-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Module / Action</th>
+        <th class="h-admin">Admin</th>
+        <th class="h-manager">Manager / Purchasing</th>
+        <th class="h-shop">Shopkeeper</th>
+        <th class="h-wholesale">Wholesaler</th>
+        <th class="h-customer">Customer</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Dashboard -->
+      <tr class="section-header"><td colspan="6">Dashboard & Analytics</td></tr>
+      <tr><td>Dashboard — full view</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-read">Read</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Revenue & sales reports</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Export CSV / reports</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+
+      <!-- Inventory -->
+      <tr class="section-header"><td colspan="6">Inventory</td></tr>
+      <tr><td>View catalog</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-custom">Wholesale cat.</td><td class="p-none">—</td></tr>
+      <tr><td>Add / edit releases</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Barcode generate & print</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Scan barcode (POS / phone)</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Set item location (rack/shelf)</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-read">View only</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Track preview — manage</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+
+      <!-- Purchase Orders -->
+      <tr class="section-header"><td colspan="6">Purchase Orders</td></tr>
+      <tr><td>Create / edit POs</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>View all POs</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Payment tracking & finance view</td><td class="p-full">●</td><td class="p-read">Read only</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Shipment consolidation & packing list</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Email shipper / export PDF</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+
+      <!-- Orders -->
+      <tr class="section-header"><td colspan="6">Orders</td></tr>
+      <tr><td>View all orders (all channels)</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Process POS walk-in order</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Issue refund / credit note</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>View own orders</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-own">Own only</td><td class="p-own">Own only</td></tr>
+
+      <!-- Customers -->
+      <tr class="section-header"><td colspan="6">Customers</td></tr>
+      <tr><td>View all customers</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Manage wholesale accounts</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Manage own profile</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td></tr>
+
+      <!-- Vouchers & Marketing -->
+      <tr class="section-header"><td colspan="6">Vouchers & Marketing</td></tr>
+      <tr><td>Create / edit vouchers</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Apply voucher at checkout</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-full">●</td></tr>
+      <tr><td>Newsletter — create & send</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+
+      <!-- Channels & Config -->
+      <tr class="section-header"><td colspan="6">Channels, Payments & Config</td></tr>
+      <tr><td>Connect / configure channels</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Marketplace price rules</td><td class="p-full">●</td><td class="p-read">View only</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Configure payments (Xendit/Stripe)</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Configure shipping zones</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Eshop editor / theme</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Manage staff accounts</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Preferences / API keys</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+
+      <!-- Wholesale -->
+      <tr class="section-header"><td colspan="6">Wholesale</td></tr>
+      <tr><td>View & manage wholesale catalogue</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-own">Browse only</td><td class="p-none">—</td></tr>
+      <tr><td>Set wholesale price tiers</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-none">—</td><td class="p-none">—</td></tr>
+      <tr><td>Place wholesale order</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-full">●</td><td class="p-none">—</td></tr>
+      <tr><td>Generate wholesale invoice PDF</td><td class="p-full">●</td><td class="p-full">●</td><td class="p-none">—</td><td class="p-own">Own orders</td><td class="p-none">—</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><span class="legend-sym p-full">●</span> Full access</div>
+  <div class="legend-item"><span class="legend-sym p-read" style="font-size:11px;">R</span> Read only</div>
+  <div class="legend-item"><span class="legend-sym p-own" style="font-size:10px;">O</span> Own records only</div>
+  <div class="legend-item"><span class="p-custom" style="font-size:9px;">★</span>&nbsp; Scoped access (custom subset)</div>
+  <div class="legend-item"><span class="legend-sym p-none">—</span> No access</div>
+</div>
+
+</body>
+</html>

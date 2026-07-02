@@ -1,0 +1,270 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Club Edition",
+        "Deluxe Edition",
+        "Limited Edition",
+        "Numbered"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Vinyl Me, Please. Exclusive Pressing",
+        "Vinyl Me, Please",
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 14538846,
+      "barcode": [
+        "656605351346",
+        "0656605235011"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1594486,
+      "master_url": "https://api.discogs.com/masters/1594486",
+      "uri": "/release/14538846-Bon-Iver-ii",
+      "catno": "JAG350",
+      "title": "Bon Iver - i,i",
+      "thumb": "https://i.discogs.com/2ETkcHLneucusws812iF23Fq4s46evxkrC7podwL6wc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTM4/ODQ2LTE1NzY2MTQ2/NDgtODk5NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/0tZDkMtpZNXopmuGjsOx4Gu15O088FEMPAqwJPq3yMk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTM4/ODQ2LTE1NzY2MTQ2/NDgtODk5NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14538846",
+      "community": {
+        "want": 548,
+        "have": 1836
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Green",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Club Edition",
+            "Deluxe Edition",
+            "Limited Edition",
+            "Numbered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Bon Iver",
+        "April Base Publishing",
+        "April Base Publishing",
+        "Kobalt Songs Music Publishing",
+        "Eight Of Swords",
+        "Sony ATV",
+        "Penumbral Music",
+        "Modern Works Music Publishing",
+        "Bradleytime",
+        "Songish",
+        "Brought To You By Heavy Duty",
+        "Heavy Duty Music Publishing",
+        "Velvet Negroni Music",
+        "4AD Songs",
+        "Beggars Music Ltd",
+        "This Is Poliça",
+        "Wheezyhitmaker",
+        "Ultra Empire Music",
+        "Infinite Vibration Technology",
+        "Guitarheels Music",
+        "Big Deal Music Group",
+        "The Sound Of Trying",
+        "Ribbon Music",
+        "Heptablooptipuss",
+        "Zappo Music",
+        "Juwan Productions Inc.",
+        "Sevendollars",
+        "Noah Goldstein Music",
+        "Concord Sounds",
+        "BMG Rights Management (UK) Limited",
+        "Good Years Music",
+        "BMG (UK) Ltd.",
+        "Chevelon Publishing",
+        "Broderism Music",
+        "2 Packs Of Camel Wides",
+        "Gary Nicholson Music",
+        "Universal Music Corp.",
+        "Howdy Skies Music",
+        "BMG Rights Management",
+        "April Base",
+        "Sonic Ranch Studios",
+        "Sterling Sound",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 14041411,
+      "barcode": [
+        "656605235011",
+        "6 56605 23501 1",
+        "JAG350LP ARE YOU RECORDING TREVOR - YES 192206E1/A",
+        "JAG350LP 'MONEY CANT BUY LIFE' 192206E2/A",
+        "ASCAP",
+        "BMI"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1594486,
+      "master_url": "https://api.discogs.com/masters/1594486",
+      "uri": "/release/14041411-Bon-Iver-ii",
+      "catno": "JAG350",
+      "title": "Bon Iver - i,i",
+      "thumb": "https://i.discogs.com/lJzlPjTja5jClmTUZwZB1yJvFXnk2hWDgEheRD2z6pM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MDQx/NDExLTE1ODEyNjQw/NjctNjQ1Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/xwdcfTV5x4IFSZBYACDzZ0ZzibbcEdEnwLuVMEkJSlI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MDQx/NDExLTE1ODEyNjQw/NjctNjQ1Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14041411",
+      "community": {
+        "want": 1362,
+        "have": 11639
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "Bon Iver",
+        "Jagjaguwar",
+        "April Base Publishing",
+        "Bon Iver",
+        "Jagjaguwar",
+        "2 Packs Of Camel Wides",
+        "4AD Songs Limited",
+        "Beggars Music Ltd",
+        "BMG Rights Management (UK) Limited",
+        "Bradleytime",
+        "Broderism Music",
+        "Brought To You By Heavy Duty",
+        "Chevelon Publishing",
+        "Eight Of Swords",
+        "Gary Nicholson Music",
+        "Good Years Music",
+        "Guitarheels Music",
+        "Heavy Duty Music Publishing",
+        "Heptablooptipuss",
+        "Howdy Skies Music",
+        "Infinite Vibration Technology",
+        "Juwan Productions Inc.",
+        "Noah Goldstein Music",
+        "Penumbral Music",
+        "Sevendollars",
+        "Songish",
+        "Sony / ATV",
+        "The Sound Of Trying",
+        "This Is Poliça",
+        "Ultra Empire Music",
+        "Universal Music Corp.",
+        "Velvet Negroni Music",
+        "Wheezyhitmaker",
+        "Zappo Music",
+        "April Base",
+        "Sonic Ranch Studios",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 15857861,
+      "barcode": [
+        "656605235011",
+        "6 56605 23501 1",
+        "JAG350LP-A Are You Recording Trevor - Yes Chris Muth ♡",
+        "JAG350LP-B 'Money can't buy Life' CM in NYC",
+        "ASCAP",
+        "BMI"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1594486,
+      "master_url": "https://api.discogs.com/masters/1594486",
+      "uri": "/release/15857861-Bon-Iver-ii",
+      "catno": "JAG350",
+      "title": "Bon Iver - i,i",
+      "thumb": "https://i.discogs.com/bGsQfZJhH_la1qEP8nhUz3RCX0hBaBWCotmOzQN7x-c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1ODU3/ODYxLTE1OTkwNzg1/MTktMTg2NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/n9Y21Lc72AVqG_F--vGcyy6BTt9OHQjT5PUEqC9XsJ0/rs:fit/g:sm/q:90/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1ODU3/ODYxLTE1OTkwNzg1/MTktMTg2NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15857861",
+      "community": {
+        "want": 389,
+        "have": 2364
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

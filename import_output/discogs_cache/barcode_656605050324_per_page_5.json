@@ -1,0 +1,121 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Japan",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Secretly Canadian",
+        "Secretly Canadian"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Dream Pop",
+        "Jangle Pop",
+        "Shoegaze",
+        "Indie Pop"
+      ],
+      "id": 35838313,
+      "barcode": [
+        "656605050324",
+        "4526180738671"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4029502,
+      "master_url": "https://api.discogs.com/masters/4029502",
+      "uri": "/release/35838313-Hatchie-Liquorice",
+      "catno": "SC503JCD",
+      "title": "Hatchie - Liquorice",
+      "thumb": "https://i.discogs.com/zlL-TtSZNzLiWk8-Bh28u8UmM6Y3tuLAoHoUzkxd_rg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODM4/MzEzLTE3NjQ4NDky/NTEtMTc4MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/XEvp3SrRsdU1nf1Pwbt_WV10uLcZcvK7WYAEp7PKm7M/rs:fit/g:sm/q:90/h:567/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODM4/MzEzLTE3NjQ4NDky/NTEtMTc4MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35838313",
+      "community": {
+        "want": 1,
+        "have": 3
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Secretly Canadian",
+        "Secretly Canadian"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Dream Pop",
+        "Jangle Pop",
+        "Shoegaze",
+        "Indie Pop"
+      ],
+      "id": 35606713,
+      "barcode": [
+        "656605050324",
+        "SC503CD  6745-CD-7348  25-210-11-2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4029502,
+      "master_url": "https://api.discogs.com/masters/4029502",
+      "uri": "/release/35606713-Hatchie-Liquorice",
+      "catno": "SC503",
+      "title": "Hatchie - Liquorice",
+      "thumb": "https://i.discogs.com/BvnQati9Xw7vDP3DbTk_vPlF8uefuIN4AxC61eaUGc0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjA2/NzEzLTE3NjI2MzQw/OTktODc1Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/From-Jysgadw9caPUSqIJ2KixojF7_R9eDtFROaiCtE/rs:fit/g:sm/q:90/h:531/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjA2/NzEzLTE3NjI2MzQw/OTktODc1Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35606713",
+      "community": {
+        "want": 15,
+        "have": 58
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

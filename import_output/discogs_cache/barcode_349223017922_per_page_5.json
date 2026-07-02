@@ -1,0 +1,59 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Big Crown Records",
+        "Studio Pelikan"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul"
+      ],
+      "style": [],
+      "id": 31440071,
+      "barcode": [
+        "349223017922",
+        "3 49223 01792 2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3558535,
+      "master_url": "https://api.discogs.com/masters/3558535",
+      "uri": "/release/31440071-Thee-Marloes-Perak",
+      "catno": "BC179-CD",
+      "title": "Thee Marloes - Perak",
+      "thumb": "https://i.discogs.com/yrQ006d9GPPMtX9vOsn8pYLLacpFQq-EFnKQv_CFLgM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNDQw/MDcxLTE3MjMyMTY3/NTgtNjg5Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/WY0qeMwAXh881KEyBteyDQgwjN4XoG5mtDO64QvzdLI/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNDQw/MDcxLTE3MjMyMTY3/NTgtNjg5Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31440071",
+      "community": {
+        "want": 16,
+        "have": 34
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# Medium Format API — built on the VPS from the synced workspace subset
+# (package.json, pnpm-lock.yaml, pnpm-workspace.yaml, packages/shared, apps/api).
+# Single-stage on purpose: the runtime needs the prisma CLI for `migrate deploy`
+# and ts-node for the seed; image size is a fair trade for operational simplicity.
+# Debian slim (not alpine): Prisma's engines need glibc + OpenSSL
+FROM node:20-slim
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openssl ca-certificates wget \
+ && rm -rf /var/lib/apt/lists/* \
+ && corepack enable && corepack prepare pnpm@9.0.0 --activate
+WORKDIR /repo
+
+# Dependency manifests first so Docker layer-caches the install
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages/shared/package.json packages/shared/
+COPY apps/api/package.json apps/api/
+RUN pnpm install --frozen-lockfile --filter @mf/api...
+
+COPY packages/shared packages/shared
+COPY apps/api apps/api
+RUN pnpm --filter @mf/shared build \
+ && cd apps/api \
+ && npx prisma generate \
+ && pnpm build
+
+WORKDIR /repo/apps/api
+EXPOSE 3001
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]

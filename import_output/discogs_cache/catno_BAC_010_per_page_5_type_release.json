@@ -1,0 +1,291 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 22,
+    "per_page": 5,
+    "items": 110,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?catno=BAC+010&type=release&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=22",
+      "next": "https://api.discogs.com/database/search?catno=BAC+010&type=release&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Russia",
+      "year": "2023",
+      "format": [
+        "File",
+        "MP3",
+        "Mini-Album",
+        "Reissue",
+        "Stereo"
+      ],
+      "label": [
+        "KBAC Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Non-Music"
+      ],
+      "style": [
+        "Comedy",
+        "Noise",
+        "Goregrind"
+      ],
+      "id": 27535338,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/27535338-%D0%9A%D1%80%D0%BE%D0%B2%D0%B0%D0%B2%D1%8B%D0%B5-%D0%9E%D1%88%D0%BC%D1%91%D1%82%D0%BA%D0%B8-%D0%9F%D0%BB%D0%BE%D1%82%D0%B8-%D0%A0%D0%B0%D1%814%D0%BB%D0%B5%D0%BD%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F-%D0%90%D1%80%D0%BC%D0%BE%D1%82%D1%83%D1%80%D0%B0-%D0%A7%D1%91%D1%80%D0%BD%D0%B0%D1%8F-%D0%9A",
+      "catno": "KBAC-010",
+      "title": "Кровавые Ошмётки Плоти, Рас4лененная Армотура - Чёрная Кровь Изо Рта Мёртвого Лыткина",
+      "thumb": "https://i.discogs.com/kgixfEdOBDSdKXqTAJU3YzZXpvBZKXsF1KOVbnsEdt8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTM1/MzM4LTE2ODgxMTY2/OTUtNDYzNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Sf05GDDUCVjcALjEWffqbEI91zIVg8SrwcyAd_z_ieE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTM1/MzM4LTE2ODgxMTY2/OTUtNDYzNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27535338",
+      "community": {
+        "want": 0,
+        "have": 0
+      },
+      "format_quantity": 0,
+      "formats": [
+        {
+          "name": "File",
+          "qty": "8",
+          "text": "320 kbps",
+          "descriptions": [
+            "MP3",
+            "Mini-Album",
+            "Reissue",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Single",
+        "DVD",
+        "DVD-Video",
+        "NTSC",
+        "Single",
+        "All Media",
+        "Limited Edition"
+      ],
+      "label": [
+        "Fabtone Inc.",
+        "Fabtone Inc.",
+        "Fabtone Inc.",
+        "Tsutaya O-East"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "J-pop"
+      ],
+      "id": 26990538,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/26990538-%E3%82%A2%E3%83%BC%E3%83%90%E3%83%B3%E3%82%AE%E3%83%A3%E3%83%AB%E3%83%89-%E3%81%82%E3%81%8F%E3%81%BE%E3%81%A7%E6%82%AA%E9%AD%94",
+      "catno": "FBAC-010",
+      "title": "アーバンギャルド - あくまで悪魔",
+      "thumb": "https://i.discogs.com/812D5TFkVhMiPbdhBRjMiavExLzy6ImLVQi1_8-0GHI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2OTkw/NTM4LTE2ODMzNTk3/MzQtNDE2NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/hQ2Ilnor8gJWUkzI5Uc7u6cjpfEQSsrrK70qT1mc-JY/rs:fit/g:sm/q:90/h:526/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2OTkw/NTM4LTE2ODMzNTk3/MzQtNDE2NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/26990538",
+      "community": {
+        "want": 2,
+        "have": 1
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Single"
+          ]
+        },
+        {
+          "name": "DVD",
+          "qty": "1",
+          "descriptions": [
+            "DVD-Video",
+            "NTSC",
+            "Single"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Switzerland",
+      "year": "2022",
+      "format": [
+        "File",
+        "WAV",
+        "EP"
+      ],
+      "label": [
+        "Blizzard Audio Club"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Breakbeat"
+      ],
+      "id": 24357749,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/24357749-Etienne-Machine-Over-Out",
+      "catno": "BAC010",
+      "title": "Etienne Machine - Over & Out",
+      "thumb": "https://i.discogs.com/sPd4vO32sM0A9xAt_WcuW-3x23zlB_x-k-E3gZPbpAY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0MzU3/NzQ5LTE2NjE4NDgx/MDktMzUyMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/1OAZQmJWJhs_m93qWo8Zna3YsoGfi4HjmU6gf-Tl49U/rs:fit/g:sm/q:90/h:452/w:452/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0MzU3/NzQ5LTE2NjE4NDgx/MDktMzUyMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/24357749",
+      "community": {
+        "want": 0,
+        "have": 0
+      },
+      "format_quantity": 0,
+      "formats": [
+        {
+          "name": "File",
+          "qty": "4",
+          "descriptions": [
+            "WAV",
+            "EP"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "12\""
+      ],
+      "label": [
+        "Bacalao"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "African",
+        "Disco"
+      ],
+      "id": 27798057,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/27798057-Bosq-Kaleta-Meji-Meji-Sonayon",
+      "catno": "BAC010",
+      "title": "Bosq & Kaleta - Meji Meji / Sonayon",
+      "thumb": "https://i.discogs.com/Vt7xC9Qp-gxai9CtqaqFmxaYq781qrkBWqGqqvxzD2w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3Nzk4/MDU3LTE2OTA3MjI2/NTQtNTg1NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/R5aXpcdCDUexv8Z_HiGpFZFtMpwdg_Fi901SDuZP8mU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3Nzk4/MDU3LTE2OTA3MjI2/NTQtNTg1NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27798057",
+      "community": {
+        "want": 62,
+        "have": 110
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "12\""
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2018",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Wasabi Records",
+        "Air Mail Recordings",
+        "BMG Rights Management (UK) Limited"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Pop Rock",
+        "Glam"
+      ],
+      "id": 12857455,
+      "barcode": [
+        "4571136377510"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 196953,
+      "master_url": "https://api.discogs.com/masters/196953",
+      "uri": "/release/12857455-Spiders-From-Mars-Spiders-From-Mars",
+      "catno": "WSBAC-0103",
+      "title": "Spiders From Mars - Spiders From Mars",
+      "thumb": "https://i.discogs.com/Itqn4bbIB8P1N25go57jKzBKsMGkW5exDdCromMSoyw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyODU3/NDU1LTE1NDMyODQ0/MjItMzc2NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/GiHarKyslK1Sd1dEh6syONotvU3fbYUuBNLAi_k36N4/rs:fit/g:sm/q:90/h:500/w:500/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyODU3/NDU1LTE1NDMyODQ0/MjItMzc2NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/12857455",
+      "community": {
+        "want": 9,
+        "have": 5
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Blu-spec",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

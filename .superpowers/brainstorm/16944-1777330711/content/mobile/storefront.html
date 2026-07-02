@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Medium Format — Storefront (Mobile)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #050505;
+    font-family: Inter, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  /* ── DEVICE FRAME ── */
+  .device-frame {
+    width: 390px;
+    min-height: 100vh;
+    background: #090909;
+    color: #fff;
+    position: relative;
+    overflow-x: hidden;
+    padding-bottom: 60px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: 52px;
+    background: #090909;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: -0.04em;
+    color: #fff;
+  }
+  .logo span { color: #0099ff; }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .icon-btn svg { stroke: #999; }
+  .cart-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 36px;
+    padding: 0 14px;
+    background: #fff;
+    border-radius: 100px;
+    border: none;
+    font-size: 11px;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* ── FILTER CHIPS ── */
+  .filter-chips-wrap {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 16px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .filter-chips-wrap::-webkit-scrollbar { display: none; }
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+  }
+  .chip {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 100px;
+    background: #141414;
+    border: 1px solid #262626;
+    color: #999;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    font-family: inherit;
+    transition: background 0.12s, color 0.12s;
+  }
+  .chip.active {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+  }
+
+  /* ── GRID TOOLBAR ── */
+  .grid-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px 6px;
+  }
+  .grid-count {
+    color: #555;
+    font-size: 11px;
+  }
+  .sort-select {
+    background: #141414;
+    border: 1px solid #262626;
+    color: #999;
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 11px;
+    font-family: inherit;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  /* ── RELEASE GRID ── */
+  .release-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 16px 16px;
+  }
+
+  /* ── RELEASE CARD ── */
+  .release-card {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .release-card.playing {
+    border-color: rgba(0,153,255,0.35);
+    box-shadow: 0 0 0 1px rgba(0,153,255,0.2), 0 6px 24px rgba(0,153,255,0.12);
+  }
+
+  /* COVER */
+  .cover-wrap {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  .cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+  .cover-grad-1 { background: linear-gradient(135deg, #1a0a3a 0%, #0a0a2e 100%); }
+  .cover-grad-2 { background: linear-gradient(135deg, #2a0a1e 0%, #0a0a1a 100%); }
+  .cover-grad-3 { background: linear-gradient(135deg, #1a1a0a 0%, #0a0f0a 100%); }
+  .cover-grad-4 { background: linear-gradient(135deg, #0a1a2a 0%, #0a0a1a 100%); }
+  .cover-grad-5 { background: linear-gradient(135deg, #1a0a0a 0%, #0f0a0a 100%); }
+  .cover-grad-6 { background: linear-gradient(135deg, #0a1a1a 0%, #0a0f14 100%); }
+
+  /* PREVIEW BADGE */
+  .preview-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    font-size: 7px;
+    padding: 2px 5px;
+    border-radius: 100px;
+    background: rgba(0,0,0,0.75);
+    color: #0099ff;
+    border: 1px solid rgba(0,153,255,0.2);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    z-index: 2;
+  }
+  .preview-badge.sold-out {
+    color: #444;
+    border-color: transparent;
+  }
+
+  /* PLAY OVERLAY */
+  .play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0);
+    transition: background 0.15s;
+  }
+  .release-card:active .play-overlay { background: rgba(0,0,0,0.45); }
+  .play-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #0099ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.15s;
+    font-size: 12px;
+    color: #fff;
+    box-shadow: 0 2px 14px rgba(0,153,255,0.5);
+  }
+  .release-card.playing .play-circle { opacity: 1; }
+
+  /* WAVEFORM STRIP */
+  .waveform-area {
+    padding: 6px 8px 2px;
+    background: #141414;
+  }
+  .waveform {
+    height: 18px;
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+  }
+  .waveform-bar {
+    flex-shrink: 0;
+    width: 2.5px;
+    border-radius: 1px 1px 0 0;
+    background: #2a2a2a;
+  }
+  .waveform-bar.played { background: #0099ff; }
+  .waveform-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2px;
+  }
+  .clip-badge {
+    font-size: 8px;
+    color: #0099ff;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* CARD BODY */
+  .card-body { padding: 8px 10px; }
+  .card-artist {
+    color: #999;
+    font-size: 9px;
+    margin-bottom: 2px;
+  }
+  .card-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 11px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.02em;
+  }
+  .card-title.dimmed { color: #555; }
+  .card-meta {
+    color: #555;
+    font-size: 9px;
+    margin-bottom: 7px;
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-price {
+    font-weight: 800;
+    font-size: 12px;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .card-price.dimmed { color: #555; }
+
+  .add-cart-btn {
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    min-height: 24px;
+  }
+  .notify-btn {
+    background: #141414;
+    color: #999;
+    border: 1px solid #262626;
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    min-height: 24px;
+  }
+
+  /* ── NOW PLAYING BAR ── */
+  .now-playing {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 390px;
+    height: 60px;
+    background: #090909;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+    z-index: 100;
+  }
+  .np-cover {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #1a0a3a, #0a0a2e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    border: 1px solid #262626;
+  }
+  .np-info {
+    min-width: 0;
+    flex: 1;
+  }
+  .np-track-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .np-track {
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+  .np-clip-badge {
+    font-size: 8px;
+    padding: 1px 5px;
+    border-radius: 100px;
+    background: rgba(0,153,255,0.08);
+    color: #0099ff;
+    border: 1px solid rgba(0,153,255,0.2);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .np-release {
+    color: #555;
+    font-size: 9px;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .np-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .np-skip {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px;
+    min-width: 30px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .np-play {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+  .np-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+    gap: 3px;
+  }
+  .np-mini-waveform {
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+    width: 52px;
+    height: 18px;
+  }
+  .np-wave-bar {
+    width: 2px;
+    border-radius: 1px 1px 0 0;
+    flex-shrink: 0;
+  }
+  .np-time {
+    font-size: 9px;
+    color: #555;
+    white-space: nowrap;
+  }
+  .np-time strong {
+    color: #fff;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="device-frame">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Medium<span>Format</span></div>
+    <div class="header-right">
+      <div class="icon-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="7" cy="7" r="4.5"/>
+          <line x1="10.5" y1="10.5" x2="14" y2="14"/>
+        </svg>
+      </div>
+      <button class="cart-pill">🛒 2</button>
+    </div>
+  </header>
+
+  <!-- FILTER CHIPS -->
+  <div class="filter-chips-wrap">
+    <div class="filter-chips">
+      <button class="chip active">New In</button>
+      <button class="chip">Electronic</button>
+      <button class="chip">Rock</button>
+      <button class="chip">LP</button>
+      <button class="chip">CD</button>
+      <button class="chip">Has Preview</button>
+    </div>
+  </div>
+
+  <!-- GRID TOOLBAR -->
+  <div class="grid-toolbar">
+    <span class="grid-count">1,240 releases</span>
+    <select class="sort-select">
+      <option>Newest First</option>
+      <option>Price: Low → High</option>
+      <option>Price: High → Low</option>
+      <option>Artist A–Z</option>
+    </select>
+  </div>
+
+  <!-- RELEASE GRID -->
+  <div class="release-grid">
+
+    <!-- Card 1: PLAYING — OK Computer -->
+    <div class="release-card playing">
+      <div class="cover-wrap">
+        <div class="cover-placeholder cover-grad-1">🎵</div>
+        <div class="preview-badge">♪ PREVIEW</div>
+        <div class="play-overlay">
+          <div class="play-circle">■</div>
+        </div>
+      </div>
+      <div class="waveform-area">
+        <div class="waveform" id="card-waveform"></div>
+        <div class="waveform-footer">
+          <span class="clip-badge">:30 CLIP</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-artist">Radiohead</div>
+        <div class="card-title">OK Computer</div>
+        <div class="card-meta">1997 · LP · M</div>
+        <div class="card-footer">
+          <div class="card-price">Rp 850K</div>
+          <button class="add-cart-btn">+ Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Mezzanine -->
+    <div class="release-card">
+      <div class="cover-wrap">
+        <div class="cover-placeholder cover-grad-2">🎵</div>
+        <div class="preview-badge">♪ PREVIEW</div>
+        <div class="play-overlay"><div class="play-circle">▶</div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-artist">Massive Attack</div>
+        <div class="card-title">Mezzanine</div>
+        <div class="card-meta">1998 · LP · VG+</div>
+        <div class="card-footer">
+          <div class="card-price">Rp 620K</div>
+          <button class="add-cart-btn">+ Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Dummy -->
+    <div class="release-card">
+      <div class="cover-wrap">
+        <div class="cover-placeholder cover-grad-3">🎵</div>
+        <div class="preview-badge">♪ PREVIEW</div>
+        <div class="play-overlay"><div class="play-circle">▶</div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-artist">Portishead</div>
+        <div class="card-title">Dummy</div>
+        <div class="card-meta">1994 · LP · M</div>
+        <div class="card-footer">
+          <div class="card-price">Rp 780K</div>
+          <button class="add-cart-btn">+ Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 — Selected Ambient Works Vol. II -->
+    <div class="release-card">
+      <div class="cover-wrap">
+        <div class="cover-placeholder cover-grad-4">🎵</div>
+        <div class="preview-badge">♪ PREVIEW</div>
+        <div class="play-overlay"><div class="play-circle">▶</div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-artist">Aphex Twin</div>
+        <div class="card-title">Selected Ambient Works Vol. II</div>
+        <div class="card-meta">1994 · 2xLP · M</div>
+        <div class="card-footer">
+          <div class="card-price">Rp 1.25M</div>
+          <button class="add-cart-btn">+ Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 — Sold Out: Untrue -->
+    <div class="release-card">
+      <div class="cover-wrap">
+        <div class="cover-placeholder cover-grad-5" style="opacity:0.4">🎵</div>
+        <div class="preview-badge sold-out">♪ PREVIEW</div>
+        <div class="play-overlay"><div class="play-circle">▶</div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-artist" style="color:#555">Burial</div>
+        <div class="card-title dimmed">Untrue</div>
+        <div class="card-meta">2007 · LP · M</div>
+        <div class="card-footer">
+          <div class="card-price dimmed">Sold Out</div>
+          <button class="notify-btn">Notify Me</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 — Music Has the Right to Children -->
+    <div class="release-card">
+      <div class="cover-wrap">
+        <div class="cover-placeholder cover-grad-6">🎵</div>
+        <div class="preview-badge">♪ PREVIEW</div>
+        <div class="play-overlay"><div class="play-circle">▶</div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-artist">Boards of Canada</div>
+        <div class="card-title">Music Has the Right to Children</div>
+        <div class="card-meta">1998 · LP · VG+</div>
+        <div class="card-footer">
+          <div class="card-price">Rp 920K</div>
+          <button class="add-cart-btn">+ Cart</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NOW PLAYING BAR -->
+<div class="now-playing">
+  <div class="np-cover">🎵</div>
+  <div class="np-info">
+    <div class="np-track-row">
+      <span class="np-track">Airbag</span>
+      <span class="np-clip-badge">30s</span>
+    </div>
+    <div class="np-release">Radiohead — OK Computer</div>
+  </div>
+  <div class="np-controls">
+    <button class="np-skip">⏮</button>
+    <button class="np-play">■</button>
+    <button class="np-skip">⏭</button>
+  </div>
+  <div class="np-right">
+    <div class="np-mini-waveform" id="np-waveform"></div>
+    <div class="np-time"><strong>0:14</strong> / 0:30</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var heights = [55,70,85,45,65,90,55,80,60,75,50,85,70,55,90,65,80,45,75,60,85,55,70,90,50,65,80,45,75,60];
+
+  // Card waveform — 30 bars, 12 played
+  var cardWf = document.getElementById('card-waveform');
+  if (cardWf) {
+    heights.forEach(function (h, i) {
+      var b = document.createElement('div');
+      b.className = 'waveform-bar' + (i < 12 ? ' played' : '');
+      b.style.height = h + '%';
+      cardWf.appendChild(b);
+    });
+  }
+
+  // Now-playing mini waveform — 20 bars, 9 played (~14s of 30s)
+  var npWf = document.getElementById('np-waveform');
+  if (npWf) {
+    heights.slice(0, 20).forEach(function (h, i) {
+      var b = document.createElement('div');
+      b.className = 'np-wave-bar';
+      b.style.height = h + '%';
+      b.style.background = i < 9 ? '#0099ff' : '#2a2a2a';
+      npWf.appendChild(b);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 6,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Alex+Turner+Submarine+%286-Track%29&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?q=Alex+Turner+Submarine+%286-Track%29&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "2011",
+      "format": [
+        "CD",
+        "EP"
+      ],
+      "label": [
+        "Domino",
+        "Domino Recording Co. Ltd.",
+        "Domino Recording Co. Ltd.",
+        "EMI Music Publishing Ltd.",
+        "One Inch Studios",
+        "Air Studios",
+        "The Premises Studio (London)",
+        "Sound Performance",
+        "Sound Performance"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Soundtrack",
+        "Indie Rock"
+      ],
+      "id": 2776960,
+      "barcode": [
+        "5 034202 139829",
+        "5034202139829",
+        "LC10192",
+        "SOUND PERFORMANCE 020 8691 2121 RUG398CD",
+        "IFPI LP76",
+        "IFPI 5H 42"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 320427,
+      "master_url": "https://api.discogs.com/masters/320427",
+      "uri": "/release/2776960-Alex-Turner-Submarine",
+      "catno": "RUG398CD",
+      "title": "Alex Turner - Submarine",
+      "thumb": "https://i.discogs.com/qEBlnOtCVQ76VQkZ5Jm3VL7tRPj1yhippMwWYzK6NHo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NzY5/NjAtMTcwODM4Njg4/NC03Nzk0LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/rdvbJvCBRLi7DB0plz7g1hc_sIEzTzATFSsjfs62rRI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NzY5/NjAtMTcwODM4Njg4/NC03Nzk0LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2776960",
+      "community": {
+        "want": 276,
+        "have": 941
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "EP"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2011",
+      "format": [
+        "CD",
+        "EP"
+      ],
+      "label": [
+        "Domino",
+        "Domino Recording Co. Ltd.",
+        "Domino Recording Co. Ltd.",
+        "EMI Music Publishing Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Soundtrack",
+        "Indie Rock"
+      ],
+      "id": 10396439,
+      "barcode": [
+        "5034202139829",
+        "IFPI L574",
+        "IFPI 9712",
+        "RUG398CD AG29605-01",
+        "LC10192"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 320427,
+      "master_url": "https://api.discogs.com/masters/320427",
+      "uri": "/Alex-Turner-Submarine/release/10396439",
+      "catno": "RUG398CD",
+      "title": "Alex Turner - Submarine",
+      "thumb": "https://i.discogs.com/UHHxmAFlEyULjBcB3A899P-o7XbIQGDfU6GOcsodk8s/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMzk2/NDM5LTE0OTY2Mjkw/MTktNTk4My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/z5kTo_iY_7LuTltzFlyvPeLzKfPB1-c3mmWPGLAIZ1M/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMzk2/NDM5LTE0OTY2Mjkw/MTktNTk4My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10396439",
+      "community": {
+        "want": 88,
+        "have": 335
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "EP"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "genre": [
+        "Rock",
+        "Stage & Screen"
+      ],
+      "format": [
+        "CD",
+        "EP",
+        "Reissue"
+      ],
+      "style": [
+        "Soundtrack",
+        "Indie Rock"
+      ],
+      "id": 12604118,
+      "label": [
+        "Domino",
+        "Domino Recording Co. Ltd.",
+        "Domino Recording Co. Ltd.",
+        "EMI Music Publishing Ltd.",
+        "UK Film Council",
+        "Film 4",
+        "Warp Records",
+        "Protagonist Pictures",
+        "Optimum Releasing",
+        "StudioCanal",
+        "One Inch Studios",
+        "Air Lyndhurst Hall",
+        "The Premises Studio (London)",
+        "Sony DADC"
+      ],
+      "type": "release",
+      "barcode": [
+        "5034202139829",
+        "5 034202 139829",
+        "Sony DADC RUG398CD 41 A00",
+        "IFPI L551",
+        "IFPI 944A",
+        "LC10192"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 320427,
+      "master_url": "https://api.discogs.com/masters/320427",
+      "uri": "/Alex-Turner-Submarine/release/12604118",
+      "catno": "RUG398CD",
+      "title": "Alex Turner - Submarine",
+      "thumb": "https://i.discogs.com/aBPWdASze7xbjSw6h_GtirIWQtpKjXcflXzrdsDg2G8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyNjA0/MTE4LTE1Mzg0Mjc0/NzktODg1Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/yLGEuNhozLHCOR9j2eJnelgBJ8-1T84R-tXGl_0iIIw/rs:fit/g:sm/q:90/h:536/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyNjA0/MTE4LTE1Mzg0Mjc0/NzktODg1Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/12604118",
+      "community": {
+        "want": 54,
+        "have": 178
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "EP",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2011",
+      "format": [
+        "CD",
+        "EP"
+      ],
+      "label": [
+        "Domino",
+        "Domino Recording Co. Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Soundtrack",
+        "Indie Rock"
+      ],
+      "id": 4542489,
+      "barcode": [
+        "8 01390 02992 9"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 320427,
+      "master_url": "https://api.discogs.com/masters/320427",
+      "uri": "/Alex-Turner-Submarine/release/4542489",
+      "catno": "DNO299",
+      "title": "Alex Turner - Submarine",
+      "thumb": "https://i.discogs.com/u26gqdoPxZIHNGZTmSAXzUymin9fylr9uxPdeQFNeJ0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ1NDI0/ODktMTM2Nzg2NTUz/OC0zNjE0LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/PVXTIthSe8q7bnhbqo4Ygw60kBR3x7dr6UE5KpRUI6k/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ1NDI0/ODktMTM2Nzg2NTUz/OC0zNjE0LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4542489",
+      "community": {
+        "want": 112,
+        "have": 103
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "EP"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Australia",
+      "year": "2011",
+      "format": [
+        "CD",
+        "EP"
+      ],
+      "label": [
+        "Domino",
+        "Domino Recording Co. Ltd.",
+        "Domino Recording Co. Ltd.",
+        "EMI Music Australia Pty. Limited",
+        "EMI Music Australia Pty. Limited",
+        "One Inch Studios",
+        "The Premises Studio (London)",
+        "Air Studios",
+        "Regency Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Soundtrack",
+        "Indie Rock"
+      ],
+      "id": 5714092,
+      "barcode": [
+        "5099902607528",
+        "REGENCY MEDIA 129904.1 0260752 P74541",
+        "ifpi LN96"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 320427,
+      "master_url": "https://api.discogs.com/masters/320427",
+      "uri": "/release/5714092-Alex-Turner-Submarine",
+      "catno": "0260752",
+      "title": "Alex Turner - Submarine",
+      "thumb": "https://i.discogs.com/NYKxTd7es6r9jKoGddDp9s-GXKTrQwPmVBg2ihMAZjo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU3MTQw/OTItMTczMzY2Mzc0/My0yMTQxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/mFR9oTs9ai1bhl0fp7sKYc-xEqPYfUm4t2qaUIYun4s/rs:fit/g:sm/q:90/h:533/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU3MTQw/OTItMTczMzY2Mzc0/My0yMTQxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5714092",
+      "community": {
+        "want": 68,
+        "have": 63
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "EP"
+          ]
+        }
+      ]
+    }
+  ]
+}

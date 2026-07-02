@@ -1,0 +1,69 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2017",
+      "format": [
+        "Cassette",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "DFA",
+        "DFA Studios",
+        "Lanark Studio",
+        "Strongroom",
+        "The Church, London",
+        "B-Side Studios, Portland, OR",
+        "Excelsior Equity Management Of NY, LLC"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Leftfield"
+      ],
+      "id": 10886192,
+      "barcode": [
+        "8 29732 25664 2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1230243,
+      "master_url": "https://api.discogs.com/masters/1230243",
+      "uri": "/release/10886192-LCD-Soundsystem-American-Dream",
+      "catno": "DFA2566",
+      "title": "LCD Soundsystem - American Dream",
+      "thumb": "https://i.discogs.com/MlZGI5CxFlzvdDPB2DWNpGLuCuBUW67PMaAOv72sgEE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwODg2/MTkyLTE2NTc4NjAx/NjYtNzAyNy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/jrzY_ytmKuym1N2dTCmXoPp-0x2hHMgQAFvCML-GAi4/rs:fit/g:sm/q:90/h:381/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwODg2/MTkyLTE2NTc4NjAx/NjYtNzAyNy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10886192",
+      "community": {
+        "want": 161,
+        "have": 256
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Clear",
+          "descriptions": [
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

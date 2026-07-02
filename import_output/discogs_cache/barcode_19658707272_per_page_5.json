@@ -1,0 +1,337 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 6,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=19658707272&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=19658707272&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Erskine Records",
+        "Sony Music Entertainment",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Columbia Records",
+        "Columbia Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Pop Rock"
+      ],
+      "id": 23301476,
+      "barcode": [
+        "1 96587 07272 8",
+        "196587072728",
+        "U19658707272 22-063-11",
+        "U19658707272 22-063-12",
+        "IFPI LK13",
+        "IFPI L823",
+        "IFPI L817"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2640143,
+      "master_url": "https://api.discogs.com/masters/2640143",
+      "uri": "/release/23301476-Harry-Styles-Harrys-House",
+      "catno": "19658707272",
+      "title": "Harry Styles - Harry’s House",
+      "thumb": "https://i.discogs.com/k7KoSY_j3wdeBliQmj2Gc2UyUESO5lm9WWWanW2n1B8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMzAx/NDc2LTE2NjY1NzQ3/NjEtMzA0Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/_CXc-356WGJY1viUfIc1erfjdPR194mzzsIKkQVASlQ/rs:fit/g:sm/q:90/h:543/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMzAx/NDc2LTE2NjY1NzQ3/NjEtMzA0Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23301476",
+      "community": {
+        "want": 271,
+        "have": 3085
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Mexico",
+      "year": "2022",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Erskine Records",
+        "Erskine Records",
+        "Sony Music Entertainment México, S.A. De C.V.",
+        "Sony Music Entertainment México, S.A. De C.V."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Pop Rock"
+      ],
+      "id": 24140156,
+      "barcode": [
+        "1 96587 07272 8"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2640143,
+      "master_url": "https://api.discogs.com/masters/2640143",
+      "uri": "/release/24140156-Harry-Styles-Harrys-House",
+      "catno": "196587072728",
+      "title": "Harry Styles - Harry’s House",
+      "thumb": "https://i.discogs.com/s7kqijHCsPHw_sAcoqjpylSEYd6gUOmIcDIMj9RMbpA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0MTQw/MTU2LTE2NTk5ODYx/ODAtMzcwMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/lQpgdRSa6TV4XISbe4R5iZ2OW8medU56nDiHaXbGu7M/rs:fit/g:sm/q:90/h:543/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0MTQw/MTU2LTE2NTk5ODYx/ODAtMzcwMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/24140156",
+      "community": {
+        "want": 78,
+        "have": 418
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Taiwan",
+      "year": "2022",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Real World Studios",
+        "Angelic Studios",
+        "Henson Recording Studios",
+        "Shangri-La, Malibu, CA",
+        "Highmoor Farm",
+        "Tom's Room (Tokyo, Japan)",
+        "Solag Studios",
+        "The Cave Studios, London"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Pop Rock",
+        "Funk",
+        "Synth-pop",
+        "Downtempo"
+      ],
+      "id": 23980331,
+      "barcode": [
+        "1 96587 07272 8"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2640143,
+      "master_url": "https://api.discogs.com/masters/2640143",
+      "uri": "/release/23980331-Harry-Styles-%E4%B8%80%E4%B8%96%E4%BB%A3%E8%90%AC%E4%BA%BA%E8%BF%B7-%E5%93%88%E5%88%A9-Harrys-House-%E5%93%88%E5%88%A9%E5%B1%8B",
+      "catno": "19658707272",
+      "title": "Harry Styles = 一世代萬人迷 哈利* - Harry’s House = 哈利屋",
+      "thumb": "https://i.discogs.com/6JuJDES2Qpjxbva7E4AHonPA0DwRe7Atufo7x2SkJOE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzOTgw/MzMxLTE2NTg2MzM4/MzgtOTYxMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/X0Un_9dwtF73UlkJxVbSIJr46oVsnZwINcsDriM51Ok/rs:fit/g:sm/q:90/h:533/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzOTgw/MzMxLTE2NTg2MzM4/MzgtOTYxMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23980331",
+      "community": {
+        "want": 50,
+        "have": 3
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Argentina",
+      "year": "2022",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Real World Studios",
+        "Angelic Studios",
+        "Henson Recording Studios",
+        "Shangri-La, Malibu, CA",
+        "Highmoor Farm",
+        "Tom's Room (Tokyo, Japan)",
+        "Solag Studios",
+        "The Cave Studios, London"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Pop Rock"
+      ],
+      "id": 23824982,
+      "barcode": [
+        "1 96587 07272 8"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2640143,
+      "master_url": "https://api.discogs.com/masters/2640143",
+      "uri": "/release/23824982-Harry-Styles-Harrys-House",
+      "catno": "19658707272",
+      "title": "Harry Styles - Harry’s House",
+      "thumb": "https://i.discogs.com/5955dp5Y8etc736y7zfrlF3HM-j5l1PlVy1OuTivbQE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzODI0/OTgyLTE2NTczMDc2/NjItNjQxOC5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/gPuCxCe_2wgXxqgjF68ahU-VLy1ShKnQ2IlU9HenqC4/rs:fit/g:sm/q:90/h:548/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzODI0/OTgyLTE2NTczMDc2/NjItNjQxOC5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23824982",
+      "community": {
+        "want": 47,
+        "have": 58
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Australia",
+      "year": "2022",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Sony Music",
+        "Erskine Records",
+        "Columbia",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment Australia Pty Ltd.",
+        "Real World Studios",
+        "Angelic Studios",
+        "Henson Recording Studios",
+        "Shangri-La, Malibu, CA",
+        "Highmoor Farm",
+        "Tom's Room (Tokyo, Japan)",
+        "Solag Studios",
+        "The Cave Studios, London",
+        "Technicolor, Australia"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Pop Rock"
+      ],
+      "id": 23300957,
+      "barcode": [
+        "0 196587 072728",
+        "0196587072728",
+        "19658707272 HARRY S HOUSE 02 [technicolor logo] ifpi L285",
+        "ifpi L285"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2640143,
+      "master_url": "https://api.discogs.com/masters/2640143",
+      "uri": "/release/23300957-Harry-Styles-Harrys-House",
+      "catno": "19658707272",
+      "title": "Harry Styles - Harry’s House",
+      "thumb": "https://i.discogs.com/I5meZhOdeJdR7jYR7UiNS1TGFSs2kbWrEeDxx6v-uIY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMzAw/OTU3LTE2NjA3MTQx/MTktMTA5OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/0bGdd4MTvdxQeBvIhk7ZPunWRsiw3jJd-3DTAn5Eakg/rs:fit/g:sm/q:90/h:540/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMzAw/OTU3LTE2NjA3MTQx/MTktMTA5OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23300957",
+      "community": {
+        "want": 75,
+        "have": 560
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

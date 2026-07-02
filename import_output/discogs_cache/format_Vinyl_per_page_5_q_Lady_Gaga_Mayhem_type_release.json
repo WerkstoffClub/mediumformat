@@ -1,0 +1,570 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 7,
+    "per_page": 5,
+    "items": 33,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Lady+Gaga+Mayhem&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=7",
+      "next": "https://api.discogs.com/database/search?q=Lady+Gaga+Mayhem&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Vinyl",
+        "LP",
+        "Single Sided",
+        "Etched",
+        "All Media",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Interscope Records",
+        "Streamline Records",
+        "Interscope Records",
+        "Interscope Records",
+        "UMG Commercial Services",
+        "SG Songs Worldwide",
+        "Sony/ATV Songs LLC",
+        "Andrew Watt Music",
+        "Songs Of Kobalt Music Publishing",
+        "Cirkut Breaker LLC",
+        "Universal Music Corp.",
+        "Michael Polansky",
+        "Henry Walter",
+        "BMG Rights Management (UK) Limited",
+        "BMG Rights Management (US) LLC",
+        "Domino Publishing Company Of America, Inc.",
+        "Savoir Faire Publishing",
+        "EMI Music Publishing France",
+        "HV James Fauntleroy Publishing",
+        "Lord Fauntleroy LLC",
+        "WC Music Corp",
+        "Mars Force Songs, LLC",
+        "BMG Rights Management",
+        "Tailored 4U Music, LLC",
+        "Dii Music LLC Global Publishing",
+        "BMG Platinum Songs",
+        "Shangri-La, Malibu, CA",
+        "The Village Studios",
+        "Henson Recording Studios",
+        "Shampoo Press & Curl Studios",
+        "MixStar Studios",
+        "Shangri-La, Malibu, CA",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "GZ Media",
+        "Target"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Dance-pop"
+      ],
+      "id": 33324156,
+      "barcode": [
+        "6 02475 45115 0",
+        "602475451150",
+        "602475451150-1",
+        "602475451150-2",
+        "BMI",
+        "ASCAP",
+        "GMR",
+        "00602475451150-A 00602475451150-A (2) 2141926 295499E1 02145668 JN-H STERLING ",
+        "00602475451150-B (2) 00602475451150-B JN-H STERLING 2141935 295499E2 02145571",
+        "00602475451150-C (3) 00602475451150-C JN-H 2153857 02155523  295499E3"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3772997,
+      "master_url": "https://api.discogs.com/masters/3772997",
+      "uri": "/release/33324156-Lady-Gaga-Mayhem",
+      "catno": "602475451150",
+      "title": "Lady Gaga - Mayhem",
+      "thumb": "https://i.discogs.com/i7d0T_UrPut_9oBq3rdodOJmv0ldlHZ_ZUR7dtEgIk0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzI0/MTU2LTE3NDM1Mjgx/MTYtMzQzNy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/CmS-0j8mZUeGFLm6BQOraQFkGAw3H_ww0-JtSdHY2Ew/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzI0/MTU2LTE3NDM1Mjgx/MTYtMzQzNy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33324156",
+      "community": {
+        "want": 907,
+        "have": 5456
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Single Sided",
+            "Etched"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Yellow [Opaque Yellow], Alternate Cover",
+          "descriptions": [
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Vinyl",
+        "LP",
+        "Single Sided",
+        "Etched",
+        "All Media",
+        "Album"
+      ],
+      "label": [
+        "Interscope Records",
+        "Streamline Records",
+        "Interscope Records",
+        "Streamline Records",
+        "Interscope Records",
+        "Interscope Records",
+        "Universal International Music B.V.",
+        "Sterling Sound Nashville",
+        "GZ Media",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Dance-pop",
+        "Electro",
+        "Synth-pop",
+        "Art Rock",
+        "Nu-Disco",
+        "Ballad"
+      ],
+      "id": 33337262,
+      "barcode": [
+        "6 02475 45108 2",
+        "602475451082",
+        "0602475459385",
+        "LC 06406",
+        "BIEM/SDRM",
+        "294489E1 2133161 00602475451082 - A 00602475451082 - A (1) JN-H STERLING",
+        "294489E2 2132106 00602475451082 - B 00602475451082 - B (1) JN-H STERLING",
+        "294489E3 2132114 00602475451082 - C 00602475451082 - C (1) JN-H STERLING",
+        "295284E4",
+        "294489E1  2120673  02169772  00602475451082-A  00602475451082-A (1)  JN-H STERLING",
+        "294489E2  2117057  02171360  00602475451082-B  00602475451082-B (1)  JN-H STERLING",
+        "294489E3  2137298  02142579  00602475451082-C  00602475451082-C (1) JN-H STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3772997,
+      "master_url": "https://api.discogs.com/masters/3772997",
+      "uri": "/release/33337262-Lady-Gaga-Mayhem",
+      "catno": "602475451082",
+      "title": "Lady Gaga - Mayhem",
+      "thumb": "https://i.discogs.com/mzarhdc5IWpgqGW-hU192EwxBOyC4tu-NRdLkTau50k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzM3/MjYyLTE3NjU3Mjg1/MzctMjkzMC5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/GMvMPJFD00Z2xsj5X2Z2SeSPcxIbf95F50dRvQMclc8/rs:fit/g:sm/q:90/h:576/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzM3/MjYyLTE3NjU3Mjg1/MzctMjkzMC5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33337262",
+      "community": {
+        "want": 411,
+        "have": 4829
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Single Sided",
+            "Etched"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Vinyl",
+        "LP",
+        "Single Sided",
+        "Etched",
+        "All Media",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Interscope Records",
+        "Streamline Records",
+        "Interscope Records",
+        "Interscope Records",
+        "UMG Commercial Services",
+        "SG Songs Worldwide",
+        "Sony/ATV Songs LLC",
+        "Andrew Watt Music",
+        "Songs Of Kobalt Music Publishing",
+        "Cirkut Breaker LLC",
+        "Universal Music Corp.",
+        "Henry Walter",
+        "Michael Polansky",
+        "Savoir Faire Publishing",
+        "EMI Music Publishing France",
+        "HV James Fauntleroy Publishing",
+        "Lord Fauntleroy LLC",
+        "WC Music Corp",
+        "Mars Force Songs, LLC",
+        "BMG Rights Management",
+        "Tailored 4U Music, LLC",
+        "Dii Music LLC Global Publishing",
+        "BMG Platinum Songs",
+        "BMG Rights Management (UK) Limited",
+        "BMG Rights Management (US) LLC",
+        "Domino Publishing Company Of America, Inc.",
+        "Shangri-La, Malibu, CA",
+        "The Village Studios",
+        "Henson Recording Studios",
+        "Shampoo Press & Curl Studios",
+        "MixStar Studios",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "Bad World Limited",
+        "Bad World Limited"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Dance-pop",
+        "Electro",
+        "Synth-pop",
+        "Art Rock",
+        "Nu-Disco",
+        "Ballad"
+      ],
+      "id": 35587999,
+      "barcode": [
+        "none",
+        "BMI",
+        "ASCAP",
+        "602478822049 LP1",
+        "602478822049 LP2",
+        "602478822049-A",
+        "602478822049-C",
+        "BW007-A (3) JN-H STERLING",
+        "BW007-B (3) JN-H STERLING",
+        "BW007-C (3) JN-H STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3772997,
+      "master_url": "https://api.discogs.com/masters/3772997",
+      "uri": "/release/35587999-Lady-Gaga-Mayhem",
+      "catno": "602478822049",
+      "title": "Lady Gaga - Mayhem",
+      "thumb": "https://i.discogs.com/xj-rFMxWYzo7vTq1zFDzfsAL1XiX3aGd01DLAIqL5DA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NTg3/OTk5LTE3NjI3NzY5/MDQtMzk3NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/WHfgjbh2Ik-A7rgsEEG2u9WBvSqEE1ahl5x7-xWPjDM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NTg3/OTk5LTE3NjI3NzY5/MDQtMzk3NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35587999",
+      "community": {
+        "want": 578,
+        "have": 4060
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear With Split Orange And Black Liquid Fill",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Orange Translucent [Neon Orange]",
+          "descriptions": [
+            "LP",
+            "Single Sided",
+            "Etched"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Vinyl",
+        "LP",
+        "Single Sided",
+        "Etched",
+        "All Media",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Interscope Records",
+        "Streamline Records",
+        "Interscope Records",
+        "Streamline Records",
+        "Interscope Records",
+        "Interscope Records",
+        "Universal International Music B.V.",
+        "SG Songs Worldwide",
+        "Sony/ATV Songs LLC",
+        "Andrew Watt Music",
+        "Songs Of Kobalt Music Publishing",
+        "Cirkut Breaker LLC",
+        "Universal Music Corp.",
+        "Henry Walter",
+        "Michael Polansky",
+        "Savoir Faire Publishing",
+        "EMI Music Publishing France",
+        "HV James Fauntleroy Publishing",
+        "Lord Fauntleroy LLC",
+        "WC Music Corp",
+        "Mars Force Songs, LLC",
+        "BMG Rights Management",
+        "Tailored 4U Music, LLC",
+        "Dii Music LLC Global Publishing",
+        "BMG Platinum Songs",
+        "BMG Rights Management (UK) Limited",
+        "BMG Rights Management (US) LLC",
+        "Domino Publishing Company Of America, Inc.",
+        "Shangri-La, Malibu, CA",
+        "The Village Studios",
+        "Henson Recording Studios",
+        "Shampoo Press & Curl Studios",
+        "MixStar Studios",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "GZ Media",
+        "FNAC",
+        "HMV",
+        "Golden Discs",
+        "iMusic",
+        "Discoteca Laziale S.r.l.",
+        "JB Hi-Fi",
+        "Platomania.nl"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Dance-pop",
+        "Electro",
+        "Synth-pop",
+        "Art Rock",
+        "Nu-Disco",
+        "Ballad"
+      ],
+      "id": 33338333,
+      "barcode": [
+        "6 02475 45512 7",
+        "6 02475 45512 7",
+        "LC 06406",
+        "BIEM/SDRM",
+        "BMI",
+        "ASCAP",
+        "2141929 02143746 295499E1 00602475451150-A (2) 00602475451150-A JN-H STERLING",
+        "2131581 295499E2 02142591 00602475451150-B (2) 00602475451150-B JN-H STERLING",
+        "2153152 02156660 295499E3 00602475451150-C (3) 00602475451150-C JN-H STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3772997,
+      "master_url": "https://api.discogs.com/masters/3772997",
+      "uri": "/release/33338333-Lady-Gaga-Mayhem",
+      "catno": "602475455127",
+      "title": "Lady Gaga - Mayhem",
+      "thumb": "https://i.discogs.com/D1Q7j7rK041HOwqTYUzo46sw8TUwTUpeExuvAISV5sE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzM4/MzMzLTE3NDI2OTc1/ODItNjQzOS5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/uZ3dceGNjvCkFXmqxWoNGQ_t8BGJoTMJeHyyMLCf7Pc/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzM4/MzMzLTE3NDI2OTc1/ODItNjQzOS5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33338333",
+      "community": {
+        "want": 414,
+        "have": 3420
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Single Sided",
+            "Etched"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Yellow [Opaque Yellow], Alternate Cover",
+          "descriptions": [
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Vinyl",
+        "LP",
+        "Single Sided",
+        "Etched",
+        "All Media",
+        "Album"
+      ],
+      "label": [
+        "Interscope Records",
+        "Streamline Records",
+        "Interscope Records",
+        "Streamline Records",
+        "Interscope Records",
+        "Interscope Records",
+        "Universal International Music B.V.",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Dance-pop"
+      ],
+      "id": 33337208,
+      "barcode": [
+        "6 02475 45109 9",
+        "602475451099",
+        "LC 06406",
+        "BIEM/SDRM",
+        "00602475451099 - A 294487E1 2133025",
+        "00602475451099 - B 294487E2 2133013",
+        "00602475451099 - C 294487E3 2142746"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3772997,
+      "master_url": "https://api.discogs.com/masters/3772997",
+      "uri": "/release/33337208-Lady-Gaga-Mayhem",
+      "catno": "602475451099",
+      "title": "Lady Gaga - Mayhem",
+      "thumb": "https://i.discogs.com/FlQzZjRRpe2pHIw3jhhr8-sGq5iu4B4UQDeNFZass_Y/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzM3/MjA4LTE3NDI1NjU4/NDAtOTY0MC5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/PTjdKsfJ-r1zXvivOHTUON-paka5GLD0BHfBiMT8hhg/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzM3/MjA4LTE3NDI1NjU4/NDAtOTY0MC5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33337208",
+      "community": {
+        "want": 398,
+        "have": 2744
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Single Sided",
+            "Etched"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Silver [Opaque Silver], Alternate Cover",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

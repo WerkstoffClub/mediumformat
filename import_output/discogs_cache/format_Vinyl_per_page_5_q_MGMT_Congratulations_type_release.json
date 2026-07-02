@@ -1,0 +1,393 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 12,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=MGMT+Congratulations&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?q=MGMT+Congratulations&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2014",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Repress"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Record Industry",
+        "Columbia Records",
+        "Columbia Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Electro",
+        "Pop Rock"
+      ],
+      "id": 5942237,
+      "barcode": [
+        "888430453319",
+        "SESAC",
+        "88843045331A",
+        "88843045331B",
+        "88843045331C",
+        "88843045331D",
+        "95692 1A / MOVLP 777",
+        "95692 1B / MOVLP 777",
+        "95692 1C / MOVLP 777",
+        "95692 1D / MOVLP 777",
+        "95692 1A MOVLP 777 88843045331",
+        "95692 1B MOVLP 777 88843045331",
+        "95692 1C MOVLP 777 88843045331",
+        "95692 1D MOVLP 777 88843045331"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 240064,
+      "master_url": "https://api.discogs.com/masters/240064",
+      "uri": "/release/5942237-MGMT-Congratulations",
+      "catno": "88843045331",
+      "title": "MGMT - Congratulations",
+      "thumb": "https://i.discogs.com/nad90xkhXgecYQrKYrgHL3J1jhtn32SfQSXhGJmzXsM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU5NDIy/MzctMTQwNzAzNTcy/Ny0zMzQzLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/sXCGC1PckNQ_g-0GIee3oQwmi15Jx4oRwE4ihshpvvY/rs:fit/g:sm/q:90/h:500/w:500/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU5NDIy/MzctMTQwNzAzNTcy/Ny0zMzQzLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5942237",
+      "community": {
+        "want": 1045,
+        "have": 2910
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2010",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Columbia Records",
+        "Columbia Records",
+        "United Record Pressing",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Electro",
+        "Pop Rock",
+        "Indie Pop",
+        "Psychedelic Rock"
+      ],
+      "id": 2591885,
+      "barcode": [
+        "886974533511",
+        "8 8697-45335-1 1",
+        "ⓤ",
+        "LC00162",
+        "C-745335",
+        "8869-7-45335-1A RJ",
+        "8869-7-45335-1B RJ",
+        "8869-7-45335-2A RJ",
+        "8869-7-45335-2B RJ",
+        "8869-7-45335-1A II RJ STERLING ⓤ ",
+        "8869-7-45335-1B RJ STERLING ★ ⓤ ",
+        "8869-7-45335-2A II II RJ STERLING ⓤ",
+        "8869-7-45335-2B RJ STERLING ⓤ"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 240064,
+      "master_url": "https://api.discogs.com/masters/240064",
+      "uri": "/release/2591885-MGMT-Congratulations",
+      "catno": "88697453351",
+      "title": "MGMT - Congratulations",
+      "thumb": "https://i.discogs.com/VaaXH9WN2zyD3eK60Gqe9GaLeXcVURPWh5XYA0jjOrk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1OTE4/ODUtMTcwMDUyMjQ2/NC0xNjg4LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/xmT9mmnZhMf_X9rksAyeZznBpVQxHriiruWYa3Vu8hs/rs:fit/g:sm/q:90/h:584/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1OTE4/ODUtMTcwMDUyMjQ2/NC0xNjg4LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2591885",
+      "community": {
+        "want": 1334,
+        "have": 1684
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Scratch-off Cover, 180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2010",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Music",
+        "Columbia",
+        "Sony Music",
+        "Columbia",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment",
+        "Old Man Future",
+        "Sadguitarius",
+        "Vacation Island",
+        "Blanker Unsinn",
+        "Tarbox Road Studios",
+        "Tarbox Road Studios",
+        "Sterling Sound",
+        "Optimal Media Production",
+        "Optimal Media Production",
+        "Sony Music Entertainment",
+        "BMG Rights Management"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Pop Rock",
+        "Psychedelic Rock"
+      ],
+      "id": 2228790,
+      "barcode": [
+        "8 86974 53351 1",
+        "886974533511",
+        "LC00162",
+        "BA97328-01 A1 MK / 88697453351",
+        "BA97328-01 B1 MK / 88697453351",
+        "BA97328-02 C1 MK / 88697453351",
+        "BA97328-02 D1 MK / 88697453351",
+        "BIEM/GEMA",
+        "SESAC"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 240064,
+      "master_url": "https://api.discogs.com/masters/240064",
+      "uri": "/release/2228790-MGMT-Congratulations",
+      "catno": "88697453351",
+      "title": "MGMT - Congratulations",
+      "thumb": "https://i.discogs.com/FX6zE7np2J1zrZkFYrUQbR_HbxFp1Bd3lYM4DdNeWIE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyMjg3/OTAtMTUxMzIzNzAz/NC0zMzQ0LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/oocZS2IoZ_dvBuDWEJmGoH-shIfBcmRAwrVsbufG_kU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyMjg3/OTAtMTUxMzIzNzAz/NC0zMzQ0LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2228790",
+      "community": {
+        "want": 1021,
+        "have": 1364
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Scratch-Off Sleeve, 180 g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2014",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Music On Vinyl",
+        "Columbia Records",
+        "Columbia Records",
+        "Music On Vinyl B.V.",
+        "Music On Vinyl B.V.",
+        "Sony Music Entertainment"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Psychedelic Rock",
+        "Pop Rock",
+        "Indie Rock"
+      ],
+      "id": 5799410,
+      "barcode": [
+        "8718469532872",
+        "88843045331 95692 1A MOVLP 777",
+        "95692 1B MOVLP 777 88843045331",
+        "95692 1C MOVLP 777 88843045331",
+        "88843045331 95692 1D MOVLP 777"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 240064,
+      "master_url": "https://api.discogs.com/masters/240064",
+      "uri": "/release/5799410-MGMT-Congratulations",
+      "catno": "MOVLP777",
+      "title": "MGMT - Congratulations",
+      "thumb": "https://i.discogs.com/PiLq7XhSAlWk7lHouBsHwMA1M2JUQ47u_hpMnSR0Ubc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU3OTk0/MTAtMTQwMzAwNDcw/NS0yNTkxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/ec_lF5qAmlN5S208d9PB0gCbM1ddYEJ6wU2UcuNbmaM/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU3OTk0/MTAtMTQwMzAwNDcw/NS0yNTkxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5799410",
+      "community": {
+        "want": 656,
+        "have": 1585
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2014",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Record Store Day",
+        "Limited Edition",
+        "Numbered",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "Columbia",
+        "Columbia Records",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Record Industry"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Psychedelic Rock",
+        "Pop Rock",
+        "Indie Rock"
+      ],
+      "id": 5617720,
+      "barcode": [
+        "8 88430 45331 9",
+        "888430453319",
+        "95692 1A  MOVLP 777",
+        "95692 1B  MOVLP 777",
+        "95692 1C  MOVLP 777  88843045331",
+        "95692 1D  MOVLP 777  88843045331"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 240064,
+      "master_url": "https://api.discogs.com/masters/240064",
+      "uri": "/release/5617720-MGMT-Congratulations",
+      "catno": "88843045331",
+      "title": "MGMT - Congratulations",
+      "thumb": "https://i.discogs.com/YJjEEBDV-1ji7vvVKgneXGnOwGLlTYx5KaVTlT1NsXw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU2MTc3/MjAtMTM5ODEwMzc1/OS0yNTIxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/YCSjPO3hfopM9SUKqJ2kfYDfNS_1yLrM_l00K18rkus/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU2MTc3/MjAtMTM5ODEwMzc1/OS0yNTIxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5617720",
+      "community": {
+        "want": 854,
+        "have": 1574
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Record Store Day",
+            "Limited Edition",
+            "Numbered",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    }
+  ]
+}

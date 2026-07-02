@@ -1,0 +1,380 @@
+<h2 style="color:#fff;font-family:Inter,-apple-system,sans-serif;font-weight:800;letter-spacing:-0.04em;">Inventory Manager</h2>
+<p style="color:#999;font-family:Inter,-apple-system,sans-serif;font-size:13px;margin-top:4px;">Centralized catalog — Discogs-enriched, multi-channel ready</p>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  * { box-sizing: border-box; }
+
+  .shell {
+    display: flex; height: 560px;
+    border: 1px solid #262626; border-radius: 10px;
+    overflow: hidden; font-size: 12px; margin-top: 10px;
+    font-family: Inter, -apple-system, sans-serif;
+    background: #090909;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 180px; min-width: 180px; background: #090909;
+    border-right: 1px solid #1a1a1a; display: flex; flex-direction: column;
+  }
+  .sidebar-logo {
+    padding: 14px 16px 12px; font-weight: 800; font-size: 14px;
+    color: #fff; border-bottom: 1px solid #1a1a1a;
+    letter-spacing: -0.04em;
+  }
+  .sidebar-logo span { color: #0099ff; }
+  .sidebar-nav { padding: 8px 0; flex: 1; }
+  .nav-group-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: #444; padding: 10px 16px 4px; font-weight: 600;
+  }
+  .nav-link {
+    display: flex; align-items: center; gap: 8px; padding: 7px 16px;
+    color: #999; font-size: 12px; border-left: 2px solid transparent;
+    cursor: pointer;
+  }
+  .nav-link.active {
+    color: #fff; background: #141414; border-left-color: #fff;
+  }
+  .nav-badge {
+    margin-left: auto; background: rgba(224,92,106,0.15); color: #e05c6a;
+    font-size: 9px; border-radius: 100px; padding: 1px 6px; font-weight: 700;
+  }
+
+  /* MAIN */
+  .main { flex: 1; background: #141414; overflow: hidden; display: flex; flex-direction: column; }
+
+  /* TOPBAR */
+  .topbar {
+    display: flex; align-items: center; padding: 10px 20px;
+    border-bottom: 1px solid #1a1a1a; background: #090909; gap: 8px;
+  }
+  .topbar-title { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+  .spacer { flex: 1; }
+
+  /* BUTTONS — pills */
+  .btn {
+    padding: 6px 14px; border-radius: 100px; font-size: 11px;
+    font-weight: 600; cursor: pointer; border: none;
+    font-family: Inter, -apple-system, sans-serif;
+  }
+  .btn-primary { background: #fff; color: #000; }
+  .btn-primary:hover { background: #e8e8e8; }
+  .btn-secondary {
+    background: #141414; color: #fff;
+    border: 1px solid #262626;
+  }
+  .btn-secondary:hover { background: #1c1c1c; }
+
+  /* TOOLBAR */
+  .toolbar {
+    display: flex; align-items: center; gap: 8px; padding: 10px 20px;
+    border-bottom: 1px solid #1a1a1a; background: #141414; flex-wrap: wrap;
+  }
+  .search-box {
+    display: flex; align-items: center; gap: 6px;
+    background: #141414; border: 1px solid #262626; border-radius: 6px;
+    padding: 5px 10px; flex: 1; min-width: 180px; max-width: 280px;
+  }
+  .search-box input {
+    background: none; border: none; outline: none; color: #fff;
+    font-size: 11px; width: 100%; font-family: Inter, -apple-system, sans-serif;
+  }
+  .search-box input::placeholder { color: #555; }
+
+  .filter-tag {
+    padding: 4px 10px; border-radius: 100px; font-size: 11px;
+    background: #141414; border: 1px solid #262626; color: #999; cursor: pointer;
+  }
+  .filter-tag.active { background: #1c1c1c; border-color: #262626; color: #fff; }
+
+  /* TABLE */
+  .table-wrap { flex: 1; overflow-y: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  thead { position: sticky; top: 0; z-index: 1; }
+  th {
+    background: #090909; text-align: left; padding: 7px 14px;
+    color: #999; font-weight: 600; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.06em; border-bottom: 1px solid #262626; white-space: nowrap;
+  }
+  td { padding: 8px 14px; border-bottom: 1px solid #1a1a1a; vertical-align: middle; color: #999; }
+  tr:hover td { background: #141414; }
+
+  .release-cell { display: flex; align-items: center; gap: 10px; }
+  .cover {
+    width: 36px; height: 36px; border-radius: 4px; background: #1c1c1c;
+    border: 1px solid #262626; flex-shrink: 0; display: flex;
+    align-items: center; justify-content: center; font-size: 14px;
+  }
+  .release-info .title {
+    color: #fff; font-weight: 600; font-size: 12px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;
+  }
+  .release-info .artist { color: #666; font-size: 10px; margin-top: 1px; }
+  .release-info .meta { color: #444; font-size: 10px; margin-top: 1px; }
+
+  .price-cell { color: #fff; font-weight: 600; }
+  .price-cell .usd { color: #555; font-size: 10px; margin-top: 1px; }
+
+  .stock-cell { font-weight: 700; }
+  .stock-ok { color: #22c55e; }
+  .stock-low { color: #e8a838; }
+  .stock-out { color: #e05c6a; }
+
+  /* CONDITION PILLS */
+  .condition {
+    display: inline-block; padding: 2px 7px; border-radius: 100px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.04em;
+  }
+  .cond-m   { background: rgba(34,197,94,0.1);  color: #22c55e; }
+  .cond-vgp { background: rgba(0,153,255,0.12); color: #0099ff; }
+  .cond-vg  { background: rgba(232,168,56,0.12); color: #e8a838; }
+  .cond-g   { background: rgba(224,92,106,0.12); color: #e05c6a; }
+
+  /* CHANNEL DOTS */
+  .channel-dots { display: flex; gap: 4px; flex-wrap: wrap; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* PREVIEW BUTTON */
+  .preview-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; cursor: pointer; padding: 3px 8px; border-radius: 6px;
+    background: rgba(0,153,255,0.1); color: #0099ff;
+    border: 1px solid rgba(0,153,255,0.3); white-space: nowrap;
+    font-family: Inter, -apple-system, sans-serif;
+  }
+  .no-preview { color: #333; font-size: 10px; }
+
+  /* ROW ACTIONS */
+  .row-actions { display: flex; gap: 6px; opacity: 0; }
+  tr:hover .row-actions { opacity: 1; }
+  .action-icon {
+    color: #555; font-size: 12px; cursor: pointer;
+    padding: 2px 5px; border-radius: 3px;
+  }
+  .action-icon:hover { color: #999; background: #1c1c1c; }
+
+  /* FOOTER */
+  .footer-bar {
+    display: flex; align-items: center; padding: 8px 20px;
+    border-top: 1px solid #1a1a1a; background: #090909;
+    font-size: 11px; color: #555; gap: 8px;
+  }
+  .page-btn {
+    padding: 4px 9px; border-radius: 100px; border: 1px solid #262626;
+    background: #141414; color: #999; font-size: 11px; cursor: pointer;
+    font-family: Inter, -apple-system, sans-serif;
+  }
+  .page-btn.active { background: #1c1c1c; border-color: #262626; color: #fff; }
+  .page-btn:hover:not(.active) { background: #1c1c1c; color: #fff; }
+</style>
+
+<div class="shell">
+  <div class="sidebar">
+    <div class="sidebar-logo">Medium<span>Format</span></div>
+    <div class="sidebar-nav">
+      <div class="nav-group-label">Main</div>
+      <div class="nav-link"><span>◈</span> Dashboard</div>
+      <div class="nav-link active"><span>📦</span> Inventory</div>
+      <div class="nav-link"><span>🛒</span> Orders <span class="nav-badge">7</span></div>
+      <div class="nav-link"><span>👥</span> Customers</div>
+      <div class="nav-group-label">Channels</div>
+      <div class="nav-link"><span>🌐</span> Website</div>
+      <div class="nav-link"><span>🏪</span> POS</div>
+      <div class="nav-link"><span>🟢</span> Tokopedia</div>
+      <div class="nav-link"><span>🟠</span> Shopee</div>
+      <div class="nav-link"><span>🔵</span> Discogs</div>
+      <div class="nav-group-label">Business</div>
+      <div class="nav-link"><span>💳</span> Payments</div>
+      <div class="nav-link"><span>🚚</span> Shipping</div>
+      <div class="nav-link"><span>🏭</span> Wholesale</div>
+      <div class="nav-link"><span>📣</span> Marketing</div>
+      <div class="nav-link"><span>📊</span> Analytics</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Inventory</div>
+      <div class="spacer"></div>
+      <button class="btn btn-secondary">⬇ Import Discogs</button>
+      <button class="btn btn-secondary">⬇ Import CSV</button>
+      <button class="btn btn-primary">+ Add Release</button>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <span style="color:#555">🔍</span>
+        <input placeholder="Search artist, title, label, cat#..." />
+      </div>
+      <div class="filter-tag active">All (1,240)</div>
+      <div class="filter-tag">Vinyl</div>
+      <div class="filter-tag">CD</div>
+      <div class="filter-tag">Merch</div>
+      <div class="filter-tag">🟢 Tokopedia</div>
+      <div class="filter-tag">🟠 Shopee</div>
+      <div class="filter-tag">⚠️ Low Stock</div>
+      <div class="filter-tag">🎵 Has Preview</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:32px"><input type="checkbox" /></th>
+            <th>Release</th>
+            <th>Condition</th>
+            <th>Price (IDR)</th>
+            <th>Stock</th>
+            <th>Channels</th>
+            <th>Preview</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>
+              <div class="release-cell">
+                <div class="cover">🎵</div>
+                <div class="release-info">
+                  <div class="title">OK Computer</div>
+                  <div class="artist">Radiohead</div>
+                  <div class="meta">1997 · Parlophone · LP · Rock</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="condition cond-m">M</span></td>
+            <td><div class="price-cell">Rp 850.000<div class="usd">≈ USD 52</div></div></td>
+            <td><span class="stock-cell stock-low">1</span></td>
+            <td>
+              <div class="channel-dots">
+                <div class="dot" style="background:#7c6fcd" title="Website"></div>
+                <div class="dot" style="background:#4caf82" title="Tokopedia"></div>
+                <div class="dot" style="background:#e8a838" title="Shopee"></div>
+                <div class="dot" style="background:#5bc0de" title="Discogs"></div>
+              </div>
+            </td>
+            <td><div class="preview-btn">▶ Bandcamp</div></td>
+            <td><div class="row-actions"><span class="action-icon">✏️</span><span class="action-icon">📋</span><span class="action-icon">🗑</span></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>
+              <div class="release-cell">
+                <div class="cover">🎵</div>
+                <div class="release-info">
+                  <div class="title">Mezzanine</div>
+                  <div class="artist">Massive Attack</div>
+                  <div class="meta">1998 · Virgin · LP · Trip-Hop</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="condition cond-vgp">VG+</span></td>
+            <td><div class="price-cell">Rp 620.000<div class="usd">≈ USD 38</div></div></td>
+            <td><span class="stock-cell stock-low">2</span></td>
+            <td>
+              <div class="channel-dots">
+                <div class="dot" style="background:#7c6fcd"></div>
+                <div class="dot" style="background:#4caf82"></div>
+                <div class="dot" style="background:#5bc0de"></div>
+              </div>
+            </td>
+            <td><div class="preview-btn">▶ Spotify</div></td>
+            <td><div class="row-actions"><span class="action-icon">✏️</span><span class="action-icon">📋</span><span class="action-icon">🗑</span></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>
+              <div class="release-cell">
+                <div class="cover">🎵</div>
+                <div class="release-info">
+                  <div class="title">Dummy</div>
+                  <div class="artist">Portishead</div>
+                  <div class="meta">1994 · Go! Discs · LP · Trip-Hop</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="condition cond-m">M</span></td>
+            <td><div class="price-cell">Rp 780.000<div class="usd">≈ USD 48</div></div></td>
+            <td><span class="stock-cell stock-ok">5</span></td>
+            <td>
+              <div class="channel-dots">
+                <div class="dot" style="background:#7c6fcd"></div>
+                <div class="dot" style="background:#4caf82"></div>
+                <div class="dot" style="background:#e8a838"></div>
+                <div class="dot" style="background:#5bc0de"></div>
+                <div class="dot" style="background:#e05c6a" title="Meta"></div>
+              </div>
+            </td>
+            <td><div class="preview-btn">▶ YouTube</div></td>
+            <td><div class="row-actions"><span class="action-icon">✏️</span><span class="action-icon">📋</span><span class="action-icon">🗑</span></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>
+              <div class="release-cell">
+                <div class="cover">🎵</div>
+                <div class="release-info">
+                  <div class="title">Selected Ambient Works Vol. II</div>
+                  <div class="artist">Aphex Twin</div>
+                  <div class="meta">1994 · Warp · 2xLP · Ambient</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="condition cond-m">M</span></td>
+            <td><div class="price-cell">Rp 1.250.000<div class="usd">≈ USD 76</div></div></td>
+            <td><span class="stock-cell stock-ok">3</span></td>
+            <td>
+              <div class="channel-dots">
+                <div class="dot" style="background:#7c6fcd"></div>
+                <div class="dot" style="background:#5bc0de"></div>
+              </div>
+            </td>
+            <td><span class="no-preview">— No preview</span></td>
+            <td><div class="row-actions"><span class="action-icon">✏️</span><span class="action-icon">📋</span><span class="action-icon">🗑</span></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>
+              <div class="release-cell">
+                <div class="cover">🎵</div>
+                <div class="release-info">
+                  <div class="title">Blue Lines</div>
+                  <div class="artist">Massive Attack</div>
+                  <div class="meta">1991 · Wild Bunch · LP · Trip-Hop</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="condition cond-vg">VG</span></td>
+            <td><div class="price-cell">Rp 450.000<div class="usd">≈ USD 28</div></div></td>
+            <td><span class="stock-cell stock-ok">8</span></td>
+            <td>
+              <div class="channel-dots">
+                <div class="dot" style="background:#7c6fcd"></div>
+                <div class="dot" style="background:#4caf82"></div>
+                <div class="dot" style="background:#e8a838"></div>
+              </div>
+            </td>
+            <td><div class="preview-btn">▶ Bandcamp</div></td>
+            <td><div class="row-actions"><span class="action-icon">✏️</span><span class="action-icon">📋</span><span class="action-icon">🗑</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer-bar">
+      <span>Showing 1–20 of 1,240 releases</span>
+      <div style="flex:1"></div>
+      <button class="page-btn">‹</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">…</button>
+      <button class="page-btn">62</button>
+      <button class="page-btn">›</button>
+    </div>
+  </div>
+</div>

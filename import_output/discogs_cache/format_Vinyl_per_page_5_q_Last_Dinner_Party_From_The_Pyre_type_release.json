@@ -1,0 +1,353 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 13,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Last+Dinner+Party+From+The+Pyre&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?q=Last+Dinner+Party+From+The+Pyre&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records",
+        "Universal International Music B.V.",
+        "The Last Dinner Party",
+        "The Last Dinner Party",
+        "Universal Music Operations Ltd.",
+        "Kobalt Music Publishing Ltd.",
+        "Metropolis Songs Limited",
+        "Universal Music Publishing Ltd.",
+        "Copyright Control",
+        "The Church, London",
+        "Hoxa HQ",
+        "Air Lyndhurst Studios",
+        "Angel Studios",
+        "Boons Point Studios, Antigua",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "Schallplattenfabrik Pallas GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Art Rock",
+        "Baroque Pop"
+      ],
+      "id": 35396587,
+      "barcode": [
+        "6 02478 59766 4",
+        "602478597664",
+        "BIEM/SDRM",
+        "LC00407",
+        "00602478597169-A (1) JN-H STERLING -66842- V",
+        "00602478597169-B (2) JN-H STERLING -66842- IV",
+        "00602478597169-A (1) JN-H STERLING -66842- III",
+        "00602478597169-B (2) JN-H STERLING -66842- III",
+        "00602478597169-A (1) JN-H STERLING -66842- II",
+        "00602478597169-B (2) JN-H STERLING -66842- II"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4005544,
+      "master_url": "https://api.discogs.com/masters/4005544",
+      "uri": "/release/35396587-The-Last-Dinner-Party-From-The-Pyre",
+      "catno": "7859766",
+      "title": "The Last Dinner Party - From The Pyre",
+      "thumb": "https://i.discogs.com/0S7FvOt1rY_3DbvoKDy7Qw6by-Ds2qJrygsJquXAx2w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzk2/NTg3LTE3NzI2Mjg4/MjktODY1My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/4BE2pFT5HF0tkaRxQcagP1781TuX9VYOY52CnVxdYaM/rs:fit/g:sm/q:90/h:589/w:590/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzk2/NTg3LTE3NzI2Mjg4/MjktODY1My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35396587",
+      "community": {
+        "want": 203,
+        "have": 1568
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red/Pink [Inferno]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records",
+        "The Last Dinner Party",
+        "The Last Dinner Party",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V.",
+        "Bad World Limited",
+        "Bad World Limited"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Rock",
+        "Indie Pop"
+      ],
+      "id": 35394208,
+      "barcode": [
+        "BW030 A -33- GYLDA@POV",
+        "BW030 B -33- GYLDA@POV",
+        "LC00407",
+        "BIEM/SDRM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4005544,
+      "master_url": "https://api.discogs.com/masters/4005544",
+      "uri": "/release/35394208-The-Last-Dinner-Party-From-The-Pyre",
+      "catno": "00602478597299",
+      "title": "The Last Dinner Party - From The Pyre",
+      "thumb": "https://i.discogs.com/GLAAXWnoIPfD6g2eXueBfnxaVfqlAuDOFLdxlj0jLIc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzk0/MjA4LTE3NjA3OTI3/NzctMjgyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ZoahOstLKMVhd_FsXrfQQGgf9oMhk4aebDiDMfw4beU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzk0/MjA4LTE3NjA3OTI3/NzctMjgyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35394208",
+      "community": {
+        "want": 129,
+        "have": 967
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear w/ Black Liquid Fill [Film Noir Edition]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records",
+        "Sterling Sound",
+        "Schallplattenfabrik Pallas GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Baroque Pop",
+        "Art Rock"
+      ],
+      "id": 35397334,
+      "barcode": [
+        "Text",
+        "LC00407",
+        "BIEM/SDRM",
+        "00602478597169-A (1) JN-H STERLING -66842-II",
+        "00602478597169-B (2) JN-H STERLING -66842-III",
+        "00602478597169-A (1) JN-H STERLING -66842-IV",
+        "00602478597169-B (2) JN-H STERLING -66842-III"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4005544,
+      "master_url": "https://api.discogs.com/masters/4005544",
+      "uri": "/release/35397334-The-Last-Dinner-Party-From-The-Pyre",
+      "catno": "7859716",
+      "title": "The Last Dinner Party - From The Pyre",
+      "thumb": "https://i.discogs.com/zpZAxhz62TM6_9Mffc-WIYg7M_lFej5dtPO0arP_CMI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzk3/MzM0LTE3NjU5OTMz/MDUtMTg0Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/e-E5GKFlQzmW3h0IuGa9sqKV8J6DARMLRGKZ3PcqQeQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzk3/MzM0LTE3NjU5OTMz/MDUtMTg0Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35397334",
+      "community": {
+        "want": 104,
+        "have": 1222
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo",
+        "CD",
+        "All Media",
+        "Limited Edition"
+      ],
+      "label": [
+        "Island Records",
+        "Rough Trade"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Rock",
+        "Indie Pop",
+        "Alternative Rock",
+        "Baroque Pop"
+      ],
+      "id": 35392591,
+      "barcode": [
+        "0602478597329 "
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4005544,
+      "master_url": "https://api.discogs.com/masters/4005544",
+      "uri": "/release/35392591-The-Last-Dinner-Party-From-The-Pyre",
+      "catno": "7859732",
+      "title": "The Last Dinner Party - From The Pyre",
+      "thumb": "https://i.discogs.com/XrE1cBWHFlWwTdW7HyZNOa8yc8FXug0BsEUIp1V71lI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzky/NTkxLTE3NjA3MTI2/MTUtOTYyNi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/_J2VXiHmLEb8Q5lQfk-kfVfZMtUljhD1EQEM12Vlejc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzky/NTkxLTE3NjA3MTI2/MTUtOTYyNi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35392591",
+      "community": {
+        "want": 150,
+        "have": 864
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Smokey Marble",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Rough Trade Bonus"
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Handpainted Album Artwork",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Island Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 35395873,
+      "barcode": [
+        "602478597275",
+        "00602478597169-A (1) JN-H STERLING -66842- IV",
+        "00602478597169-B (2) JN-H STERLING -66842- III"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4005544,
+      "master_url": "https://api.discogs.com/masters/4005544",
+      "uri": "/release/35395873-The-Last-Dinner-Party-From-The-Pyre",
+      "catno": "7859727",
+      "title": "The Last Dinner Party - From The Pyre",
+      "thumb": "https://i.discogs.com/zwLLuNHdsBmT6iVraPM6Lh1MCCubLEglm2ODChLKaro/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzk1/ODczLTE3NzExNzk0/MTYtMTExMi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/XQkZutlL7JGSkI_vJyHHR7LR8K5w_PehPt465cOUVdc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzk1/ODczLTE3NzExNzk0/MTYtMTExMi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35395873",
+      "community": {
+        "want": 63,
+        "have": 692
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Glow In The Dark, Alternate Cover",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

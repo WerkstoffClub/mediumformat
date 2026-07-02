@@ -1,0 +1,88 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Vinyl",
+        "7\"",
+        "45 RPM",
+        "Single Sided",
+        "Single"
+      ],
+      "label": [
+        "War Child",
+        "War Child Records",
+        "War Child Records",
+        "Metropolis Mastering",
+        "Abbey Road Studios",
+        "Wembley Stadium",
+        "Optimal Media GmbH",
+        "Optimal Media GmbH",
+        "Metropolis Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [],
+      "id": 36685252,
+      "barcode": [
+        "1 91400 69161 2",
+        "191400691612",
+        "WARCHILDHELP 2 LP A1 BP53302-01 A1 3// = MATT @ METROPOLIS =",
+        "WARCHILDHELP2LP-B2 BP53302-01 B2 GOOD MORNING THIS IS YOUR WARNING 8-",
+        "WARCHILDHELP2LP-C2 5= BP53302-02 C2",
+        "WARCHILDHELP 2 LP D1 BP53302-02 D1 THEY ARE ALL OUR BABIES 7I",
+        "WARCHILD 16LP BQ53850-01 A1 31 = MATT @ METROPOLIS ="
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4153960,
+      "master_url": "https://api.discogs.com/masters/4153960",
+      "uri": "/release/36685252-Various-Help2",
+      "catno": "WARCHILD16LP",
+      "title": "Various - Help(2)",
+      "thumb": "https://i.discogs.com/1ekZSfImY6s_LfTbK9A3xJ98uLziOYK2KegmHNloTPo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njg1/MjUyLTE3NzI3MTky/MzctOTE2OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ZzeOachrnfvgc3_h29z7AjVHdfy9-ypFsD8EBFZVg-E/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Njg1/MjUyLTE3NzI3MTky/MzctOTE2OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36685252",
+      "community": {
+        "want": 390,
+        "have": 3753
+      },
+      "format_quantity": 3,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "7\"",
+            "45 RPM",
+            "Single Sided",
+            "Single"
+          ]
+        }
+      ]
+    }
+  ]
+}

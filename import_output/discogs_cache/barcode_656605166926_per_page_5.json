@@ -1,0 +1,84 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Metropolis Mastering",
+        "Occam's Fader",
+        "9000 Dreams Publishing",
+        "Urok Music",
+        "Kobalt",
+        "Promised Land Music Ltd.",
+        "Sony Music Publishing",
+        "Rostam Batmanglij Music",
+        "Sony ATV",
+        "Dear Cleveland Publishing",
+        "Where Da Kasz At",
+        "Copyright Control",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Dance-pop",
+        "Indie Pop",
+        "Dream Pop",
+        "Synth-pop"
+      ],
+      "id": 35416228,
+      "barcode": [
+        "656605166926",
+        "LC 29265",
+        "ASCAP",
+        "PRS",
+        "BMI",
+        "DOC369CD 6745-CD-7533 25-347-06-2",
+        "IFPI LY89"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4169005,
+      "master_url": "https://api.discogs.com/masters/4169005",
+      "uri": "/release/35416228-Avalon-Emerson-The-Charm-Written-Into-Changes",
+      "catno": "DOC369",
+      "title": "Avalon Emerson & The Charm* - Written Into Changes",
+      "thumb": "https://i.discogs.com/GT2BRIkEbUI4u9uzBLa02D2SVhOovJ5ri85OKDIqMfs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NDE2/MjI4LTE3NzYxNDA0/NzAtNjQ0OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Tt3iLkakQGrIBrfLxcRFHyPNhGXFrcTnEVVibUjoyKg/rs:fit/g:sm/q:90/h:532/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NDE2/MjI4LTE3NzYxNDA0/NzAtNjQ0OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35416228",
+      "community": {
+        "want": 5,
+        "have": 5
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

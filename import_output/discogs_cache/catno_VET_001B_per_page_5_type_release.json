@@ -1,0 +1,70 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Vetra Records",
+        "The Orchard",
+        "Vetra Records",
+        "Vetra Records",
+        "AWAL Recordings Ltd"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Blues"
+      ],
+      "style": [
+        "Soul",
+        "Neo Soul"
+      ],
+      "id": 34807400,
+      "barcode": [
+        "5056167181644"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3944249,
+      "master_url": "https://api.discogs.com/masters/3944249",
+      "uri": "/release/34807400-Loaded-Honey-Love-Made-Trees",
+      "catno": "VET001B",
+      "title": "Loaded Honey - Love Made Trees",
+      "thumb": "https://i.discogs.com/E90mW4HI_1vFYotgUhn928h6C_Tsu1e7COP4yWYByU8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODA3/NDAwLTE3NTUwOTAy/MTItNTA0OC5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/UNhfB2QrPTzPeaT-6rRMpcK-kE6UzbFc7s0bpqWh2o8/rs:fit/g:sm/q:90/h:577/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODA3/NDAwLTE3NTUwOTAy/MTItNTA0OC5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34807400",
+      "community": {
+        "want": 127,
+        "have": 505
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Marbled ",
+          "descriptions": [
+            "LP",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

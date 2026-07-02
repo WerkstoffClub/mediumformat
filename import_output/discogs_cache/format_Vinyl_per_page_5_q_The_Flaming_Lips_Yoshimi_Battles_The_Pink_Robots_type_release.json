@@ -1,0 +1,346 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 7,
+    "per_page": 5,
+    "items": 31,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=The+Flaming+Lips+Yoshimi+Battles+The+Pink+Robots&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=7",
+      "next": "https://api.discogs.com/database/search?q=The+Flaming+Lips+Yoshimi+Battles+The+Pink+Robots&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2002",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Warner Bros. Records",
+        "Warner Music Group",
+        "AOL Time Warner",
+        "Warner Bros. Records Inc.",
+        "Warner Bros. Records Inc.",
+        "Tarbox Road Studios",
+        "Lovely Sorts of Death",
+        "EMI Blackwood Music Inc.",
+        "Optimal Media Production",
+        "Optimal Media Production",
+        "Lovely Sorts of Death",
+        "EMI Blackwood Music Inc."
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Psychedelic Rock",
+        "Indie Rock",
+        "Experimental"
+      ],
+      "id": 623525,
+      "barcode": [
+        "0 93624 81411 5",
+        "093624814115",
+        "LC 00392",
+        "GEMA / BIEM",
+        "BMI",
+        "B266608-01 A3 HL",
+        "B266608-01 B1 HL",
+        "B266608-01 A2 HL",
+        "B266608-01 B1 HL",
+        "B266608-01 A4 HL",
+        "B266608-01 B3 HL",
+        "B266608-01 A1 HL",
+        "B266608-01 B1 HL"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 114267,
+      "master_url": "https://api.discogs.com/masters/114267",
+      "uri": "/release/623525-The-Flaming-Lips-Yoshimi-Battles-The-Pink-Robots",
+      "catno": "9362-48141-1",
+      "title": "The Flaming Lips - Yoshimi Battles The Pink Robots",
+      "thumb": "https://i.discogs.com/Y98OuCzdvJG8CuG1ctfcvr1dmFAslf0-lkwVrPo_JPQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYyMzUy/NS0xMTcxNzM1OTA1/LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/G0cI03t-DWnA9b3VuyYo4t_QblGxnsiZkLIek8h3jIM/rs:fit/g:sm/q:90/h:500/w:500/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYyMzUy/NS0xMTcxNzM1OTA1/LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/623525",
+      "community": {
+        "want": 3523,
+        "have": 10322
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red Translucent, Gatefold",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2011",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Remastered",
+        "Reissue"
+      ],
+      "label": [
+        "Warner Bros. Records",
+        "Tarbox Road Studios",
+        "Warner Bros. Records Inc.",
+        "Warner Bros. Records Inc.",
+        "Pallas USA",
+        "Schallplattenfabrik Pallas GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Experimental",
+        "Synth-pop",
+        "Indie Rock"
+      ],
+      "id": 3411172,
+      "barcode": [
+        "0 93624-95217 6",
+        "-22252-  1-48141-A  P.USA CB",
+        "-22252-  1-48141-B  P.USA CB"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 114267,
+      "master_url": "https://api.discogs.com/masters/114267",
+      "uri": "/release/3411172-The-Flaming-Lips-Yoshimi-Battles-The-Pink-Robots",
+      "catno": "530200-1",
+      "title": "The Flaming Lips - Yoshimi Battles The Pink Robots",
+      "thumb": "https://i.discogs.com/JPzMdqSZRGDnokF9UCWArlXXoLAtsym8cv1c-xzTYCo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0MTEx/NzItMTQ5Mzc0NDk1/MS01ODYyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/BDdEg7cDgmte2AknvnoGaYS93CEbrz40dSPtv2AqR2Q/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0MTEx/NzItMTQ5Mzc0NDk1/MS01ODYyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3411172",
+      "community": {
+        "want": 2417,
+        "have": 8712
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Remastered",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Remastered",
+        "Reissue"
+      ],
+      "label": [
+        "Warner Records",
+        "Tarbox Road Studios",
+        "Warner Records Inc.",
+        "Warner Records Inc.",
+        "Pallas USA",
+        "Schallplattenfabrik Pallas GmbH",
+        "Bernie Grundman Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Experimental",
+        "Synth-pop",
+        "Indie Rock"
+      ],
+      "id": 15871518,
+      "barcode": [
+        "0 93624 95217 6",
+        "093624952176",
+        "1-48141-A P.USA -22252- CB",
+        "1-48141-B P.USA -22252- CB"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 114267,
+      "master_url": "https://api.discogs.com/masters/114267",
+      "uri": "/release/15871518-The-Flaming-Lips-Yoshimi-Battles-The-Pink-Robots",
+      "catno": "093624952176",
+      "title": "The Flaming Lips - Yoshimi Battles The Pink Robots",
+      "thumb": "https://i.discogs.com/UsIs4wewqUikQPoTBle9eZ6QP9jYjpWCy6g74EFeKUE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1ODcx/NTE4LTE2MDQ2OTk4/NDAtMzY3Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/p64ZQN-26rx1_93E2cdRBuVTJnSjZrpiFcwmE0Tg3fo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1ODcx/NTE4LTE2MDQ2OTk4/NDAtMzY3Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15871518",
+      "community": {
+        "want": 1283,
+        "have": 5059
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Remastered",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2002",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "[PIAS] America",
+        "Europadisk"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Experimental"
+      ],
+      "id": 196557,
+      "barcode": [
+        "805551011013",
+        "PIASA-10-A-RE EUROPADISK DMM NY USA 63224 DON GROSSINGER",
+        "PIASA-10-B-RE EUROPADISK DMM NY USA 63224 DON GROSSINGER"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 114267,
+      "master_url": "https://api.discogs.com/masters/114267",
+      "uri": "/release/196557-The-Flaming-Lips-Yoshimi-Battles-The-Pink-Robots",
+      "catno": "PIASA 10",
+      "title": "The Flaming Lips - Yoshimi Battles The Pink Robots",
+      "thumb": "https://i.discogs.com/fZc6H9IyCl_xV5UzMxjXrpbfvtYEpwRz9pxy3wD--Wg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5NjU1/Ny0xMjk2MDY3OTYx/LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/Z2Do3GAsp_jnwmIbIO1ajtmhxKufMLKYoUGO-GfbYz4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5NjU1/Ny0xMjk2MDY3OTYx/LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/196557",
+      "community": {
+        "want": 1999,
+        "have": 1332
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Remastered",
+        "Reissue"
+      ],
+      "label": [
+        "Warner Records",
+        "Lovely Sorts Of Death Music",
+        "Warner Music Group",
+        "Warner Records Inc.",
+        "Warner Records Inc.",
+        "Lovely Sorts Of Death Music",
+        "EMI Blackwood Music Inc.",
+        "Tarbox Road Studios",
+        "Bernie Grundman Mastering",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Experimental",
+        "Synth-pop",
+        "Indie Rock"
+      ],
+      "id": 30551773,
+      "barcode": [
+        "0 93624 95217 6",
+        "093624952176",
+        "093624873051 - A 244215E1 1470473 CB",
+        "093624873051 - B 244215E2 1245951 CB",
+        "BMI"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 114267,
+      "master_url": "https://api.discogs.com/masters/114267",
+      "uri": "/release/30551773-The-Flaming-Lips-Yoshimi-Battles-The-Pink-Robots",
+      "catno": "093624952176",
+      "title": "The Flaming Lips - Yoshimi Battles The Pink Robots",
+      "thumb": "https://i.discogs.com/l94nNwBLsM0rzG1zHwlJZQg_dCha_eXM2QFlqa4xXEk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwNTUx/NzczLTE3MjA5MDYy/NDktMzc0OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/6qV22-0vdOqyrZ5fLvLQEBIhpUSu124iTEMUalis0MA/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwNTUx/NzczLTE3MjA5MDYy/NDktMzc0OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/30551773",
+      "community": {
+        "want": 377,
+        "have": 1704
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Remastered",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

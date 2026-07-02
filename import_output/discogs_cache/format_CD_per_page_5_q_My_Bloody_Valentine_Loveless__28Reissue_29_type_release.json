@@ -1,0 +1,475 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 5,
+    "per_page": 5,
+    "items": 22,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=My+Bloody+Valentine+Loveless+%28Reissue%29&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=5",
+      "next": "https://api.discogs.com/database/search?q=My+Bloody+Valentine+Loveless+%28Reissue%29&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "1996",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Creation Records",
+        "Creation Records",
+        "Creation Records",
+        "Creation Records",
+        "Creation Records",
+        "Sony Music",
+        "Creation Records Ltd.",
+        "Creation Records Ltd.",
+        "EMI Music",
+        "Sony Music",
+        "DADC Austria"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Noise Rock",
+        "Alternative Rock"
+      ],
+      "id": 1084479,
+      "barcode": [
+        "5 099748 421425",
+        "5099748421425",
+        "LC 6306",
+        "SACEM SDRM SACD SGDL",
+        "BIEM",
+        "01-484214-10",
+        "CDM",
+        "Sony Music S0148421410-0101 14",
+        "IFPI L554",
+        "unknown",
+        "Sony Music S0148421410-0101 14 A6",
+        "IFPI L554",
+        "IFPI 941B",
+        "Sony Music S0148421410-0101 14 A13",
+        "IFPI L554",
+        "IFPI 9460",
+        "Sony Music S0148421410-0101 14 A7",
+        "IFPI L554",
+        "IFPI 946B",
+        "Sony Music S0148421410-0101 14 A5",
+        "IFPI L554",
+        "IFPI 944A",
+        "Sony Music S0148421410-0101 14 A10",
+        "IFPI L554",
+        "IFPI 942C",
+        "Sony Music S0148421410-0101 14 B1",
+        "IFPI L554",
+        "IFPI 947B",
+        "Sony Music S0148421410-0101 14 A5",
+        "IFPI L554",
+        "IFPI 94Y4",
+        "Sony Music S0148421410-0101 14 A6",
+        "IFPI L554",
+        "IFPI 946A",
+        "Sony Music S0148421410-0101 14 A5",
+        "IFPI 94V1",
+        "Sony Music S0148421410-0101 14 A12",
+        "IFPI L554",
+        "IFPI 942A",
+        "Sony Music S0148421410-0101 14 A4",
+        "IFPI L554",
+        "IFPI 942R",
+        "Sony Music S0148421410-0101 14 B2",
+        "IFPI L554",
+        "IFPI 94Z1",
+        "Sony Music S0148421410-0101 14 A13",
+        "IFPI L554",
+        "IFPI 94Y6",
+        "Sony Music S0148421410-0101 14 A13",
+        "IFPI L554",
+        "IFPI 946A",
+        "Sony Music S0148421410-0101 14 A13",
+        "IFPI L554",
+        "IFPI 94K2",
+        "Sony Music S0148421410-0101 14 A8",
+        "IFPI L554",
+        "IFPI 944B",
+        "Sony Music S0148421410-0101 14 A13",
+        "IFPI L554",
+        "IFPI 94K8",
+        "Sony Music S0148421410-0101 14 A10",
+        "IFPI L554",
+        "IFPI 94K5",
+        "Sony Music S0148421410-0101 14 B3",
+        "✽",
+        "IFPI L554",
+        "IFPI 942C",
+        "Sony Music S0148421410-0101 14 A9",
+        "✽",
+        "IFPI L554 ",
+        "IFPI 944B",
+        "Sony Music S0148421410-0101 14 A5",
+        "IFPI L554",
+        "IFPI 944Q"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/1084479-My-Bloody-Valentine-Loveless",
+      "catno": "SCR 484214 2",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/XtZiWzF4C4yVhmKSRpGEm0X8h7kt2x7G9mqkbDrO6hQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwODQ0/NzktMTE5MDg3NTAx/My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/9jPsz3r3e8VK0vZfU_hRJSbXe3m1zTo5IGxr98sB50Q/rs:fit/g:sm/q:90/h:500/w:500/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwODQ0/NzktMTE5MDg3NTAx/My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/1084479",
+      "community": {
+        "want": 874,
+        "have": 3623
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2012",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue",
+        "Remastered",
+        "Repress"
+      ],
+      "label": [
+        "Sony Music",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment",
+        "EMI Music",
+        "Arvato",
+        "Arvato"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Shoegaze",
+        "Noise Rock",
+        "Alternative Rock"
+      ],
+      "id": 4899674,
+      "barcode": [
+        "8 86973 12112 2",
+        "886973121122",
+        "LC 12723",
+        "BIEM/GEMA",
+        "[Sony Music logo] 55115382/88697312112-1-1 21",
+        "IFPI LB 45",
+        "IFPI 0752",
+        "[Sony Music logo] 55115383/88697312112-2-1 21",
+        "IFPI LB 46",
+        "IFPI 0752",
+        "[Sony Music logo] 55115382/88697312112-1-1 21",
+        "IFPI LB 45",
+        "IFPI 0794",
+        "[Sony Music logo] 55115383/88697312112-2-1 21",
+        "IFPI LB 46",
+        "IFPI 0763",
+        "[Sony Music logo] 55115382/88697312112-1-1 21",
+        "IFPI LB 45",
+        "IFPI 0773",
+        "[Sony Music logo] 55115383/88697312112-2-1 21",
+        "IFPI LB 46",
+        "IFPI 0773",
+        "[Sony Music logo] 55115382/88697312112-1-1 21",
+        "IFPI LB 45",
+        "IFPI 0718",
+        "[Sony Music logo] 55115383/88697312112-2-1 21",
+        "IFPI LB 46",
+        "IFPI 0718"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/4899674-My-Bloody-Valentine-Loveless",
+      "catno": "88697312112",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/cXSp6DC2Ijqq1Rx0ZQJ-GRNwO4kIwrSGugbMcaCyM-c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ4OTk2/NzQtMTM3ODg1Mzc5/MC0zNTAxLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/LXFDFj0fskW5mVGtFhu6kjwn0f0LN_cqIGOtAzWQtSY/rs:fit/g:sm/q:90/h:565/w:567/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ4OTk2/NzQtMTM3ODg1Mzc5/MC0zNTAxLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4899674",
+      "community": {
+        "want": 846,
+        "have": 1183
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "2",
+          "text": "Digisleeve",
+          "descriptions": [
+            "Album",
+            "Reissue",
+            "Remastered",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK & Europe",
+      "year": "2012",
+      "format": [
+        "CD",
+        "Album",
+        "Remastered",
+        "Reissue",
+        "Mispress"
+      ],
+      "label": [
+        "Sony Music",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment UK Limited",
+        "Sony Music Entertainment",
+        "EMI Music",
+        "Arvato",
+        "Arvato"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Shoegaze",
+        "Noise Rock",
+        "Alternative Rock"
+      ],
+      "id": 3582420,
+      "barcode": [
+        "886973121122",
+        "8 86973 12112 2",
+        "LC 12723",
+        "BIEM/GEMA",
+        "[Sony Music logo] 55008696/88697312112-1 21",
+        "IFPI LP 73",
+        "IFPI 0713",
+        "[Sony Music logo] 55008694/88697312112-2 21",
+        "IFPI LB 46",
+        "IFPI 0712"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/3582420-My-Bloody-Valentine-Loveless",
+      "catno": "88697312112",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/6SJTnr29BZrAXtY8_9zAt2FFDqI8LM6CNPh151sDGfE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODI0/MjAtMTMzODc2Mjkw/Ny05NDQ2LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/nR5bwsv7KQJXwH85xAE-_tcfe8CYORECFTR14ZOZ5Hg/rs:fit/g:sm/q:90/h:565/w:567/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODI0/MjAtMTMzODc2Mjkw/Ny05NDQ2LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3582420",
+      "community": {
+        "want": 838,
+        "have": 1855
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "2",
+          "text": "Digisleeve",
+          "descriptions": [
+            "Album",
+            "Remastered",
+            "Reissue",
+            "Mispress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2021",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "Domino",
+        "MBV Records",
+        "MBV Records",
+        "MBV Records",
+        "Domino Recording Co. Ltd.",
+        "Optimal Media GmbH",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Noise Rock"
+      ],
+      "id": 18879622,
+      "barcode": [
+        "8 87830 01592 9",
+        "887830015929",
+        "LC 10192",
+        "AL35388-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9746",
+        "AL35389-01 manufactured by optimal media GmbH",
+        "IFPI L576",
+        "IFPI 9746",
+        "AL35388-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9701",
+        "AL35389-01 manufactured by optimal media GmbH",
+        "IFPI L576",
+        "IFPI 9701"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/18879622-My-Bloody-Valentine-Loveless",
+      "catno": "REWIGCD159",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/8kl91zsNM0Q_GdDSeiCO1msP0u_bvXfRHys-6YSdu6c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4ODc5/NjIyLTE2MjI0NzQ3/NDMtMzU2NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/OuJraHMugKlXazfS4ys7wlp7OD9DvrD5wkbRYo-wgIU/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4ODc5/NjIyLTE2MjI0NzQ3/NDMtMzU2NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/18879622",
+      "community": {
+        "want": 507,
+        "have": 1466
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "2",
+          "descriptions": [
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Noise Rock"
+      ],
+      "id": 4597210,
+      "label": [
+        "Sire",
+        "Warner Bros. Records",
+        "Creation Records",
+        "Sire Records Company",
+        "Time Warner",
+        "Sire Records Company",
+        "Sire Records Company",
+        "Warner Bros. Records Inc.",
+        "WEA Manufacturing",
+        "WEA Mfg. Olyphant",
+        "Cinram, Olyphant, PA",
+        "EMI Music Ltd.",
+        "Blackwood Music Inc."
+      ],
+      "type": "release",
+      "barcode": [
+        "0 7599-26759-2 5",
+        "075992675925",
+        "AAD",
+        "BMI",
+        "wea mfg. OLYPHANT X18378 1 26759-2 RE-1 03 M1S3 CI",
+        "wea mfg. OLYPHANT X18378 1 26759-2 RE-1 03 M1S4 CI",
+        "wea mfg. OLYPHANT X18378 1 26759-2 RE-1 03 M1S5 CI",
+        "wea mfg. OLYPHANT X18378 1 26759-2 RE-1 03 M1S6 CI",
+        "wea mfg. OLYPHANT X18378 1 26759-2 RE-1 03 M1S2 CI",
+        "wea mfg. OLYPHANT X18378 1 26759-2 RE-1 03 M1S7 CI",
+        "wea mfg. OLYPHANT X18378 1 26759-2 RE-1 03 M1S1",
+        "wea mfg. OLYPHANT X18378 1 26759-2 RE-1 03 M1S3 CI",
+        "ifpi L902",
+        "not entered",
+        "IFPI 2UA5",
+        "IFPI 2U3W",
+        "IFPI 2U9E",
+        "IFPI 2U6A",
+        "IFPI 2U7N",
+        "IFPI 2U4G",
+        "IFPI 2U4J",
+        "IFPI 2U70",
+        "IFPI 2U4W",
+        "IFPI 2U6C"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/4597210-My-Bloody-Valentine-Loveless",
+      "catno": "9 26759-2",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/Sqo0JWZRtng6R0w5202Y0Z-_gJ7xKvVvAON0odcPd5o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ1OTcy/MTAtMTYwODkxNzk2/NC03NzQ1LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/u_o_2J6wWOU-CJL6wMTvN584CG6ux5v9C_w_0WtKa7k/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ1OTcy/MTAtMTYwODkxNzk2/NC03NzQ1LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4597210",
+      "community": {
+        "want": 740,
+        "have": 687
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

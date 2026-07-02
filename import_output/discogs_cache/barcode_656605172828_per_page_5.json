@@ -1,0 +1,82 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Covertly Canadian Publishing",
+        "Secretly Canadian Publishing",
+        "Hiss Lovers Publishing",
+        "Cage Match Publishing",
+        "Empty Unused Publishing",
+        "Crab Bucket Enterprises",
+        "Harmony Of Note",
+        "Secretly Publishing",
+        "Peer International Corp.",
+        "Sony Music Publishing",
+        "Sony/ATV Acuff Rose",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Shoegaze",
+        "Indie Rock",
+        "Country Rock"
+      ],
+      "id": 35148556,
+      "barcode": [
+        "656605172828",
+        "DOC428  6745-CD-7317  25-161-21-2",
+        "IFPI LY89",
+        "IFPI L820",
+        "DOC428  6745-CD-7317  25-161-21-2",
+        "IFPI LY89",
+        "IFPI L825"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3977033,
+      "master_url": "https://api.discogs.com/masters/3977033",
+      "uri": "/release/35148556-Wednesday-Bleeds",
+      "catno": "DOC428",
+      "title": "Wednesday (10) - Bleeds",
+      "thumb": "https://i.discogs.com/seCotjKZNyTnFD-ZotoenAE7GjnLD162UwG9mo7jT1w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MTQ4/NTU2LTE3NTgzMjY4/OTQtNzU2NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/QXB2WBqG25QC6qKgOwxfW0pLTl3NDkm9keAP5psdOL8/rs:fit/g:sm/q:90/h:532/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MTQ4/NTU2LTE3NTgzMjY4/OTQtNzU2NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35148556",
+      "community": {
+        "want": 102,
+        "have": 334
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

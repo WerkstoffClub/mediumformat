@@ -1,0 +1,183 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Unknown",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Ninja Tune"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Electro House",
+        "Electroclash"
+      ],
+      "id": 36912588,
+      "barcode": [
+        "5054429209747"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4175668,
+      "master_url": "https://api.discogs.com/masters/4175668",
+      "uri": "/release/36912588-Fcukers-%C3%96",
+      "catno": "ZEN324N",
+      "title": "Fcukers - Ö",
+      "thumb": "https://i.discogs.com/qwpt-lqNBrdHHZlBYAS3uhntn8E-l6A2s3SWzpHEztQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTEy/NTg4LTE3NzQ3Nzgz/NzAtODkwNi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/3h-Op8dsF1OO8SiSkjnyv_lIMEPmwZHKM8u8N_-YoX8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTEy/NTg4LTE3NzQ3Nzgz/NzAtODkwNi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36912588",
+      "community": {
+        "want": 1,
+        "have": 20
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Unknown",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Ninja Tune",
+        "Ninja Tune",
+        "Ninja Tune",
+        "Sony Music Publishing",
+        "Becker Mastering",
+        "Universal Music Publishing Group",
+        "Warner Publishing Group",
+        "BMG Rights Management"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Electro House",
+        "Electroclash"
+      ],
+      "id": 36893233,
+      "barcode": [
+        "LC-12885"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4175668,
+      "master_url": "https://api.discogs.com/masters/4175668",
+      "uri": "/release/36893233-Fcukers-%C3%96",
+      "catno": "ZEN324NS",
+      "title": "Fcukers - Ö",
+      "thumb": "https://i.discogs.com/ymHrEjO-Oro8-57RJFhAEEepmdnu17ZEg6k0mCJdpWU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODkz/MjMzLTE3NzQ2MjI1/NjYtMTU4NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/NdIs4cTq-VX57PHaMZIa1EOzjJtsNR1unqHrIMJ2FGw/rs:fit/g:sm/q:90/h:604/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODkz/MjMzLTE3NzQ2MjI1/NjYtMTU4NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36893233",
+      "community": {
+        "want": 31,
+        "have": 198
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Ninja Tune"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Electro House",
+        "Electroclash"
+      ],
+      "id": 36921870,
+      "barcode": [
+        "4523132163697"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4175668,
+      "master_url": "https://api.discogs.com/masters/4175668",
+      "uri": "/release/36921870-Fcukers-%C3%96",
+      "catno": "ZEN324NBR",
+      "title": "Fcukers - Ö",
+      "thumb": "https://i.discogs.com/sph0R3aDUBZkpHjFlGcxeVSbrg-KJkce4OXy-HVCgHQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTIx/ODcwLTE3NzUxMTk5/NDAtNTUzOS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/W7P6jloDJyknH6Pw9J-A44sgnzIK3ol19JxdOeZQnhw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTIx/ODcwLTE3NzUxMTk5/NDAtNTUzOS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36921870",
+      "community": {
+        "want": 1,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

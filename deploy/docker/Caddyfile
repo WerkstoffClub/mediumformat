@@ -16,15 +16,31 @@
 }
 
 :80 {
-	root * /srv
 	encode gzip zstd
 
-	# Pretty URLs: /mockup-cart → mockup-cart.html
-	try_files {path} {path}.html {path}/ =404
-	file_server
+	# ── Real app: NestJS API (path already carries /api/v1) ──
+	handle /api/* {
+		reverse_proxy api:3001
+	}
+
+	# ── Real app: back-office SPA (built with --base=/backoffice/) ──
+	handle /backoffice* {
+		root * /srv
+		try_files {path} /backoffice/index.html
+		file_server
+	}
+
+	# ── Static prototype (everything else) ──
+	handle {
+		root * /srv
+		# Pretty URLs: /mockup-cart → mockup-cart.html
+		try_files {path} {path}.html {path}/ =404
+		file_server
+	}
 
 	handle_errors {
 		rewrite * /404.html
+		root * /srv
 		file_server
 	}
 

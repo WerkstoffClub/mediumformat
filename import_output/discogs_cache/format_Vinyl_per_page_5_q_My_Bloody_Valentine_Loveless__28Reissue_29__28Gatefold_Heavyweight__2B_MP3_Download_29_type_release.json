@@ -1,0 +1,364 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 5,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2021",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Deluxe Edition",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Domino",
+        "MBV Records",
+        "MBV Records",
+        "MBV Records",
+        "Domino Recording Co. Ltd.",
+        "Alchemy Mastering",
+        "Optimal Media GmbH",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Noise Rock"
+      ],
+      "id": 18793696,
+      "barcode": [
+        "8 87830 01595 0",
+        "887830015950",
+        "LC 10192",
+        "MBV 0217 XX8S A3 =MATT@ALCHEMY= BH97159=01A₁ REWIGLP159",
+        "MBV 0217 XX8S B3 =MATT@ALCHEMY= BH97159=01B₁ REWIGLP159",
+        "MBV 0217 XX8S A3 =MATT@ALCHEMY= A=1 BH97159-01A1 REWIGLP159",
+        "MBV0217 XX8S B1 REWIGLP159 BH97156-01B1 =1E",
+        "MBV 0217 XX8S A3 =MATT@ALCHEMY= BH97159=01A₁ REWIGLP159",
+        "MBV0217 XX8S B1 REWIGLP159 BH97156-01B₁ =1E",
+        "MBV 0217 XX8S A3 =MATT@ALCHEMY= 1=r BH97159-01A1 REWIGLP159",
+        "MBV 0217 XX8S B1 REWIGLP159 BH97156-01B1 311",
+        "MBV 0217 XX8S A3 =MATT@ALCHEMY= Δ|˅ BH97159-01A1 REWIGLP159",
+        "MBV 0217 XX8S B1 REWIGLP159 BH97156-01B1 31T",
+        "MBV 0217 XX8S A3 =MATT@ALCHEMY= < .. > BH97159-01A1 REWIGLP159",
+        "MBV0217 XX8S B1 REWIGLP159 BH97159-01B1 TIE",
+        "MBV0217XX8S A3 =MATT@ALCHEMY= 1|| BH97159-01A1 REWIGLP159",
+        "MBV0217XX8S B1 REWIGLP159 BH97156-01B1 3+",
+        "MBV 0217 XX8S A3 Δ|^ =MATT@ALCHEMY= BH97159=01A₁ REWIGLP159",
+        "MBV0217 XX8S B1 REWIGLP159 BH97156-01B₁ ΔE"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/18793696-My-Bloody-Valentine-Loveless",
+      "catno": "REWIGLP159X",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/2WVN-kBpjh9JmJqkWJKN1tv2iEYXOIAG12hQ9268n0E/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4Nzkz/Njk2LTE2MjE2NDA3/MzItMzAwNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/TKVifr22Gisr9AwA5WtzAJ5nvDx7IWYQyRdl_VnJ4FE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4Nzkz/Njk2LTE2MjE2NDA3/MzItMzAwNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/18793696",
+      "community": {
+        "want": 3007,
+        "have": 12871
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Deluxe Edition",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Deluxe Edition",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "MBV Records",
+        "Domino",
+        "MBV Records",
+        "Domino",
+        "MBV Records",
+        "MBV Records",
+        "Domino Recording Co. Ltd.",
+        "Alchemy Mastering",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Dream Pop",
+        "Noise Rock",
+        "Alternative Rock"
+      ],
+      "id": 23029007,
+      "barcode": [
+        "8 87830 01597 4",
+        "0887830015974",
+        "LC 10192",
+        "BH97159-01A₁ REWIGLP159 MBV 0217 XX8S A3 =MATT @ ALCHEMY= V+1",
+        "BH97156-01B₁ MBV 0217 XX8S B1 REWIGLP159 3+V"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/23029007-My-Bloody-Valentine-Loveless",
+      "catno": "REWIGLP159",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/p-LCaMlbsB1Ac8bK7u7faWv_ZIYyP8NLVVjX_ml4fNQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDI5/MDA3LTE2NjE5NjIx/OTEtMTA2Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/axihc63SBmAkfFtL0u665JKL8i77x1y7gIORQKi9Fx4/rs:fit/g:sm/q:90/h:565/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDI5/MDA3LTE2NjE5NjIx/OTEtMTA2Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23029007",
+      "community": {
+        "want": 1347,
+        "have": 3498
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Deluxe Edition",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2021",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Deluxe Edition",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Domino",
+        "MBV Records",
+        "MBV Records",
+        "MBV Records",
+        "Alchemy Mastering",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Noise Rock"
+      ],
+      "id": 21223558,
+      "barcode": [
+        "8 87830 01595 0",
+        "887830015950",
+        "LC 10192",
+        "MBV 0217 XX8S A3 =MATT @ Alchemy = BH97159=01A₁ REWIGLP159",
+        "MBV 0217 XX8S B3 =MATT @ Alchemy = BH97159=01B₁ REWIGLP159",
+        "MBV 0217 XX8S A3 = MATT @ ALCHEMY = BH97159-01A₁  REWIGLP159",
+        "MBV0217 XX8S B1 3=+ REWIGLP159 BH97156-01B₁"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/21223558-My-Bloody-Valentine-Loveless",
+      "catno": "REWIGLP159X",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/Pg31oCHYHbln7juT3jJhatTLrFskVaprHtoivdUo8hw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMjIz/NTU4LTE2Mzg2MzU1/NTAtNjc1OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/c-bLRMWMyAAe6DHyeFoGz5BcelD_9Dx_ph-9_OdpXLA/rs:fit/g:sm/q:90/h:602/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMjIz/NTU4LTE2Mzg2MzU1/NTAtNjc1OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/21223558",
+      "community": {
+        "want": 943,
+        "have": 2667
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Deluxe Edition",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2021",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Deluxe Edition",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Domino",
+        "MBV Records",
+        "Domino",
+        "MBV Records",
+        "MBV Records",
+        "MBV Records",
+        "Alchemy Mastering",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Noise Rock"
+      ],
+      "id": 18817489,
+      "barcode": [
+        "4523132169590",
+        "MBV 0217 XX8S A3 REWIGLP159 =MATT@ALCHEMY= BH97159-01 A",
+        "MBV 0217 XX8S B1 REWIGLP159 BH97156-01 B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/18817489-My-Bloody-Valentine-Loveless",
+      "catno": "BRWGLP159X",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/QRpzOoJG8wtraCJCD9dKUL3TP2ZXOw6n2iBG_Hiwgc4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4ODE3/NDg5LTE2MjI1NzIz/NzEtNTYzNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/O4ctlNcaFB5i6rEvfBbM5JlhH-CfaMgeZkY_-6HWNbE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4ODE3/NDg5LTE2MjI1NzIz/NzEtNTYzNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/18817489",
+      "community": {
+        "want": 836,
+        "have": 281
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold,180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Deluxe Edition",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "Domino"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Noise Rock"
+      ],
+      "id": 23357897,
+      "barcode": [
+        "4523132650593",
+        "MBV 0217 XX8S A3  =MATT@ALCHEMY= BH97159=01A₁ REWIGLP159 Δ+⊥",
+        "MBV 0217 XX8S B1 REWIGLP159 BH97156-01B₁ 3=x"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/23357897-My-Bloody-Valentine-Loveless",
+      "catno": "REWIGLP159SBR",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/dPTDKmBjLnJBX2iqWqkNuXZspUPf_YJEXGrHi1qGeeU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMzU3/ODk3LTE2NTM1NzA0/NTgtODU3OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/-cx7F5_HeSeMfCshr9D-LAudRd4FqDrN0LmKrSZJBjQ/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMzU3/ODk3LTE2NTM1NzA0/NTgtODU3OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23357897",
+      "community": {
+        "want": 581,
+        "have": 172
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Gatefold, 180g, Art Print",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

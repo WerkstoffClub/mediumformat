@@ -1,0 +1,321 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 4,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "USA & Europe",
+      "year": "2019",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Jagjaguwar",
+        "Bon Iver",
+        "April Base Publishing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 14935201,
+      "barcode": [
+        "656605235028",
+        "6 56605 23502 8",
+        "F62004 JAG350CD ",
+        "IFPI LD02",
+        "IFPI 5J54",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/14935201-Bon-Iver-ii",
+      "catno": "JAG350",
+      "title": "Bon Iver - i,i",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/14935201",
+      "community": {
+        "want": 0,
+        "have": 0
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2019",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Jagjaguwar",
+        "Bon Iver",
+        "April Base Publishing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 14935208,
+      "barcode": [
+        "656605235028",
+        "6 56605 23502 8",
+        "F62004 JAG350CD ",
+        "IFPI LD02",
+        "IFPI 5J54",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/14935208-Bon-Iver-ii",
+      "catno": "JAG350",
+      "title": "Bon Iver - i,i",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/14935208",
+      "community": {
+        "want": 0,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2019",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Jagjaguwar",
+        "Bon Iver",
+        "April Base Publishing",
+        "Kobalt Songs Music Publishing",
+        "Gary Nicholson Music",
+        "Universal Music Corporation",
+        "Howdy Skies Music",
+        "Eight Of Swords",
+        "Sony ATV",
+        "Penumbral Music",
+        "Modern Works Music Publishing",
+        "Bradleytime",
+        "Songish",
+        "Brought To You By Heavy Duty",
+        "Heavy Duty Music Publishing",
+        "Velvet Negroni Music",
+        "4AD Songs Limited",
+        "Beggars Music Ltd",
+        "This Is Poliça",
+        "WheezyHitMaker",
+        "Ultra Empire Music",
+        "Infinite Vibration Technology",
+        "Guitarheels Music",
+        "Big Deal Music Group",
+        "The Sound Of Trying",
+        "Ribbon Music",
+        "Heptablooptipuss",
+        "Zappo Music",
+        "Juwan Productions Inc.",
+        "Sevendollars",
+        "Noah Goldstein Music",
+        "Concord Sounds",
+        "BMG Rights Management (UK) Limited",
+        "Good Years Music",
+        "BMG (UK) Ltd.",
+        "Chevelon Music",
+        "Broderism Music",
+        "2 Packs Of Camel Wides",
+        "April Base",
+        "Sonic Ranch Studios",
+        "Sterling Sound Edgewater, NJ",
+        "GZ Media",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Experimental",
+        "Folk Rock"
+      ],
+      "id": 14030164,
+      "barcode": [
+        "656605235028",
+        "6 56605 23502 8",
+        "ASCAP",
+        "BMI",
+        "F62004 JAG350CD ",
+        "IFPI LD02",
+        "IFPI 5J54"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1594486,
+      "master_url": "https://api.discogs.com/masters/1594486",
+      "uri": "/release/14030164-Bon-Iver-ii",
+      "catno": "JAG350",
+      "title": "Bon Iver - i,i",
+      "thumb": "https://i.discogs.com/10UvzpbvdXKCRJm2Kjz50ypS-UCglv-MXaFLyKNkfJA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MDMw/MTY0LTE1Njg2NjQ5/OTctNzMyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/8SF906JblM3Ycl7l3cCkVU0aUnX7p87Kn6fGMUMPoSs/rs:fit/g:sm/q:90/h:535/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MDMw/MTY0LTE1Njg2NjQ5/OTctNzMyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14030164",
+      "community": {
+        "want": 358,
+        "have": 1600
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2019",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Jagjaguwar",
+        "Bon Iver",
+        "April Base Publishing",
+        "Kobalt Songs Music Publishing",
+        "Gary Nicholson Music",
+        "Universal Music Corporation",
+        "Howdy Skies Music",
+        "Eight Of Swords",
+        "Sony ATV",
+        "Penumbral Music",
+        "Modern Works Music Publishing",
+        "Bradleytime",
+        "Songish",
+        "Brought To You By Heavy Duty",
+        "Heavy Duty Music Publishing",
+        "Velvet Negroni Music",
+        "4AD Songs Limited",
+        "Beggars Music Ltd",
+        "This Is Poliça",
+        "WheezyHitMaker",
+        "Ultra Empire Music",
+        "Infinite Vibration Technology",
+        "Guitarheels Music",
+        "Big Deal Music Group",
+        "The Sound Of Trying",
+        "Ribbon Music",
+        "Heptablooptipuss",
+        "Zappo Music",
+        "Juwan Productions Inc.",
+        "Sevendollars",
+        "Noah Goldstein Music",
+        "Concord Sounds",
+        "BMG Rights Management (UK) Limited",
+        "Good Years Music",
+        "BMG (UK) Ltd.",
+        "Chevelon Music",
+        "Broderism Music",
+        "2 Packs Of Camel Wides",
+        "April Base",
+        "Sonic Ranch Studios",
+        "Sterling Sound Edgewater, NJ",
+        "GZ Media",
+        "GZ Media"
+      ],
+      "type": "master",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Experimental",
+        "Folk Rock"
+      ],
+      "id": 1594486,
+      "barcode": [
+        "656605235028",
+        "6 56605 23502 8",
+        "ASCAP",
+        "BMI",
+        "F62004 JAG350CD ",
+        "IFPI LD02",
+        "IFPI 5J54"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1594486,
+      "master_url": "https://api.discogs.com/masters/1594486",
+      "uri": "/master/1594486-Bon-Iver-ii",
+      "catno": "JAG350",
+      "title": "Bon Iver - i,i",
+      "thumb": "https://i.discogs.com/10UvzpbvdXKCRJm2Kjz50ypS-UCglv-MXaFLyKNkfJA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MDMw/MTY0LTE1Njg2NjQ5/OTctNzMyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/8SF906JblM3Ycl7l3cCkVU0aUnX7p87Kn6fGMUMPoSs/rs:fit/g:sm/q:90/h:535/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MDMw/MTY0LTE1Njg2NjQ5/OTctNzMyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/1594486",
+      "community": {
+        "want": 4610,
+        "have": 19475
+      }
+    }
+  ]
+}

@@ -1,0 +1,478 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 7,
+    "per_page": 5,
+    "items": 32,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Taylor+Swift+1989&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=7",
+      "next": "https://api.discogs.com/database/search?q=Taylor+Swift+1989&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Special Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift Music",
+        "MXM Productions",
+        "UMG Commercial Services",
+        "Electric Lady Studios",
+        "Rough Customer Studio",
+        "Sharp Sonics",
+        "Conway Studios",
+        "Kitty Committee Studio",
+        "Kitty Committee Studios East",
+        "Hutchinson Sound",
+        "Big Mercy Studio",
+        "Pleasure Hill Recording",
+        "Mandarin Oriental Hotel (Milan, IT)",
+        "Audu Music Studio",
+        "Studio 112",
+        "Black Bird Studios",
+        "The Hideaway Studio",
+        "BLND Studio, Sweden",
+        "Sterling Sound Edgewater, NJ",
+        "Sterling Sound Nashville",
+        "MixStar Studios",
+        "Prime Recording",
+        "Prime Recording",
+        "Studio 112",
+        "BLND Studio, Sweden",
+        "Songs of Universal, Inc.",
+        "Kobalt Music",
+        "Kobalt Music Group Limited",
+        "Sony/ATV Songs LLC",
+        "Ducky Donath Music",
+        "Write 2 Live",
+        "MXM Music",
+        "Wolf Cousins",
+        "Warner/Chappell Music Scandinavia AB",
+        "Indiscipline AB",
+        "Megaphonic Ltd",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Pop Rock"
+      ],
+      "id": 28638091,
+      "barcode": [
+        "0 602455 54214 4",
+        "0602455542144",
+        "BMI",
+        "STIM",
+        "ASCAP",
+        "245554214-A (3) RKS STERLING 3=1",
+        "245554214-B (3) RKS STERLING 31X",
+        "245554214-C (1) P1 060245554217 C RKS STERLING 3=+",
+        "245554214-D2 RE1 (2) RKS STERLING 4Λ",
+        "245554214-A (3) 3T RKS STERLING",
+        "245554214-B (3) 3Δ RKS STERLING",
+        "245554214-C (1) P1 060245554217 C 3=T RKS STERLING",
+        "245554214-D2 RE1 (2) SV RKS STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3287971,
+      "master_url": "https://api.discogs.com/masters/3287971",
+      "uri": "/release/28638091-Taylor-Swift-1989-Taylors-Version",
+      "catno": "0245554214",
+      "title": "Taylor Swift - 1989 (Taylor's Version)",
+      "thumb": "https://i.discogs.com/UnTtgCRUtgMAo8doTrgT4ulWnnPTbM3WSHIZv9rLM74/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NjM4/MDkxLTE3NjA0NTYx/NzgtNTU1MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/u2oar7eGFfQT4-HRra4zaqCHLgCp409254OxKwHCTVA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NjM4/MDkxLTE3NjA0NTYx/NzgtNTU1MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28638091",
+      "community": {
+        "want": 2893,
+        "have": 40279
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Blue [Crystal Skies Blue]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Special Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Special Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "Taylor Swift Music",
+        "UMG Commercial Services",
+        "Songs of Universal, Inc.",
+        "Write 2 Live",
+        "MXM Music",
+        "Kobalt Music",
+        "Wolf Cousins",
+        "Warner/Chappell Music Scandinavia AB",
+        "Sony/ATV Songs LLC",
+        "Ducky Donath Music",
+        "Megaphonic Ltd",
+        "Indiscipline AB",
+        "Kobalt Music Group Limited",
+        "Realsongs",
+        "MixStar Studios",
+        "Mandarin Oriental Hotel (Milan, IT)",
+        "Kitty Committee Studio",
+        "Conway Studios",
+        "Rough Customer Studio",
+        "Electric Lady Studios",
+        "Sharp Sonics",
+        "Audu Music Studio",
+        "Hutchinson Sound",
+        "Pleasure Hill Recording",
+        "Big Mercy Studio",
+        "Studio 112",
+        "BLND Studio, Sweden",
+        "Blackbird Studio",
+        "The Hideaway Studio",
+        "Sterling Sound Nashville",
+        "Sterling Sound Edgewater, NJ",
+        "Prime Recording",
+        "Prime Recording",
+        "MXM Productions",
+        "Target",
+        "Sterling Sound",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop"
+      ],
+      "id": 28714936,
+      "barcode": [
+        "6 02455 54218 2",
+        "602455542182",
+        "BMI",
+        "GMR",
+        "STIM",
+        "PRS",
+        "ASCAP",
+        "0245554218",
+        "0245586636",
+        "BN02524-01 A1 245554218-A (2) 31△ RKS Sterling",
+        "BN02524-01 B1 245554218-B (2) 4# RKS Sterling",
+        "BN02524-02 C1 | 245554218-C (2) z= RKS Sterling",
+        "BN02524-02 D1 | 245554218-D2 RE1 (2) RKS +h Sterling",
+        "245554218-A (2) 1T RKS STERLING BN02524-01 A1",
+        "245554218-B (2) RKS STERLING BN02524 01 B1 V1",
+        "RKS STERLING 245554218-C (2) BN02524-02 C1 1+",
+        "245554218-D-RE1 (2) RKS STERLING BN02524-02 D1 =1",
+        "BN 02524-01 A1 245554218-A (2) RKS Sterling 311",
+        "BN 02524-01 B1 31△ 245554218-B (2) RKS STERLING",
+        "245554218-C (2) 3=▽ BN 02524-02 C1 RKS STERLING",
+        "BN 02524-02 D1 245554218-D2RE 1 (2) 31△ RKS STERLING",
+        "6 02455 86636 3",
+        "602455866363"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3287971,
+      "master_url": "https://api.discogs.com/masters/3287971",
+      "uri": "/release/28714936-Taylor-Swift-1989-Taylors-Version",
+      "catno": "0245554218",
+      "title": "Taylor Swift - 1989 (Taylor's Version)",
+      "thumb": "https://i.discogs.com/jyVVlwZSb6wP4XxMclktdhltO__lbVG1g9qFhTXeUcs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzE0/OTM2LTE2OTg0OTc0/MzctNjU5MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/RBQuQnnHS-oam3C70hdVic60lDKg5doB3zRKQSF0pfg/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzE0/OTM2LTE2OTg0OTc0/MzctNjU5MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28714936",
+      "community": {
+        "want": 1542,
+        "have": 24940
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Tangerine, Optimal Media GmbH Pressing",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Special Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Special Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "UMG Commercial Services",
+        "Sterling Sound",
+        "MPO"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Pop Rock"
+      ],
+      "id": 28714750,
+      "barcode": [
+        "6 02455 54217 5",
+        "[MPO logo]® 23 314514 RKS STERLING M2 060245554217  A   245554214-A  (1)",
+        "RKS STERLING P1 M1 245554214-B (1)  060245554217 B",
+        "[MPO logo]® 23322504  RKS STERLING P1 M1  245554214-C  (2)  060245554217 C",
+        "[MPO logo]® 23 322519  RKS STERLING  P1  245554214-D2 RE1  (2)",
+        "RKS STERLING 060245554217 A 245554214-A (1) P1 M1",
+        "RKS STERLING 245554214-B (1) P1 M2 060245554217 B",
+        "[MPO logo]® 23 321409 245554214-C (1) M3 060245554217 C RKS STERLING",
+        "RKS STERLING 245554214-D2 RE1 (2) M2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3287971,
+      "master_url": "https://api.discogs.com/masters/3287971",
+      "uri": "/release/28714750-Taylor-Swift-1989-Taylors-Version",
+      "catno": "0245554217",
+      "title": "Taylor Swift - 1989 (Taylor's Version)",
+      "thumb": "https://i.discogs.com/U0_txxsgtB06rBZs6lTH2ONUoBUH1vg6TtI9b0OIkqI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzE0/NzUwLTE2OTk0NzQ1/NTctNDExNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/KdIu9S39s1TExn0DEPaaQW-Vxf4fT8OAfbleGydyiUY/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzE0/NzUwLTE2OTk0NzQ1/NTctNDExNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28714750",
+      "community": {
+        "want": 2156,
+        "have": 24854
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Yellow [Sunrise Boulevard Yellow]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Special Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Special Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "UMG Commercial Services",
+        "Mandarin Oriental Hotel (Milan, IT)",
+        "Kitty Committee Studio",
+        "Conway Studios",
+        "Rough Customer Studio",
+        "Electric Lady Studios",
+        "Sharp Sonics",
+        "Audu Music Studio",
+        "Hutchinson Sound",
+        "Pleasure Hill Recording",
+        "Big Mercy Studio",
+        "Studio 112",
+        "BLND Studio, Sweden",
+        "Blackbird Studio",
+        "The Hideaway Studio",
+        "MixStar Studios",
+        "Sterling Sound Nashville",
+        "Sterling Sound Edgewater, NJ",
+        "Prime Recording",
+        "Prime Recording",
+        "MXM Productions",
+        "Taylor Swift Music",
+        "Songs of Universal, Inc.",
+        "Write 2 Live",
+        "MXM Music",
+        "Kobalt Music",
+        "Wolf Cousins",
+        "Warner/Chappell Music Scandinavia AB",
+        "Sony/ATV Songs LLC",
+        "Ducky Donath Music",
+        "Megaphonic Ltd",
+        "Indiscipline AB",
+        "Kobalt Music Group Limited",
+        "Realsongs",
+        "Sterling Sound Nashville",
+        "MPO"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Pop Rock"
+      ],
+      "id": 28714732,
+      "barcode": [
+        "602455542151",
+        "6 02455 54215 1",
+        "BMI",
+        "GMR",
+        "STIM",
+        "PRS",
+        "ASCAP",
+        "0245554215",
+        "245554214-A (2) 060245554217 A RKS STERLING [MPO logo]® 23 320943",
+        "245554214-B (1) P1 M1 060245554217 B RKS STERLING ",
+        "245554214-C (2) 060245554217 C RKS STERLING [MPO logo]® 23 322961 P1 M2",
+        "245554214-d2 RE1 (2) RKS STERLING [MPO logo]® 23 323065 P1 M3"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3287971,
+      "master_url": "https://api.discogs.com/masters/3287971",
+      "uri": "/release/28714732-Taylor-Swift-1989-Taylors-Version",
+      "catno": "0245554215",
+      "title": "Taylor Swift - 1989 (Taylor's Version)",
+      "thumb": "https://i.discogs.com/YRunIMEPN3KktU1zCcALUc33oj_aa2iCTN6XEawbKAc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzE0/NzMyLTE2OTk5MjA3/NDAtOTcxMy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/JmmPmOtk8B2jmghbf0wem9LBv_032ldE9jPos3p9yGQ/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzE0/NzMyLTE2OTk5MjA3/NDAtOTcxMy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28714732",
+      "community": {
+        "want": 2348,
+        "have": 25840
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Pink [Rose Garden Pink]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Special Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Special Edition"
+      ],
+      "label": [
+        "Republic Records",
+        "Taylor Swift",
+        "Taylor Swift",
+        "MPO",
+        "Sterling Sound",
+        "UMG Commercial Services"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Synth-pop",
+        "Ballad",
+        "Pop Rock"
+      ],
+      "id": 28714738,
+      "barcode": [
+        "6 02455 54216 8",
+        "602455542168",
+        "[MPO logo]® 23 320910 245554214-A (1) 060245554217 A RKS STERLING P1 M1",
+        "[MPO logo]® 23 314511 245554214-B (1) 060245554217 B RKS STERLING P1 M1",
+        "[MPO logo]® 23 322502 245554214-C (3) RKS STERLING",
+        "[MPO logo]® 23 322503 245554214-D2 RE1 (2) RKS STERLING P1 M2",
+        "[MPO Logo]® 23 314617 RKS STERLING 060245554217 A M2 245554214-A (1)",
+        "[MPO Logo]® 23 314616 245554214-B (1) 060245554217 B RKS STERLING",
+        "[MPO Logo]® 23 316275 060245554217 C RKS STERLING 245554214-C (1) P1",
+        "245554214-D2 RE1 (2) M1 [MPO Logo]® 23 316276 RKS STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3287971,
+      "master_url": "https://api.discogs.com/masters/3287971",
+      "uri": "/release/28714738-Taylor-Swift-1989-Taylors-Version",
+      "catno": "0245554216",
+      "title": "Taylor Swift - 1989 (Taylor's Version)",
+      "thumb": "https://i.discogs.com/S_kb7y6qy2J5cYFBheRJa5Ryq2S4gGr8GSBGHUIh3h8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzE0/NzM4LTE2OTk5MjEw/MTItMzk1My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/BhR8VHeaF1jpLfw2A8UE19d9FeGg4B8TLo2AonjdFHk/rs:fit/g:sm/q:90/h:592/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzE0/NzM4LTE2OTk5MjEw/MTItMzk1My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28714738",
+      "community": {
+        "want": 2118,
+        "have": 17685
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Green [Aquamarine Green]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Special Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

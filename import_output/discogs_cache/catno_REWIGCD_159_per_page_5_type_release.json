@@ -1,0 +1,135 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2021",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "MBV Records",
+        "Domino"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock"
+      ],
+      "id": 18915661,
+      "barcode": [
+        "887830015929"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/18915661-My-Bloody-Valentine-Loveless",
+      "catno": "REWIGCD159",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/USf_O1WmgVWMvT6n0UMDM64sb7nB_hy6vzg7cWa0Qt0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4OTE1/NjYxLTE2MjIyMjAz/NDctMTE1NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/7qBWwR0aldYGkqzTENS2GMZuhLzbzsXHoeU8mL-9Cj0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4OTE1/NjYxLTE2MjIyMjAz/NDctMTE1NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/18915661",
+      "community": {
+        "want": 65,
+        "have": 179
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2021",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue",
+        "Remastered"
+      ],
+      "label": [
+        "Domino",
+        "MBV Records",
+        "MBV Records",
+        "MBV Records",
+        "Domino Recording Co. Ltd.",
+        "Optimal Media GmbH",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Shoegaze",
+        "Alternative Rock",
+        "Noise Rock"
+      ],
+      "id": 18879622,
+      "barcode": [
+        "8 87830 01592 9",
+        "887830015929",
+        "LC 10192",
+        "AL35388-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9746",
+        "AL35389-01 manufactured by optimal media GmbH",
+        "IFPI L576",
+        "IFPI 9746",
+        "AL35388-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9701",
+        "AL35389-01 manufactured by optimal media GmbH",
+        "IFPI L576",
+        "IFPI 9701"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 5948,
+      "master_url": "https://api.discogs.com/masters/5948",
+      "uri": "/release/18879622-My-Bloody-Valentine-Loveless",
+      "catno": "REWIGCD159",
+      "title": "My Bloody Valentine - Loveless",
+      "thumb": "https://i.discogs.com/8kl91zsNM0Q_GdDSeiCO1msP0u_bvXfRHys-6YSdu6c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4ODc5/NjIyLTE2MjI0NzQ3/NDMtMzU2NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/OuJraHMugKlXazfS4ys7wlp7OD9DvrD5wkbRYo-wgIU/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4ODc5/NjIyLTE2MjI0NzQ3/NDMtMzU2NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/18879622",
+      "community": {
+        "want": 507,
+        "have": 1466
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "2",
+          "descriptions": [
+            "Album",
+            "Reissue",
+            "Remastered"
+          ]
+        }
+      ]
+    }
+  ]
+}

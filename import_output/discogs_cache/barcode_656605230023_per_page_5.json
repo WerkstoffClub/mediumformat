@@ -1,0 +1,246 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 4,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Mexico",
+      "genre": [
+        "Pop"
+      ],
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 23439614,
+      "label": [
+        "Jagjaguwar"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 56605 23002 3",
+        "656605230023"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/release/23439614-Bon-Iver-22-A-Million",
+      "catno": "JAG300",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/550wDJq6IVXBjaO7uFC4VtqX0bzCSWTpaHwqf4F5DPE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNDM5/NjE0LTE2NTQxNTU1/MzUtNDE3OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/nvQpiNwjXPVf65-SdddeJaqndjO0po3kP9_7mg9qTS4/rs:fit/g:sm/q:90/h:522/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNDM5/NjE0LTE2NTQxNTU1/MzUtNDE3OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/23439614",
+      "community": {
+        "want": 60,
+        "have": 78
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Jewel Case",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Australia",
+      "year": "2016",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Bon Iver",
+        "April Base Publishing",
+        "Sony DADC Australia"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop"
+      ],
+      "id": 10299917,
+      "barcode": [
+        "6 56605 23002 3",
+        "656605230023",
+        "Sony DADC IFPI LV90 A0101084059-0101 15",
+        "IFPI LV90",
+        "IFPI 6550",
+        "Sony DADC IFPI LV90 A0101084059-0101 25",
+        "IFPI LV90",
+        "IFPI 6549"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/release/10299917-Bon-Iver-22-A-Million",
+      "catno": "JAG300",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/YzelBWPxp26WheGBJPVUPS6VyTFrrKNawSkcWmsY5nc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjk5/OTE3LTE3Mjc0ODE1/MjItODMzNi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/pQzrHGlyhxaly1mBtVh_hxdPA2UZ0yiwnNkW7d0JPWs/rs:fit/g:sm/q:90/h:529/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjk5/OTE3LTE3Mjc0ODE1/MjItODMzNi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10299917",
+      "community": {
+        "want": 150,
+        "have": 312
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2016",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Bon Iver",
+        "April Base Publishing",
+        "CDA ImPressing Solutions, USA"
+      ],
+      "type": "master",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Lo-Fi",
+        "Experimental",
+        "Leftfield"
+      ],
+      "id": 1065672,
+      "barcode": [
+        "6 56605 23002 3",
+        "656605230023",
+        "ASCAP",
+        "08/17/2016 04:49:54.PM #164373 IFPI LN08 JAG300CD 3036925 03",
+        "08/17/2016 05:01:11.PM #164374 IFPI LN08 JAG300CD 3036925 04",
+        "IFPI LN08",
+        "IFPI JI06",
+        "IFPI 1002"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/master/1065672-Bon-Iver-22-A-Million",
+      "catno": "JAG300",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/gSOUfTyLRdEer5rs8IYW9--aU3NzwZnpFLyNq9cFmc8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxMTc3/NjAtMTQ4MjE3ODU0/OS00Mzc1LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/sPfljxjT8wCkBn2x2N_KErZ9V1k0biBuhqwCbDvlNm8/rs:fit/g:sm/q:90/h:523/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxMTc3/NjAtMTQ4MjE3ODU0/OS00Mzc1LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/masters/1065672",
+      "community": {
+        "want": 10517,
+        "have": 35652
+      }
+    },
+    {
+      "country": "US",
+      "year": "2016",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Jagjaguwar",
+        "Bon Iver",
+        "Bon Iver",
+        "April Base Publishing",
+        "CDA ImPressing Solutions, USA"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Lo-Fi",
+        "Experimental",
+        "Leftfield"
+      ],
+      "id": 9117760,
+      "barcode": [
+        "6 56605 23002 3",
+        "656605230023",
+        "ASCAP",
+        "08/17/2016 04:49:54.PM #164373 IFPI LN08 JAG300CD 3036925 03",
+        "08/17/2016 05:01:11.PM #164374 IFPI LN08 JAG300CD 3036925 04",
+        "IFPI LN08",
+        "IFPI JI06",
+        "IFPI 1002"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1065672,
+      "master_url": "https://api.discogs.com/masters/1065672",
+      "uri": "/release/9117760-Bon-Iver-22-A-Million",
+      "catno": "JAG300",
+      "title": "Bon Iver - 22, A Million",
+      "thumb": "https://i.discogs.com/gSOUfTyLRdEer5rs8IYW9--aU3NzwZnpFLyNq9cFmc8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxMTc3/NjAtMTQ4MjE3ODU0/OS00Mzc1LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/sPfljxjT8wCkBn2x2N_KErZ9V1k0biBuhqwCbDvlNm8/rs:fit/g:sm/q:90/h:523/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxMTc3/NjAtMTQ4MjE3ODU0/OS00Mzc1LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/9117760",
+      "community": {
+        "want": 553,
+        "have": 2979
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digisleeve",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

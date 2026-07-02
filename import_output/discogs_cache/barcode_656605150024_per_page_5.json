@@ -1,0 +1,171 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "UK & US",
+      "year": "2020",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Sound City Studios",
+        "ARC Studios, Omaha, NE",
+        "Gateway Mastering",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Whatever Mom Music",
+        "Corn Fox Publishing",
+        "Goldmeyn Music",
+        "Bedrooms; Bedrooms And Spiders",
+        "Pizza Money Music",
+        "Sliondelion",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk"
+      ],
+      "id": 15497734,
+      "barcode": [
+        "656605150024",
+        "6 56605 15002 4",
+        "LC 29265",
+        "ASCAP",
+        "BMI",
+        "DOC200CD 6745-CD-3872 20-105-09",
+        "IFPI LK13",
+        "IFPI L820",
+        "DOC200CD 6745-CD-3872 20-105-09",
+        "IFPI LK13",
+        "IFPI L817",
+        "DOC200CD 6745-CD-3872 20-105-09",
+        "IFPI LK13",
+        "IFPI L821",
+        "DOC200CD 6745-CD-3872 20-105-09",
+        "IFPI LK13",
+        "IFPI L814"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1757517,
+      "master_url": "https://api.discogs.com/masters/1757517",
+      "uri": "/release/15497734-Phoebe-Bridgers-Punisher",
+      "catno": "DOC200",
+      "title": "Phoebe Bridgers - Punisher",
+      "thumb": "https://i.discogs.com/B5KO_UDH54JuhruL9Bf0zoqvIazPHkzBl4J28E7_RCg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1NDk3/NzM0LTE1OTc3NjU0/NTUtMjk4Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/xQB0RTnloPsQqrl4jhi7wo_XVG5S8ckA4GQXIwawk_8/rs:fit/g:sm/q:90/h:546/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1NDk3/NzM0LTE1OTc3NjU0/NTUtMjk4Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15497734",
+      "community": {
+        "want": 958,
+        "have": 4479
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Ultra-Vybe, Inc.",
+        "Sound City Studios",
+        "ARC Studios, Omaha, NE",
+        "Gateway Mastering",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Whatever Mom Music",
+        "Corn Fox Publishing",
+        "Goldmeyn Music",
+        "Bedrooms; Bedrooms And Spiders",
+        "Pizza Money Music",
+        "Sliondelion"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Rock",
+        "Folk"
+      ],
+      "id": 33426044,
+      "barcode": [
+        "656605150024",
+        "6 56605 15002 4",
+        "LC 29265",
+        "ASCAP",
+        "BMI",
+        "DOC200CD 6745-CD-3872 20-105-09",
+        "IFPI LK13",
+        "IFPI L820",
+        "DOC200CD 6745-CD-3872 20-105-09",
+        "IFPI LK13",
+        "IFPI L817",
+        "DOC200CD 6745-CD-3872 20-105-09",
+        "IFPI LK13",
+        "IFPI L821",
+        "DOC200CD 6745-CD-3872 20-105-09",
+        "IFPI LK13",
+        "IFPI L814"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1757517,
+      "master_url": "https://api.discogs.com/masters/1757517",
+      "uri": "/release/33426044-Phoebe-Bridgers-Punisher",
+      "catno": "DOC200",
+      "title": "Phoebe Bridgers - Punisher",
+      "thumb": "https://i.discogs.com/TZ_GARZYULcm7NvGTfksydDJj5xlHGYAOmyPq-O6AyU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNDI2/MDQ0LTE3NDIxMzQ3/NjItNDExNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/6X0T2Ptu4PWW0DfhaKrkeEeqCGZfJeLBJNjPwTieRkA/rs:fit/g:sm/q:90/h:518/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNDI2/MDQ0LTE3NDIxMzQ3/NjItNDExNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33426044",
+      "community": {
+        "want": 53,
+        "have": 30
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

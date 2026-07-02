@@ -1,0 +1,336 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 10,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Olivia+Dean+The+Art+Of+Loving&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?q=Olivia+Dean+The+Art+Of+Loving&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Capitol Records",
+        "Capitol Records",
+        "Capitol Records UK",
+        "Polydor Label Group",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V.",
+        "The House Of Loving",
+        "Wadeson Street Studios",
+        "Air Edel Studios",
+        "RAK Studios",
+        "Electric Lady Studios",
+        "Rollover Studios",
+        "Optimal Media GmbH",
+        "Sony Music Publishing",
+        "Kobalt Music Group",
+        "Universal Music Publishing",
+        "OTM",
+        "Warner Chappell Music",
+        "Kenny + Betty Tunes",
+        "Copyright Control",
+        "Universal/MCA Music",
+        "Concord Music Publishing",
+        "Dust Index",
+        "Ragland Publications",
+        "Secretly Publishing"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Neo Soul",
+        "Indie Pop"
+      ],
+      "id": 35211355,
+      "barcode": [
+        "6 02478 16321 0",
+        "602478163210",
+        "LC00309",
+        "BIEM/SDRM",
+        "[Universal logo] 7816321 [Universal logo] AP44812-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9746",
+        "[Universal logo] 7816321 [Universal logo] AP44812-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9723"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35211355-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "7816321",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/ccUi4YUhPFSiRNoR-FaeP_PZr2aUOiNzYYH7deAR-8s/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjEx/MzU1LTE3NjQ1MzA5/OTgtOTczMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/spZXOpzzqORaRqMa6-kOOzwjAgj-VRedbfpNZ6BH8U8/rs:fit/g:sm/q:90/h:536/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjEx/MzU1LTE3NjQ1MzA5/OTgtOTczMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35211355",
+      "community": {
+        "want": 199,
+        "have": 666
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Capitol Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [],
+      "id": 35228203,
+      "barcode": [
+        "602478163289"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35228203-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "7816328",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/22gVYUpMeQ7yrqTBJVd27suERQ56iFyhSAaiyGSQ1cQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjI4/MjAzLTE3NTkxMzU2/NjYtNDkwMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/jf4AF1jOreuUfGkay5TOdewXvJ-WUfYO7NUFT5O5XMc/rs:fit/g:sm/q:90/h:542/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjI4/MjAzLTE3NTkxMzU2/NjYtNDkwMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35228203",
+      "community": {
+        "want": 72,
+        "have": 106
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Australia",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Capitol Records",
+        "Capitol Records UK",
+        "Polydor Label Group",
+        "Universal Music Australia",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Conectiv, Guadalajara, Mexico",
+        "Conectiv, Guadalajara, Mexico"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [],
+      "id": 35415436,
+      "barcode": [
+        "6 02478 16321 0",
+        "602478163210",
+        "(1303827) 00602478163210 01",
+        "IFPI LW66",
+        "IFPI KK4H"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35415436-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "7816321",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/k-eQS1pKr2hFCOgmJ3h17-l_ZIwgHPiDBkKN1X3VLi4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NDE1/NDM2LTE3NjA4NTEx/NDctMTQ4OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/tZ8QFF__gmmsx3rrXP_C-x4zSILN1EpG67axyLKgSdQ/rs:fit/g:sm/q:90/h:534/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NDE1/NDM2LTE3NjA4NTEx/NDctMTQ4OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35415436",
+      "community": {
+        "want": 36,
+        "have": 104
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Capitol Records",
+        "Capitol Records",
+        "Capitol Records UK",
+        "Polydor Label Group",
+        "Universal Music Operations Ltd.",
+        "Universal Music Operations Ltd.",
+        "Universal International Music B.V."
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Neo Soul"
+      ],
+      "id": 35243182,
+      "barcode": [
+        "6 02478 79177 2",
+        "602478791772",
+        "LC00309",
+        "BIEM/SDRM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/35243182-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "7879177",
+      "title": "Olivia Dean -  The Art Of Loving",
+      "thumb": "https://i.discogs.com/E2ySQ7_V4LRwzevHHTreSs71owAMsLDO-pTUvpYU36w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjQz/MTgyLTE3NTkyMTcx/ODEtNTg5Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/c45MCF0VLyd4GhJ_UC4te3DZlvgUZW-RoOM2PZ1Xd28/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjQz/MTgyLTE3NTkyMTcx/ODEtNTg5Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35243182",
+      "community": {
+        "want": 83,
+        "have": 62
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Capitol Records",
+        "Island Records",
+        "Polydor Label Group",
+        "Capitol Records UK",
+        "Island Records",
+        "UMG Recordings, Inc.",
+        "UMG Commercial Services",
+        "The House Of Loving",
+        "Wadeson Street Studios",
+        "Air Edel Studios",
+        "RAK Studios",
+        "Electric Lady Studios",
+        "Rollover Studios",
+        "Conectiv, Guadalajara, Mexico"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Neo Soul",
+        "Indie Pop"
+      ],
+      "id": 36455970,
+      "barcode": [
+        "6 02478 16321 0",
+        "(1311715) 00602478163210 01 0001",
+        "IFPI KKV2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3984037,
+      "master_url": "https://api.discogs.com/masters/3984037",
+      "uri": "/release/36455970-Olivia-Dean-The-Art-Of-Loving",
+      "catno": "00602478163210",
+      "title": "Olivia Dean - The Art Of Loving",
+      "thumb": "https://i.discogs.com/r8PPrs9ua1pHzejARD7VPUUfaNQIaIYvQaDaWe68M7c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NDU1/OTcwLTE3NzA2NjQz/MzEtMzY0OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/7XHrBEeWSc0DL-Y6gGJO08-ykEnEoUptNzad2dy_idc/rs:fit/g:sm/q:90/h:544/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NDU1/OTcwLTE3NzA2NjQz/MzEtMzY0OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36455970",
+      "community": {
+        "want": 34,
+        "have": 85
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

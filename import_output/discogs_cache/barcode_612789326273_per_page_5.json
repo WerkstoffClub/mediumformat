@@ -1,0 +1,79 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Australia",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "45 RPM",
+        "Record Store Day",
+        "Compilation",
+        "Limited Edition"
+      ],
+      "label": [
+        "Spinning Top Music",
+        "Spinning Top Records Pty Limited",
+        "Spinning Top Records Pty Limited",
+        "Troy TCE",
+        "The Norfolk Basement",
+        "Bang Bang Studios",
+        "Blackbird Sound Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Psychedelic Rock"
+      ],
+      "id": 33672309,
+      "barcode": [
+        "612789326273",
+        "6 12789 32627 3",
+        "294054M1/A",
+        "294054M2/A",
+        "294054M3/A",
+        "294054M4/A"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/33672309-Pond-The-Early-Years-2008-2010",
+      "catno": "STR038LP-C1",
+      "title": "Pond (5) - The Early Years: 2008 - 2010",
+      "thumb": "https://i.discogs.com/hzk2PjCXGVbUD-7faW3RNwSt6FGR6K-RJ1jtaR-PMlA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNjcy/MzA5LTE3NDQ1OTk0/OTUtNzE4OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/kzQRsBn9_wtUTgsk29Y3AI22SLFbOZWP5zo7jsLRqSI/rs:fit/g:sm/q:90/h:609/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNjcy/MzA5LTE3NDQ1OTk0/OTUtNzE4OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33672309",
+      "community": {
+        "want": 71,
+        "have": 506
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Mango Vision",
+          "descriptions": [
+            "LP",
+            "45 RPM",
+            "Record Store Day",
+            "Compilation",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

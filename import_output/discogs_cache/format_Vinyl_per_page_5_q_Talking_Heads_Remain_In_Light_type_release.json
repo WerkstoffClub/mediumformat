@@ -1,0 +1,451 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 24,
+    "per_page": 5,
+    "items": 120,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Talking+Heads+Remain+In+Light&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=24",
+      "next": "https://api.discogs.com/database/search?q=Talking+Heads+Remain+In+Light&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "1980",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Sire",
+        "Sire Records Company",
+        "Sire Records Company",
+        "Compass Point Studios",
+        "Sigma Sound Studios, New York",
+        "Sigma Sound Studios, New York",
+        "Eldorado Recording Studios",
+        "Sterling Sound",
+        "Sterling Sound",
+        "Capitol Records Pressing Plant, Winchester",
+        "Sire Records Company",
+        "Sire Records, Inc.",
+        "Warner Bros. Records Inc.",
+        "Warner Communications",
+        "Index Music",
+        "Bleu Disque Music Co., Inc.",
+        "E.G. Music Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "New Wave",
+        "Art Rock"
+      ],
+      "id": 116491,
+      "barcode": [
+        "0 7599-26095-1",
+        "ASCAP",
+        "BMI",
+        " ━◁",
+        "SRK.1.6095-WW1 STERLING",
+        "SRK.2.6095-WW1 STERLING",
+        "SRK•1•6095-WW1 ━◁ STERLING",
+        "SRK•2•6095-WW1 #2 ━◁ STERLING",
+        "SRK.1.6095-WW1 #3 STERLING",
+        "SRK.2.6095-WW1 STERLING",
+        "SRK•1•6095-WW1 ━◁ STERLING",
+        "SRK•2•6095-WW1  #5 ━◁ STERLING",
+        "SRK•2•6095-WW1 #8 ━◁ STERLING",
+        "SRK•2•6095-WW2  ━◁ STERLING",
+        "SRK•1•6095-WW1 #4  ━◁ STERLING",
+        "SRK•2•6095-WW1 #2  ━◁ STERLING",
+        "SRK•1•6095-WW1 #7 ━◁ STERLING",
+        "SRK•2•6095-WW1  ━◁ STERLING",
+        "SRK•1•6095-WW1 #2  ━◁ STERLING",
+        "SRK•2•6095-WW1 #2  ━◁ STERLING",
+        "SRK•1•6095-WW1 #6  ━◁ STERLING",
+        "SRK•2•6095-WW1  ━◁ STERLING",
+        "SRK•1•6095-WW1 #5  ━◁ STERLING",
+        "SRK•2•6095-WW1 #3  ━◁ STERLING",
+        "SRK.1.6095-WW1#2 · ━◁ STERLING",
+        "SRK.2.6095-WW1 · ━◁ STERLING",
+        "SRK•1•6095-WW1 #4  ━◁ STERLING",
+        "SRK•2•6095-WW1 #8  ━◁ STERLING",
+        "SRK•1•6095-WW1 #2 ━◁ STERLING",
+        "SRK•2•6095-WW1 #3 ━◁ STERLING",
+        "SRK•1•6095-WW1 #5  ━◁ STERLING",
+        "SRK•2•6095-WW1 ━◁ STERLING",
+        "SRK•1•6095-WW1 #4  ━◁ STERLING",
+        "SRK•1•6095-WW1 #6  ━◁ STERLING",
+        "SRK•1•6095-WW1 #3  ━◁ STERLING",
+        "SRK•2•6095-WW1 #2  ━◁ STERLING",
+        "SRK·1·6095-WW1 #2 ·━◁ STERLING",
+        "SRK·2·6095-WW1 #5 · ━◁ STERLING",
+        "SRK·1·6095-WW1 #3  ━◁ STERLING",
+        "SRK·2·6095-WW1 #5  · ━◁ STERLING",
+        "SRK·1·6095-WW1 #6  · ━◁ STERLING",
+        "SRK·2·6095-WW1 #2  · ━◁ STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 25688,
+      "master_url": "https://api.discogs.com/masters/25688",
+      "uri": "/release/116491-Talking-Heads-Remain-In-Light",
+      "catno": "SRK 6095",
+      "title": "Talking Heads - Remain In Light",
+      "thumb": "https://i.discogs.com/zDMEFMBLb9j8gqtksqWBkib83fxR20okzOTesKtUCQA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNjQ5/MS0xNTQxOTQ1NDcy/LTQ3OTUuanBlZw.jpeg",
+      "cover_image": "https://i.discogs.com/rHJU3UXR0FAkeUkU4vZpdpF3XwsLoJeitBnQVCxjRQQ/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNjQ5/MS0xNTQxOTQ1NDcy/LTQ3OTUuanBlZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/116491",
+      "community": {
+        "want": 9005,
+        "have": 17777
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Winchester Pressing",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2013",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Sire",
+        "Sire Records Company",
+        "Sire Records Company",
+        "Index Music",
+        "Bleu Disque Music Co., Inc.",
+        "E.G. Music Ltd.",
+        "Rhino Entertainment Company",
+        "Warner Music Group",
+        "Compass Point Studios",
+        "Sigma Sound Studios, New York",
+        "Sigma Sound Studios, New York",
+        "Sterling Sound",
+        "Record Technology Incorporated",
+        "AcousTech Mastering",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul"
+      ],
+      "style": [
+        "New Wave",
+        "Post-Punk",
+        "Funk",
+        "Afrobeat",
+        "Experimental",
+        "Art Rock"
+      ],
+      "id": 4426315,
+      "barcode": [
+        "0 81227 08021 1",
+        "0 8122 70802 1 1",
+        "081227080211",
+        "LC 02982",
+        "R1-70802-A 14769.1 (3) BD06290-01 A₁ KPG@ATM",
+        "R1-70802-B 14769.2 (3) BD06290-01 B₁ KPG@ATM",
+        "R1-70802-A 14769.1 (3) BD06290-01 A₁ KPG@ATM VIT",
+        "R1-70802-B 14769.2 (3) BD06290-01 B₁ KPG@ATM V==",
+        "R1-70802-A KPG@ATM >=x 14769.1(3) BD06290-01 A₁",
+        "R1-70802-B KPG@ATM 14769.2(3) BD06290-01 B₁ ◺+˄",
+        "R1-70802-A KPG@ATM 14769.1(3) BD06290-01 A₁ VΛΛ",
+        "R1-70802-B KPG@ATM +VΛ 14769.2(3) BD06290-01 B₁",
+        "R1-70802-A KPG@ATM x+Λ 14769.1(3) BD06290-01 A₁",
+        "R1-70802-B VVX KPG@ATM 14769.2(3) BD06290-01 B₁",
+        "R1-70802-A KPG@ATM 14769.01(3) BD06290-01 A₁ I+Λ",
+        "R1-70802-A KPG@ATM 14769.1(3) BD06290-01 B₁ ++Λ",
+        "R1-70802-A KPG@ATM —V1 14769.1 (3) BD06290-01 A1",
+        "R1-70802-B KPG@ATM 10 14769.2 (3) BD06290-01 B1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 25688,
+      "master_url": "https://api.discogs.com/masters/25688",
+      "uri": "/release/4426315-Talking-Heads-Remain-In-Light",
+      "catno": "8122708021",
+      "title": "Talking Heads - Remain In Light",
+      "thumb": "https://i.discogs.com/o7xHtn_coEcLJYpzX-NdhsO0OKXk8q5RL98_UvTroas/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ0MjYz/MTUtMTQyOTM0MTMx/NS04NzEyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/XkrpFtlygHicBVnrvaLkkyG1DxlRXAQtF4_rbkRy1nI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ0MjYz/MTUtMTQyOTM0MTMx/NS04NzEyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/4426315",
+      "community": {
+        "want": 2337,
+        "have": 15496
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180g",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2006",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Sire",
+        "Rhino Vinyl",
+        "Sire Records Company",
+        "Sire Records Company",
+        "Rhino Vinyl",
+        "Rhino Vinyl",
+        "Warner Music Group",
+        "Compass Point Studios",
+        "Sigma Sound Studios, New York",
+        "Sigma Sound Studios, New York",
+        "Eldorado Recording Studios",
+        "Index Music, Inc.",
+        "Bleu Disque Music Co., Inc.",
+        "BMG Music Publishing Ltd.",
+        "AcousTech Mastering",
+        "Record Technology Incorporated"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Art Rock",
+        "Leftfield"
+      ],
+      "id": 1312119,
+      "barcode": [
+        "0 8122 70802 1 1",
+        "081227080211",
+        "R1-70802-A KPG@ATM 14769.1(3)",
+        "R1-70802-B KPG@ATM 14769.2(3)",
+        "ASCAP",
+        "PRS"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 25688,
+      "master_url": "https://api.discogs.com/masters/25688",
+      "uri": "/release/1312119-Talking-Heads-Remain-In-Light",
+      "catno": "R1 70802",
+      "title": "Talking Heads - Remain In Light",
+      "thumb": "https://i.discogs.com/55c4wrarHI5-dzCqxRWHi6wh8DCKNJh9MkS0CIdQ0rw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMTIx/MTktMTM4Mzk1MTg2/Ny01MjgzLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/mV4acRwLi_D8V240Efn_yj3_FaVWORMRj-JhSxTTa0s/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMTIx/MTktMTM4Mzk1MTg2/Ny01MjgzLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/1312119",
+      "community": {
+        "want": 1947,
+        "have": 10441
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Germany",
+      "year": "1980",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Sire",
+        "Sire",
+        "Ariola Eurodisc GmbH",
+        "Ariola",
+        "Sire Records Company",
+        "Sire Records Company",
+        "Index Music",
+        "Bleu Disque Music Co., Inc.",
+        "E.G. Music Ltd.",
+        "Sonopress",
+        "Mohndruck Graphische Betriebe GmbH",
+        "Compass Point Studios",
+        "Sigma Sound Studios, New York",
+        "Sigma Sound Studios, New York",
+        "Eldorado Recording Studios",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "New Wave"
+      ],
+      "id": 681547,
+      "barcode": [
+        "LC 3228",
+        "GEMA",
+        "ASCAP",
+        "BMI",
+        "-320",
+        "202 980/96 878",
+        "S 202 980 A",
+        "S 202 980 B",
+        "202980 A-1/80S Made in Germany",
+        "202980 B-1/80S Made in Germany"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 25688,
+      "master_url": "https://api.discogs.com/masters/25688",
+      "uri": "/release/681547-Talking-Heads-Remain-In-Light",
+      "catno": "202 980",
+      "title": "Talking Heads - Remain In Light",
+      "thumb": "https://i.discogs.com/YUt5iTpvfWHkpyLo0uTeN-xwj-9jm3F3U_R7id9SxCo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY4MTU0/Ny0xNzUzNjA2MTc0/LTg4NTQuanBlZw.jpeg",
+      "cover_image": "https://i.discogs.com/HTPL6wfpFOv4Zg6HqQOLxXEZh4NCVdrS0e_pbe3qit4/rs:fit/g:sm/q:90/h:589/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY4MTU0/Ny0xNzUzNjA2MTc0/LTg4NTQuanBlZw.jpeg",
+      "resource_url": "https://api.discogs.com/releases/681547",
+      "community": {
+        "want": 1495,
+        "have": 4114
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "1980",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Sire",
+        "Sire",
+        "Sterling Sound",
+        "Strawberry Mastering",
+        "Compass Point Studios",
+        "Sigma Sound Studios, New York",
+        "Eldorado Recording Studios",
+        "Sigma Sound Studios, New York",
+        "WEA Records Ltd.",
+        "E.G. Music Ltd.",
+        "Warner Bros. Music Ltd.",
+        "Sire",
+        "Sire Records Company",
+        "WEA Records Pressing Plant, West Drayton",
+        "Warner Communications"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock",
+        "Funk / Soul"
+      ],
+      "style": [
+        "New Wave",
+        "Art Rock",
+        "Funk"
+      ],
+      "id": 1174103,
+      "barcode": [
+        "SRK 6095 A*",
+        "SRK 6095 B*",
+        "SRK + 6095 + A W7KD STRAWBERRY",
+        "SRK + 6095 + B W4   STRAWBERRY",
+        "SRK+6095+A STRAWBERRY W-12",
+        "SRK+6095+B STRAWBERRY W 2",
+        "SRK+6095+A  W-1 STRAWBERRY",
+        "SRK+6095+B  W 5 STRAWBERRY",
+        "SRK-6095-A-2 1M  W7KD STRAWBERRY",
+        "SRK-6095-B  W-14 STRAWBERRY",
+        "SRK+6095+A STRAWBERRY W-3",
+        "SRK+6095+B STRAWBERRY W-1KD"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 25688,
+      "master_url": "https://api.discogs.com/masters/25688",
+      "uri": "/release/1174103-Talking-Heads-Remain-In-Light",
+      "catno": "SRK 6095",
+      "title": "Talking Heads - Remain In Light",
+      "thumb": "https://i.discogs.com/HC4pgbxz7rynoXoVM16q9VmIoiwFOsBeWugfJnY8x6c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNzQx/MDMtMTM5MzA3ODM4/NC03MTY3LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/jdBOSwi9DZ2IQaGt62kWJI-e6IlhxNYCnTkDiGR835M/rs:fit/g:sm/q:90/h:550/w:550/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNzQx/MDMtMTM5MzA3ODM4/NC03MTY3LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/1174103",
+      "community": {
+        "want": 1896,
+        "have": 4440
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

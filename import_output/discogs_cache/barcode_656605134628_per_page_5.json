@@ -1,0 +1,143 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "style": [
+        "Art Rock",
+        "Pop Rock",
+        "Soft Rock"
+      ],
+      "id": 13547219,
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Merge",
+        "JC/DC Studios",
+        "JC/DC Studios",
+        "Bellwether Manufacturing",
+        "Optical Experts Manufacturing"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 56605 13462 8",
+        "656605134628",
+        "SOCAN",
+        "05/17/2014 09:43:19.AM #127528 IFPI LN08 7205-DOC046CD WWW.BELLWETHERMFG.COM 01",
+        "IFPI LN08",
+        "IFPI JI01"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 304997,
+      "master_url": "https://api.discogs.com/masters/304997",
+      "uri": "/release/13547219-Destroyer-Kaputt",
+      "catno": "DOC046",
+      "title": "Destroyer (4) - Kaputt",
+      "thumb": "https://i.discogs.com/rO4QhoWemJa04wp9YGk-KKkMerIQaWgkdRbT01XhfFk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNTQ3/MjE5LTE2Nzk2OTA3/NTMtMjExOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/aPlrAcvnm_UJsO6AXgFVacDngH-GK66dNXs3rwjp114/rs:fit/g:sm/q:90/h:530/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNTQ3/MjE5LTE2Nzk2OTA3/NTMtMjExOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/13547219",
+      "community": {
+        "want": 58,
+        "have": 47
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2011",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Merge Records",
+        "Bellwether Manufacturing",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "JC/DC Studios",
+        "JC/DC Studios",
+        "Arvato Digital Services Bertelsmann, USA"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Art Rock",
+        "Pop Rock",
+        "Soft Rock"
+      ],
+      "id": 2955842,
+      "barcode": [
+        "6 56605 13462 8",
+        "656605134628",
+        "SOCAN",
+        "WWW.BELLWETHERMFG.COM 7205-DOC046CD-C + + 71922521",
+        "WWW.BELLWETHERMFG.COM 7205-DOC046CD-C + + 71922521",
+        "IFPI L028",
+        "IFPI 1045",
+        "WWW.BELLWETHERMFG.COM 7205-DOC046CD-C + + 71922521",
+        "IFPI L028",
+        "IFPI 10J5"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 304997,
+      "master_url": "https://api.discogs.com/masters/304997",
+      "uri": "/release/2955842-Destroyer-Kaputt",
+      "catno": "DOC046",
+      "title": "Destroyer (4) - Kaputt",
+      "thumb": "https://i.discogs.com/_laLQ-aKMdp6kjZopeqY0B0G6nD-_SQzgEQ-jriLngE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NTU4/NDItMTMxMTIzODIz/OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Q8Y7BXCt_s7VSZIAflv4JreSl2ZjhuqafIFsjstuEZ8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NTU4/NDItMTMxMTIzODIz/OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2955842",
+      "community": {
+        "want": 124,
+        "have": 526
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

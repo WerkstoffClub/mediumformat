@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Medium Format — Dashboard</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#090909;color:#fff;font-family:Inter,-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.45;display:flex;height:100vh;overflow:hidden;letter-spacing:-.01em;}
+
+/* SIDEBAR */
+aside{width:186px;min-width:186px;background:#090909;border-right:1px solid #1a1a1a;display:flex;flex-direction:column;flex-shrink:0;}
+.logo{padding:15px 18px 13px;font-size:15px;font-weight:900;color:#fff;letter-spacing:-.04em;border-bottom:1px solid #1a1a1a;flex-shrink:0;}
+.logo span{color:#fff;opacity:.45;}
+.nav-group{padding:8px 0 2px;}
+.nav-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#404040;padding:0 18px 5px;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:7px 18px;color:#484848;font-size:12.5px;cursor:pointer;border-left:2px solid transparent;transition:color 100ms,background 100ms;user-select:none;}
+.nav-item:hover{color:#ccc;background:#141414;}
+.nav-item.active{color:#fff;background:#141414;border-left-color:#fff;}
+.nav-item svg{width:15px;height:15px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.nav-badge{margin-left:auto;background:rgba(224,92,106,.15);color:#e05c6a;font-size:9px;border-radius:100px;padding:1px 6px;font-weight:700;}
+.sidebar-foot{margin-top:auto;border-top:1px solid #1a1a1a;padding:12px 18px;flex-shrink:0;}
+.store-pill{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#141414;border:1px solid #262626;border-radius:100px;cursor:pointer;transition:border-color 120ms;}
+.store-pill:hover{border-color:#333;}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;flex-shrink:0;animation:livepulse 2.5s ease-in-out infinite;}
+@keyframes livepulse{0%,100%{box-shadow:0 0 4px #22c55e;}50%{box-shadow:0 0 9px #22c55e;}}
+.store-name{font-size:11px;color:#999;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* MAIN + TOPBAR */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{display:flex;align-items:center;gap:10px;padding:0 20px;height:52px;min-height:52px;background:#090909;border-bottom:1px solid #1a1a1a;flex-shrink:0;}
+.tb-search{display:flex;align-items:center;gap:8px;background:#141414;border:1px solid #262626;border-radius:6px;padding:6px 12px;flex:1;max-width:400px;transition:border-color 150ms;}
+.tb-search:focus-within{border-color:#0099ff;}
+.tb-search svg{width:14px;height:14px;stroke:#484848;fill:none;stroke-width:1.8;stroke-linecap:round;flex-shrink:0;}
+.tb-search input{background:none;border:none;outline:none;color:#fff;font-size:12px;width:100%;font-family:inherit;}
+.tb-search input::placeholder{color:#333;}
+.tb-spacer{flex:1;}
+.tb-link{font-size:12px;color:#484848;cursor:pointer;padding:5px 8px;border-radius:5px;transition:all 120ms;}
+.tb-link:hover{color:#999;background:#141414;}
+.tb-add{display:flex;align-items:center;gap:5px;padding:7px 14px;background:#fff;border-radius:100px;color:#000;font-size:12px;font-weight:600;cursor:pointer;transition:opacity 120ms;white-space:nowrap;font-family:inherit;}
+.tb-add:hover{opacity:.85;}
+.tb-add svg{width:12px;height:12px;stroke:#000;fill:none;stroke-width:2.5;flex-shrink:0;}
+.tb-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#484848;border-radius:6px;cursor:pointer;transition:all 120ms;}
+.tb-icon:hover{color:#999;background:#141414;}
+.tb-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;}
+.avatar{width:30px;height:30px;border-radius:50%;background:#1c1c1c;border:1px solid #262626;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#999;flex-shrink:0;cursor:pointer;transition:border-color 120ms;}
+.avatar:hover{border-color:#444;}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:16px 20px 32px;scrollbar-width:thin;scrollbar-color:#262626 transparent;}
+.content::-webkit-scrollbar{width:4px;}
+.content::-webkit-scrollbar-thumb{background:#262626;border-radius:2px;}
+
+/* PAGE HEADER */
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
+.ph-left .page-title{font-size:21px;font-weight:800;color:#fff;letter-spacing:-.05em;line-height:1;}
+.ph-left .page-sub{font-size:12px;color:#484848;margin-top:4px;}
+.ph-right{text-align:right;}
+.dt-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#2e2e2e;}
+.dt-date{font-size:12px;color:#999;margin-top:2px;}
+.dt-time{font-size:30px;font-weight:800;color:#fff;letter-spacing:-.05em;line-height:1;margin-top:2px;font-variant-numeric:tabular-nums;}
+.dt-curr{font-size:10px;color:#2e2e2e;margin-top:3px;}
+
+/* STAT CARDS */
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.stat-card{background:#141414;border:1px solid #262626;border-radius:10px;padding:13px 15px 11px;overflow:hidden;transition:border-color 160ms,box-shadow 160ms;cursor:default;}
+.stat-card:hover{border-color:#333;box-shadow:0 6px 24px rgba(0,0,0,.4);}
+.stat-card.gradient-violet{background:linear-gradient(135deg,#6a4cf5,#4c2b9a);border-color:transparent;}
+.stat-card.gradient-orange{background:linear-gradient(135deg,#ff7a3d,#e04a1a);border-color:transparent;}
+.sc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.sc-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#484848;font-weight:600;}
+.stat-card.gradient-violet .sc-lbl,.stat-card.gradient-orange .sc-lbl{color:rgba(255,255,255,.65);}
+.sc-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 5px #22c55e;animation:livepulse 2.5s ease-in-out infinite;}
+.sc-val{font-size:27px;font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1;margin-bottom:8px;}
+.sc-foot{display:flex;align-items:center;justify-content:space-between;}
+.sc-delta{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;line-height:1.4;}
+.delta-up{background:rgba(34,197,94,.12);color:#22c55e;}
+.delta-dn{background:rgba(224,92,106,.12);color:#e05c6a;}
+.delta-neu{background:rgba(100,100,100,.1);color:#999;}
+.stat-card.gradient-violet .delta-up,.stat-card.gradient-orange .delta-up{background:rgba(255,255,255,.15);color:#fff;}
+.sc-sparkline{width:60px;height:22px;display:block;overflow:visible;}
+
+/* GRID + WIDGETS */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.span-2{grid-column:span 2;}
+.span-3{grid-column:span 3;}
+.widget{background:#141414;border:1px solid #262626;border-radius:10px;overflow:hidden;transition:border-color 200ms,box-shadow 200ms;}
+.widget:hover{border-color:#333;box-shadow:0 6px 24px rgba(0,0,0,.3);}
+.wh{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid #1a1a1a;}
+.wh-title{font-size:10px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.1em;flex:1;}
+.wh-meta{font-size:13px;font-weight:800;color:#fff;}
+.pills{display:flex;gap:3px;}
+.pill{padding:3px 8px;border-radius:100px;font-size:10px;cursor:pointer;border:1px solid #262626;background:transparent;color:#484848;font-weight:500;transition:all 120ms;line-height:1.3;font-family:inherit;}
+.pill:hover{color:#999;}
+.pill.active{background:#1c1c1c;border-color:#262626;color:#fff;font-weight:600;}
+.see-all{font-size:10px;color:#0099ff;cursor:pointer;opacity:.8;transition:opacity 120ms;white-space:nowrap;}
+.see-all:hover{opacity:1;}
+.wb{padding:13px 14px;}
+.wb-0{padding:0;}
+
+/* CHART */
+.chart-kpi{display:flex;align-items:flex-end;gap:12px;margin-bottom:12px;}
+.chart-total{font-size:24px;font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1;}
+.chart-sub{font-size:11px;color:#484848;margin-bottom:3px;}
+.chart-delta{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;color:#22c55e;margin-bottom:3px;}
+.chart-layout{display:flex;gap:6px;}
+.y-axis{width:30px;flex-shrink:0;display:flex;flex-direction:column;justify-content:space-between;height:112px;font-size:9px;color:#2e2e2e;text-align:right;padding:1px 0;font-variant-numeric:tabular-nums;}
+.chart-area{flex:1;}
+svg.lc{width:100%;height:112px;display:block;overflow:visible;}
+.chart-xaxis{display:flex;justify-content:space-between;padding-top:6px;font-size:9px;color:#2e2e2e;}
+
+/* VISITORS */
+.v-big{font-size:32px;font-weight:800;color:#fff;letter-spacing:-.05em;line-height:1;}
+.v-sub{font-size:10px;color:#484848;margin-top:3px;}
+.v-bars{display:flex;align-items:flex-end;gap:2px;height:32px;margin:10px 0 8px;}
+.v-bar{flex:1;border-radius:2px 2px 0 0;background:#1c1c1c;min-height:2px;transition:background 120ms;position:relative;}
+.v-bar .v-bar-fill{position:absolute;bottom:0;left:0;right:0;border-radius:2px 2px 0 0;background:#0099ff;opacity:.55;transition:opacity 120ms;}
+.v-bar:hover .v-bar-fill{opacity:1;}
+.v-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;}
+.v-stat-n{font-size:15px;font-weight:700;color:#fff;}
+.v-stat-l{font-size:9px;color:#484848;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+
+/* ORDERS TABLE */
+table{width:100%;border-collapse:collapse;}
+th{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#999;padding:7px 12px;text-align:left;border-bottom:1px solid #1a1a1a;font-weight:600;white-space:nowrap;}
+td{padding:7px 12px;border-bottom:1px solid #1a1a1a;font-size:11.5px;color:#999;white-space:nowrap;}
+tr:last-child td{border-bottom:none;}
+tbody tr{transition:background 80ms;cursor:default;}
+tbody tr:hover td{background:#191919;}
+.mono{font-family:'SF Mono','Fira Code',monospace;font-size:11px;color:#fff;}
+.cust-cell{display:flex;align-items:center;gap:7px;}
+.cust-init{width:22px;height:22px;border-radius:50%;background:#1c1c1c;border:1px solid #262626;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:#999;flex-shrink:0;}
+.ch-pill{display:inline-flex;align-items:center;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.03em;background:#1c1c1c;color:#999;border:1px solid #262626;}
+.s-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.s-pill::before{content:'';width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.st-pend{background:rgba(232,168,56,.12);color:#e8a838;}
+.st-proc{background:rgba(0,153,255,.12);color:#0099ff;}
+.st-ship{background:rgba(91,192,222,.12);color:#5bc0de;}
+.st-done{background:rgba(34,197,94,.12);color:#22c55e;}
+td.amt{font-variant-numeric:tabular-nums;color:#fff;font-weight:600;}
+
+/* CHANNELS */
+.ch-row{display:flex;align-items:center;gap:9px;padding:6px 0;}
+.ch-name{font-size:11px;color:#999;width:72px;flex-shrink:0;}
+.ch-track{flex:1;height:6px;background:#1c1c1c;border-radius:3px;overflow:hidden;}
+.ch-fill{height:100%;border-radius:3px;transition:width 400ms cubic-bezier(.25,.8,.25,1);}
+.ch-pct{font-size:10px;color:#484848;width:28px;flex-shrink:0;text-align:right;}
+.ch-val{font-size:10px;color:#fff;font-weight:600;width:56px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums;}
+
+/* BEST SELLERS */
+.bs-list{display:flex;flex-direction:column;gap:7px;}
+.bs-row{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:8px;background:#090909;border:1px solid #1a1a1a;cursor:default;transition:all 150ms;}
+.bs-row:hover{border-color:#262626;background:#141414;transform:translateX(3px);}
+.bs-rank{font-size:10px;font-weight:800;color:#2e2e2e;width:16px;text-align:center;flex-shrink:0;}
+.bs-row:nth-child(1) .bs-rank{color:#fff;}
+.bs-row:nth-child(2) .bs-rank{color:#484848;}
+.bs-cover{width:40px;height:40px;border-radius:5px;flex-shrink:0;}
+.cv1{background:linear-gradient(135deg,#1a1040,#4c2b8a,#7c4dff);}
+.cv2{background:linear-gradient(135deg,#0d3b5c,#1a6b8a,#00c9ff);}
+.cv3{background:linear-gradient(135deg,#3b0d1a,#8a1a3b,#ff4d6d);}
+.cv4{background:linear-gradient(135deg,#0d3b1a,#1a8a3b,#4dff91);}
+.cv5{background:linear-gradient(135deg,#2b1a0d,#7a4a1a,#d4844d);}
+.bs-info{flex:1;min-width:0;}
+.bs-title{font-size:12px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bs-artist{font-size:10px;color:#484848;margin-top:2px;}
+.bs-right{text-align:right;flex-shrink:0;}
+.bs-sold{font-size:10px;font-weight:700;color:#22c55e;}
+.bs-rev{font-size:10px;color:#484848;margin-top:2px;font-variant-numeric:tabular-nums;}
+
+/* COUNTRIES */
+.c-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #1a1a1a;}
+.c-row:last-child{border-bottom:none;}
+.c-code{width:26px;text-align:center;font-size:8.5px;font-weight:800;letter-spacing:.04em;padding:2px 3px;border-radius:3px;background:#1c1c1c;color:#484848;flex-shrink:0;}
+.c-name{flex:1;font-size:11px;color:#999;}
+.c-bar-wrap{width:50px;height:3px;background:#1a1a1a;border-radius:2px;overflow:hidden;}
+.c-bar{height:100%;background:#0099ff;border-radius:2px;opacity:.5;}
+.c-amt{font-size:10px;color:#fff;font-weight:600;width:58px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums;}
+
+/* NEWS */
+.news-cols{display:grid;grid-template-columns:1fr 1fr 1fr;}
+.news-col{padding:0 14px;border-right:1px solid #1a1a1a;}
+.news-col:first-child{padding-left:0;}
+.news-col:last-child{border-right:none;padding-right:0;}
+.news-card{padding:10px 0;border-bottom:1px solid #1a1a1a;}
+.news-card:last-child{border-bottom:none;}
+.news-top{display:flex;align-items:center;gap:7px;margin-bottom:6px;}
+.ns-bc{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:2px 6px;border-radius:3px;background:rgba(0,153,255,.12);color:#0099ff;}
+.ns-dc{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:2px 6px;border-radius:3px;background:rgba(224,92,106,.1);color:#e05c6a;}
+.news-date{font-size:9px;color:#2e2e2e;}
+.news-title{font-size:12px;color:#fff;line-height:1.55;}
+.news-more{font-size:10px;color:#0099ff;cursor:pointer;margin-top:5px;display:inline-block;opacity:.8;transition:opacity 120ms;}
+.news-more:hover{opacity:1;}
+svg{flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="logo">Medium<span>Format</span></div>
+  <div class="nav-group">
+    <div class="nav-item active">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
+      Inventory
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Orders <span class="nav-badge">7</span>
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      Checkouts
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Credit Notes
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Customers
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+      Vouchers
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Messages
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Purchase Orders
+    </div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-lbl">Store</div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      Eshop Editor
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      Media
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+      Newsletter
+    </div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-lbl">Config</div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+      Channels
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      Preferences
+    </div>
+  </div>
+  <div class="sidebar-foot">
+    <div class="store-pill">
+      <div class="live-dot"></div>
+      <div class="store-name">Medium Format · JKT</div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="tb-search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="Find releases, products or orders…"/>
+    </div>
+    <div class="tb-spacer"></div>
+    <div class="tb-link">Feed</div>
+    <div class="tb-link">My Eshop</div>
+    <div class="tb-add">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add Release
+    </div>
+    <div class="tb-icon">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+    </div>
+    <div class="avatar">MF</div>
+  </div>
+
+  <div class="content">
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="ph-left">
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">Good morning, Adrian — here's what's happening today</div>
+      </div>
+      <div class="ph-right">
+        <div class="dt-label">Week 18 · 2026</div>
+        <div class="dt-date">Friday, May 2, 2026</div>
+        <div class="dt-time" id="clock">09:41</div>
+        <div class="dt-curr">Base currency: IDR (Rp)</div>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="stats-strip">
+      <div class="stat-card gradient-violet">
+        <div class="sc-top"><div class="sc-lbl">Today's Revenue</div><div class="sc-dot"></div></div>
+        <div class="sc-val">Rp 2.4M</div>
+        <div class="sc-foot">
+          <span class="sc-delta delta-up">↑ 18% vs yesterday</span>
+          <svg class="sc-sparkline" viewBox="0 0 60 22" preserveAspectRatio="none">
+            <defs><linearGradient id="sg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity=".3"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,18 L10,16 L20,17 L30,12 L40,13 L50,8 L60,4 L60,22 L0,22Z" fill="url(#sg1)"/>
+            <polyline points="0,18 10,16 20,17 30,12 40,13 50,8 60,4" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card gradient-orange">
+        <div class="sc-top"><div class="sc-lbl">This Month</div></div>
+        <div class="sc-val">Rp 48M</div>
+        <div class="sc-foot">
+          <span class="sc-delta delta-up">↑ 8% vs last month</span>
+          <svg class="sc-sparkline" viewBox="0 0 60 22" preserveAspectRatio="none">
+            <defs><linearGradient id="sg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity=".3"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,20 L10,17 L20,15 L30,13 L40,11 L50,8 L60,4 L60,22 L0,22Z" fill="url(#sg4)"/>
+            <polyline points="0,20 10,17 20,15 30,13 40,11 50,8 60,4" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-top"><div class="sc-lbl">Open Orders</div></div>
+        <div class="sc-val">7</div>
+        <div class="sc-foot">
+          <span class="sc-delta delta-dn">3 need action</span>
+          <svg class="sc-sparkline" viewBox="0 0 60 22" preserveAspectRatio="none">
+            <defs><linearGradient id="sg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e05c6a" stop-opacity=".2"/><stop offset="100%" stop-color="#e05c6a" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,10 L10,4 L20,14 L30,8 L40,12 L50,5 L60,9 L60,22 L0,22Z" fill="url(#sg2)"/>
+            <polyline points="0,10 10,4 20,14 30,8 40,12 50,5 60,9" fill="none" stroke="#e05c6a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-top"><div class="sc-lbl">Items in Stock</div></div>
+        <div class="sc-val">1,240</div>
+        <div class="sc-foot">
+          <span class="sc-delta delta-neu">12 sold today</span>
+          <svg class="sc-sparkline" viewBox="0 0 60 22" preserveAspectRatio="none">
+            <defs><linearGradient id="sg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#888" stop-opacity=".15"/><stop offset="100%" stop-color="#888" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,8 L10,10 L20,9 L30,12 L40,10 L50,11 L60,9 L60,22 L0,22Z" fill="url(#sg3)"/>
+            <polyline points="0,8 10,10 20,9 30,12 40,10 50,11 60,9" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main grid -->
+    <div class="dash-grid">
+
+      <!-- Sales chart span 2 -->
+      <div class="widget span-2">
+        <div class="wh">
+          <div class="wh-title">Sales over time</div>
+          <div class="pills" id="chart-pills">
+            <div class="pill" onclick="setPills(this,'chart-pills')">3M</div>
+            <div class="pill" onclick="setPills(this,'chart-pills')">6M</div>
+            <div class="pill active" onclick="setPills(this,'chart-pills')">12M</div>
+          </div>
+        </div>
+        <div class="wb">
+          <div class="chart-kpi">
+            <div><div class="chart-total">Rp 318.4M</div><div class="chart-sub">May 2025 – Apr 2026</div></div>
+            <div class="chart-delta">↑ 22% YoY</div>
+          </div>
+          <div class="chart-layout">
+            <div class="y-axis"><span>50M</span><span>40M</span><span>30M</span><span>20M</span><span>10M</span><span>0</span></div>
+            <div class="chart-area">
+              <svg class="lc" viewBox="0 0 600 112" preserveAspectRatio="none">
+                <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0099ff" stop-opacity=".22"/><stop offset="100%" stop-color="#0099ff" stop-opacity=".02"/></linearGradient></defs>
+                <line x1="0" y1="22" x2="600" y2="22" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 4"/>
+                <line x1="0" y1="44" x2="600" y2="44" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 4"/>
+                <line x1="0" y1="67" x2="600" y2="67" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 4"/>
+                <line x1="0" y1="89" x2="600" y2="89" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 4"/>
+                <path d="M0,67 L54.5,61 L109,54 L163.5,59 L218,53 L272.5,56 L327,47 L381.5,42 L436,35 L490.5,42 L545,31 L600,23 L600,112 L0,112Z" fill="url(#cg)"/>
+                <polyline points="0,67 54.5,61 109,54 163.5,59 218,53 272.5,56 327,47 381.5,42 436,35 490.5,42 545,31 600,23" fill="none" stroke="#0099ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="0,89 54.5,85 109,80 163.5,83 218,79 272.5,82 327,75 381.5,70 436,65 490.5,70 545,60 600,55" fill="none" stroke="#0099ff" stroke-width="1.2" stroke-opacity=".15" stroke-dasharray="4 3"/>
+                <circle cx="600" cy="23" r="4" fill="#0099ff"/>
+                <circle cx="600" cy="23" r="7" fill="none" stroke="#0099ff" stroke-width="1.5" stroke-opacity=".3"/>
+              </svg>
+              <div class="chart-xaxis">
+                <span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+                <span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Eshop visitors -->
+      <div class="widget">
+        <div class="wh">
+          <div class="wh-title">Eshop Visitors</div>
+          <div class="pills" id="vis-pills">
+            <div class="pill active" onclick="setPills(this,'vis-pills')">30d</div>
+            <div class="pill" onclick="setPills(this,'vis-pills')">60d</div>
+            <div class="pill" onclick="setPills(this,'vis-pills')">90d</div>
+          </div>
+        </div>
+        <div class="wb">
+          <div class="v-big">3,841</div>
+          <div class="v-sub">Unique visitors · last 30 days</div>
+          <div class="v-bars" id="vbars"></div>
+          <div class="v-stats">
+            <div><div class="v-stat-n">12,841</div><div class="v-stat-l">Page Views</div></div>
+            <div><div class="v-stat-n">3.05</div><div class="v-stat-l">Avg Pages</div></div>
+            <div><div class="v-stat-n">2:18</div><div class="v-stat-l">Avg Session</div></div>
+            <div><div class="v-stat-n">31%</div><div class="v-stat-l">Bounce Rate</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent orders span 2 -->
+      <div class="widget span-2">
+        <div class="wh">
+          <div class="wh-title">Recent Orders</div>
+          <div class="pills" id="ord-pills">
+            <div class="pill active" onclick="setPills(this,'ord-pills')">All</div>
+            <div class="pill" onclick="setPills(this,'ord-pills')">Shop</div>
+            <div class="pill" onclick="setPills(this,'ord-pills')">Tokopedia</div>
+            <div class="pill" onclick="setPills(this,'ord-pills')">Shopee</div>
+            <div class="pill" onclick="setPills(this,'ord-pills')">Discogs</div>
+          </div>
+          <div class="see-all">View all →</div>
+        </div>
+        <div class="wb-0">
+          <table>
+            <thead><tr><th>Order</th><th>Customer</th><th>Channel</th><th>Items</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">#1042</td><td><div class="cust-cell"><div class="cust-init">AS</div>Andi S.</div></td><td><span class="ch-pill">Tokopedia</span></td><td>2</td><td class="amt">Rp 185K</td><td><span class="s-pill st-pend">Pending</span></td></tr>
+              <tr><td class="mono">#1041</td><td><div class="cust-cell"><div class="cust-init">DR</div>Diana R.</div></td><td><span class="ch-pill">Website</span></td><td>1</td><td class="amt">Rp 420K</td><td><span class="s-pill st-proc">Processing</span></td></tr>
+              <tr><td class="mono">#1040</td><td><div class="cust-cell"><div class="cust-init">MK</div>Marco K.</div></td><td><span class="ch-pill">Discogs</span></td><td>3</td><td class="amt">USD 22</td><td><span class="s-pill st-ship">Shipped</span></td></tr>
+              <tr><td class="mono">#1039</td><td><div class="cust-cell"><div class="cust-init">SW</div>Sari W.</div></td><td><span class="ch-pill">Shopee</span></td><td>1</td><td class="amt">Rp 95K</td><td><span class="s-pill st-done">Done</span></td></tr>
+              <tr><td class="mono">#1038</td><td><div class="cust-cell"><div class="cust-init">RJ</div>Reza J.</div></td><td><span class="ch-pill">POS</span></td><td>4</td><td class="amt">Rp 890K</td><td><span class="s-pill st-done">Done</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Sales channels -->
+      <div class="widget">
+        <div class="wh">
+          <div class="wh-title">Sales Channels</div>
+          <div style="font-size:9px;color:#484848">MTD</div>
+        </div>
+        <div class="wb">
+          <div class="ch-row"><div class="ch-name">Tokopedia</div><div class="ch-track"><div class="ch-fill" style="width:72%;background:#22c55e;"></div></div><div class="ch-pct">36%</div><div class="ch-val">Rp 17.2M</div></div>
+          <div class="ch-row"><div class="ch-name">Website</div><div class="ch-track"><div class="ch-fill" style="width:55%;background:#0099ff;"></div></div><div class="ch-pct">27%</div><div class="ch-val">Rp 13.1M</div></div>
+          <div class="ch-row"><div class="ch-name">Shopee</div><div class="ch-track"><div class="ch-fill" style="width:42%;background:#e8a838;"></div></div><div class="ch-pct">21%</div><div class="ch-val">Rp 10.0M</div></div>
+          <div class="ch-row"><div class="ch-name">POS</div><div class="ch-track"><div class="ch-fill" style="width:20%;background:#5bc0de;"></div></div><div class="ch-pct">10%</div><div class="ch-val">Rp 4.8M</div></div>
+          <div class="ch-row"><div class="ch-name">Discogs</div><div class="ch-track"><div class="ch-fill" style="width:12%;background:#e05c6a;"></div></div><div class="ch-pct">6%</div><div class="ch-val">Rp 2.9M</div></div>
+        </div>
+      </div>
+
+      <!-- Best sellers span 2 -->
+      <div class="widget span-2">
+        <div class="wh">
+          <div class="wh-title">Best Sellers</div>
+          <div class="pills" id="bs-pills">
+            <div class="pill active" onclick="setPills(this,'bs-pills')">All</div>
+            <div class="pill" onclick="setPills(this,'bs-pills')">Releases</div>
+            <div class="pill" onclick="setPills(this,'bs-pills')">Products</div>
+          </div>
+        </div>
+        <div class="wb">
+          <div class="bs-list">
+            <div class="bs-row"><div class="bs-rank">#1</div><div class="bs-cover cv1"></div><div class="bs-info"><div class="bs-title">OK Computer</div><div class="bs-artist">Radiohead · LP · M</div></div><div class="bs-right"><div class="bs-sold">12 sold</div><div class="bs-rev">Rp 8.1M</div></div></div>
+            <div class="bs-row"><div class="bs-rank">#2</div><div class="bs-cover cv2"></div><div class="bs-info"><div class="bs-title">Dummy</div><div class="bs-artist">Portishead · LP · VG+</div></div><div class="bs-right"><div class="bs-sold">9 sold</div><div class="bs-rev">Rp 5.4M</div></div></div>
+            <div class="bs-row"><div class="bs-rank">#3</div><div class="bs-cover cv3"></div><div class="bs-info"><div class="bs-title">Mezzanine</div><div class="bs-artist">Massive Attack · 2LP · M</div></div><div class="bs-right"><div class="bs-sold">7 sold</div><div class="bs-rev">Rp 4.9M</div></div></div>
+            <div class="bs-row"><div class="bs-rank">#4</div><div class="bs-cover cv4"></div><div class="bs-info"><div class="bs-title">Promises</div><div class="bs-artist">Floating Points · LP · VG+</div></div><div class="bs-right"><div class="bs-sold">6 sold</div><div class="bs-rev">Rp 2.7M</div></div></div>
+            <div class="bs-row"><div class="bs-rank">#5</div><div class="bs-cover cv5"></div><div class="bs-info"><div class="bs-title">Mordechai</div><div class="bs-artist">Khruangbin · LP · M</div></div><div class="bs-right"><div class="bs-sold">5 sold</div><div class="bs-rev">Rp 2.6M</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top countries -->
+      <div class="widget">
+        <div class="wh">
+          <div class="wh-title">Top Country Sales</div>
+          <div class="see-all">Map view →</div>
+        </div>
+        <div class="wb">
+          <div class="c-row"><div class="c-code">ID</div><div class="c-name">Indonesia</div><div class="c-bar-wrap"><div class="c-bar" style="width:100%"></div></div><div class="c-amt">Rp 38.2M</div></div>
+          <div class="c-row"><div class="c-code">JP</div><div class="c-name">Japan</div><div class="c-bar-wrap"><div class="c-bar" style="width:24%"></div></div><div class="c-amt">Rp 9.1M</div></div>
+          <div class="c-row"><div class="c-code">AU</div><div class="c-name">Australia</div><div class="c-bar-wrap"><div class="c-bar" style="width:18%"></div></div><div class="c-amt">Rp 7.0M</div></div>
+          <div class="c-row"><div class="c-code">GB</div><div class="c-name">United Kingdom</div><div class="c-bar-wrap"><div class="c-bar" style="width:15%"></div></div><div class="c-amt">Rp 5.8M</div></div>
+          <div class="c-row"><div class="c-code">US</div><div class="c-name">United States</div><div class="c-bar-wrap"><div class="c-bar" style="width:12%"></div></div><div class="c-amt">Rp 4.4M</div></div>
+          <div class="c-row"><div class="c-code">SG</div><div class="c-name">Singapore</div><div class="c-bar-wrap"><div class="c-bar" style="width:8%"></div></div><div class="c-amt">Rp 2.9M</div></div>
+          <div class="c-row"><div class="c-code">DE</div><div class="c-name">Germany</div><div class="c-bar-wrap"><div class="c-bar" style="width:5%"></div></div><div class="c-amt">Rp 2.1M</div></div>
+          <div class="c-row"><div class="c-code">MY</div><div class="c-name">Malaysia</div><div class="c-bar-wrap"><div class="c-bar" style="width:3%"></div></div><div class="c-amt">Rp 1.3M</div></div>
+        </div>
+      </div>
+
+      <!-- Industry news span 3 -->
+      <div class="widget span-3">
+        <div class="wh">
+          <div class="wh-title">Industry News</div>
+          <div class="pills" id="news-pills">
+            <div class="pill active" onclick="setPills(this,'news-pills')">All</div>
+            <div class="pill" onclick="setPills(this,'news-pills')">Bandcamp</div>
+            <div class="pill" onclick="setPills(this,'news-pills')">Discogs</div>
+          </div>
+        </div>
+        <div class="wb">
+          <div class="news-cols">
+            <div class="news-col">
+              <div class="news-card">
+                <div class="news-top"><span class="ns-bc">Bandcamp</span><span class="news-date">Apr 28, 2026</span></div>
+                <div class="news-title">New releases: Warp Records spring catalog now available for pre-order</div>
+                <div class="news-more">Read more →</div>
+              </div>
+              <div class="news-card">
+                <div class="news-top"><span class="ns-bc">Bandcamp</span><span class="news-date">Apr 25, 2026</span></div>
+                <div class="news-title">Bandcamp Friday returns in May — artists keep 100% of sales</div>
+                <div class="news-more">Read more →</div>
+              </div>
+            </div>
+            <div class="news-col">
+              <div class="news-card">
+                <div class="news-top"><span class="ns-dc">Discogs</span><span class="news-date">Apr 27, 2026</span></div>
+                <div class="news-title">New eBay integration — list your inventory to eBay directly from Discogs</div>
+                <div class="news-more">Read more →</div>
+              </div>
+              <div class="news-card">
+                <div class="news-top"><span class="ns-dc">Discogs</span><span class="news-date">Apr 22, 2026</span></div>
+                <div class="news-title">Discogs seller fee structure update effective June 2026</div>
+                <div class="news-more">Read more →</div>
+              </div>
+            </div>
+            <div class="news-col">
+              <div class="news-card">
+                <div class="news-top"><span class="ns-bc">Bandcamp</span><span class="news-date">Apr 20, 2026</span></div>
+                <div class="news-title">Ambient music streams up 40% globally — Wantlist data analysis</div>
+                <div class="news-more">Read more →</div>
+              </div>
+              <div class="news-card">
+                <div class="news-top"><span class="ns-dc">Discogs</span><span class="news-date">Apr 18, 2026</span></div>
+                <div class="news-title">Collector spotlight: Top 10 Japanese jazz pressings of Q1 2026</div>
+                <div class="news-more">Read more →</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /dash-grid -->
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+function setPills(clicked, groupId) {
+  document.querySelectorAll(`#${groupId} .pill`).forEach(p => p.classList.remove('active'));
+  clicked.classList.add('active');
+}
+function tick() {
+  const n = new Date();
+  document.getElementById('clock').textContent = String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
+}
+tick();
+setInterval(tick, 15000);
+(function() {
+  const data = [38,62,45,78,52,90,68,74,55,82,61,95,70,88,64,72,85,58,76,92,67,80,48,71,84,59,77,96,63,91];
+  const max = Math.max(...data);
+  const wrap = document.getElementById('vbars');
+  data.forEach(v => {
+    const outer = document.createElement('div');
+    outer.className = 'v-bar';
+    outer.style.height = '32px';
+    const inner = document.createElement('div');
+    inner.className = 'v-bar-fill';
+    inner.style.height = Math.max(2, Math.round(v / max * 32)) + 'px';
+    outer.appendChild(inner);
+    wrap.appendChild(outer);
+  });
+})();
+</script>
+</body>
+</html>

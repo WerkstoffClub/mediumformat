@@ -1,0 +1,76 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "USA, Canada & Europe",
+      "year": "2024",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Dead Oceans",
+        "Dead Oceans, Inc.",
+        "Dead Oceans, Inc.",
+        "Night Time Stories Ltd.",
+        "Night Time Stories Ltd.",
+        "Barn Hug Ink, Inc.",
+        "Kobalt Music Group Limited",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul"
+      ],
+      "style": [
+        "Psychedelic Rock",
+        "Indie Rock",
+        "Funk",
+        "Neo Soul"
+      ],
+      "id": 30292349,
+      "barcode": [
+        "656605165721",
+        "DOC357CD 6745-CD-6151 24-015-06-2",
+        "IFPI LY89",
+        "IFPI L824",
+        "DOC357CD 6745-CD-6151 24-015-06-2",
+        "IFPI LY89",
+        "IFPI L813"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3445235,
+      "master_url": "https://api.discogs.com/masters/3445235",
+      "uri": "/release/30292349-Khruangbin-A-La-Sala",
+      "catno": "DOC357",
+      "title": "Khruangbin - A La Sala",
+      "thumb": "https://i.discogs.com/3Sp2m2kWJ_sLaCskiI5fqNKxrQLEnkkZYC5es5kxN1w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwMjky/MzQ5LTE3MTI4MDg0/MTQtMTE5Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/rcHqtQ6dpCKcKu0vTkTMTkCzJbDjl_2O2Wotc00XJL0/rs:fit/g:sm/q:90/h:534/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwMjky/MzQ5LTE3MTI4MDg0/MTQtMTE5Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/30292349",
+      "community": {
+        "want": 108,
+        "have": 627
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

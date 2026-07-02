@@ -1,0 +1,67 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Linear Labs",
+        "Linear Labs, LLC",
+        "Linear Labs, LLC",
+        "Linear Labs Studio",
+        "Linear Labs Studio",
+        "Linear Labs Studio",
+        "Elysian Masters"
+      ],
+      "type": "release",
+      "genre": [
+        "Jazz",
+        "Funk / Soul"
+      ],
+      "style": [],
+      "id": 37293444,
+      "barcode": [
+        "6 17308 03575 9",
+        "LL019 17810-CD-0004 26-059-14-2",
+        "IFPI LY89",
+        "IFPI L817"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/37293444-Adrian-Younge-Younge",
+      "catno": "LL019",
+      "title": "Adrian Younge - Younge",
+      "thumb": "https://i.discogs.com/p3p8-MxBkJFUf8N1w1EGIbZtRazK6scG-IfYPPRG8bk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3Mjkz/NDQ0LTE3NzgzMzQ3/ODUtMzc5My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/IAjwQvxchcP09U4jcSvH2KBUic7h3xUY4YWkeBfhiyE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3Mjkz/NDQ0LTE3NzgzMzQ3/ODUtMzc5My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/37293444",
+      "community": {
+        "want": 1,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

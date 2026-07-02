@@ -883,7 +883,36 @@ html[data-theme="light"] .cover-art .grooves, .light .cover-art .grooves {
         </div>
       </div>
 
-      <!-- FAMILY C — CASH -->
+      <!-- FAMILY C — MARKETPLACE BALANCE -->
+      <div class="family" id="famMarket">
+        <div class="family-head" onclick="toggleFamily('famMarket')">
+          <div class="family-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7l2-4h14l2 4"/><path d="M3 7h18v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 11a4 4 0 0 0 8 0"/></svg>
+          </div>
+          <div class="family-meta">
+            <div class="family-name">Marketplace <span class="family-tag">Platform balance</span></div>
+            <div class="family-desc">Order settled by the marketplace — record against platform balance, no funds at register.</div>
+          </div>
+          <svg class="family-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="family-body">
+          <div class="family-inner">
+            <div class="x-chips">
+              <div class="x-chip" onclick="this.parentNode.querySelectorAll('.x-chip').forEach(c=>c.classList.remove('active'));this.classList.add('active')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+                Saldo TikTok
+              </div>
+              <div class="x-chip" onclick="this.parentNode.querySelectorAll('.x-chip').forEach(c=>c.classList.remove('active'));this.classList.add('active')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1.2 12.2a1 1 0 0 1-1 .8H8.2a1 1 0 0 1-1-.8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+                ShopeePay
+              </div>
+            </div>
+            <div class="secured-note">Matches the "Saldo Tiktok" / "Shopee" payment methods in DealPOS — the platform pays out on its settlement schedule.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILY D — CASH -->
       <div class="family" id="famCash">
         <div class="family-head" onclick="toggleFamily('famCash')">
           <div class="family-icon">

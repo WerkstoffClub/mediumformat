@@ -1,0 +1,61 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Lame-O Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Emo"
+      ],
+      "id": 35305561,
+      "barcode": [
+        "199438000598"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 646051,
+      "master_url": "https://api.discogs.com/masters/646051",
+      "uri": "/release/35305561-Marietta-Summer-Death",
+      "catno": "lmo-123",
+      "title": "Marietta (2) - Summer Death",
+      "thumb": "https://i.discogs.com/_j0QNGyOyX1_gv3LCdIi_5Yrfunee93rdXSXqd9Gkqo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MzA1/NTYxLTE3NTk3OTMy/NjctMzE0MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/EdUaIMl0Y2kapqF8CaU97SJ5fujoILPAl1Ge16sYZT8/rs:fit/g:sm/q:90/h:545/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MzA1/NTYxLTE3NTk3OTMy/NjctMzE0MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35305561",
+      "community": {
+        "want": 41,
+        "have": 66
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

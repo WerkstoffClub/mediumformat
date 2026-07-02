@@ -1,0 +1,331 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 5,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "45 RPM",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "RCA",
+        "Domino",
+        "RCA Records",
+        "Domino Recording Co. Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Pop",
+        "Contemporary R&B"
+      ],
+      "id": 34959245,
+      "barcode": [
+        "198029449617"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3955667,
+      "master_url": "https://api.discogs.com/masters/3955667",
+      "uri": "/release/34959245-Blood-Orange-Essex-Honey",
+      "catno": "19802960851",
+      "title": "Blood Orange (2) - Essex Honey",
+      "thumb": "https://i.discogs.com/gljLGMTKfaNGtnKnKar9DlVsCkNyfG0cYSu7cor1WU0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTU5/MjQ1LTE3NTY1OTUz/NzYtMTQxNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/bvT0wPtAFkW6WBcopxX-UhrWz_miTgOsKSLF5DQLqQk/rs:fit/g:sm/q:90/h:607/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTU5/MjQ1LTE3NTY1OTUz/NzYtMTQxNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34959245",
+      "community": {
+        "want": 562,
+        "have": 1633
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "45 RPM",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "45 RPM",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "RCA",
+        "Domino",
+        "Sony Music",
+        "RCA Records",
+        "Domino Recording Co. Ltd.",
+        "RCA Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Sony Music UK"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Pop",
+        "Contemporary R&B"
+      ],
+      "id": 35204698,
+      "barcode": [
+        "198029449617",
+        "19802-94496-1-SA MPO(logo)® 25368655 RKS STERLING",
+        "19802-94496-1-SB MPO(logo)® 25368733 RKS STERLING",
+        "19802-94496-1-SC MPO(logo)® 25368865 RKS STERLING",
+        "19802-94496-1-SD RKS STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3955667,
+      "master_url": "https://api.discogs.com/masters/3955667",
+      "uri": "/release/35204698-Blood-Orange-Essex-Honey",
+      "catno": "19802944961",
+      "title": "Blood Orange (2) - Essex Honey",
+      "thumb": "https://i.discogs.com/bGN-qU6pW4BLAsJThnmFjoZqaZmweKaoI-uBkfQSfh8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjA0/Njk4LTE3NjA2MDA1/NjMtNTkyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/hyzAk53NMGGQlWFIUDhsYjF5TiQgJ4QfkjdxW33UIf8/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MjA0/Njk4LTE3NjA2MDA1/NjMtNTkyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35204698",
+      "community": {
+        "want": 138,
+        "have": 628
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Gatefold",
+          "descriptions": [
+            "LP",
+            "45 RPM",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "45 RPM",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "RCA",
+        "Domino",
+        "RCA Records",
+        "Domino Recording Co. Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Pop",
+        "Contemporary R&B"
+      ],
+      "id": 34995014,
+      "barcode": [
+        "198029449617"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3955667,
+      "master_url": "https://api.discogs.com/masters/3955667",
+      "uri": "/release/34995014-Blood-Orange-Essex-Honey",
+      "catno": "19802960851",
+      "title": "Blood Orange (2) - Essex Honey",
+      "thumb": "https://i.discogs.com/51CIWRI-8AzP1h9L__1j3ZAk5_2QhcwRrGBTP-CDSiA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTk1/MDE0LTE3NTc1NTg0/NDQtNDE3MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/XtPBMrkfeKOpOopWjnsgwVoClGj0TwWLjspevbzK6H8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0OTk1/MDE0LTE3NTc1NTg0/NDQtNDE3MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34995014",
+      "community": {
+        "want": 200,
+        "have": 293
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Marble, Gatefold",
+          "descriptions": [
+            "LP",
+            "45 RPM",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "45 RPM",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "RCA",
+        "Domino"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Pop",
+        "Contemporary R&B"
+      ],
+      "id": 35389522,
+      "barcode": [
+        "000104282736"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3955667,
+      "master_url": "https://api.discogs.com/masters/3955667",
+      "uri": "/release/35389522-Blood-Orange-Essex-Honey",
+      "catno": "198029750317",
+      "title": "Blood Orange (2) - Essex Honey",
+      "thumb": "https://i.discogs.com/_CoMBjLO7sZSIWwP035EfyaTFVyvOmlcsKUiCRBRAUs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzg5/NTIyLTE3NjA2MTQy/NDMtNTY0Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/r8vMRTon7hQAr3y-fWOfU0IiQfKqDPreWWy4zxQZmF4/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Mzg5/NTIyLTE3NjA2MTQy/NDMtNTY0Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35389522",
+      "community": {
+        "want": 140,
+        "have": 194
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Crystal Orange, Gatefold",
+          "descriptions": [
+            "LP",
+            "45 RPM",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "45 RPM",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "RCA",
+        "Domino",
+        "RCA Records",
+        "Domino Recording Co. Ltd.",
+        "Big Love Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Pop",
+        "Contemporary R&B"
+      ],
+      "id": 35066315,
+      "barcode": [
+        "19802960851"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3955667,
+      "master_url": "https://api.discogs.com/masters/3955667",
+      "uri": "/release/35066315-Blood-Orange-Essex-Honey",
+      "catno": "19802960851",
+      "title": "Blood Orange (2) - Essex Honey",
+      "thumb": "https://i.discogs.com/OKzdFrzZyAYIW0PJN2CH-Q5lpm3VJOAAfLQiZkBAsXg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MDY2/MzE1LTE3NTc1NjE0/MzQtMjc5NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/vw87jKBKqoBS55b5epsEmKsKjdnw1T2N9-TWkqO352I/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MDY2/MzE1LTE3NTc1NjE0/MzQtMjc5NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35066315",
+      "community": {
+        "want": 125,
+        "have": 74
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Japan Edition, Gatefold, Marble",
+          "descriptions": [
+            "LP",
+            "45 RPM",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

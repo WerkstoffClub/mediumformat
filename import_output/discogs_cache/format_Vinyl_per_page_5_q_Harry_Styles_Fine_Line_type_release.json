@@ -1,0 +1,449 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 10,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Harry+Styles+Fine+Line&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?q=Harry+Styles+Fine+Line&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Erskine Records",
+        "Columbia",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Columbia Records",
+        "Columbia Records",
+        "HSA Publishing Ltd.",
+        "Universal PolyGram International",
+        "Universal Music Corp.",
+        "Cabin Mobile Music",
+        "One Year Yesterday",
+        "These Are Pulse Songs",
+        "Creative Pulse Music",
+        "Artist Publishing Group East",
+        "Kobalt",
+        "Sony/ATV Songs LLC",
+        "Songs of Universal, Inc.",
+        "Way Above Music",
+        "EMI April Music Inc.",
+        "Kurstin Music",
+        "Sparko Phone Music",
+        "Shangri-La, Malibu, CA",
+        "Real World Studios",
+        "Groove Masters",
+        "Harpoon House, Los Angeles, CA",
+        "The Cave, Nashville, TN",
+        "Henson Recording Studios",
+        "RAK Studios",
+        "Eastwest Studios",
+        "The Diamond Mine",
+        "Capitol Studios",
+        "Echo Studio, Los Angeles, CA",
+        "Eastwest Studios",
+        "The Gift Shop, Los Angeles",
+        "The Cave, Nashville, TN",
+        "Sterling Sound",
+        "Sterling Sound",
+        "Memphis Record Pressing",
+        "GZ Media",
+        "Target"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Pop Rock",
+        "Soul",
+        "Soft Rock",
+        "Britpop"
+      ],
+      "id": 14525240,
+      "barcode": [
+        "1 94397 05161 2",
+        "194397051612",
+        "1 94397 05141 4",
+        "194397051414",
+        "19439705141-SV1",
+        "19439705141-SV2",
+        "LC00162",
+        "BIEM/GEMA",
+        "AL19439705161 MRP2237/19439705141/AB-A JN-H STERLING 199032E1/A1",
+        "BL19439705161 MRP2237/19439705141/AB-B JN-H STERLING 199032E2/B2",
+        "CL19439705161 MRP2237/19439705141/CD-A JN-H STERLING 199032E3/A4",
+        "DL19439705151 MRP2237/19439705141/CD-B JN-H STERLING 199032E4/D3",
+        "AL19439705161 MRP2237/19439705141/AB-A JN-H STERLING 199032E1/A8",
+        "BL19439705141 RES MRP2237/19439705141/AB-B JN-H STERLING 199032E2 944139",
+        "CL19439705151 MRP2237/19439705141/CD-A JN-H STERLING 199032E3/B1",
+        "DL19439705141 REI MRP2237/19439705141/CD-B JN-H STERLING 199032E4/E12",
+        "AL19439705161 MRP2237/19439705141/AB-A JN-H STERLING A15 199032E1/A",
+        "BL19439705161 MRP2237/19439705141/AB-B JN-H STERLING 199032E2/B2 B15",
+        "CL19439705161 MRP2237/19439705141/CD-A JN-H STERLING 199032E3/A3",
+        "DL19439705151 MRP2237/19439705141/CD-B JN-H STERLING 199032E4/AA2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1649896,
+      "master_url": "https://api.discogs.com/masters/1649896",
+      "uri": "/release/14525240-Harry-Styles-Fine-Line",
+      "catno": "19439705141",
+      "title": "Harry Styles - Fine Line",
+      "thumb": "https://i.discogs.com/NdUDPSpKPueAwdEDCS0tV7N2pboF9XhnbDldn6p85tk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTI1/MjQwLTE1OTA1NTYy/NDMtNjYwNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/oam3ZDYQQFl5zHfcKoCp1mqi13ebyilEgaxTCHlX3cs/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTI1/MjQwLTE1OTA1NTYy/NDMtNjYwNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14525240",
+      "community": {
+        "want": 4055,
+        "have": 29554
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Clear w/ Black & White Splatter",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Sterling Sound",
+        "Sterling Sound",
+        "GZ Media",
+        "Memphis Record Pressing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Pop Rock"
+      ],
+      "id": 14510978,
+      "barcode": [
+        "194397051414",
+        "1 94397 05141 4",
+        "AL19439705161 MRP2237 / 19439705141 / 19439705151 / 19439705161 / AB-A JN-H STERLING 199032E1/A A26",
+        "BL19439705161 199032E2/B JN-H STERLING MRP2237 / 19439705141 / AB-B B10",
+        "CL19439705141 JN-H STERLING #90",
+        "DL19439705141 JN-H STERLING #90"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1649896,
+      "master_url": "https://api.discogs.com/masters/1649896",
+      "uri": "/release/14510978-Harry-Styles-Fine-Line",
+      "catno": "19439705141",
+      "title": "Harry Styles - Fine Line",
+      "thumb": "https://i.discogs.com/ikhZ3hv4SHvaoGJE9bwDJZ8WbLyNHiHMbPRqZ0IvgO0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTEw/OTc4LTE2MTU0OTcz/NTAtMjgyMy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/kommzwVkXGWGIbMnlcb1WlN-q_MFOtB16UvL7Zu92xI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTEw/OTc4LTE2MTU0OTcz/NTAtMjgyMy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14510978",
+      "community": {
+        "want": 2329,
+        "have": 22475
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Columbia",
+        "Erskine Records",
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Columbia Records",
+        "Sony Music Entertainment International Services GmbH",
+        "Shangri-La, Malibu, CA",
+        "Real World Studios",
+        "Groove Masters",
+        "Harpoon House, Los Angeles, CA",
+        "The Cave, Nashville, TN",
+        "Henson Recording Studios",
+        "RAK Studios",
+        "Eastwest Studios",
+        "The Diamond Mine",
+        "Capitol Studios",
+        "Echo Studio, Los Angeles, CA",
+        "Eastwest Studios",
+        "The Gift Shop, Los Angeles",
+        "The Cave, Nashville, TN",
+        "Sterling Sound",
+        "Sterling Sound",
+        "Memphis Record Pressing",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [],
+      "id": 14521017,
+      "barcode": [
+        "1 94397 11681 6",
+        "194397116816",
+        "LC00162",
+        "BIEM/GEMA",
+        "AL19439705161 MRP2237/19439705141/AB-A JN-H STERLING 199032E1/A1",
+        "BL19439705161 MRP2237/19439705141/AB-B JN-H STERLING 199032E2/B2",
+        "CL19439705161 MRP2237/19439705141/CD-A JN-H STERLING 199032E3/A4",
+        "DL19439705151 MRP2237/19439705141/CD-B JN-H STERLING 199032E4/D3",
+        "AL19439705161 MRP2237/19439705141/AB-A JN-H STERLING 199032E1/A1",
+        "BL19439705161 MRP2237/19439705141/AB-B JN-H STERLING 199032E2/A5",
+        "CL19439705161 MRP2237/19439705141/CD-A JN-H STERLING 199032E3/A7",
+        "DL19439705151 MRP2237/19439705141/CD-B JN-H STERLING 199032E4/D3"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1649896,
+      "master_url": "https://api.discogs.com/masters/1649896",
+      "uri": "/release/14521017-Harry-Styles-Fine-Line",
+      "catno": "19439705141",
+      "title": "Harry Styles - Fine Line",
+      "thumb": "https://i.discogs.com/XwEE5YHqwKs5EvLYeUhf7TeuIqk2hLSdfzjRCKpnNuA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTIx/MDE3LTE2NzY0MTEy/MzMtNDkxOS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/E5h5ZNAM1ZzmXvCBe2JPwh67BbALUq992_bP9FxuPgc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTIx/MDE3LTE2NzY0MTEy/MzMtNDkxOS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14521017",
+      "community": {
+        "want": 2612,
+        "have": 13894
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Clear w/ Black & White Splatter",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Erskine Records",
+        "Columbia",
+        "Sony Music",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Sony Music Entertainment",
+        "Sony Music Entertainment International Services GmbH",
+        "Columbia Records",
+        "HSA Publishing Ltd.",
+        "Universal PolyGram International",
+        "Universal Music Corp.",
+        "Cabin Mobile Music",
+        "One Year Yesterday",
+        "These Are Pulse Songs",
+        "Creative Pulse Music",
+        "Artist Publishing Group East",
+        "Kobalt",
+        "Sony/ATV Songs LLC",
+        "Songs of Universal, Inc.",
+        "Way Above Music",
+        "EMI April Music Inc.",
+        "Kurstin Music",
+        "Sparko Phone Music",
+        "Shangri-La, Malibu, CA",
+        "Real World Studios",
+        "Groove Masters",
+        "Harpoon House, Los Angeles, CA",
+        "The Cave, Nashville, TN",
+        "Henson Recording Studios",
+        "RAK Studios",
+        "Eastwest Studios",
+        "The Diamond Mine",
+        "Capitol Studios",
+        "Echo Studio, Los Angeles, CA",
+        "Eastwest Studios",
+        "The Gift Shop, Los Angeles",
+        "The Cave, Nashville, TN",
+        "Sterling Sound",
+        "Sterling Sound",
+        "Memphis Record Pressing",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Pop",
+        "Pop Rock",
+        "Soft Rock",
+        "Soul",
+        "Britpop"
+      ],
+      "id": 14552957,
+      "barcode": [
+        "1 94397 05141 4",
+        "194397051414",
+        "AL19439705161 MRP2237/19439705141/19439705151/19439705161/AB-A JN-H STERLING 199032E1/A",
+        "BL19439705161 MRP2237/19439705141/AB-B JN-H STERLING 199032E2/A5",
+        "CL19439705161 MRP2237/19439705141/CD-A JN-H STERLING 199032E3/A7",
+        "DL19439705161 REI MRP2237/19439705141/CD-B JN-H STERLING 199032E4/E",
+        "19439705141-SV1",
+        "19439705141-SV2",
+        "LC00162",
+        "BIEM/GEMA"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1649896,
+      "master_url": "https://api.discogs.com/masters/1649896",
+      "uri": "/release/14552957-Harry-Styles-Fine-Line",
+      "catno": "19439705141",
+      "title": "Harry Styles - Fine Line",
+      "thumb": "https://i.discogs.com/i7utSv8ZGbuslClB67ZLzNQwqpA5U8XDcw0F4iLFho4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTUy/OTU3LTE1OTA1NTY5/ODYtNzU4Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/7fsQt2QEDqhdWYyCjg5jyY7tdqvWWZDEUT_2OuS0e28/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTUy/OTU3LTE1OTA1NTY5/ODYtNzU4Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/14552957",
+      "community": {
+        "want": 1093,
+        "have": 13812
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "180 Gram",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Columbia",
+        "Sterling Sound",
+        "Sterling Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Pop Rock"
+      ],
+      "id": 25142392,
+      "barcode": [
+        "1 94397 05141 4",
+        "194397051414",
+        "AL19439705141 JN-H STERLING",
+        "A̶ BL19439705141 JN-H STERLING",
+        "CL19439705141 JN-H STERLING",
+        "DL19439705141 JN-H STERLING"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1649896,
+      "master_url": "https://api.discogs.com/masters/1649896",
+      "uri": "/release/25142392-Harry-Styles-Fine-Line",
+      "catno": "19439705141",
+      "title": "Harry Styles - Fine Line",
+      "thumb": "https://i.discogs.com/jV6CPBpy8I-h0-nI6HezRF-qEiULbVLka0wJC9uVgMY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MTQy/MzkyLTE2NjgyOTUy/NzYtMjMzMy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/iZvICHVn2ZSfS9EpKnwVSfbC7TWj_1ysW2clbIZg-_Y/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MTQy/MzkyLTE2NjgyOTUy/NzYtMjMzMy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/25142392",
+      "community": {
+        "want": 510,
+        "have": 11675
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "180g Gatefold",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

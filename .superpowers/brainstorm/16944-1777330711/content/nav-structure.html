@@ -1,0 +1,234 @@
+<h2>Backoffice Navigation Structure</h2>
+<p class="subtitle">All modules and sub-sections of the Medium Format admin panel</p>
+
+<style>
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .nav-module {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .nav-module-header {
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #090909;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .nav-module-body {
+    padding: 8px 14px 12px;
+  }
+  .nav-item {
+    font-size: 12px;
+    line-height: 2;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .nav-item::before { content: "›"; color: #555; }
+  .nav-item:hover { color: #fff; }
+  .badge {
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .badge.new { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid #262626; }
+  .badge.id  { background: rgba(232,168,56,0.1); color: #e8a838; border: 1px solid rgba(232,168,56,0.2); }
+  .badge.ext { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+
+  /* Module accent top borders */
+  .mod-inventory   .nav-module-header { color: #0099ff; border-top: 4px solid #0099ff; }
+  .mod-orders      .nav-module-header { color: #22c55e; border-top: 4px solid #22c55e; }
+  .mod-customers   .nav-module-header { color: #5bc0de; border-top: 4px solid #5bc0de; }
+  .mod-channels    .nav-module-header { color: #e8a838; border-top: 4px solid #e8a838; }
+  .mod-payments    .nav-module-header { color: #e05c6a; border-top: 4px solid #e05c6a; }
+  .mod-shipping    .nav-module-header { color: #5bc0de; border-top: 4px solid #5bc0de; }
+  .mod-wholesale   .nav-module-header { color: #e8a838; border-top: 4px solid #e8a838; }
+  .mod-marketing   .nav-module-header { color: #d44df0; border-top: 4px solid #d44df0; }
+  .mod-analytics   .nav-module-header { color: #0099ff; border-top: 4px solid #0099ff; }
+  .mod-website     .nav-module-header { color: #22c55e; border-top: 4px solid #22c55e; }
+  .mod-settings    .nav-module-header { color: #999;    border-top: 4px solid #999; }
+</style>
+
+<div class="nav-grid">
+
+  <!-- INVENTORY -->
+  <div class="nav-module mod-inventory">
+    <div class="nav-module-header">📦 Inventory</div>
+    <div class="nav-module-body">
+      <div class="nav-item">All Releases</div>
+      <div class="nav-item">Add Release</div>
+      <div class="nav-item">Import from Discogs</div>
+      <div class="nav-item">Import via CSV</div>
+      <div class="nav-item">Categories & Genres</div>
+      <div class="nav-item">Condition Grades</div>
+      <div class="nav-item">Low Stock Alerts</div>
+      <div class="nav-item">Merch & Accessories</div>
+      <div class="nav-item">Track Previews <span class="badge new">New</span></div>
+    </div>
+  </div>
+
+  <!-- ORDERS -->
+  <div class="nav-module mod-orders">
+    <div class="nav-module-header">🛒 Orders</div>
+    <div class="nav-module-body">
+      <div class="nav-item">All Orders</div>
+      <div class="nav-item">Pending</div>
+      <div class="nav-item">Processing</div>
+      <div class="nav-item">Shipped</div>
+      <div class="nav-item">Completed</div>
+      <div class="nav-item">Refunds / Returns</div>
+      <div class="nav-item">Walk-in (POS)</div>
+      <div class="nav-item">Order by Channel</div>
+    </div>
+  </div>
+
+  <!-- CUSTOMERS -->
+  <div class="nav-module mod-customers">
+    <div class="nav-module-header">👥 Customers</div>
+    <div class="nav-module-body">
+      <div class="nav-item">All Customers</div>
+      <div class="nav-item">Customer Profiles</div>
+      <div class="nav-item">Purchase History</div>
+      <div class="nav-item">Wishlists</div>
+      <div class="nav-item">Customer Groups</div>
+      <div class="nav-item">Wholesale Accounts <span class="badge new">New</span></div>
+    </div>
+  </div>
+
+  <!-- SALES CHANNELS -->
+  <div class="nav-module mod-channels">
+    <div class="nav-module-header">📡 Sales Channels</div>
+    <div class="nav-module-body">
+      <div class="nav-item">Own Website</div>
+      <div class="nav-item">POS (Offline Store)</div>
+      <div class="nav-item">Tokopedia <span class="badge id">ID</span></div>
+      <div class="nav-item">Shopee <span class="badge id">ID</span></div>
+      <div class="nav-item">Discogs <span class="badge ext">Ext</span></div>
+      <div class="nav-item">Bandcamp <span class="badge ext">Ext</span></div>
+      <div class="nav-item">Meta (FB/IG) <span class="badge ext">Ext</span></div>
+      <div class="nav-item">eBay <span class="badge ext">Ext</span></div>
+      <div class="nav-item">Google Merchant <span class="badge ext">Ext</span></div>
+      <div class="nav-item">Channel Sync Status</div>
+    </div>
+  </div>
+
+  <!-- PAYMENTS -->
+  <div class="nav-module mod-payments">
+    <div class="nav-module-header">💳 Payments</div>
+    <div class="nav-module-body">
+      <div class="nav-item">Transactions</div>
+      <div class="nav-item">Xendit Dashboard <span class="badge id">ID</span></div>
+      <div class="nav-item">Stripe (Int'l)</div>
+      <div class="nav-item">PayPal (Int'l)</div>
+      <div class="nav-item">Refunds</div>
+      <div class="nav-item">Payout History</div>
+      <div class="nav-item">Payment Methods Config</div>
+    </div>
+  </div>
+
+  <!-- SHIPPING -->
+  <div class="nav-module mod-shipping">
+    <div class="nav-module-header">🚚 Shipping</div>
+    <div class="nav-module-body">
+      <div class="nav-item">Active Shipments</div>
+      <div class="nav-item">Rate Calculator</div>
+      <div class="nav-item">Local Couriers (Biteship) <span class="badge id">ID</span></div>
+      <div class="nav-item">International (DHL/FedEx)</div>
+      <div class="nav-item">EMS POS Indonesia <span class="badge id">ID</span></div>
+      <div class="nav-item">Shipping Zones</div>
+      <div class="nav-item">Tracking Lookup</div>
+      <div class="nav-item">Packaging Presets</div>
+    </div>
+  </div>
+
+  <!-- WHOLESALE -->
+  <div class="nav-module mod-wholesale">
+    <div class="nav-module-header">🏭 Wholesale / B2B</div>
+    <div class="nav-module-body">
+      <div class="nav-item">Wholesale Catalogue</div>
+      <div class="nav-item">Price Tiers</div>
+      <div class="nav-item">Wholesale Orders</div>
+      <div class="nav-item">Invoice Generator</div>
+      <div class="nav-item">Credit Terms</div>
+      <div class="nav-item">Approved Buyers</div>
+    </div>
+  </div>
+
+  <!-- MARKETING -->
+  <div class="nav-module mod-marketing">
+    <div class="nav-module-header">📣 Marketing</div>
+    <div class="nav-module-body">
+      <div class="nav-item">Newsletter</div>
+      <div class="nav-item">Discount Codes</div>
+      <div class="nav-item">Promotions</div>
+      <div class="nav-item">New Arrivals Feed</div>
+      <div class="nav-item">WhatsApp Broadcast <span class="badge id">ID</span></div>
+      <div class="nav-item">Instagram Feed Sync <span class="badge ext">Ext</span></div>
+    </div>
+  </div>
+
+  <!-- ANALYTICS -->
+  <div class="nav-module mod-analytics">
+    <div class="nav-module-header">📊 Analytics</div>
+    <div class="nav-module-body">
+      <div class="nav-item">Sales Overview</div>
+      <div class="nav-item">Revenue by Channel</div>
+      <div class="nav-item">Top Selling Releases</div>
+      <div class="nav-item">Inventory Turnover</div>
+      <div class="nav-item">Customer Insights</div>
+      <div class="nav-item">Export to CSV</div>
+    </div>
+  </div>
+
+  <!-- WEBSITE -->
+  <div class="nav-module mod-website">
+    <div class="nav-module-header">🌐 Website (Eshop)</div>
+    <div class="nav-module-body">
+      <div class="nav-item">Theme Editor</div>
+      <div class="nav-item">Pages & Content</div>
+      <div class="nav-item">Navigation Menu</div>
+      <div class="nav-item">Homepage Banners</div>
+      <div class="nav-item">Track Preview Player <span class="badge new">New</span></div>
+      <div class="nav-item">Custom Domain</div>
+      <div class="nav-item">SEO Settings</div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="nav-module mod-settings">
+    <div class="nav-module-header">⚙️ Settings</div>
+    <div class="nav-module-body">
+      <div class="nav-item">Store Profile</div>
+      <div class="nav-item">Staff Accounts</div>
+      <div class="nav-item">Roles & Permissions</div>
+      <div class="nav-item">Tax & IDR Currency</div>
+      <div class="nav-item">Notifications</div>
+      <div class="nav-item">API Keys</div>
+      <div class="nav-item">Billing & Plan</div>
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:16px; padding:12px 16px; background:#141414; border:1px solid #262626; border-radius:8px; font-size:12px; color:#999;">
+  <span style="color:#999; font-weight:700;">Legend:</span>
+  &nbsp;<span class="badge id">ID</span> Indonesia-specific &nbsp;
+  <span class="badge ext">Ext</span> External marketplace &nbsp;
+  <span class="badge new">New</span> Beyond Common Ground scope
+</div>

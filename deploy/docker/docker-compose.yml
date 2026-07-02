@@ -24,6 +24,7 @@ services:
       - no-new-privileges=true
     networks:
       - proxy_public
+      - mf_internal
     volumes:
       - /opt/stacks/mediumformat/Caddyfile:/etc/caddy/Caddyfile:ro
       - /opt/stacks/mediumformat/site:/srv:ro
@@ -46,6 +47,43 @@ services:
       retries: 3
       start_period: 15s
 
+# ── Real app: NestJS API + Postgres (reached via Caddy path routes) ──
+  db:
+    image: postgres:16-alpine
+    container_name: mediumformat-db
+    restart: unless-stopped
+    env_file:
+      - /opt/stacks/mediumformat/api.env   # POSTGRES_DB/USER/PASSWORD live here
+    networks:
+      - mf_internal
+    volumes:
+      - mf_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  api:
+    build:
+      context: /opt/stacks/mediumformat/app-src
+      dockerfile: Dockerfile.api
+    image: mediumformat-api:latest
+    container_name: mediumformat-api
+    restart: unless-stopped
+    env_file:
+      - /opt/stacks/mediumformat/api.env
+    networks:
+      - mf_internal
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mf_pg_data:
+
 networks:
   proxy_public:
     external: true
+  mf_internal: {}

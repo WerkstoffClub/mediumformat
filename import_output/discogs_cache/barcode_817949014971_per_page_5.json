@@ -1,0 +1,118 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Russia",
+      "year": "2018",
+      "format": [
+        "CD",
+        "Album",
+        "Unofficial Release"
+      ],
+      "label": [
+        "Captured Tracks"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 12505728,
+      "barcode": [
+        "8-17949-01497-1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1411492,
+      "master_url": "https://api.discogs.com/masters/1411492",
+      "uri": "/Wild-Nothing-Indigo/release/12505728",
+      "catno": "CT 282",
+      "title": "Wild Nothing - Indigo",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/12505728",
+      "community": {
+        "want": 16,
+        "have": 3
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Unofficial Release"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2018",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Sterling Sound",
+        "Empty Estate",
+        "Sunset Sound"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 12422221,
+      "barcode": [
+        "8-17949-01497-1",
+        "LC 30356",
+        "01/03/2018 08:25:05 AM #178032  3279368 01",
+        "06/27/2018 12:14:17 PM #177942  3279368 01",
+        "IFPI LN08",
+        "IFPI 1025",
+        "IFPI J103"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1411492,
+      "master_url": "https://api.discogs.com/masters/1411492",
+      "uri": "/Wild-Nothing-Indigo/release/12422221",
+      "catno": "CT 282",
+      "title": "Wild Nothing - Indigo",
+      "thumb": "https://i.discogs.com/2dQTJsBlyE2AkV6yNRgjbtD1Cpx19N3EWmXjJ-FhRBM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyNDIy/MjIxLTE1MzQ5Njc1/NDQtNDc5NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Oo0ZsMh3aY3pHETv4ScS3_ivPTWVVBzLaN0kJMAK_RE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyNDIy/MjIxLTE1MzQ5Njc1/NDQtNDc5NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/12422221",
+      "community": {
+        "want": 51,
+        "have": 278
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

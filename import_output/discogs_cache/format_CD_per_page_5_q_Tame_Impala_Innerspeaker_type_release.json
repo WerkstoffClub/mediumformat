@@ -1,0 +1,373 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 5,
+    "per_page": 5,
+    "items": 21,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Tame+Impala+Innerspeaker&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=5",
+      "next": "https://api.discogs.com/database/search?q=Tame+Impala+Innerspeaker&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album",
+        "Enhanced"
+      ],
+      "label": [
+        "Modular Recordings",
+        "Modular Recordings",
+        "Modular Recordings",
+        "Republic Of Music",
+        "Republic Of Music",
+        "Wave House",
+        "Poons Head",
+        "Tarbox Road Studios",
+        "Sterling Sound",
+        "Sony DADC, Southwater"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Psychedelic Rock"
+      ],
+      "id": 2302950,
+      "barcode": [
+        "6 02527 37538 0",
+        "602527375380",
+        "Sony DADC MODCD126 02",
+        "IFPI LY33",
+        "IFPI AEW43",
+        "IFPI LY34",
+        "IFPI AEW24",
+        "IFPI LY33",
+        "IFPI AEW31",
+        "IFPI LY33",
+        "IFPI AEW24",
+        "Sony DADC MODCD126 01",
+        "IFPI LY34",
+        "IFPI AEW27",
+        "Sony DADC MODCD126 03",
+        "IFPI LY33",
+        "IFPI AEW41"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 268496,
+      "master_url": "https://api.discogs.com/masters/268496",
+      "uri": "/release/2302950-Tame-Impala-Innerspeaker",
+      "catno": "MODCD126",
+      "title": "Tame Impala - Innerspeaker",
+      "thumb": "https://i.discogs.com/gKypCpJCC265l4h-GcKF23EEisFMBmN0fVCQZawjCVo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDI5/NTAtMTQ1MjMxNzEy/OC00ODQ0LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/vR338asoVU55Ma9YASLbQV6dPVCNu-uVKv7V1bqofjs/rs:fit/g:sm/q:90/h:540/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDI5/NTAtMTQ1MjMxNzEy/OC00ODQ0LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2302950",
+      "community": {
+        "want": 463,
+        "have": 2054
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album",
+            "Enhanced"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Modular Recordings",
+        "Modular Recordings",
+        "Modular Recordings",
+        "Wave House",
+        "Poons Head",
+        "Tarbox Road Studios",
+        "Sony DADC, Terre Haute"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Psychedelic Rock"
+      ],
+      "id": 5689055,
+      "barcode": [
+        "6 02527 37538 0",
+        "602527375380",
+        "DIDX-767311 1",
+        "IFPI L328",
+        "DIDX-767311 1 A01",
+        "IFPI L328",
+        "IFPI 50D3"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 268496,
+      "master_url": "https://api.discogs.com/masters/268496",
+      "uri": "/release/5689055-Tame-Impala-Innerspeaker",
+      "catno": "MODCD126",
+      "title": "Tame Impala - Innerspeaker",
+      "thumb": "https://i.discogs.com/wPOrwtXv_f8NiWHb8KXWxgh5-VxUIethiV6xIBrItsk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU2ODkw/NTUtMTM5OTk4Nzg3/Ni01Mjg3LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/upB7JhN8ydjrrbQPib_azWHHV1960cS9iKyB_ljBRt0/rs:fit/g:sm/q:90/h:540/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU2ODkw/NTUtMTM5OTk4Nzg3/Ni01Mjg3LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/5689055",
+      "community": {
+        "want": 469,
+        "have": 1176
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "CD",
+        "Album",
+        "Enhanced",
+        "Reissue"
+      ],
+      "style": [
+        "Psychedelic Rock"
+      ],
+      "id": 6410673,
+      "label": [
+        "Fiction Records",
+        "Caroline Records",
+        "Universal Music Australia",
+        "Universal Music Australia",
+        "Universal Music Australia",
+        "Modular Recordings",
+        "Modular Recordings",
+        "Wave House",
+        "Poons Head",
+        "Tarbox Road Studios",
+        "Sterling Sound",
+        "EDC, Germany"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 02537 94792 8",
+        "602537947928",
+        "LC 0326",
+        "06025 379 479-2 01 # 53593867 MADE IN GERMANY BY EDC A",
+        "IFPI LZ87",
+        "IFPI 0153"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 268496,
+      "master_url": "https://api.discogs.com/masters/268496",
+      "uri": "/release/6410673-Tame-Impala-Innerspeaker",
+      "catno": "3794792",
+      "title": "Tame Impala - Innerspeaker",
+      "thumb": "https://i.discogs.com/tWu1rYDK-n8rCOk4peIw5clqAkm6lFTZI03tO9af24c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY0MTA2/NzMtMTQxODkwMzcx/Mi05OTY4LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/AopWk9fzNlQOKRcwvafD9lsAbtnx7KMCd7fIxGUPmI4/rs:fit/g:sm/q:90/h:449/w:500/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY0MTA2/NzMtMTQxODkwMzcx/Mi05OTY4LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/6410673",
+      "community": {
+        "want": 268,
+        "have": 469
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album",
+            "Enhanced",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album",
+        "Enhanced",
+        "CD",
+        "Limited Edition"
+      ],
+      "label": [
+        "Modular Recordings",
+        "Modular Recordings",
+        "Rough Trade"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Psychedelic Rock"
+      ],
+      "id": 2787747,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 268496,
+      "master_url": "https://api.discogs.com/masters/268496",
+      "uri": "/release/2787747-Tame-Impala-Innerspeaker",
+      "catno": "MODCD126",
+      "title": "Tame Impala - Innerspeaker",
+      "thumb": "https://i.discogs.com/lL_VXR_UAwqKm73XQdmbDq2tljUgLXUo7gm3bIm2uUE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3ODc3/NDctMTM2NjgxODUx/My0zNjAyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/4Jma0oPMGxJmWsK2yrwyk-nMO0WWwV6GnoeSDWbWm5U/rs:fit/g:sm/q:90/h:267/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3ODc3/NDctMTM2NjgxODUx/My0zNjAyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2787747",
+      "community": {
+        "want": 424,
+        "have": 111
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Enhanced"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Canada",
+      "year": "2011",
+      "format": [
+        "CD",
+        "Album",
+        "Enhanced",
+        "CD",
+        "All Media",
+        "Limited Edition"
+      ],
+      "label": [
+        "Modular Recordings",
+        "Modular Recordings",
+        "Modular Recordings",
+        "Universal Music Canada Inc.",
+        "Universal Music Canada Inc.",
+        "Wave House",
+        "Poons Head",
+        "Tarbox Road Studios",
+        "Sterling Sound",
+        "Toe Rag Studios",
+        "The Exchange",
+        "Cinram"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Psychedelic Rock"
+      ],
+      "id": 2909149,
+      "barcode": [
+        "602527692845",
+        "6 02527 69284 5",
+        "L387 MODCD1381 #110914Y17",
+        "LT40 MODCD1381 #131001V02",
+        "LT36 MODCD1381 #130115Z11",
+        "L387 MODCD1382 #110913Y17",
+        "L36 MODCD1381 #131216Z04",
+        "IFPI L387",
+        "LT40",
+        "LT36",
+        "IFPI L387",
+        "none",
+        "IFPI 6000",
+        "IFPI 6000",
+        "MADE IN CANADA 4",
+        "MADE IN CANADA 15",
+        "MADE IN CANADA 1",
+        "MADE IN CANADA 2",
+        "MADE IN CANADA 2",
+        "MADE IN CANADA 15",
+        "MADE IN CANADA 7"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 268496,
+      "master_url": "https://api.discogs.com/masters/268496",
+      "uri": "/release/2909149-Tame-Impala-Innerspeaker",
+      "catno": "MODCD138",
+      "title": "Tame Impala - Innerspeaker",
+      "thumb": "https://i.discogs.com/8w3MzaaRxT0KIygeGdZMYpdpQ0D_hziLXuq23MTFfs4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5MDkx/NDktMTM1NjkwNzk4/Ny02OTQyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/lTU53tLo59wtm7p6arWl9VDgnsR0xFVsLlkCRpZqsbM/rs:fit/g:sm/q:90/h:544/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5MDkx/NDktMTM1NjkwNzk4/Ny02OTQyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2909149",
+      "community": {
+        "want": 387,
+        "have": 437
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Enhanced"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1"
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Gatefold Cardboard Sleeve",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

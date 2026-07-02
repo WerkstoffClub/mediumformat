@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>System Architecture — Mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #050505;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .app {
+    width: 390px;
+    min-height: 100vh;
+    background: #090909;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+    padding-bottom: 72px;
+  }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 52px;
+    background: #090909;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+  }
+  .header-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    flex: 1;
+  }
+  .header-badge {
+    font-size: 10px;
+    font-weight: 600;
+    color: #555;
+    background: #141414;
+    border: 1px solid #262626;
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+
+  /* Layer cards container */
+  .layers {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  /* Layer connector */
+  .layer-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #262626;
+    font-size: 16px;
+    height: 16px;
+    margin: -4px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .layer-connector::before,
+  .layer-connector::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 12px;
+    background: #1c1c1c;
+    top: 2px;
+  }
+  .layer-connector::before { left: calc(50% - 12px); }
+  .layer-connector::after  { left: calc(50% + 12px); }
+
+  /* Base layer card */
+  .layer-card {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    overflow: hidden;
+    border-left: 3px solid #262626;
+  }
+
+  /* Accent borders */
+  .layer-presentation { border-left-color: #0099ff; }
+  .layer-application  { border-left-color: #6a4cf5; }
+  .layer-data         { border-left-color: #22c55e; }
+  .layer-integration  { border-left-color: #e8a838; }
+  .layer-infra        { border-left-color: #555; }
+
+  .layer-header {
+    padding: 8px 12px;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .layer-name {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .layer-presentation .layer-name { color: #0099ff; }
+  .layer-application  .layer-name { color: #9b87f5; }
+  .layer-data         .layer-name { color: #22c55e; }
+  .layer-integration  .layer-name { color: #e8a838; }
+  .layer-infra        .layer-name { color: #555; }
+
+  .layer-count {
+    font-size: 9px;
+    color: #555;
+    font-weight: 600;
+  }
+
+  /* Service chips grid */
+  .chips-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 12px;
+  }
+  .chip {
+    font-size: 11px;
+    font-weight: 500;
+    color: #999;
+    background: #1c1c1c;
+    border: 1px solid #262626;
+    border-radius: 6px;
+    padding: 4px 9px;
+    white-space: nowrap;
+  }
+  .chip-pres { color: rgba(0,153,255,0.8); border-color: rgba(0,153,255,0.15); background: rgba(0,153,255,0.06); }
+  .chip-data { color: rgba(34,197,94,0.8); border-color: rgba(34,197,94,0.15); background: rgba(34,197,94,0.05); }
+  .chip-int  { color: rgba(232,168,56,0.8); border-color: rgba(232,168,56,0.15); background: rgba(232,168,56,0.05); }
+  .chip-infra{ color: #555; }
+  .chip-app  { color: rgba(155,135,245,0.8); border-color: rgba(106,76,245,0.2); background: rgba(106,76,245,0.06); }
+
+  /* Core Engine — spotlight card */
+  .core-engine-card {
+    background: linear-gradient(135deg, #6a4cf5, #4c2b9a);
+    border-radius: 10px;
+    padding: 14px 14px;
+    margin: 10px 12px;
+    border: 1px solid rgba(106,76,245,0.5);
+  }
+  .core-engine-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4px;
+  }
+  .core-engine-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .core-engine-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .core-engine-chip {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 5px;
+    padding: 3px 8px;
+  }
+
+  /* Horizontal scroll chips row */
+  .chips-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 6px;
+    padding: 10px 12px;
+    scrollbar-width: none;
+  }
+  .chips-scroll::-webkit-scrollbar { display: none; }
+
+  /* Data flow note */
+  .data-flow-note {
+    margin: 4px 16px 8px;
+    background: rgba(106,76,245,0.06);
+    border: 1px solid rgba(106,76,245,0.15);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .data-flow-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6a4cf5;
+    margin-bottom: 6px;
+  }
+  .data-flow-text {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.6;
+  }
+  .data-flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .data-flow-step:last-child { margin-bottom: 0; }
+  .flow-num {
+    font-size: 9px;
+    font-weight: 700;
+    color: #6a4cf5;
+    width: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Legend row */
+  .legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    padding: 0 16px 8px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: #555;
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 390px;
+    height: 56px;
+    background: #090909;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    z-index: 200;
+  }
+  .bn-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #555;
+    cursor: pointer;
+    height: 100%;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .bn-item.active { color: #fff; }
+  .bn-item svg { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">System Architecture</div>
+    <span class="header-badge">5 layers</span>
+  </div>
+
+  <!-- LAYERS -->
+  <div class="layers">
+
+    <!-- PRESENTATION LAYER -->
+    <div class="layer-card layer-presentation">
+      <div class="layer-header">
+        <span class="layer-name">Presentation Layer</span>
+        <span class="layer-count">4 clients</span>
+      </div>
+      <div class="chips-grid">
+        <span class="chip chip-pres">Storefront (React)</span>
+        <span class="chip chip-pres">Backoffice (React)</span>
+        <span class="chip chip-pres">POS App (React Native)</span>
+        <span class="chip chip-pres">Customer App</span>
+      </div>
+    </div>
+
+    <div class="layer-connector">↕</div>
+
+    <!-- APPLICATION LAYER -->
+    <div class="layer-card layer-application">
+      <div class="layer-header">
+        <span class="layer-name">Application Layer</span>
+        <span class="layer-count">5 services</span>
+      </div>
+
+      <!-- NestJS Core Engine spotlight -->
+      <div class="core-engine-card">
+        <div class="core-engine-label">Core Engine</div>
+        <div class="core-engine-title">NestJS API</div>
+        <div class="core-engine-services">
+          <span class="core-engine-chip">Inventory</span>
+          <span class="core-engine-chip">Orders</span>
+          <span class="core-engine-chip">Customers</span>
+          <span class="core-engine-chip">Analytics</span>
+          <span class="core-engine-chip">Wholesale</span>
+          <span class="core-engine-chip">Staff Mgmt</span>
+        </div>
+      </div>
+
+      <div class="chips-grid" style="padding-top:6px;">
+        <span class="chip chip-app">Auth Service</span>
+        <span class="chip chip-app">Sync Engine</span>
+        <span class="chip chip-app">Preview Matcher</span>
+        <span class="chip chip-app">Order Processor</span>
+      </div>
+    </div>
+
+    <div class="layer-connector">↕</div>
+
+    <!-- DATA LAYER -->
+    <div class="layer-card layer-data">
+      <div class="layer-header">
+        <span class="layer-name">Data Layer</span>
+        <span class="layer-count">4 stores</span>
+      </div>
+      <div class="chips-grid">
+        <span class="chip chip-data">PostgreSQL (Primary)</span>
+        <span class="chip chip-data">Redis Cache</span>
+        <span class="chip chip-data">S3 / Object Storage</span>
+        <span class="chip chip-data">Search Index</span>
+      </div>
+    </div>
+
+    <div class="layer-connector">↕</div>
+
+    <!-- INTEGRATION LAYER -->
+    <div class="layer-card layer-integration">
+      <div class="layer-header">
+        <span class="layer-name">Integration Layer</span>
+        <span class="layer-count">6 integrations</span>
+      </div>
+      <div class="chips-scroll">
+        <span class="chip chip-int">Tokopedia API</span>
+        <span class="chip chip-int">Shopee API</span>
+        <span class="chip chip-int">Discogs API</span>
+        <span class="chip chip-int">Bandcamp / Spotify / YouTube</span>
+        <span class="chip chip-int">Xendit</span>
+        <span class="chip chip-int">Courier APIs</span>
+      </div>
+    </div>
+
+    <div class="layer-connector">↕</div>
+
+    <!-- INFRASTRUCTURE LAYER -->
+    <div class="layer-card layer-infra">
+      <div class="layer-header">
+        <span class="layer-name">Infrastructure Layer</span>
+        <span class="layer-count">4 services</span>
+      </div>
+      <div class="chips-grid">
+        <span class="chip chip-infra">Docker</span>
+        <span class="chip chip-infra">Nginx</span>
+        <span class="chip chip-infra">CI/CD</span>
+        <span class="chip chip-infra">Monitoring</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DATA FLOW NOTE -->
+  <div class="data-flow-note">
+    <div class="data-flow-title">Request Flow</div>
+    <div class="data-flow-step">
+      <span class="flow-num">1.</span>
+      <span class="data-flow-text">Client apps (Storefront, Backoffice, POS) send requests through Nginx to the NestJS API core engine.</span>
+    </div>
+    <div class="data-flow-step">
+      <span class="flow-num">2.</span>
+      <span class="data-flow-text">The API resolves auth, reads from PostgreSQL or Redis cache, and delegates to specialized services (Sync Engine, Order Processor).</span>
+    </div>
+    <div class="data-flow-step">
+      <span class="flow-num">3.</span>
+      <span class="data-flow-text">Integration layer bridges external platforms — pushing stock to Tokopedia/Shopee, pulling orders, fetching Discogs metadata, and routing payments via Xendit.</span>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend-row">
+    <div class="legend-item"><div class="legend-dot" style="background:#0099ff;"></div>Presentation</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#6a4cf5;"></div>Application</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22c55e;"></div>Data</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e8a838;"></div>Integration</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#555;"></div>Infrastructure</div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div class="bn-item active">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Dashboard</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      <span>Inventory</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+      <span>Orders</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg>
+      <span>Channels</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      <span>More</span>
+    </div>
+  </nav>
+
+</div>
+</body>
+</html>

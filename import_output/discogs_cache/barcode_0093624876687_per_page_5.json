@@ -1,0 +1,199 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "R&R Digital, LLC",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "Warner Records",
+        "Studios Ferber",
+        "MPO",
+        "Noiseland Industries"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul"
+      ],
+      "style": [
+        "Contemporary R&B"
+      ],
+      "id": 25022509,
+      "barcode": [
+        "0 93624 87668 7",
+        "22-0194NL_093624876687 A ΩFM MPO® 22 276867",
+        "22-0194NL_093624876687 B ΩFM MPO® 22 276868"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2851525,
+      "master_url": "https://api.discogs.com/masters/2851525",
+      "uri": "/release/25022509-Dijon-Absolutely",
+      "catno": "093624876687",
+      "title": "Dijon (7) - Absolutely",
+      "thumb": "https://i.discogs.com/5ch0BOkxp__a7SCYDwYvSR3vumdt2RU4E4uBEw1R6fw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MDIy/NTA5LTE2Njc1MTA3/NjYtMTk4My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/9rsafS23VE-ZXI2sfb3-StoUJocHZufxFR3zaMNnyxc/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MDIy/NTA5LTE2Njc1MTA3/NjYtMTk4My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/25022509",
+      "community": {
+        "want": 1314,
+        "have": 2998
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Brown",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Repress"
+      ],
+      "label": [
+        "R&R",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "Warner Records",
+        "Studios Ferber",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul"
+      ],
+      "style": [
+        "Contemporary R&B"
+      ],
+      "id": 34505104,
+      "barcode": [
+        "0 93624 87668 7",
+        "246124E1/C 02164109",
+        "246124E2/A 02158013"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2851525,
+      "master_url": "https://api.discogs.com/masters/2851525",
+      "uri": "/release/34505104-Dijon-Absolutely",
+      "catno": "093624876687",
+      "title": "Dijon (7) - Absolutely",
+      "thumb": "https://i.discogs.com/_Db7pisXw_r03uIyaJwOfLx9Ba2qXYilRgp86CTNxNs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTA1/MTA0LTE3NTIxNzc4/NzUtNDcxNi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/C7cXAl65kng5ffiQTNdxPlb6pPiRV8RYE08G9T3_LGE/rs:fit/g:sm/q:90/h:609/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTA1/MTA0LTE3NTIxNzc4/NzUtNDcxNi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34505104",
+      "community": {
+        "want": 241,
+        "have": 421
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Brown",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "R&R",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "Warner Records",
+        "Studios Ferber"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul"
+      ],
+      "style": [
+        "Contemporary R&B"
+      ],
+      "id": 26753636,
+      "barcode": [
+        "0 93624 85799 0",
+        "22-0194NL_093624876687 A ΩFM MPO® 22 276867",
+        "22-0194NL_093624876687 B ΩFM MPO® 22 276868"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2851525,
+      "master_url": "https://api.discogs.com/masters/2851525",
+      "uri": "/release/26753636-Dijon-Absolutely",
+      "catno": "093624857990",
+      "title": "Dijon (7) - Absolutely",
+      "thumb": "https://i.discogs.com/gfeTJnm0PYY1_dJRzUC9klhG4YHlXX-pO0xsoBZiFR8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NzUz/NjM2LTE3NjY3MzA4/ODItMzQ2NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/ntbkMkMqH_XS4bs-kH46m70IuVf_bP9nKYIZ-HiVCLc/rs:fit/g:sm/q:90/h:225/w:225/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NzUz/NjM2LTE3NjY3MzA4/ODItMzQ2NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/26753636",
+      "community": {
+        "want": 485,
+        "have": 918
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Green",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

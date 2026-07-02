@@ -1,0 +1,130 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Warp Records",
+        "Ridge Valley Digital",
+        "Ridge Valley Digital",
+        "Warp Records Limited",
+        "Universal Music Publishing",
+        "Mode Musik Limited",
+        "Optimal Media GmbH",
+        "Scape Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Ambient",
+        "IDM",
+        "Plunderphonics"
+      ],
+      "id": 35733064,
+      "barcode": [
+        "5 056818 805257",
+        "WARPCD411 AP46639-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9703"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4045132,
+      "master_url": "https://api.discogs.com/masters/4045132",
+      "uri": "/release/35733064-Oneohtrix-Point-Never-Tranquilizer",
+      "catno": "WARPCD411",
+      "title": "Oneohtrix Point Never - Tranquilizer",
+      "thumb": "https://i.discogs.com/6Fqw5nIpWF1jq4fEUn1rkmV6xHQ5pRB4jDCIPyrdd9w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzMz/MDY0LTE3NjM4MjQy/NjctNTc2Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/zMSXfL-5puyhFW7Y4xwUuFRXjG9Gz6JnFP2r9YBmIO4/rs:fit/g:sm/q:90/h:539/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzMz/MDY0LTE3NjM4MjQy/NjctNTc2Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35733064",
+      "community": {
+        "want": 94,
+        "have": 271
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Beat Records",
+        "Warp Records",
+        "Ridge Valley Digital",
+        "Ridge Valley Digital",
+        "Warp Records Limited",
+        "Scape Mastering",
+        "Memory-Tech"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "Ambient",
+        "IDM",
+        "Plunderphonics"
+      ],
+      "id": 35894896,
+      "barcode": [
+        "4523132160504",
+        "BRC805 MT 961",
+        "IFPI L159",
+        "IFPI 445K"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4045132,
+      "master_url": "https://api.discogs.com/masters/4045132",
+      "uri": "/release/35894896-Oneohtrix-Point-Never-%E3%83%AF%E3%83%B3%E3%82%AA%E3%83%BC%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%83%8D%E3%83%B4%E3%82%A1%E3%83%BC-Tranquilizer-%E3%83%88%E3%83%A9%E3%83%B3%E3%82%AD",
+      "catno": "BRC805",
+      "title": "Oneohtrix Point Never = ワンオートリックス・ポイント・ネヴァー* - Tranquilizer = トランキライザー",
+      "thumb": "https://i.discogs.com/dH0VHMXnKlflOFnH0eeL282eBFV3ext70RTEzFyiSTE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODk0/ODk2LTE3NzMyNzkx/NzItODExMi5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/6Z90tyLF49lYPfeDijUVCQnRZl7qiab1OIvowKg3e2Y/rs:fit/g:sm/q:90/h:530/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODk0/ODk2LTE3NzMyNzkx/NzItODExMi5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35894896",
+      "community": {
+        "want": 41,
+        "have": 19
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

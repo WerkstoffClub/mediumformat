@@ -1,0 +1,336 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 8,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=8704834592&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=8704834592&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "UK",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Vinyl",
+        "7\"",
+        "45 RPM",
+        "Single",
+        "All Media",
+        "Limited Edition"
+      ],
+      "label": [
+        "Good Boy Records",
+        "Dinked Edition"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Ambient"
+      ],
+      "id": 36762250,
+      "barcode": [
+        "(19) 8704834608",
+        "198704834608",
+        "GN1194 / 198704834592 A",
+        "GN1194 / 198704834592 B",
+        "GN1194 / 198704834592 C",
+        "GN1194 / 198704834592 D"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4161256,
+      "master_url": "https://api.discogs.com/masters/4161256",
+      "uri": "/release/36762250-James-Blake-Trying-Times",
+      "catno": "198704834608",
+      "title": "James Blake - Trying Times",
+      "thumb": "https://i.discogs.com/A0Z0NrcoUkImUg3AuGfs0L2XlLp3HQoxiseP3zlAAos/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzYy/MjUwLTE3NzM3NTMz/OTctNTU1MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/39uMZHmFP30eYsNHY8fBiATa67qn_DFo48vTsMiSIuw/rs:fit/g:sm/q:90/h:580/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzYy/MjUwLTE3NzM3NTMz/OTctNTU1MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36762250",
+      "community": {
+        "want": 35,
+        "have": 183
+      },
+      "format_quantity": 3,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Translucent Black",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "7\"",
+            "45 RPM",
+            "Single"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "text": "Dinked Edition",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Good Boy Records",
+        "Good Boy Records",
+        "Good Boy Records",
+        "Real World Studios",
+        "Soho House Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Ambient",
+        "Contemporary R&B",
+        "Soul",
+        "Leftfield",
+        "Indie Pop"
+      ],
+      "id": 36771319,
+      "barcode": [
+        "198704834592"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4161256,
+      "master_url": "https://api.discogs.com/masters/4161256",
+      "uri": "/release/36771319-James-Blake-Trying-Times",
+      "catno": "198704834592",
+      "title": "James Blake - Trying Times",
+      "thumb": "https://i.discogs.com/oBH3tTQigK77VM_jU76421Umd7oCH2FKPec0R9xrFng/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Nzcx/MzE5LTE3NzQ0NDMx/NjQtODM3Ni5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/pep4-KWzhsWk4lP9tV32kzN0qCX-XvCD-nKwhfdkIRU/rs:fit/g:sm/q:90/h:565/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Nzcx/MzE5LTE3NzQ0NDMx/NjQtODM3Ni5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36771319",
+      "community": {
+        "want": 42,
+        "have": 122
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Good Boy Records",
+        "Good Boy Records",
+        "Good Boy Records",
+        "Real World Studios",
+        "Soho House Studios",
+        "Good Neighbor",
+        "Independent Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Ambient",
+        "Contemporary R&B",
+        "Soul",
+        "Leftfield",
+        "Indie Pop"
+      ],
+      "id": 36766081,
+      "barcode": [
+        "198704834639",
+        "198704834592 A GN1194 gn EC IM",
+        "198704834592 B GN1194 gn EC IM",
+        "198704834592 C GN1194 gn EC IM",
+        "198704834592 D GN1194 gn EC IM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4161256,
+      "master_url": "https://api.discogs.com/masters/4161256",
+      "uri": "/release/36766081-James-Blake-Trying-Times",
+      "catno": "198704834639",
+      "title": "James Blake - Trying Times",
+      "thumb": "https://i.discogs.com/EKME4JcuyMJRu2JuZIMmxh4XYwNfS1Q0NiQs_lhVExc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzY2/MDgxLTE3NzM2NzQz/MjAtNjU0NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/fylsET5l-kIm6uBiS8hPIi2Fo5FzJbSr2hOrsksQhKw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzY2/MDgxLTE3NzM2NzQz/MjAtNjU0NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36766081",
+      "community": {
+        "want": 47,
+        "have": 252
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "White Lightning",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Good Boy Records",
+        "Good Boy Records",
+        "Good Boy Records",
+        "Independent Mastering",
+        "Good Neighbor"
+      ],
+      "type": "master",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Ambient"
+      ],
+      "id": 4161256,
+      "barcode": [
+        "0198704868702",
+        "GN1194  198704834592 A EC IM GN",
+        "GN1194  198704834592 B EC IM GN",
+        "GN1194  198704834592 C EC IM GN",
+        "GN1194 198704834592 D EC IM GN"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4161256,
+      "master_url": "https://api.discogs.com/masters/4161256",
+      "uri": "/master/4161256-James-Blake-Trying-Times",
+      "catno": "198704868702",
+      "title": "James Blake - Trying Times",
+      "thumb": "https://i.discogs.com/km7douxOhe9DrpU3L7wX4VWtJS8K8oUCsoxSrpZyDNM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzU5/MDczLTE3NzM0MDg2/MzctNTIxNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/RwVaV367_MJYJjDjQj9H0cGXgsOhbu_h2wsJG62Ali0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzU5/MDczLTE3NzM0MDg2/MzctNTIxNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/4161256",
+      "community": {
+        "want": 382,
+        "have": 1367
+      }
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Good Boy Records",
+        "Good Boy Records",
+        "Good Boy Records",
+        "Independent Mastering",
+        "Good Neighbor"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Ambient"
+      ],
+      "id": 36762028,
+      "barcode": [
+        "0198704834646",
+        "(19) 8704834646",
+        "198704834592 A GN1194 EC gn IM",
+        "198704834592 B GN1194 EC gn IM",
+        "198704834592 C GN1194 EC gn IM",
+        "198704834592 D GN1194 EC gn IM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4161256,
+      "master_url": "https://api.discogs.com/masters/4161256",
+      "uri": "/release/36762028-James-Blake-Trying-Times-Vault-Edition",
+      "catno": "198704834646",
+      "title": "James Blake - Trying Times (Vault Edition)",
+      "thumb": "https://i.discogs.com/Aj4p3SJjozEGB892eEMte057HQ-E1i6JyZKA7rIQG3o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzYy/MDI4LTE3NzM0MTgz/MDYtMTU0OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/6n1F1mQm6SZZA0czwXMvyjOWFVHAxvURKISZYz_gXF0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzYy/MDI4LTE3NzM0MTgz/MDYtMTU0OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36762028",
+      "community": {
+        "want": 25,
+        "have": 128
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Clear",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

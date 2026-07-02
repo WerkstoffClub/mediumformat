@@ -1,0 +1,102 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Cassette",
+        "Album",
+        "Reissue",
+        "Cassette",
+        "Album",
+        "Reissue",
+        "Box Set",
+        "Compilation",
+        "Limited Edition"
+      ],
+      "label": [
+        "Ghostly International",
+        "Ghostly International",
+        "Ghostly International",
+        "Ghostly International",
+        "Ghostly International",
+        "C418",
+        "TUNECORE DIGITAL MUSIC",
+        "Mojang Synergies AB",
+        "Notch Development AB"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Video Game Music",
+        "Chiptune",
+        "Ambient",
+        "IDM"
+      ],
+      "id": 34255783,
+      "barcode": [
+        "804297844435",
+        "6 17308 07470 3",
+        "6 17308 07471 0",
+        "BMI",
+        "GVL",
+        "LC 47563"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/34255783-C418-Minecraft-Volume-Alpha-Minecraft-Volume-Beta",
+      "catno": "GI-444",
+      "title": "C418 - Minecraft Volume Alpha / Minecraft Volume Beta",
+      "thumb": "https://i.discogs.com/ckzTqPXvA36xaLJKNAOqa7dH0zsBVDzrSIAY5q8-Nmc/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0MjU1/NzgzLTE3NDk4MTIz/MjctNzM4NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/oJRYVbcbO2JpsAmR6GzaE53RYfqAu9KR1wevIxtCeRc/rs:fit/g:sm/q:90/h:965/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0MjU1/NzgzLTE3NDk4MTIz/MjctNzM4NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/34255783",
+      "community": {
+        "want": 102,
+        "have": 497
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Green",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        },
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Red",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        },
+        {
+          "name": "Box Set",
+          "qty": "1",
+          "descriptions": [
+            "Compilation",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

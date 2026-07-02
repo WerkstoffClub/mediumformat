@@ -1,0 +1,65 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2023",
+      "format": [
+        "Cassette",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Metal Face Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Hip Hop"
+      ],
+      "style": [
+        "Jazzy Hip-Hop",
+        "Boom Bap",
+        "Conscious",
+        "Abstract"
+      ],
+      "id": 37227219,
+      "barcode": [
+        "826257035240"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 8470,
+      "master_url": "https://api.discogs.com/masters/8470",
+      "uri": "/release/37227219-MF-Doom-Operation-Doomsday",
+      "catno": "RSE0352-4",
+      "title": "MF-Doom* - Operation Doomsday",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/37227219",
+      "community": {
+        "want": 0,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "text": "Silver",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

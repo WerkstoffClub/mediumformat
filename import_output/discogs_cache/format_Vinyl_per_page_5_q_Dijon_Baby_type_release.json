@@ -1,0 +1,318 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 8,
+    "per_page": 5,
+    "items": 38,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Dijon+Baby&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=8",
+      "next": "https://api.discogs.com/database/search?q=Dijon+Baby&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "R&R Digital",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "R&R Digital, LLC",
+        "Warner Records Inc.",
+        "Warner Records Inc.",
+        "WMIS Limited",
+        "Warner Music Group Germany Holding GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Soul",
+        "Alt-Pop"
+      ],
+      "id": 35706151,
+      "barcode": [
+        "0 93624 82697 2",
+        "093624826972"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4042915,
+      "master_url": "https://api.discogs.com/masters/4042915",
+      "uri": "/release/35706151-Dijon-Baby",
+      "catno": "093624826972",
+      "title": "Dijon (7) - Baby",
+      "thumb": "https://i.discogs.com/9HAGDojUFbldH7-9tPdqSHjjImV_82rMPeoZPjx8dCk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzA2/MTUxLTE3NjM1Njcw/NzEtNTYxMi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/jANyjn72IZG2qeA9_jCmr-eR_-WLHzLdH6T23s_kI4Q/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzA2/MTUxLTE3NjM1Njcw/NzEtNTYxMi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35706151",
+      "community": {
+        "want": 158,
+        "have": 726
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Silver",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "R&R Digital",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "R&R Digital, LLC",
+        "Warner Records Inc.",
+        "Warner Records Inc.",
+        "WMIS Limited",
+        "Warner Music Group Germany Holding GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Soul",
+        "Alt-Pop"
+      ],
+      "id": 35724265,
+      "barcode": [
+        "0 93624 82739 9",
+        "093624827399"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4042915,
+      "master_url": "https://api.discogs.com/masters/4042915",
+      "uri": "/release/35724265-Dijon-Baby",
+      "catno": "093624827399",
+      "title": "Dijon (7) - Baby",
+      "thumb": "https://i.discogs.com/Qb1gIhrrmwLs3ySth_Y3IlfhBJXSY__M_sjIGE8mGLE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzI0/MjY1LTE3NjM4MDc0/MjMtNzQwMy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/07xVaub315HP_nZvistpmV13brbW9WjWo5qZ_1EIOys/rs:fit/g:sm/q:90/h:610/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzI0/MjY1LTE3NjM4MDc0/MjMtNzQwMy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35724265",
+      "community": {
+        "want": 75,
+        "have": 628
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Canada",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "R&R Digital",
+        "Warner Records",
+        "R&R Digital",
+        "Warner Records",
+        "R&R Digital",
+        "Warner Records",
+        "Precision Record Pressing",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Neo Soul",
+        "Contemporary R&B",
+        "Alt-Pop"
+      ],
+      "id": 35735992,
+      "barcode": [
+        "0 93624 82697 2",
+        "093624826972",
+        "306362E1/B 02358220 2357069 10-113996/093624827399-A",
+        "306362E2/A 02359502 2357069 10-113996/093624827399-B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4042915,
+      "master_url": "https://api.discogs.com/masters/4042915",
+      "uri": "/release/35735992-Dijon-Baby",
+      "catno": "093624826972",
+      "title": "Dijon (7) - Baby",
+      "thumb": "https://i.discogs.com/JB-MkbrCcks4T45JyXdMIerTWwQF7GvQyCGrw72Yd2Y/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzM1/OTkyLTE3NjM4NDQ0/NzEtNzU4Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Syl5EPppqiDI2_y23O_GhXUQzlfaQISBpGjzij9NOvs/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzM1/OTkyLTE3NjM4NDQ0/NzEtNzU4Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35735992",
+      "community": {
+        "want": 90,
+        "have": 501
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Silver",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "R&R Digital",
+        "Warner Records",
+        "R&R Digital, LLC",
+        "R&R Digital, LLC",
+        "Warner Records Inc.",
+        "Warner Records Inc."
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Soul",
+        "Alt-Pop"
+      ],
+      "id": 35715001,
+      "barcode": [
+        "093624826941"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4042915,
+      "master_url": "https://api.discogs.com/masters/4042915",
+      "uri": "/release/35715001-Dijon-Baby",
+      "catno": "093624826941",
+      "title": "Dijon (7) - Baby",
+      "thumb": "https://i.discogs.com/a-s8mqQTqW6i2aMJOloDbMbFP0K6GvOc8yqpawiYsjo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzE1/MDAxLTE3NjM2NTQw/NDktMTc2My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/sGHRqDVZVmEtCpOsbt7zEeNyi8GNf-RF2sZ9-PZuXt4/rs:fit/g:sm/q:90/h:601/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzE1/MDAxLTE3NjM2NTQw/NDktMTc2My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35715001",
+      "community": {
+        "want": 99,
+        "have": 338
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Limited Edition"
+      ],
+      "label": [
+        "R&R Digital",
+        "Warner Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Contemporary R&B",
+        "Alt-Pop",
+        "Soul"
+      ],
+      "id": 35775514,
+      "barcode": [
+        "093624826972",
+        "0 93624 82697 2"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4042915,
+      "master_url": "https://api.discogs.com/masters/4042915",
+      "uri": "/release/35775514-Dijon-Baby",
+      "catno": "093624827399",
+      "title": "Dijon (7) - Baby",
+      "thumb": "https://i.discogs.com/QuJP5s3d0Zfs9XHFQdZdEkr33aWtdvAH2o3G0_oEiSA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Nzc1/NTE0LTE3NjQyMjMx/NzEtNDAxNy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/4E3JOOAinYhj7iKL6YJECitKaI8Oc6Jwp70_zUeIfb4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Nzc1/NTE0LTE3NjQyMjMx/NzEtNDAxNy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35775514",
+      "community": {
+        "want": 68,
+        "have": 52
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "OBI, Silver",
+          "descriptions": [
+            "LP",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

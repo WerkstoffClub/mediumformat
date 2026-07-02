@@ -1,0 +1,400 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 5,
+    "per_page": 5,
+    "items": 23,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Sabrina+Carpenter+Short+n%27+Sweet&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=5",
+      "next": "https://api.discogs.com/database/search?q=Sabrina+Carpenter+Short+n%27+Sweet&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "UMG Commercial Services",
+        "Island Records",
+        "Island Records",
+        "Vantiva, Guadalajara, Mexico",
+        "Vantiva, Guadalajara, Mexico"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Dance-pop",
+        "Disco"
+      ],
+      "id": 31556044,
+      "barcode": [
+        "6 02465 86900 2",
+        "602465869002",
+        "BMI",
+        "ASCAP",
+        "602465835199-A",
+        "00602465835199A (1271098) 01010230",
+        "00602465835199B (1271099) 01010112"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3577354,
+      "master_url": "https://api.discogs.com/masters/3577354",
+      "uri": "/release/31556044-Sabrina-Carpenter-Short-N-Sweet",
+      "catno": "602465869002",
+      "title": "Sabrina Carpenter - Short N' Sweet",
+      "thumb": "https://i.discogs.com/B5Q8sPagcMlvz_Lbueuwdkj3bHBChJSAIZeTc4M2Mus/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTU2/MDQ0LTE3MjQ5NzE1/NzctNzg1My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/8CSVqz_MK6nh5nMAOzlPBAb_s_Mq2oOBkA60wm54PK0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTU2/MDQ0LTE3MjQ5NzE1/NzctNzg1My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31556044",
+      "community": {
+        "want": 1909,
+        "have": 17402
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue Marbled [Light Sky]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "UMG Recordings, Inc.",
+        "UMG Commercial Services",
+        "Target"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Dance-pop"
+      ],
+      "id": 31558525,
+      "barcode": [
+        "6 02465 86909 5",
+        "602465869095",
+        "602465835199"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3577354,
+      "master_url": "https://api.discogs.com/masters/3577354",
+      "uri": "/release/31558525-Sabrina-Carpenter-Short-N-Sweet",
+      "catno": "602465869095",
+      "title": "Sabrina Carpenter - Short N' Sweet",
+      "thumb": "https://i.discogs.com/cu_QQCh2t96Zi5nne5dRihITYnMY6qUnLXOLdTY09kA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTU4/NTI1LTE3MjQ5NzQ4/OTAtODA3NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/r8wIZ_31tzWpRGzhj557YNCGlnZ19_5O77P4RZ2qM5U/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTU4/NTI1LTE3MjQ5NzQ4/OTAtODA3NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31558525",
+      "community": {
+        "want": 844,
+        "have": 7532
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Pink Marbled [Bubblegum Marbled]",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Sabalicious Songs",
+        "Songs of Universal, Inc.",
+        "Music Of Big Family",
+        "Don Wyan Music",
+        "Hipgnosis Songs Group",
+        "Good Deal Publishing",
+        "Kenny + Betty Tunes",
+        "WC Music Corp",
+        "Buckley Tenenbaum Publishing",
+        "Warner-Tamerlane Publishing Corp.",
+        "Ducky Donarth Music",
+        "Dragon Bunny Music",
+        "Steph Jones Who Music",
+        "Reservoir Media Management Inc.",
+        "MixStar Studios",
+        "Larrabee Sound Studios",
+        "The Playpen, Calabasas",
+        "Nomograph Mastering",
+        "The Perch",
+        "Juicy Hill Studios, Bahamas",
+        "The Playpen, Calabasas",
+        "Electric Lady Studios",
+        "Santa Ynez House",
+        "Flow Studios",
+        "Zenseven Studios",
+        "The Squirrel Nest",
+        "Big Mercy Studio",
+        "Hutchinson Sound",
+        "Sharp Sonic Studios",
+        "Island Records",
+        "Island Records",
+        "UMG Recordings, Inc.",
+        "Universal International Music B.V.",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Country",
+        "Dance-pop"
+      ],
+      "id": 31543114,
+      "barcode": [
+        "6 02465 83519 9",
+        "602465835199",
+        "LC 00407",
+        "BIEM/SDRM",
+        "BMI",
+        "ASCAP",
+        "BO17763-01 A1 6583981",
+        "BO17763-01 B1 6583981",
+        "BO17763-01 A1 2+1 6583981 3|T",
+        "BO17763-01 B1 2+1 6583981 9XT"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3577354,
+      "master_url": "https://api.discogs.com/masters/3577354",
+      "uri": "/release/31543114-Sabrina-Carpenter-Short-N-Sweet",
+      "catno": "00602465835199",
+      "title": "Sabrina Carpenter - Short N' Sweet",
+      "thumb": "https://i.discogs.com/RbgRxQWgv0qXof37PSBfnheg_V-p6WC9zMEm6WVGUTg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTQz/MTE0LTE3MjU3NTM4/MjMtNjc3OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/IGOgExAGCnZhvJqOYTmaFi4YwGuFlPuSYq3venGm8Ac/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTQz/MTE0LTE3MjU3NTM4/MjMtNjc3OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31543114",
+      "community": {
+        "want": 1097,
+        "have": 7414
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue Marbled [Light Sky]",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Island Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [],
+      "id": 31558306,
+      "barcode": [
+        "6 02465 86137 2",
+        "602465861372"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3577354,
+      "master_url": "https://api.discogs.com/masters/3577354",
+      "uri": "/release/31558306-Sabrina-Carpenter-Short-N-Sweet",
+      "catno": "602465861372",
+      "title": "Sabrina Carpenter - Short N' Sweet",
+      "thumb": "https://i.discogs.com/8wgo8yd4IEy8GGU-RqbIz0oGaM04QcaEjFA3l7ceyuM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTU4/MzA2LTE3MjQ1MjQ1/MDUtNjMyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/nvrvT28P9uIv4fqiwIaSdgRwxTpRLF8D_9Az7FDeLcc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTU4/MzA2LTE3MjQ1MjQ1/MDUtNjMyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31558306",
+      "community": {
+        "want": 1276,
+        "have": 5904
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Green [Vintage Bottle], Alternate Cover",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Deluxe Edition",
+        "Repress"
+      ],
+      "label": [
+        "Island Records",
+        "Island Records",
+        "Island Records",
+        "UMG Recordings, Inc.",
+        "UMG Commercial Services",
+        "Vantiva, Guadalajara, Mexico",
+        "Vantiva, Guadalajara, Mexico",
+        "Vantiva, Guadalajara, Mexico",
+        "Vantiva, Guadalajara, Mexico",
+        "Sabalicious Songs",
+        "Songs of Universal, Inc.",
+        "Music Of Big Family",
+        "Don Wyan Music",
+        "Hipgnosis Songs Group",
+        "Good Deal Publishing",
+        "Kenny + Betty Tunes",
+        "WC Music Corp",
+        "Buckley Tenenbaum Publishing",
+        "Warner-Tamerlane Publishing Corp.",
+        "Ducky Donarth Music",
+        "Dragon Bunny Music",
+        "Steph Jones Who Music",
+        "Reservoir Media Management Inc.",
+        "ISIMO Compositions",
+        "MixStar Studios",
+        "Larrabee Sound Studios",
+        "The Playpen, Calabasas",
+        "Nomograph Mastering",
+        "The Perch",
+        "Juicy Hill Studios, Bahamas",
+        "The Playpen, Calabasas",
+        "Electric Lady Studios",
+        "Santa Ynez House",
+        "Flow Studios",
+        "Zenseven Studios",
+        "The Squirrel Nest",
+        "Big Mercy Studio",
+        "Hutchinson Sound",
+        "Sharp Sonic Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Funk / Soul",
+        "Pop"
+      ],
+      "style": [
+        "Bubblegum",
+        "Contemporary R&B",
+        "Nu-Disco",
+        "Vocal"
+      ],
+      "id": 33136755,
+      "barcode": [
+        "6 02475 65699 9",
+        "602475656999",
+        "6 02475 85859 1",
+        "602475858591",
+        "BMI",
+        "ASCAP",
+        "602475656999-A",
+        "602475656999-B",
+        "602475656999-C",
+        "602475656999-D",
+        "(1271098) 01010252 00602465835199A",
+        "(1271099) 01010613 00602465835199B",
+        "(1286399) 01010310 602475656999A",
+        "(1286400) 01010320 602475656999B"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3577354,
+      "master_url": "https://api.discogs.com/masters/3577354",
+      "uri": "/release/33136755-Sabrina-Carpenter-Short-N-Sweet-Deluxe",
+      "catno": "602475656999",
+      "title": "Sabrina Carpenter - Short N' Sweet (Deluxe)",
+      "thumb": "https://i.discogs.com/NOfnFZ1LyAL1H9KI0M2coADSD42TuI8PUZtR8qg776o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMTM2/NzU1LTE3Mzk1ODQ4/NTAtMTUzNi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/xpOKzGfr6baGfLUNNASR6UHUuTTAIYWKNSclEJkMQzU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMTM2/NzU1LTE3Mzk1ODQ4/NTAtMTUzNi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33136755",
+      "community": {
+        "want": 2052,
+        "have": 10651
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Blue Opaque [Bright Azure]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Deluxe Edition",
+            "Repress"
+          ]
+        }
+      ]
+    }
+  ]
+}

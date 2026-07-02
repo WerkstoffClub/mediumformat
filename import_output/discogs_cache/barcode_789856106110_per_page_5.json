@@ -1,0 +1,74 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "K",
+        "K",
+        "Avast! Recording Co.",
+        "Teaspoon of Kisses Music",
+        "Telegraph Mastering",
+        "Record Technology Incorporated",
+        "Cascade Record Pressing"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Indie Rock",
+        "Indie Pop"
+      ],
+      "id": 31094453,
+      "barcode": [
+        "7 89856 10611 0",
+        "BMI",
+        "KLP061 A CP24-0055 A 43753.1(3)... TELEGRAPH-GONSALVES",
+        "KLP061 B CP24-0055 B 43753.2(3)... TELEGRAPH-GONSALVES"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 95457,
+      "master_url": "https://api.discogs.com/masters/95457",
+      "uri": "/release/31094453-The-Softies-Winter-Pageant",
+      "catno": "KLP061",
+      "title": "The Softies - Winter Pageant",
+      "thumb": "https://i.discogs.com/aj5rPKku1yPMoJeDN6Do3ejBNEQljWECAxNHirA3AWo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDk0/NDUzLTE3MTk3MTA1/NzUtNjI1Mi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Lt-yhqBW0TsDyYTVWlFXnDQyhUaK9DyLaflHM1pl8N8/rs:fit/g:sm/q:90/h:578/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDk0/NDUzLTE3MTk3MTA1/NzUtNjI1Mi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31094453",
+      "community": {
+        "want": 40,
+        "have": 148
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    }
+  ]
+}

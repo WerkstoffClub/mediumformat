@@ -1,0 +1,67 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2026",
+      "format": [
+        "Cassette",
+        "Album"
+      ],
+      "label": [
+        "YZY",
+        "Gamma.",
+        "Vydia",
+        "Gamma.",
+        "YZY",
+        "Gamma.",
+        "YZY"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Hip Hop",
+        "Funk / Soul"
+      ],
+      "style": [
+        "Hip Hop"
+      ],
+      "id": 36930813,
+      "barcode": [
+        "9120005656109"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4177389,
+      "master_url": "https://api.discogs.com/masters/4177389",
+      "uri": "/release/36930813-Ye-Bully",
+      "catno": "none",
+      "title": "Ye (2) - Bully",
+      "thumb": "https://i.discogs.com/XXaLK52zB18TiqppAHVAQH1nS4H1HeP2UhZZGfQxqSw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTMw/ODEzLTE3NzY2OTI3/NTAtMjEwNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/mthpzCQWoUAPVYsYQRRDG_EJKGr2IiVnpvjSbY7ZK4A/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTMw/ODEzLTE3NzY2OTI3/NTAtMjEwNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36930813",
+      "community": {
+        "want": 6,
+        "have": 6
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 3,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Ghostly International",
+        "Eric Littmann",
+        "Ghostly International",
+        "Ghostly International",
+        "Mute Song Ltd.",
+        "12K Mastering",
+        "GZ Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Folk",
+        "Indie Rock"
+      ],
+      "id": 27740166,
+      "barcode": [
+        "8 04297 84162 5",
+        "804297841625",
+        "0804297841625",
+        "LC 47563",
+        "298594 GI416CD",
+        "LBR DF01",
+        "DFM10",
+        "298594 GI416CD",
+        "LBR DF01",
+        "DFM03"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3159765,
+      "master_url": "https://api.discogs.com/masters/3159765",
+      "uri": "/release/27740166-Julie-Byrne-The-Greater-Wings",
+      "catno": "GI-416",
+      "title": "Julie Byrne - The Greater Wings",
+      "thumb": "https://i.discogs.com/I5SbZfAmuC-dPqNu96AIjwDEyiBnyeXo9phYKwSIa9k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NzQw/MTY2LTE2OTA2MjEy/MTUtMzQ2Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/axaGwfnH3x6WvGz_CBu4dooU8DHAa1o8HMT53hC_sSo/rs:fit/g:sm/q:90/h:537/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NzQw/MTY2LTE2OTA2MjEy/MTUtMzQ2Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27740166",
+      "community": {
+        "want": 17,
+        "have": 105
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album",
+        "CD",
+        "EP",
+        "Limited Edition"
+      ],
+      "label": [
+        "Ghostly International",
+        "Rough Trade",
+        "Mute Song Ltd."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Folk",
+        "Indie Rock"
+      ],
+      "id": 27765132,
+      "barcode": [
+        "8 04297 84162 5"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3159765,
+      "master_url": "https://api.discogs.com/masters/3159765",
+      "uri": "/release/27765132-Julie-Byrne-The-Greater-Wings",
+      "catno": "GI-416",
+      "title": "Julie Byrne - The Greater Wings",
+      "thumb": "https://i.discogs.com/qdPKiuPzwMbMLQtKrVkppettsKSR8bt72WP4pb7LfcY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NzY1/MTMyLTE2OTAyMDMx/MDEtODEyMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Or_RGrx4W1MlaLyyZstfUa-rNPkPQZa3PN2J_5aAtRc/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NzY1/MTMyLTE2OTAyMDMx/MDEtODEyMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/27765132",
+      "community": {
+        "want": 17,
+        "have": 29
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "EP",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2023",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Ghostly International",
+        "Eric Littmann",
+        "Ghostly International",
+        "Ghostly International",
+        "Mute Song Ltd.",
+        "12K Mastering",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Alternative Rock",
+        "Folk",
+        "Indie Rock"
+      ],
+      "id": 28051317,
+      "barcode": [
+        "8 04297 84162 5",
+        "GI416CD 6745-CD-5596 23-070-10-2",
+        "IFPI LY89",
+        "IFPI L821"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3159765,
+      "master_url": "https://api.discogs.com/masters/3159765",
+      "uri": "/release/28051317-Julie-Byrne-The-Greater-Wings",
+      "catno": "GI-416",
+      "title": "Julie Byrne - The Greater Wings",
+      "thumb": "https://i.discogs.com/E8gdosXyzwkDuuS-4T_YQ78oRGJhtJeF7dgJpIrvJSo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MDUx/MzE3LTE2OTI3NzM2/MDEtNzI5OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/fbBheGjYGUrm5pOD3OJPpd4RvRusZVSl-KUUh73C7ao/rs:fit/g:sm/q:90/h:542/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4MDUx/MzE3LTE2OTI3NzM2/MDEtNzI5OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/28051317",
+      "community": {
+        "want": 21,
+        "have": 31
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

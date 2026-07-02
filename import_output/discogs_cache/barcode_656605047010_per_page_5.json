@@ -1,0 +1,410 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 3,
+    "per_page": 5,
+    "items": 12,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605047010&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=3",
+      "next": "https://api.discogs.com/database/search?barcode=656605047010&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "USA & Europe",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Dress Up",
+        "Secretly Canadian",
+        "BMG Blue",
+        "Big Deal Notes",
+        "New Clear Winter Music",
+        "Fire Songs",
+        "Seasons Four Music Corp.",
+        "PW Ballads",
+        "EMI Longitude Music",
+        "Brought To You By Heavy Duty Music",
+        "Heavy Duty Music Publishing",
+        "Sonic Ranch Studios",
+        "Nick's Basement",
+        "Federal Prism Studio",
+        "Planet Paulie",
+        "Bonnie Hill Studios, Los Angeles, CA",
+        "The Diamond Mine",
+        "Air Lyndhurst Studios",
+        "RAK Studios",
+        "Subtle McNugget",
+        "Sterling Sound Edgewater, NJ"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Punk"
+      ],
+      "id": 31800884,
+      "barcode": [
+        "656605047010",
+        "6 56605 04701 0",
+        "BMI",
+        "ASCAP",
+        "PRS"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2797622,
+      "master_url": "https://api.discogs.com/masters/2797622",
+      "uri": "/release/31800884-Yeah-Yeah-Yeahs-Cool-It-Down",
+      "catno": "SC470",
+      "title": "Yeah Yeah Yeahs - Cool It Down",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/31800884",
+      "community": {
+        "want": 22,
+        "have": 24
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Clear Vinyl",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Repress",
+        "Stereo"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Secretly Canadian",
+        "Dress Up",
+        "Secretly Canadian",
+        "BMG Blue",
+        "Big Deal Notes",
+        "New Clear Winter Music",
+        "Fire Songs",
+        "Seasons Four Music Corp.",
+        "PW Ballads",
+        "EMI Longitude Music",
+        "Brought To You By Heavy Duty Music",
+        "Heavy Duty Music Publishing",
+        "Sonic Ranch Studios",
+        "Nick's Basement",
+        "Federal Prism Studio",
+        "Planet Paulie",
+        "Bonnie Hill Studios, Los Angeles, CA",
+        "The Diamond Mine",
+        "Air Lyndhurst Studios",
+        "RAK Studios",
+        "Subtle McNugget",
+        "Sterling Sound Edgewater, NJ",
+        "Rough Trade"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Punk"
+      ],
+      "id": 25411579,
+      "barcode": [
+        "656605047010",
+        "6 56605 04701 0",
+        "617308036114",
+        "SC470LP-C7",
+        "BMI",
+        "ASCAP",
+        "PRS"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2797622,
+      "master_url": "https://api.discogs.com/masters/2797622",
+      "uri": "/release/25411579-Yeah-Yeah-Yeahs-Cool-It-Down",
+      "catno": "SC470",
+      "title": "Yeah Yeah Yeahs - Cool It Down",
+      "thumb": "https://i.discogs.com/M1zZicfXimwyR4AE-yxtenbt7-2tIxRsNOr4lCrNO-k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NDEx/NTc5LTE2NzA1Nzg0/NTktNjgwNC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/owcKCM8z-hDpl_BMGEFc3Kfp6sDDZhTi2Mq6HYq8HSM/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NDEx/NTc5LTE2NzA1Nzg0/NTktNjgwNC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/25411579",
+      "community": {
+        "want": 141,
+        "have": 413
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Blue & White Cornetto [Ocean Blue Cornetto]",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Repress",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Secretly Canadian"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Punk"
+      ],
+      "id": 24645701,
+      "barcode": [
+        "656605047010",
+        "6 56605 04701 0",
+        "6 56605 04700 3"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2797622,
+      "master_url": "https://api.discogs.com/masters/2797622",
+      "uri": "/release/24645701-Yeah-Yeah-Yeahs-Cool-It-Down",
+      "catno": "SC470",
+      "title": "Yeah Yeah Yeahs - Cool It Down",
+      "thumb": "https://i.discogs.com/iHFvh73wAj09SpkQlYsJcWWDUeZPCksXo9TBksZ-ln4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NjQ1/NzAxLTE2NjQ2ODU3/MzgtMjE2MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/nfjNZeO8T9HpTh7hcrBnBKWoLIenpqdQUT7PwAasQY8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NjQ1/NzAxLTE2NjQ2ODU3/MzgtMjE2MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/24645701",
+      "community": {
+        "want": 108,
+        "have": 529
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Red",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Advance",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Dress Up",
+        "Secretly Canadian",
+        "Secretly Canadian",
+        "BMG Blue",
+        "Big Deal Notes",
+        "New Clear Winter Music",
+        "Fire Songs",
+        "Seasons Four Music Corp.",
+        "PW Ballads",
+        "EMI Longitude Music",
+        "Brought To You By Heavy Duty Music",
+        "Heavy Duty Music Publishing",
+        "Sonic Ranch Studios",
+        "Nick's Basement",
+        "Federal Prism Studio",
+        "Planet Paulie",
+        "Bonnie Hill Studios, Los Angeles, CA",
+        "The Diamond Mine",
+        "Air Lyndhurst Studios",
+        "RAK Studios",
+        "Subtle McNugget",
+        "Sterling Sound Edgewater, NJ"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Punk"
+      ],
+      "id": 26504672,
+      "barcode": [
+        "656605047010",
+        "6 56605 04701 0",
+        "6 56605 04703 4",
+        "SC470LP-C1",
+        "SC470LP A RE-1 CM",
+        "SC470LP B RE-1 CM",
+        "BMI",
+        "ASCAP",
+        "PRS"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2797622,
+      "master_url": "https://api.discogs.com/masters/2797622",
+      "uri": "/release/26504672-Yeah-Yeah-Yeahs-Cool-It-Down",
+      "catno": "SC470",
+      "title": "Yeah Yeah Yeahs - Cool It Down",
+      "thumb": "https://i.discogs.com/-Uzb65Le8NSOXPFmDuRj36YQt4CIBTeStOSFhRzS3sA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NTA0/NjcyLTE2Nzk0ODc4/MDAtNjg5NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/u_rOWg1bqv7udcUj-wD9mFrDJIa32ry2_UjOA1CVcvs/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NTA0/NjcyLTE2Nzk0ODc4/MDAtNjg5NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/26504672",
+      "community": {
+        "want": 60,
+        "have": 4
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Promo Pack",
+          "descriptions": [
+            "LP",
+            "Advance",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "USA & Europe",
+      "year": "2022",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Secretly Canadian",
+        "Dress Up",
+        "Secretly Canadian",
+        "Secretly Canadian",
+        "BMG Blue",
+        "Big Deal Notes",
+        "New Clear Winter Music",
+        "Fire Songs",
+        "Seasons Four Music Corp.",
+        "PW Ballads",
+        "EMI Longitude Music",
+        "Brought To You By Heavy Duty Music",
+        "Heavy Duty Music Publishing",
+        "Sonic Ranch Studios",
+        "Nick's Basement",
+        "Federal Prism Studio",
+        "Planet Paulie",
+        "Bonnie Hill Studios, Los Angeles, CA",
+        "The Diamond Mine",
+        "Air Lyndhurst Studios",
+        "RAK Studios",
+        "Subtle McNugget",
+        "Sterling Sound Edgewater, NJ"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock",
+        "Punk"
+      ],
+      "id": 24559520,
+      "barcode": [
+        "656605047010",
+        "6 56605 04701 0",
+        "6 56605 04703 4",
+        "SC470LP-C1",
+        "SC470LP A RE-1 CM",
+        "SC470LP B RE-1 CM",
+        "BMI",
+        "ASCAP",
+        "PRS"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 2797622,
+      "master_url": "https://api.discogs.com/masters/2797622",
+      "uri": "/release/24559520-Yeah-Yeah-Yeahs-Cool-It-Down",
+      "catno": "SC470",
+      "title": "Yeah Yeah Yeahs - Cool It Down",
+      "thumb": "https://i.discogs.com/PVSJH5cA1oIRWDtYDSTyjDELwouEDq1fv2KiXF-fUEU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTU5/NTIwLTE2NjM4ODUw/MjAtMjAwNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/CAdbAlUnwGG-atnyKuduaT4menOJDokmsWGEYmd3cWo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTU5/NTIwLTE2NjM4ODUw/MjAtMjAwNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/24559520",
+      "community": {
+        "want": 389,
+        "have": 4449
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Yellow Opaque",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    }
+  ]
+}

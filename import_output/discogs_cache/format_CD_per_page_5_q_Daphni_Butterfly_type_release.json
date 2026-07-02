@@ -1,0 +1,110 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Jiaolong"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "House",
+        "Disco",
+        "Nu-Disco"
+      ],
+      "id": 36559198,
+      "barcode": [],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4129723,
+      "master_url": "https://api.discogs.com/masters/4129723",
+      "uri": "/release/36559198-Daphni-Butterfly",
+      "catno": "JIAOLONG 034CD",
+      "title": "Daphni - Butterfly",
+      "thumb": "https://i.discogs.com/9KdPyy44nvGVbGC02ZPvuc0wGdsKKNDAB8denjIQ-cQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTU5/MTk4LTE3NzE1ODU0/OTQtMTE1Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Id07e2-fiporxr_Pb9sXFanuZvWV5aphIdI-9VL-Yjw/rs:fit/g:sm/q:90/h:638/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTU5/MTk4LTE3NzE1ODU0/OTQtMTE1Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36559198",
+      "community": {
+        "want": 7,
+        "have": 20
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Plancha",
+        "Jiaolong"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "House",
+        "Disco",
+        "Nu-Disco"
+      ],
+      "id": 36541477,
+      "barcode": [
+        "4582561405730"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4129723,
+      "master_url": "https://api.discogs.com/masters/4129723",
+      "uri": "/release/36541477-Daphni-Butterfly",
+      "catno": "ARTPL-247",
+      "title": "Daphni - Butterfly",
+      "thumb": "https://i.discogs.com/S5bOA4SyKeY5bRLt5bZcSZQ8hII6BfvhTfOmZGSRxks/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTQx/NDc3LTE3NzE0MjIx/MjktMjM0MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/CCemgoBmP3oqGsz3W11XzuCqxBjFwq8ZASSutvFDwNI/rs:fit/g:sm/q:90/h:578/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTQx/NDc3LTE3NzE0MjIx/MjktMjM0MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36541477",
+      "community": {
+        "want": 2,
+        "have": 4
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

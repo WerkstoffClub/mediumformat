@@ -1,0 +1,315 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 9,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=88985436772&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=88985436772&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Colombia",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Music"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Soft Rock",
+        "Pop Rock",
+        "Vocal",
+        "Ballad"
+      ],
+      "id": 11117661,
+      "barcode": [
+        "8 89854 36772 5"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1179077,
+      "master_url": "https://api.discogs.com/masters/1179077",
+      "uri": "/release/11117661-Harry-Styles-Harry-Styles",
+      "catno": "88985 43677 2",
+      "title": "Harry Styles - Harry Styles",
+      "thumb": "https://i.discogs.com/E3-uIc9yIM0b3hbHpDAI7nNhBTWKzwwlOnVD3X47Gg4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMTE3/NjYxLTE1MTAxNjcy/NzgtMTA4MS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/i-qkzd_NrIWrXqJtXZtNV-mC9t1mSlskQJthuQvIxHA/rs:fit/g:sm/q:90/h:525/w:586/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMTE3/NjYxLTE1MTAxNjcy/NzgtMTA4MS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/11117661",
+      "community": {
+        "want": 97,
+        "have": 144
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Australia",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Corporation",
+        "Sony Music Entertainment Australia Pty Ltd.",
+        "Sony DADC Australia",
+        "Sony Music"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Pop Rock",
+        "Soft Rock",
+        "Vocal",
+        "Ballad"
+      ],
+      "id": 10433495,
+      "barcode": [
+        "0 889854 367725",
+        "0889854367725",
+        "Sony DADC A0101090340-0101 25",
+        "IFPI LV90",
+        "IFPI 6545"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1179077,
+      "master_url": "https://api.discogs.com/masters/1179077",
+      "uri": "/release/10433495-Harry-Styles-Harry-Styles",
+      "catno": "88985436772",
+      "title": "Harry Styles - Harry Styles",
+      "thumb": "https://i.discogs.com/iwehZOs0Ll6p6g_kLJzoisE2hkDZi3Wz0X0F8ETZ4ho/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNDMz/NDk1LTE2MjkwODY5/MzQtOTc3Ny5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/0OM5QUc1jIVdW_InBo3bkuN4Diojn5-5VRKl4dOTBzs/rs:fit/g:sm/q:90/h:531/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNDMz/NDk1LTE2MjkwODY5/MzQtOTc3Ny5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10433495",
+      "community": {
+        "want": 103,
+        "have": 774
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Brazil",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Sony Music",
+        "Sonopress Rimo Indústria E Comércio Fonográfica S.A.",
+        "Sonopress Rimo Indústria E Comércio Fonográfica S.A.",
+        "Sony Music Entertainment (Brasil) Ltda."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Pop Rock",
+        "Soft Rock",
+        "Vocal",
+        "Ballad"
+      ],
+      "id": 10538201,
+      "barcode": [
+        "8 89854 36772 5",
+        "889854367725"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1179077,
+      "master_url": "https://api.discogs.com/masters/1179077",
+      "uri": "/release/10538201-Harry-Styles-Harry-Styles",
+      "catno": "88985436772",
+      "title": "Harry Styles - Harry Styles",
+      "thumb": "https://i.discogs.com/TLql1T2oanvYLamsA8rR38P-LmbAqT3vc9yoBUEQU40/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNTM4/MjAxLTE1MDU2MTQ3/MTAtNTczOS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/UOGqAvTYVI-aZen6x56SwKb0I5PCCK7bNzJxPPi0Ogc/rs:fit/g:sm/q:90/h:540/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNTM4/MjAxLTE1MDU2MTQ3/MTAtNTczOS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10538201",
+      "community": {
+        "want": 109,
+        "have": 202
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Malaysia",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Erskine Records",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Columbia Records"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Pop Rock",
+        "Soft Rock",
+        "Vocal",
+        "Ballad"
+      ],
+      "id": 36893539,
+      "barcode": [
+        "8 89854 36772 5",
+        "889854367725",
+        "05100807",
+        "IFPI Lk76",
+        "IFPI 8399",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1179077,
+      "master_url": "https://api.discogs.com/masters/1179077",
+      "uri": "/release/36893539-Harry-Styles-Harry-Styles",
+      "catno": "88985 43677 2",
+      "title": "Harry Styles - Harry Styles",
+      "thumb": "https://i.discogs.com/C567sM7X2XyljrWZRaZdAoIsavnz80XFJ8cL-nCLGN8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODkz/NTM5LTE3NzQ2ODYz/MDItNzAyNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/_i9gBaforh2slOUR3dlOfla8itjpa7TdEGwMzGDxdX4/rs:fit/g:sm/q:90/h:535/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODkz/NTM5LTE3NzQ2ODYz/MDItNzAyNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36893539",
+      "community": {
+        "want": 0,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2017",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Columbia",
+        "Erskine Records",
+        "Erskine Records Limited",
+        "Erskine Records Limited",
+        "Columbia Records",
+        "Columbia Records",
+        "Sony DADC, Terre Haute"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop"
+      ],
+      "style": [
+        "Pop Rock",
+        "Soft Rock",
+        "Vocal",
+        "Ballad"
+      ],
+      "id": 10317723,
+      "barcode": [
+        "8 89854 36772 5",
+        "889854367725",
+        "DIDX-1085301 1",
+        "IFPI L329",
+        "IFPI 50BP",
+        "A02",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 1179077,
+      "master_url": "https://api.discogs.com/masters/1179077",
+      "uri": "/release/10317723-Harry-Styles-Harry-Styles",
+      "catno": "88985 43677 2",
+      "title": "Harry Styles - Harry Styles",
+      "thumb": "https://i.discogs.com/2a2aSQ3kGI0xA5sc45vDE2j96l4vo8RqmqQsu33YjiE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMzE3/NzIzLTE0OTY1MTUy/MTAtNTc1OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/O3MuF2FArNwtlNZFYvQq9YdbNVM7bkd4XO-0kRMEsLw/rs:fit/g:sm/q:90/h:535/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMzE3/NzIzLTE0OTY1MTUy/MTAtNTc1OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10317723",
+      "community": {
+        "want": 254,
+        "have": 2486
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

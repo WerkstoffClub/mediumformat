@@ -1,0 +1,108 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 2,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "UK & Europe",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Ghostly International"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Pop"
+      ],
+      "id": 31022296,
+      "barcode": [
+        "0804297842912"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3614122,
+      "master_url": "https://api.discogs.com/masters/3614122",
+      "uri": "/release/31022296-Bullion-Affection",
+      "catno": "GI-429",
+      "title": "Bullion - Affection",
+      "thumb": "https://i.discogs.com/wKdKGW-E4l3_U7CGT0AJOm-_T54TSMz4-OWPGWYl9ds/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDIy/Mjk2LTE3MTg5OTI5/MzYtMTE4OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/RPOA81_T26r6n0ilR66Cc0rUP9HbzQNu_yl4CD93JZg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDIy/Mjk2LTE3MTg5OTI5/MzYtMTE4OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31022296",
+      "community": {
+        "want": 32,
+        "have": 35
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Standard Black ",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK & Europe",
+      "year": "2024",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Stereo"
+      ],
+      "label": [
+        "Ghostly International"
+      ],
+      "type": "master",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Pop"
+      ],
+      "id": 3614122,
+      "barcode": [
+        "0804297842912"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3614122,
+      "master_url": "https://api.discogs.com/masters/3614122",
+      "uri": "/master/3614122-Bullion-Affection",
+      "catno": "GI-429",
+      "title": "Bullion - Affection",
+      "thumb": "https://i.discogs.com/wKdKGW-E4l3_U7CGT0AJOm-_T54TSMz4-OWPGWYl9ds/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDIy/Mjk2LTE3MTg5OTI5/MzYtMTE4OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/RPOA81_T26r6n0ilR66Cc0rUP9HbzQNu_yl4CD93JZg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDIy/Mjk2LTE3MTg5OTI5/MzYtMTE4OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/masters/3614122",
+      "community": {
+        "want": 91,
+        "have": 213
+      }
+    }
+  ]
+}

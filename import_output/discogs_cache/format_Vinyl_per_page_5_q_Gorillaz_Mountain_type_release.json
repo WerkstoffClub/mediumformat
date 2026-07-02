@@ -1,0 +1,494 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 5,
+    "per_page": 5,
+    "items": 22,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Gorillaz+Mountain&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=5",
+      "next": "https://api.discogs.com/database/search?q=Gorillaz+Mountain&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Kong",
+        "Kong",
+        "Kong",
+        "Kong Studios Essex Ltd.",
+        "Sony Music Publishing",
+        "Thirteen Limited",
+        "Chester Music Ltd.",
+        "Wise Music Group",
+        "80's Kid Music",
+        "Universal Music Publishing",
+        "Legendelphia Music",
+        "Dale Play Publishing",
+        "Sony Music Publishing",
+        "Concord Music Publishing",
+        "Kobalt Music Publishing",
+        "BMG Rights Management (UK) Limited",
+        "EMI Blackwood Music Inc.",
+        "Pop-Up Music Limited",
+        "Sub Pop Publishing LLC",
+        "Studio 13",
+        "Studio 13 Devon",
+        "Island City Studios",
+        "5020 Studios",
+        "Criteria Recording Studios",
+        "Kintsugi Studio",
+        "Amber Fort",
+        "Sparks Studio",
+        "Studio Zona",
+        "Metropolis Mastering",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Hip Hop",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Latin Pop",
+        "Indie Pop",
+        "Indo-Pop",
+        "Alt-Pop"
+      ],
+      "id": 36594097,
+      "barcode": [
+        "199538697308",
+        "LC 23398",
+        "BMI",
+        "ASCAP",
+        "KONG001 LP A1 = MATT @ METROPOLIS = BP45543-01 A1",
+        "KONG001 LP B1 BP45543-01 B1",
+        "KONG001 LP C1 BP45543-02 C1 = MATT @ METROPOLIS =",
+        "KONG001 LP D1 BP45543-02 D1",
+        "KONG001 LP A1 = MATT @ METROPOLIS = 1IX BP45543-01 A1",
+        "KONG001 LP B1 1IT BP45543-01 B1",
+        "KONG001 LP C1 1=V BP45543-02 C1 = MATT @ METROPOLIS =",
+        "KONG001 LP D1 BP45543-02 D1 1+△"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4142620,
+      "master_url": "https://api.discogs.com/masters/4142620",
+      "uri": "/release/36594097-Gorillaz-%E0%A4%AA%E0%A4%B0%E0%A4%B5%E0%A4%A4-The-Mountain",
+      "catno": "KONG001LPI",
+      "title": "Gorillaz - पर्वत (The Mountain)",
+      "thumb": "https://i.discogs.com/gSyyA9HAdJXiy24sihxALVpmNvKV5X151K_nip03lAo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTk0/MDk3LTE3NzIxMzY1/ODYtMTg4NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/xd_QHLZPL8wOW1j0QVSWk1oi7DGc3a9tq4npKbakDJc/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTk0/MDk3LTE3NzIxMzY1/ODYtMTg4NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36594097",
+      "community": {
+        "want": 859,
+        "have": 3025
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Yellow",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album"
+      ],
+      "label": [
+        "Kong",
+        "Kong Studios Essex Ltd.",
+        "Kong",
+        "Kong",
+        "Optimal Media GmbH",
+        "80's Kid Music",
+        "BMG Rights Management (UK) Limited",
+        "Chester Music Ltd.",
+        "Concord Music Publishing",
+        "Dale Play Publishing",
+        "EMI Blackwood Music Inc.",
+        "Kobalt Music Publishing",
+        "Legendelphia Music",
+        "Pop-Up Music Limited",
+        "Sony Music Publishing",
+        "Sub Pop Publishing LLC",
+        "Thirteen Limited",
+        "Universal Music Publishing",
+        "5020 Studios",
+        "Island City Studios, Mumbai",
+        "Kintsugi Studio",
+        "Sparks Studio",
+        "Studio 13",
+        "Studio 13 Devon",
+        "The Ganges, Varanasi",
+        "Studio Zona",
+        "Metropolis Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Hip Hop",
+        "Rock",
+        "Funk / Soul",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indian Classical",
+        "Indie Pop",
+        "Latin Pop"
+      ],
+      "id": 36520261,
+      "barcode": [
+        "199538688146",
+        "LC 23398",
+        "KONG001 LP A1 -1 BP45543-01 A1 =MATT@METROPOLIS= ",
+        "KONG001 LP B1 1|1 BP45543-01 B1",
+        "KONG001 LP C1 +|1 BP45543-01 C1 =MATT@METROPOLIS= ",
+        "KONG001 LP D1 +|1 BP45543-01 D1",
+        "KONG001 LP A1 △|1 BP45543-01 A1 =MATT@METROPOLIS=",
+        "KONG001 LP B1 V1▽ BP45543-01 B1",
+        "KONG001 LP C1 △=1 BP45543-02 C1 =MATT@METROPOLIS=",
+        "KONG001 LP D1 1=— BP45543-02 D1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4142620,
+      "master_url": "https://api.discogs.com/masters/4142620",
+      "uri": "/release/36520261-Gorillaz-%E0%A4%AA%E0%A4%B0%E0%A4%B5%E0%A4%A4-The-Mountain",
+      "catno": "KONG001LP",
+      "title": "Gorillaz - पर्वत (The Mountain)",
+      "thumb": "https://i.discogs.com/x-6sLC6M-fg4EOWmqOkh7BAbkttMDBF7VFAXod-3gv8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTIw/MjYxLTE3NzI4MTM4/NDYtMjAzNS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/4jjzKImzHdD156oI2mX3tisAssoDINKGAiRyIgQXAYU/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTIw/MjYxLTE3NzI4MTM4/NDYtMjAzNS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36520261",
+      "community": {
+        "want": 531,
+        "have": 2369
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Limited Edition",
+        "White Label"
+      ],
+      "label": [
+        "Kong",
+        "Kong",
+        "Kong",
+        "Metropolis Mastering",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Hip Hop",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Latin Pop",
+        "Indie Pop",
+        "Alt-Pop",
+        "Indian Classical"
+      ],
+      "id": 36591982,
+      "barcode": [
+        "1 99538 66299 3",
+        "199538662993",
+        "KONG001 LP A1 △ΛΛ BP45543-01 A1 =MATT@METROPOLIS=",
+        "KONG001 LP B1 VV△ BP45543-01 B1",
+        "KONG001 LP C1 +ε BP45543-02 C1 =MATT@METROPOLIS=",
+        "KONG001 LP D1 VIε  BP45543-02 D1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4142620,
+      "master_url": "https://api.discogs.com/masters/4142620",
+      "uri": "/release/36591982-Gorillaz-%E0%A4%AA%E0%A4%B0%E0%A4%B5%E0%A4%A4-The-Mountain",
+      "catno": "KONG001LPL",
+      "title": "Gorillaz - पर्वत (The Mountain)",
+      "thumb": "https://i.discogs.com/RhrcmxZmnNqYrTLnQFxKxPEUwGnC8m2h0j2wvBFHfus/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTkx/OTgyLTE3NzIyMjA2/OTMtNDg1NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/llp-DHVYHTGS8C6_69rRKVrSab_P5SUbkDE9xAn1zfE/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NTkx/OTgyLTE3NzIyMjA2/OTMtNDg1NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36591982",
+      "community": {
+        "want": 577,
+        "have": 1247
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Limited Edition",
+            "White Label"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Bioplastic",
+        "Limited Edition",
+        "Stereo"
+      ],
+      "label": [
+        "Kong",
+        "Kong",
+        "Kong",
+        "Kong Studios Essex Ltd.",
+        "Wise Music Group",
+        "HMV",
+        "FNAC",
+        "JB Hi-Fi",
+        "Urban Outfitters",
+        "Feltrinelli",
+        "JPC",
+        "Sony Music Publishing",
+        "Thirteen Limited",
+        "Chester Music Ltd.",
+        "80's Kid Music",
+        "Universal Music Publishing",
+        "Legendelphia Music",
+        "Dale Play Publishing",
+        "Sony Music Publishing",
+        "Concord Music Publishing",
+        "Kobalt Music Publishing",
+        "BMG Rights Management (UK) Limited",
+        "EMI Blackwood Music Inc.",
+        "Pop-Up Music Limited",
+        "Sub Pop Publishing LLC",
+        "Studio 13",
+        "Studio 13 Devon",
+        "Island City Studios",
+        "5020 Studios",
+        "Criteria Recording Studios",
+        "Kintsugi Studio",
+        "Amber Fort",
+        "Sparks Studio",
+        "Studio Zona",
+        "Metropolis Mastering",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Hip Hop",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Latin Pop",
+        "Indie Pop",
+        "Indo-Pop",
+        "Alt-Pop"
+      ],
+      "id": 36619705,
+      "barcode": [
+        "199538697469",
+        "LC 23398",
+        "BMI",
+        "ASCAP",
+        "KONG001 LP A1 = MATT @ METROPOLIS = BP45543-01 A1 1",
+        "KONG001 LP B1 BP45543-01 B1 1⋀=",
+        "KONG001 LP C1 BP45543-02 C1 = MATT @ METROPOLIS =",
+        "KONG001 LP D1 BP45543-02 D1"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4142620,
+      "master_url": "https://api.discogs.com/masters/4142620",
+      "uri": "/release/36619705-Gorillaz-%E0%A4%AA%E0%A4%B0%E0%A4%B5%E0%A4%A4-The-Mountain",
+      "catno": "KONG001LPR",
+      "title": "Gorillaz - पर्वत (The Mountain)",
+      "thumb": "https://i.discogs.com/l4IPKQlIYR3cAD-2GTtNQCTuHUJ0dw5PAUoQjW2mvXo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NjE5/NzA1LTE3NzIxOTg2/NjUtOTI2MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/_nie0Obr4WpFVpViHnbDtZmg4eE5C4K2DEUar5uEl0I/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NjE5/NzA1LTE3NzIxOTg2/NjUtOTI2MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36619705",
+      "community": {
+        "want": 319,
+        "have": 1321
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "Orange, Lenticular Cover",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Bioplastic",
+            "Limited Edition",
+            "Stereo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2026",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Vinyl",
+        "LP",
+        "All Media",
+        "Album"
+      ],
+      "label": [
+        "Kong",
+        "Kong",
+        "Kong",
+        "Bad World Limited",
+        "Kong Studios Essex Ltd.",
+        "Sony Music Publishing",
+        "Thirteen Limited",
+        "Chester Music Ltd.",
+        "Wise Music Group",
+        "80's Kid Music",
+        "Universal Music Publishing",
+        "Legendelphia Music",
+        "Dale Play Publishing",
+        "Concord Music Publishing",
+        "Kobalt Music Publishing",
+        "BMG Rights Management (UK) Limited",
+        "EMI Blackwood Music Inc.",
+        "Pop-Up Music Limited",
+        "Sub Pop Publishing LLC",
+        "Studio 13",
+        "Studio 13 Devon",
+        "Island City Studios",
+        "5020 Studios",
+        "Criteria Recording Studios",
+        "Kintsugi Studio",
+        "Amber Fort",
+        "The Ganges, Varanasi",
+        "Sparks Studio",
+        "Studio Zona",
+        "Heba Kadry Mastering",
+        "Metropolis Mastering",
+        "Optimal Media GmbH",
+        "Bad World Limited"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Hip Hop",
+        "Pop",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Indie Pop",
+        "Indo-Pop",
+        "Alt-Pop",
+        "Indian Classical",
+        "Latin Pop"
+      ],
+      "id": 36641638,
+      "barcode": [
+        "BMI",
+        "ASCAP",
+        " KONG001 LP A1 -1 x BP45543-01 A1 =MATT@METROPOLIS=",
+        "KONG001 LP B1 1|1 x BP45543-01 B1",
+        "KONG001 LP C1 +|1 x BP45543-01 C1 =MATT@METROPOLIS=",
+        "KONG001 LP D1 +|1 x BP45543-01 D1",
+        "=MATT@METROPOLIS= KONG001 LP A1 x BP45543-01_A1 ",
+        "KONG001LP B1 x BP45543-01_B1",
+        "KONG001LP C1 x BP45543-02_C1 =MATT@METROPOLIS= ",
+        "KONG001LP D1 x BP45543-02_D1 "
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4142620,
+      "master_url": "https://api.discogs.com/masters/4142620",
+      "uri": "/release/36641638-Gorillaz-%E0%A4%AA%E0%A4%B0%E0%A4%B5%E0%A4%A4-The-Mountain",
+      "catno": "KONG001LP",
+      "title": "Gorillaz - पर्वत (The Mountain)",
+      "thumb": "https://i.discogs.com/CQ1zzAkq27ZTpJkeerYgRYFinpWY3gZ6XYKhWiODqeg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NjQx/NjM4LTE3NzI0NTM3/MDctMTcxMy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/319gUTvQVB_kvk_YRS4IvTI9lkPqpyVl3LE-YPCGbcc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NjQx/NjM4LTE3NzI0NTM3/MDctMTcxMy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36641638",
+      "community": {
+        "want": 299,
+        "have": 1398
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Yellow Translucent With White And Yellow Splatter / Red Liquid Filled",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "Vinyl",
+          "qty": "1",
+          "text": "Yellow Translucent With White And Yellow Splatter",
+          "descriptions": [
+            "LP"
+          ]
+        },
+        {
+          "name": "All Media",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

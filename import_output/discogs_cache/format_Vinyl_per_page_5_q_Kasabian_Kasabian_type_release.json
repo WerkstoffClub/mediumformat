@@ -1,0 +1,339 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 24,
+    "per_page": 5,
+    "items": 120,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Kasabian+Kasabian&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=24",
+      "next": "https://api.discogs.com/database/search?q=Kasabian+Kasabian&type=release&per_page=5&format=Vinyl&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "Europe",
+      "year": "2004",
+      "format": [
+        "Vinyl",
+        "10\"",
+        "Album"
+      ],
+      "label": [
+        "RCA",
+        "Loud Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 460482,
+      "barcode": [
+        "828766383812",
+        "LC00316",
+        "BIEM / GEMA / MCPS",
+        "PARADISE 18 A-1-1 LOUD",
+        "PARADISE 18 B-1-1 JONZ LOUD M.CUM",
+        "PARADISE 18 C-1-1 LOUD",
+        "PARADISE 18 D-2-1 LOUD M.CUM"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 89974,
+      "master_url": "https://api.discogs.com/masters/89974",
+      "uri": "/release/460482-Kasabian-Kasabian",
+      "catno": "PARADISE18",
+      "title": "Kasabian - Kasabian",
+      "thumb": "https://i.discogs.com/addeRaKCNbx1vGaq77lTkkrna8Oyf-w3KQIkSCsRRqA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ2MDQ4/Mi0xMjM0ODQ4MzYx/LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/lXCr5mopBJEkXz49ZmSFTBuCa6NEhhZDrSZwKt8zBfU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ2MDQ4/Mi0xMjM0ODQ4MzYx/LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/460482",
+      "community": {
+        "want": 1603,
+        "have": 3057
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "10\"",
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2014",
+      "format": [
+        "Vinyl",
+        "10\"",
+        "33 ⅓ RPM",
+        "Album",
+        "Limited Edition",
+        "Reissue"
+      ],
+      "label": [
+        "RCA",
+        "Sony Music Entertainment International Services GmbH",
+        "BMG",
+        "BMG UK & Ireland Ltd.",
+        "BMG UK & Ireland Ltd.",
+        "Optimal Media GmbH",
+        "Paradise Studios",
+        "Bink Bonk Studio",
+        "Mayfair Studios",
+        "Loud Mastering",
+        "Copyright Control",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 6305329,
+      "barcode": [
+        "828766383812",
+        "LC00316",
+        "BIEM / GEMA / MCPS",
+        "BE62268-01 A1 HL",
+        "BE62268-01 B1 HL",
+        "BE62268-02 C1 HL",
+        "BE62268-02 D1 HL",
+        "BE62268-01 A1 HL",
+        "BE62268-01 B1 HL",
+        "BE62268-02 C2 HL",
+        "BE62268-02 D1 HL"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 89974,
+      "master_url": "https://api.discogs.com/masters/89974",
+      "uri": "/release/6305329-Kasabian-Kasabian",
+      "catno": "PARADISE18",
+      "title": "Kasabian - Kasabian",
+      "thumb": "https://i.discogs.com/Tla0yroTsdDxi2NS130uzLh2-YisX_qw9GsmfQApMpo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYzMDUz/MjktMTQxNjA2MDgz/MS0zODk2LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/_2GUDOMWP9yodIGlpumSla484tceck_8cliGAHVPZ-Y/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYzMDUz/MjktMTQxNjA2MDgz/MS0zODk2LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/6305329",
+      "community": {
+        "want": 933,
+        "have": 3210
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "10\"",
+            "33 ⅓ RPM",
+            "Album",
+            "Limited Edition",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2025",
+      "format": [
+        "Vinyl",
+        "LP",
+        "Album",
+        "Record Store Day",
+        "Reissue"
+      ],
+      "label": [
+        "Sony Music"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 33668517,
+      "barcode": [
+        "198028981910"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 89974,
+      "master_url": "https://api.discogs.com/masters/89974",
+      "uri": "/release/33668517-Kasabian-Kasabian",
+      "catno": "19802898191",
+      "title": "Kasabian - Kasabian",
+      "thumb": "https://i.discogs.com/Q583vcmOpSGiidF5d2ep2x9o1HTSdzEt4MS0cWpm5UY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNjY4/NTE3LTE3NDQzOTQ2/NzItMTQzNy5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/BGjNUCwwlyp9q2Mr_a-Sm0bpXVd7IvgxYjzPasaMAvU/rs:fit/g:sm/q:90/h:606/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzNjY4/NTE3LTE3NDQzOTQ2/NzItMTQzNy5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/33668517",
+      "community": {
+        "want": 313,
+        "have": 1650
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "text": "White",
+          "descriptions": [
+            "LP",
+            "Album",
+            "Record Store Day",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "Vinyl",
+        "10\"",
+        "33 ⅓ RPM",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 26488049,
+      "label": [
+        "RCA",
+        "Sony Music Entertainment International Services GmbH",
+        "BMG",
+        "BMG UK & Ireland Ltd.",
+        "BMG UK & Ireland Ltd.",
+        "Optimal Media GmbH",
+        "Paradise Studios",
+        "Bink Bonk Studio",
+        "Mayfair Studios",
+        "Loud Mastering",
+        "Copyright Control",
+        "Optimal Media GmbH",
+        "RCA"
+      ],
+      "type": "release",
+      "barcode": [
+        "828766383812",
+        "LC00316",
+        "BIEM / GEMA / MCPS",
+        "BE62268-01 A1 HL V≡V",
+        "BE62268-01 B1 HL TI⋀",
+        "BE62268-02 C1 HL XIS",
+        "BE62268-02 D1 HL XI⋀",
+        "BE62268-01 A1 HL 1=T",
+        "BE62268-01 B1 HL 1I1",
+        "BE62268-02 C2 HL 6IΔ",
+        "BE62268-02 D1 HL 1I⟂"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 89974,
+      "master_url": "https://api.discogs.com/masters/89974",
+      "uri": "/release/26488049-Kasabian-Kasabian",
+      "catno": "PARADISE18",
+      "title": "Kasabian - Kasabian",
+      "thumb": "https://i.discogs.com/5Ul4wD0HJxgJ8OzcNBhqNMJ30Ksc1zQx907PLCKU-5c/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NDg4/MDQ5LTE2NzkzNDY4/MDAtMTcyMS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/tka_ZJtOMzUA1CpPfPHcEJDRGcdaf1StqjK92Aiq_YA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NDg4/MDQ5LTE2NzkzNDY4/MDAtMTcyMS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/26488049",
+      "community": {
+        "want": 106,
+        "have": 525
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "10\"",
+            "33 ⅓ RPM",
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Europe",
+      "year": "2014",
+      "format": [
+        "Vinyl",
+        "10\"",
+        "Album",
+        "Reissue",
+        "White Label"
+      ],
+      "label": [
+        "RCA",
+        "Optimal Media GmbH",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Alternative Rock"
+      ],
+      "id": 10621065,
+      "barcode": [
+        "BE62268-01 A1 HL",
+        "BE62268-01 B1 HL",
+        "BE62268-02 C2 HL",
+        "BE62268-02 D1 HL"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 89974,
+      "master_url": "https://api.discogs.com/masters/89974",
+      "uri": "/release/10621065-Kasabian-Kasabian",
+      "catno": "PARADISE18",
+      "title": "Kasabian - Kasabian",
+      "thumb": "https://i.discogs.com/EKzunwV9Gzw7efu0xUZtuEwhWIi6y2ldozRjbH6DX4I/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNjIx/MDY1LTE1MDExNzg2/NTQtMTIwOC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/LUD8NUNTwRFY9pE8XafqK5d1oC81hYILSo5AvgN3X-k/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNjIx/MDY1LTE1MDExNzg2/NTQtMTIwOC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10621065",
+      "community": {
+        "want": 127,
+        "have": 7
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "Vinyl",
+          "qty": "2",
+          "descriptions": [
+            "10\"",
+            "Album",
+            "Reissue",
+            "White Label"
+          ]
+        }
+      ]
+    }
+  ]
+}

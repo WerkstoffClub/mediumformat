@@ -1,0 +1,74 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "Worldwide",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Compilation"
+      ],
+      "label": [
+        "Jagjaguwar",
+        "Bon Iver",
+        "Jagjaguwar Records",
+        "Bon Iver",
+        "Jagjaguwar Records",
+        "The Forum, Los Angeles",
+        "Xcel Energy Center",
+        "Parkir Timur Senayan",
+        "Toyota Music Pavilion, Irving",
+        "Mediolanum Forum, Milan",
+        "Red Hill Auditorium",
+        "Pitchfork Music Festival Chicago",
+        "State Theatre, Portland",
+        "WOMADelaide Festival",
+        "Scotiabank Arena, Toronto"
+      ],
+      "type": "release",
+      "genre": [
+        "Pop"
+      ],
+      "style": [],
+      "id": 36953676,
+      "barcode": [
+        "0656605248523",
+        "JAG485CD 6745-CD-7532 25-349-14-2",
+        "IFPI LY89",
+        "IFPI L817"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 4183227,
+      "master_url": "https://api.discogs.com/masters/4183227",
+      "uri": "/release/36953676-Bon-Iver-Volumes-One-Selections-From-Music-Concerts-2019-2023-Bon-Iver-6-Piece-Band",
+      "catno": "JAG485CD",
+      "title": "Bon Iver - Volumes: One - Selections From Music Concerts 2019-2023 Bon Iver 6 Piece Band",
+      "thumb": "https://i.discogs.com/BJJ3tCUyxKTXJs3D5BGhcN8RTM2WaXx6fIr2fmUQEYk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTUz/Njc2LTE3NzUzMTA1/NTQtNzc3NS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/NQrU8U6-X6ZrktpPdXHp3ycnm-uaFfAY-wwOcVtVjPA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTUz/Njc2LTE3NzUzMTA1/NTQtNzc3NS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/36953676",
+      "community": {
+        "want": 2,
+        "have": 5
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Compilation"
+          ]
+        }
+      ]
+    }
+  ]
+}

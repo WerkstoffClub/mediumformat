@@ -1,0 +1,67 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2019",
+      "format": [
+        "CD",
+        "Mixed"
+      ],
+      "label": [
+        "Beats In Space Records",
+        "...In Space",
+        "Beats In Space Records, LLC",
+        "Calyx Mastering",
+        "RVNG Intl."
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic"
+      ],
+      "style": [
+        "House",
+        "Deep House",
+        "Techno",
+        "Downtempo",
+        "Ambient"
+      ],
+      "id": 13289319,
+      "barcode": [
+        "700064953129"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/Powder-Powder-In-Space/release/13289319",
+      "catno": "BIS036",
+      "title": "Powder (16) - Powder In Space",
+      "thumb": "https://i.discogs.com/JuF9yiAojQbRkToBlzyLZ5pW_jDhLe63pndolZt6zmg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjg5/MzE5LTE1OTQyMTM1/NzgtMTg4OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Q4E_FB1xyfz4Cbpl66Ugy00vmP8QtvU5aHwzCaWl-yo/rs:fit/g:sm/q:90/h:546/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjg5/MzE5LTE1OTQyMTM1/NzgtMTg4OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/13289319",
+      "community": {
+        "want": 62,
+        "have": 78
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Mixed"
+          ]
+        }
+      ]
+    }
+  ]
+}

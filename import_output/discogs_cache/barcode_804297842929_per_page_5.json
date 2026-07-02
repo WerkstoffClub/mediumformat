@@ -1,0 +1,66 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Ghostly International",
+        "The ADS Group"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Pop"
+      ],
+      "style": [
+        "Alt-Pop",
+        "Indie Pop",
+        "Experimental"
+      ],
+      "id": 30863562,
+      "barcode": [
+        "804297842929",
+        "GI429CD 6745-CD-6280 24-100-16-2 ",
+        "IFPI LY89",
+        "IFPI L817"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3614122,
+      "master_url": "https://api.discogs.com/masters/3614122",
+      "uri": "/release/30863562-Bullion-Affection",
+      "catno": "GI-429",
+      "title": "Bullion - Affection",
+      "thumb": "https://i.discogs.com/MSrgB2l25YRVuAi0xCdqeIi6zxT1jdG_zL6_AuJP1x0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwODYz/NTYyLTE3MTgwMjAy/MjMtMTQ5OC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/xRYLZ63P6Man5-ZOThPD3yHeasZdFZglr27beaZefsU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwODYz/NTYyLTE3MTgwMjAy/MjMtMTQ5OC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/30863562",
+      "community": {
+        "want": 5,
+        "have": 17
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,353 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 7,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?barcode=656605892627&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?barcode=656605892627&per_page=5&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Stage & Screen"
+      ],
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Pop",
+        "Theme"
+      ],
+      "id": 32084244,
+      "label": [
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Sufjan Stevens Music",
+        "The Buddy Project",
+        "St. Paul's Episcopal Church, Brooklyn",
+        "The New Jerusalem Recreational Room, Clarksboro, NJ",
+        "Carroll Music Studios, NY",
+        "West West Side Music"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 56605 89262 7",
+        "656605892627",
+        "ASCAP",
+        "AKR 014-2",
+        "IFPI LD11",
+        "IFPI AKV11",
+        "none"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/32084244-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/PTKimIv2BlOnXUR3GIBxeRGjWq2Rvy4yoFR0APiVUuI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMDg0/MjQ0LTE3Mjk3Njk2/ODAtOTM5OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/0_81uTnPJ_i7shXG18zEMv0vu7PT1rCX53vlPO26vc0/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMDg0/MjQ0LTE3Mjk3Njk2/ODAtOTM5OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/32084244",
+      "community": {
+        "want": 90,
+        "have": 152
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "genre": [
+        "Rock"
+      ],
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "style": [
+        "Folk Rock"
+      ],
+      "id": 10261978,
+      "label": [
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "New Jerusalem Music",
+        "The ADS Group",
+        "Copycats Media"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 56605 89262 7",
+        "656605892627",
+        "WWW.COPYCATSMEDIA.COM 17696-CD-0002  15-319-09",
+        "IFPI LK13",
+        "none",
+        "ASCAP"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/10261978-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/umLOjfATasg28s0xkqNxLZzMXIFpaBBfwS__qczRk_o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjYx/OTc4LTE1MjU0Mjg0/NjgtNTY5OS5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/Oln8RLpgFEZ8ZJUczE153e4eJn_G1NlfSUxCNC0bFW4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMjYx/OTc4LTE1MjU0Mjg0/NjgtNTY5OS5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/10261978",
+      "community": {
+        "want": 233,
+        "have": 172
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2005",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Asthmatic Kitty Records",
+        "Sounds Familyre",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "New Jerusalem Music",
+        "The Buddy Project",
+        "St. Paul's Episcopal Church, Brooklyn",
+        "The New Jerusalem Recreational Room, Clarksboro, NJ",
+        "Carroll Music Studios, NY",
+        "West West Side Music",
+        "Bellwether Manufacturing",
+        "Disque Americ",
+        "Disque Americ"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Pop",
+        "Theme"
+      ],
+      "id": 2530166,
+      "barcode": [
+        "6 56605 89262 7",
+        "ASCAP",
+        "3DL61<7205>AKR014",
+        "WWW.BELLWETHERMFG.COM ",
+        "IFPI L483",
+        "IFPI 810A",
+        "IFPI 8116"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/2530166-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/V9AXabaUnCFMhVdbciGRxIAfF5EzlL7Z1DI5eThWvvY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MzAx/NjYtMTU0ODIyMzIx/OC0yNzgyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/v0YT_VDLgWVYZu5rGeA95ubXSaNfO3CjJ3uFpsnPt1s/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MzAx/NjYtMTU0ODIyMzIx/OC0yNzgyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2530166",
+      "community": {
+        "want": 440,
+        "have": 1204
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Superman Cover",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Stage & Screen"
+      ],
+      "format": [
+        "CD",
+        "Album",
+        "Repress"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Pop",
+        "Theme"
+      ],
+      "id": 625723,
+      "label": [
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "New Jerusalem Music",
+        "The Buddy Project",
+        "St. Paul's Episcopal Church, Brooklyn",
+        "The New Jerusalem Recreational Room, Clarksboro, NJ",
+        "Carroll Music Studios, NY",
+        "West West Side Music",
+        "Bellwether Manufacturing",
+        "Optical Experts Manufacturing"
+      ],
+      "type": "release",
+      "barcode": [
+        "6 56605 89262 7",
+        "MM/DD/YYYY hh:mm:ss AM/PM #xxxxx AKR014",
+        "WWW.BELLWETHERMFG.COM 01",
+        "IFPI LN08"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 14863,
+      "master_url": "https://api.discogs.com/masters/14863",
+      "uri": "/release/625723-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "https://i.discogs.com/6bUbMOd9avRrNLHNLz6eoZlD8Z5eJc8PqNcXOhqe2nw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYyNTcy/My0xMjg5NTA3Mjcy/LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/NE7-XYJrUYPfNoyh_OU9hgyHkgni4AyDFMMnB_y4_C0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYyNTcy/My0xMjg5NTA3Mjcy/LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/625723",
+      "community": {
+        "want": 374,
+        "have": 1254
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Repress"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2006",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue",
+        "Repress"
+      ],
+      "label": [
+        "Asthmatic Kitty Records",
+        "Sounds Familyre",
+        "Asthmatic Kitty Records",
+        "Asthmatic Kitty Records",
+        "New Jerusalem Music",
+        "The Buddy Project",
+        "St. Paul's Episcopal Church, Brooklyn",
+        "The New Jerusalem Recreational Room, Clarksboro, NJ",
+        "Carroll Music Studios, NY",
+        "West West Side Music",
+        "www.BellwetherMfg.com",
+        "Americ Disc"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Pop",
+        "Stage & Screen"
+      ],
+      "style": [
+        "Folk Rock",
+        "Indie Pop",
+        "Theme"
+      ],
+      "id": 29404489,
+      "barcode": [
+        "6 56605 89262 7",
+        "ASCAP",
+        "3DL61<7205>AKR014 WWW.BELLWETHERMFG.COM",
+        "IFPI L483",
+        "IFPI 7711",
+        "3DL61<7205>AKR014 WWW.BELLWETHERMFG.COM",
+        "IFPI L483",
+        "IFPI 8125"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/29404489-Sufjan-Stevens-Illinois",
+      "catno": "AKR 014",
+      "title": "Sufjan Stevens - Illinois",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/29404489",
+      "community": {
+        "want": 0,
+        "have": 0
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue",
+            "Repress"
+          ]
+        }
+      ]
+    }
+  ]
+}

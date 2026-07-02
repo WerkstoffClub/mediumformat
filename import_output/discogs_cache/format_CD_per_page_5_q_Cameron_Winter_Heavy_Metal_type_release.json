@@ -1,0 +1,322 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "per_page": 5,
+    "items": 9,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Cameron+Winter+Heavy+Metal&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2",
+      "next": "https://api.discogs.com/database/search?q=Cameron+Winter+Heavy+Metal&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "USA & Europe",
+      "year": "2024",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "Magic Mountain Tuxedo",
+        "The Diamond Mine",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk",
+        "Acoustic",
+        "Soul",
+        "Soft Rock"
+      ],
+      "id": 32564664,
+      "barcode": [
+        "5400863168957",
+        "PTPS50CD AO22882-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9755",
+        "IFPI 9723",
+        "IFPI 9757"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3686919,
+      "master_url": "https://api.discogs.com/masters/3686919",
+      "uri": "/release/32564664-Cameron-Winter-Heavy-Metal",
+      "catno": "PTPS50CD",
+      "title": "Cameron Winter - Heavy Metal",
+      "thumb": "https://i.discogs.com/z2YWZsuOwRvtBT95zPjqpJk_qpq1yTsjFslzZZ6-6VM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyNTY0/NjY0LTE3NTk0MDc0/MjctODE1My5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/sNQwxMizKWFOHqbTtP4zDu-LxbjOMNY4r00P8V6kyqg/rs:fit/g:sm/q:90/h:534/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyNTY0/NjY0LTE3NTk0MDc0/MjctODE1My5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/32564664",
+      "community": {
+        "want": 386,
+        "have": 664
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "UK",
+      "year": "2025",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "Partisan Records LLC",
+        "Play It Again Sam",
+        "Magic Mountain Tuxedo",
+        "The Diamond Mine",
+        "Optimal Media GmbH"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk",
+        "Acoustic",
+        "Soul",
+        "Soft Rock"
+      ],
+      "id": 35799646,
+      "barcode": [
+        "5400863168957D",
+        "PTPS50CD AO22882-01 manufactured by optimal media GmbH",
+        "IFPI L578",
+        "IFPI 9755",
+        "IFPI 9723",
+        "IFPI 9707"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3686919,
+      "master_url": "https://api.discogs.com/masters/3686919",
+      "uri": "/release/35799646-Cameron-Winter-Heavy-Metal",
+      "catno": "PTPS50CDBC",
+      "title": "Cameron Winter - Heavy Metal",
+      "thumb": "https://i.discogs.com/sfT6GuKASbMipkJrBBFSApZLCCJbN9gYqTH-ANI5f24/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Nzk5/NjQ2LTE3NjQ0NTMz/ODEtODMzMi5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/XYVZS6Y6EOEK6DpGpZZNjLuv50ZVYYUmfqjPweWfYNM/rs:fit/g:sm/q:90/h:522/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1Nzk5/NjQ2LTE3NjQ0NTMz/ODEtODMzMi5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/35799646",
+      "community": {
+        "want": 51,
+        "have": 50
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Germany, Austria, & Switzerland",
+      "year": "2016",
+      "format": [
+        "CD",
+        "Compilation",
+        "Promo"
+      ],
+      "label": [
+        "Metal Hammer",
+        "Metal Hammer - Maximum Metal",
+        "KIRO Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Heavy Metal",
+        "Power Metal",
+        "Metalcore"
+      ],
+      "id": 7971682,
+      "barcode": [
+        "[KIRO MEDIA CONSULT logo] 1107438912 MAXIMUM METAL CD Vol. 214",
+        "IFPI LT58",
+        "IFPI Z953",
+        "austromechana"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/release/7971682-Various-Maximum-Metal-Vol-214",
+      "catno": "none",
+      "title": "Various - Maximum Metal Vol. 214",
+      "thumb": "https://i.discogs.com/GFvEG-jhs0WLfBXkcETbJH6stDussTX-iiUflyuDIqE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTc5NzE2/ODItMTQ1Mjc5NTUy/OC0xMjgzLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/BSuc4hyakRmWyS-nR76U_3W4bSl0zT0JbQKqigAiHac/rs:fit/g:sm/q:90/h:601/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTc5NzE2/ODItMTQ1Mjc5NTUy/OC0xMjgzLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/7971682",
+      "community": {
+        "want": 8,
+        "have": 121
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Compilation",
+            "Promo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Germany, Austria, & Switzerland",
+      "year": "2012",
+      "format": [
+        "CD",
+        "Compilation",
+        "Promo"
+      ],
+      "label": [
+        "Metal Hammer",
+        "Metal Hammer - Maximum Metal",
+        "Kiro Media"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Thrash",
+        "Viking Metal",
+        "Heavy Metal"
+      ],
+      "id": 3743747,
+      "barcode": [
+        "['KIRO MEDIA CONSULT' logo] 2605612906 MAXIMUM METAL CD Vol. 175",
+        "IFPI LT57",
+        "IFPI Z945",
+        "['KIRO MEDIA CONSULT' logo] 2605612906 MAXIMUM METAL CD Vol. 175",
+        "IFPI LT57",
+        "IFPI Z935",
+        "austromechana"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 0,
+      "master_url": null,
+      "uri": "/Various-Maximum-Metal-Vol-175/release/3743747",
+      "catno": "none",
+      "title": "Various - Maximum Metal Vol. 175",
+      "thumb": "https://i.discogs.com/POx43Tl0SWVTiOOAwkGuY4Q4p84aDrnQ8qiPO-zT4OM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3NDM3/NDctMTM0MzA2MDY3/OC02MDU0LmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/4Q6v7DK2PL99IdAdhlSD5xcQLGd2jXhg6TaFYbmel0E/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3NDM3/NDctMTM0MzA2MDY3/OC02MDU0LmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/3743747",
+      "community": {
+        "want": 8,
+        "have": 100
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Compilation",
+            "Promo"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "year": "2026",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Partisan Records",
+        "Play It Again Sam",
+        "Magic Mountain Tuxedo",
+        "The Diamond Mine",
+        "Ultra-Vybe, Inc."
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Funk / Soul",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Folk",
+        "Acoustic",
+        "Soft Rock",
+        "Soul"
+      ],
+      "id": 36913311,
+      "barcode": [
+        "4526180751588",
+        "4 526180 751588"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3686919,
+      "master_url": "https://api.discogs.com/masters/3686919",
+      "uri": "/release/36913311-Cameron-Winter-Heavy-Metal",
+      "catno": "PTPS50CDJ",
+      "title": "Cameron Winter - Heavy Metal",
+      "thumb": "",
+      "cover_image": "https://st.discogs.com/52908c1cb4715a50ec3235ace5993a47bbd26c79/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/releases/36913311",
+      "community": {
+        "want": 1,
+        "have": 1
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Paper Sleeve",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}

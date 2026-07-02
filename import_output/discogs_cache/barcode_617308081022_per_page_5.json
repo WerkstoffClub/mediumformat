@@ -1,0 +1,66 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 1,
+    "per_page": 5,
+    "items": 1,
+    "urls": {}
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2024",
+      "format": [
+        "Cassette",
+        "Album",
+        "Limited Edition"
+      ],
+      "label": [
+        "Dear Life Records",
+        "Cage Match Publishing",
+        "Drop Of Sun Studios"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock",
+        "Folk, World, & Country"
+      ],
+      "style": [
+        "Country",
+        "Alternative Rock",
+        "Indie Rock"
+      ],
+      "id": 31718669,
+      "barcode": [
+        "617308081022"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 3590696,
+      "master_url": "https://api.discogs.com/masters/3590696",
+      "uri": "/release/31718669-MJ-Lenderman-Manning-Fireworks",
+      "catno": "DLR 058",
+      "title": "MJ Lenderman - Manning Fireworks",
+      "thumb": "https://i.discogs.com/ukcxjxho3F3MUGrmH92frods5w7ht8AfzcIx0KvWAZI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNzE4/NjY5LTE3Mjc4MTc2/ODYtODIxNi5wbmc.jpeg",
+      "cover_image": "https://i.discogs.com/3rnSrWwtIGXYi_z9mFHNZoUpkCDsBbZtCmafKUJp_FI/rs:fit/g:sm/q:90/h:585/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNzE4/NjY5LTE3Mjc4MTc2/ODYtODIxNi5wbmc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/31718669",
+      "community": {
+        "want": 61,
+        "have": 110
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "Cassette",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Limited Edition"
+          ]
+        }
+      ]
+    }
+  ]
+}

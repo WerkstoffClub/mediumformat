@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Roles & Permissions — Mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #050505;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .app {
+    width: 390px;
+    min-height: 100vh;
+    background: #090909;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+    padding-bottom: 72px;
+  }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 52px;
+    background: #090909;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 10px;
+  }
+  .header-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    flex: 1;
+  }
+  .btn-pill {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+    background: #fff;
+    color: #000;
+  }
+
+  /* Role cards container */
+  .role-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  /* Individual role card */
+  .role-card {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .role-card-header {
+    background: #0d0d0d;
+    padding: 10px 14px;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 3px solid transparent;
+  }
+  .r-admin .role-card-header   { border-top-color: #0099ff; }
+  .r-manager .role-card-header { border-top-color: #22c55e; }
+  .r-shop .role-card-header    { border-top-color: #e8a838; }
+  .r-wholesale .role-card-header { border-top-color: #d44df0; }
+  .r-customer .role-card-header  { border-top-color: #999; }
+
+  .role-name {
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .r-admin .role-name     { color: #0099ff; }
+  .r-manager .role-name   { color: #22c55e; }
+  .r-shop .role-name      { color: #e8a838; }
+  .r-wholesale .role-name { color: #d44df0; }
+  .r-customer .role-name  { color: #999; }
+
+  .role-portal {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: #1c1c1c;
+    color: #555;
+    border: 1px solid #262626;
+  }
+  .role-count {
+    font-size: 10px;
+    color: #555;
+    font-weight: 600;
+  }
+
+  /* Role description */
+  .role-desc {
+    padding: 8px 14px 4px;
+    font-size: 10px;
+    color: #555;
+    line-height: 1.5;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  /* Permissions list */
+  .perm-list {
+    padding: 6px 14px 10px;
+  }
+  .perm-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #141414;
+    gap: 8px;
+  }
+  .perm-row:last-child { border-bottom: none; }
+  .perm-name {
+    font-size: 11px;
+    color: #999;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .access-pill {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .access-full {
+    background: rgba(34,197,94,0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34,197,94,0.2);
+  }
+  .access-read {
+    background: rgba(0,153,255,0.1);
+    color: #0099ff;
+    border: 1px solid rgba(0,153,255,0.2);
+  }
+  .access-own {
+    background: rgba(232,168,56,0.1);
+    color: #e8a838;
+    border: 1px solid rgba(232,168,56,0.2);
+  }
+  .access-none {
+    background: #1c1c1c;
+    color: #555;
+    border: 1px solid #262626;
+  }
+  .access-scoped {
+    background: rgba(0,153,255,0.08);
+    color: #0099ff;
+    border: 1px solid rgba(0,153,255,0.2);
+  }
+
+  .more-link {
+    font-size: 10px;
+    color: #0099ff;
+    padding: 4px 14px 0;
+    cursor: pointer;
+    font-weight: 600;
+    display: block;
+  }
+
+  /* Legend */
+  .legend-section {
+    margin: 4px 16px 8px;
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: #999;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 390px;
+    height: 56px;
+    background: #090909;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    z-index: 200;
+  }
+  .bn-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #555;
+    cursor: pointer;
+    height: 100%;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .bn-item.active { color: #fff; }
+  .bn-item svg { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">Roles &amp; Permissions</div>
+    <button class="btn-pill">＋ New Role</button>
+  </div>
+
+  <!-- ROLE CARDS -->
+  <div class="role-cards">
+
+    <!-- ADMIN -->
+    <div class="role-card r-admin">
+      <div class="role-card-header">
+        <div class="role-name">
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke="#0099ff" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Admin
+        </div>
+        <span class="role-portal">Backoffice</span>
+        <div class="role-count">All permissions</div>
+      </div>
+      <div class="role-desc">Full access to everything. Configures integrations, manages staff, and controls all settings.</div>
+      <div class="perm-list">
+        <div class="perm-row"><span class="perm-name">Dashboard — full view</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Revenue &amp; sales reports</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Inventory — add / edit releases</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Purchase Orders — create / edit</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Payment tracking &amp; finance view</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Connect / configure channels</span><span class="access-pill access-full">Full</span></div>
+      </div>
+      <span class="more-link">＋6 more permissions</span>
+    </div>
+
+    <!-- MANAGER -->
+    <div class="role-card r-manager">
+      <div class="role-card-header">
+        <div class="role-name">
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke="#22c55e" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          Manager / Purchasing
+        </div>
+        <span class="role-portal">Backoffice</span>
+        <div class="role-count">15 permissions</div>
+      </div>
+      <div class="role-desc">Full operational access. Manages inventory, POs, orders, and shipping. Cannot change integrations or staff.</div>
+      <div class="perm-list">
+        <div class="perm-row"><span class="perm-name">Dashboard — full view</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Revenue &amp; sales reports</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Inventory — add / edit releases</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Purchase Orders — create / edit</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Payment tracking &amp; finance view</span><span class="access-pill access-read">Read only</span></div>
+        <div class="perm-row"><span class="perm-name">Connect / configure channels</span><span class="access-pill access-none">None</span></div>
+      </div>
+      <span class="more-link">＋5 more permissions</span>
+    </div>
+
+    <!-- SHOPKEEPER -->
+    <div class="role-card r-shop">
+      <div class="role-card-header">
+        <div class="role-name">
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke="#e8a838" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Shopkeeper
+        </div>
+        <span class="role-portal">Backoffice (limited)</span>
+        <div class="role-count">8 permissions</div>
+      </div>
+      <div class="role-desc">Processes walk-in POS sales, scans barcodes, views inventory. Cannot edit catalog or access finance.</div>
+      <div class="perm-list">
+        <div class="perm-row"><span class="perm-name">Dashboard — full view</span><span class="access-pill access-read">Read only</span></div>
+        <div class="perm-row"><span class="perm-name">View catalog</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Barcode generate &amp; print</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Scan barcode (POS / phone)</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">View all orders (all channels)</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Add / edit releases</span><span class="access-pill access-none">None</span></div>
+      </div>
+      <span class="more-link">＋2 more permissions</span>
+    </div>
+
+    <!-- WHOLESALER -->
+    <div class="role-card r-wholesale">
+      <div class="role-card-header">
+        <div class="role-name">
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke="#d44df0" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Wholesaler
+        </div>
+        <span class="role-portal">Wholesale Portal</span>
+        <div class="role-count">6 permissions</div>
+      </div>
+      <div class="role-desc">Approved B2B buyer. Sees wholesale catalogue with tiered pricing. Places and tracks their own orders.</div>
+      <div class="perm-list">
+        <div class="perm-row"><span class="perm-name">View catalog</span><span class="access-pill access-scoped">Wholesale cat.</span></div>
+        <div class="perm-row"><span class="perm-name">View wholesale catalogue</span><span class="access-pill access-own">Browse only</span></div>
+        <div class="perm-row"><span class="perm-name">Place wholesale order</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Generate wholesale invoice PDF</span><span class="access-pill access-own">Own orders</span></div>
+        <div class="perm-row"><span class="perm-name">View own orders</span><span class="access-pill access-own">Own only</span></div>
+        <div class="perm-row"><span class="perm-name">Manage own profile</span><span class="access-pill access-full">Full</span></div>
+      </div>
+    </div>
+
+    <!-- CUSTOMER -->
+    <div class="role-card r-customer">
+      <div class="role-card-header">
+        <div class="role-name">
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke="#999" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Customer
+        </div>
+        <span class="role-portal">Storefront</span>
+        <div class="role-count">4 permissions</div>
+      </div>
+      <div class="role-desc">Standard retail buyer. Browses storefront, places orders, tracks deliveries, manages wishlist.</div>
+      <div class="perm-list">
+        <div class="perm-row"><span class="perm-name">View own orders</span><span class="access-pill access-own">Own only</span></div>
+        <div class="perm-row"><span class="perm-name">Apply voucher at checkout</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Manage own profile</span><span class="access-pill access-full">Full</span></div>
+        <div class="perm-row"><span class="perm-name">Purchase Orders</span><span class="access-pill access-none">None</span></div>
+        <div class="perm-row"><span class="perm-name">Dashboard / Analytics</span><span class="access-pill access-none">None</span></div>
+        <div class="perm-row"><span class="perm-name">Inventory management</span><span class="access-pill access-none">None</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend-section">
+    <div class="legend-item"><span class="access-pill access-full" style="font-size:9px;">Full</span>Full access</div>
+    <div class="legend-item"><span class="access-pill access-read" style="font-size:9px;">Read</span>Read only</div>
+    <div class="legend-item"><span class="access-pill access-own" style="font-size:9px;">Own</span>Own records</div>
+    <div class="legend-item"><span class="access-pill access-scoped" style="font-size:9px;">Scoped</span>Custom subset</div>
+    <div class="legend-item"><span class="access-pill access-none" style="font-size:9px;">None</span>No access</div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Dashboard</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      <span>Inventory</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+      <span>Orders</span>
+    </div>
+    <div class="bn-item">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg>
+      <span>Channels</span>
+    </div>
+    <div class="bn-item active">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      <span>More</span>
+    </div>
+  </nav>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,297 @@
+{
+  "pagination": {
+    "page": 1,
+    "pages": 4,
+    "per_page": 5,
+    "items": 17,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=Wild+Nothing+Gemini&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=4",
+      "next": "https://api.discogs.com/database/search?q=Wild+Nothing+Gemini&type=release&per_page=5&format=CD&token=koyDmZAictDrjARklpvYMClqQsyXksJlpVKYWepM&page=2"
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Captured Tracks",
+        "WWW.ILOVEIMPRINT.COM",
+        "Bonati Mastering",
+        "ODS Optical Disc Solutions"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Synth-pop",
+        "Indie Rock"
+      ],
+      "id": 2304548,
+      "barcode": [
+        "844185060950",
+        ">IMP-17978 S2131M WWW.ILOVEIMPRINT.COM 17978 01",
+        "IFPI LL29"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 251280,
+      "master_url": "https://api.discogs.com/masters/251280",
+      "uri": "/release/2304548-Wild-Nothing-Gemini",
+      "catno": "CT68",
+      "title": "Wild Nothing - Gemini",
+      "thumb": "https://i.discogs.com/Gega4J-vAwg5HwmhgrpNV0BqidIMzDQoA4jo6jHR8fU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDQ1/NDgtMTQyNDYyNjQz/Ny04MDgyLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/GJSBpXowM5ATAoVnnNKn3YG4sLx8Xq4B2YfxFxWpDwQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMDQ1/NDgtMTQyNDYyNjQz/Ny04MDgyLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2304548",
+      "community": {
+        "want": 156,
+        "have": 380
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2011",
+      "format": [
+        "CD",
+        "Album",
+        "Reissue"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Bonati Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Rock"
+      ],
+      "style": [
+        "Indie Rock"
+      ],
+      "id": 2736917,
+      "barcode": [
+        "6 56605 78282 9",
+        "EKMAU5415/B S1",
+        "IFPI LM07"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 251280,
+      "master_url": "https://api.discogs.com/masters/251280",
+      "uri": "/release/2736917-Wild-Nothing-Gemini",
+      "catno": "CT68",
+      "title": "Wild Nothing - Gemini",
+      "thumb": "https://i.discogs.com/fUTpyW2XlJBX9-4gIdOG0GJRRMUyt_bMI1hfsgPNy7k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3MzY5/MTctMTMwOTE1NzMw/NC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/vuj9pdLcyMgIAhKr9OcRPrnt4H9QebSswdI7kXzabbY/rs:fit/g:sm/q:90/h:535/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3MzY5/MTctMTMwOTE1NzMw/NC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2736917",
+      "community": {
+        "want": 91,
+        "have": 82
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "descriptions": [
+            "Album",
+            "Reissue"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album",
+        "CDr",
+        "Limited Edition"
+      ],
+      "label": [
+        "Captured Tracks",
+        "Rough Trade",
+        "Bonati Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Synth-pop",
+        "Indie Rock"
+      ],
+      "id": 2556418,
+      "barcode": [
+        "844185060950"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 251280,
+      "master_url": "https://api.discogs.com/masters/251280",
+      "uri": "/release/2556418-Wild-Nothing-Gemini",
+      "catno": "CT68",
+      "title": "Wild Nothing - Gemini",
+      "thumb": "https://i.discogs.com/-QnUCS9tK6QI2MLFMoo9OWWThvUH8t5p8MWN7kAgKbI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NTY0/MTgtMTQ0ODkyMzQ0/Mi02ODYwLmpwZWc.jpeg",
+      "cover_image": "https://i.discogs.com/tR1LjVUyDbRHOhaA7ZOzMWOIK5mSiTN1_JqG993wdZo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NTY0/MTgtMTQ0ODkyMzQ0/Mi02ODYwLmpwZWc.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2556418",
+      "community": {
+        "want": 105,
+        "have": 39
+      },
+      "format_quantity": 2,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        },
+        {
+          "name": "CDr",
+          "qty": "1",
+          "descriptions": [
+            "Limited Edition"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Captured Tracks",
+        "www.iloveimprint.com",
+        "Arvato Digital Services Bertelsmann, USA",
+        "Bonati Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Synth-pop",
+        "Indie Rock"
+      ],
+      "id": 15140860,
+      "barcode": [
+        "www.iloveimprint.com 10971 + + J693001",
+        "IFPI LY93",
+        "IFPI 10J3",
+        "www.iloveimprint.com 10971 + + J693001",
+        "IFPI LY93",
+        "IFPI 1046"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 251280,
+      "master_url": "https://api.discogs.com/masters/251280",
+      "uri": "/release/15140860-Wild-Nothing-Gemini",
+      "catno": "CT68",
+      "title": "Wild Nothing - Gemini",
+      "thumb": "https://i.discogs.com/_r55a0RFaCKQDpv5HH34TsjO8fDnMySYEz95VxpoiUE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MTQw/ODYwLTE1ODcyMTQ4/NzUtNDYyMC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/yXbY2dloIf7calMPMbahZDbkebS9DlVLrx2NsNDkPkI/rs:fit/g:sm/q:90/h:532/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1MTQw/ODYwLTE1ODcyMTQ4/NzUtNDYyMC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/15140860",
+      "community": {
+        "want": 51,
+        "have": 76
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Digipak",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    },
+    {
+      "country": "Australia",
+      "year": "2010",
+      "format": [
+        "CD",
+        "Album"
+      ],
+      "label": [
+        "Spunk",
+        "Captured Tracks",
+        "Bonati Mastering"
+      ],
+      "type": "release",
+      "genre": [
+        "Electronic",
+        "Rock"
+      ],
+      "style": [
+        "Synth-pop",
+        "Indie Rock"
+      ],
+      "id": 2384563,
+      "barcode": [
+        "5 099964 608822"
+      ],
+      "user_data": {
+        "in_wantlist": false,
+        "in_collection": false
+      },
+      "master_id": 251280,
+      "master_url": "https://api.discogs.com/masters/251280",
+      "uri": "/release/2384563-Wild-Nothing-Gemini",
+      "catno": "URA331",
+      "title": "Wild Nothing - Gemini",
+      "thumb": "https://i.discogs.com/2YO4qcZZwPaGfYfp0BmBBfa2QIQcedNNeq66fsDToeI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzODQ1/NjMtMTI4MDg5OTAz/MC5qcGVn.jpeg",
+      "cover_image": "https://i.discogs.com/vpaeDWq_K45zBMxJMy64va_uGTigfPr_xXeuX_DQ1Mw/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzODQ1/NjMtMTI4MDg5OTAz/MC5qcGVn.jpeg",
+      "resource_url": "https://api.discogs.com/releases/2384563",
+      "community": {
+        "want": 73,
+        "have": 37
+      },
+      "format_quantity": 1,
+      "formats": [
+        {
+          "name": "CD",
+          "qty": "1",
+          "text": "Jewel",
+          "descriptions": [
+            "Album"
+          ]
+        }
+      ]
+    }
+  ]
+}
