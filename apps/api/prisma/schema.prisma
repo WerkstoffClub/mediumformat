@@ -253,3 +253,15 @@ model SyncState {
   cursor    String?
   lastRunAt DateTime?
 }
+
+// Single-row settings for the Social Media feature (Meta catalog feed + WhatsApp)
+model SocialSettings {
+  id                Int      @id @default(1)
+  waPhone           String?
+  waTemplate        String   @default("Hi Medium Format! I'd like to buy *{title}* ({price}). Is it still available?")
+  igUsername        String?
+  fbPageUrl         String?
+  storefrontUrlBase String?
+  feedEnabled       Boolean  @default(true)
+  updatedAt         DateTime @updatedAt
+}
