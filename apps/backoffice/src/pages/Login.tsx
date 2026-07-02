@@ -28,9 +28,8 @@ export default function Login() {
     <div className="min-h-screen bg-[var(--bg-base)] flex items-center justify-center">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-            Medium<span className="text-[var(--brand)]">Format</span>
-          </h1>
+          <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="h-[22px] w-auto mx-auto dark:hidden" />
+          <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[22px] w-auto mx-auto hidden dark:block" />
           <p className="text-[13px] text-[var(--text-muted)] mt-1">Backoffice</p>
         </div>
 
@@ -73,7 +72,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[var(--brand)] hover:bg-[var(--brand-hover)] disabled:opacity-50 text-white font-bold text-[13px] py-2.5 rounded-md transition-colors mt-1"
+            className="w-full bg-[var(--brand)] hover:bg-[var(--brand-hover)] disabled:opacity-50 text-[var(--accent-text)] font-bold text-[13px] py-2.5 rounded-md transition-colors mt-1"
           >
             {loading ? 'Signing in...' : 'Sign in'}
           </button>

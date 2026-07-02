@@ -68,7 +68,7 @@ export function BlogList() {
         </select>
         <Link
           to="/blog/new"
-          className="px-3 py-1.5 bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-white text-[11px] font-bold rounded-md transition-colors"
+          className="px-3 py-1.5 bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-[var(--accent-text)] text-[11px] font-bold rounded-md transition-colors"
         >
           + New Post
         </Link>

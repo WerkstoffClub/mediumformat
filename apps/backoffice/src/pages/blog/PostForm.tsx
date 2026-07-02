@@ -117,7 +117,7 @@ export function PostForm() {
         {error && <p className="text-[11px] text-[var(--danger)]">{error}</p>}
         <div className="flex gap-3">
           <button type="button" onClick={() => navigate('/blog')} className="px-4 py-2 border border-[var(--border)] rounded-md text-[12px] text-[var(--text-secondary)] hover:text-[var(--text-primary)]">Cancel</button>
-          <button type="submit" disabled={loading} className="px-4 py-2 bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-white text-[12px] font-bold rounded-md disabled:opacity-50 transition-colors">
+          <button type="submit" disabled={loading} className="px-4 py-2 bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-[var(--accent-text)] text-[12px] font-bold rounded-md disabled:opacity-50 transition-colors">
             {loading ? 'Saving...' : isEdit ? 'Save Changes' : 'Publish Post'}
           </button>
         </div>

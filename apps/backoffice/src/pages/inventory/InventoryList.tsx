@@ -55,7 +55,7 @@ export function InventoryList() {
         <div className="flex-1" />
         <Link
           to="/inventory/new"
-          className="px-3 py-1.5 bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-white text-[11px] font-bold rounded-md transition-colors"
+          className="px-3 py-1.5 bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-[var(--accent-text)] text-[11px] font-bold rounded-md transition-colors"
         >
           + Add Release
         </Link>
@@ -64,7 +64,7 @@ export function InventoryList() {
       <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg overflow-hidden">
         <table className="w-full border-collapse text-[11px]">
           <thead>
-            <tr className="bg-[#0d0d0d]">
+            <tr className="bg-[var(--bg-overlay)]">
               {['Release', 'Format', 'Condition', 'Price (IDR)', 'Stock', 'Location', ''].map(h => (
                 <th key={h} className="text-left px-3.5 py-2 text-[9px] uppercase tracking-[0.07em] text-[var(--text-faint)] font-semibold border-b border-[var(--border-sub)]">
                   {h}

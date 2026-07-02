@@ -49,17 +49,17 @@ const NAV_GROUPS: NavGroup[] = [
 
 export function Sidebar() {
   return (
-    <aside className="w-[186px] min-w-[186px] bg-[#0d0d0d] border-r border-[#1e1e1e] flex flex-col">
-      <div className="px-[18px] py-4 border-b border-[#1e1e1e]">
-        {/* sidebar chrome is always dark, so the white lockup is used in both themes */}
-        <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[16px] w-auto" />
+    <aside className="w-[186px] min-w-[186px] bg-[var(--bg-surface)] border-r border-[var(--border)] flex flex-col">
+      <div className="px-[18px] py-4 border-b border-[var(--border)]">
+        <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="h-[15px] w-auto dark:hidden" />
+        <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[15px] w-auto hidden dark:block" />
       </div>
 
       <nav className="flex-1 overflow-y-auto py-2">
         {NAV_GROUPS.map((group, gi) => (
           <div key={gi}>
             {group.label && (
-              <p className="px-[18px] pt-3 pb-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-[#3a3a3a]">
+              <p className="px-[18px] pt-3 pb-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-[var(--text-faint)]">
                 {group.label}
               </p>
             )}
@@ -70,8 +70,8 @@ export function Sidebar() {
                 className={({ isActive }) =>
                   `flex items-center gap-2.5 px-[18px] py-[7px] text-[12.5px] border-l-2 transition-colors ${
                     isActive
-                      ? 'text-white bg-[#181822] border-[var(--brand)]'
-                      : 'text-[#555] border-transparent hover:text-[#ccc] hover:bg-[#141414]'
+                      ? 'text-[var(--text-primary)] bg-[var(--bg-overlay)] border-[var(--accent)]'
+                      : 'text-[var(--text-muted)] border-transparent hover:text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]'
                   }`
                 }
               >
@@ -88,10 +88,10 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="border-t border-[#1e1e1e] p-[14px]">
-        <div className="flex items-center gap-2 px-2.5 py-1.5 bg-[#191919] border border-[#252525] rounded-md">
+      <div className="border-t border-[var(--border)] p-[14px]">
+        <div className="flex items-center gap-2 px-2.5 py-1.5 bg-[var(--bg-overlay)] border border-[var(--border)] rounded-md">
           <span className="w-2 h-2 rounded-full bg-[var(--success)] flex-shrink-0" />
-          <span className="text-[11px] text-[#aaa] truncate">Medium Format · JKT</span>
+          <span className="text-[11px] text-[var(--text-secondary)] truncate">Medium Format · JKT</span>
         </div>
       </div>
     </aside>
