@@ -1,28 +1,35 @@
-/* Medium Format design system v2.1 — monochrome, matches the prototype
-   (preview.html / DESIGN.md). The interactive accent is ALWAYS the opposite
-   of the background; colour is reserved for status. No brand colour. */
+/* Medium Format design system v2.2 — monochrome, source of truth:
+   mockup-dashboard.html. Accent is ALWAYS the opposite of the background;
+   colour = status (+ the channel colour key). No brand colour. */
 
 :root.dark {
-  --bg-base:        #0F0F0F;
-  --bg-surface:     #0E0E0E;
-  --bg-overlay:     #1A1A1A;
+  --bg-base:        #0F0F0F;   /* canvas  */
+  --bg-surface:     #0E0E0E;   /* surface */
+  --bg-overlay:     #1A1A1A;   /* raised  */
   --bg-hover:       #1A1A1A;
-  --border:         #2A2A2A;
+  --border:         #2A2A2A;   /* hairline */
   --border-sub:     #222222;
-  --text-primary:   #FFFFFF;
-  --text-secondary: #B4B4B4;
-  --text-muted:     #6E6E6E;
+  --text-primary:   #FFFFFF;   /* ink  */
+  --text-secondary: #B4B4B4;   /* body */
+  --text-muted:     #6E6E6E;   /* mute */
   --text-faint:     #4A4A4A;
   --accent:         #FFFFFF;
   --accent-text:    #000000;
-  /* legacy aliases — kept so older class usages stay monochrome */
   --brand:          var(--accent);
   --brand-hover:    #D9D9D9;
   --brand-muted:    rgba(255,255,255,0.12);
-  --success:        #4caf82;
-  --warning:        #e8a838;
-  --danger:         #e05c6a;
-  --info:           #5bc0de;
+  --success:        #22C55E;
+  --info:           #3B82F6;
+  --warning:        #F59E0B;
+  --danger:         #EF4444;
+  --success-t:      rgba(34,197,94,.12);
+  --info-t:         rgba(59,130,246,.12);
+  --warning-t:      rgba(245,158,11,.12);
+  --danger-t:       rgba(239,68,68,.12);
+  --neutral-t:      rgba(255,255,255,.06);
+  --grid:           #2A2A2A;
+  --area-top:       rgba(255,255,255,.12);
+  --focus:          0 0 0 2px rgba(255,255,255,.6);
 }
 
 :root.light {
@@ -41,10 +48,31 @@
   --brand:          var(--accent);
   --brand-hover:    #333333;
   --brand-muted:    rgba(0,0,0,0.08);
-  --success:        #2d8a55;
-  --warning:        #b07a10;
-  --danger:         #c0303d;
-  --info:           #1a7fa0;
+  --success:        #16A34A;
+  --info:           #2563EB;
+  --warning:        #B45309;
+  --danger:         #DC2626;
+  --success-t:      rgba(34,197,94,.12);
+  --info-t:         rgba(59,130,246,.12);
+  --warning-t:      rgba(245,158,11,.14);
+  --danger-t:       rgba(239,68,68,.12);
+  --neutral-t:      rgba(0,0,0,.05);
+  --grid:           #E4E4E4;
+  --area-top:       rgba(0,0,0,.09);
+  --focus:          0 0 0 2px rgba(0,0,0,.5);
+}
+
+:root {
+  /* v2.1 channel colour key — channel indicators only, never decoration */
+  --ch-website:   #6366F1;
+  --ch-pos:       #0EA5E9;
+  --ch-tokopedia: #22C55E;
+  --ch-shopee:    #F97316;
+  --ch-tiktok:    #69C9D0;
+  --ch-discogs:   #9CA3AF;
+  --ch-bandcamp:  #14B8A6;
+  --ch-event:     #EC4899;
+  --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 12px; --r-pill: 999px;
 }
 
 body {
@@ -53,3 +81,5 @@ body {
   font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-sm); }

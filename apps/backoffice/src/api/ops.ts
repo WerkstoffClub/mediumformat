@@ -74,6 +74,7 @@ export interface ChannelSummary {
 export interface OrdersFilter {
   q?: string;
   tag?: string;
+  payment?: string;
   from?: string;
   to?: string;
   page?: number;
