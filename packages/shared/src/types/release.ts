@@ -1,4 +1,4 @@
-export type RecordFormat = 'LP' | '2xLP' | '3xLP' | '12_INCH' | '7_INCH' | 'CD' | '2xCD' | 'MERCH';
+export type RecordFormat = 'LP' | '2xLP' | '3xLP' | '12_INCH' | '7_INCH' | 'CD' | '2xCD' | 'CASSETTE' | 'MERCH';
 
 /** Discogs grading scale, best → worst: Mint, Very Good Plus, Very Good, Good Plus, Good, Fair, Poor */
 export type RecordCondition = 'M' | 'VGP' | 'VG' | 'GP' | 'G' | 'F' | 'P';

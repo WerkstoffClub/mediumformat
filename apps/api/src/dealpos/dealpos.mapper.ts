@@ -30,6 +30,7 @@ export interface ReleaseUpsertData {
   costIdr: number | null;
   stock: number;
   barcode: string | null;
+  catNumber: string | null;
   imageUrl: string | null;
   dealposProductId: string;
   dealposVariantId: string;
@@ -42,9 +43,19 @@ const FORMAT_PATTERNS: Array<[RegExp, RecordFormat]> = [
   [/7\s*(inch|")|single/i, RecordFormat.SEVEN_INCH],
   [/2\s*x?\s*cd|2cd/i, RecordFormat.TWO_CD],
   [/\bcd\b|compact/i, RecordFormat.CD],
+  [/kaset|cassette|\btape\b/i, RecordFormat.CASSETTE],
   [/merch|shirt|tote|cap|apparel|accessor/i, RecordFormat.MERCH],
   [/\blp\b|vinyl|album/i, RecordFormat.LP],
 ];
+
+/** DealPOS product names are prefixed with a format word: "VINYL Bon Iver - …". */
+const NAME_PREFIX = /^(VINYL|LP|CD|KASET|CASSETTE|TAPE|MERCH)\s+/i;
+
+export function stripFormatPrefix(name: string): { cleaned: string; prefix: string | null } {
+  const match = name.match(NAME_PREFIX);
+  if (!match) return { cleaned: name, prefix: null };
+  return { cleaned: name.slice(match[0].length).trim(), prefix: match[1] };
+}
 
 /** Infer a RecordFormat from DealPOS category/variant text; LP is the shop default. */
 export function inferFormat(...texts: Array<string | undefined>): RecordFormat {
@@ -85,7 +96,8 @@ export function mapVariantToRelease(
   product: DpProduct,
   variant: DpProductVariant,
 ): ReleaseUpsertData {
-  const { artist, title } = splitArtistTitle(product.Name);
+  const { cleaned, prefix } = stripFormatPrefix(product.Name);
+  const { artist, title } = splitArtistTitle(cleaned);
   const model = variant.Model?.trim();
   const withEdition =
     model && !/^(standard|default|-)$/i.test(model) ? `${title} (${model})` : title;
@@ -95,12 +107,13 @@ export function mapVariantToRelease(
   return {
     artist,
     title: withEdition,
-    format: inferFormat(product.Category, model, product.Name),
+    format: inferFormat(prefix ?? undefined, product.Category, model, product.Name),
     genre: genreFromCategory(product.Category),
     priceIdr: Math.round(variant.UnitPrice ?? 0),
     costIdr: variant.UnitCost != null ? Math.round(variant.UnitCost) : null,
     stock: Math.max(0, Math.floor(variant.Inventory ?? 0)),
     barcode: normalizeBarcode(variant.Code),
+    catNumber: variant.Code?.trim() || null,
     imageUrl,
     dealposProductId: product.ID,
     dealposVariantId: variant.ID,

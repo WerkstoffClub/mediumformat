@@ -29,6 +29,31 @@ describe('splitArtistTitle', () => {
   });
 });
 
+describe('stripFormatPrefix (live DealPOS naming)', () => {
+  test.each([
+    ['VINYL Bon Iver - 22, A Million LP', 'Bon Iver', '22, A Million LP', RecordFormat.LP],
+    ['CD Fourtwnty - Nalar', 'Fourtwnty', 'Nalar', RecordFormat.CD],
+    ['KASET Kaiser Chiefs - Yours Truly, Angry Mob', 'Kaiser Chiefs', 'Yours Truly, Angry Mob', RecordFormat.CASSETTE],
+    ['MERCH Hindia - Persona - Cap - Brown', 'Hindia', 'Persona - Cap - Brown', RecordFormat.MERCH],
+  ])('%s', (name, artist, title, format) => {
+    const release = mapVariantToRelease(
+      { ID: 'p', Name: name, Category: 'Whatever', Variants: [] },
+      { ID: 'v' },
+    );
+    expect(release.artist).toBe(artist);
+    expect(release.title).toBe(title);
+    expect(release.format).toBe(format);
+  });
+
+  test('no prefix leaves name untouched', () => {
+    const release = mapVariantToRelease(
+      { ID: 'p', Name: 'Duster - Stratosphere', Category: 'Vinyl/LP', Variants: [] },
+      { ID: 'v' },
+    );
+    expect(release.artist).toBe('Duster');
+  });
+});
+
 describe('inferFormat', () => {
   test.each([
     ['Vinyl/LP', RecordFormat.LP],
@@ -98,6 +123,7 @@ describe('mapVariantToRelease', () => {
       costIdr: 320000,
       stock: 3,
       barcode: '617308017083',
+      catNumber: '617308017083',
       imageUrl: 'https://res.cloudinary.com/dealpos/image/upload/x.jpg',
       dealposProductId: 'prod-1',
       dealposVariantId: 'var-1',

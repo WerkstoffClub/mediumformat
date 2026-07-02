@@ -74,15 +74,29 @@ export class DealposClient {
     for (const [k, v] of Object.entries(opts.query ?? {})) {
       if (v !== undefined && v !== null) url.searchParams.set(k, String(v));
     }
-    const res = await fetch(url, {
-      method,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        ...opts.headers,
-      },
-      body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
-    });
+    // Only send Content-Type when there is a body — DealPOS's model binding
+    // 500s on bodyless GETs that declare application/json.
+    let res: Response;
+    try {
+      res = await fetch(url, {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          ...(opts.body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+          ...opts.headers,
+        },
+        body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
+      });
+    } catch (err) {
+      // Network-level failure (DNS, reset socket) — retry like a 5xx
+      if (attempt < MAX_RETRIES) {
+        const waitMs = BASE_BACKOFF_MS * 2 ** attempt;
+        this.logger.warn(`${method} ${path} network error; retry in ${waitMs}ms`);
+        await new Promise(r => setTimeout(r, waitMs));
+        return this.request<T>(method, path, opts, attempt + 1, reauthed);
+      }
+      throw err;
+    }
 
     if (res.status === 401 && !reauthed) {
       this.token = null;

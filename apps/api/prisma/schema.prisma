@@ -23,6 +23,7 @@ enum RecordFormat {
   SEVEN_INCH
   CD
   TWO_CD
+  CASSETTE
   MERCH
 }
 
@@ -128,7 +129,8 @@ model DpOutlet {
 }
 
 model DpSupplier {
-  name   String  @id
+  id     String  @id
+  name   String
   code   String?
   phone  String?
   mobile String?

@@ -135,8 +135,10 @@ export class DealposSyncService {
   }
 
   private async outlets() {
-    const rows = await this.client.get<Array<{ ID: string; Name: string; Code?: string; Suspended?: boolean }>>(
-      '/api/v3/Outlet',
+    // POST twin returns all outlets; bare GET rejects a missing Suspended param
+    const rows = await this.client.post<Array<{ ID: string; Name: string; Code?: string; Suspended?: boolean }>>(
+      '/api/v3/Outlet/p',
+      {},
     );
     let upserted = 0;
     for (const o of rows ?? []) {
@@ -153,15 +155,15 @@ export class DealposSyncService {
 
   private async suppliers() {
     let upserted = 0, skipped = 0;
-    for await (const page of this.client.paginate<{ Name?: string; Code?: string; Phone?: string; Mobile?: string; Email?: string }>(
+    for await (const page of this.client.paginate<{ ID?: string; Name?: string; Code?: string; Phone?: string; Mobile?: string; Email?: string }>(
       '/api/v3/Supplier', {}, PAGE_SIZE,
     )) {
       for (const s of page) {
-        if (!s.Name) { skipped++; continue; }
-        const data = { code: s.Code ?? null, phone: s.Phone ?? null, mobile: s.Mobile ?? null, email: s.Email ?? null };
+        if (!s.ID || !s.Name) { skipped++; continue; }
+        const data = { name: s.Name, code: s.Code ?? null, phone: s.Phone ?? null, mobile: s.Mobile ?? null, email: s.Email ?? null };
         await this.prisma.dpSupplier.upsert({
-          where: { name: s.Name },
-          create: { name: s.Name, ...data },
+          where: { id: s.ID },
+          create: { id: s.ID, ...data },
           update: data,
         });
         upserted++;
@@ -189,17 +191,18 @@ export class DealposSyncService {
   }
 
   private async paymentMethods() {
-    const rows = await this.client.get<Array<{ ID: number; Name: string; Type?: string; Suspended?: boolean }>>(
+    // Type is numeric in the live API (docs show a string) — store as text either way
+    const rows = await this.client.get<Array<{ ID: number; Name: string; Type?: string | number; Suspended?: boolean }>>(
       '/api/v3/PaymentMethod',
     );
     let upserted = 0;
-    // The sample docs show duplicate IDs across rows; last write wins deliberately.
     for (const m of rows ?? []) {
       if (m.ID == null || !m.Name) continue;
+      const data = { name: m.Name, type: m.Type != null ? String(m.Type) : null, suspended: m.Suspended ?? false };
       await this.prisma.dpPaymentMethod.upsert({
         where: { id: m.ID },
-        create: { id: m.ID, name: m.Name, type: m.Type ?? null, suspended: m.Suspended ?? false },
-        update: { name: m.Name, type: m.Type ?? null, suspended: m.Suspended ?? false },
+        create: { id: m.ID, ...data },
+        update: data,
       });
       upserted++;
     }

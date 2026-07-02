@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { createRelease, getRelease, updateRelease } from '../../api/inventory';
 import type { Release } from '@mf/shared';
 
-const FORMATS  = ['LP', '2xLP', '3xLP', '12_INCH', '7_INCH', 'CD', '2xCD', 'MERCH'] as const;
+const FORMATS  = ['LP', '2xLP', '3xLP', '12_INCH', '7_INCH', 'CD', '2xCD', 'CASSETTE', 'MERCH'] as const;
 const CONDITIONS = ['M', 'VGP', 'VG', 'GP', 'G', 'F', 'P'] as const;
 const LOCATIONS = ['MAIN_STORE', 'WAREHOUSE', 'CONSIGNMENT'] as const;
 
