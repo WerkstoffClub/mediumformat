@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format — Inventory (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .app-brand .brand-wordmark{height:16px;width:auto;}
+
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --neutral-t:rgba(255,255,255,.06);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-pill:999px;
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --page-bg:#161616;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --neutral-t:rgba(0,0,0,.05);--focus:0 0 0 2px rgba(0,0,0,.5);--page-bg:#E8E8E8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--ui);background:var(--page-bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;-webkit-font-smoothing:antialiased;transition:background .2s;}
+    button{cursor:pointer;font-family:inherit;color:inherit;border:none;background:none;}
+    svg{display:block;}
+    a{text-decoration:none;color:inherit;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    .device{width:390px;height:844px;border-radius:44px;background:var(--canvas);border:1px solid var(--hairline);box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+    .status-bar{height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:relative;z-index:5;background:var(--surface);}
+    .status-bar .time{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);}
+    .status-bar .icons{display:flex;align-items:center;gap:6px;color:var(--ink);}
+    .status-bar .icons svg{width:16px;height:16px;}
+    .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--canvas);border-radius:14px;z-index:6;}
+    ::-webkit-scrollbar{width:0;}
+
+    /* ─── Announce bar (running text, sticky) ───────────────────────── */
+    :root{--announce-h:26px;}
+    .announce{flex-shrink:0;position:sticky;top:0;z-index:23;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:40px;padding-left:100%;animation:mf-marquee 20s linear infinite;font-size:10px;font-family:var(--ui);}
+    .announce-track strong{font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+
+    .app-hdr{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:8px 16px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);position:sticky;top:var(--announce-h);z-index:22;}
+    .app-hdr .ham{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .app-hdr .ham:active{background:var(--raised);}
+    .app-hdr .ham svg{width:20px;height:20px;}
+    .app-brand{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;}
+    .app-brand .mark{width:28px;height:28px;color:var(--ink);}
+    .app-brand .wm{font-size:15px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .app-brand .wm sup{font-size:8px;color:var(--mute);vertical-align:super;}
+    .hdr-btn{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);position:relative;}
+    .hdr-btn:active{background:var(--raised);}
+    .hdr-btn svg{width:18px;height:18px;}
+
+    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:16px 16px 88px;}
+    .page-title{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:28px;}
+    .page-sub{font-size:12px;color:var(--mute);margin-top:2px;margin-bottom:14px;}
+
+    /* search + add */
+    .search-row{display:flex;gap:8px;margin-bottom:12px;}
+    .m-search{flex:1;display:flex;align-items:center;gap:8px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:9px 11px;min-height:44px;}
+    .m-search svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
+    .m-search input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
+    .m-search input::placeholder{color:var(--mute);}
+    .add-btn{width:44px;height:44px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .add-btn svg{width:20px;height:20px;}
+
+    /* filter chips scroll */
+    .chips{display:flex;gap:6px;overflow-x:auto;margin-bottom:16px;padding-bottom:2px;}
+    .chips::-webkit-scrollbar{height:0;}
+    .chip{flex-shrink:0;font-size:12px;font-weight:500;padding:6px 14px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--mute);background:transparent;min-height:32px;}
+    .chip.on{border-color:var(--accent);color:var(--ink);}
+
+    /* stacked release cards */
+    .cover{width:52px;height:52px;border-radius:var(--r-sm);overflow:hidden;flex-shrink:0;border:1px solid var(--hairline);}
+    .cover-art{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .cover-art .grooves{width:64%;height:64%;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);}
+    html[data-theme="light"] .cover-art .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px);}
+    .cover-art .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+
+    .inv-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:12px;display:flex;gap:12px;margin-bottom:10px;}
+    .inv-card:active{background:var(--raised);}
+    .ic-body{flex:1;min-width:0;}
+    .ic-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;}
+    .rel-artist{font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .rel-title{font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .pill-neutral{display:inline-flex;align-items:center;font-family:var(--ui);font-size:10px;font-weight:500;padding:2px 7px;border-radius:var(--r-pill);color:var(--body);border:1px solid var(--hairline);}
+    .fmt{font-family:var(--ui);font-size:11px;color:var(--body);}
+    .cat{font-family:var(--ui);font-size:10px;color:var(--mute);}
+    .status-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);white-space:nowrap;}
+    .status-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .st-in{background:var(--success-t);color:var(--success);}
+    .st-low{background:var(--warning-t);color:var(--warning);}
+    .st-out{background:var(--danger-t);color:var(--danger);}
+    .ic-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:7px;}
+    .ic-figs{display:flex;justify-content:space-between;gap:8px;margin-top:9px;padding-top:9px;border-top:1px solid var(--hairline);}
+    .ic-fig{display:flex;flex-direction:column;gap:2px;}
+    .ic-fig .k{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .ic-fig .v{font-family:var(--ui);font-size:12px;color:var(--ink);}
+    .ic-fig.right{align-items:flex-end;}
+
+    /* channel tags (neutral pill + coloured dot/text key) */
+    .channels{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+    .channel-tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--ui);font-size:10px;font-weight:500;padding:1px 7px;border-radius:var(--r-sm);color:var(--body);border:1px solid var(--hairline);background:transparent;white-space:nowrap;}
+    .channel-tag::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+    /* per-channel colour key (channel row only — status stays semantic) */
+    .ch-website{color:#6366F1;}.ch-pos{color:#0EA5E9;}.ch-tokopedia{color:#22C55E;}.ch-shopee{color:#F97316;}
+    .ch-discogs{color:#9CA3AF;}.ch-bandcamp{color:#14B8A6;}.ch-ebay{color:#EAB308;}.ch-event{color:#EC4899;}
+    .channel-more{font-family:var(--ui);font-size:10px;color:var(--mute);}
+
+    /* channels row inside a card */
+    .ic-channels{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-top:8px;}
+    .ic-print{display:inline-flex;align-items:center;gap:5px;font-family:var(--ui);font-size:10px;font-weight:500;color:var(--body);border:1px solid var(--hairline);border-radius:var(--r-sm);padding:3px 8px;min-height:24px;margin-left:auto;background:transparent;}
+    .ic-print:active{background:var(--raised);color:var(--ink);}
+    .ic-print svg{width:12px;height:12px;}
+
+    /* "Locations" secondary button */
+    .loc-link{display:inline-flex;align-items:center;gap:7px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:9px 12px;color:var(--ink);font-size:13px;font-weight:500;min-height:44px;flex-shrink:0;}
+    .loc-link:active{background:var(--surface);}
+    .loc-link svg{width:15px;height:15px;color:var(--body);}
+
+    /* barcode label modal */
+    .bc-ov{display:none;position:absolute;inset:0;z-index:90;background:rgba(0,0,0,.66);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:20px;}
+    .bc-ov.open{display:flex;}
+    .bc-modal{background:var(--surface);border:1px solid var(--hairline);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.6);width:100%;max-width:320px;overflow:hidden;}
+    .bc-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--hairline);}
+    .bc-head h3{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .bc-x{background:transparent;border:none;color:var(--mute);width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);}
+    .bc-x:active{background:var(--raised);color:var(--ink);}
+    .bc-x svg{width:15px;height:15px;}
+    .bc-pad{padding:18px 16px;}
+    /* the physical label: always black-on-white (prints correctly) */
+    .bc-label{background:#fff;color:#000;border-radius:var(--r-md);border:1px solid #e4e4e4;padding:14px 16px;text-align:center;}
+    .bc-brand{display:flex;align-items:center;justify-content:center;gap:6px;color:#000;margin-bottom:10px;}
+    .bc-brand svg{width:14px;height:14px;}
+    .bc-brand span{font-size:11px;font-weight:600;letter-spacing:-.02em;}
+    .bc-bars{width:100%;height:54px;color:#000;}
+    .bc-sku{font-family:var(--ui);font-size:13px;font-weight:500;letter-spacing:.18em;margin-top:6px;color:#000;}
+    .bc-rel{font-size:12px;font-weight:600;color:#000;margin-top:9px;line-height:1.35;}
+    .bc-meta{font-family:var(--ui);font-size:10px;color:#555;margin-top:3px;}
+    .bc-loc{display:inline-flex;align-items:center;gap:5px;font-family:var(--ui);font-size:10px;color:#000;background:#f2f2f2;border-radius:999px;padding:3px 9px;margin-top:9px;}
+    .bc-actions{display:flex;gap:8px;margin-top:16px;}
+    .bc-actions button{flex:1;padding:11px 14px;border-radius:var(--r-md);font-size:13px;font-weight:500;min-height:44px;}
+    .bc-print-btn{background:var(--accent);color:var(--accent-text);border:none;}
+    .bc-close{background:transparent;color:var(--ink);border:1px solid var(--hairline);}
+    @media print{body *{visibility:hidden;}.bc-ov,.bc-ov *{visibility:visible;}.bc-ov{position:absolute;background:#fff;}.bc-modal{box-shadow:none;border:none;max-width:none;}.bc-head,.bc-actions{display:none!important;}}
+
+    .pagination{display:flex;align-items:center;gap:8px;padding:11px 2px 4px;font-size:12px;color:var(--mute);}
+    .pg-count{font-family:var(--ui);}
+    .pg-spacer{flex:1;}
+    .pg-btn{width:32px;height:32px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--body);display:flex;align-items:center;justify-content:center;}
+    .pg-btn:disabled{opacity:.3;}
+    .pg-btn svg{width:14px;height:14px;}
+    .pg-num{min-width:32px;height:32px;border-radius:var(--r-md);border:1px solid transparent;color:var(--body);font-family:var(--ui);font-size:12px;}
+    .pg-num.on{border-color:var(--accent);color:var(--ink);}
+
+    /* bottom tab bar */
+    .tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;z-index:8;background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:flex-start;justify-content:space-around;padding:10px 8px 0;}
+    .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);width:64px;}
+    .tabbar a.on{color:var(--ink);}
+    .tabbar a svg{width:21px;height:21px;}
+    .tabbar a span{font-size:10px;font-weight:500;}
+    .tabbar a .nav-dot{position:relative;}
+    .tabbar a .nav-dot::after{content:"";position:absolute;top:-2px;right:-4px;width:6px;height:6px;border-radius:50%;background:var(--warning);}
+
+    /* drawer */
+    .drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:20;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .drawer-overlay.show{opacity:1;pointer-events:auto;}
+    .drawer{position:absolute;top:0;bottom:0;left:0;width:248px;z-index:21;background:var(--surface);border-right:1px solid var(--hairline);transform:translateX(-100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .drawer.open{transform:translateX(0);}
+
+    /* ─── Notifications drawer ───────────────────────────────────── */
+    .notif-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .notif-overlay.show{opacity:1;pointer-events:auto;}
+    .notif-drawer{position:absolute;top:0;bottom:0;right:0;width:280px;max-width:86vw;z-index:41;
+      background:var(--surface);border-left:1px solid var(--hairline);
+      transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .notif-drawer.open{transform:translateX(0);}
+    .notif-hdr{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:var(--accent);color:var(--accent-text);}
+    .notif-hdr .notif-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+    .notif-hdr .notif-clear{font-size:11px;font-weight:500;color:inherit;opacity:.85;background:none;border:none;}
+    .notif-hdr .notif-clear:active{opacity:1;}
+    .notif-list{flex:1;overflow-y:auto;padding:6px;}
+    .notif-item{display:flex;gap:10px;padding:10px;border-radius:var(--r-md);position:relative;}
+    .notif-item:active{background:var(--raised);}
+    .notif-ico{width:32px;height:32px;border-radius:50%;background:var(--raised);color:var(--body);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .notif-ico svg{width:16px;height:16px;}
+    .notif-body{flex:1;min-width:0;}
+    .notif-text{font-size:12.5px;color:var(--ink);line-height:1.4;}
+    .notif-text strong{font-weight:600;}
+    .notif-meta{font-size:11px;color:var(--mute);margin-top:2px;}
+    .notif-unread{position:absolute;top:14px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--danger);}
+    .drawer-brand{display:flex;align-items:center;gap:9px;padding:20px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-brand .mark{width:22px;height:22px;color:var(--ink);}
+    .drawer-brand .wm{font-size:14px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .drawer-nav{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:2px;}
+    .dn-group{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);padding:10px 12px 4px;}
+    .dn-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--r-md);font-size:13px;font-weight:500;color:var(--body);}
+    .dn-item.active{color:var(--ink);background:var(--raised);}
+    .dn-item svg{width:17px;height:17px;flex-shrink:0;}
+    .dn-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--warning);}
+    .dn-count{margin-left:auto;font-family:var(--ui);font-size:11px;font-weight:500;color:var(--body);background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);padding:1px 8px;min-width:22px;text-align:center;}
+    .dn-item.active .dn-count{background:var(--surface);}
+    .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .drawer-foot{border-top:1px solid var(--hairline);padding:12px;}
+    .drawer-theme{display:flex;align-items:center;gap:8px;width:100%;margin-top:8px;padding:9px 10px;
+      background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--ink);
+      font-family:var(--ui);font-size:12px;font-weight:500;cursor:pointer;min-height:40px;}
+    .drawer-theme svg{width:15px;height:15px;flex-shrink:0;}
+    .drawer-user{display:flex;align-items:center;gap:10px;padding:6px 6px;}
+    .drawer-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-text);font-size:12px;font-weight:600;font-family:var(--ui);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .drawer-user-name{font-size:13px;font-weight:500;color:var(--ink);line-height:1.3;}
+    .drawer-user-role{font-size:11px;color:var(--mute);line-height:1.3;}
+    .sb-status{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .sb-status-text{font-size:11px;color:var(--body);}
+
+    .proto-hub{position:fixed;right:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--mute);font-size:12px;font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.5);}
+    .proto-hub:hover{color:var(--ink);border-color:var(--mute);}
+      .sort-row{display:flex;justify-content:flex-end;margin:6px 0 10px;}
+    .sort-select{display:flex;align-items:center;gap:7px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:0 8px 0 12px;min-height:40px;}
+    .sort-select > span{font-size:12px;color:var(--mute);}
+    .sort-select select{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;font-family:inherit;padding:9px 4px;cursor:pointer;}
+  </style>
+</head>
+<body>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <span class="icons">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="13" width="3" height="6" rx="1"/><rect x="7" y="9" width="3" height="10" rx="1"/><rect x="12" y="5" width="3" height="14" rx="1"/><rect x="17" y="2" width="3" height="17" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13a10 10 0 0114 0M8.5 16.5a5 5 0 017 0M2 9.5a15 15 0 0120 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2.5"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><rect x="21" y="10" width="1.6" height="4" rx="1" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <!-- Announce bar -->
+  <div class="announce"><div class="announce-track"><span>3 low-stock items need reordering · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>3 low-stock items need reordering · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
+
+  <div class="app-hdr">
+    <button class="ham" id="ham-btn" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="index.html" class="app-brand" aria-label="Medium Format — hub">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <button class="hdr-btn" id="notifBtn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </button>
+  </div>
+
+  <div class="screen">
+    <h1 class="page-title">Inventory</h1>
+    <div class="page-sub">1,284 releases · 46 low · 8 out</div>
+
+    <div class="search-row" style="margin-bottom:10px;">
+      <a class="loc-link" href="mockup-locations-mobile.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Locations
+      </a>
+      <a class="loc-link" href="mockup-formats-mobile.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>
+        Product Categories
+      </a>
+    </div>
+
+    <div class="search-row">
+      <div class="m-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input placeholder="Search artist, title, cat#…">
+      </div>
+      <a class="add-btn" href="mockup-release-edit.html" aria-label="Add release">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </a>
+    </div>
+
+    <div class="sort-row">
+      <label class="sort-select"><span>Sort</span>
+        <select><option>Newest</option><option>Price: low → high</option><option>Price: high → low</option><option>Artist A–Z</option><option>Stock: low first</option></select>
+      </label>
+    </div>
+
+    <div class="chips">
+      <button class="chip on" onclick="setChip(this)">All</button>
+      <button class="chip" onclick="setChip(this)">LP</button>
+      <button class="chip" onclick="setChip(this)">2xLP</button>
+      <button class="chip" onclick="setChip(this)">CD</button>
+      <button class="chip" onclick="setChip(this)">Low</button>
+      <button class="chip" onclick="setChip(this)">Out</button>
+    </div>
+
+    <a class="inv-card" href="mockup-release-edit.html">
+      <span class="cover"><span class="cover-art"><span class="grooves"></span></span></span>
+      <div class="ic-body">
+        <div class="ic-top"><div><div class="rel-artist">Floating Points</div><div class="rel-title">Crush</div></div><span class="status-pill st-in">In stock</span></div>
+        <div class="ic-meta"><span class="fmt">LP</span><span class="pill-neutral">M</span><span class="cat">NINJA-CD/LP</span></div>
+        <div class="ic-channels"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-pos">POS</span><span class="channel-more">+2</span></span><button class="ic-print" onclick="openBarcode(event,this)" aria-label="Print barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>Print</button></div>
+        <div class="ic-figs"><div class="ic-fig"><span class="k">Stock</span><span class="v">14</span></div><div class="ic-fig right"><span class="k">Price</span><span class="v">Rp 485.000</span></div></div>
+      </div>
+    </a>
+    <a class="inv-card" href="mockup-release-edit.html">
+      <span class="cover"><span class="cover-art"><span class="grooves"></span></span></span>
+      <div class="ic-body">
+        <div class="ic-top"><div><div class="rel-artist">Khruangbin</div><div class="rel-title">Mordechai</div></div><span class="status-pill st-low">Low</span></div>
+        <div class="ic-meta"><span class="fmt">LP</span><span class="pill-neutral">VG+</span><span class="cat">DOC-146LP</span></div>
+        <div class="ic-channels"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-tokopedia">Tokopedia</span><span class="channel-more">+1</span></span><button class="ic-print" onclick="openBarcode(event,this)" aria-label="Print barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>Print</button></div>
+        <div class="ic-figs"><div class="ic-fig"><span class="k">Stock</span><span class="v">3</span></div><div class="ic-fig right"><span class="k">Price</span><span class="v">Rp 525.000</span></div></div>
+      </div>
+    </a>
+    <a class="inv-card" href="mockup-release-edit.html">
+      <span class="cover"><span class="cover-art"><span class="grooves"></span></span></span>
+      <div class="ic-body">
+        <div class="ic-top"><div><div class="rel-artist">Sade</div><div class="rel-title">Love Deluxe</div></div><span class="status-pill st-in">In stock</span></div>
+        <div class="ic-meta"><span class="fmt">LP</span><span class="pill-neutral">M</span><span class="cat">EPC-472626</span></div>
+        <div class="ic-channels"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-discogs">Discogs</span></span><button class="ic-print" onclick="openBarcode(event,this)" aria-label="Print barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>Print</button></div>
+        <div class="ic-figs"><div class="ic-fig"><span class="k">Stock</span><span class="v">9</span></div><div class="ic-fig right"><span class="k">Price</span><span class="v">Rp 620.000</span></div></div>
+      </div>
+    </a>
+    <a class="inv-card" href="mockup-release-edit.html">
+      <span class="cover"><span class="cover-art"><span class="grooves"></span></span></span>
+      <div class="ic-body">
+        <div class="ic-top"><div><div class="rel-artist">Daft Punk</div><div class="rel-title">Discovery</div></div><span class="status-pill st-out">Out</span></div>
+        <div class="ic-meta"><span class="fmt">2xLP</span><span class="pill-neutral">M</span><span class="cat">190296-61193</span></div>
+        <div class="ic-channels"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-shopee">Shopee</span><span class="channel-more">+1</span></span><button class="ic-print" onclick="openBarcode(event,this)" aria-label="Print barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>Print</button></div>
+        <div class="ic-figs"><div class="ic-fig"><span class="k">Stock</span><span class="v">0</span></div><div class="ic-fig right"><span class="k">Price</span><span class="v">Rp 750.000</span></div></div>
+      </div>
+    </a>
+    <a class="inv-card" href="mockup-release-edit.html">
+      <span class="cover"><span class="cover-art"><span class="grooves"></span></span></span>
+      <div class="ic-body">
+        <div class="ic-top"><div><div class="rel-artist">Björk</div><div class="rel-title">Homogenic</div></div><span class="status-pill st-in">In stock</span></div>
+        <div class="ic-meta"><span class="fmt">LP</span><span class="pill-neutral">VG+</span><span class="cat">ONE-LITTLE-539</span></div>
+        <div class="ic-channels"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-pos">POS</span></span><button class="ic-print" onclick="openBarcode(event,this)" aria-label="Print barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>Print</button></div>
+        <div class="ic-figs"><div class="ic-fig"><span class="k">Stock</span><span class="v">6</span></div><div class="ic-fig right"><span class="k">Price</span><span class="v">Rp 560.000</span></div></div>
+      </div>
+    </a>
+    <a class="inv-card" href="mockup-release-edit.html">
+      <span class="cover"><span class="cover-art"><span class="grooves"></span></span></span>
+      <div class="ic-body">
+        <div class="ic-top"><div><div class="rel-artist">Massive Attack</div><div class="rel-title">Mezzanine</div></div><span class="status-pill st-low">Low</span></div>
+        <div class="ic-meta"><span class="fmt">2xLP</span><span class="pill-neutral">VG</span><span class="cat">VIRGIN-WBRLP4</span></div>
+        <div class="ic-channels"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-discogs">Discogs</span></span><button class="ic-print" onclick="openBarcode(event,this)" aria-label="Print barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>Print</button></div>
+        <div class="ic-figs"><div class="ic-fig"><span class="k">Stock</span><span class="v">2</span></div><div class="ic-fig right"><span class="k">Price</span><span class="v">Rp 680.000</span></div></div>
+      </div>
+    </a>
+    <a class="inv-card" href="mockup-release-edit.html">
+      <span class="cover"><span class="cover-art"><span class="grooves"></span></span></span>
+      <div class="ic-body">
+        <div class="ic-top"><div><div class="rel-artist">Miles Davis</div><div class="rel-title">Kind of Blue</div></div><span class="status-pill st-in">In stock</span></div>
+        <div class="ic-meta"><span class="fmt">LP</span><span class="pill-neutral">VG+</span><span class="cat">COL-CS-8163</span></div>
+        <div class="ic-channels"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-tokopedia">Tokopedia</span><span class="channel-more">+2</span></span><button class="ic-print" onclick="openBarcode(event,this)" aria-label="Print barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>Print</button></div>
+        <div class="ic-figs"><div class="ic-fig"><span class="k">Stock</span><span class="v">18</span></div><div class="ic-fig right"><span class="k">Price</span><span class="v">Rp 510.000</span></div></div>
+      </div>
+    </a>
+
+    <div class="pagination">
+      <span class="pg-count">1–13 of 1,284</span>
+      <div class="pg-spacer"></div>
+      <button class="pg-btn" disabled aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="pg-num on">1</button>
+      <button class="pg-num">2</button>
+      <button class="pg-btn" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="drawer">
+    <a href="index.html" class="drawer-brand" aria-label="Medium Format — hub">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <nav class="drawer-nav">
+      <div class="dn-group">Overview</div>
+      <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+
+      <div class="dn-group">Selling</div>
+      <a href="mockup-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-count mono">12</span></a>
+      <a href="mockup-inventory-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</a>
+      <a href="mockup-customers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Customers</a>
+      <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 012-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 010 4v4a2 2 0 002 2h16a2 2 0 002-2v-4a2 2 0 01-2-2z"/><line x1="9" y1="8" x2="9" y2="16"/></svg>Vouchers</a>
+      <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
+      <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
+
+      <div class="dn-group">Content</div>
+      <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
+      <a href="mockup-news-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>News</a>
+      <a href="mockup-news-categories-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>Categories &amp; Tags</a>
+
+      <div class="dn-group">Shop</div>
+      <a href="mockup-purchase-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Purchase orders</a>
+
+      <div class="dn-group">Config</div>
+      <a href="mockup-preferences-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</a>
+    </nav>
+    <div class="drawer-foot">
+      <div class="drawer-user">
+        <div class="drawer-avatar">RP</div>
+        <div>
+          <div class="drawer-user-name">Raka Pratama</div>
+          <div class="drawer-user-role">Owner</div>
+        </div>
+            <button class="drawer-theme" id="theme-btn" aria-label="Toggle theme">
+      <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span id="theme-label">Dark</span>
+    </button>
+    </div>
+    </div>
+  </aside>
+
+  <!-- Notifications drawer -->
+  <div class="notif-overlay" id="notifOverlay"></div>
+  <aside class="notif-drawer" id="notifDrawer" aria-label="Notifications">
+    <div class="notif-hdr">
+      <span class="notif-title">Notifications</span>
+      <button class="notif-clear" id="notifClearBtn">Mark all read</button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-meta">2 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text"><strong>3 items</strong> are running low on stock</div>
+          <div class="notif-meta">28 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">PO-0032 was <strong>partially received</strong> from Analog Distro</div>
+          <div class="notif-meta">Yesterday</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Bottom tab bar -->
+  <nav class="tabbar">
+    <a href="mockup-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Home</span></a>
+    <a href="mockup-inventory.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg><span>Stock</span></a>
+    <a href="mockup-orders.html"><span class="nav-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Orders</span></a>
+    <a href="mockup-customers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Customers</span></a>
+  </nav>
+
+  <!-- Barcode label modal (scoped to phone frame) -->
+  <div class="bc-ov" id="bcOv" role="dialog" aria-modal="true" aria-label="Print barcode label">
+    <div class="bc-modal">
+      <div class="bc-head"><h3>Item label</h3><button class="bc-x" onclick="closeBarcode()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+      <div class="bc-pad">
+        <div class="bc-label" id="bcLabel">
+          <div class="bc-brand"><svg viewBox="0 0 1080 1080" fill="#000"><path d="M858.21,130.64c-53.14-66.98-130.64-83.97-212.83-81.02-25.27.91-46.84,2.92-65.66,5.82-22.46-5.24-46.36-6.78-70.85-5.9-144.29,5.17-131.46,57.34-223.49,99.9-100.65,46.56-92.46,129.42-125.95,175.35-49.06,67.27-68.46,143.78-62.64,226.59,1.02,14.48,3.33,28.3,6.95,41.41-7.49,40.09-9.63,81.66-6.62,124.51,5.51,78.44,39.27,142.57,105.31,186.44,23.67,15.72,46.2,41.64,66.06,62.8,111.62,118.98,233.6,49.34,285.88,40.01,94.53-16.87,175.2-53.51,244.66-121.56,33.1-32.43,55.07-73.46,79.26-114.18,17.31-29.13,40.36-55.02,53.07-87.61,66.75-171.18,96.6-429.31-73.14-552.56ZM247.28,694.57c-2.68-2.86-46.16-25.29-42.52-23.83,56.1,22.5,109.06-5.34,135.22-10.01,61.55-10.98,114.09-34.85,159.32-79.16,21.55-21.12,35.86-47.84,51.62-74.36,11.27-18.97,26.28-35.83,34.56-57.05,40.9-104.89,108.09-250.09,18.17-334.9,10.35,7.07,19.93,15.85,28.53,26.62.18.23.4.44.64.61,110.13,80.36,90.69,248.21,47.27,359.56-8.27,21.22-23.29,38.08-34.56,57.05-15.76,26.52-30.06,53.24-51.62,74.36-45.24,44.31-97.77,68.18-159.32,79.16-34.04,6.07-114.62,59.42-187.3-18.06ZM873.17,650.54c-11.01,28.23-30.98,50.66-45.98,75.9-20.96,35.28-39.99,70.83-68.67,98.93-60.18,58.96-130.08,90.71-211.97,105.32-45.29,8.08-150.98,68.42-247.68-34.67-.06-.06-.12-.13-.18-.19-3.56-3.8-40.36-36.05-35.52-34.11,74.64,29.93,145.1-7.11,179.9-13.32,81.9-14.61,151.79-46.36,211.97-105.32,28.68-28.09,47.71-63.64,68.67-98.93,14.99-25.24,34.97-47.67,45.98-75.9,54.41-139.56,121.41-319.5,1.78-432.33,13.78,9.41,30.33,19.61,41.77,33.94.24.31,1.86,1.51,2.17,1.74,146.52,106.92,115.52,330.78,57.75,478.94Z"/></svg><span>Medium Format</span></div>
+          <svg class="bc-bars" id="bcBars" preserveAspectRatio="none" viewBox="0 0 100 54"></svg>
+          <div class="bc-sku" id="bcSku">MF-000000</div>
+          <div class="bc-rel" id="bcRel">Artist — Title</div>
+          <div class="bc-meta" id="bcMeta">CAT# · M · Rp 0</div>
+          <div class="bc-loc" id="bcLoc"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#000" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Main Store · Shelf A3</span></div>
+        </div>
+        <div class="bc-actions">
+          <button class="bc-close" onclick="closeBarcode()">Close</button>
+          <button class="bc-print-btn" onclick="window.print()">Print label</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="index.html" class="proto-hub" aria-label="Back to prototype hub">◹ Prototype</a>
+
+<script>
+  function setChip(el){el.parentNode.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
+  const drawer=document.getElementById('drawer');
+  const dOverlay=document.getElementById('drawer-overlay');
+  function closeDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('show');}
+  document.getElementById('ham-btn').addEventListener('click',()=>{drawer.classList.add('open');dOverlay.classList.add('show');});
+  dOverlay.addEventListener('click',closeDrawer);
+
+  // Notifications drawer
+  const notifDrawer=document.getElementById('notifDrawer');
+  const notifOverlay=document.getElementById('notifOverlay');
+  function closeNotif(){notifDrawer.classList.remove('open');notifOverlay.classList.remove('show');}
+  document.getElementById('notifBtn').addEventListener('click',()=>{notifDrawer.classList.add('open');notifOverlay.classList.add('show');});
+  notifOverlay.addEventListener('click',closeNotif);
+  document.getElementById('notifClearBtn').addEventListener('click',()=>{
+    document.querySelectorAll('.notif-unread').forEach(d=>d.remove());
+  });
+
+  const root=document.documentElement;
+  const moon=document.getElementById('ico-moon');
+  const sun=document.getElementById('ico-sun');
+  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';}
+  applyTheme(localStorage.getItem('mf-theme')||'dark');
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    localStorage.setItem('mf-theme',next);applyTheme(next);
+  });
+
+  // Barcode label modal — reads from the .inv-card the Print button lives in
+  (function(){
+    const ov=document.getElementById('bcOv');
+    const LOCS=['Main Store · Shelf A3','Main Store · Shelf B1','Warehouse · Rack C2','Warehouse · Rack D4','Main Store · Shelf A6'];
+    function hash(s){let h=0;for(const ch of s)h=(h*31+ch.charCodeAt(0))>>>0;return h;}
+    function bars(code){let seed=hash(code)||1;const rnd=()=>{seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};
+      let x=0,out='';for(let i=0;i<52;i++){const w=1+Math.floor(rnd()*3);if(i%2===0)out+=`<rect x="${x}" y="0" width="${w}" height="54" fill="#000"/>`;x+=w;}
+      const svg=document.getElementById('bcBars');svg.setAttribute('viewBox',`0 0 ${x} 54`);svg.innerHTML=out;}
+    window.openBarcode=function(ev,btn){
+      ev.preventDefault();ev.stopPropagation();
+      const card=btn.closest('.inv-card');
+      const artist=(card.querySelector('.rel-artist')||{}).textContent||'';
+      const title=(card.querySelector('.rel-title')||{}).textContent||'';
+      const cat=(card.querySelector('.cat')||{}).textContent||'';
+      const cond=(card.querySelector('.pill-neutral')||{}).textContent||'';
+      const priceEl=card.querySelector('.ic-fig.right .v');
+      const price=priceEl?priceEl.textContent.trim():'';
+      const skuBase=(cat.replace(/[^A-Za-z0-9]/g,'')||artist.replace(/\s/g,'')).toUpperCase().slice(0,8);
+      const sku='MF-'+(hash(artist+title)%1000000).toString().padStart(6,'0');
+      document.getElementById('bcSku').textContent=sku;
+      document.getElementById('bcRel').textContent=artist+' — '+title;
+      document.getElementById('bcMeta').textContent=[cat,cond,price].filter(Boolean).join('  ·  ');
+      document.getElementById('bcLoc').querySelector('span').textContent=LOCS[hash(artist+title)%LOCS.length];
+      bars(sku+skuBase);
+      ov.classList.add('open');
+    };
+    window.closeBarcode=function(){ov.classList.remove('open');};
+    ov.addEventListener('click',e=>{if(e.target===ov)closeBarcode();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBarcode();});
+  })();
+</script>
+</body>
+</html>

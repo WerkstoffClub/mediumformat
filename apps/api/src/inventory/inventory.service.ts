@@ -18,10 +18,19 @@ export class InventoryService {
   }
 
   async findAll(filter: ReleaseFilterDto) {
-    const { page = 1, limit = 50, lowStockOnly, ...rest } = filter;
+    const { page = 1, limit = 50, lowStockOnly, q, ...rest } = filter;
     const skip = (page - 1) * limit;
 
     const where: Prisma.ReleaseWhereInput = {};
+    if (q) {
+      where.OR = [
+        { artist:    { contains: q, mode: 'insensitive' } },
+        { title:     { contains: q, mode: 'insensitive' } },
+        { label:     { contains: q, mode: 'insensitive' } },
+        { catNumber: { contains: q, mode: 'insensitive' } },
+        { barcode:   q },
+      ];
+    }
     if (rest.artist)        where.artist        = { contains: rest.artist, mode: 'insensitive' };
     if (rest.title)         where.title         = { contains: rest.title,  mode: 'insensitive' };
     if (rest.label)         where.label         = { contains: rest.label,  mode: 'insensitive' };

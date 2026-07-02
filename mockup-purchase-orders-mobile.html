@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format — Purchase Orders (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .app-brand .brand-wordmark{height:16px;width:auto;}
+
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --neutral-t:rgba(255,255,255,.06);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-pill:999px;
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --page-bg:#161616;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --neutral-t:rgba(0,0,0,.05);--focus:0 0 0 2px rgba(0,0,0,.5);--page-bg:#E8E8E8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--ui);background:var(--page-bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;-webkit-font-smoothing:antialiased;transition:background .2s;}
+    button{cursor:pointer;font-family:inherit;color:inherit;border:none;background:none;}
+    svg{display:block;}
+    a{text-decoration:none;color:inherit;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    .device{width:390px;height:844px;border-radius:44px;background:var(--canvas);border:1px solid var(--hairline);box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+    .status-bar{height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:relative;z-index:5;background:var(--surface);}
+    .status-bar .time{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);}
+    .status-bar .icons{display:flex;align-items:center;gap:6px;color:var(--ink);}
+    .status-bar .icons svg{width:16px;height:16px;}
+    .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--canvas);border-radius:14px;z-index:6;}
+    ::-webkit-scrollbar{width:0;}
+
+    /* ─── Announce bar (running text, sticky) ───────────────────────── */
+    :root{--announce-h:26px;}
+    .announce{flex-shrink:0;position:sticky;top:0;z-index:23;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:40px;padding-left:100%;animation:mf-marquee 20s linear infinite;font-size:10px;font-family:var(--ui);}
+    .announce-track strong{font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+
+    .app-hdr{flex-shrink:0;position:sticky;top:var(--announce-h);z-index:22;display:flex;align-items:center;gap:10px;padding:8px 16px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);}
+    .app-hdr .ham{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .app-hdr .ham:active{background:var(--raised);}
+    .app-hdr .ham svg{width:20px;height:20px;}
+    .app-brand{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;}
+    .app-brand .mark{width:28px;height:28px;color:var(--ink);}
+    .app-brand .wm{font-size:15px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .app-brand .wm sup{font-size:8px;color:var(--mute);vertical-align:super;}
+    .hdr-btn{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);position:relative;}
+    .hdr-btn:active{background:var(--raised);}
+    .hdr-btn svg{width:18px;height:18px;}
+    .hdr-btn .dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--danger);border:1.5px solid var(--surface);}
+
+    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:16px 16px 88px;}
+    .page-title{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:28px;}
+    .page-sub{font-size:12px;color:var(--mute);margin-top:2px;margin-bottom:14px;}
+
+    .btn-pri{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:11px 16px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:14px;font-weight:500;margin-bottom:16px;}
+    .btn-pri svg{width:15px;height:15px;}
+
+    .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+    .stat{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;}
+    .stat-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-bottom:8px;}
+    .stat-val{font-family:var(--ui);font-size:20px;font-weight:500;color:var(--ink);line-height:1;letter-spacing:-.02em;}
+    .stat-sub{font-size:11px;color:var(--body);margin-top:8px;}
+    .trend-neu{color:var(--mute);}
+
+    /* filter chips */
+    .filters{display:flex;gap:6px;overflow-x:auto;margin-bottom:16px;padding-bottom:2px;}
+    .filters::-webkit-scrollbar{height:0;}
+    .chip{flex-shrink:0;font-size:12px;font-weight:500;padding:6px 14px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--mute);background:transparent;min-height:32px;}
+    .chip.on{border-color:var(--accent);color:var(--ink);}
+
+    /* PO cards (tables → cards) */
+    .po-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);margin-bottom:12px;overflow:hidden;}
+    .po-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:13px 14px;cursor:pointer;}
+    .po-head-l{min-width:0;}
+    .po-no{font-family:var(--ui);font-size:12px;color:var(--ink);font-weight:500;}
+    .po-supplier{font-size:13px;font-weight:500;color:var(--ink);margin-top:4px;}
+    .po-supplier-meta{font-family:var(--ui);font-size:10px;color:var(--mute);margin-top:2px;}
+    .po-head-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;}
+    .status-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);white-space:nowrap;}
+    .status-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .st-draft{background:var(--info-t);color:var(--info);}
+    .st-ordered{background:var(--info-t);color:var(--info);}
+    .st-partial{background:var(--warning-t);color:var(--warning);}
+    .st-received{background:var(--success-t);color:var(--success);}
+    .st-cancelled{background:var(--danger-t);color:var(--danger);}
+    .po-caret{width:15px;height:15px;color:var(--mute);transition:transform .2s;}
+    .po-card.open .po-caret{transform:rotate(180deg);}
+
+    .po-figs{display:flex;justify-content:space-between;gap:6px;padding:0 14px 12px;}
+    .fig{display:flex;flex-direction:column;gap:3px;}
+    .fig .k{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .fig .v{font-family:var(--ui);font-size:12px;color:var(--ink);}
+    .fig.right{align-items:flex-end;}
+
+    /* expander */
+    .po-detail{display:none;border-top:1px solid var(--hairline);padding:14px;background:var(--canvas);}
+    .po-detail.show{display:block;}
+    .pd-progress-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--mute);margin-bottom:6px;}
+    .pd-progress-lbl .mono{color:var(--ink);}
+    .pd-track{height:7px;background:var(--raised);border-radius:var(--r-pill);overflow:hidden;margin-bottom:14px;}
+    .pd-fill{height:100%;background:var(--accent);opacity:.9;border-radius:var(--r-pill);}
+    .line{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0;border-top:1px solid var(--hairline);}
+    .line:first-of-type{border-top:none;}
+    .line-l{min-width:0;}
+    .line-title{font-size:12px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .line-cat{font-family:var(--ui);font-size:10px;color:var(--mute);margin-top:1px;}
+    .line-r{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
+    .line-cost{font-family:var(--ui);font-size:11px;color:var(--ink);}
+    .recv-tag{font-family:var(--ui);font-size:10px;padding:1px 6px;border-radius:var(--r-sm);border:1px solid var(--hairline);color:var(--body);}
+    .recv-tag.done{color:var(--success);border-color:rgba(34,197,94,.3);}
+    .recv-tag.part{color:var(--warning);border-color:rgba(245,158,11,.3);}
+    .pd-note{margin-top:12px;font-size:11px;color:var(--body);line-height:1.5;}
+    .pd-note strong{color:var(--ink);font-weight:500;}
+    .pd-actions{display:flex;gap:8px;margin-top:12px;}
+    .btn-mini{flex:1;font-size:12px;font-weight:500;padding:9px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);color:var(--ink);text-align:center;}
+
+    /* Consolidated invoices */
+    .widget{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;margin-bottom:16px;}
+    .widget-hdr{padding:11px 14px;border-bottom:1px solid var(--hairline);}
+    .widget-title{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--body);}
+    .widget-note{display:block;font-size:10px;color:var(--mute);margin-top:2px;}
+    .ship-card{border-top:1px solid var(--hairline);padding:14px;}
+    .ship-card:first-child{border-top:none;}
+    .ship-ref{font-family:var(--ui);font-size:13px;color:var(--ink);font-weight:600;}
+    .ship-shipper{font-size:11px;color:var(--body);margin-top:3px;}
+    .ship-shipper .lbl{color:var(--mute);}
+    .ship-route{font-size:10px;color:var(--mute);margin-top:3px;line-height:1.4;}
+    .ship-carrier{display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
+    .ship-carrier-name{font-size:10px;color:var(--mute);}
+    .ship-track-link{display:inline-flex;align-items:center;gap:5px;font-family:var(--ui);font-size:11px;color:var(--ink);border-bottom:1px dashed var(--hairline);padding-bottom:1px;}
+    .ship-track-link svg{width:10px;height:10px;flex-shrink:0;}
+    .ship-figs{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px 12px;margin-top:10px;}
+    .ship-fig-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-bottom:4px;}
+    .ship-fig-val{font-family:var(--ui);font-size:13px;color:var(--ink);}
+    .ship-uplift{color:var(--warning);}
+    .ship-edit-row{margin-top:10px;}
+    .ship-edit-toggle{font-size:11px;font-weight:500;color:var(--body);border-bottom:1px dashed var(--hairline);padding-bottom:1px;}
+    .ship-edit-form{display:none;flex-direction:column;gap:8px;margin-top:10px;}
+    .ship-edit-form.show{display:flex;}
+    .ship-edit-form .input{padding:9px 10px;font-size:12px;}
+    .ship-edit-save{font-size:12px;font-weight:500;padding:9px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);text-align:center;}
+
+    /* Per-PO shipper/cost block */
+    .pd-ship{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);padding:9px 10px;margin-bottom:12px;}
+    .pd-ship-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-bottom:4px;}
+    .pd-ship-val{font-size:11px;color:var(--body);line-height:1.5;}
+    .pd-ship-val a{color:var(--ink);font-family:var(--ui);}
+    .pd-ship-val .mono{color:var(--ink);}
+    .pd-ship-edit{font-size:10px;font-weight:500;color:var(--body);border-bottom:1px dashed var(--hairline);margin-left:4px;}
+    .pd-ship-none{font-size:11px;color:var(--mute);}
+
+    /* bottom tab bar */
+    .tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;z-index:8;background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:flex-start;justify-content:space-around;padding:10px 8px 0;}
+    .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);width:64px;}
+    .tabbar a.on{color:var(--ink);}
+    .tabbar a svg{width:21px;height:21px;}
+    .tabbar a span{font-size:10px;font-weight:500;}
+    .tabbar a .nav-dot{position:relative;}
+    .tabbar a .nav-dot::after{content:"";position:absolute;top:-2px;right:-4px;width:6px;height:6px;border-radius:50%;background:var(--warning);}
+
+    /* drawer */
+    .drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:20;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .drawer-overlay.show{opacity:1;pointer-events:auto;}
+    .drawer{position:absolute;top:0;bottom:0;left:0;width:248px;z-index:21;background:var(--surface);border-right:1px solid var(--hairline);transform:translateX(-100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .drawer.open{transform:translateX(0);}
+
+    /* ─── Notifications drawer ───────────────────────────────────── */
+    .notif-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .notif-overlay.show{opacity:1;pointer-events:auto;}
+    .notif-drawer{position:absolute;top:0;bottom:0;right:0;width:280px;max-width:86vw;z-index:41;
+      background:var(--surface);border-left:1px solid var(--hairline);
+      transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .notif-drawer.open{transform:translateX(0);}
+    .notif-hdr{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:var(--accent);color:var(--accent-text);}
+    .notif-hdr .notif-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+    .notif-hdr .notif-clear{font-size:11px;font-weight:500;color:inherit;opacity:.85;background:none;border:none;}
+    .notif-hdr .notif-clear:active{opacity:1;}
+    .notif-list{flex:1;overflow-y:auto;padding:6px;}
+    .notif-item{display:flex;gap:10px;padding:10px;border-radius:var(--r-md);position:relative;}
+    .notif-item:active{background:var(--raised);}
+    .notif-ico{width:32px;height:32px;border-radius:50%;background:var(--raised);color:var(--body);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .notif-ico svg{width:16px;height:16px;}
+    .notif-body{flex:1;min-width:0;}
+    .notif-text{font-size:12.5px;color:var(--ink);line-height:1.4;}
+    .notif-text strong{font-weight:600;}
+    .notif-meta{font-size:11px;color:var(--mute);margin-top:2px;}
+    .notif-unread{position:absolute;top:14px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--danger);}
+
+    .drawer-brand{display:flex;align-items:center;gap:9px;padding:20px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-brand .mark{width:22px;height:22px;color:var(--ink);}
+    .drawer-brand .wm{font-size:14px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .drawer-nav{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:2px;}
+    .dn-group{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:12px 12px 5px;}
+    .dn-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--r-md);font-size:13px;font-weight:500;color:var(--body);}
+    .dn-item.active{color:var(--ink);background:var(--raised);}
+    .dn-item svg{width:17px;height:17px;flex-shrink:0;}
+    .dn-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--warning);}
+    .drawer-foot{border-top:1px solid var(--hairline);padding:12px;}
+    .sb-status{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .sb-status-text{font-size:11px;color:var(--body);}
+
+    /* create PO sheet */
+    .sheet-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:30;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .sheet-overlay.show{opacity:1;pointer-events:auto;}
+    .sheet{position:absolute;left:0;right:0;bottom:0;z-index:31;max-height:90%;background:var(--surface);border-top:1px solid var(--hairline);border-radius:20px 20px 0 0;transform:translateY(100%);transition:transform .26s ease;display:flex;flex-direction:column;}
+    .sheet.open{transform:translateY(0);}
+    .sheet-grip{width:36px;height:4px;border-radius:2px;background:var(--hairline);margin:10px auto 4px;flex-shrink:0;}
+    .sheet-hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 18px 12px;border-bottom:1px solid var(--hairline);flex-shrink:0;}
+    .sheet-hdr h2{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .sheet-close{width:30px;height:30px;border-radius:var(--r-md);color:var(--body);display:flex;align-items:center;justify-content:center;}
+    .sheet-close svg{width:16px;height:16px;}
+    .sheet-body{overflow-y:auto;padding:16px 18px;}
+    .field{margin-bottom:14px;}
+    .field label{display:block;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:6px;}
+    .input,.select,.textarea{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px 12px;color:var(--ink);font-size:13px;font-family:inherit;}
+    .input:focus,.select:focus,.textarea:focus{outline:none;border-color:var(--accent);}
+    .input.mono{font-family:var(--ui);}
+    .textarea{resize:vertical;min-height:56px;line-height:1.5;}
+    .select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236E6E6E' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
+    .repeater-hdr{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:8px;}
+    .li-item{background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px;margin-bottom:8px;}
+    .li-item .input{background:var(--surface);margin-bottom:8px;}
+    .li-qc{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .li-qc .input{margin-bottom:0;}
+    .li-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+    .li-total{font-family:var(--ui);font-size:12px;color:var(--ink);}
+    .li-del{font-size:11px;color:var(--mute);display:inline-flex;align-items:center;gap:4px;}
+    .li-del svg{width:12px;height:12px;}
+    .add-line{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;font-size:12px;font-weight:500;padding:10px;border-radius:var(--r-md);background:transparent;border:1px dashed var(--hairline);color:var(--body);}
+    .add-line svg{width:13px;height:13px;}
+    .form-totals{margin-top:14px;padding-top:12px;border-top:1px solid var(--hairline);}
+    .tot-row{display:flex;justify-content:space-between;font-size:13px;color:var(--body);padding:4px 0;}
+    .tot-row.grand{margin-top:6px;padding-top:10px;border-top:1px solid var(--hairline);font-size:15px;color:var(--ink);font-weight:600;}
+    .tot-row .mono{font-family:var(--ui);color:var(--ink);}
+    .sheet-foot{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 18px;border-top:1px solid var(--hairline);flex-shrink:0;}
+    .sheet-foot .btn-sec{display:inline-flex;align-items:center;justify-content:center;padding:11px;border-radius:var(--r-md);border:1px solid var(--hairline);color:var(--ink);font-size:13px;font-weight:500;}
+    .sheet-foot .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:13px;font-weight:500;}
+    .sheet-foot .btn-primary svg{width:14px;height:14px;}
+
+    /* prototype hub link (inside frame, above tab bar) */
+    .proto-link{position:absolute;left:12px;bottom:80px;z-index:9;display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--mute);font-size:10px;font-weight:500;opacity:.75;}
+    .proto-link:active{opacity:1;color:var(--ink);}
+  
+    .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+  </style>
+</head>
+<body>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <span class="icons">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="13" width="3" height="6" rx="1"/><rect x="7" y="9" width="3" height="10" rx="1"/><rect x="12" y="5" width="3" height="14" rx="1"/><rect x="17" y="2" width="3" height="17" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13a10 10 0 0114 0M8.5 16.5a5 5 0 017 0M2 9.5a15 15 0 0120 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2.5"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><rect x="21" y="10" width="1.6" height="4" rx="1" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <!-- Announce bar -->
+  <div class="announce"><div class="announce-track"><span>PO-0032 partially received from Analog Distro · New order <strong>#MF-1044</strong> just came in · 2 purchase orders awaiting approval</span><span>PO-0032 partially received from Analog Distro · New order <strong>#MF-1044</strong> just came in · 2 purchase orders awaiting approval</span></div></div>
+
+  <div class="app-hdr">
+    <button class="ham" id="ham-btn" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="index.html" class="app-brand" aria-label="Medium Format — home">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <button class="hdr-btn" id="notifBtn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </button>
+  </div>
+
+  <div class="screen">
+    <h1 class="page-title">Purchase Orders</h1>
+    <div class="page-sub">Restock from suppliers &amp; distributors</div>
+
+    <button class="btn-pri" id="create-po-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Create PO
+    </button>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-lbl">Open POs</div><div class="stat-val">7</div><div class="stat-sub trend-neu"><span class="mono">3</span> awaiting</div></div>
+      <div class="stat"><div class="stat-lbl">On order</div><div class="stat-val">Rp 58.4M</div><div class="stat-sub trend-neu">all suppliers</div></div>
+      <div class="stat"><div class="stat-lbl">Units in</div><div class="stat-val">642</div><div class="stat-sub trend-neu"><span class="mono">418</span> received</div></div>
+      <div class="stat"><div class="stat-lbl">Due · week</div><div class="stat-val">2</div><div class="stat-sub trend-neu">by 8 May</div></div>
+    </div>
+
+    <div class="filters">
+      <button class="chip on" onclick="setChip(this)">All</button>
+      <button class="chip" onclick="setChip(this)">Draft</button>
+      <button class="chip" onclick="setChip(this)">Ordered</button>
+      <button class="chip" onclick="setChip(this)">Partial</button>
+      <button class="chip" onclick="setChip(this)">Received</button>
+      <button class="chip" onclick="setChip(this)">Cancelled</button>
+    </div>
+
+    <!-- PO-124 partial -->
+    <div class="po-card">
+      <div class="po-head" onclick="togglePO(this)">
+        <div class="po-head-l"><span class="po-no">PO-124</span><div class="po-supplier">Aksara Distribusi</div><div class="po-supplier-meta">Distributor · Jakarta</div></div>
+        <div class="po-head-r"><span class="status-pill st-partial">Partially received</span><svg class="po-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="po-figs">
+        <div class="fig"><span class="k">Items</span><span class="v">128</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">6 May</span></div>
+        <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 18.400.000</span></div>
+      </div>
+      <div class="po-detail">
+        <div class="pd-progress-lbl"><span>Receiving progress</span><span class="mono">86 / 128 units</span></div>
+        <div class="pd-track"><div class="pd-fill" style="width:67%"></div></div>
+        <div class="pd-ship">
+          <div class="pd-ship-lbl">Shipper &amp; shipping</div>
+          <div class="pd-ship-val">Shipped via <a href="#ship-SHP-0091" onclick="revealShipment(event,'SHP-0091')">SHP-0091</a> · <span class="mono">Rp 589.000</span> freight share <button class="pd-ship-edit" onclick="revealShipment(event,'SHP-0091',true)">Edit</button></div>
+        </div>
+        <div class="line"><div class="line-l"><div class="line-title">Floating Points — Cascade</div><div class="line-cat">NINJA-LP · 40 × Rp 165.000</div></div><div class="line-r"><span class="line-cost">Rp 6.600.000</span><span class="recv-tag done">40 / 40</span></div></div>
+        <div class="line"><div class="line-l"><div class="line-title">Khruangbin — A LA SALA</div><div class="line-cat">DEAD-092 · 48 × Rp 145.000</div></div><div class="line-r"><span class="line-cost">Rp 6.960.000</span><span class="recv-tag part">30 / 48</span></div></div>
+        <div class="line"><div class="line-l"><div class="line-title">Bonobo — Fragments</div><div class="line-cat">NINJA-441 · 40 × Rp 121.000</div></div><div class="line-r"><span class="line-cost">Rp 4.840.000</span><span class="recv-tag part">16 / 40</span></div></div>
+        <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton 30 Apr, remainder in transit. Ordered 22 Apr by Andra.</div>
+        <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
+      </div>
+    </div>
+
+    <!-- PO-123 ordered -->
+    <div class="po-card">
+      <div class="po-head" onclick="togglePO(this)">
+        <div class="po-head-l"><span class="po-no">PO-123</span><div class="po-supplier">Warner Music Indonesia</div><div class="po-supplier-meta">Label · Jakarta</div></div>
+        <div class="po-head-r"><span class="status-pill st-ordered">Ordered</span><svg class="po-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="po-figs">
+        <div class="fig"><span class="k">Items</span><span class="v">96</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">8 May</span></div>
+        <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 14.100.000</span></div>
+      </div>
+      <div class="po-detail">
+        <div class="pd-progress-lbl"><span>Receiving progress</span><span class="mono">0 / 96 units</span></div>
+        <div class="pd-track"><div class="pd-fill" style="width:0%"></div></div>
+        <div class="pd-ship">
+          <div class="pd-ship-lbl">Shipper &amp; shipping</div>
+          <div class="pd-ship-val">Shipped via <a href="#ship-SHP-0089" onclick="revealShipment(event,'SHP-0089')">SHP-0089</a> · <span class="mono">Rp 251.000</span> freight share <button class="pd-ship-edit" onclick="revealShipment(event,'SHP-0089',true)">Edit</button></div>
+        </div>
+        <div class="line"><div class="line-l"><div class="line-title">Sade — Diamond Life</div><div class="line-cat">SONY-88 · 50 × Rp 158.000</div></div><div class="line-r"><span class="line-cost">Rp 7.900.000</span><span class="recv-tag">0 / 50</span></div></div>
+        <div class="line"><div class="line-l"><div class="line-title">Daft Punk — Random Access Memories</div><div class="line-cat">COL-889 · 46 × Rp 135.000</div></div><div class="line-r"><span class="line-cost">Rp 6.200.000</span><span class="recv-tag">0 / 46</span></div></div>
+        <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Dispatch 5 May via JNE. Ordered 29 Apr by Rara.</div>
+        <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
+      </div>
+    </div>
+
+    <!-- PO-122 received -->
+    <div class="po-card">
+      <div class="po-head" onclick="togglePO(this)">
+        <div class="po-head-l"><span class="po-no">PO-122</span><div class="po-supplier">Demajors</div><div class="po-supplier-meta">Distributor · Jakarta</div></div>
+        <div class="po-head-r"><span class="status-pill st-received">Received</span><svg class="po-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="po-figs">
+        <div class="fig"><span class="k">Items</span><span class="v">74</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">28 Apr</span></div>
+        <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 9.250.000</span></div>
+      </div>
+      <div class="po-detail">
+        <div class="pd-progress-lbl"><span>Receiving progress</span><span class="mono">74 / 74 units</span></div>
+        <div class="pd-track"><div class="pd-fill" style="width:100%"></div></div>
+        <div class="pd-ship">
+          <div class="pd-ship-lbl">Shipper &amp; shipping</div>
+          <div class="pd-ship-val pd-ship-none">Direct delivery — not part of a consolidated shipment</div>
+        </div>
+        <div class="line"><div class="line-l"><div class="line-title">Erykah Badu — Mama's Gun</div><div class="line-cat">MOT-014 · 38 × Rp 142.000</div></div><div class="line-r"><span class="line-cost">Rp 5.396.000</span><span class="recv-tag done">38 / 38</span></div></div>
+        <div class="line"><div class="line-l"><div class="line-title">Madlib — Sound Ancestors</div><div class="line-cat">MADLIB-01 · 36 × Rp 107.000</div></div><div class="line-r"><span class="line-cost">Rp 3.854.000</span><span class="recv-tag done">36 / 36</span></div></div>
+        <div class="pd-note"><strong>Notes:</strong> All units received and shelved 28 Apr. No damage. Ordered 15 Apr by Andra.</div>
+        <div class="pd-actions"><button class="btn-mini">View receipt</button><button class="btn-mini">Print PO</button></div>
+      </div>
+    </div>
+
+    <!-- PO-121 ordered -->
+    <div class="po-card">
+      <div class="po-head" onclick="togglePO(this)">
+        <div class="po-head-l"><span class="po-no">PO-121</span><div class="po-supplier">Rush Hour (NL)</div><div class="po-supplier-meta">Distributor · Amsterdam · import</div></div>
+        <div class="po-head-r"><span class="status-pill st-ordered">Ordered</span><svg class="po-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="po-figs">
+        <div class="fig"><span class="k">Items</span><span class="v">120</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">15 May</span></div>
+        <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 22.800.000</span></div>
+      </div>
+      <div class="po-detail">
+        <div class="pd-progress-lbl"><span>Receiving progress</span><span class="mono">0 / 120 units</span></div>
+        <div class="pd-track"><div class="pd-fill" style="width:0%"></div></div>
+        <div class="pd-ship">
+          <div class="pd-ship-lbl">Shipper &amp; shipping</div>
+          <div class="pd-ship-val">Shipped via <a href="#ship-SHP-0087" onclick="revealShipment(event,'SHP-0087')">SHP-0087</a> · <span class="mono">Rp 2.050.000</span> freight share <button class="pd-ship-edit" onclick="revealShipment(event,'SHP-0087',true)">Edit</button></div>
+        </div>
+        <div class="line"><div class="line-l"><div class="line-title">Björk — Homogenic</div><div class="line-cat">ONELP-30 · 40 × Rp 205.000</div></div><div class="line-r"><span class="line-cost">Rp 8.200.000</span><span class="recv-tag">0 / 40</span></div></div>
+        <div class="line"><div class="line-l"><div class="line-title">Aphex Twin — Selected Ambient Works</div><div class="line-cat">APHEX-85 · 44 × Rp 190.000</div></div><div class="line-r"><span class="line-cost">Rp 8.360.000</span><span class="recv-tag">0 / 44</span></div></div>
+        <div class="line"><div class="line-l"><div class="line-title">Massive Attack — Mezzanine</div><div class="line-cat">VIRGIN-98 · 36 × Rp 172.000</div></div><div class="line-r"><span class="line-cost">Rp 6.192.000</span><span class="recv-tag">0 / 36</span></div></div>
+        <div class="pd-note"><strong>Notes:</strong> International import — customs ~7 days. Paid by bank transfer (EUR). Ordered 25 Apr by Rara.</div>
+        <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
+      </div>
+    </div>
+
+    <!-- PO-120 draft -->
+    <div class="po-card">
+      <div class="po-head" onclick="togglePO(this)">
+        <div class="po-head-l"><span class="po-no">PO-120</span><div class="po-supplier">Universal Music Indonesia</div><div class="po-supplier-meta">Label · Jakarta</div></div>
+        <div class="po-head-r"><span class="status-pill st-draft">Draft</span><svg class="po-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="po-figs">
+        <div class="fig"><span class="k">Items</span><span class="v">64</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">—</span></div>
+        <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 8.900.000</span></div>
+      </div>
+      <div class="po-detail">
+        <div class="pd-progress-lbl"><span>Not yet ordered</span><span class="mono">draft</span></div>
+        <div class="pd-track"><div class="pd-fill" style="width:0%"></div></div>
+        <div class="pd-ship">
+          <div class="pd-ship-lbl">Shipper &amp; shipping</div>
+          <div class="pd-ship-val">Planned via <a href="#ship-SHP-0089" onclick="revealShipment(event,'SHP-0089')">SHP-0089</a> · <span class="mono">Rp 159.000</span> freight share (est.) <button class="pd-ship-edit" onclick="revealShipment(event,'SHP-0089',true)">Edit</button></div>
+        </div>
+        <div class="line"><div class="line-l"><div class="line-title">Radiohead — In Rainbows</div><div class="line-cat">XL-324 · 34 × Rp 155.000</div></div><div class="line-r"><span class="line-cost">Rp 5.270.000</span><span class="recv-tag">—</span></div></div>
+        <div class="line"><div class="line-l"><div class="line-title">John Coltrane — Blue Train</div><div class="line-cat">BLUE-1577 · 30 × Rp 121.000</div></div><div class="line-r"><span class="line-cost">Rp 3.630.000</span><span class="recv-tag">—</span></div></div>
+        <div class="pd-note"><strong>Notes:</strong> Draft awaiting price confirmation from label. Prepared by Andra.</div>
+        <div class="pd-actions"><button class="btn-mini">Edit draft</button><button class="btn-mini">Submit order</button></div>
+      </div>
+    </div>
+
+    <!-- PO-118 cancelled -->
+    <div class="po-card">
+      <div class="po-head" onclick="togglePO(this)">
+        <div class="po-head-l"><span class="po-no">PO-118</span><div class="po-supplier">HMV Japan</div><div class="po-supplier-meta">Distributor · Tokyo · import</div></div>
+        <div class="po-head-r"><span class="status-pill st-cancelled">Cancelled</span><svg class="po-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="po-figs">
+        <div class="fig"><span class="k">Items</span><span class="v">44</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">—</span></div>
+        <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 11.200.000</span></div>
+      </div>
+      <div class="po-detail">
+        <div class="pd-progress-lbl"><span>Order cancelled</span><span class="mono">0 / 44 units</span></div>
+        <div class="pd-track"><div class="pd-fill" style="width:0%"></div></div>
+        <div class="pd-ship">
+          <div class="pd-ship-lbl">Shipper &amp; shipping</div>
+          <div class="pd-ship-val pd-ship-none">Not shipped — order cancelled before consolidation</div>
+        </div>
+        <div class="line"><div class="line-l"><div class="line-title">Aphex Twin — Syro</div><div class="line-cat">WARP-247 · 24 × Rp 285.000</div></div><div class="line-r"><span class="line-cost">Rp 6.840.000</span><span class="recv-tag">0 / 24</span></div></div>
+        <div class="line"><div class="line-l"><div class="line-title">Björk — Vespertine</div><div class="line-cat">ONELP-24 · 20 × Rp 218.000</div></div><div class="line-r"><span class="line-cost">Rp 4.360.000</span><span class="recv-tag">0 / 20</span></div></div>
+        <div class="pd-note"><strong>Notes:</strong> Cancelled 24 Apr — supplier out of stock, personal card charge reversed.</div>
+        <div class="pd-actions"><button class="btn-mini">Duplicate as new</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consolidated Invoices -->
+  <div class="widget">
+    <div class="widget-hdr">
+      <span class="widget-title">Consolidated invoices</span>
+      <span class="widget-note">Freight shipments bundling multiple POs · shipping apportioned into landed cost</span>
+    </div>
+
+    <!-- SHP-0091 -->
+    <div class="ship-card" id="ship-SHP-0091">
+      <div class="ship-ref">SHP-0091</div>
+      <div class="ship-shipper"><span class="lbl">Shipper:</span> <span class="js-shipper-name">JNE Trucking</span></div>
+      <div class="ship-route">PO-124 → Main Store (Kemang, Jakarta Selatan)</div>
+      <div class="ship-carrier">
+        <div class="ship-carrier-name">Carrier / tracking</div>
+        <a class="ship-track-link" href="#" onclick="return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="mono">JNE-TRK-77410293</span>
+        </a>
+      </div>
+      <div class="ship-figs">
+        <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 25.940.000</div></div>
+        <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 830.000</div></div>
+        <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 26.770.000</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3.2% landed cost</div></div>
+      </div>
+      <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0091')">Edit shipper &amp; cost</button></div>
+      <div class="ship-edit-form" id="ship-edit-SHP-0091" data-goods="25940000">
+        <input class="input mono shipper-name" type="text" value="JNE Trucking">
+        <input class="input mono shipper-cost" type="number" step="1000" value="830000">
+        <button class="ship-edit-save" onclick="saveShipEdit('SHP-0091')">Save</button>
+      </div>
+    </div>
+
+    <!-- SHP-0089 -->
+    <div class="ship-card" id="ship-SHP-0089">
+      <div class="ship-ref">SHP-0089</div>
+      <div class="ship-shipper"><span class="lbl">Shipper:</span> <span class="js-shipper-name">Own courier</span></div>
+      <div class="ship-route">PO-123, PO-120 → Main Store (Kemang, Jakarta Selatan)</div>
+      <div class="ship-carrier">
+        <div class="ship-carrier-name">Carrier / tracking</div>
+        <a class="ship-track-link" href="#" onclick="return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="mono">BL-2024-05812</span>
+        </a>
+      </div>
+      <div class="ship-figs">
+        <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 23.000.000</div></div>
+        <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 410.000</div></div>
+        <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 23.410.000</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1.8% landed cost</div></div>
+      </div>
+      <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0089')">Edit shipper &amp; cost</button></div>
+      <div class="ship-edit-form" id="ship-edit-SHP-0089" data-goods="23000000">
+        <input class="input mono shipper-name" type="text" value="Own courier">
+        <input class="input mono shipper-cost" type="number" step="1000" value="410000">
+        <button class="ship-edit-save" onclick="saveShipEdit('SHP-0089')">Save</button>
+      </div>
+    </div>
+
+    <!-- SHP-0087 -->
+    <div class="ship-card" id="ship-SHP-0087">
+      <div class="ship-ref">SHP-0087</div>
+      <div class="ship-shipper"><span class="lbl">Shipper:</span> <span class="js-shipper-name">FedEx</span></div>
+      <div class="ship-route">PO-121 → Main Store (Kemang, Jakarta Selatan) · import from Amsterdam</div>
+      <div class="ship-carrier">
+        <div class="ship-carrier-name">Carrier / tracking</div>
+        <a class="ship-track-link" href="https://www.fedex.com/fedextrack/?trknbr=794658213904" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="mono">794658213904</span>
+        </a>
+      </div>
+      <div class="ship-figs">
+        <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 22.800.000</div></div>
+        <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 2.050.000</div></div>
+        <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 24.850.000</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9.0% landed cost</div></div>
+      </div>
+      <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0087')">Edit shipper &amp; cost</button></div>
+      <div class="ship-edit-form" id="ship-edit-SHP-0087" data-goods="22800000">
+        <input class="input mono shipper-name" type="text" value="FedEx">
+        <input class="input mono shipper-cost" type="number" step="1000" value="2050000">
+        <button class="ship-edit-save" onclick="saveShipEdit('SHP-0087')">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="drawer">
+    <a href="index.html" class="drawer-brand" aria-label="Medium Format — home">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <nav class="drawer-nav">
+      <div class="dn-group">Overview</div>
+      <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+
+      <div class="dn-group">Selling</div>
+      <a href="mockup-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-dot"></span></a>
+      <a href="mockup-inventory-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</a>
+      <a href="mockup-customers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Customers</a>
+      <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 012-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 010 4v4a2 2 0 002 2h16a2 2 0 002-2v-4a2 2 0 01-2-2z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="2 3"/></svg>Vouchers</a>
+      <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
+      <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
+
+      <div class="dn-group">Content</div>
+      <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
+      <a href="mockup-news-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>News</a>
+      <a href="mockup-news-categories-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>Categories &amp; Tags</a>
+
+      <div class="dn-group">Shop</div>
+      <a href="mockup-purchase-orders-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Purchase orders</a>
+
+      <div class="dn-group">Config</div>
+      <a href="mockup-preferences-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</a>
+    </nav>
+    <div class="drawer-foot">
+      <div class="dn-user">
+        <div class="dn-avatar">RP</div>
+        <div>
+          <div class="dn-user-name">Raka Pratama</div>
+          <div class="dn-user-role">Owner</div>
+        </div>
+            <button class="drawer-theme" id="theme-btn" aria-label="Toggle theme">
+      <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span id="theme-label">Dark</span>
+    </button>
+    </div>
+    </div>
+  </aside>
+
+  <!-- Notifications drawer -->
+  <div class="notif-overlay" id="notifOverlay"></div>
+  <aside class="notif-drawer" id="notifDrawer" aria-label="Notifications">
+    <div class="notif-hdr">
+      <span class="notif-title">Notifications</span>
+      <button class="notif-clear" id="notifClearBtn">Mark all read</button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-meta">2 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text"><strong>3 items</strong> are running low on stock</div>
+          <div class="notif-meta">28 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">PO-0032 was <strong>partially received</strong> from Analog Distro</div>
+          <div class="notif-meta">Yesterday</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Create PO sheet -->
+  <div class="sheet-overlay" id="sheet-overlay"></div>
+  <div class="sheet" id="sheet" aria-label="Create purchase order">
+    <div class="sheet-grip"></div>
+    <div class="sheet-hdr">
+      <h2>Create PO</h2>
+      <button class="sheet-close" id="sheet-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="sheet-body">
+      <div class="field">
+        <label for="f-supplier">Supplier</label>
+        <select class="select" id="f-supplier">
+          <option>Aksara Distribusi — Jakarta</option>
+          <option>Demajors — Jakarta</option>
+          <option>Warner Music Indonesia</option>
+          <option>Rush Hour (NL) — import</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-expected">Expected date</label>
+        <input class="input mono" id="f-expected" value="12/05/2024">
+      </div>
+      <div class="field">
+        <div class="repeater-hdr">Line items</div>
+        <div id="li-list">
+          <div class="li-item">
+            <input class="input" placeholder="Search release…" value="Floating Points — Cascade">
+            <div class="li-qc"><input class="input mono" placeholder="Qty" value="40"><input class="input mono" placeholder="Unit cost" value="165.000"></div>
+            <div class="li-foot"><span class="li-total">Rp 6.600.000</span><button class="li-del"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Remove</button></div>
+          </div>
+          <div class="li-item">
+            <input class="input" placeholder="Search release…" value="Khruangbin — A LA SALA">
+            <div class="li-qc"><input class="input mono" placeholder="Qty" value="48"><input class="input mono" placeholder="Unit cost" value="145.000"></div>
+            <div class="li-foot"><span class="li-total">Rp 6.960.000</span><button class="li-del"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Remove</button></div>
+          </div>
+        </div>
+        <button class="add-line" id="add-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add line item</button>
+      </div>
+      <div class="field">
+        <label for="f-notes">Notes</label>
+        <textarea class="textarea" id="f-notes">Restock ahead of May new-arrivals campaign. Split shipment OK.</textarea>
+      </div>
+      <div class="form-totals">
+        <div class="tot-row"><span>Subtotal · 88 units</span><span class="mono">Rp 13.560.000</span></div>
+        <div class="tot-row"><span>Shipping</span><span class="mono">Rp 250.000</span></div>
+        <div class="tot-row grand"><span>Total cost</span><span class="mono">Rp 13.810.000</span></div>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <button class="btn-sec">Save draft</button>
+      <button class="btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Create &amp; order</button>
+    </div>
+  </div>
+
+  <!-- Prototype hub link -->
+  <a href="index.html" class="proto-link" aria-label="Back to prototype hub">◹ Prototype</a>
+
+  <!-- Bottom tab bar -->
+  <nav class="tabbar">
+    <a href="mockup-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Home</span></a>
+    <a href="mockup-orders.html"><span class="nav-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Orders</span></a>
+    <a href="mockup-newsletter.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg><span>News</span></a>
+    <a href="mockup-purchase-orders.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg><span>POs</span></a>
+  </nav>
+</div>
+
+<script>
+  function setChip(el){el.closest('.filters').querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
+  function togglePO(head){
+    const card=head.closest('.po-card');
+    const detail=card.querySelector('.po-detail');
+    const open=detail.classList.toggle('show');
+    card.classList.toggle('open',open);
+  }
+
+  // Consolidated invoices — inline shipper/cost edit
+  function formatRp(n){
+    return 'Rp ' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  }
+  function toggleShipEdit(ref){
+    const form=document.getElementById('ship-edit-'+ref);
+    form.classList.toggle('show');
+  }
+  // Jump from a PO's detail row to its consolidated shipment card, optionally opening the edit form
+  function revealShipment(evt,ref,openEdit){
+    if(evt) evt.preventDefault();
+    const card=document.getElementById('ship-'+ref);
+    if(card) card.scrollIntoView({behavior:'smooth',block:'center'});
+    if(openEdit){
+      const form=document.getElementById('ship-edit-'+ref);
+      if(form) form.classList.add('show');
+    }
+  }
+  function saveShipEdit(ref){
+    const card=document.getElementById('ship-'+ref);
+    const form=document.getElementById('ship-edit-'+ref);
+    const goods=parseFloat(form.dataset.goods);
+    const nameInput=form.querySelector('.shipper-name');
+    const costInput=form.querySelector('.shipper-cost');
+    const shipping=parseFloat(costInput.value)||0;
+    const total=goods+shipping;
+    const uplift=goods>0?(shipping/goods*100):0;
+
+    card.querySelectorAll('.js-shipper-name').forEach(el=>el.textContent=nameInput.value);
+    card.querySelectorAll('.js-shipper-cost').forEach(el=>el.textContent=formatRp(shipping));
+    card.querySelectorAll('.js-ship-total').forEach(el=>el.textContent=formatRp(total));
+    card.querySelectorAll('.js-ship-uplift').forEach(el=>el.textContent='+'+uplift.toFixed(1)+'% landed cost');
+
+    form.classList.remove('show');
+  }
+
+  const drawer=document.getElementById('drawer');
+  const dOverlay=document.getElementById('drawer-overlay');
+  function closeDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('show');}
+  document.getElementById('ham-btn').addEventListener('click',()=>{drawer.classList.add('open');dOverlay.classList.add('show');});
+  dOverlay.addEventListener('click',closeDrawer);
+
+  // Notifications drawer
+  const notifDrawer=document.getElementById('notifDrawer');
+  const notifOverlay=document.getElementById('notifOverlay');
+  function closeNotif(){notifDrawer.classList.remove('open');notifOverlay.classList.remove('show');}
+  document.getElementById('notifBtn').addEventListener('click',()=>{notifDrawer.classList.add('open');notifOverlay.classList.add('show');});
+  notifOverlay.addEventListener('click',closeNotif);
+  document.getElementById('notifClearBtn').addEventListener('click',()=>{
+    document.querySelectorAll('.notif-unread').forEach(d=>d.remove());
+  });
+
+  const sheet=document.getElementById('sheet');
+  const sOverlay=document.getElementById('sheet-overlay');
+  function openSheet(){sheet.classList.add('open');sOverlay.classList.add('show');}
+  function closeSheet(){sheet.classList.remove('open');sOverlay.classList.remove('show');}
+  document.getElementById('create-po-btn').addEventListener('click',openSheet);
+  document.getElementById('sheet-close').addEventListener('click',closeSheet);
+  sOverlay.addEventListener('click',closeSheet);
+
+  document.getElementById('add-line').addEventListener('click',()=>{
+    const list=document.getElementById('li-list');
+    const row=document.createElement('div');
+    row.className='li-item';
+    row.innerHTML='<input class="input" placeholder="Search release…">'
+      +'<div class="li-qc"><input class="input mono" placeholder="Qty"><input class="input mono" placeholder="Unit cost"></div>'
+      +'<div class="li-foot"><span class="li-total">Rp 0</span><button class="li-del"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Remove</button></div>';
+    list.appendChild(row);
+    row.querySelector('.li-del').addEventListener('click',()=>row.remove());
+  });
+  document.querySelectorAll('.li-del').forEach(b=>b.addEventListener('click',e=>e.currentTarget.closest('.li-item').remove()));
+
+  const root=document.documentElement;
+  const moon=document.getElementById('ico-moon');
+  const sun=document.getElementById('ico-sun');
+  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';}
+  applyTheme(localStorage.getItem('mf-theme')||'dark');
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    localStorage.setItem('mf-theme',next);applyTheme(next);
+  });
+</script>
+</body>
+</html>

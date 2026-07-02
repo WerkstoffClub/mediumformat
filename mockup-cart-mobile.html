@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format® — Cart (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .appbar-logo .brand-wordmark{height:16px;width:auto;}
+
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+      --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 4px 12px rgba(0,0,0,.6);--e3:0 8px 24px rgba(0,0,0,.7);
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --player-h:62px;--checkout-h:76px;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --focus:0 0 0 2px rgba(0,0,0,.5);
+      --e1:0 1px 2px rgba(0,0,0,.08);--e2:0 4px 12px rgba(0,0,0,.12);--e3:0 8px 24px rgba(0,0,0,.16);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    a{color:inherit;text-decoration:none;}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    body{font-family:var(--ui);background:#101012;min-height:100vh;display:flex;align-items:center;justify-content:center;
+      padding:32px 16px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(circle at 50% 0%,#1c1c20,#08080a 70%);}
+    html[data-theme="light"] body{background:#e7e7ea;background-image:radial-gradient(circle at 50% 0%,#f4f4f6,#d8d8dc 70%);}
+
+    .phone{width:390px;height:844px;border-radius:44px;background:var(--canvas);border:1px solid var(--hairline);
+      box-shadow:0 24px 70px rgba(0,0,0,.6),inset 0 0 0 6px #050505;position:relative;overflow:hidden;color:var(--ink);display:flex;flex-direction:column;}
+    html[data-theme="light"] .phone{box-shadow:0 24px 70px rgba(0,0,0,.25),inset 0 0 0 6px #c8c8cc;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+
+    .statusbar{height:44px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 8px;position:relative;z-index:5;
+      font-family:var(--ui);font-size:12px;font-weight:500;color:var(--ink);}
+    .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:118px;height:30px;background:#000;border-radius:0 0 18px 18px;}
+    html[data-theme="light"] .notch{background:#111;}
+    .sb-right{display:flex;align-items:center;gap:6px;}
+    .sb-right svg{width:15px;height:13px;color:var(--ink);}
+
+    .screen{flex:1;overflow-y:auto;position:relative;background:var(--canvas);}
+    .screen::-webkit-scrollbar{width:0;}
+
+    /* app bar */
+    .appbar{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--hairline);
+      display:flex;align-items:center;gap:10px;padding:10px 12px;}
+    .icon-btn{width:38px;height:38px;border:none;background:transparent;color:var(--body);border-radius:var(--r-md);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;text-decoration:none;}
+    .icon-btn:active{background:var(--raised);color:var(--ink);}
+    .icon-btn svg{width:20px;height:20px;}
+    .appbar-title{flex:1;min-width:0;font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .appbar-title .sub{font-family:var(--ui);font-size:11px;font-weight:400;color:var(--mute);margin-left:6px;}
+    .cat-bar{background:var(--surface);border-bottom:1px solid var(--hairline);}
+    .cat-bar-inner{display:flex;align-items:center;gap:16px;padding:8px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .cat-bar-inner::-webkit-scrollbar{display:none;}
+    .cat-link{font-size:12px;font-weight:500;color:var(--mute);text-decoration:none;white-space:nowrap;transition:color .15s;}
+    .cat-link:active{color:var(--ink);}
+
+    /* cover art */
+    .cover-art{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .cover-art .grooves{width:64%;height:64%;border-radius:50%;position:relative;
+      background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);}
+    html[data-theme="light"] .cover-art .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px);}
+    .cover-art .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+    .cover-art::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05),transparent 60%);pointer-events:none;}
+    html[data-theme="light"] .cover-art::before{background:linear-gradient(135deg,rgba(0,0,0,.04),transparent 60%);}
+    .cover-art.sm .grooves{width:74%;height:74%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 2px,#1f1f1f 2px 4px);}
+    html[data-theme="light"] .cover-art.sm .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 2px,#fff 2px 4px);}
+
+    /* free-ship banner */
+    .ship-banner{display:flex;align-items:center;gap:8px;margin:14px 16px 4px;padding:10px 12px;border-radius:var(--r-md);
+      background:var(--success-t);border:1px solid rgba(34,197,94,.3);font-size:12px;color:var(--success);}
+    .ship-banner svg{width:15px;height:15px;flex-shrink:0;}
+
+    /* items */
+    .items{padding:12px 16px;display:flex;flex-direction:column;gap:12px;}
+    .item{display:flex;gap:12px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:12px;}
+    .item-cover{width:64px;height:64px;border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden;flex-shrink:0;}
+    .item-body{flex:1;min-width:0;}
+    .item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+    .item-artist{font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .item-title{font-size:12px;color:var(--body);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .item-body a{text-decoration:none;}
+    .item-meta{font-family:var(--ui);font-size:11px;color:var(--mute);margin-top:5px;}
+    .item-tags{display:flex;gap:4px;margin-top:7px;flex-wrap:wrap;}
+    .chip{font-size:10px;font-weight:500;padding:2px 7px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--body);background:transparent;line-height:1.4;}
+    .chip.fmt{font-family:var(--ui);}
+    .chip.cond{font-family:var(--ui);color:var(--mute);}
+    .item-remove{width:30px;height:30px;background:transparent;border:none;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:var(--r-md);flex-shrink:0;}
+    .item-remove:active{color:var(--danger);background:var(--danger-t);}
+    .item-remove svg{width:15px;height:15px;}
+    .item-bot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
+    .qty{display:inline-flex;align-items:center;border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden;}
+    .qty button{width:32px;height:32px;background:transparent;border:none;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .qty button:active{background:var(--raised);}
+    .qty button:disabled{color:var(--mute);}
+    .qty button svg{width:12px;height:12px;}
+    .qty .val{font-family:var(--ui);font-size:13px;color:var(--ink);width:30px;text-align:center;}
+    .line-total{font-family:var(--ui);font-size:14px;font-weight:500;color:var(--ink);}
+
+    /* continue */
+    .continue{display:flex;align-items:center;justify-content:center;gap:7px;margin:4px 16px 8px;
+      font-size:13px;font-weight:500;color:var(--ink);background:transparent;border:1px solid var(--hairline);border-radius:var(--r-md);padding:11px;text-decoration:none;}
+    .continue:active{background:var(--raised);}
+    .continue svg{width:15px;height:15px;}
+
+    /* promo */
+    .promo-block{padding:0 16px 8px;}
+    .promo-applied{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--success-t);border:1px solid rgba(34,197,94,.3);border-radius:var(--r-md);padding:9px 12px;margin-bottom:10px;font-size:12px;color:var(--success);}
+    .promo-applied .code{font-family:var(--ui);font-weight:500;display:flex;align-items:center;gap:6px;}
+    .promo-applied .code svg{width:13px;height:13px;}
+    .promo-applied button{background:transparent;border:none;color:var(--success);cursor:pointer;font-size:12px;text-decoration:underline;}
+    .promo{display:flex;gap:8px;}
+    .promo input{flex:1;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--ink);font-family:var(--ui);font-size:13px;padding:11px 12px;}
+    .promo input::placeholder{color:var(--mute);font-family:var(--ui);}
+    .promo input:focus{outline:none;border-color:var(--accent);}
+    .promo button{background:transparent;color:var(--ink);border:1px solid var(--hairline);border-radius:var(--r-md);padding:0 16px;font-size:13px;font-weight:500;font-family:var(--ui);cursor:pointer;}
+
+    /* summary */
+    .summary{margin:8px 16px 0;border:1px solid var(--hairline);border-radius:var(--r-lg);background:var(--surface);overflow:hidden;}
+    .sum-hdr{padding:14px 16px;border-bottom:1px solid var(--hairline);font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .sum-body{padding:14px 16px;}
+    .sum-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px;font-size:13px;}
+    .sum-row .k{color:var(--body);display:flex;align-items:center;gap:6px;}
+    .sum-row .k .sub{color:var(--mute);font-size:11px;}
+    .sum-row .v{font-family:var(--ui);font-size:13px;color:var(--ink);}
+    .sum-row .v.free{color:var(--success);}
+    .sum-row .v.disc{color:var(--success);}
+    .sum-divider{height:1px;background:var(--hairline);margin:12px 0;}
+    .sum-total{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
+    .sum-total .k{font-size:14px;font-weight:600;color:var(--ink);}
+    .sum-total .v{font-family:var(--ui);font-size:19px;font-weight:500;color:var(--ink);letter-spacing:-.02em;}
+    .sum-total-usd{text-align:right;font-family:var(--ui);font-size:11px;color:var(--mute);margin-top:2px;}
+
+    /* trust */
+    .trust{padding:14px 16px;}
+    .trust-label{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:10px;}
+    .pay-logos{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .pay-logos svg{height:16px;width:auto;color:var(--mute);}
+
+    .bottom-spacer{height:calc(var(--player-h) + var(--checkout-h) + 8px);}
+
+    /* sticky checkout bar */
+    .checkout-bar{position:absolute;left:0;right:0;bottom:var(--player-h);height:var(--checkout-h);z-index:28;
+      background:var(--surface);border-top:1px solid var(--hairline);box-shadow:var(--e2);display:flex;align-items:center;gap:12px;padding:0 16px;}
+    .checkout-bar .tot{flex-shrink:0;}
+    .checkout-bar .tot .lbl{font-size:11px;color:var(--mute);}
+    .checkout-bar .tot .amt{font-family:var(--ui);font-size:17px;font-weight:500;color:var(--ink);}
+    .checkout-btn{flex:1;background:var(--accent);color:var(--accent-text);border:none;border-radius:var(--r-md);height:48px;
+      font-size:15px;font-weight:500;font-family:var(--ui);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;}
+    .checkout-btn svg{width:16px;height:16px;}
+
+    /* player */
+    .player{position:absolute;left:0;right:0;bottom:0;height:var(--player-h);z-index:30;
+      background:var(--surface);border-top:1px solid var(--hairline);box-shadow:var(--e2);display:flex;align-items:center;gap:11px;padding:0 12px;}
+    .pcover{width:42px;height:42px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;border:1px solid var(--hairline);}
+    .pinfo{flex:1;min-width:0;}
+    .ptrack{font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .prelease{font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px;}
+    .psource{font-size:9px;font-weight:500;padding:1px 6px;border-radius:var(--r-pill);background:transparent;color:var(--body);border:1px solid var(--hairline);flex-shrink:0;}
+    .pplay{width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-text);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .pplay svg{width:15px;height:15px;}
+    .pplay .ico-pause{display:none;}
+    .pplay.playing .ico-play{display:none;}
+    .pplay.playing .ico-pause{display:block;}
+    .pclose{width:30px;height:30px;background:transparent;border:none;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .pclose svg{width:14px;height:14px;}
+    .player-progress{position:absolute;left:0;right:0;top:0;height:2px;background:var(--hairline);}
+    .player-progress .fill{position:absolute;left:0;top:0;bottom:0;width:38%;background:var(--accent);}
+
+    /* search overlay */
+    .search-ov{display:none;position:absolute;inset:0;z-index:50;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);padding:60px 16px 0;}
+    html[data-theme="light"] .search-ov{background:rgba(255,255,255,.65);}
+    .search-ov.open{display:block;}
+    .sbox{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--e3);}
+    .srow{display:flex;align-items:center;padding:14px;gap:10px;border-bottom:1px solid var(--hairline);}
+    .srow svg{width:17px;height:17px;color:var(--mute);flex-shrink:0;}
+    .sinput{flex:1;background:transparent;border:none;outline:none;font-size:15px;font-family:var(--ui);color:var(--ink);}
+    .sinput::placeholder{color:var(--mute);}
+    .shint{font-size:11px;color:var(--mute);padding:11px 14px;line-height:1.5;}
+
+    /* theme toggle */
+    .theme-fab{position:absolute;top:50px;right:14px;z-index:6;width:32px;height:32px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--body);}
+    .theme-fab svg{width:16px;height:16px;}
+    .proto-hub{position:absolute;top:50px;left:14px;z-index:6;display:inline-flex;align-items:center;gap:5px;
+      font-family:var(--ui);font-size:10px;color:var(--body);text-decoration:none;background:var(--raised);
+      border:1px solid var(--hairline);border-radius:var(--r-pill);padding:6px 10px;}
+    .proto-hub:active{color:var(--ink);}
+
+    /* three-zone appbar: hamburger LEFT · logo CENTERED · cart RIGHT */
+    .appbar{display:grid;grid-template-columns:1fr auto 1fr;gap:0;}
+    .appbar-lead{justify-self:start;}
+    .appbar-trail{justify-self:end;display:flex;align-items:center;gap:4px;}
+    .cart-wrap{position:relative;}
+    .cart-badge{position:absolute;top:3px;right:3px;min-width:15px;height:15px;padding:0 3px;border-radius:var(--r-pill);
+      background:var(--accent);color:var(--accent-text);font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+    .appbar-logo{display:flex;align-items:center;justify-content:center;gap:8px;justify-self:center;min-width:0;}
+    .appbar-logo .mark{width:36px;height:36px;color:var(--ink);flex-shrink:0;}
+    .appbar-logo .mark svg{width:100%;height:100%;display:block;}
+    .appbar-name{font-size:17px;font-weight:600;letter-spacing:-.04em;color:var(--ink);white-space:nowrap;}
+    .appbar-name sup{font-size:7px;font-weight:500;}
+
+    /* ─── Announcement — BLACK in light mode ─────── */
+    
+    html[data-theme="light"] .announce strong{color:#fff;}
+    html[data-theme="light"] .announce a{color:#fff;border-color:rgba(255,255,255,.55);}
+    html[data-theme="light"] .announce a:hover{border-color:#fff;}
+
+    /* ─── Nav drawer (opened by hamburger) ───────── */
+    .drawer-scrim{display:none;position:absolute;inset:0;z-index:60;background:rgba(0,0,0,.6);}
+    .drawer-scrim.open{display:block;}
+    html[data-theme="light"] .drawer-scrim{background:rgba(0,0,0,.35);}
+    .drawer{position:absolute;top:0;left:0;bottom:0;width:82%;max-width:320px;z-index:65;
+      background:var(--surface);border-right:1px solid var(--hairline);box-shadow:var(--e3);
+      transform:translateX(-100%);transition:transform .28s cubic-bezier(.16,1,.3,1);
+      display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+    .drawer::-webkit-scrollbar{width:0;}
+    .drawer.open{transform:translateX(0);}
+    .drawer-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--hairline);position:sticky;top:0;background:var(--surface);z-index:2;}
+    .drawer-brand{display:flex;align-items:center;gap:11px;font-size:18px;font-weight:600;letter-spacing:-.04em;color:var(--ink);flex:1;}
+    .drawer-brand .mark{width:32px;height:32px;color:var(--ink);flex-shrink:0;}
+    .drawer-brand .mark svg{width:100%;height:100%;display:block;}
+    .drawer-brand sup{font-size:7px;font-weight:500;}
+    .drawer-close{width:38px;height:38px;min-width:44px;min-height:44px;border:none;background:transparent;color:var(--body);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+    .drawer-close:active{background:var(--raised);color:var(--ink);}
+    .drawer-close svg{width:18px;height:18px;}
+    /* drawer search */
+    .drawer-search{padding:14px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-search .srow2{display:flex;align-items:center;gap:10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:11px 12px;}
+    .drawer-search .srow2 svg{width:16px;height:16px;color:var(--mute);flex-shrink:0;}
+    .drawer-search input{flex:1;background:transparent;border:none;outline:none;font-family:var(--ui);font-size:14px;color:var(--ink);min-width:0;}
+    .drawer-search input::placeholder{color:var(--mute);}
+    /* accordion menu */
+    .acc{padding:6px 8px;flex:1;}
+    .acc-item{border-bottom:1px solid var(--hairline);}
+    .acc-item:last-child{border-bottom:none;}
+    .acc-head{width:100%;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+      background:transparent;border:none;cursor:pointer;padding:12px 8px;font-family:var(--ui);font-size:15px;font-weight:500;color:var(--ink);text-align:left;}
+    .acc-head .chev{width:16px;height:16px;color:var(--mute);flex-shrink:0;transition:transform .2s;}
+    .acc-item.open .acc-head .chev{transform:rotate(180deg);}
+    .acc-panel{display:none;padding:2px 8px 10px;}
+    .acc-item.open .acc-panel{display:block;}
+    .acc-panel.grid{display:none;}
+    .acc-item.open .acc-panel.grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;}
+    .acc-link{display:flex;align-items:center;min-height:44px;padding:8px 10px;border-radius:var(--r-md);font-size:14px;color:var(--body);}
+    .acc-link:active{background:var(--raised);color:var(--ink);}
+    /* drawer footer: currency + theme + account */
+    .drawer-foot{border-top:1px solid var(--hairline);padding:14px 16px;display:flex;flex-direction:column;gap:12px;position:sticky;bottom:0;background:var(--surface);}
+    .drawer-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;}
+    .drawer-row-label{font-size:13px;color:var(--body);}
+    .cur-switch{display:flex;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:2px;}
+    .cur-btn{font-family:var(--ui);font-size:11px;font-weight:500;color:var(--mute);background:transparent;border:none;border-radius:var(--r-pill);padding:8px 14px;min-height:36px;cursor:pointer;}
+    .cur-btn.on{background:var(--accent);color:var(--accent-text);}
+    .theme-row-btn{display:flex;align-items:center;gap:8px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);color:var(--ink);font-family:var(--ui);font-size:13px;font-weight:500;padding:8px 14px;min-height:40px;cursor:pointer;}
+    .theme-row-btn svg{width:16px;height:16px;}
+
+    .drawer-account svg{width:18px;height:18px;color:var(--body);}
+    .drawer-account:active{background:var(--raised);}
+
+
+    /* MF: mobile chrome overhaul (announce marquee, full-screen drawer, redesigned account row) */
+    :root{--announce-h:28px;}
+    .announce{position:sticky;top:0;z-index:22;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:48px;padding-left:100%;animation:mf-marquee 16s linear infinite;font-size:11px;color:inherit;}
+    .announce-track strong{color:inherit;font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+    .drawer{width:100%!important;max-width:none!important;}
+    .drawer-hdr{border-bottom:none!important;}
+    .drawer-search{border-bottom:1px solid var(--hairline);}
+    .drawer-search .srow2{transition:border-color .15s;}
+    .drawer-search .srow2
+    .acc-panel .acc-link{border-top:1px solid var(--hairline);}
+    .acc-panel .acc-link:first-child{border-top:none;}
+    .acc-panel.grid{display:none;}
+    .acc-item.open .acc-panel.grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+    .acc-panel.grid .acc-link:nth-child(-n+2){border-top:none;}
+    .drawer-foot{padding:10px 16px 14px!important;gap:8px!important;}
+    .drawer-row{min-height:36px!important;}
+    .theme-row-btn{padding:6px 12px!important;min-height:34px!important;}
+    .cur-switch .cur-btn{padding:6px 11px!important;min-height:32px!important;}
+    .drawer-account{display:flex;align-items:center;gap:11px;min-height:56px;padding:10px 12px;
+      border:1px solid var(--hairline);border-radius:var(--r-lg);color:var(--ink);background:var(--raised);}
+    .drawer-account .da-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-text);
+      display:flex;align-items:center;justify-content:center;font-family:var(--ui);font-size:12px;font-weight:600;flex-shrink:0;}
+    .drawer-account .da-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+    .drawer-account .da-title{font-size:13px;font-weight:600;color:var(--ink);}
+    .drawer-account .da-sub{font-size:11px;color:var(--mute);margin-top:1px;}
+    .drawer-account .da-chev{color:var(--mute);flex-shrink:0;}
+    .psource{display:none!important;}
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<div class="phone" id="phone">
+
+  <!-- Status bar / notch -->
+  <div class="statusbar">
+    <span>9:41</span>
+    <div class="notch"></div>
+    <div class="sb-right">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="9" width="3" height="6" rx="1"/><rect x="7" y="6" width="3" height="9" rx="1"/><rect x="12" y="3" width="3" height="12" rx="1"/><rect x="17" y="6" width="3" height="9" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M2 8.8a16 16 0 0 1 20 0M12 20h.01"/></svg>
+      <svg viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="6" width="20" height="12" rx="3"/><rect x="3" y="8" width="15" height="8" rx="1.5" fill="currentColor"/><path d="M23 10v4" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+
+  <!-- Prototype hub + theme toggle -->
+  <a href="index.html" class="proto-hub" aria-label="Back to prototype hub">◹ Prototype</a>
+
+  <!-- Screen -->
+  <div class="screen" id="screen">
+
+    <!-- Announce -->
+    <div class="announce"><div class="announce-track"><span>Free shipping over <strong>$31</strong> within Jakarta — shop by category</span><span>Free shipping over <strong>$31</strong> within Jakarta — shop by category</span></div></div>
+
+    <!-- App bar -->
+    <div class="appbar">
+      <button class="icon-btn appbar-lead" id="menu-btn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="index.html" class="appbar-logo" aria-label="Medium Format">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </a>
+      <div class="appbar-trail">
+        <div class="cart-wrap"><a href="mockup-cart-mobile.html" class="icon-btn" aria-label="Cart — 3 items">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </a><span class="cart-badge">3</span></div>
+      </div>
+    </div>
+
+    <!-- Free ship banner -->
+    <div class="ship-banner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      You qualify for free same-day Jakarta shipping
+    </div>
+
+    <!-- Items -->
+    <div class="items">
+
+      <!-- Item 1 -->
+      <div class="item">
+        <a href="mockup-release-mobile.html" class="item-cover"><div class="cover-art sm"><div class="grooves"></div></div></a>
+        <div class="item-body">
+          <div class="item-top">
+            <a href="mockup-release-mobile.html">
+              <div class="item-artist">Floating Points</div>
+              <div class="item-title">Promises</div>
+            </a>
+            <button class="item-remove" aria-label="Remove Promises"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+          </div>
+          <div class="item-meta">Ninja Tune · NTcd 269</div>
+          <div class="item-tags"><span class="chip fmt">LP</span><span class="chip cond">Media: M</span><span class="chip cond">Sleeve: VG+</span></div>
+          <div class="item-bot">
+            <div class="qty" aria-label="Quantity">
+              <button aria-label="Decrease" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg></button>
+              <span class="val" data-price="450000">1</span>
+              <button aria-label="Increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <span class="line-total">Rp 450.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 (qty 2) -->
+      <div class="item">
+        <a href="mockup-release-mobile.html" class="item-cover"><div class="cover-art sm"><div class="grooves"></div></div></a>
+        <div class="item-body">
+          <div class="item-top">
+            <a href="mockup-release-mobile.html">
+              <div class="item-artist">Sade</div>
+              <div class="item-title">Diamond Life</div>
+            </a>
+            <button class="item-remove" aria-label="Remove Diamond Life"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+          </div>
+          <div class="item-meta">Portrait Records · PRT 26423</div>
+          <div class="item-tags"><span class="chip fmt">LP</span><span class="chip cond">Media: VG+</span><span class="chip cond">Sleeve: VG</span></div>
+          <div class="item-bot">
+            <div class="qty" aria-label="Quantity">
+              <button aria-label="Decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg></button>
+              <span class="val" data-price="380000">2</span>
+              <button aria-label="Increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <span class="line-total">Rp 760.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="item">
+        <a href="mockup-release-mobile.html" class="item-cover"><div class="cover-art sm"><div class="grooves"></div></div></a>
+        <div class="item-body">
+          <div class="item-top">
+            <a href="mockup-release-mobile.html">
+              <div class="item-artist">Miles Davis</div>
+              <div class="item-title">Kind of Blue</div>
+            </a>
+            <button class="item-remove" aria-label="Remove Kind of Blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+          </div>
+          <div class="item-meta">Columbia Records · CL 1355</div>
+          <div class="item-tags"><span class="chip fmt">LP</span><span class="chip cond">Media: VG+</span><span class="chip cond">Sleeve: VG+</span></div>
+          <div class="item-bot">
+            <div class="qty" aria-label="Quantity">
+              <button aria-label="Decrease" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg></button>
+              <span class="val" data-price="350000">1</span>
+              <button aria-label="Increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <span class="line-total">Rp 350.000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="mockup-storefront-mobile.html" class="continue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Continue shopping
+    </a>
+
+    <!-- Promo -->
+    <div class="promo-block">
+      <div class="promo-applied">
+        <span class="code">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          VINYL10 applied
+        </span>
+        <button type="button">Remove</button>
+      </div>
+      <div class="promo">
+        <input type="text" placeholder="Add voucher" aria-label="Voucher code">
+        <button type="button">Apply</button>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <section class="summary" aria-label="Order summary">
+      <div class="sum-hdr">Order summary</div>
+      <div class="sum-body">
+        <div class="sum-row"><span class="k">Subtotal <span class="sub">(4)</span></span><span class="v" id="sum-subtotal">Rp 1.560.000</span></div>
+        <div class="sum-row"><span class="k">Voucher <span class="sub">VINYL10</span></span><span class="v disc" id="sum-discount">− Rp 156.000</span></div>
+        <div class="sum-row"><span class="k">Shipping <span class="sub">Jakarta</span></span><span class="v free">Free</span></div>
+        <div class="sum-row"><span class="k">PPN <span class="sub">11%</span></span><span class="v" id="sum-tax">Rp 154.440</span></div>
+        <div class="sum-divider"></div>
+        <div class="sum-total"><span class="k">Total</span><span class="v" id="sum-total">Rp 1.558.440</span></div>
+              </div>
+      <div class="trust">
+        <div class="trust-label">We accept</div>
+        <div class="pay-logos">
+          <svg class="paylogo" viewBox="0 0 46 18" role="img" aria-label="Visa"><text x="0" y="14" font-family="Geist,sans-serif" font-weight="700" font-size="15" fill="currentColor" letter-spacing="-.5" font-style="italic">VISA</text></svg>
+          <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="Mastercard"><circle cx="12" cy="9" r="7" fill="currentColor" opacity=".55"/><circle cx="22" cy="9" r="7" fill="currentColor"/></svg>
+          <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="JCB"><text x="0" y="14" font-family="Geist,sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.5">JCB</text></svg>
+          <svg class="paylogo" viewBox="0 0 46 18" role="img" aria-label="QRIS"><text x="0" y="14" font-family="Geist,sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.5">QRIS</text></svg>
+          <svg class="paylogo" viewBox="0 0 54 18" role="img" aria-label="GoPay"><text x="0" y="14" font-family="Geist,sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.5">GoPay</text></svg>
+          <svg class="paylogo" viewBox="0 0 40 18" role="img" aria-label="OVO"><text x="0" y="14" font-family="Geist,sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.5">OVO</text></svg>
+          <svg class="paylogo" viewBox="0 0 50 18" role="img" aria-label="DANA"><text x="0" y="14" font-family="Geist,sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.5">DANA</text></svg>
+          <svg class="paylogo" viewBox="0 0 80 18" role="img" aria-label="ShopeePay"><text x="0" y="14" font-family="Geist,sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.5">ShopeePay</text></svg>
+          <svg class="paylogo" viewBox="0 0 40 18" role="img" aria-label="BCA"><text x="0" y="14" font-family="Geist,sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.5">BCA</text></svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="bottom-spacer"></div>
+  </div><!-- /screen -->
+
+  <!-- Sticky checkout bar -->
+  <div class="checkout-bar">
+    <a href="mockup-checkout.html" class="checkout-btn checkout-btn-full">
+      Checkout
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <!-- Now Playing (pinned) -->
+  <div class="player" id="player">
+    <div class="player-progress"><div class="fill"></div></div>
+    <div class="pcover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+    <div class="pinfo">
+      <div class="ptrack">Diamond Life</div>
+      <div class="prelease">Sade — Diamond Life <span class="psource">Discogs</span></div>
+    </div>
+    <button class="pplay playing" id="pplay-btn" aria-label="Pause">
+      <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button class="pclose" id="pclose-btn" aria-label="Close player">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- Search overlay -->
+  <div class="search-ov" id="search-ov" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="sbox">
+      <div class="srow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="sinput" id="sinput" type="text" placeholder="Search artist, title, label…">
+      </div>
+      <div class="shint">Try "Floating Points", "Blue Note", "jazz LP", "Ninja Tune"</div>
+    </div>
+  </div>
+
+<div class="drawer-scrim" id="drawer-scrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Menu">
+    <div class="drawer-hdr">
+      <a href="index.html" class="drawer-brand" aria-label="Medium Format">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </a>
+      <button class="drawer-close" id="drawer-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-search">
+      <label class="srow2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="drawer-search-input" type="search" placeholder="Search artist, title, label…" aria-label="Search">
+      </label>
+    </div>
+
+    <nav class="acc" aria-label="Browse">
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">Shop
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel">
+          <a class="acc-link" href="mockup-storefront-mobile.html">New Releases</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">Best Selling</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">Pre-Orders</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">On-Sale</a>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">Formats
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel grid">
+          <a class="acc-link" href="mockup-category-mobile.html">Vinyls</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Cassettes</a>
+          <a class="acc-link" href="mockup-category-mobile.html">CD</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Books</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Prints</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Merchandise</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Audio</a>
+          <a class="acc-link" href="mockup-category-players-mobile.html">Players</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Accessories</a>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">Style
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel grid">
+          <a class="acc-link" href="mockup-category-mobile.html">Electronic</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Jazz</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Soul</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Hip-Hop</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Rock</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Ambient</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Funk</a>
+          <a class="acc-link" href="mockup-category-mobile.html">World</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Indie</a>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">News
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel">
+          <a class="acc-link" href="mockup-journal-mobile.html">Review</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Staff Picks</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">New Arrivals</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Feature</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Selector</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="drawer-foot">
+      <div class="drawer-row">
+        <span class="drawer-row-label">Currency</span>
+        <div class="cur-switch" role="group" aria-label="Currency">
+          <button class="cur-btn on" data-cur="IDR" onclick="setCurrency('IDR')">IDR</button>
+          <button class="cur-btn" data-cur="USD" onclick="setCurrency('USD')">USD</button>
+        </div>
+      </div>
+      <div class="drawer-row">
+        <span class="drawer-row-label">Theme</span>
+        <button class="theme-row-btn" id="theme-btn" aria-label="Toggle theme">
+          <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <span id="theme-label">Dark</span>
+        </button>
+      </div>
+      <a class="drawer-account" href="mockup-account-mobile.html">
+        <span class="da-avatar">MF</span>
+        <span class="da-body"><span class="da-title">My Account</span><span class="da-sub">Orders, wishlist &amp; addresses</span></span>
+        <svg class="da-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </aside>
+</div><!-- /phone -->
+
+<script>
+  const root = document.documentElement;
+  const moon = document.getElementById('ico-moon');
+  const sun  = document.getElementById('ico-sun');
+  const themeLabel = document.getElementById('theme-label');
+  function applyTheme(theme){
+    root.setAttribute('data-theme', theme);
+    const dark = theme === 'dark';
+    if(moon) moon.style.display = dark ? '' : 'none';
+    if(sun)  sun.style.display  = dark ? 'none' : '';
+    if(themeLabel) themeLabel.textContent = dark ? 'Dark' : 'Light';
+  }
+  applyTheme(localStorage.getItem('mf-theme') || 'dark');
+  document.getElementById('theme-btn').addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('mf-theme', next);
+    applyTheme(next);
+  });
+
+  // ─── Nav drawer ───
+  const drawer = document.getElementById('drawer');
+  const drawerScrim = document.getElementById('drawer-scrim');
+  function openDrawer(){ drawer.classList.add('open'); drawerScrim.classList.add('open'); }
+  function closeDrawer(){ drawer.classList.remove('open'); drawerScrim.classList.remove('open'); }
+  document.getElementById('menu-btn').addEventListener('click', openDrawer);
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+  drawerScrim.addEventListener('click', closeDrawer);
+
+  // ─── Accordion (one open at a time) ───
+  document.querySelectorAll('.acc-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const item = head.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.acc-head').setAttribute('aria-expanded','false'); });
+      if(!isOpen){ item.classList.add('open'); head.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  // ─── Currency switcher (site-wide price conversion) ───
+  const FX=16000, fmtUSD=v=>'$'+Math.round(v/FX).toLocaleString('en-US'), parseIDR=s=>parseInt(s.replace(/[^0-9]/g,''),10);
+  function setCurrency(cur){
+    document.querySelectorAll('.cur-btn').forEach(b=>b.classList.toggle('on',b.dataset.cur===cur));
+    localStorage.setItem('mf-cur',cur);
+    cartCurrency = cur;
+    if(typeof recalc === 'function') recalc();
+  }
+  setCurrency(localStorage.getItem('mf-cur')||'IDR');
+
+  // Now-playing play/pause
+  document.getElementById('pplay-btn').addEventListener('click', function(){
+    const playing = this.classList.toggle('playing');
+    this.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  });
+  document.getElementById('pclose-btn').addEventListener('click', () => {
+    document.getElementById('player').style.display = 'none';
+  });
+
+  // Cart maths
+  const DISCOUNT_RATE = 0.10, PPN_RATE = 0.11, USD_RATE = 16000;
+  const fmtIDR = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
+  let cartCurrency = localStorage.getItem('mf-cur') || 'IDR';
+  const fmtMoney = n => cartCurrency === 'USD' ? '$' + Math.round(n / USD_RATE).toLocaleString('en-US') : fmtIDR(n);
+  function recalc(){
+    let subtotal = 0;
+    document.querySelectorAll('.item').forEach(item => {
+      const val = item.querySelector('.val');
+      const qty = parseInt(val.textContent, 10);
+      const price = parseInt(val.dataset.price, 10);
+      const line = qty * price;
+      item.querySelector('.line-total').textContent = fmtMoney(line);
+      subtotal += line;
+    });
+    const discount = subtotal * DISCOUNT_RATE;
+    const taxable = subtotal - discount;
+    const tax = taxable * PPN_RATE;
+    const total = taxable + tax;
+    document.getElementById('sum-subtotal').textContent = fmtMoney(subtotal);
+    document.getElementById('sum-discount').textContent = '− ' + fmtMoney(discount);
+    document.getElementById('sum-tax').textContent = fmtMoney(tax);
+    document.getElementById('sum-total').textContent = fmtMoney(total);
+  }
+
+  // Qty steppers
+  document.querySelectorAll('.qty').forEach(q => {
+    const [minus, , plus] = q.children;
+    const val = q.querySelector('.val');
+    minus.addEventListener('click', () => {
+      let n = parseInt(val.textContent, 10);
+      if(n > 1){ n--; val.textContent = n; minus.disabled = n <= 1; recalc(); }
+    });
+    plus.addEventListener('click', () => {
+      let n = parseInt(val.textContent, 10) + 1;
+      val.textContent = n; minus.disabled = false; recalc();
+    });
+  });
+
+  // Remove item
+  document.querySelectorAll('.item-remove').forEach(btn => {
+    btn.addEventListener('click', () => { btn.closest('.item').remove(); recalc(); });
+  });
+
+  // Promo remove (demo)
+  const promoApplied = document.querySelector('.promo-applied');
+  promoApplied.querySelector('button').addEventListener('click', () => { promoApplied.remove(); });
+
+  // Search overlay
+  const searchOv = document.getElementById('search-ov');
+  function openSearch(){ searchOv.classList.add('open'); setTimeout(()=>document.getElementById('sinput').focus(),50); }
+  function closeSearch(){ searchOv.classList.remove('open'); }
+  document.getElementById('search-btn').addEventListener('click', openSearch);
+  searchOv.addEventListener('click', e => { if(e.target === searchOv) closeSearch(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape'){ closeSearch(); } });
+
+  // ─── Real album art (iTunes Search API, JSONP) ───
+  function mfCover(coverEl, query){
+    if(!coverEl || !query) return;
+    const cb = 'itcb_' + Math.random().toString(36).slice(2);
+    window[cb] = function(data){
+      const r = data && data.results && data.results[0];
+      if(r && r.artworkUrl100){
+        const url = r.artworkUrl100.replace('100x100','600x600');
+        const img = new Image();
+        img.onload = function(){ coverEl.style.background = '#fff'; coverEl.innerHTML = ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block'; coverEl.appendChild(img); };
+        img.src = url;
+      }
+      delete window[cb];
+    };
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://itunes.apple.com/search?media=music&entity=album&limit=1&term=' + encodeURIComponent(query) + '&callback=' + cb;
+    s.onerror = function(){ delete window[cb]; };
+    document.head.appendChild(s);
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.item').forEach(function(item){
+      const artist = item.querySelector('.item-artist');
+      const title  = item.querySelector('.item-title');
+      const cover  = item.querySelector('.item-cover .cover-art');
+      if(artist && title && cover){ mfCover(cover, artist.textContent.trim() + ' ' + title.textContent.trim()); }
+    });
+  });
+
+  recalc();
+</script>
+</body>
+</html>

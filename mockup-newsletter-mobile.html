@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format — Newsletter (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .app-brand .brand-wordmark{height:16px;width:auto;}
+    .ep-logo .brand-wordmark{height:14px;width:auto;}
+
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --neutral-t:rgba(255,255,255,.06);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-pill:999px;
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --page-bg:#161616;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --neutral-t:rgba(0,0,0,.05);--focus:0 0 0 2px rgba(0,0,0,.5);--page-bg:#E8E8E8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--ui);background:var(--page-bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;-webkit-font-smoothing:antialiased;transition:background .2s;}
+    button{cursor:pointer;font-family:inherit;color:inherit;border:none;background:none;}
+    svg{display:block;}
+    a{text-decoration:none;color:inherit;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    .device{width:390px;height:844px;border-radius:44px;background:var(--canvas);border:1px solid var(--hairline);box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+    .status-bar{height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:relative;z-index:5;background:var(--surface);}
+    .status-bar .time{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);}
+    .status-bar .icons{display:flex;align-items:center;gap:6px;color:var(--ink);}
+    .status-bar .icons svg{width:16px;height:16px;}
+    .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--canvas);border-radius:14px;z-index:6;}
+    ::-webkit-scrollbar{width:0;}
+
+    /* ─── Announce bar (running text, sticky) ───────────────────────── */
+    :root{--announce-h:26px;}
+    .announce{flex-shrink:0;position:sticky;top:0;z-index:23;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:40px;padding-left:100%;animation:mf-marquee 20s linear infinite;font-size:10px;font-family:var(--ui);}
+    .announce-track strong{font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+
+    .app-hdr{flex-shrink:0;position:sticky;top:var(--announce-h);z-index:22;display:flex;align-items:center;gap:10px;padding:8px 16px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);}
+    .app-hdr .ham{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .app-hdr .ham:active{background:var(--raised);}
+    .app-hdr .ham svg{width:20px;height:20px;}
+    .app-brand{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;}
+    .app-brand .mark{width:28px;height:28px;color:var(--ink);}
+    .app-brand .wm{font-size:15px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .app-brand .wm sup{font-size:8px;color:var(--mute);vertical-align:super;}
+    .hdr-btn{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);position:relative;}
+    .hdr-btn:active{background:var(--raised);}
+    .hdr-btn svg{width:18px;height:18px;}
+    .hdr-btn .dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--danger);border:1.5px solid var(--surface);}
+
+    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:16px 16px 88px;}
+    .page-title{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:28px;}
+    .page-sub{font-size:12px;color:var(--mute);margin-top:2px;margin-bottom:14px;}
+
+    .btn-pri{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:11px 16px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:14px;font-weight:500;margin-bottom:16px;}
+    .btn-pri svg{width:15px;height:15px;}
+
+    .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+    .stat{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;}
+    .stat-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-bottom:8px;}
+    .stat-val{font-family:var(--ui);font-size:21px;font-weight:500;color:var(--ink);line-height:1;letter-spacing:-.02em;}
+    .stat-sub{font-size:11px;color:var(--body);margin-top:8px;display:flex;align-items:center;gap:4px;}
+    .trend-up{color:var(--success);display:inline-flex;align-items:center;gap:2px;}
+    .trend-neu{color:var(--mute);}
+
+    .card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;margin-bottom:16px;}
+    .widget-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-bottom:1px solid var(--hairline);}
+    .widget-title{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--body);}
+    .widget-note{font-size:10px;color:var(--mute);font-family:var(--ui);}
+
+    .tabs{display:flex;gap:4px;overflow-x:auto;}
+    .tabs::-webkit-scrollbar{height:0;}
+    .tab{flex-shrink:0;font-size:11px;font-weight:500;padding:4px 10px;border-radius:var(--r-sm);color:var(--mute);background:transparent;}
+    .tab.on{background:var(--raised);color:var(--ink);}
+
+    /* campaign cards (tables → cards) */
+    .cmp-row{padding:13px 14px;border-top:1px solid var(--hairline);}
+    .cmp-row:first-child{border-top:none;}
+    .cmp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:9px;}
+    .cmp-subj{font-size:13px;font-weight:500;color:var(--ink);line-height:1.4;}
+    .cmp-meta{font-family:var(--ui);font-size:10px;color:var(--mute);margin-top:3px;}
+    .status-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);flex-shrink:0;white-space:nowrap;}
+    .status-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .st-draft{background:var(--info-t);color:var(--info);}
+    .st-scheduled{background:var(--warning-t);color:var(--warning);}
+    .st-sent{background:var(--success-t);color:var(--success);}
+    .cmp-figs{display:flex;justify-content:space-between;gap:6px;}
+    .fig{display:flex;flex-direction:column;gap:3px;}
+    .fig .k{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .fig .v{font-family:var(--ui);font-size:12px;color:var(--ink);}
+    .fig.right{align-items:flex-end;}
+
+    /* subscribers */
+    .sub-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-top:1px solid var(--hairline);}
+    .sub-row:first-child{border-top:none;}
+    .sub-av{width:28px;height:28px;border-radius:50%;background:var(--raised);border:1px solid var(--hairline);color:var(--body);font-family:var(--ui);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .sub-body{flex:1;min-width:0;}
+    .sub-name{font-size:12px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .sub-email{font-family:var(--ui);font-size:10px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .src-tag{display:inline-flex;align-items:center;font-family:var(--ui);font-size:10px;padding:2px 7px;border-radius:var(--r-sm);color:var(--body);border:1px solid var(--hairline);flex-shrink:0;}
+
+    /* source bars */
+    .src-list{padding:14px;display:flex;flex-direction:column;gap:11px;}
+    .src-bar-row{display:flex;align-items:center;gap:9px;}
+    .src-bar-name{font-size:11px;color:var(--body);width:70px;flex-shrink:0;}
+    .src-track{flex:1;height:6px;background:var(--raised);border-radius:var(--r-pill);overflow:hidden;}
+    .src-fill{height:100%;background:var(--accent);border-radius:var(--r-pill);}
+    .src-pct{font-family:var(--ui);font-size:10px;color:var(--mute);width:30px;text-align:right;flex-shrink:0;}
+
+    /* bottom tab bar */
+    .tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;z-index:8;background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:flex-start;justify-content:space-around;padding:10px 8px 0;}
+    .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);width:64px;}
+    .tabbar a.on{color:var(--ink);}
+    .tabbar a svg{width:21px;height:21px;}
+    .tabbar a span{font-size:10px;font-weight:500;}
+    .tabbar a .nav-dot{position:relative;}
+    .tabbar a .nav-dot::after{content:"";position:absolute;top:-2px;right:-4px;width:6px;height:6px;border-radius:50%;background:var(--warning);}
+
+    /* drawer */
+    .drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:20;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .drawer-overlay.show{opacity:1;pointer-events:auto;}
+    .drawer{position:absolute;top:0;bottom:0;left:0;width:248px;z-index:21;background:var(--surface);border-right:1px solid var(--hairline);transform:translateX(-100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .drawer.open{transform:translateX(0);}
+
+    /* ─── Notifications drawer ───────────────────────────────────── */
+    .notif-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .notif-overlay.show{opacity:1;pointer-events:auto;}
+    .notif-drawer{position:absolute;top:0;bottom:0;right:0;width:280px;max-width:86vw;z-index:41;
+      background:var(--surface);border-left:1px solid var(--hairline);
+      transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .notif-drawer.open{transform:translateX(0);}
+    .notif-hdr{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:var(--accent);color:var(--accent-text);}
+    .notif-hdr .notif-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+    .notif-hdr .notif-clear{font-size:11px;font-weight:500;color:inherit;opacity:.85;background:none;border:none;}
+    .notif-hdr .notif-clear:active{opacity:1;}
+    .notif-list{flex:1;overflow-y:auto;padding:6px;}
+    .notif-item{display:flex;gap:10px;padding:10px;border-radius:var(--r-md);position:relative;}
+    .notif-item:active{background:var(--raised);}
+    .notif-ico{width:32px;height:32px;border-radius:50%;background:var(--raised);color:var(--body);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .notif-ico svg{width:16px;height:16px;}
+    .notif-body{flex:1;min-width:0;}
+    .notif-text{font-size:12.5px;color:var(--ink);line-height:1.4;}
+    .notif-text strong{font-weight:600;}
+    .notif-meta{font-size:11px;color:var(--mute);margin-top:2px;}
+    .notif-unread{position:absolute;top:14px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--danger);}
+
+    .drawer-brand{display:flex;align-items:center;gap:9px;padding:20px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-brand .mark{width:22px;height:22px;color:var(--ink);}
+    .drawer-brand .wm{font-size:14px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .drawer-nav{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:2px;}
+    .dn-group{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:12px 12px 5px;}
+    .dn-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--r-md);font-size:13px;font-weight:500;color:var(--body);}
+    .dn-item.active{color:var(--ink);background:var(--raised);}
+    .dn-item svg{width:17px;height:17px;flex-shrink:0;}
+    .dn-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--warning);}
+    .drawer-foot{border-top:1px solid var(--hairline);padding:12px;}
+    .sb-status{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .sb-status-text{font-size:11px;color:var(--body);}
+
+    /* compose sheet (bottom) */
+    .sheet-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:30;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .sheet-overlay.show{opacity:1;pointer-events:auto;}
+    .sheet{position:absolute;left:0;right:0;bottom:0;z-index:31;max-height:88%;background:var(--surface);border-top:1px solid var(--hairline);border-radius:20px 20px 0 0;transform:translateY(100%);transition:transform .26s ease;display:flex;flex-direction:column;}
+    .sheet.open{transform:translateY(0);}
+    .sheet-grip{width:36px;height:4px;border-radius:2px;background:var(--hairline);margin:10px auto 4px;flex-shrink:0;}
+    .sheet-hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 18px 12px;border-bottom:1px solid var(--hairline);flex-shrink:0;}
+    .sheet-hdr h2{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .sheet-close{width:30px;height:30px;border-radius:var(--r-md);color:var(--body);display:flex;align-items:center;justify-content:center;}
+    .sheet-close svg{width:16px;height:16px;}
+    .sheet-body{overflow-y:auto;padding:16px 18px;}
+    .field{margin-bottom:14px;}
+    .field label{display:block;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:6px;}
+    .input,.select{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px 12px;color:var(--ink);font-size:13px;font-family:inherit;}
+    .input:focus,.select:focus{outline:none;border-color:var(--accent);}
+    .select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236E6E6E' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
+    .field-hint{font-size:10px;color:var(--mute);margin-top:5px;font-family:var(--ui);}
+    .email-prev{border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;background:var(--canvas);}
+    .ep-bar{display:flex;align-items:center;gap:5px;padding:7px 11px;background:var(--raised);border-bottom:1px solid var(--hairline);}
+    .ep-dot{width:7px;height:7px;border-radius:50%;background:var(--hairline);}
+    .ep-frm{font-family:var(--ui);font-size:9px;color:var(--mute);margin-left:5px;}
+    .ep-body{padding:18px 16px;}
+    .ep-logo{display:flex;align-items:center;gap:7px;margin-bottom:14px;}
+    .ep-logo .mark{width:18px;height:18px;color:var(--ink);}
+    .ep-logo .wm{font-size:13px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .ep-h{font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1.3;margin-bottom:10px;}
+    .ep-cover{width:100%;aspect-ratio:16/7;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);margin-bottom:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .ep-grooves{width:58px;height:58px;border-radius:50%;position:relative;background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);}
+    html[data-theme="light"] .ep-grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px);}
+    .ep-grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+    .ep-p{font-size:12px;color:var(--body);line-height:1.55;margin-bottom:12px;}
+    .ep-btn{display:inline-block;background:var(--accent);color:var(--accent-text);font-size:11px;font-weight:600;padding:8px 16px;border-radius:var(--r-md);}
+    .sheet-foot{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 18px;border-top:1px solid var(--hairline);flex-shrink:0;}
+    .sheet-foot .btn-sec{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px;border-radius:var(--r-md);border:1px solid var(--hairline);color:var(--ink);font-size:13px;font-weight:500;}
+    .sheet-foot .btn-primary{grid-column:1 / -1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:14px;font-weight:500;}
+    .sheet-foot svg{width:14px;height:14px;}
+
+    /* prototype hub link (inside frame, above tab bar) */
+    .proto-link{position:absolute;left:12px;bottom:80px;z-index:9;display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--mute);font-size:10px;font-weight:500;opacity:.75;}
+    .proto-link:active{opacity:1;color:var(--ink);}
+  
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  
+    .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+  </style>
+</head>
+<body>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <span class="icons">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="13" width="3" height="6" rx="1"/><rect x="7" y="9" width="3" height="10" rx="1"/><rect x="12" y="5" width="3" height="14" rx="1"/><rect x="17" y="2" width="3" height="17" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13a10 10 0 0114 0M8.5 16.5a5 5 0 017 0M2 9.5a15 15 0 0120 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2.5"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><rect x="21" y="10" width="1.6" height="4" rx="1" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <!-- Announce bar -->
+  <div class="announce"><div class="announce-track"><span>Next newsletter send scheduled Friday 9am · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>Next newsletter send scheduled Friday 9am · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
+
+  <div class="app-hdr">
+    <button class="ham" id="ham-btn" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="index.html" class="app-brand" aria-label="Medium Format — home">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <button class="hdr-btn" id="notifBtn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </button>
+  </div>
+
+  <div class="screen">
+    <h1 class="page-title">Newsletter</h1>
+    <div class="page-sub">Campaigns, audience &amp; performance</div>
+
+    <button class="btn-pri" id="new-campaign-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      New campaign
+    </button>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-lbl">Subscribers</div><div class="stat-val">8.412</div><div class="stat-sub"><span class="trend-up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 15l-6-6-6 6"/></svg><span class="mono">214</span></span><span class="trend-neu">/mo</span></div></div>
+      <div class="stat"><div class="stat-lbl">Open rate</div><div class="stat-val">42.6%</div><div class="stat-sub"><span class="mono">avg</span> <span class="trend-up mono">+3.1pt</span></div></div>
+      <div class="stat"><div class="stat-lbl">Click rate</div><div class="stat-val">7.8%</div><div class="stat-sub trend-neu"><span class="mono">CTR</span> avg</div></div>
+      <div class="stat"><div class="stat-lbl">Growth · 30d</div><div class="stat-val">+2.6%</div><div class="stat-sub trend-neu">−18 unsub</div></div>
+    </div>
+
+    <div class="card">
+      <div class="widget-hdr">
+        <span class="widget-title">Campaigns</span>
+        <div class="tabs">
+          <button class="tab on" onclick="setTab(this)">All</button>
+          <button class="tab" onclick="setTab(this)">Sent</button>
+          <button class="tab" onclick="setTab(this)">Sched.</button>
+          <button class="tab" onclick="setTab(this)">Draft</button>
+        </div>
+      </div>
+      <div>
+        <div class="cmp-row">
+          <div class="cmp-top"><div><div class="cmp-subj">New arrivals — Floating Points &amp; Khruangbin restock</div><div class="cmp-meta">Broadcast · 28 Apr</div></div><span class="status-pill st-sent">Sent</span></div>
+          <div class="cmp-figs">
+            <div class="fig"><span class="k">Recipients</span><span class="v">8.198</span></div>
+            <div class="fig"><span class="k">Open %</span><span class="v">46.2%</span></div>
+            <div class="fig right"><span class="k">Click %</span><span class="v">9.1%</span></div>
+          </div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-top"><div><div class="cmp-subj">Record Store Day 2024 — the full drop list</div><div class="cmp-meta">Broadcast · 18 Apr</div></div><span class="status-pill st-sent">Sent</span></div>
+          <div class="cmp-figs">
+            <div class="fig"><span class="k">Recipients</span><span class="v">8.104</span></div>
+            <div class="fig"><span class="k">Open %</span><span class="v">51.7%</span></div>
+            <div class="fig right"><span class="k">Click %</span><span class="v">14.3%</span></div>
+          </div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-top"><div><div class="cmp-subj">May new arrivals — Björk, Massive Attack &amp; more</div><div class="cmp-meta">Broadcast · 3 May · 09:00</div></div><span class="status-pill st-scheduled">Scheduled</span></div>
+          <div class="cmp-figs">
+            <div class="fig"><span class="k">Recipients</span><span class="v">8.412</span></div>
+            <div class="fig"><span class="k">Open %</span><span class="v">—</span></div>
+            <div class="fig right"><span class="k">Click %</span><span class="v">—</span></div>
+          </div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-top"><div><div class="cmp-subj">Coltrane &amp; Miles — the jazz corner refill</div><div class="cmp-meta">Segment · 6 May · 10:00</div></div><span class="status-pill st-scheduled">Scheduled</span></div>
+          <div class="cmp-figs">
+            <div class="fig"><span class="k">Recipients</span><span class="v">1.920</span></div>
+            <div class="fig"><span class="k">Open %</span><span class="v">—</span></div>
+            <div class="fig right"><span class="k">Click %</span><span class="v">—</span></div>
+          </div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-top"><div><div class="cmp-subj">News: inside the Aphex Twin pressing</div><div class="cmp-meta">Draft · not sent</div></div><span class="status-pill st-draft">Draft</span></div>
+          <div class="cmp-figs">
+            <div class="fig"><span class="k">Recipients</span><span class="v">—</span></div>
+            <div class="fig"><span class="k">Open %</span><span class="v">—</span></div>
+            <div class="fig right"><span class="k">Click %</span><span class="v">—</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="widget-hdr"><span class="widget-title">Recent subscribers</span><span class="widget-note">24h · 41</span></div>
+      <div>
+        <div class="sub-row"><span class="sub-av">RA</span><div class="sub-body"><div class="sub-name">Rangga Aditya</div><div class="sub-email">rangga.a@gmail.com</div></div><span class="src-tag">Website</span></div>
+        <div class="sub-row"><span class="sub-av">SW</span><div class="sub-body"><div class="sub-name">Siti Wulandari</div><div class="sub-email">sitiw@outlook.com</div></div><span class="src-tag">POS</span></div>
+        <div class="sub-row"><span class="sub-av">JT</span><div class="sub-body"><div class="sub-name">Joko Tan</div><div class="sub-email">jokotan@yahoo.com</div></div><span class="src-tag">Checkout</span></div>
+        <div class="sub-row"><span class="sub-av">LM</span><div class="sub-body"><div class="sub-name">Linda Marsha</div><div class="sub-email">linda.m@gmail.com</div></div><span class="src-tag">Event</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="widget-hdr"><span class="widget-title">List sources</span><span class="widget-note">all-time</span></div>
+      <div class="src-list">
+        <div class="src-bar-row"><span class="src-bar-name">Website</span><div class="src-track"><div class="src-fill" style="width:54%;opacity:.9"></div></div><span class="src-pct">54%</span></div>
+        <div class="src-bar-row"><span class="src-bar-name">Checkout</span><div class="src-track"><div class="src-fill" style="width:22%;opacity:.45"></div></div><span class="src-pct">22%</span></div>
+        <div class="src-bar-row"><span class="src-bar-name">POS</span><div class="src-track"><div class="src-fill" style="width:14%;opacity:.25"></div></div><span class="src-pct">14%</span></div>
+        <div class="src-bar-row"><span class="src-bar-name">Event</span><div class="src-track"><div class="src-fill" style="width:10%;opacity:.25"></div></div><span class="src-pct">10%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="drawer">
+    <a href="index.html" class="drawer-brand" aria-label="Medium Format — home">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <nav class="drawer-nav">
+      <div class="dn-group">Overview</div>
+      <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+
+      <div class="dn-group">Selling</div>
+      <a href="mockup-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-dot"></span></a>
+      <a href="mockup-inventory-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</a>
+      <a href="mockup-customers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Customers</a>
+      <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 012-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 010 4v4a2 2 0 002 2h16a2 2 0 002-2v-4a2 2 0 01-2-2z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="2 3"/></svg>Vouchers</a>
+      <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
+      <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
+
+      <div class="dn-group">Content</div>
+      <a href="mockup-newsletter-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
+      <a href="mockup-news-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>News</a>
+      <a href="mockup-news-categories-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>Categories &amp; Tags</a>
+
+      <div class="dn-group">Shop</div>
+      <a href="mockup-purchase-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Purchase orders</a>
+
+      <div class="dn-group">Config</div>
+      <a href="mockup-preferences-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</a>
+    </nav>
+    <div class="drawer-foot">
+      <div class="dn-user">
+        <div class="dn-avatar">RP</div>
+        <div>
+          <div class="dn-user-name">Raka Pratama</div>
+          <div class="dn-user-role">Owner</div>
+        </div>
+            <button class="drawer-theme" id="theme-btn" aria-label="Toggle theme">
+      <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span id="theme-label">Dark</span>
+    </button>
+    </div>
+    </div>
+  </aside>
+
+  <!-- Notifications drawer -->
+  <div class="notif-overlay" id="notifOverlay"></div>
+  <aside class="notif-drawer" id="notifDrawer" aria-label="Notifications">
+    <div class="notif-hdr">
+      <span class="notif-title">Notifications</span>
+      <button class="notif-clear" id="notifClearBtn">Mark all read</button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-meta">2 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text"><strong>3 items</strong> are running low on stock</div>
+          <div class="notif-meta">28 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">PO-0032 was <strong>partially received</strong> from Analog Distro</div>
+          <div class="notif-meta">Yesterday</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Compose sheet -->
+  <div class="sheet-overlay" id="sheet-overlay"></div>
+  <div class="sheet" id="sheet" aria-label="New campaign">
+    <div class="sheet-grip"></div>
+    <div class="sheet-hdr">
+      <h2>New campaign</h2>
+      <button class="sheet-close" id="sheet-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="sheet-body">
+      <div class="field">
+        <label for="c-subject">Subject line</label>
+        <input class="input" id="c-subject" value="May new arrivals — Bonobo, Madlib & more">
+        <div class="field-hint">62 chars</div>
+      </div>
+      <div class="field">
+        <label for="c-segment">Audience segment</label>
+        <select class="select" id="c-segment">
+          <option>All subscribers · 8.412</option>
+          <option>Buyers — last 90 days · 2.640</option>
+          <option>Jazz interest · 1.920</option>
+          <option>Event sign-ups · 842</option>
+        </select>
+        <div class="field-hint">Estimated recipients · 8.412</div>
+      </div>
+      <div class="field">
+        <label>Email preview</label>
+        <div class="email-prev">
+          <div class="ep-bar"><span class="ep-dot"></span><span class="ep-dot"></span><span class="ep-dot"></span><span class="ep-frm">Medium Format &lt;hello@mediumformat.id&gt;</span></div>
+          <div class="ep-body">
+            <div class="ep-logo"><img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light"></div>
+            <div class="ep-h">May new arrivals — Bonobo, Madlib &amp; more</div>
+            <div class="ep-cover"><span class="ep-grooves"></span></div>
+            <div class="ep-p">Fresh in the crates: a Bonobo repress, two Madlib instrumentals and VG+ used jazz. Cleaned in Jakarta, shipping nationwide.</div>
+            <span class="ep-btn">Shop new arrivals →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <button class="btn-sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send test</button>
+      <button class="btn-sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Schedule</button>
+      <button class="btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send campaign</button>
+    </div>
+  </div>
+
+  <!-- Prototype hub link -->
+  <a href="index.html" class="proto-link" aria-label="Back to prototype hub">◹ Prototype</a>
+
+  <!-- Bottom tab bar -->
+  <nav class="tabbar">
+    <a href="mockup-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Home</span></a>
+    <a href="mockup-orders.html"><span class="nav-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Orders</span></a>
+    <a href="mockup-newsletter.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg><span>News</span></a>
+    <a href="mockup-purchase-orders.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg><span>POs</span></a>
+  </nav>
+</div>
+
+<script>
+  function setTab(el){el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');}
+
+  const drawer=document.getElementById('drawer');
+  const dOverlay=document.getElementById('drawer-overlay');
+  function closeDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('show');}
+  document.getElementById('ham-btn').addEventListener('click',()=>{drawer.classList.add('open');dOverlay.classList.add('show');});
+  dOverlay.addEventListener('click',closeDrawer);
+
+  // Notifications drawer
+  const notifDrawer=document.getElementById('notifDrawer');
+  const notifOverlay=document.getElementById('notifOverlay');
+  function closeNotif(){notifDrawer.classList.remove('open');notifOverlay.classList.remove('show');}
+  document.getElementById('notifBtn').addEventListener('click',()=>{notifDrawer.classList.add('open');notifOverlay.classList.add('show');});
+  notifOverlay.addEventListener('click',closeNotif);
+  document.getElementById('notifClearBtn').addEventListener('click',()=>{
+    document.querySelectorAll('.notif-unread').forEach(d=>d.remove());
+  });
+
+  const sheet=document.getElementById('sheet');
+  const sOverlay=document.getElementById('sheet-overlay');
+  function openSheet(){sheet.classList.add('open');sOverlay.classList.add('show');}
+  function closeSheet(){sheet.classList.remove('open');sOverlay.classList.remove('show');}
+  document.getElementById('new-campaign-btn').addEventListener('click',openSheet);
+  document.getElementById('sheet-close').addEventListener('click',closeSheet);
+  sOverlay.addEventListener('click',closeSheet);
+
+  const root=document.documentElement;
+  const moon=document.getElementById('ico-moon');
+  const sun=document.getElementById('ico-sun');
+  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';}
+  applyTheme(localStorage.getItem('mf-theme')||'dark');
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    localStorage.setItem('mf-theme',next);applyTheme(next);
+  });
+</script>
+</body>
+</html>

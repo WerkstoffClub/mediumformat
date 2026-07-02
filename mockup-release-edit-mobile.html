@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format — Edit Release (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --neutral-t:rgba(255,255,255,.06);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-pill:999px;
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --page-bg:#161616;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --neutral-t:rgba(0,0,0,.05);--focus:0 0 0 2px rgba(0,0,0,.5);--page-bg:#E8E8E8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--ui);background:var(--page-bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;-webkit-font-smoothing:antialiased;transition:background .2s;}
+    button{cursor:pointer;font-family:inherit;color:inherit;border:none;background:none;}
+    svg{display:block;}
+    a{text-decoration:none;color:inherit;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    .device{width:390px;height:844px;border-radius:44px;background:var(--canvas);border:1px solid var(--hairline);box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+    .status-bar{height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:relative;z-index:5;background:var(--surface);}
+    .status-bar .time{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);}
+    .status-bar .icons{display:flex;align-items:center;gap:6px;color:var(--ink);}
+    .status-bar .icons svg{width:16px;height:16px;}
+    .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--canvas);border-radius:14px;z-index:6;}
+    ::-webkit-scrollbar{width:0;}
+
+    .app-hdr{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:8px 12px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);}
+    .app-hdr .back{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .app-hdr .back:active{background:var(--raised);}
+    .app-hdr .back svg{width:20px;height:20px;}
+    .hdr-titles{flex:1;min-width:0;}
+    .hdr-titles .t{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .hdr-titles .s{font-family:var(--ui);font-size:10px;color:var(--mute);}
+    .hdr-btn{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .hdr-btn:active{background:var(--raised);}
+    .hdr-btn svg{width:18px;height:18px;}
+
+    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:14px 14px 20px;}
+
+    /* section (accordion-ish, all open) */
+    .section{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);margin-bottom:12px;overflow:hidden;}
+    .section-hdr{display:flex;align-items:center;gap:9px;padding:12px 14px;border-bottom:1px solid var(--hairline);}
+    .section-hdr .n{width:20px;height:20px;border-radius:var(--r-sm);background:var(--raised);border:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;font-family:var(--ui);font-size:10px;font-weight:500;color:var(--body);flex-shrink:0;}
+    .section-title{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--ink);}
+    .section-body{padding:14px;display:flex;flex-direction:column;gap:14px;}
+
+    .field-label{display:block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-bottom:6px;}
+    .field-label .req{color:var(--body);}
+    .field-hint{font-size:10px;color:var(--mute);margin-top:5px;}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .input,.select,.textarea{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:11px 12px;color:var(--ink);font-family:var(--ui);font-size:14px;line-height:20px;outline:none;transition:border-color .15s;min-height:44px;}
+    .input::placeholder,.textarea::placeholder{color:var(--mute);}
+    .input:focus,.select:focus,.textarea:focus{border-color:var(--accent);}
+    .input.mono{font-family:var(--ui);}
+    .textarea{resize:vertical;min-height:84px;}
+    .select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236E6E6E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
+    .input-prefix{display:flex;align-items:stretch;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden;min-height:44px;transition:border-color .15s;}
+    .input-prefix
+    .input-prefix .pfx{display:flex;align-items:center;padding:0 12px;font-family:var(--ui);font-size:13px;color:var(--mute);border-right:1px solid var(--hairline);background:var(--surface);}
+    .input-prefix input{flex:1;background:transparent;border:none;outline:none;padding:11px 12px;color:var(--ink);font-family:var(--ui);font-size:14px;font-variant-numeric:tabular-nums;}
+
+    .grades{display:flex;gap:6px;flex-wrap:wrap;}
+    .grade{font-family:var(--ui);font-size:13px;font-weight:500;padding:9px 13px;border-radius:var(--r-md);background:var(--raised);border:1px solid var(--hairline);color:var(--mute);min-width:44px;min-height:40px;}
+    .grade.on{border-color:var(--accent);color:var(--ink);background:var(--surface);}
+
+    .check-list{display:flex;flex-direction:column;gap:8px;}
+    .check{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:var(--r-md);border:1px solid var(--hairline);background:var(--raised);min-height:44px;}
+    .check.on{border-color:var(--accent);background:var(--surface);}
+    .check .box{width:20px;height:20px;border-radius:var(--r-sm);border:1.5px solid var(--mute);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+    .check.on .box{background:var(--accent);border-color:var(--accent);}
+    .check .box svg{width:12px;height:12px;color:var(--accent-text);opacity:0;}
+    .check.on .box svg{opacity:1;}
+    .check .name{font-size:13px;font-weight:500;color:var(--ink);}
+    .check .meta{font-family:var(--ui);font-size:10px;color:var(--mute);margin-left:auto;}
+
+    .dropzone{aspect-ratio:1;max-width:160px;border:1.5px dashed var(--hairline);border-radius:var(--r-lg);background:var(--raised);position:relative;overflow:hidden;}
+    .dropzone .cover-art{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .dropzone .cover-art .grooves{width:64%;height:64%;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);}
+    html[data-theme="light"] .dropzone .cover-art .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px);}
+    .dropzone .cover-art .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+    .dz-overlay{position:absolute;left:0;right:0;bottom:0;padding:7px;background:linear-gradient(transparent,rgba(0,0,0,.7));text-align:center;}
+    .dz-overlay span{font-size:10px;color:#fff;font-weight:500;}
+
+    .tracks{display:flex;flex-direction:column;gap:8px;}
+    .track-row{display:grid;grid-template-columns:24px 1fr 58px 30px 30px;gap:6px;align-items:center;}
+    .track-no{font-family:var(--ui);font-size:11px;color:var(--mute);text-align:center;}
+    .track-row .input{padding:9px 10px;min-height:40px;font-size:13px;}
+    .track-remove{width:32px;height:40px;border-radius:var(--r-md);color:var(--mute);display:flex;align-items:center;justify-content:center;}
+    .track-remove:active{color:var(--danger);}
+    .track-remove svg{width:14px;height:14px;}
+    .add-track{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:var(--r-md);border:1px solid var(--hairline);color:var(--ink);font-size:13px;font-weight:500;align-self:flex-start;min-height:40px;}
+    .add-track svg{width:14px;height:14px;}
+    /* per-track audio preview */
+    .track{display:flex;flex-direction:column;}
+    .track-pv{width:30px;height:40px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--mute);display:flex;align-items:center;justify-content:center;}
+    .track-pv.set{border-color:var(--accent);color:var(--ink);}
+    .track-pv svg{width:15px;height:15px;}
+    .track-preview{display:none;margin:8px 0 4px 30px;padding:12px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .track.open .track-preview{display:block;}
+    .tp-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin-bottom:9px;}
+    .tp-sources{display:flex;flex-wrap:wrap;gap:6px;}
+    .tp-src{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:7px 11px;border-radius:var(--r-pill);border:1px solid var(--hairline);background:var(--surface);color:var(--body);min-height:34px;}
+    .tp-src.on{border-color:var(--accent);color:var(--ink);}
+    .tp-src svg{width:13px;height:13px;}
+    .tp-link,.tp-drop,.tp-linked{margin-top:11px;}
+    .tp-input-wrap{display:flex;gap:8px;}
+    .tp-input-wrap .input{flex:1;}
+    .tp-hint{font-size:11px;color:var(--mute);margin-top:7px;}
+    .tp-drop{display:flex;align-items:center;gap:9px;padding:12px;border:1px dashed var(--hairline);border-radius:var(--r-md);color:var(--mute);font-size:12px;}
+    .tp-drop svg{width:16px;height:16px;flex-shrink:0;}
+    .tp-linked{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink);}
+    .tp-linked svg{width:14px;height:14px;color:var(--success);flex-shrink:0;}
+    .tp-linked .src{font-family:var(--ui);color:var(--body);}
+    .tp-clear{margin-left:auto;font-size:12px;color:var(--mute);background:transparent;border:none;}
+    /* Per-location stock allocation */
+    .stock-alloc{display:flex;flex-direction:column;gap:10px;}
+    .stock-row{display:flex;flex-direction:column;gap:8px;padding:11px;border:1px solid var(--hairline);border-radius:var(--r-md);background:var(--raised);}
+    .stock-row .select{background:var(--surface);}
+    .stock-line{display:grid;grid-template-columns:1fr 84px 40px;gap:8px;align-items:center;}
+    .stock-line .input{background:var(--surface);}
+    .stock-line .qty-in{text-align:right;}
+    .stock-remove{width:40px;height:44px;border-radius:var(--r-md);border:1px solid var(--hairline);background:var(--surface);color:var(--mute);display:flex;align-items:center;justify-content:center;}
+    .stock-remove:active{color:var(--danger);border-color:rgba(239,68,68,.4);}
+    .stock-remove svg{width:15px;height:15px;}
+    .stock-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .add-loc{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 13px;border-radius:var(--r-md);border:1px dashed var(--hairline);color:var(--body);font-size:13px;font-weight:500;align-self:flex-start;min-height:44px;}
+    .add-loc:active{color:var(--ink);border-color:var(--mute);}
+    .add-loc svg{width:14px;height:14px;}
+    .stock-foot{display:flex;flex-direction:column;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--hairline);}
+    .stock-total{font-size:13px;color:var(--body);}
+    .stock-total strong{color:var(--ink);font-weight:600;}
+    .stock-manage{font-size:12px;color:var(--mute);text-decoration:none;}
+    .stock-manage:active{color:var(--ink);}
+
+    /* sticky footer inside frame (above tab area) */
+    .footer-bar{position:absolute;left:0;right:0;bottom:0;z-index:9;background:var(--surface);border-top:1px solid var(--hairline);box-shadow:0 -4px 12px rgba(0,0,0,.4);padding:12px 14px;display:flex;gap:8px;}
+    .footer-meta{position:absolute;top:-22px;left:14px;font-size:10px;color:var(--mute);display:flex;align-items:center;gap:6px;background:var(--canvas);padding:2px 8px;border-radius:var(--r-pill);border:1px solid var(--hairline);}
+    .footer-meta .dot{width:5px;height:5px;border-radius:50%;background:var(--warning);}
+    .btn-ghost{padding:11px 12px;border-radius:var(--r-md);color:var(--body);font-size:13px;font-weight:500;min-height:44px;}
+    .btn-secondary{flex:1;padding:11px 12px;border-radius:var(--r-md);border:1px solid var(--hairline);color:var(--ink);font-size:13px;font-weight:500;min-height:44px;}
+    .btn-primary{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 12px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:13px;font-weight:500;min-height:44px;}
+    .btn-primary svg{width:14px;height:14px;}
+    /* pad screen so content clears the footer */
+    .screen{padding-bottom:84px;}
+
+    .proto-hub{position:fixed;right:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--mute);font-size:12px;font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.5);}
+    .proto-hub:hover{color:var(--ink);border-color:var(--mute);}
+  
+    .opt{font-family:var(--ui);font-size:10px;color:var(--mute);font-weight:400;margin-left:4px;}
+    .input-suffix{display:flex;align-items:stretch;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden;}
+    .input-suffix input{flex:1;background:transparent;border:none;outline:none;padding:10px 12px;color:var(--ink);font-family:var(--ui);}
+    .input-suffix .sfx{display:flex;align-items:center;padding:0 12px;font-family:var(--ui);font-size:13px;color:var(--mute);border-left:1px solid var(--hairline);background:var(--surface);}
+    .dim-row{display:flex;align-items:center;gap:6px;}
+    .dim-row .input{flex:1;text-align:center;}
+    .dim-x{color:var(--mute);} .dim-unit{font-family:var(--ui);font-size:12px;color:var(--mute);}
+    .ai-btn{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--ink);background:transparent;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:4px 10px;}
+    .ai-btn svg{width:12px;height:12px;}
+    .mf-toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--canvas);font-size:12px;font-weight:500;padding:8px 15px;border-radius:var(--r-pill);z-index:400;opacity:0;transition:opacity .2s;pointer-events:none;}
+    .mf-toast.show{opacity:1;}
+
+    /* ─── Merchandising toggles ──────────────────────────────────── */
+    .mrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--hairline);}
+    .mrow:last-child{border-bottom:none;}
+    .mrow-text{flex:1;}
+    .mrow-title{font-size:13px;font-weight:600;color:var(--ink);}
+    .mrow-hint{font-size:11px;color:var(--mute);margin-top:3px;}
+    .tswitch{width:34px;height:20px;border-radius:var(--r-pill);background:var(--accent);cursor:pointer;position:relative;flex-shrink:0;transition:background .2s;}
+    .tswitch::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:var(--surface);top:3px;right:3px;transition:transform .2s;}
+    .tswitch.off{background:var(--hairline);}
+    .tswitch.off::after{transform:translateX(-14px);background:var(--mute);}
+    .mrow-extra{display:none;padding:0 0 13px;margin-top:-3px;}
+    .mrow-extra.show{display:block;}
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <span class="icons">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="13" width="3" height="6" rx="1"/><rect x="7" y="9" width="3" height="10" rx="1"/><rect x="12" y="5" width="3" height="14" rx="1"/><rect x="17" y="2" width="3" height="17" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13a10 10 0 0114 0M8.5 16.5a5 5 0 017 0M2 9.5a15 15 0 0120 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2.5"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><rect x="21" y="10" width="1.6" height="4" rx="1" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <div class="app-hdr">
+    <a class="back" href="mockup-inventory-mobile.html" aria-label="Back to inventory">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="hdr-titles">
+      <div class="t">Edit release</div>
+      <div class="s">NINJA-CD/LP</div>
+    </div>
+    <button class="hdr-btn" id="theme-btn" aria-label="Toggle theme">
+      <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </div>
+
+  <div class="screen">
+    <form onsubmit="return false">
+
+      <!-- 1. Basics -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">1</span><span class="section-title">Basics</span></div>
+        <div class="section-body">
+          <div><label class="field-label">Artist <span class="req">*</span></label><input class="input" value="Floating Points"></div>
+          <div><label class="field-label">Title <span class="req">*</span></label><input class="input" value="Crush"></div>
+          <div class="row2">
+            <div><label class="field-label">Label</label><input class="input" value="Ninja Tune"></div>
+            <div><label class="field-label">Year</label><input class="input mono" type="number" value="2019"></div>
+          </div>
+          <div class="row2">
+            <div><label class="field-label">Cat #</label><input class="input mono" value="NINJA-CD/LP"></div>
+            <div><label class="field-label">Country</label><select class="select"><option>UK</option><option>US</option><option>JP</option><option>DE</option><option>ID</option></select></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Format & condition -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">2</span><span class="section-title">Format &amp; condition</span></div>
+        <div class="section-body">
+          <div class="row2">
+            <div><label class="field-label">Format <span class="req">*</span></label><select class="select"><option>LP</option><option>2xLP</option><option>12"</option><option>7"</option><option>CD</option><option>Merch</option></select></div>
+            <div><label class="field-label">Genre</label><select class="select"><option>Electronic</option><option>Jazz</option><option>Soul</option><option>Hip-Hop</option></select></div>
+          </div>
+          <div>
+            <label class="field-label">Condition grade <span class="req">*</span></label>
+            <div class="grades" role="group" aria-label="Overall condition">
+              <button type="button" class="grade on" onclick="pickGrade(this)">M</button>
+              <button type="button" class="grade" onclick="pickGrade(this)">VG+</button>
+              <button type="button" class="grade" onclick="pickGrade(this)">VG</button>
+              <button type="button" class="grade" onclick="pickGrade(this)">G+</button>
+              <button type="button" class="grade" onclick="pickGrade(this)">G</button>
+            </div>
+          </div>
+          <div class="row2">
+            <div><label class="field-label">Media grade</label><select class="select"><option>Mint (M)</option><option>NM</option><option>VG+</option><option>VG</option></select></div>
+            <div><label class="field-label">Sleeve grade</label><select class="select"><option>Mint (M)</option><option>NM</option><option>VG+</option><option>VG</option></select></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Pricing -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">3</span><span class="section-title">Pricing</span></div>
+        <div class="section-body">
+          <div><label class="field-label">Price <span class="req">*</span></label><div class="input-prefix"><span class="pfx">Rp</span><input inputmode="numeric" value="485.000"></div></div>
+          <div class="row2">
+            <div><label class="field-label">Compare-at</label><div class="input-prefix"><span class="pfx">Rp</span><input inputmode="numeric" value="540.000"></div></div>
+            <div><label class="field-label">Cost</label><div class="input-prefix"><span class="pfx">Rp</span><input inputmode="numeric" value="310.000"></div></div>
+          </div>
+          <div class="field-hint">Margin <span class="mono">36.1%</span> · <span class="mono">Rp 175.000</span> profit</div>
+        </div>
+      </div>
+
+      <!-- 4. Stock & location -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">4</span><span class="section-title">Stock &amp; location</span></div>
+        <div class="section-body">
+          <div class="stock-alloc" id="stock-alloc">
+            <div class="stock-row">
+              <select class="select" aria-label="Location">
+                <option selected>Main Store</option><option>Warehouse</option><option>Pop-up · ATM Fair</option><option>Consignment · Sunday Vinyl</option>
+              </select>
+              <div class="stock-line">
+                <input class="input" value="A3" placeholder="Shelf" aria-label="Shelf">
+                <input class="input mono qty-in" type="number" value="10" min="0" aria-label="Qty" oninput="recalcStock()">
+                <button type="button" class="stock-remove" onclick="removeStockRow(this)" aria-label="Remove location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+              </div>
+            </div>
+            <div class="stock-row">
+              <select class="select" aria-label="Location">
+                <option>Main Store</option><option selected>Warehouse</option><option>Pop-up · ATM Fair</option><option>Consignment · Sunday Vinyl</option>
+              </select>
+              <div class="stock-line">
+                <input class="input" value="C2" placeholder="Shelf" aria-label="Shelf">
+                <input class="input mono qty-in" type="number" value="4" min="0" aria-label="Qty" oninput="recalcStock()">
+                <button type="button" class="stock-remove" onclick="removeStockRow(this)" aria-label="Remove location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="add-loc" onclick="addStockRow()" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add location</button>
+          <div class="stock-foot">
+            <div class="stock-total">Total stock: <strong class="mono" id="stock-total">14</strong> across <strong id="stock-locs">2</strong> locations</div>
+            <a class="stock-manage" href="mockup-locations.html">Manage locations &amp; shelves →</a>
+          </div>
+          <div style="margin-top:14px"><label class="field-label">Low-stock ≤</label><input class="input mono" type="number" value="4"></div>
+          <div style="margin-top:14px"><label class="field-label">Weight <span class="opt">optional</span></label><div class="input-suffix"><input class="mono" id="weight" placeholder="e.g. 250"><span class="sfx">g</span></div></div>
+          <div style="margin-top:14px"><label class="field-label">Dimensions <span class="opt">L×W×H · optional</span></label><div class="dim-row"><input class="input mono" placeholder="L"><span class="dim-x">×</span><input class="input mono" placeholder="W"><span class="dim-x">×</span><input class="input mono" placeholder="H"><span class="dim-unit">cm</span></div></div>
+          <div class="field-hint" style="margin-top:8px">Blank = hidden on the product page.</div>
+        </div>
+      </div>
+
+      <!-- 5. Channels -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">5</span><span class="section-title">Channels</span></div>
+        <div class="section-body">
+          <div class="check-list">
+            <label class="check on" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">Website</span><span class="meta">Rp 485.000</span></label>
+            <label class="check on" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">POS</span><span class="meta">in-store</span></label>
+            <label class="check on" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">Tokopedia</span><span class="meta">synced</span></label>
+            <label class="check" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">Shopee</span><span class="meta">off</span></label>
+            <label class="check on" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">Discogs</span><span class="meta">Rp 505.000</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Media -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">6</span><span class="section-title">Media</span></div>
+        <div class="section-body">
+          <div>
+            <label class="field-label">Cover art</label>
+            <label class="dropzone" for="cover-file">
+              <div class="cover-art"><span class="grooves"></span></div>
+              <div class="dz-overlay"><span>Replace image</span></div>
+              <input id="cover-file" type="file" accept="image/*" hidden>
+            </label>
+          </div>
+          <div>
+            <label class="field-label">Tracklist</label>
+            <div class="tracks" id="tracks"><div class="track open"><div class="track-row"><span class="track-no">A1</span><input class="input" value="Falaise"><input class="input mono" value="3:12" aria-label="Duration"><button type="button" class="track-pv set" onclick="togglePreview(this)" aria-label="Audio preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></button><button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div><div class="track-preview" data-source="Spotify"><div class="tp-label">Audio preview — link or upload</div><div class="tp-sources"><button type="button" class="tp-src" onclick="selectSource(this,'Bandcamp')">Bandcamp</button><button type="button" class="tp-src on" onclick="selectSource(this,'Spotify')">Spotify</button><button type="button" class="tp-src" onclick="selectSource(this,'Apple Music')">Apple Music</button><button type="button" class="tp-src" onclick="selectSource(this,'YouTube')">YouTube</button><button type="button" class="tp-src" onclick="selectSource(this,'SoundCloud')">SoundCloud</button><button type="button" class="tp-src tp-upload" onclick="selectSource(this,'Upload')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Upload audio</button></div><div class="tp-link"><div class="tp-input-wrap"><input class="input tp-url" placeholder="Paste Spotify track link…" value="https://open.spotify.com/track/2Fxm…"><button type="button" class="btn-sec" onclick="attachLink(this)" aria-label="Attach preview" title="Attach"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button></div><div class="tp-hint">Public track URL — plays a ~30s preview.</div></div><label class="tp-drop" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span>Choose audio — MP3/WAV · ≤10 MB</span><input type="file" accept="audio/*" hidden onchange="fileChosen(this)"></label><div class="tp-linked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Linked from <span class="src">Spotify</span></span><button type="button" class="tp-clear" onclick="clearPreview(this)">Remove</button></div></div></div><div class="track"><div class="track-row"><span class="track-no">A2</span><input class="input" value="Last Bloom"><input class="input mono" value="4:05" aria-label="Duration"><button type="button" class="track-pv" onclick="togglePreview(this)" aria-label="Audio preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></button><button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div><div class="track"><div class="track-row"><span class="track-no">B1</span><input class="input" value="Requiem for CS70"><input class="input mono" value="7:34" aria-label="Duration"><button type="button" class="track-pv" onclick="togglePreview(this)" aria-label="Audio preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></button><button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div></div>
+            <button type="button" class="add-track" onclick="addTrack()" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add track</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Description -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">7</span><span class="section-title">Description</span><button type="button" class="ai-btn" onclick="aiAssist('desc')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.3L19 9l-5.3 1.7L12 16l-1.7-5.3L5 9l5.3-1.7z"/></svg>AI assist</button></div>
+        <div class="section-body">
+          <textarea class="textarea" id="desc" placeholder="Tell the story of this record…">Sam Shepherd's third album under the Floating Points name — modular synthesis, strings and rhythm. 180g vinyl, printed inner sleeve.</textarea>
+        </div>
+      </div>
+
+      <!-- 8. SEO -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">8</span><span class="section-title">SEO</span></div>
+        <div class="section-body">
+          <div><label class="field-label">URL slug</label><div class="input-prefix"><span class="pfx">/release/</span><input value="floating-points-crush"></div></div>
+          <div><label class="field-label">Meta title</label><input class="input" value="Floating Points — Crush (LP)"></div>
+        </div>
+      </div>
+
+      <!-- 9. Merchandising -->
+      <div class="section">
+        <div class="section-hdr"><span class="n">9</span><span class="section-title">Merchandising</span></div>
+        <div class="section-body">
+          <div class="mrow">
+            <div class="mrow-text">
+              <div class="mrow-title">Featured</div>
+              <div class="mrow-hint">Show in the homepage featured slider and category hero placements.</div>
+            </div>
+            <span class="tswitch" id="toggle-featured" role="switch" aria-checked="false" tabindex="0" onclick="flipToggle(this)" onkeydown="toggleKeydown(event,this)"></span>
+          </div>
+          <div class="mrow">
+            <div class="mrow-text">
+              <div class="mrow-title">Pre-order</div>
+              <div class="mrow-hint">List before release with an estimated delivery date shown to customers.</div>
+            </div>
+            <span class="tswitch" id="toggle-preorder" role="switch" aria-checked="false" tabindex="0" onclick="flipToggle(this);togglePreorderFields()" onkeydown="toggleKeydown(event,this,true)"></span>
+          </div>
+          <div class="mrow-extra" id="preorder-fields">
+            <label class="field-label" for="preorder-date">Estimated delivery</label>
+            <input class="input mono" id="preorder-date" type="date" value="2026-03-01">
+            <div class="field-hint">Shown as "Pre-order · Ships …" and in the Pre-order badge.</div>
+          </div>
+          <div class="mrow">
+            <div class="mrow-text">
+              <div class="mrow-title">On-sale</div>
+              <div class="mrow-hint">Enable to show the struck-through Compare-at price (Section 3 — Pricing) on the storefront.</div>
+            </div>
+            <span class="tswitch" id="toggle-onsale" role="switch" aria-checked="false" tabindex="0" onclick="flipToggle(this)" onkeydown="toggleKeydown(event,this)"></span>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Sticky footer -->
+  <div class="footer-bar">
+    <div class="footer-meta"><span class="dot"></span>Unsaved · autosaved 14:32</div>
+    <a href="mockup-inventory-mobile.html" class="btn-ghost">Cancel</a>
+    <button type="button" class="btn-secondary">Draft</button>
+    <a href="mockup-inventory-mobile.html" class="btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Publish</a>
+  </div>
+</div>
+
+<a href="index.html" class="proto-hub" aria-label="Back to prototype hub">◹ Prototype</a>
+
+<script>
+  function pickGrade(el){el.closest('.grades').querySelectorAll('.grade').forEach(g=>g.classList.remove('on'));el.classList.add('on');}
+  function toggleCheck(el){el.classList.toggle('on');}
+  function sideLabel(i){const side=String.fromCharCode(65+Math.floor(i/6));return side+((i%6)+1);}
+  function relabel(){document.querySelectorAll('#tracks .track-row').forEach((r,i)=>{r.querySelector('.track-no').textContent=sideLabel(i);});}
+  function removeTrack(btn){const tracks=document.querySelectorAll('#tracks .track');if(tracks.length<=1)return;btn.closest('.track').remove();relabel();}
+  const PV_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>';
+  const UP_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>';
+  const SRC_NAMES=['Bandcamp','Spotify','Apple Music','YouTube','SoundCloud'];
+  function addTrack(){
+    const wrap=document.getElementById('tracks');
+    const t=document.createElement('div');t.className='track';
+    t.innerHTML='<div class="track-row"><span class="track-no"></span><input class="input" placeholder="Track title"><input class="input mono" placeholder="0:00" aria-label="Duration"><button type="button" class="track-pv" onclick="togglePreview(this)" aria-label="Audio preview">'+PV_ICON+'</button><button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>';
+    wrap.appendChild(t);relabel();t.querySelector('.input').focus();
+  }
+  function buildPanel(){
+    let chips=SRC_NAMES.map(function(n){return '<button type="button" class="tp-src" onclick="selectSource(this,\''+n+'\')">'+n+'</button>';}).join('');
+    chips+='<button type="button" class="tp-src tp-upload" onclick="selectSource(this,\'Upload\')">'+UP_ICON+'Upload audio</button>';
+    return '<div class="track-preview"><div class="tp-label">Audio preview — link or upload</div>'+
+      '<div class="tp-sources">'+chips+'</div>'+
+      '<div class="tp-link" hidden><div class="tp-input-wrap"><input class="input tp-url" placeholder="Paste track link…"><button type="button" class="btn-sec" onclick="attachLink(this)" aria-label="Attach preview" title="Attach"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button></div><div class="tp-hint">Public track URL — plays a ~30s preview.</div></div>'+
+      '<label class="tp-drop" hidden>'+UP_ICON+'<span>Choose audio — MP3/WAV · ≤10 MB</span><input type="file" accept="audio/*" hidden onchange="fileChosen(this)"></label>'+
+      '<div class="tp-linked" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Linked from <span class="src"></span></span><button type="button" class="tp-clear" onclick="clearPreview(this)">Remove</button></div></div>';
+  }
+  function togglePreview(btn){const t=btn.closest('.track');if(!t.querySelector('.track-preview'))t.insertAdjacentHTML('beforeend',buildPanel());t.classList.toggle('open');}
+  function selectSource(chip,source){const p=chip.closest('.track-preview');p.querySelectorAll('.tp-src').forEach(function(s){s.classList.remove('on');});chip.classList.add('on');const u=source==='Upload';p.querySelector('.tp-link').hidden=u;p.querySelector('.tp-drop').hidden=!u;if(!u)p.querySelector('.tp-url').placeholder='Paste '+source+' track link…';p.querySelector('.tp-linked').hidden=true;p.dataset.source=source;chip.closest('.track').querySelector('.track-pv').classList.add('set');}
+  function attachLink(btn){const p=btn.closest('.track-preview');const lk=p.querySelector('.tp-linked');lk.querySelector('.src').textContent=p.dataset.source||'link';lk.hidden=false;}
+  function fileChosen(inp){const p=inp.closest('.track-preview');const lk=p.querySelector('.tp-linked');lk.querySelector('.src').textContent=(inp.files&&inp.files[0])?inp.files[0].name:'audio file';lk.hidden=false;}
+  function clearPreview(btn){const p=btn.closest('.track-preview');p.querySelectorAll('.tp-src').forEach(function(s){s.classList.remove('on');});p.querySelector('.tp-link').hidden=true;p.querySelector('.tp-drop').hidden=true;p.querySelector('.tp-linked').hidden=true;const u=p.querySelector('.tp-url');if(u)u.value='';btn.closest('.track').querySelector('.track-pv').classList.remove('set');delete p.dataset.source;}
+
+  // Per-location stock allocation
+  const STOCK_LOCS=['Main Store','Warehouse','Pop-up · ATM Fair','Consignment · Sunday Vinyl'];
+  function recalcStock(){
+    const rows=document.querySelectorAll('#stock-alloc .stock-row');
+    let total=0;
+    rows.forEach(r=>{const v=parseInt(r.querySelector('.qty-in').value,10);if(!isNaN(v))total+=v;});
+    document.getElementById('stock-total').textContent=total;
+    document.getElementById('stock-locs').textContent=rows.length;
+  }
+  function removeStockRow(btn){
+    const rows=document.querySelectorAll('#stock-alloc .stock-row');
+    if(rows.length<=1)return;
+    btn.closest('.stock-row').remove();
+    recalcStock();
+  }
+  function addStockRow(){
+    const wrap=document.getElementById('stock-alloc');
+    const row=document.createElement('div');
+    row.className='stock-row';
+    const opts=STOCK_LOCS.map(l=>'<option>'+l+'</option>').join('');
+    row.innerHTML='<select class="select" aria-label="Location">'+opts+'</select>'+
+      '<div class="stock-line">'+
+        '<input class="input" placeholder="Shelf" aria-label="Shelf">'+
+        '<input class="input mono qty-in" type="number" value="0" min="0" aria-label="Qty" oninput="recalcStock()">'+
+        '<button type="button" class="stock-remove" onclick="removeStockRow(this)" aria-label="Remove location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>'+
+      '</div>';
+    wrap.appendChild(row);
+    recalcStock();
+    row.querySelector('.select').focus();
+  }
+  document.getElementById('cover-file').addEventListener('change',function(e){
+    const f=e.target.files&&e.target.files[0];if(!f)return;
+    const url=URL.createObjectURL(f);
+    document.querySelector('.dropzone .cover-art').outerHTML='<img src="'+url+'" alt="Cover preview" style="width:100%;height:100%;object-fit:cover">';
+  });
+
+  const root=document.documentElement;
+  const moon=document.getElementById('ico-moon');
+  const sun=document.getElementById('ico-sun');
+  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';}
+  applyTheme(localStorage.getItem('mf-theme')||'dark');
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    localStorage.setItem('mf-theme',next);applyTheme(next);
+  });
+
+  const AI_TEXT={desc:"Recorded 2015–2019, Crush is Floating Points at his most expansive — modular synthesis threaded through live strings and restless rhythm. Lush yet patient. 180g vinyl, printed inner sleeve."};
+  function aiAssist(id){var el=document.getElementById(id);if(!el)return;var b=event.currentTarget,o=b.innerHTML;b.style.opacity=.7;setTimeout(function(){el.value=AI_TEXT[id]||el.value;b.style.opacity=1;mfToast('Generated with AI · from the web');},900);}
+  function mfToast(m){var t=document.querySelector('.mf-toast');if(!t){t=document.createElement('div');t.className='mf-toast';document.body.appendChild(t);}t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show');},1700);}
+
+  // ── Merchandising toggles (Featured / Pre-order / On-sale) ──
+  function flipToggle(el){
+    const off=el.classList.toggle('off');
+    el.setAttribute('aria-checked',String(!off));
+  }
+  function toggleKeydown(ev,el,isPreorder){
+    if(ev.key===' '||ev.key==='Enter'){
+      ev.preventDefault();
+      flipToggle(el);
+      if(isPreorder) togglePreorderFields();
+    }
+  }
+  function togglePreorderFields(){
+    const on=document.getElementById('toggle-preorder').getAttribute('aria-checked')==='true';
+    document.getElementById('preorder-fields').classList.toggle('show',on);
+  }
+</script>
+</body>
+</html>

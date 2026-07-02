@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format — Vouchers (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .app-brand .brand-wordmark{height:16px;width:auto;}
+
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --neutral-t:rgba(255,255,255,.06);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --page-bg:#161616;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --neutral-t:rgba(0,0,0,.05);--focus:0 0 0 2px rgba(0,0,0,.5);--page-bg:#E8E8E8;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--ui);background:var(--page-bg);min-height:100vh;
+      display:flex;align-items:center;justify-content:center;padding:32px 16px;
+      -webkit-font-smoothing:antialiased;transition:background .2s;}
+    button{cursor:pointer;font-family:inherit;color:inherit;border:none;background:none;}
+    svg{display:block;}
+    a{text-decoration:none;color:inherit;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    /* ─── Phone frame ────────────────────────────────────────────── */
+    .device{
+      width:390px;height:844px;border-radius:44px;
+      background:var(--canvas);border:1px solid var(--hairline);
+      box-shadow:0 8px 40px rgba(0,0,0,.5);
+      position:relative;overflow:hidden;display:flex;flex-direction:column;
+    }
+    .status-bar{
+      height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;
+      padding:0 26px;position:relative;z-index:5;background:var(--surface);
+    }
+    .status-bar .time{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);}
+    .status-bar .icons{display:flex;align-items:center;gap:6px;color:var(--ink);}
+    .status-bar .icons svg{width:16px;height:16px;}
+    .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--canvas);border-radius:14px;z-index:6;}
+    ::-webkit-scrollbar{width:0;}
+
+    /* ─── Announce bar (running text, sticky) ───────────────────────── */
+    :root{--announce-h:26px;}
+    .announce{flex-shrink:0;position:sticky;top:0;z-index:23;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:40px;padding-left:100%;animation:mf-marquee 20s linear infinite;font-size:10px;font-family:var(--ui);}
+    .announce-track strong{font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+
+    /* ─── App header ─────────────────────────────────────────────── */
+    .app-hdr{
+      flex-shrink:0;display:flex;align-items:center;gap:10px;
+      padding:8px 16px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);
+      position:sticky;top:var(--announce-h);z-index:22;
+    }
+    .app-hdr .ham{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .app-hdr .ham:active{background:var(--raised);}
+    .app-hdr .ham svg{width:20px;height:20px;}
+    .app-brand{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;}
+    .app-brand .mark{width:28px;height:28px;color:var(--ink);}
+    .app-brand .wm{font-size:15px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .app-brand .wm sup{font-size:8px;color:var(--mute);vertical-align:super;}
+    .hdr-btn{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);position:relative;}
+    .hdr-btn:active{background:var(--raised);}
+    .hdr-btn svg{width:18px;height:18px;}
+    .hdr-btn .dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--danger);border:1.5px solid var(--surface);}
+
+    /* ─── Scroll area ────────────────────────────────────────────── */
+    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:16px 16px 88px;}
+    .page-title{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:28px;}
+    .page-sub{font-size:12px;color:var(--mute);margin-top:2px;margin-bottom:14px;}
+
+    /* create button (full width primary) */
+    .btn-pri-full{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:12px;border-radius:var(--r-md);
+      background:var(--accent);color:var(--accent-text);font-size:14px;font-weight:500;margin-bottom:14px;}
+    .btn-pri-full svg{width:16px;height:16px;}
+
+    /* search */
+    .search-box{display:flex;align-items:center;gap:9px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px 12px;margin-bottom:12px;}
+    .search-box svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
+    .search-box input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
+    .search-box input::placeholder{color:var(--mute);}
+
+    /* status chips */
+    .chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:16px;padding-bottom:2px;}
+    .chips::-webkit-scrollbar{height:0;}
+    .chip{flex-shrink:0;font-size:12px;font-weight:500;padding:6px 14px;border-radius:var(--r-pill);
+      border:1px solid var(--hairline);color:var(--mute);background:transparent;min-height:32px;display:inline-flex;align-items:center;gap:6px;}
+    .chip.on{border-color:var(--accent);color:var(--ink);}
+    .chip .cnt{font-family:var(--ui);font-size:10px;color:var(--mute);}
+    .chip.on .cnt{color:var(--body);}
+
+    /* stat 2-up */
+    .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+    .stat{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;}
+    .stat-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-bottom:8px;}
+    .stat-val{font-family:var(--ui);font-size:20px;font-weight:500;color:var(--ink);line-height:1;letter-spacing:-.02em;}
+    .stat-sub{font-size:11px;color:var(--mute);margin-top:8px;}
+
+    .sec-lbl{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--body);margin:4px 2px 10px;}
+
+    /* ─── Voucher cards (table → cards) ──────────────────────────── */
+    .vc-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;margin-bottom:10px;}
+    .vc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;}
+    .vc-code-wrap{min-width:0;}
+    .vc-code{font-family:var(--ui);font-size:15px;font-weight:500;color:var(--ink);letter-spacing:.04em;}
+    .vc-desc{font-size:11px;color:var(--mute);margin-top:2px;}
+    .status-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);flex-shrink:0;}
+    .status-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .st-active{background:var(--success-t);color:var(--success);}
+    .st-scheduled{background:var(--info-t);color:var(--info);}
+    .st-expired{background:var(--danger-t);color:var(--danger);}
+    .st-paused{background:var(--warning-t);color:var(--warning);}
+    .vc-figs{display:flex;justify-content:space-between;gap:6px;align-items:flex-end;padding-top:12px;border-top:1px solid var(--hairline);}
+    .fig{display:flex;flex-direction:column;gap:3px;}
+    .fig .k{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .fig .v{font-family:var(--ui);font-size:12px;color:var(--ink);}
+    .fig .v .lim{color:var(--mute);}
+    .fig .v.past{color:var(--mute);}
+    .vc-toggle{display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+    .vc-toggle .tg-k{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .use-bar{width:100%;height:5px;background:var(--raised);border-radius:var(--r-pill);overflow:hidden;margin-top:2px;}
+    .use-fill{height:100%;background:var(--accent);opacity:.85;border-radius:var(--r-pill);}
+    .use-line{margin-top:10px;}
+    .use-lbl{display:flex;justify-content:space-between;font-family:var(--ui);font-size:10px;color:var(--mute);margin-bottom:4px;}
+    .use-lbl .u{color:var(--body);}
+
+    /* toggle switch */
+    .switch{position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0;}
+    .switch input{opacity:0;width:0;height:0;}
+    .track{position:absolute;inset:0;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);transition:background .18s,border-color .18s;cursor:pointer;}
+    .track::before{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--mute);transition:transform .18s,background .18s;}
+    .switch input:checked + .track{background:var(--accent);border-color:var(--accent);}
+    .switch input:checked + .track::before{transform:translateX(16px);background:var(--accent-text);}
+    .switch input:focus-visible + .track{box-shadow:var(--focus);}
+
+    /* ─── Bottom sheet: create voucher ───────────────────────────── */
+    .sheet-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:30;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .sheet-overlay.show{opacity:1;pointer-events:auto;}
+    .sheet{
+      position:absolute;left:0;right:0;bottom:0;z-index:31;max-height:82%;
+      background:var(--surface);border-top:1px solid var(--hairline);
+      border-radius:20px 20px 0 0;transform:translateY(100%);transition:transform .26s ease;
+      display:flex;flex-direction:column;
+    }
+    .sheet.open{transform:translateY(0);}
+    .sheet-grab{width:36px;height:4px;border-radius:var(--r-pill);background:var(--hairline);margin:10px auto 4px;}
+    .sheet-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 18px 14px;border-bottom:1px solid var(--hairline);}
+    .sheet-title{font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .sheet-sub{font-size:11px;color:var(--mute);margin-top:2px;}
+    .sheet-close{width:30px;height:30px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .sheet-close:active{background:var(--raised);}
+    .sheet-close svg{width:16px;height:16px;}
+    .sheet-body{overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:14px;}
+    .field{display:flex;flex-direction:column;gap:6px;}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    label.lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .input,.select{background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:11px 12px;color:var(--ink);font-size:14px;font-family:inherit;width:100%;}
+    .input.mono-input{font-family:var(--ui);letter-spacing:.04em;}
+    .input::placeholder{color:var(--mute);}
+    .input:focus,.select:focus{outline:none;border-color:var(--accent);}
+    .hint{font-size:10px;color:var(--mute);}
+    .type-toggle{display:flex;gap:2px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:3px;}
+    .type-toggle button{flex:1;font-size:12px;font-weight:500;padding:9px 8px;border-radius:var(--r-sm);color:var(--mute);background:transparent;}
+    .type-toggle button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.3);}
+    .ch-grid{display:flex;flex-wrap:wrap;gap:8px;}
+    .ch-tag{font-family:var(--ui);font-size:12px;padding:6px 12px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--mute);background:transparent;}
+    .ch-tag.on{border-color:var(--accent);color:var(--ink);}
+    .sheet-foot{display:flex;gap:10px;padding:14px 18px 18px;border-top:1px solid var(--hairline);}
+    .btn-ghost{flex:1;padding:11px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);color:var(--ink);font-size:13px;font-weight:500;}
+    .btn-save{flex:1;padding:11px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:13px;font-weight:500;}
+
+    /* ─── Bottom tab bar ─────────────────────────────────────────── */
+    .tabbar{
+      position:absolute;left:0;right:0;bottom:0;height:72px;z-index:8;
+      background:var(--surface);border-top:1px solid var(--hairline);
+      display:flex;align-items:flex-start;justify-content:space-around;padding:10px 8px 0;
+    }
+    .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);width:64px;}
+    .tabbar a.on{color:var(--ink);}
+    .tabbar a svg{width:21px;height:21px;}
+    .tabbar a span{font-size:10px;font-weight:500;}
+    .tabbar a .nav-dot{position:relative;}
+    .tabbar a .nav-dot::after{content:"";position:absolute;top:-2px;right:-4px;width:6px;height:6px;border-radius:50%;background:var(--warning);}
+
+    /* ─── Drawer ─────────────────────────────────────────────────── */
+    .drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:20;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .drawer-overlay.show{opacity:1;pointer-events:auto;}
+    .drawer{
+      position:absolute;top:0;bottom:0;left:0;width:248px;z-index:21;
+      background:var(--surface);border-right:1px solid var(--hairline);
+      transform:translateX(-100%);transition:transform .24s ease;display:flex;flex-direction:column;
+    }
+    .drawer.open{transform:translateX(0);}
+    /* ─── Notifications drawer ───────────────────────────────────── */
+    .notif-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .notif-overlay.show{opacity:1;pointer-events:auto;}
+    .notif-drawer{position:absolute;top:0;bottom:0;right:0;width:280px;max-width:86vw;z-index:41;
+      background:var(--surface);border-left:1px solid var(--hairline);
+      transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .notif-drawer.open{transform:translateX(0);}
+    .notif-hdr{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:var(--accent);color:var(--accent-text);}
+    .notif-hdr .notif-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+    .notif-hdr .notif-clear{font-size:11px;font-weight:500;color:inherit;opacity:.85;background:none;border:none;}
+    .notif-hdr .notif-clear:active{opacity:1;}
+    .notif-list{flex:1;overflow-y:auto;padding:6px;}
+    .notif-item{display:flex;gap:10px;padding:10px;border-radius:var(--r-md);position:relative;}
+    .notif-item:active{background:var(--raised);}
+    .notif-ico{width:32px;height:32px;border-radius:50%;background:var(--raised);color:var(--body);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .notif-ico svg{width:16px;height:16px;}
+    .notif-body{flex:1;min-width:0;}
+    .notif-text{font-size:12.5px;color:var(--ink);line-height:1.4;}
+    .notif-text strong{font-weight:600;}
+    .notif-meta{font-size:11px;color:var(--mute);margin-top:2px;}
+    .notif-unread{position:absolute;top:14px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--danger);}
+    .drawer-brand{display:flex;align-items:center;gap:9px;padding:20px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-brand .mark{width:22px;height:22px;color:var(--ink);}
+    .drawer-brand .wm{font-size:14px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .drawer-nav{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:2px;}
+    .dn-group{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:12px 12px 4px;}
+    .dn-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--r-md);font-size:13px;font-weight:500;color:var(--body);}
+    .dn-item.active{color:var(--ink);background:var(--raised);}
+    .dn-item svg{width:17px;height:17px;flex-shrink:0;}
+    .dn-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--warning);}
+    .drawer-foot{border-top:1px solid var(--hairline);padding:12px;}
+    .sb-status{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .sb-status-text{font-size:11px;color:var(--body);}
+
+    /* ─── Prototype hub link ─────────────────────────────────────── */
+    .proto-link{
+      position:fixed;left:14px;bottom:14px;z-index:60;
+      display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:var(--r-pill);
+      background:var(--surface);border:1px solid var(--hairline);color:var(--mute);
+      font-size:12px;font-weight:500;transition:color .15s,background .15s;box-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+    .proto-link:hover{color:var(--ink);background:var(--raised);}
+  
+    .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+  </style>
+</head>
+<body>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <!-- Status bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <span class="icons">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="13" width="3" height="6" rx="1"/><rect x="7" y="9" width="3" height="10" rx="1"/><rect x="12" y="5" width="3" height="14" rx="1"/><rect x="17" y="2" width="3" height="17" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13a10 10 0 0114 0M8.5 16.5a5 5 0 017 0M2 9.5a15 15 0 0120 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2.5"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><rect x="21" y="10" width="1.6" height="4" rx="1" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <!-- Announce bar -->
+  <div class="announce"><div class="announce-track"><span>2 vouchers expiring this week · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>2 vouchers expiring this week · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
+
+  <!-- App header -->
+  <div class="app-hdr">
+    <button class="ham" id="ham-btn" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="index.html" class="app-brand" aria-label="Medium Format home">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <button class="hdr-btn" id="notifBtn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </button>
+  </div>
+
+  <!-- Scroll content -->
+  <div class="screen">
+    <h1 class="page-title">Vouchers</h1>
+    <div class="page-sub">Promo codes across every channel</div>
+
+    <!-- create button -->
+    <button class="btn-pri-full" id="open-create">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Create voucher
+    </button>
+
+    <!-- search -->
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="Search code…">
+    </div>
+
+    <!-- status chips -->
+    <div class="chips">
+      <button class="chip on" onclick="setChip(this)">All <span class="cnt">12</span></button>
+      <button class="chip" onclick="setChip(this)">Active <span class="cnt">7</span></button>
+      <button class="chip" onclick="setChip(this)">Scheduled <span class="cnt">2</span></button>
+      <button class="chip" onclick="setChip(this)">Expired <span class="cnt">3</span></button>
+      <button class="chip" onclick="setChip(this)">Paused <span class="cnt">1</span></button>
+    </div>
+
+    <!-- stats -->
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-lbl">Active</div><div class="stat-val">7</div><div class="stat-sub">2 scheduled</div></div>
+      <div class="stat"><div class="stat-lbl">Discount MTD</div><div class="stat-val">Rp 5.9M</div><div class="stat-sub">418 redemptions</div></div>
+    </div>
+
+    <div class="sec-lbl">All Vouchers · 12</div>
+
+    <!-- voucher cards -->
+    <div class="vc-card">
+      <div class="vc-top">
+        <div class="vc-code-wrap"><div class="vc-code">CRATE10</div><div class="vc-desc">10% off · min Rp 300k</div></div>
+        <span class="status-pill st-active">Active</span>
+      </div>
+      <div class="use-line">
+        <div class="use-lbl"><span>Used</span><span class="u">184 / 500</span></div>
+        <div class="use-bar"><div class="use-fill" style="width:37%"></div></div>
+      </div>
+      <div class="vc-figs">
+        <div class="fig"><span class="k">Type</span><span class="v">Percentage</span></div>
+        <div class="fig"><span class="k">Value</span><span class="v">10%</span></div>
+        <div class="fig"><span class="k">Expiry</span><span class="v">31 Jul 26</span></div>
+        <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" checked aria-label="Toggle CRATE10"><span class="track"></span></label></div>
+      </div>
+    </div>
+
+    <div class="vc-card">
+      <div class="vc-top">
+        <div class="vc-code-wrap"><div class="vc-code">WELCOME50K</div><div class="vc-desc">Rp 50k off first order</div></div>
+        <span class="status-pill st-active">Active</span>
+      </div>
+      <div class="use-line">
+        <div class="use-lbl"><span>Used</span><span class="u">129 / ∞</span></div>
+        <div class="use-bar"><div class="use-fill" style="width:26%"></div></div>
+      </div>
+      <div class="vc-figs">
+        <div class="fig"><span class="k">Type</span><span class="v">Fixed</span></div>
+        <div class="fig"><span class="k">Value</span><span class="v">Rp 50k</span></div>
+        <div class="fig"><span class="k">Expiry</span><span class="v">None</span></div>
+        <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" checked aria-label="Toggle WELCOME50K"><span class="track"></span></label></div>
+      </div>
+    </div>
+
+    <div class="vc-card">
+      <div class="vc-top">
+        <div class="vc-code-wrap"><div class="vc-code">RSD2026</div><div class="vc-desc">Rp 100k off · min Rp 750k</div></div>
+        <span class="status-pill st-scheduled">Scheduled</span>
+      </div>
+      <div class="use-line">
+        <div class="use-lbl"><span>Used</span><span class="u">0 / 300</span></div>
+        <div class="use-bar"><div class="use-fill" style="width:0%"></div></div>
+      </div>
+      <div class="vc-figs">
+        <div class="fig"><span class="k">Type</span><span class="v">Fixed</span></div>
+        <div class="fig"><span class="k">Value</span><span class="v">Rp 100k</span></div>
+        <div class="fig"><span class="k">Starts</span><span class="v">18 Apr 26</span></div>
+        <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" checked aria-label="Toggle RSD2026"><span class="track"></span></label></div>
+      </div>
+    </div>
+
+    <div class="vc-card">
+      <div class="vc-top">
+        <div class="vc-code-wrap"><div class="vc-code">WHOLESALE15</div><div class="vc-desc">15% off · partners only</div></div>
+        <span class="status-pill st-paused">Paused</span>
+      </div>
+      <div class="use-line">
+        <div class="use-lbl"><span>Used</span><span class="u">38 / 50</span></div>
+        <div class="use-bar"><div class="use-fill" style="width:76%"></div></div>
+      </div>
+      <div class="vc-figs">
+        <div class="fig"><span class="k">Type</span><span class="v">Percentage</span></div>
+        <div class="fig"><span class="k">Value</span><span class="v">15%</span></div>
+        <div class="fig"><span class="k">Expiry</span><span class="v">30 Sep 26</span></div>
+        <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" aria-label="Toggle WHOLESALE15"><span class="track"></span></label></div>
+      </div>
+    </div>
+
+    <div class="vc-card" style="margin-bottom:4px;">
+      <div class="vc-top">
+        <div class="vc-code-wrap"><div class="vc-code">NEWYEAR25</div><div class="vc-desc">Rp 25k off · min Rp 200k</div></div>
+        <span class="status-pill st-expired">Expired</span>
+      </div>
+      <div class="use-line">
+        <div class="use-lbl"><span>Used</span><span class="u">312 / 300</span></div>
+        <div class="use-bar"><div class="use-fill" style="width:100%"></div></div>
+      </div>
+      <div class="vc-figs">
+        <div class="fig"><span class="k">Type</span><span class="v">Fixed</span></div>
+        <div class="fig"><span class="k">Value</span><span class="v">Rp 25k</span></div>
+        <div class="fig"><span class="k">Expired</span><span class="v past">2 Jan 26</span></div>
+        <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" aria-label="Toggle NEWYEAR25"><span class="track"></span></label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create voucher bottom sheet -->
+  <div class="sheet-overlay" id="sheet-overlay"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="sheet-grab"></div>
+    <div class="sheet-hdr">
+      <div>
+        <div class="sheet-title" id="sheet-title">Create voucher</div>
+        <div class="sheet-sub">Set up a new promo code</div>
+      </div>
+      <button class="sheet-close" id="close-create" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="sheet-body">
+      <div class="field">
+        <label class="lbl" for="vc-code">Code</label>
+        <input class="input mono-input" id="vc-code" value="SUMMER20" placeholder="SUMMER20">
+        <span class="hint">Uppercase, no spaces.</span>
+      </div>
+      <div class="field">
+        <label class="lbl">Discount type</label>
+        <div class="type-toggle" id="type-toggle">
+          <button class="on" onclick="setType(this,'pct')">Percentage %</button>
+          <button onclick="setType(this,'fixed')">Fixed IDR</button>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label class="lbl" for="vc-value">Value</label><input class="input mono-input" id="vc-value" value="20" placeholder="20"><span class="hint" id="value-hint">Percent off</span></div>
+        <div class="field"><label class="lbl" for="vc-min">Min spend</label><input class="input mono-input" id="vc-min" placeholder="Rp 300.000"><span class="hint">Optional</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label class="lbl" for="vc-limit">Usage limit</label><input class="input mono-input" id="vc-limit" placeholder="500"><span class="hint">Total allowed</span></div>
+        <div class="field"><label class="lbl" for="vc-expiry">Expiry</label><input class="input mono-input" id="vc-expiry" value="31/07/2026" placeholder="dd/mm/yyyy"><span class="hint">Blank = never</span></div>
+      </div>
+      <div class="field">
+        <label class="lbl">Eligible channels</label>
+        <div class="ch-grid" id="ch-grid">
+          <button class="ch-tag on" onclick="toggleCh(this)">Website</button>
+          <button class="ch-tag on" onclick="toggleCh(this)">POS</button>
+          <button class="ch-tag" onclick="toggleCh(this)">Tokopedia</button>
+          <button class="ch-tag" onclick="toggleCh(this)">Shopee</button>
+          <button class="ch-tag" onclick="toggleCh(this)">Discogs</button>
+          <button class="ch-tag" onclick="toggleCh(this)">Bandcamp</button>
+          <button class="ch-tag" onclick="toggleCh(this)">Event</button>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <button class="btn-ghost" id="cancel-create">Cancel</button>
+      <button class="btn-save" id="save-create">Create voucher</button>
+    </div>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="drawer">
+    <a href="index.html" class="drawer-brand" aria-label="Medium Format home">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <nav class="drawer-nav">
+      <div class="dn-group">Overview</div>
+      <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+
+      <div class="dn-group">Selling</div>
+      <a href="mockup-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-dot"></span></a>
+      <a href="mockup-inventory-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</a>
+      <a href="mockup-customers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Customers</a>
+      <a href="mockup-vouchers-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 012-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 010 4v4a2 2 0 002 2h16a2 2 0 002-2v-4a2 2 0 01-2-2z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="2 3"/></svg>Vouchers</a>
+      <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
+      <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
+
+      <div class="dn-group">Content</div>
+      <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
+      <a href="mockup-news-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>News</a>
+      <a href="mockup-news-categories-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>Categories &amp; Tags</a>
+
+      <div class="dn-group">Shop</div>
+      <a href="mockup-purchase-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Purchase orders</a>
+
+      <div class="dn-group">Config</div>
+      <a href="mockup-preferences-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</a>
+    </nav>
+    <div class="drawer-foot">
+      <div class="dn-user">
+        <div class="dn-avatar">RP</div>
+        <div>
+          <div class="dn-user-name">Raka Pratama</div>
+          <div class="dn-user-role">Owner</div>
+        </div>
+            <button class="drawer-theme" id="theme-btn" aria-label="Toggle theme">
+      <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span id="theme-label">Dark</span>
+    </button>
+    </div>
+    </div>
+  </aside>
+
+  <!-- Notifications drawer -->
+  <div class="notif-overlay" id="notifOverlay"></div>
+  <aside class="notif-drawer" id="notifDrawer" aria-label="Notifications">
+    <div class="notif-hdr">
+      <span class="notif-title">Notifications</span>
+      <button class="notif-clear" id="notifClearBtn">Mark all read</button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-meta">2 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text"><strong>3 items</strong> are running low on stock</div>
+          <div class="notif-meta">28 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">PO-0032 was <strong>partially received</strong> from Analog Distro</div>
+          <div class="notif-meta">Yesterday</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Bottom tab bar -->
+  <nav class="tabbar">
+    <a href="mockup-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Home</span></a>
+    <a href="mockup-orders.html"><span class="nav-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Orders</span></a>
+    <a href="mockup-customers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Customers</span></a>
+    <a href="mockup-vouchers.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 010-4V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 010 4v2a2 2 0 000 4v0a2 2 0 002 2h12a2 2 0 002-2v0a2 2 0 000-4z"/></svg><span>Vouchers</span></a>
+  </nav>
+</div>
+
+<!-- Prototype hub link -->
+<a href="index.html" class="proto-link" aria-label="Back to prototype hub">◹ Prototype</a>
+
+<script>
+  function setChip(el){el.parentNode.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
+  function setType(el,kind){
+    el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+    el.classList.add('on');
+    const hint=document.getElementById('value-hint');const val=document.getElementById('vc-value');
+    if(kind==='pct'){hint.textContent='Percent off';val.placeholder='20';}
+    else{hint.textContent='Rupiah off';val.placeholder='Rp 50.000';}
+  }
+  function toggleCh(el){el.classList.toggle('on');}
+
+  // Create voucher sheet
+  const sheet=document.getElementById('sheet');
+  const sOverlay=document.getElementById('sheet-overlay');
+  function openSheet(){sheet.classList.add('open');sOverlay.classList.add('show');}
+  function closeSheet(){sheet.classList.remove('open');sOverlay.classList.remove('show');}
+  document.getElementById('open-create').addEventListener('click',openSheet);
+  document.getElementById('close-create').addEventListener('click',closeSheet);
+  document.getElementById('cancel-create').addEventListener('click',closeSheet);
+  document.getElementById('save-create').addEventListener('click',closeSheet);
+  sOverlay.addEventListener('click',closeSheet);
+
+  // Drawer
+  const drawer=document.getElementById('drawer');
+  const dOverlay=document.getElementById('drawer-overlay');
+  function closeDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('show');}
+  document.getElementById('ham-btn').addEventListener('click',()=>{drawer.classList.add('open');dOverlay.classList.add('show');});
+  dOverlay.addEventListener('click',closeDrawer);
+
+  // Notifications drawer
+  const notifDrawer=document.getElementById('notifDrawer');
+  const notifOverlay=document.getElementById('notifOverlay');
+  function closeNotif(){notifDrawer.classList.remove('open');notifOverlay.classList.remove('show');}
+  document.getElementById('notifBtn').addEventListener('click',()=>{notifDrawer.classList.add('open');notifOverlay.classList.add('show');});
+  notifOverlay.addEventListener('click',closeNotif);
+  document.getElementById('notifClearBtn').addEventListener('click',()=>{
+    document.querySelectorAll('.notif-unread').forEach(d=>d.remove());
+  });
+
+  // Theme
+  const root=document.documentElement;
+  const moon=document.getElementById('ico-moon');
+  const sun=document.getElementById('ico-sun');
+  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';}
+  applyTheme(localStorage.getItem('mf-theme')||'dark');
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    localStorage.setItem('mf-theme',next);applyTheme(next);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>Medium Format — All Screens Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .brand .brand-wordmark{height:20px;width:auto;}
+
+:root{
+  --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+  --ink:#FFF;--body:#B4B4B4;--mute:#6E6E6E;--accent:#FFF;--accent-text:#000;
+  --ui:"Geist","Helvetica Neue",Arial,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;
+  --e2:0 4px 12px rgba(0,0,0,.6);--rail:264px;
+}
+html[data-theme="light"]{
+  --canvas:#F0F0F0;--surface:#FFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+  --ink:#000;--body:#525252;--mute:#8A8A8A;--accent:#000;--accent-text:#FFF;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--canvas);color:var(--body);font:400 14px/20px var(--ui);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;color:inherit}
+
+/* top bar */
+.top{height:56px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--surface);border-bottom:1px solid var(--hairline)}
+.brand{display:flex;align-items:center;gap:8px;color:var(--ink)}
+.brand .mark{width:22px;height:22px}
+.brand .wm{font:600 14px/1 var(--ui);letter-spacing:-.04em}
+.brand .wm sup{font-size:7px;color:var(--mute);vertical-align:super}
+.brand .tag{font:500 10px/1 var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding-left:10px;margin-left:3px;border-left:1px solid var(--hairline)}
+.spacer{flex:1}
+.now{font:500 13px/1 var(--ui);color:var(--ink);display:flex;align-items:center;gap:8px;min-width:0}
+.now .g{font:500 11px/1 var(--mono);color:var(--mute)}
+.seg{display:flex;border:1px solid var(--hairline);border-radius:999px;padding:3px;background:var(--canvas)}
+.seg button{font:500 12px/1 var(--ui);color:var(--mute);background:transparent;border:none;border-radius:999px;padding:6px 12px;display:flex;align-items:center;gap:6px}
+.seg button.on{background:var(--accent);color:var(--accent-text)}
+.seg button svg{width:13px;height:13px}
+.ico-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--hairline);background:transparent;color:var(--body);display:flex;align-items:center;justify-content:center}
+.ico-btn:hover{color:var(--ink);border-color:var(--mute)}
+.ico-btn svg{width:15px;height:15px}
+
+/* layout */
+.layout{flex:1;display:flex;min-height:0}
+.rail{width:var(--rail);flex:none;background:var(--surface);border-right:1px solid var(--hairline);display:flex;flex-direction:column;overflow:hidden}
+.search{display:flex;align-items:center;gap:8px;margin:12px 12px 8px;padding:8px 11px;background:var(--raised);border:1px solid var(--hairline);border-radius:8px}
+.search svg{width:14px;height:14px;color:var(--mute);flex:none}
+.search input{background:transparent;border:none;outline:none;color:var(--ink);font:400 13px/1 var(--ui);width:100%}
+.search input::placeholder{color:var(--mute)}
+.list{flex:1;overflow-y:auto;padding:4px 8px 16px}
+.grp-lbl{font:600 10px/16px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding:14px 8px 6px}
+.item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:7px;color:var(--body);font:500 13px/18px var(--ui);position:relative}
+.item:hover{background:var(--raised);color:var(--ink)}
+.item.on{background:var(--raised);color:var(--ink)}
+.item .n{font:500 10px/1 var(--mono);color:var(--mute);width:20px;flex:none}
+.item.on .n{color:var(--ink)}
+.item .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .op{opacity:0;color:var(--mute)}
+.item:hover .op{opacity:1}
+.item .op svg{width:13px;height:13px;display:block}
+
+/* stage */
+.stage{flex:1;min-width:0;background:var(--canvas);display:flex;align-items:stretch;justify-content:center;overflow:auto;padding:0}
+.stage.m{padding:24px;align-items:flex-start}
+.wrap-d{width:100%;height:100%}
+.wrap-d iframe{width:100%;height:100%;border:0;background:var(--canvas)}
+.device{width:390px;height:844px;max-height:calc(100vh - 104px);border:10px solid #101012;border-radius:44px;overflow:hidden;box-shadow:var(--e2);background:#000;flex:none}
+.device iframe{width:100%;height:100%;border:0;background:#000}
+.stage:not(.m) .device{display:none}
+.stage.m .wrap-d{display:none}
+
+/* gallery */
+.gallery{flex:1;overflow-y:auto;padding:18px;display:none;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;align-content:start}
+.layout.gal .stage{display:none}
+.layout.gal .gallery{display:grid}
+.g-card{border:1px solid var(--hairline);border-radius:10px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+.g-view{position:relative;height:210px;overflow:hidden;background:var(--canvas);border-bottom:1px solid var(--hairline);cursor:pointer}
+.g-view iframe{position:absolute;top:0;left:0;width:1280px;height:840px;border:0;transform:scale(.242);transform-origin:top left;pointer-events:none}
+.g-cap{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px}
+.g-cap .gt{font:600 13px/16px var(--ui);color:var(--ink);letter-spacing:-.01em}
+.g-cap .gf{font:400 10px/14px var(--mono);color:var(--mute);margin-top:1px}
+.g-open{font:500 11px/1 var(--ui);color:var(--body);border:1px solid var(--hairline);border-radius:6px;padding:6px 9px;flex:none}
+.g-open:hover{color:var(--ink);border-color:var(--mute)}
+
+@media(max-width:760px){.rail{position:absolute;z-index:20;height:calc(100% - 56px);transform:translateX(-100%);transition:transform .2s}.rail.open{transform:none}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand">
+    <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light"><span class="tag">Preview</span>
+  </div>
+  <div class="now"><span class="g" id="nowNo">01</span><span id="nowTitle">Catalogue</span></div>
+  <div class="spacer"></div>
+  <div class="seg" aria-label="Device">
+    <button id="dvD" class="on" onclick="setDevice('d')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Desktop</button>
+    <button id="dvM" onclick="setDevice('m')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>Mobile</button>
+  </div>
+  <div class="seg" aria-label="View">
+    <button id="vwS" class="on" onclick="setView('stage')">Stage</button>
+    <button id="vwG" onclick="setView('gallery')">Gallery</button>
+  </div>
+  <button class="ico-btn" id="openTab" title="Open current in new tab" aria-label="Open in new tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></button>
+  <button class="ico-btn" id="theme" title="Toggle theme" aria-label="Toggle theme"><svg id="icMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg id="icSun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg></button>
+</div>
+
+<div class="layout" id="layout">
+  <aside class="rail" id="rail">
+    <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="q" placeholder="Filter screens…"></div>
+    <div class="list" id="list"></div>
+  </aside>
+  <main class="stage" id="stage">
+    <div class="wrap-d"><iframe id="frameD" title="Screen preview" src="mockup-storefront.html"></iframe></div>
+    <div class="device"><iframe id="frameM" title="Mobile preview" src=""></iframe></div>
+  </main>
+  <section class="gallery" id="gallery"></section>
+</div>
+
+<script>
+const SCREENS=[
+ {g:"Storefront",items:[
+   ["storefront","Catalogue"],["category","Category"],["cassettes","Cassettes (hero)"],["release","Release detail"],["cart","Cart"],["checkout","Checkout"],
+   ["confirmation","Confirmation"],["account","Account"],["journal","News article"]]},
+ {g:"Back-office",items:[
+   ["dashboard","Dashboard"],["inventory","Inventory"],["locations","Locations"],["release-edit","Add / edit release"],
+   ["orders","Orders"],["order-detail","Order detail"],["customers","Customers"],["vouchers","Vouchers"],
+   ["newsletter","Newsletter"],["purchase-orders","Purchase orders"],["news","News updates"],
+   ["channels","Channels"],["preferences","Preferences"]]},
+ {g:"Point of sale",items:[["pos","POS sale"],["pos-checkout","POS checkout"]]},
+];
+const FLAT=[]; SCREENS.forEach(s=>s.items.forEach(it=>FLAT.push({f:it[0],t:it[1],g:s.g})));
+let device='d', view='stage', current='storefront';
+const srcOf=(f)=>device==='m'?`mockup-${f}-mobile.html`:`mockup-${f}.html`;
+
+// build rail
+const listEl=document.getElementById('list');
+let n=0;
+listEl.innerHTML=SCREENS.map(s=>{
+  const rows=s.items.map(it=>{n++;const num=String(n).padStart(2,'0');
+    return `<a class="item" data-f="${it[0]}" data-t="${it[1]}" data-n="${num}" onclick="select('${it[0]}')">
+      <span class="n">${num}</span><span class="t">${it[1]}</span>
+      <span class="op" title="Open in new tab" onclick="event.stopPropagation();window.open(srcOf('${it[0]}'),'_blank')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span></a>`;
+  }).join('');
+  return `<div class="grp-lbl">${s.g}</div>${rows}`;
+}).join('');
+
+const frameD=document.getElementById('frameD'), frameM=document.getElementById('frameM'), stage=document.getElementById('stage');
+function select(f){
+  current=f;
+  const meta=FLAT.find(x=>x.f===f)||FLAT[0];
+  document.getElementById('nowTitle').textContent=meta.t;
+  const idx=FLAT.indexOf(meta); document.getElementById('nowNo').textContent=String(idx+1).padStart(2,'0');
+  if(device==='m'){frameM.src=srcOf(f);} else {frameD.src=srcOf(f);}
+  document.querySelectorAll('.item').forEach(a=>a.classList.toggle('on',a.dataset.f===f));
+}
+function setDevice(d){
+  device=d;
+  document.getElementById('dvD').classList.toggle('on',d==='d');
+  document.getElementById('dvM').classList.toggle('on',d==='m');
+  stage.classList.toggle('m',d==='m');
+  // (re)load the correct frame for current screen
+  if(d==='m'){frameM.src=srcOf(current);} else {frameD.src=srcOf(current);}
+  if(view==='gallery') buildGallery();
+  localStorage.setItem('mf-prev-dev',d);
+}
+function setView(v){
+  view=v;
+  document.getElementById('vwS').classList.toggle('on',v==='stage');
+  document.getElementById('vwG').classList.toggle('on',v==='gallery');
+  document.getElementById('layout').classList.toggle('gal',v==='gallery');
+  if(v==='gallery') buildGallery();
+}
+const gallery=document.getElementById('gallery');
+function buildGallery(){
+  gallery.innerHTML=FLAT.map(x=>`
+    <div class="g-card">
+      <div class="g-view" onclick="select('${x.f}');setView('stage')"><iframe loading="lazy" src="${srcOf(x.f)}" title="${x.t}"></iframe></div>
+      <div class="g-cap"><div><div class="gt">${x.t}</div><div class="gf">mockup-${x.f}${device==='m'?'-mobile':''}</div></div>
+      <button class="g-open" onclick="window.open(srcOf('${x.f}'),'_blank')">Open ↗</button></div>
+    </div>`).join('');
+}
+document.getElementById('openTab').onclick=()=>window.open(srcOf(current),'_blank');
+document.getElementById('q').addEventListener('input',e=>{
+  const v=e.target.value.toLowerCase();
+  document.querySelectorAll('.item').forEach(a=>{a.style.display=a.dataset.t.toLowerCase().includes(v)?'':'none';});
+});
+// theme
+const H=document.documentElement;
+function applyTheme(t){H.setAttribute('data-theme',t);document.getElementById('icMoon').style.display=t==='light'?'none':'';document.getElementById('icSun').style.display=t==='light'?'':'none';}
+applyTheme(localStorage.getItem('mf-theme')||'dark');
+document.getElementById('theme').onclick=()=>{const nx=H.getAttribute('data-theme')==='light'?'dark':'light';localStorage.setItem('mf-theme',nx);applyTheme(nx);};
+// restore device pref, select first
+setDevice(localStorage.getItem('mf-prev-dev')||'d');
+select('storefront');
+</script>
+</body>
+</html>

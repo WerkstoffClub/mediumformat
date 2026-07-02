@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format® — Shop by Category</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .nav-logo .brand-wordmark{height:22px;width:auto;}
+    .fbrand-name .brand-wordmark{height:22px;width:auto;}
+
+    /* ─── Tokens (dark default) ─────────────────────── */
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+      --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 4px 12px rgba(0,0,0,.6);--e3:0 8px 24px rgba(0,0,0,.7);
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --nav-h:56px;--player-h:68px;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --focus:0 0 0 2px rgba(0,0,0,.5);
+      --e1:0 1px 2px rgba(0,0,0,.08);--e2:0 4px 12px rgba(0,0,0,.12);--e3:0 8px 24px rgba(0,0,0,.16);
+    }
+
+    /* ─── Reset ──────────────────────────────────── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:var(--ui);font-size:14px;line-height:1.45;
+      background:var(--canvas);color:var(--ink);
+      padding-bottom:var(--player-h);
+      transition:background .3s,color .3s;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    ::-webkit-scrollbar{width:6px;height:6px;}
+    ::-webkit-scrollbar-track{background:var(--canvas);}
+    ::-webkit-scrollbar-thumb{background:var(--hairline);border-radius:3px;}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    /* ─── Announcement ───────────────────────────── */
+    .announce{height:32px;background:var(--accent);border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--accent-text);}
+    .announce strong{color:inherit;font-weight:600;}
+    .announce a{color:inherit;text-decoration:none;font-weight:500;border-bottom:1px solid currentColor;padding-bottom:1px;opacity:.8;transition:opacity .15s;}
+    .announce a:hover{opacity:1;}
+    
+    html[data-theme="light"] .announce strong{color:#fff;}
+    html[data-theme="light"] .announce a{color:#fff;border-color:rgba(255,255,255,.55);}
+    html[data-theme="light"] .announce a:hover{border-color:#fff;}
+
+    /* ─── Nav ────────────────────────────────────── */
+    .nav{
+      position:sticky;top:0;z-index:100;height:var(--nav-h);
+      background:var(--surface);border-bottom:1px solid var(--hairline);
+      display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;
+    }
+    .nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0;}
+    .nav-logo .mark{width:42px;height:42px;color:var(--ink);flex-shrink:0;}
+    .nav-logo .mark svg{width:100%;height:100%;display:block;}
+    .nav-logo-main{font-size:18px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:1;display:flex;align-items:flex-start;}
+    .nav-logo-main sup{font-size:8px;font-weight:500;margin-left:1px;top:-.2em;}
+    .nav-link{
+      display:inline-flex;align-items:center;gap:4px;
+      font-size:13px;font-weight:500;color:var(--body);text-decoration:none;
+      padding:7px 11px;border-radius:var(--r-md);transition:color .15s,background .15s;cursor:pointer;
+    }
+    .nav-link:hover{color:var(--ink);background:var(--raised);}
+    .nav-link.active{color:var(--ink);}
+    .nav-actions{display:flex;align-items:center;gap:2px;justify-self:end;}
+
+    /* ─── Centered mega-menu ─────────────────────── */
+    .nav-menu{display:flex;align-items:center;gap:4px;justify-self:center;}
+    .menu-item{position:relative;}
+    .menu-item::after{content:"";position:absolute;left:0;right:0;top:100%;height:14px;}
+    .nav-link .chev{font-size:9px;opacity:.7;}
+    .submenu{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);
+      min-width:200px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);
+      box-shadow:var(--e2);padding:8px;opacity:0;visibility:hidden;transition:opacity .15s,transform .15s;z-index:120;}
+    .menu-item:hover .submenu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+    .submenu a{display:block;padding:8px 12px;border-radius:var(--r-md);font-size:13px;color:var(--body);text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
+    .submenu a:hover{background:var(--raised);color:var(--ink);}
+    .submenu.grid{display:grid;grid-template-columns:1fr 1fr;min-width:320px;}
+
+    /* ─── Currency switcher ──────────────────────── */
+    .cur-switch{display:flex;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:2px;margin-left:4px;}
+    .cur-btn{font-family:var(--ui);font-size:11px;font-weight:500;color:var(--mute);background:transparent;border:none;border-radius:var(--r-pill);padding:5px 10px;cursor:pointer;transition:background .15s,color .15s;}
+    .cur-btn.on{background:var(--accent);color:var(--accent-text);}
+    .nav-btn{
+      width:38px;height:38px;border-radius:var(--r-md);border:none;background:transparent;
+      color:var(--body);cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:background .15s,color .15s;
+    }
+    .nav-btn:hover{background:var(--raised);color:var(--ink);}
+    .nav-btn svg{width:18px;height:18px;}
+    .kbd{font-family:var(--ui);font-size:10px;color:var(--mute);border:1px solid var(--hairline);
+      border-radius:var(--r-sm);padding:2px 5px;margin-left:6px;}
+    .cart-wrap{position:relative;}
+    .cart-badge{
+      position:absolute;top:4px;right:4px;min-width:15px;height:15px;padding:0 3px;border-radius:var(--r-pill);
+      background:var(--accent);color:var(--accent-text);font-size:9px;font-weight:600;
+      display:flex;align-items:center;justify-content:center;
+    }
+
+    /* ─── Page header ────────────────────────────── */
+    .page-head{
+      background:var(--surface);border-bottom:1px solid var(--hairline);padding:32px 24px 0;
+    }
+    .breadcrumb{font-family:var(--ui);font-size:12px;color:var(--mute);display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+    .breadcrumb a{text-decoration:none;color:var(--mute);transition:color .15s;}
+    .breadcrumb a:hover{color:var(--ink);}
+    .breadcrumb .sep{color:var(--hairline);}
+    .breadcrumb .crumb-cur{color:var(--ink);}
+    .ph-title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px;}
+    .ph-title{font-size:34px;font-weight:600;letter-spacing:-.05em;color:var(--ink);line-height:1.05;}
+    .ph-title em{font-style:normal;color:var(--mute);}
+    .ph-count{font-family:var(--ui);font-size:13px;color:var(--body);}
+    .ph-count strong{color:var(--ink);font-weight:500;}
+
+    /* ─── Category switcher (tab pills) ──────────── */
+    .catswitch{display:flex;gap:8px;overflow-x:auto;padding-bottom:16px;margin-bottom:-1px;scrollbar-width:none;}
+    .catswitch::-webkit-scrollbar{display:none;}
+    .cat-tab{
+      display:inline-flex;align-items:center;gap:8px;flex-shrink:0;
+      font-size:13px;font-weight:500;color:var(--body);cursor:pointer;
+      background:transparent;border:1px solid var(--hairline);border-radius:var(--r-pill);
+      padding:9px 15px;transition:color .15s,background .15s,border-color .15s;white-space:nowrap;
+    }
+    .cat-tab svg{width:15px;height:15px;color:var(--mute);transition:color .15s;}
+    .cat-tab:hover{color:var(--ink);border-color:var(--mute);}
+    .cat-tab:hover svg{color:var(--body);}
+    .cat-tab .cat-n{font-family:var(--ui);font-size:11px;color:var(--mute);transition:color .15s;}
+    .cat-tab.on{background:var(--accent);border-color:var(--accent);color:var(--accent-text);}
+    .cat-tab.on svg,.cat-tab.on .cat-n{color:var(--accent-text);}
+
+    /* ─── Filter / sort row ──────────────────────── */
+    .toolbar{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:14px 24px;border-bottom:1px solid var(--hairline);background:var(--surface);
+      position:sticky;top:var(--nav-h);z-index:50;flex-wrap:wrap;
+    }
+    .tb-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .fchip{
+      display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--body);
+      background:transparent;border:1px solid var(--hairline);border-radius:var(--r-pill);
+      padding:7px 13px;cursor:pointer;transition:color .15s,border-color .15s;white-space:nowrap;
+    }
+    .fchip:hover{color:var(--ink);border-color:var(--mute);}
+    .fchip svg{width:13px;height:13px;}
+    .fchip.on{color:var(--ink);border-color:var(--ink);}
+    .fchip .fchip-x{color:var(--mute);}
+    .tb-right{display:flex;align-items:center;gap:10px;}
+    .result-count{font-size:13px;color:var(--mute);}
+    .result-count strong{font-family:var(--ui);color:var(--ink);}
+    .sort-select{
+      background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);
+      color:var(--body);font-size:13px;font-family:var(--ui);padding:8px 30px 8px 12px;cursor:pointer;appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236E6E6E'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 10px center;background-size:14px;transition:border-color .15s;
+    }
+    .sort-select:focus{border-color:var(--accent);outline:none;}
+
+    /* ─── Cover art (vinyl groove) ───────────────── */
+    .cover-art{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .cover-art .grooves{width:64%;height:64%;border-radius:50%;position:relative;
+      background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);}
+    html[data-theme="light"] .cover-art .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px);}
+    .cover-art .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+    .cover-art::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05),transparent 60%);pointer-events:none;}
+    html[data-theme="light"] .cover-art::before{background:linear-gradient(135deg,rgba(0,0,0,.04),transparent 60%);}
+
+    /* ─── Non-music tile (neutral surface + mono icon) ── */
+    .tile{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .tile::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04),transparent 62%);pointer-events:none;}
+    html[data-theme="light"] .tile::before{background:linear-gradient(135deg,rgba(0,0,0,.03),transparent 62%);}
+    .tile svg{width:34%;height:34%;color:var(--mute);stroke-width:1.25;}
+
+    /* ─── Category panels ────────────────────────── */
+    .cat-panel{display:none;}
+    .cat-panel.active{display:block;}
+
+    /* ─── Product grid ───────────────────────────── */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px 24px;}
+    .pcard{
+      background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);
+      overflow:hidden;position:relative;transition:transform .2s,border-color .2s;
+    }
+    .pcard:hover{transform:translateY(-2px);border-color:var(--mute);}
+    .pcard-media{display:block;aspect-ratio:1;position:relative;overflow:hidden;background:var(--surface);cursor:pointer;}
+    .pcard-media .cover-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+    .pcard:hover .cover-overlay{background:rgba(0,0,0,.5);}
+    html[data-theme="light"] .pcard:hover .cover-overlay{background:rgba(255,255,255,.45);}
+    .viewbtn{
+      font-size:12px;font-weight:500;padding:7px 14px;border-radius:var(--r-pill);
+      background:var(--accent);color:var(--accent-text);opacity:0;transform:translateY(4px);
+      transition:opacity .2s,transform .2s;
+    }
+    .pcard:hover .viewbtn{opacity:1;transform:translateY(0);}
+
+    /* stock badge (status colour only) */
+    .stock{
+      position:absolute;top:8px;left:8px;display:inline-flex;align-items:center;gap:4px;
+      font-size:10px;font-weight:500;letter-spacing:.03em;text-transform:uppercase;
+      padding:3px 8px;border-radius:var(--r-pill);backdrop-filter:blur(4px);
+    }
+    .stock .dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .st-in{color:var(--success);background:var(--success-t);border:1px solid rgba(34,197,94,.35);}
+    .st-low{color:var(--warning);background:var(--warning-t);border:1px solid rgba(245,158,11,.35);}
+    .st-out{color:var(--danger);background:var(--danger-t);border:1px solid rgba(239,68,68,.35);}
+
+    /* wishlist heart */
+    .wish{
+      position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;
+      border:1px solid var(--hairline);background:rgba(0,0,0,.35);backdrop-filter:blur(4px);
+      color:var(--body);cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:color .15s,border-color .15s,background .15s;z-index:2;
+    }
+    html[data-theme="light"] .wish{background:rgba(255,255,255,.55);}
+    .wish:hover{color:var(--ink);border-color:var(--mute);}
+    .wish svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;}
+    .wish.on{color:var(--danger);border-color:rgba(239,68,68,.4);}
+    .wish.on svg{fill:var(--danger);stroke:var(--danger);}
+
+    .pinfo{padding:12px;}
+    .pname{font-size:14px;font-weight:500;color:var(--ink);line-height:1.3;
+      display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
+    .psub{font-size:13px;color:var(--mute);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .pmeta{font-family:var(--ui);font-size:12px;color:var(--mute);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .chips{display:flex;align-items:center;gap:5px;margin-top:10px;flex-wrap:wrap;}
+    .chip{font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);
+      border:1px solid var(--hairline);color:var(--body);background:transparent;line-height:1.4;}
+    .chip.fmt{font-family:var(--ui);}
+    .chip.cond{font-family:var(--ui);color:var(--mute);}
+    .price-row-card{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;}
+    .pprice{font-family:var(--ui);font-size:14px;font-weight:500;color:var(--ink);}
+    .pprice.muted{color:var(--mute);text-decoration:line-through;font-size:12px;}
+    .price-cell{display:flex;flex-direction:column;gap:1px;min-width:0;}
+    .add-btn{
+      display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
+      height:30px;padding:0 12px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);
+      color:var(--ink);cursor:pointer;font-size:12px;font-weight:500;font-family:var(--ui);
+      transition:background .15s,color .15s,border-color .15s;
+    }
+    .add-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-text);}
+    .add-btn svg{width:14px;height:14px;}
+    .add-btn.disabled{opacity:.45;cursor:not-allowed;pointer-events:none;}
+    .add-btn.icon-only{width:30px;padding:0;justify-content:center;}
+
+    /* ─── Pagination ─────────────────────────────── */
+    .pagination{display:flex;align-items:center;justify-content:center;gap:5px;padding:28px 24px 32px;}
+    .ppage{
+      min-width:34px;height:34px;padding:0 6px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;
+      color:var(--body);font-family:var(--ui);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s,border-color .15s;
+    }
+    .ppage.on{background:var(--accent);border-color:var(--accent);color:var(--accent-text);font-weight:500;}
+    .ppage:hover:not(.on){border-color:var(--mute);color:var(--ink);}
+    .pdot{font-size:13px;color:var(--mute);padding:0 4px;}
+
+    /* ─── Footer ─────────────────────────────────── */
+    footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:48px 24px 28px;}
+    .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+    .fbrand-name{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:600;letter-spacing:-.04em;color:var(--ink);margin-bottom:12px;}
+    .fbrand-name .mark{width:22px;height:22px;color:var(--ink);}
+    .fbrand-name sup{font-size:9px;font-weight:500;}
+    .ftagline{font-size:13px;color:var(--body);line-height:1.6;max-width:240px;margin-bottom:16px;}
+    .floc{font-size:13px;color:var(--body);display:flex;align-items:flex-start;gap:6px;}
+    .floc svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;color:var(--mute);}
+    .fcol-h{font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:14px;}
+    .flinks{display:flex;flex-direction:column;gap:10px;}
+    .flink{font-size:13px;color:var(--body);text-decoration:none;transition:color .15s;width:fit-content;}
+    .flink:hover{color:var(--ink);}
+    .fbot{border-top:1px solid var(--hairline);padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .flegal{font-family:var(--ui);font-size:12px;color:var(--mute);}
+    .pay-logos{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .pay-logos svg{height:18px;width:auto;color:var(--mute);}
+
+    /* ─── Now Playing ────────────────────────────── */
+    .player{
+      position:fixed;bottom:0;left:0;right:0;height:var(--player-h);
+      background:var(--surface);border-top:1px solid var(--hairline);box-shadow:var(--e2);
+      display:flex;align-items:center;padding:0 16px;gap:14px;z-index:200;transition:background .3s;
+    }
+    .pcover{width:44px;height:44px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;border:1px solid var(--hairline);}
+    .pinfo-bar{flex:0 0 200px;min-width:0;}
+    .ptrack{font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .prelease{font-size:12px;color:var(--mute);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .psource{display:none;
+      font-size:11px;font-weight:500;padding:3px 9px;border-radius:var(--r-pill);
+      background:transparent;color:var(--body);border:1px solid var(--hairline);flex-shrink:0;
+    }
+    .pcontrols{display:flex;align-items:center;gap:4px;}
+    .pbtn{width:34px;height:34px;border-radius:var(--r-md);background:transparent;border:none;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .15s,background .15s;}
+    .pbtn:hover{color:var(--ink);background:var(--raised);}
+    .pbtn svg{width:16px;height:16px;}
+    .pplay{width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-text);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .1s;}
+    .pplay:hover{transform:scale(1.06);}
+    .pplay svg{width:16px;height:16px;}
+    .pplay .ico-pause{display:none;}
+    .pplay.playing .ico-play{display:none;}
+    .pplay.playing .ico-pause{display:block;}
+    .pprog{flex:1;min-width:0;}
+    .pbar-wrap{position:relative;height:4px;background:var(--hairline);border-radius:2px;cursor:pointer;margin-bottom:5px;}
+    .pbar-fill{position:absolute;left:0;top:0;bottom:0;width:38%;background:var(--accent);border-radius:2px;}
+    .pbar-thumb{position:absolute;top:50%;left:38%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:var(--accent);opacity:0;transition:opacity .2s;}
+    .pbar-wrap:hover .pbar-thumb{opacity:1;}
+    .ptimes{display:flex;justify-content:space-between;font-family:var(--ui);font-size:11px;color:var(--mute);}
+    .pvol{display:flex;align-items:center;gap:7px;flex-shrink:0;}
+    .pvol svg{width:15px;height:15px;color:var(--mute);}
+    .pvol-slider{width:68px;-webkit-appearance:none;appearance:none;height:2px;border-radius:2px;background:linear-gradient(to right,var(--ink) 70%,var(--hairline) 70%);cursor:pointer;}
+    .pvol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--ink);cursor:pointer;}
+    .pvol-slider::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--ink);cursor:pointer;border:none;}
+    .pclose{width:30px;height:30px;background:transparent;border:none;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .15s;flex-shrink:0;}
+    .pclose:hover{color:var(--ink);}
+    .pclose svg{width:15px;height:15px;}
+
+    /* ─── Search overlay ─────────────────────────── */
+    .search-ov{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:flex-start;justify-content:center;padding-top:88px;}
+    html[data-theme="light"] .search-ov{background:rgba(255,255,255,.6);}
+    .search-ov.open{display:flex;}
+    .sbox{width:100%;max-width:580px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--e3);}
+    .srow{display:flex;align-items:center;padding:16px;gap:11px;border-bottom:1px solid var(--hairline);}
+    .srow svg{width:18px;height:18px;color:var(--mute);flex-shrink:0;}
+    .sinput{flex:1;background:transparent;border:none;outline:none;font-size:16px;font-family:var(--ui);color:var(--ink);}
+    .sinput::placeholder{color:var(--mute);}
+    .shint{font-size:12px;color:var(--mute);padding:12px 16px;}
+    .shint .kbd{margin:0 2px;}
+
+    /* ─── Prototype hub link ─────────────────────── */
+    .proto-hub{position:fixed;bottom:calc(var(--player-h) + 14px);left:14px;z-index:250;display:inline-flex;align-items:center;gap:6px;
+      font-family:var(--ui);font-size:11px;color:var(--body);text-decoration:none;background:var(--surface);
+      border:1px solid var(--hairline);border-radius:var(--r-pill);padding:6px 12px;box-shadow:var(--e1);transition:color .15s,border-color .15s;opacity:.72;}
+    .proto-hub:hover{color:var(--ink);border-color:var(--mute);opacity:1;}
+
+    /* ─── Responsive ─────────────────────────────── */
+    @media (min-width:1440px){.grid{grid-template-columns:repeat(5,1fr);}}
+    @media (max-width:1024px){.grid{grid-template-columns:repeat(3,1fr);}}
+    @media (max-width:768px){
+      .grid{grid-template-columns:repeat(2,1fr);}
+      .fgrid{grid-template-columns:1fr 1fr;}
+      .nav-menu{display:none;}
+      .ph-title{font-size:28px;}
+    }
+    @media (max-width:420px){.grid{grid-template-columns:1fr;} .pvol{display:none;} .pinfo-bar{flex-basis:130px;}}
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+
+    /* MF: mega-menu with hero landing panel */
+    .submenu{min-width:220px;}
+    .submenu a{border-top:1px solid var(--hairline);}
+    .submenu a:first-child{border-top:none;}
+    .mega{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);
+      display:flex;width:560px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);
+      box-shadow:var(--e2);overflow:hidden;opacity:0;visibility:hidden;transition:opacity .15s,transform .15s;z-index:120;}
+    .menu-item:hover .mega{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+    .mega-links{flex:1;padding:10px;min-width:0;}
+    .mega-links.grid{display:grid;grid-template-columns:1fr 1fr;}
+    .mega-links a{display:block;padding:6px 12px;border-radius:var(--r-pill);font-size:13px;line-height:1.3;color:var(--body);text-decoration:none;
+      border:none;transition:background .12s,color .12s;}
+    .mega-links a:hover{background:#000;color:#fff;}
+    .mega-hero{width:220px;flex-shrink:0;background:var(--raised);border-left:1px solid var(--hairline);
+      padding:16px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;text-decoration:none;position:relative;overflow:hidden;}
+    .mega-hero:hover{background:var(--canvas);}
+    .mega-hero .mh-art{position:absolute;top:14px;right:14px;width:56px;height:56px;border-radius:50%;
+      background:repeating-radial-gradient(circle at 50% 50%,var(--hairline) 0 3px,transparent 3px 6px);opacity:.6;}
+    html[data-theme="light"] .mega-hero .mh-art{background:repeating-radial-gradient(circle at 50% 50%,#00000022 0 3px,transparent 3px 6px);}
+    .mega-hero .mh-eyebrow{font-family:var(--ui);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);}
+    .mega-hero .mh-title{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1.3;}
+    .mega-hero .mh-cta{font-size:12px;font-weight:500;color:var(--ink);display:flex;align-items:center;gap:4px;margin-top:4px;}
+    .mega-hero .mh-cta svg{width:12px;height:12px;transition:transform .15s;}
+    .mega-hero:hover .mh-cta svg{transform:translateX(3px);}
+
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<!-- Announcement bar -->
+<div class="announce">
+  Free shipping on orders over <strong>Rp&nbsp;500.000</strong> within Jakarta —
+  <a href="mockup-storefront.html">New arrivals just landed</a>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="mockup-storefront.html" class="nav-logo">
+    <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+  </a>
+  <div class="nav-menu">
+    <div class="menu-item has-sub">
+      <a class="nav-link" href="mockup-storefront.html">Shop <span class="chev">▾</span></a>
+      <div class="mega"><div class="mega-links"><a href="mockup-storefront.html">New Releases</a><a href="mockup-storefront.html">Best Selling</a><a href="mockup-storefront.html">Pre-Orders</a><a href="mockup-storefront.html">On-Sale</a></div><a class="mega-hero" href="mockup-storefront.html"><span class="mh-art"></span><span class="mh-eyebrow">New this week</span><span class="mh-title">47 titles just landed</span><span class="mh-cta">Shop new arrivals <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+    </div>
+    <div class="menu-item has-sub">
+      <a class="nav-link" href="mockup-category.html">Formats <span class="chev">▾</span></a>
+      <div class="mega"><div class="mega-links grid"><a href="mockup-category.html">Vinyls</a><a href="mockup-category.html">Cassettes</a><a href="mockup-category.html">CD</a><a href="mockup-category.html">Books</a><a href="mockup-category.html">Prints</a><a href="mockup-category.html">Merchandise</a><a href="mockup-category.html">Audio</a><a href="mockup-category-players.html">Players</a><a href="mockup-category.html">Accessories</a></div><a class="mega-hero" href="mockup-category.html"><span class="mh-art"></span><span class="mh-eyebrow">9 formats</span><span class="mh-title">Vinyl, CD, cassette & more</span><span class="mh-cta">Browse all formats <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+    </div>
+    <div class="menu-item has-sub">
+      <span class="nav-link">Style <span class="chev">▾</span></span>
+      <div class="mega"><div class="mega-links grid"><a href="mockup-category.html">Electronic</a><a href="mockup-category.html">Jazz</a><a href="mockup-category.html">Soul</a><a href="mockup-category.html">Hip-Hop</a><a href="mockup-category.html">Rock</a><a href="mockup-category.html">Ambient</a><a href="mockup-category.html">Funk</a><a href="mockup-category.html">World</a><a href="mockup-category.html">Indie</a></div><a class="mega-hero" href="mockup-category.html"><span class="mh-art"></span><span class="mh-eyebrow">Curated by genre</span><span class="mh-title">From jazz to ambient</span><span class="mh-cta">Explore genres <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+    </div>
+    <div class="menu-item has-sub">
+      <a class="nav-link" href="mockup-journal.html">News <span class="chev">▾</span></a>
+      <div class="mega"><div class="mega-links"><a href="mockup-journal.html">Review</a><a href="mockup-journal.html">Staff Picks</a><a href="mockup-journal.html">New Arrivals</a><a href="mockup-journal.html">Feature</a><a href="mockup-journal.html">Selector</a></div><a class="mega-hero" href="mockup-journal.html"><span class="mh-art"></span><span class="mh-eyebrow">Latest story</span><span class="mh-title">Promises, kept — Floating Points & Pharoah Sanders</span><span class="mh-cta">Read the News <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+    </div>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" id="search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="nav-btn" aria-label="Wishlist">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </button>
+    <div class="cart-wrap">
+      <a href="mockup-cart.html" class="nav-btn" aria-label="Cart — 3 items">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+      </a>
+      <span class="cart-badge">3</span>
+    </div>
+    <div class="cur-switch" role="group" aria-label="Currency">
+      <button class="cur-btn on" data-cur="IDR" onclick="setCurrency('IDR')">IDR</button>
+      <button class="cur-btn" data-cur="USD" onclick="setCurrency('USD')">USD</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Page header + category switcher -->
+<header class="page-head" aria-labelledby="page-title">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="mockup-storefront.html">Home</a><span class="sep">/</span>
+    <span class="crumb-cur">Shop</span><span class="sep">/</span>
+    <span class="crumb-cur" id="crumb-cat">Vinyls</span>
+  </nav>
+  <div class="ph-title-row">
+    <h1 class="ph-title" id="page-title">Shop <em>—</em> <span id="cat-name">Vinyls</span></h1>
+    <span class="ph-count"><strong id="cat-count">128</strong> products in <span id="cat-name-2">Vinyls</span></span>
+  </div>
+
+  <!-- Category switcher -->
+  <div class="catswitch" role="tablist" aria-label="Store categories">
+    <button class="cat-tab on" role="tab" aria-selected="true" data-cat="vinyls">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/></svg>
+      Vinyls <span class="cat-n">128</span>
+    </button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="cassettes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="8" cy="12" r="1.6"/><circle cx="16" cy="12" r="1.6"/><path d="M8 15.5h8"/></svg>
+      Cassettes <span class="cat-n">42</span>
+    </button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="cd">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/></svg>
+      CD <span class="cat-n">64</span>
+    </button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="books">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 3v18"/></svg>
+      Books <span class="cat-n">31</span>
+    </button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="prints">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+      Prints <span class="cat-n">24</span>
+    </button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="merch">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7l4-3 4 2 4-2 4 3-3 3v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/></svg>
+      Merchandise <span class="cat-n">37</span>
+    </button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="audio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.5" y="13" width="4" height="7" rx="1.5"/><rect x="17.5" y="13" width="4" height="7" rx="1.5"/></svg>
+      Audio <span class="cat-n">19</span>
+    </button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="players">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M17 8v4"/></svg>
+      Players <span class="cat-n">14</span>
+    </button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="accessories">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3"/></svg>
+      Accessories <span class="cat-n">28</span>
+    </button>
+  </div>
+</header>
+
+<!-- Filter / sort toolbar -->
+<div class="toolbar">
+  <div class="tb-left">
+    <button class="fchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>All filters</button>
+    <button class="fchip on">In stock <span class="fchip-x">×</span></button>
+    <button class="fchip">Genre</button>
+    <button class="fchip">Condition</button>
+    <button class="fchip">Price</button>
+    <button class="fchip">Origin</button>
+  </div>
+  <div class="tb-right">
+    <span class="result-count"><strong id="tb-count">128</strong> results</span>
+    <select class="sort-select" aria-label="Sort by">
+      <option>Sort: Featured</option>
+      <option>Newest first</option>
+      <option>Price: Low to High</option>
+      <option>Price: High to Low</option>
+      <option>Name A–Z</option>
+    </select>
+  </div>
+</div>
+
+<!-- ══════════ CATEGORY PANELS ══════════ -->
+<main>
+
+<!-- ── VINYLS ── -->
+<section class="cat-panel active" data-panel="vinyls" role="tabpanel" aria-label="Vinyls">
+  <div class="grid">
+    <!-- v1 -->
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Floating Points</div>
+        <div class="psub">Promises</div>
+        <div class="pmeta">Ninja Tune · NTcd 269</div>
+        <div class="chips"><span class="chip fmt">LP</span><span class="chip cond">M</span><span class="chip">Jazz</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 450.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <!-- v2 -->
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish on" aria-label="Remove from wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Khruangbin</div>
+        <div class="psub">Mordechai</div>
+        <div class="pmeta">Dead Oceans · DOC-189</div>
+        <div class="chips"><span class="chip fmt">LP</span><span class="chip cond">M</span><span class="chip">Soul</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 520.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <!-- v3 -->
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Sade</div>
+        <div class="psub">Diamond Life</div>
+        <div class="pmeta">Portrait · PRT 26423</div>
+        <div class="chips"><span class="chip fmt">LP</span><span class="chip cond">VG+</span><span class="chip">Soul</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 380.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <!-- v4 -->
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Daft Punk</div>
+        <div class="psub">Random Access Memories</div>
+        <div class="pmeta">Columbia · 88883 71381 1</div>
+        <div class="chips"><span class="chip fmt">2×LP</span><span class="chip cond">M</span><span class="chip">Electronic</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 680.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <!-- v5 -->
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Miles Davis</div>
+        <div class="psub">Kind of Blue</div>
+        <div class="pmeta">Columbia · CL 1355</div>
+        <div class="chips"><span class="chip fmt">LP</span><span class="chip cond">VG+</span><span class="chip">Jazz</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 350.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <!-- v6 -->
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-out"><span class="dot"></span>Sold out</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Björk</div>
+        <div class="psub">Vespertine</div>
+        <div class="pmeta">One Little Indian · TPLP 101</div>
+        <div class="chips"><span class="chip fmt">LP</span><span class="chip cond">VG+</span><span class="chip">Art Pop</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 410.000</span><button class="add-btn disabled" aria-label="Sold out" tabindex="-1">Notify</button></div>
+      </div>
+    </article>
+    <!-- v7 -->
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Slum Village</div>
+        <div class="psub">Fantastic, Vol. 2</div>
+        <div class="pmeta">Barak Records · 2000</div>
+        <div class="chips"><span class="chip fmt">2×LP</span><span class="chip cond">VG+</span><span class="chip">Hip-Hop</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 480.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <!-- v8 -->
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Massive Attack</div>
+        <div class="psub">Mezzanine</div>
+        <div class="pmeta">Circa Records · WX 117</div>
+        <div class="chips"><span class="chip fmt">2×LP</span><span class="chip cond">VG+</span><span class="chip">Trip-Hop</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 560.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── CASSETTES ── -->
+<section class="cat-panel" data-panel="cassettes" role="tabpanel" aria-label="Cassettes" hidden>
+  <div class="grid">
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Mac DeMarco</div>
+        <div class="psub">This Old Dog</div>
+        <div class="pmeta">Captured Tracks · CT-300</div>
+        <div class="chips"><span class="chip fmt">CS</span><span class="chip cond">M</span><span class="chip">Indie</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 180.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Tycho</div>
+        <div class="psub">Dive</div>
+        <div class="pmeta">Ghostly Intl. · GI-124</div>
+        <div class="chips"><span class="chip fmt">CS</span><span class="chip cond">M</span><span class="chip">Ambient</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 165.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish on" aria-label="Remove from wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Anderson .Paak</div>
+        <div class="psub">Malibu</div>
+        <div class="pmeta">OBE / Steel Wool</div>
+        <div class="chips"><span class="chip fmt">CS</span><span class="chip cond">VG+</span><span class="chip">Soul</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 195.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Haruomi Hosono</div>
+        <div class="psub">Hosono House</div>
+        <div class="pmeta">Bellwood · BZCS-1</div>
+        <div class="chips"><span class="chip fmt">CS</span><span class="chip cond">M</span><span class="chip">City Pop</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 210.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Boards of Canada</div>
+        <div class="psub">Music Has the Right…</div>
+        <div class="pmeta">Warp · WARPCS55</div>
+        <div class="chips"><span class="chip fmt">CS</span><span class="chip cond">VG+</span><span class="chip">Electronic</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 230.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Clairo</div>
+        <div class="psub">Immunity</div>
+        <div class="pmeta">Fader Label · FL-CS-09</div>
+        <div class="chips"><span class="chip fmt">CS</span><span class="chip cond">M</span><span class="chip">Bedroom Pop</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 175.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── CD ── -->
+<section class="cat-panel" data-panel="cd" role="tabpanel" aria-label="CD" hidden>
+  <div class="grid">
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Radiohead</div>
+        <div class="psub">In Rainbows</div>
+        <div class="pmeta">XL Recordings · XLCD 324</div>
+        <div class="chips"><span class="chip fmt">CD</span><span class="chip cond">M</span><span class="chip">Alt</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 220.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Fishmans</div>
+        <div class="psub">Long Season</div>
+        <div class="pmeta">Polydor · POCH-1691</div>
+        <div class="chips"><span class="chip fmt">CD</span><span class="chip cond">M</span><span class="chip">Dub</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 340.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Cornelius</div>
+        <div class="psub">Fantasma</div>
+        <div class="pmeta">Trattoria · PSCR-5477</div>
+        <div class="chips"><span class="chip fmt">CD</span><span class="chip cond">VG+</span><span class="chip">Shibuya-kei</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 285.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Aphex Twin</div>
+        <div class="psub">Selected Ambient Works 85–92</div>
+        <div class="pmeta">R&S · RS 9206 CD</div>
+        <div class="chips"><span class="chip fmt">CD</span><span class="chip cond">M</span><span class="chip">IDM</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 260.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Ryuichi Sakamoto</div>
+        <div class="psub">async</div>
+        <div class="pmeta">Milan · commmons</div>
+        <div class="chips"><span class="chip fmt">CD</span><span class="chip cond">M</span><span class="chip">Modern Classical</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 310.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="cover-art"><div class="grooves"></div></div><div class="cover-overlay"><span class="viewbtn">View release</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Portishead</div>
+        <div class="psub">Dummy</div>
+        <div class="pmeta">Go! Beat · 828 522-2</div>
+        <div class="chips"><span class="chip fmt">CD</span><span class="chip cond">VG+</span><span class="chip">Trip-Hop</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 195.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── BOOKS ── -->
+<section class="cat-panel" data-panel="books" role="tabpanel" aria-label="Books" hidden>
+  <div class="grid">
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 3v18"/></svg></div><div class="cover-overlay"><span class="viewbtn">View book</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Ways of Hearing</div>
+        <div class="psub">Damon Krukowski</div>
+        <div class="pmeta">MIT Press · 2019</div>
+        <div class="chips"><span class="chip">Paperback</span><span class="chip">Essay</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 245.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 3v18"/></svg></div><div class="cover-overlay"><span class="viewbtn">View book</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish on" aria-label="Remove from wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Retromania</div>
+        <div class="psub">Simon Reynolds</div>
+        <div class="pmeta">Faber &amp; Faber · 2011</div>
+        <div class="chips"><span class="chip">Hardcover</span><span class="chip">Criticism</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 320.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 3v18"/></svg></div><div class="cover-overlay"><span class="viewbtn">View book</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Ocean of Sound</div>
+        <div class="psub">David Toop</div>
+        <div class="pmeta">Serpent's Tail · 1995</div>
+        <div class="chips"><span class="chip">Paperback</span><span class="chip">Ambient</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 280.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 3v18"/></svg></div><div class="cover-overlay"><span class="viewbtn">View book</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Rip It Up and Start Again</div>
+        <div class="psub">Simon Reynolds</div>
+        <div class="pmeta">Penguin · 2005</div>
+        <div class="chips"><span class="chip">Paperback</span><span class="chip">Post-Punk</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 265.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 3v18"/></svg></div><div class="cover-overlay"><span class="viewbtn">View book</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Enjoy the Experience</div>
+        <div class="psub">Johan Kugelberg (ed.)</div>
+        <div class="pmeta">Sinecure Books · 2012</div>
+        <div class="chips"><span class="chip">Monograph</span><span class="chip">Covers</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 585.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 3v18"/></svg></div><div class="cover-overlay"><span class="viewbtn">View book</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Vinyl. Album. Cover. Art.</div>
+        <div class="psub">Aubrey Powell / Hipgnosis</div>
+        <div class="pmeta">Thames &amp; Hudson · 2017</div>
+        <div class="chips"><span class="chip">Hardcover</span><span class="chip">Design</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 495.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── PRINTS ── -->
+<section class="cat-panel" data-panel="prints" role="tabpanel" aria-label="Prints" hidden>
+  <div class="grid">
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div><div class="cover-overlay"><span class="viewbtn">View print</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Blue Note Grid</div>
+        <div class="psub">Reid Miles (after)</div>
+        <div class="pmeta">50 × 70 cm · Ed. /100</div>
+        <div class="chips"><span class="chip">Giclée</span><span class="chip">Numbered</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 420.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div><div class="cover-overlay"><span class="viewbtn">View print</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Kraftwerk — Autobahn</div>
+        <div class="psub">Emil Schult (after)</div>
+        <div class="pmeta">42 × 59 cm · Ed. /50</div>
+        <div class="chips"><span class="chip">Screenprint</span><span class="chip">Signed</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 650.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div><div class="cover-overlay"><span class="viewbtn">View print</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Unknown Pleasures</div>
+        <div class="psub">Peter Saville (after)</div>
+        <div class="pmeta">50 × 50 cm · Open ed.</div>
+        <div class="chips"><span class="chip">Giclée</span><span class="chip">Poster</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 185.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div><div class="cover-overlay"><span class="viewbtn">View print</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Studio One Riddim</div>
+        <div class="psub">Medium Format Editions</div>
+        <div class="pmeta">42 × 59 cm · Ed. /75</div>
+        <div class="chips"><span class="chip">Risograph</span><span class="chip">Numbered</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 240.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div><div class="cover-overlay"><span class="viewbtn">View print</span></div>
+        <span class="stock st-out"><span class="dot"></span>Sold out</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Ryo Takemasa — City Pop</div>
+        <div class="psub">Ryo Takemasa</div>
+        <div class="pmeta">50 × 70 cm · Ed. /30</div>
+        <div class="chips"><span class="chip">Giclée</span><span class="chip">Signed</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 720.000</span><button class="add-btn disabled" aria-label="Sold out" tabindex="-1">Notify</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div><div class="cover-overlay"><span class="viewbtn">View print</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Groove Chart No. 3</div>
+        <div class="psub">Medium Format Editions</div>
+        <div class="pmeta">30 × 40 cm · Open ed.</div>
+        <div class="chips"><span class="chip">Risograph</span><span class="chip">Poster</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 150.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── MERCHANDISE ── -->
+<section class="cat-panel" data-panel="merch" role="tabpanel" aria-label="Merchandise" hidden>
+  <div class="grid">
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7l4-3 4 2 4-2 4 3-3 3v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">MF Logo Tee — Black</div>
+        <div class="psub">Medium Format</div>
+        <div class="pmeta">100% cotton · S–XXL</div>
+        <div class="chips"><span class="chip">Apparel</span><span class="chip">Unisex</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 265.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 8V6a4 4 0 0 1 8 0v2M5 8h14l-1 12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1z"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish on" aria-label="Remove from wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">MF Canvas Tote</div>
+        <div class="psub">Medium Format</div>
+        <div class="pmeta">Holds 12″ LPs · 380 gsm</div>
+        <div class="chips"><span class="chip">Tote</span><span class="chip">Natural</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 145.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 13a8 8 0 0 1 16 0M2 13h20l-1 2H3z"/><path d="M8 9c1.5-2 6.5-2 8 0"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">MF 6-Panel Cap</div>
+        <div class="psub">Medium Format</div>
+        <div class="pmeta">Embroidered · Adjustable</div>
+        <div class="chips"><span class="chip">Cap</span><span class="chip">Ecru</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 195.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l3 4 4 1-3 3 1 5-5-2-5 2 1-5-3-3 4-1z"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Groove Patch Set</div>
+        <div class="psub">Medium Format</div>
+        <div class="pmeta">Iron-on · Pack of 3</div>
+        <div class="chips"><span class="chip">Patch</span><span class="chip">Woven</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 85.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7l4-3 4 2 4-2 4 3-3 3v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">MF Longsleeve — Ecru</div>
+        <div class="psub">Medium Format</div>
+        <div class="pmeta">Heavyweight · S–XL</div>
+        <div class="chips"><span class="chip">Apparel</span><span class="chip">Unisex</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 325.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Enamel Pin — Groove Disc</div>
+        <div class="psub">Medium Format</div>
+        <div class="pmeta">Hard enamel · 32 mm</div>
+        <div class="chips"><span class="chip">Pin</span><span class="chip">Black/White</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 65.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── AUDIO ── -->
+<section class="cat-panel" data-panel="audio" role="tabpanel" aria-label="Audio" hidden>
+  <div class="grid">
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.5" y="13" width="4" height="7" rx="1.5"/><rect x="17.5" y="13" width="4" height="7" rx="1.5"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Audio-Technica</div>
+        <div class="psub">ATH-M50x Headphones</div>
+        <div class="pmeta">Closed-back · 38Ω</div>
+        <div class="chips"><span class="chip">Headphones</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 2.150.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3l6 9-3 6-4-2 1-4z"/><circle cx="7" cy="16" r="1.2" fill="currentColor" stroke="none"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Ortofon</div>
+        <div class="psub">2M Red Cartridge</div>
+        <div class="pmeta">MM · Elliptical stylus</div>
+        <div class="chips"><span class="chip">Cartridge</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 1.650.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="8" width="18" height="8" rx="1.5"/><circle cx="7" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="10.5" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M15 12h4"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Schiit Audio</div>
+        <div class="psub">Mani 2 Phono Preamp</div>
+        <div class="pmeta">MM/MC · Adjustable gain</div>
+        <div class="chips"><span class="chip">Phono Preamp</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 2.980.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.5" y="13" width="4" height="7" rx="1.5"/><rect x="17.5" y="13" width="4" height="7" rx="1.5"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Sennheiser</div>
+        <div class="psub">HD 560S Headphones</div>
+        <div class="pmeta">Open-back · 120Ω</div>
+        <div class="chips"><span class="chip">Headphones</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 3.250.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3l6 9-3 6-4-2 1-4z"/><circle cx="7" cy="16" r="1.2" fill="currentColor" stroke="none"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Nagaoka</div>
+        <div class="psub">MP-110 Cartridge</div>
+        <div class="pmeta">MM · Superfine elliptical</div>
+        <div class="chips"><span class="chip">Cartridge</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 1.450.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="8" width="18" height="8" rx="1.5"/><circle cx="7" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="10.5" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M15 12h4"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Cambridge Audio</div>
+        <div class="psub">Alva Duo Phono Stage</div>
+        <div class="pmeta">MM/MC · Headphone out</div>
+        <div class="chips"><span class="chip">Phono Preamp</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 4.100.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── PLAYERS ── -->
+<section class="cat-panel" data-panel="players" role="tabpanel" aria-label="Players" hidden>
+  <div class="grid">
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M17 8v4"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish on" aria-label="Remove from wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Audio-Technica</div>
+        <div class="psub">AT-LP120XUSB</div>
+        <div class="pmeta">Direct-drive · USB out</div>
+        <div class="chips"><span class="chip">Turntable</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 5.400.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M17 8v4"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Rega</div>
+        <div class="psub">Planar 1</div>
+        <div class="pmeta">Belt-drive · Carbon MM</div>
+        <div class="chips"><span class="chip">Turntable</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 7.250.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="8" cy="12" r="1.6"/><circle cx="16" cy="12" r="1.6"/><path d="M8 15.5h8"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">TEAC</div>
+        <div class="psub">W-1200 Cassette Deck</div>
+        <div class="pmeta">Dual · USB recording</div>
+        <div class="chips"><span class="chip">Cassette Deck</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 4.850.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M17 8v4"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Pro-Ject</div>
+        <div class="psub">Debut Carbon EVO</div>
+        <div class="pmeta">Belt-drive · Ortofon 2M Red</div>
+        <div class="chips"><span class="chip">Turntable</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 9.100.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M17 8v4"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-out"><span class="dot"></span>Sold out</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Technics</div>
+        <div class="psub">SL-1500C</div>
+        <div class="pmeta">Direct-drive · Built-in phono</div>
+        <div class="chips"><span class="chip">Turntable</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 16.500.000</span><button class="add-btn disabled" aria-label="Sold out" tabindex="-1">Notify</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="8" cy="12" r="1.6"/><circle cx="16" cy="12" r="1.6"/><path d="M8 15.5h8"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">We Are Rewind</div>
+        <div class="psub">GB-001 Portable Player</div>
+        <div class="pmeta">Bluetooth · Rechargeable</div>
+        <div class="chips"><span class="chip">Cassette Player</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 2.750.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── ACCESSORIES ── -->
+<section class="cat-panel" data-panel="accessories" role="tabpanel" aria-label="Accessories" hidden>
+  <div class="grid">
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">MF Cork Slipmat</div>
+        <div class="psub">Medium Format</div>
+        <div class="pmeta">3 mm cork · 12″</div>
+        <div class="chips"><span class="chip">Slipmat</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 120.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7h16M4 7l1 12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1l1-12M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-low"><span class="dot"></span>Low stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Spin-Clean</div>
+        <div class="psub">Record Washer MKII</div>
+        <div class="pmeta">Kit · Fluid + brushes</div>
+        <div class="chips"><span class="chip">Cleaning Kit</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 1.150.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M8 4v16"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Audio-Technica Inner Sleeves</div>
+        <div class="psub">Anti-static · 12″</div>
+        <div class="pmeta">Pack of 50</div>
+        <div class="chips"><span class="chip">Inner Sleeves</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 165.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 8h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M4 8l2-3h12l2 3M9 12h6"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">MF Wooden Crate</div>
+        <div class="psub">Medium Format</div>
+        <div class="pmeta">Holds ~70 LPs · Pine</div>
+        <div class="chips"><span class="chip">Storage Crate</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 480.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 8h16"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Outer Sleeves — Poly</div>
+        <div class="psub">3 mil · 12″ gatefold-fit</div>
+        <div class="pmeta">Pack of 50</div>
+        <div class="chips"><span class="chip">Outer Sleeves</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 135.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+    <article class="pcard">
+      <a class="pcard-media" href="mockup-release.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6l7-2 9 3-7 2z"/><path d="M4 6v10l9 3 7-2V9"/><path d="M13 9v10"/></svg></div><div class="cover-overlay"><span class="viewbtn">View item</span></div>
+        <span class="stock st-in"><span class="dot"></span>In stock</span></a>
+      <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <div class="pinfo">
+        <div class="pname">Carbon Fiber Brush</div>
+        <div class="psub">Anti-static · Dual-row</div>
+        <div class="pmeta">For 12″ / 7″</div>
+        <div class="chips"><span class="chip">Cleaning</span></div>
+        <div class="price-row-card"><span class="pprice">Rp 95.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Add</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Pagination -->
+<nav class="pagination" aria-label="Pagination">
+  <button class="ppage" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="ppage on" aria-current="page">1</button>
+  <button class="ppage">2</button>
+  <button class="ppage">3</button>
+  <span class="pdot">…</span>
+  <button class="ppage" id="page-last">16</button>
+  <button class="ppage" aria-label="Next"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+</nav>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="fgrid">
+    <div>
+      <div class="fbrand-name">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </div>
+      <div class="ftagline">Independent record shop based in Jakarta, Indonesia. Curating the finest in vinyl, CD, and music culture since 2019.</div>
+      <div class="floc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Jl. Kemang Raya No. 15, Jakarta Selatan
+      </div>
+    </div>
+    <div>
+      <div class="fcol-h">Shop</div>
+      <div class="flinks">
+        <a href="mockup-category.html" class="flink">New Arrivals</a>
+        <a href="mockup-category.html" class="flink">Vinyl</a>
+        <a href="mockup-category.html" class="flink">CDs</a>
+        <a href="mockup-category.html" class="flink">Merch</a>
+        <a href="#" class="flink">Wholesale</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-h">News</div>
+      <div class="flinks">
+        <a href="mockup-news.html" class="flink">Staff Picks</a>
+        <a href="mockup-news.html" class="flink">Reviews</a>
+        <a href="mockup-news.html" class="flink">Features</a>
+        <a href="mockup-news.html" class="flink">Events</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-h">Info</div>
+      <div class="flinks">
+        <a href="#" class="flink">About Us</a>
+        <a href="#" class="flink">Shipping &amp; Returns</a>
+        <a href="#" class="flink">Sell Your Records</a>
+        <a href="#" class="flink">Contact</a>
+        <a href="#" class="flink">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="flegal">© 2026 Medium Format</div>
+    <div class="pay-logos">
+      <svg class="paylogo" viewBox="0 0 44 18" role="img" aria-label="Visa"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="15" fill="currentColor" letter-spacing="-.5" font-style="italic">VISA</text></svg>
+      <svg class="paylogo" viewBox="0 0 30 18" role="img" aria-label="Mastercard"><circle cx="11" cy="9" r="6.5" fill="currentColor" opacity=".55"/><circle cx="19" cy="9" r="6.5" fill="currentColor"/></svg>
+      <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="JCB"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.3">JCB</text></svg>
+      <svg class="paylogo" viewBox="0 0 40 18" role="img" aria-label="QRIS"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="0">QRIS</text></svg>
+      <svg class="paylogo" viewBox="0 0 48 18" role="img" aria-label="GoPay"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">GoPay</text></svg>
+      <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="OVO"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="0">OVO</text></svg>
+      <svg class="paylogo" viewBox="0 0 42 18" role="img" aria-label="DANA"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.2">DANA</text></svg>
+      <svg class="paylogo" viewBox="0 0 74 18" role="img" aria-label="ShopeePay"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">ShopeePay</text></svg>
+      <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="BCA"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.2">BCA</text></svg>
+    </div>
+  </div>
+</footer>
+
+<!-- Now Playing Bar -->
+<div class="player" id="player">
+  <div class="pcover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+  <div class="pinfo-bar">
+    <div class="ptrack">LesAlpx</div>
+    <div class="prelease">Floating Points — Promises</div>
+  </div>
+  <span class="psource">Bandcamp</span>
+  <div class="pcontrols">
+    <button class="pbtn" aria-label="Previous track">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+    </button>
+    <button class="pplay playing" id="pplay-btn" aria-label="Pause">
+      <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button class="pbtn" aria-label="Next track">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="pprog">
+    <div class="pbar-wrap">
+      <div class="pbar-fill"></div>
+      <div class="pbar-thumb"></div>
+    </div>
+    <div class="ptimes"><span>3:15</span><span>8:31</span></div>
+  </div>
+  <div class="pvol">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+    <input type="range" class="pvol-slider" min="0" max="100" value="70" aria-label="Volume">
+  </div>
+  <button class="pclose" id="pclose-btn" aria-label="Close player">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+</div>
+
+<!-- Search overlay -->
+<div class="search-ov" id="search-ov" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="sbox">
+    <div class="srow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="sinput" id="sinput" type="text" placeholder="Search artist, title, label, product…">
+    </div>
+    <div class="shint">Try "Floating Points", "slipmat", "Rega", "tote bag" — press <span class="kbd">Esc</span> to close</div>
+  </div>
+</div>
+
+<!-- Prototype hub link -->
+<a href="index.html" class="proto-hub" aria-label="Back to prototype hub">◹ Prototype</a>
+
+<script>
+  // ─── Theme (saved preference; no in-page toggle) ─
+  const root = document.documentElement;
+  root.setAttribute('data-theme', localStorage.getItem('mf-theme') || 'dark');
+
+  // ─── Currency switch (IDR / USD) ────────────────
+  const FX = 16000;
+  const fmtUSD = v => '$' + Math.round(v / FX).toLocaleString('en-US');
+  const parseIDR = s => parseInt(s.replace(/[^0-9]/g, ''), 10);
+  function setCurrency(cur){
+    document.querySelectorAll('.cur-btn').forEach(b => b.classList.toggle('on', b.dataset.cur === cur));
+    localStorage.setItem('mf-cur', cur);
+    document.querySelectorAll('body *').forEach(el => {
+      if (el.children.length) return;
+      const t = el.textContent.trim();
+      if (cur === 'USD'){
+        const m = t.match(/^Rp\s?([\d.]+)$/);
+        if (m){ if(!el.dataset.idr) el.dataset.idr = el.textContent; el.textContent = fmtUSD(parseIDR(m[1])); }
+      } else if (el.dataset.idr){ el.textContent = el.dataset.idr; }
+    });
+  }
+  setCurrency(localStorage.getItem('mf-cur') || 'IDR');
+
+  // ─── Category switcher ──────────────────────────
+  const CAT_LABELS = {
+    vinyls:'Vinyls', cassettes:'Cassettes', cd:'CD', books:'Books', prints:'Prints',
+    merch:'Merchandise', audio:'Audio', players:'Players', accessories:'Accessories'
+  };
+  const CAT_COUNTS = {
+    vinyls:128, cassettes:42, cd:64, books:31, prints:24, merch:37, audio:19, players:14, accessories:28
+  };
+  const CAT_PAGES = {
+    vinyls:16, cassettes:6, cd:8, books:4, prints:3, merch:5, audio:3, players:2, accessories:4
+  };
+  const tabs = document.querySelectorAll('.cat-tab');
+  const panels = document.querySelectorAll('.cat-panel');
+  function selectCat(cat){
+    tabs.forEach(t => {
+      const on = t.dataset.cat === cat;
+      t.classList.toggle('on', on);
+      t.setAttribute('aria-selected', String(on));
+    });
+    panels.forEach(p => {
+      const on = p.dataset.panel === cat;
+      p.classList.toggle('active', on);
+      p.hidden = !on;
+    });
+    const label = CAT_LABELS[cat] || cat;
+    document.getElementById('cat-name').textContent = label;
+    document.getElementById('cat-name-2').textContent = label;
+    document.getElementById('crumb-cat').textContent = label;
+    document.getElementById('cat-count').textContent = CAT_COUNTS[cat];
+    document.getElementById('tb-count').textContent = CAT_COUNTS[cat];
+    document.getElementById('page-last').textContent = CAT_PAGES[cat];
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(t => t.addEventListener('click', () => selectCat(t.dataset.cat)));
+
+  // ─── Wishlist heart toggle ──────────────────────
+  document.addEventListener('click', e => {
+    const w = e.target.closest('.wish');
+    if(w){
+      e.preventDefault();
+      const on = w.classList.toggle('on');
+      w.setAttribute('aria-label', on ? 'Remove from wishlist' : 'Add to wishlist');
+    }
+  });
+
+  // ─── Filter chips ───────────────────────────────
+  document.querySelectorAll('.tb-left .fchip').forEach(c => {
+    c.addEventListener('click', () => c.classList.toggle('on'));
+  });
+
+  // ─── Now-playing play/pause ─────────────────────
+  document.getElementById('pplay-btn').addEventListener('click', function(){
+    const playing = this.classList.toggle('playing');
+    this.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  });
+  document.getElementById('pclose-btn').addEventListener('click', () => {
+    document.getElementById('player').style.display = 'none';
+    document.body.style.paddingBottom = '0';
+  });
+
+  // ─── Search overlay ─────────────────────────────
+  const searchOv = document.getElementById('search-ov');
+  function openSearch(){ searchOv.classList.add('open'); setTimeout(()=>document.getElementById('sinput').focus(),50); }
+  function closeSearch(){ searchOv.classList.remove('open'); }
+  document.getElementById('search-btn').addEventListener('click', openSearch);
+  searchOv.addEventListener('click', e => { if(e.target === searchOv) closeSearch(); });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape'){ closeSearch(); }
+    if((e.metaKey || e.ctrlKey) && e.key === 'k'){ e.preventDefault(); openSearch(); }
+  });
+
+  // ─── Real album art (iTunes Search API, JSONP) — MUSIC panels only ───
+  function mfCover(coverEl, query){
+    if(!coverEl || !query) return;
+    const cb = 'itcb_' + Math.random().toString(36).slice(2);
+    window[cb] = function(data){
+      const r = data && data.results && data.results[0];
+      if(r && r.artworkUrl100){
+        const url = r.artworkUrl100.replace('100x100','600x600');
+        const img = new Image();
+        img.onload = function(){ coverEl.style.background = '#fff'; coverEl.innerHTML = ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block'; coverEl.appendChild(img); };
+        img.src = url;
+      }
+      delete window[cb];
+    };
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://itunes.apple.com/search?media=music&entity=album&limit=1&term=' + encodeURIComponent(query) + '&callback=' + cb;
+    s.onerror = function(){ delete window[cb]; };
+    document.head.appendChild(s);
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    const musicPanels = ['vinyls','cassettes','cd'];
+    musicPanels.forEach(function(name){
+      document.querySelectorAll('.cat-panel[data-panel="' + name + '"] .pcard').forEach(function(card){
+        const artist = card.querySelector('.pname');
+        const title  = card.querySelector('.psub');
+        const cover  = card.querySelector('.cover-art');
+        if(artist && title && cover){ mfCover(cover, artist.textContent.trim() + ' ' + title.textContent.trim()); }
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -7,7 +7,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <title>Medium Format — Channels (Mobile)</title>
+  <title>Medium Format — News Updates</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -64,7 +64,7 @@
     @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
     @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
 
-    .app-hdr{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:8px 16px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);position:sticky;top:var(--announce-h);z-index:22;}
+    .app-hdr{flex-shrink:0;position:sticky;top:var(--announce-h);z-index:22;display:flex;align-items:center;gap:10px;padding:8px 16px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);}
     .app-hdr .ham{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
     .app-hdr .ham:active{background:var(--raised);}
     .app-hdr .ham svg{width:20px;height:20px;}
@@ -81,62 +81,45 @@
     .page-title{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:28px;}
     .page-sub{font-size:12px;color:var(--mute);margin-top:2px;margin-bottom:14px;}
 
-    .kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
-    .kpi{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:11px 13px;}
-    .kpi-lbl{font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;font-weight:500;margin-bottom:6px;}
-    .kpi-val{font-family:var(--ui);font-size:16px;font-weight:500;color:var(--ink);}
+    .tool-search{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px 12px;margin-bottom:12px;}
+    .tool-search svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
+    .tool-search input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
+    .tool-search input::placeholder{color:var(--mute);}
 
-    .syncall{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:14px;font-weight:500;margin-bottom:16px;}
-    .syncall svg{width:15px;height:15px;}
+    .chips{display:flex;gap:6px;overflow-x:auto;margin-bottom:16px;padding-bottom:2px;}
+    .chips::-webkit-scrollbar{height:0;}
+    .chip{flex-shrink:0;font-size:12px;font-weight:500;padding:6px 13px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--mute);background:transparent;min-height:32px;display:inline-flex;align-items:center;gap:5px;}
+    .chip.on{border-color:var(--accent);color:var(--ink);}
+    .chip .n{font-family:var(--ui);font-size:10px;color:var(--mute);}
 
-    /* channel cards */
-    .ch-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;margin-bottom:10px;}
-    .ch-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
-    .ch-id{display:flex;align-items:center;gap:10px;}
-    .ch-icon{width:34px;height:34px;border-radius:var(--r-md);background:var(--raised);border:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--ink);}
-    .ch-icon svg{width:17px;height:17px;}
-    .ch-name{font-size:14px;font-weight:600;color:var(--ink);}
-    .ch-kind{font-family:var(--ui);font-size:10px;color:var(--mute);margin-top:2px;}
+    /* new post button */
+    .newpost{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:14px;font-weight:500;margin-bottom:16px;}
+    .newpost svg{width:15px;height:15px;}
+
+    /* post cards */
+    .post-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;margin-bottom:10px;}
+    .pc-top{display:flex;gap:12px;align-items:flex-start;}
+    .pc-thumb{width:52px;height:52px;border-radius:var(--r-md);flex-shrink:0;overflow:hidden;border:1px solid var(--hairline);}
+    .cover-art{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .cover-art .grooves{width:64%;height:64%;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 2px,#1f1f1f 2px 4px);}
+    html[data-theme="light"] .cover-art .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 2px,#fff 2px 4px);}
+    .cover-art .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+    .pc-main{flex:1;min-width:0;}
+    .pc-title{font-size:13px;font-weight:600;color:var(--ink);line-height:1.35;}
+    .pc-slug{font-family:var(--ui);font-size:10px;color:var(--mute);margin-top:4px;}
     .status-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);flex-shrink:0;}
     .status-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;}
-    .st-connected{background:var(--success-t);color:var(--success);}
-    .st-syncing{background:var(--info-t);color:var(--info);}
-    .st-error{background:var(--danger-t);color:var(--danger);}
-    .st-off{background:var(--neutral-t);color:var(--mute);}
-    .ch-metrics{display:flex;gap:20px;margin:12px 0;padding:12px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
-    .metric .m-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:500;margin-bottom:4px;}
-    .metric .m-val{font-family:var(--ui);font-size:13px;color:var(--ink);}
-    .metric .m-val.mut{color:var(--mute);}
-    .ch-actions{display:flex;align-items:center;gap:8px;}
-    .btn-sec{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);color:var(--ink);font-size:12px;font-weight:500;}
-    .btn-ghost{display:inline-flex;align-items:center;padding:8px 10px;border-radius:var(--r-md);background:transparent;border:none;color:var(--body);font-size:12px;font-weight:500;}
-    .toggle{position:relative;width:38px;height:22px;flex-shrink:0;}
-    .toggle input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;}
-    .toggle .track{position:absolute;inset:0;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);transition:background .18s,border-color .18s;}
-    .toggle .knob{position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--mute);transition:transform .18s,background .18s;}
-    .toggle input:checked+.track{background:var(--accent);border-color:var(--accent);}
-    .toggle input:checked+.track+.knob{transform:translateX(16px);background:var(--accent-text);}
-    .toggle input:focus-visible+.track{box-shadow:var(--focus);}
+    .st-published{background:var(--success-t);color:var(--success);}
+    .st-draft{background:var(--info-t);color:var(--info);}
+    .st-scheduled{background:var(--warning-t);color:var(--warning);}
+    .pc-meta{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--hairline);flex-wrap:wrap;}
+    .cat-tag{display:inline-flex;align-items:center;font-size:10px;padding:2px 8px;border-radius:var(--r-sm);color:var(--body);border:1px solid var(--hairline);}
+    .pc-author{font-size:11px;color:var(--body);}
+    .pc-date{font-family:var(--ui);font-size:11px;color:var(--mute);margin-left:auto;}
+    .pc-views{font-family:var(--ui);font-size:11px;color:var(--ink);}
+    .pc-dot{color:var(--mute);}
 
-    /* activity log */
-    .widget{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;margin-top:6px;}
-    .widget-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-bottom:1px solid var(--hairline);}
-    .widget-title{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--body);}
-    .widget-note{font-size:10px;color:var(--mute);font-family:var(--ui);}
-    .log-item{display:flex;gap:10px;padding:11px 14px;border-top:1px solid var(--hairline);align-items:flex-start;}
-    .log-item:first-child{border-top:none;}
-    .log-icon{width:26px;height:26px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .log-icon svg{width:13px;height:13px;}
-    .li-ok{background:var(--success-t);color:var(--success);}
-    .li-info{background:var(--info-t);color:var(--info);}
-    .li-warn{background:var(--warning-t);color:var(--warning);}
-    .li-danger{background:var(--danger-t);color:var(--danger);}
-    .log-body{flex:1;min-width:0;}
-    .log-title{font-size:12px;color:var(--ink);line-height:1.4;}
-    .log-title .ch{color:var(--body);}
-    .log-meta{font-size:11px;color:var(--mute);margin-top:2px;font-family:var(--ui);}
-    .log-time{font-family:var(--ui);font-size:10px;color:var(--mute);flex-shrink:0;}
-
+    /* drawer + tabbar (reused chrome) */
     .tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;z-index:8;background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:flex-start;justify-content:space-around;padding:10px 8px 0;}
     .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);width:64px;}
     .tabbar a.on{color:var(--ink);}
@@ -171,6 +154,7 @@
     .notif-text strong{font-weight:600;}
     .notif-meta{font-size:11px;color:var(--mute);margin-top:2px;}
     .notif-unread{position:absolute;top:14px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--danger);}
+
     .drawer-brand{display:flex;align-items:center;gap:9px;padding:20px 16px;border-bottom:1px solid var(--hairline);}
     .drawer-brand .mark{width:22px;height:22px;color:var(--ink);}
     .drawer-brand .wm{font-size:14px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
@@ -182,6 +166,7 @@
     .dn-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--warning);}
     .dn-count{margin-left:auto;font-family:var(--ui);font-size:11px;font-weight:500;color:var(--body);background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);padding:1px 8px;min-width:22px;text-align:center;}
     .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .drawer-foot{border-top:1px solid var(--hairline);padding:12px;}
     .drawer-theme{display:flex;align-items:center;gap:8px;width:100%;margin-top:8px;padding:9px 10px;
       background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--ink);
       font-family:var(--ui);font-size:12px;font-weight:500;cursor:pointer;min-height:40px;}
@@ -190,29 +175,9 @@
     .drawer-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-text);font-size:12px;font-weight:600;font-family:var(--ui);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .drawer-user-name{font-size:13px;font-weight:500;color:var(--ink);line-height:1.3;}
     .drawer-user-role{font-size:11px;color:var(--mute);line-height:1.3;}
-    .drawer-foot{border-top:1px solid var(--hairline);padding:12px;}
-    .sb-status{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
-    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
-    .sb-status-text{font-size:11px;color:var(--body);}
 
     .proto-link{position:fixed;left:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--body);font-size:12px;font-weight:500;box-shadow:0 4px 12px rgba(0,0,0,.4);}
     .proto-link:active{color:var(--ink);background:var(--raised);}
-  
-    /* channel colour key on integration cards */
-    .chi-website{color:#6366F1;}
-    .chi-pos{color:#0EA5E9;}
-    .chi-tokopedia{color:#22C55E;}
-    .chi-shopee{color:#F97316;}
-    .chi-discogs{color:#9CA3AF;}
-    .chi-bandcamp{color:#14B8A6;}
-    .chi-event{color:#EC4899;}
-    .ch-icon[class*="chi-"]{background:color-mix(in srgb,currentColor 13%,var(--raised));border-color:color-mix(in srgb,currentColor 32%,var(--hairline));}
-  
-    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
-    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
-    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
-    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
-    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
   </style>
 </head>
 <body>
@@ -229,7 +194,7 @@
   </div>
 
   <!-- Announce bar -->
-  <div class="announce"><div class="announce-track"><span>Discogs sync completed 4 minutes ago · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>Discogs sync completed 4 minutes ago · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
+  <div class="announce"><div class="announce-track"><span>1 draft post ready for review · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>1 draft post ready for review · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
 
   <div class="app-hdr">
     <button class="ham" id="ham-btn" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -240,80 +205,76 @@
   </div>
 
   <div class="screen">
-    <h1 class="page-title">Channels</h1>
-    <div class="page-sub">Connections &amp; sync health</div>
+    <h1 class="page-title">News Updates</h1>
+    <div class="page-sub">The Medium Format journal</div>
 
-    <div class="kpi-grid">
-      <div class="kpi"><div class="kpi-lbl">Active</div><div class="kpi-val">5 / 7</div></div>
-      <div class="kpi"><div class="kpi-lbl">Listings</div><div class="kpi-val">3,914</div></div>
-      <div class="kpi"><div class="kpi-lbl">Last sync</div><div class="kpi-val">4m ago</div></div>
-      <div class="kpi"><div class="kpi-lbl">Errors 24h</div><div class="kpi-val">2</div></div>
+    <div class="tool-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="Search posts…">
     </div>
 
-    <button class="syncall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>Sync all channels</button>
+    <div class="chips">
+      <button class="chip on" onclick="setChip(this)">All <span class="n">18</span></button>
+      <button class="chip" onclick="setChip(this)">Published <span class="n">11</span></button>
+      <button class="chip" onclick="setChip(this)">Draft <span class="n">5</span></button>
+      <button class="chip" onclick="setChip(this)">Scheduled <span class="n">2</span></button>
+    </div>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div><div class="ch-name">Website</div><div class="ch-kind">storefront</div></div></div>
-        <span class="status-pill st-connected">Connected</span>
+    <button class="newpost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New post</button>
+
+    <!-- Post cards -->
+    <div class="post-card">
+      <div class="pc-top">
+        <div class="pc-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="pc-main"><div class="pc-title">Khruangbin and the art of the slow build</div><div class="pc-slug">/journal/khruangbin-slow-build</div></div>
+        <span class="status-pill st-published">Published</span>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">2m ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1,482</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Website"><span class="track"></span><span class="knob"></span></label></div>
+      <div class="pc-meta"><span class="cat-tag">Feature</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">4,218 views</span><span class="pc-date">12 Apr</span></div>
     </div>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-pos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="8" y1="9" x2="16" y2="9"/></svg></div><div><div class="ch-name">POS</div><div class="ch-kind">in-store · Jakarta</div></div></div>
-        <span class="status-pill st-connected">Connected</span>
+    <div class="post-card">
+      <div class="pc-top">
+        <div class="pc-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="pc-main"><div class="pc-title">Staff picks — record of the week: Floating Points</div><div class="pc-slug">/journal/staff-pick-floating-points</div></div>
+        <span class="status-pill st-published">Published</span>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">Live</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1,482</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="POS"><span class="track"></span><span class="knob"></span></label></div>
+      <div class="pc-meta"><span class="cat-tag">Reviews</span><span class="pc-author">Andra P.</span><span class="pc-dot">·</span><span class="pc-views">2,946 views</span><span class="pc-date">8 Apr</span></div>
     </div>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-tokopedia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><div><div class="ch-name">Tokopedia</div><div class="ch-kind">marketplace</div></div></div>
-        <span class="status-pill st-syncing">Syncing</span>
+    <div class="post-card">
+      <div class="pc-top">
+        <div class="pc-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="pc-main"><div class="pc-title">A beginner's guide to grading vinyl condition</div><div class="pc-slug">/journal/guide-grading-vinyl</div></div>
+        <span class="status-pill st-scheduled">Scheduled</span>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">now</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">612</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Tokopedia"><span class="track"></span><span class="knob"></span></label></div>
+      <div class="pc-meta"><span class="cat-tag">Guides</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">—</span><span class="pc-date">2 May</span></div>
     </div>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-shopee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><div><div class="ch-name">Shopee</div><div class="ch-kind">marketplace</div></div></div>
-        <span class="status-pill st-connected">Connected</span>
+    <div class="post-card">
+      <div class="pc-top">
+        <div class="pc-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="pc-main"><div class="pc-title">Sade at 40 — why Diamond Life still sounds new</div><div class="pc-slug">/journal/sade-diamond-life-40</div></div>
+        <span class="status-pill st-draft">Draft</span>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">11m ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">548</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Shopee"><span class="track"></span><span class="knob"></span></label></div>
+      <div class="pc-meta"><span class="cat-tag">Feature</span><span class="pc-author">Yosef T.</span><span class="pc-dot">·</span><span class="pc-views">—</span><span class="pc-date">—</span></div>
     </div>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-discogs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div><div><div class="ch-name">Discogs</div><div class="ch-kind">collector</div></div></div>
-        <span class="status-pill st-error">Error</span>
+    <div class="post-card">
+      <div class="pc-top">
+        <div class="pc-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="pc-main"><div class="pc-title">New arrivals: the Japanese city-pop batch has landed</div><div class="pc-slug">/journal/new-arrivals-city-pop</div></div>
+        <span class="status-pill st-published">Published</span>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val mut">3h ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">291</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Discogs"><span class="track"></span><span class="knob"></span></label></div>
+      <div class="pc-meta"><span class="cat-tag">Store News</span><span class="pc-author">Andra P.</span><span class="pc-dot">·</span><span class="pc-views">3,571 views</span><span class="pc-date">30 Mar</span></div>
     </div>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-bandcamp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15l4-6 4 6z"/></svg></div><div><div class="ch-name">Bandcamp</div><div class="ch-kind">digital + physical</div></div></div>
-        <span class="status-pill st-connected">Connected</span>
+    <div class="post-card">
+      <div class="pc-top">
+        <div class="pc-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="pc-main"><div class="pc-title">In conversation: Bonobo on textures and tape</div><div class="pc-slug">/journal/interview-bonobo-tape</div></div>
+        <span class="status-pill st-published">Published</span>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">27m ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">184</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Bandcamp"><span class="track"></span><span class="knob"></span></label></div>
-    </div>
-
-    <!-- Activity log -->
-    <div class="widget">
-      <div class="widget-hdr"><span class="widget-title">Sync Activity</span><span class="widget-note">24h</span></div>
-      <div class="log-item"><div class="log-icon li-danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Discogs</span> — sync failed: OAuth expired</div><div class="log-meta">reauthorise to resume</div></div><span class="log-time">14:52</span></div>
-      <div class="log-item"><div class="log-icon li-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Tokopedia</span> — incremental sync</div><div class="log-meta">418 / 612 listings</div></div><span class="log-time">14:48</span></div>
-      <div class="log-item"><div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Website</span> — full sync completed</div><div class="log-meta">1,482 listings · 3 adjustments</div></div><span class="log-time">14:50</span></div>
-      <div class="log-item"><div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Shopee</span> — 4 orders imported</div><div class="log-meta">MF-0844 … MF-0847</div></div><span class="log-time">14:39</span></div>
-      <div class="log-item"><div class="log-icon li-warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Bandcamp</span> — 2 SKUs skipped</div><div class="log-meta">missing barcode · 182 / 184</div></div><span class="log-time">14:25</span></div>
+      <div class="pc-meta"><span class="cat-tag">Interviews</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">5,102 views</span><span class="pc-date">24 Mar</span></div>
     </div>
   </div>
 
@@ -332,12 +293,12 @@
       <a href="mockup-inventory-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</a>
       <a href="mockup-customers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Customers</a>
       <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a2 2 0 000-4z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="1 3"/></svg>Vouchers</a>
-      <a href="mockup-channels-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
+      <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
       <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
 
       <div class="dn-group">Content</div>
       <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
-      <a href="mockup-news-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>News</a>
+      <a href="mockup-news-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>News</a>
       <a href="mockup-news-categories-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>Categories &amp; Tags</a>
 
       <div class="dn-group">Shop</div>
@@ -395,17 +356,19 @@
     </div>
   </aside>
 
+  <!-- Bottom tab bar -->
   <nav class="tabbar">
     <a href="mockup-dashboard-mobile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Home</span></a>
     <a href="mockup-orders-mobile.html"><span class="nav-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Orders</span></a>
     <a href="mockup-inventory-mobile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg><span>Stock</span></a>
-    <a href="mockup-channels-mobile.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span>Channels</span></a>
+    <a href="mockup-news-mobile.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span>News</span></a>
   </nav>
 </div>
 
 <a href="index.html" class="proto-link" aria-label="Back to prototype hub">◹ Prototype</a>
 
 <script>
+  function setChip(el){el.parentNode.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
   const drawer=document.getElementById('drawer');
   const dOverlay=document.getElementById('drawer-overlay');
   function closeDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('show');}

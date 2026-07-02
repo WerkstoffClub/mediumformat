@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1024, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<title>Medium Format — POS Checkout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .brand-lockup .brand-wordmark{height:22px;width:auto;}
+    .rc-store .brand-wordmark{height:28px;width:auto;margin:0 auto 8px;}
+
+/* ─── Tokens (v2.0 monochrome) — verbatim from mockup-pos.html ─── */
+:root{
+  --black:#000;--white:#fff;
+  --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+  --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+  --accent:#FFFFFF;--accent-text:#000000;
+  --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+  --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+  --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+  --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+  --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+  --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+  --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 4px 12px rgba(0,0,0,.6);--e3:0 8px 24px rgba(0,0,0,.7);
+  --focus:0 0 0 2px rgba(255,255,255,.6);
+}
+html[data-theme="light"],.light{
+  --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+  --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+  --focus:0 0 0 2px rgba(0,0,0,.5);
+}
+
+/* ─── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--ui);
+  background: var(--canvas);
+  color: var(--ink);
+  height: 100vh; width: 100vw;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  font-size: 14px; line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-sm); }
+svg { flex-shrink: 0; }
+
+/* ─── Status Bar (verbatim structure from mockup-pos.html) ─── */
+.status-bar {
+  height: 52px; background: var(--surface);
+  border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: center; padding: 0 16px; gap: 16px; flex-shrink: 0;
+}
+.brand-lockup { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+.brand-lockup .logomark { width: 26px; height: 26px; color: var(--ink); display: block; }
+.brand-lockup .wordmark {
+  font-size: 15px; font-weight: 600; letter-spacing: -.04em; color: var(--ink); white-space: nowrap;
+}
+.brand-lockup .wordmark sup { font-size: 8px; font-weight: 400; color: var(--mute); top: -.7em; }
+.register-tag {
+  font-family: var(--ui); font-size: 12px; color: var(--mute);
+  padding-left: 14px; border-left: 1px solid var(--hairline); margin-left: 2px;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 36px; padding: 0 12px; margin-left: 4px;
+  border: 1px solid var(--hairline); border-radius: var(--r-md);
+  font-size: 13px; color: var(--body); cursor: pointer; text-decoration: none;
+  transition: background 150ms, color 150ms, border-color 150ms;
+}
+.back-link:hover { background: var(--raised); color: var(--ink); border-color: var(--mute); }
+.status-center { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.status-chip {
+  display: flex; align-items: center; gap: 7px;
+  height: 32px; padding: 0 12px; border-radius: var(--r-pill);
+  border: 1px solid var(--hairline); font-size: 12px; color: var(--body);
+}
+.status-chip svg { color: var(--mute); }
+.dot { width: 7px; height: 7px; border-radius: 50%; }
+.dot-success { background: var(--success); }
+.dot-warning { background: var(--warning); }
+.status-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.clock {
+  font-family: var(--ui); font-size: 14px; font-weight: 500;
+  color: var(--ink); min-width: 48px; text-align: right;
+}
+.staff-pill {
+  display: flex; align-items: center; gap: 8px;
+  height: 36px; padding: 0 12px 0 5px;
+  border: 1px solid var(--hairline); border-radius: var(--r-pill);
+  font-size: 13px; color: var(--body);
+}
+.staff-avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--raised); color: var(--ink);
+  font-size: 11px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; font-family: var(--ui);
+}
+.icon-btn {
+  width: 44px; height: 44px; border-radius: var(--r-md);
+  background: transparent; border: 1px solid var(--hairline);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--body);
+  transition: background 150ms, color 150ms, border-color 150ms;
+}
+.icon-btn:hover { background: var(--raised); color: var(--ink); border-color: var(--mute); }
+.icon-btn:active { transform: scale(.96); }
+
+/* ─── Body split ─────────────────────────────────────────── */
+.checkout-body { display: flex; flex: 1; overflow: hidden; }
+
+/* ─── LEFT: Order summary ────────────────────────────────── */
+.panel-order {
+  width: 38%; min-width: 360px;
+  display: flex; flex-direction: column;
+  border-right: 1px solid var(--hairline);
+  background: var(--canvas); overflow: hidden;
+}
+.order-head {
+  padding: 18px 20px 14px; border-bottom: 1px solid var(--hairline);
+}
+.order-head h1 { font-size: 20px; font-weight: 600; letter-spacing: -.02em; }
+.order-head .sale-meta {
+  display: flex; align-items: center; gap: 8px; margin-top: 6px;
+  font-family: var(--ui); font-size: 12px; color: var(--mute);
+}
+.order-head .sale-meta .sep { color: var(--hairline); }
+.order-items { flex: 1; overflow-y: auto; padding: 6px 0; }
+.order-items::-webkit-scrollbar { width: 6px; }
+.order-items::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 3px; }
+.oi {
+  display: flex; gap: 12px; padding: 12px 20px;
+  border-bottom: 1px solid var(--hairline);
+}
+.oi-thumb {
+  width: 48px; height: 48px; border-radius: var(--r-md);
+  flex-shrink: 0; overflow: hidden; border: 1px solid var(--hairline);
+}
+.oi-thumb .cover-art .grooves { width: 60%; height: 60%; }
+.oi-thumb .cover-tile svg { width: 40%; height: 40%; }
+.oi-body { flex: 1; min-width: 0; }
+.oi-artist { font-size: 14px; font-weight: 500; color: var(--ink); }
+.oi-title { font-size: 13px; color: var(--mute); margin-top: 1px; }
+.oi-cat { font-family: var(--ui); font-size: 11px; color: var(--mute); margin-top: 4px; }
+.oi-right { text-align: right; flex-shrink: 0; }
+.oi-qty { font-family: var(--ui); font-size: 12px; color: var(--body); }
+.oi-line { font-family: var(--ui); font-size: 14px; font-weight: 500; color: var(--ink); margin-top: 4px; }
+
+.order-totals { padding: 16px 20px; border-top: 1px solid var(--hairline); }
+.t-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+.t-label { font-size: 14px; color: var(--body); }
+.t-val { font-family: var(--ui); font-size: 14px; color: var(--ink); }
+.t-row.grand { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--hairline); }
+.t-row.grand .t-label { font-size: 16px; font-weight: 600; color: var(--ink); }
+.t-row.grand .t-val { font-size: 24px; font-weight: 500; color: var(--ink); }
+.cust-line {
+  display: flex; align-items: center; gap: 8px; margin-top: 14px;
+  padding-top: 14px; border-top: 1px solid var(--hairline);
+  font-size: 13px; color: var(--body);
+}
+.cust-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mute); }
+
+/* ─── RIGHT: Payment ─────────────────────────────────────── */
+.panel-pay {
+  flex: 1; display: flex; flex-direction: column;
+  background: var(--canvas); overflow: hidden;
+}
+.pay-scroll { flex: 1; overflow-y: auto; padding: 20px 24px 28px; }
+.pay-scroll::-webkit-scrollbar { width: 6px; }
+.pay-scroll::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 3px; }
+
+.pay-title { font-size: 16px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 4px; }
+.pay-title-sub { font-size: 13px; color: var(--mute); margin-bottom: 20px; }
+
+/* Method-family accordions */
+.family {
+  border: 1px solid var(--hairline); border-radius: var(--r-lg);
+  background: var(--surface); margin-bottom: 16px; overflow: hidden;
+}
+.family-head {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px; cursor: pointer; user-select: none;
+  transition: background 150ms;
+}
+.family-head:hover { background: var(--raised); }
+.family-icon {
+  width: 44px; height: 44px; flex-shrink: 0; border-radius: var(--r-md);
+  border: 1px solid var(--hairline); background: var(--canvas);
+  display: flex; align-items: center; justify-content: center; color: var(--ink);
+}
+.family-meta { flex: 1; min-width: 0; }
+.family-name {
+  font-size: 15px; font-weight: 600; color: var(--ink);
+  display: flex; align-items: center; gap: 8px;
+}
+.family-tag {
+  font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em;
+  padding: 2px 8px; border-radius: var(--r-pill);
+  border: 1px solid var(--hairline); color: var(--mute);
+}
+.family-desc { font-size: 12px; color: var(--mute); margin-top: 3px; }
+.family-chev { color: var(--mute); transition: transform 200ms; }
+.family.open .family-chev { transform: rotate(180deg); }
+.family-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 260ms cubic-bezier(.4,0,.2,1);
+  border-top: 1px solid transparent;
+}
+.family.open .family-body { max-height: 900px; border-top-color: var(--hairline); }
+.family-inner { padding: 18px; }
+
+/* EDC bank tiles */
+.tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.bank-tile {
+  border: 1px solid var(--hairline); border-radius: var(--r-md);
+  background: var(--canvas); cursor: pointer;
+  padding: 14px 10px; min-height: 84px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  transition: border-color 150ms, background 150ms, transform 120ms;
+}
+.bank-tile:hover { border-color: var(--mute); }
+.bank-tile:active { transform: scale(.98); }
+.bank-tile.active { border-color: var(--accent); background: var(--raised); }
+.bank-tile svg { color: var(--mute); }
+.bank-tile.active svg { color: var(--ink); }
+.bank-name {
+  font-family: var(--ui); font-size: 13px; font-weight: 500; color: var(--body); text-align: center;
+}
+.bank-tile.active .bank-name { color: var(--ink); }
+.bank-acq { font-size: 10px; color: var(--mute); text-transform: uppercase; letter-spacing: .04em; }
+
+/* Xendit inner method chips */
+.x-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.x-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 40px; padding: 0 14px; border-radius: var(--r-pill);
+  border: 1px solid var(--hairline); background: var(--canvas);
+  font-size: 13px; font-weight: 500; color: var(--mute); cursor: pointer;
+  transition: border-color 150ms, color 150ms;
+}
+.x-chip:hover { border-color: var(--mute); color: var(--body); }
+.x-chip.active { border-color: var(--accent); color: var(--ink); }
+.x-chip svg { color: currentColor; }
+
+.x-panel { display: none; }
+.x-panel.active { display: block; }
+
+/* Xendit QRIS */
+.qris-block {
+  display: flex; gap: 20px; align-items: center;
+  padding: 18px; border: 1px solid var(--hairline);
+  border-radius: var(--r-lg); background: var(--canvas);
+}
+.qr-box {
+  width: 148px; height: 148px; flex-shrink: 0;
+  background: var(--white); border-radius: var(--r-md); padding: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+html[data-theme="light"] .qr-box, .light .qr-box { border: 1px solid var(--hairline); }
+.qris-side { flex: 1; }
+.qris-side .qh { font-size: 15px; font-weight: 600; color: var(--ink); }
+.qris-side .qs { font-size: 13px; color: var(--body); margin-top: 4px; }
+.qris-amt { font-family: var(--ui); font-size: 18px; font-weight: 500; color: var(--ink); margin-top: 10px; }
+.wait-line {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
+  font-size: 12px; color: var(--body);
+}
+.wait-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--warning);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* Virtual account */
+.va-list { display: flex; flex-direction: column; gap: 10px; }
+.va-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border: 1px solid var(--hairline);
+  border-radius: var(--r-md); background: var(--canvas);
+}
+.va-bank { font-family: var(--ui); font-size: 13px; font-weight: 500; color: var(--body); width: 72px; flex-shrink: 0; }
+.va-num { font-family: var(--ui); font-size: 16px; font-weight: 500; color: var(--ink); flex: 1; letter-spacing: .02em; }
+.va-copy {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 34px; padding: 0 12px; border-radius: var(--r-md);
+  border: 1px solid var(--hairline); background: transparent;
+  font-size: 12px; color: var(--body); cursor: pointer;
+  transition: border-color 150ms, color 150ms;
+}
+.va-copy:hover { border-color: var(--mute); color: var(--ink); }
+
+/* E-wallet */
+.ew-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+.ew-tile {
+  border: 1px solid var(--hairline); border-radius: var(--r-md);
+  background: var(--canvas); cursor: pointer; padding: 12px 8px; min-height: 66px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+  transition: border-color 150ms, background 150ms;
+}
+.ew-tile:hover { border-color: var(--mute); }
+.ew-tile.active { border-color: var(--accent); background: var(--raised); }
+.ew-name { font-family: var(--ui); font-size: 12px; font-weight: 500; color: var(--body); }
+.ew-tile.active .ew-name { color: var(--ink); }
+.ew-tile svg { color: var(--mute); }
+.ew-tile.active svg { color: var(--ink); }
+.push-note {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px; border: 1px solid var(--hairline);
+  border-radius: var(--r-md); background: var(--canvas);
+  font-size: 13px; color: var(--body);
+}
+
+/* Xendit hosted card form */
+.xcard-form { display: flex; flex-direction: column; gap: 12px; }
+.field-label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--mute); margin-bottom: 6px; }
+.field { }
+.field input {
+  width: 100%; height: 46px; background: var(--raised);
+  border: 1px solid var(--hairline); border-radius: var(--r-md);
+  padding: 0 14px; color: var(--ink); font-family: var(--ui); font-size: 15px;
+  outline: none; transition: border-color 150ms;
+}
+.field input::placeholder { color: var(--mute); font-family: var(--ui); }
+.field input:focus { border-color: var(--accent); }
+.field-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Cash */
+.cash-block { display: flex; flex-direction: column; gap: 14px; }
+.cash-input-row { display: flex; gap: 12px; align-items: flex-end; }
+.cash-quick { display: flex; flex-wrap: wrap; gap: 8px; }
+.cash-quick button {
+  height: 40px; padding: 0 14px; border-radius: var(--r-md);
+  border: 1px solid var(--hairline); background: var(--canvas);
+  font-family: var(--ui); font-size: 13px; color: var(--body); cursor: pointer;
+  transition: border-color 150ms, color 150ms;
+}
+.cash-quick button:hover { border-color: var(--mute); color: var(--ink); }
+.change-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px; border: 1px solid var(--hairline); border-radius: var(--r-md);
+  background: var(--canvas);
+}
+.change-row .cl { font-size: 14px; color: var(--body); }
+.change-row .cv { font-family: var(--ui); font-size: 22px; font-weight: 500; color: var(--ink); }
+
+/* Shared note under Xendit */
+.secured-note {
+  display: flex; align-items: center; gap: 8px; margin-top: 14px;
+  font-size: 11px; color: var(--mute);
+}
+.secured-note svg { color: var(--mute); }
+
+/* Sticky action bar */
+.pay-action {
+  border-top: 1px solid var(--hairline); background: var(--surface);
+  padding: 14px 24px; display: flex; align-items: center; gap: 16px; flex-shrink: 0;
+}
+.pay-action .amt-block { flex-shrink: 0; }
+.pay-action .amt-label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--mute); }
+.pay-action .amt-value { font-family: var(--ui); font-size: 22px; font-weight: 500; color: var(--ink); }
+.btn-charge {
+  flex: 1; height: 56px; border-radius: var(--r-md);
+  background: var(--accent); border: none; color: var(--accent-text);
+  font-family: var(--ui); font-size: 16px; font-weight: 600; letter-spacing: -.01em;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: opacity 150ms, transform 120ms;
+}
+.btn-charge:hover { opacity: .9; }
+.btn-charge:active { transform: scale(.99); }
+.btn-charge:disabled { background: var(--raised); color: var(--mute); cursor: not-allowed; }
+
+/* ─── Overlay (EDC / gateway / receipt) ──────────────────── */
+.overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100; backdrop-filter: blur(5px);
+  opacity: 0; pointer-events: none; transition: opacity 200ms; padding: 24px;
+}
+.overlay.open { opacity: 1; pointer-events: all; }
+.sheet {
+  background: var(--surface); border: 1px solid var(--hairline);
+  border-radius: var(--r-xl); width: 460px; max-width: 100%;
+  max-height: 92vh; overflow-y: auto; box-shadow: var(--e3);
+  transform: scale(.96) translateY(10px); transition: transform 200ms;
+}
+.overlay.open .sheet { transform: scale(1) translateY(0); }
+.sheet::-webkit-scrollbar { width: 6px; }
+.sheet::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 3px; }
+.sheet-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px; border-bottom: 1px solid var(--hairline);
+}
+.sheet-head .sh-title { font-size: 16px; font-weight: 600; letter-spacing: -.02em; display:flex; align-items:center; gap:10px; }
+.sheet-head .sh-tag {
+  font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em;
+  padding: 2px 8px; border-radius: var(--r-pill); border: 1px solid var(--hairline); color: var(--mute);
+}
+.sheet-close {
+  width: 36px; height: 36px; border-radius: var(--r-md);
+  border: 1px solid var(--hairline); background: transparent; color: var(--body);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background 150ms, color 150ms;
+}
+.sheet-close:hover { background: var(--raised); color: var(--ink); }
+.sheet-body { padding: 28px 24px; }
+
+/* EDC stepper */
+.edc-steps { display: flex; align-items: center; gap: 6px; margin-bottom: 26px; }
+.edc-step { flex: 1; height: 4px; border-radius: 2px; background: var(--hairline); overflow: hidden; }
+.edc-step.done { background: var(--accent); }
+.edc-step.active::after {
+  content: ""; display: block; height: 100%; width: 40%;
+  background: var(--accent); animation: sweep 1.1s ease-in-out infinite;
+}
+@keyframes sweep { 0%{margin-left:-40%} 100%{margin-left:100%} }
+
+.edc-stage { text-align: center; }
+.edc-illus {
+  width: 132px; height: 132px; margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.edc-illus svg { color: var(--ink); }
+.edc-headline { font-size: 18px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 6px; }
+.edc-sub { font-size: 13px; color: var(--body); }
+.edc-amt { font-family: var(--ui); font-size: 30px; font-weight: 500; color: var(--ink); margin: 16px 0 4px; }
+.edc-bankline { font-family: var(--ui); font-size: 12px; color: var(--mute); }
+
+.spinner {
+  width: 44px; height: 44px; margin: 0 auto 8px;
+  border: 3px solid var(--hairline); border-top-color: var(--accent);
+  border-radius: 50%; animation: spin .9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Approved / declined result */
+.result-icon {
+  width: 68px; height: 68px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+}
+.result-icon.ok { background: var(--success-t); border: 1.5px solid var(--success); }
+.result-icon.no { background: var(--danger-t); border: 1.5px solid var(--danger); }
+.result-title { font-size: 22px; font-weight: 600; letter-spacing: -.02em; text-align: center; }
+.result-title.ok { color: var(--success); }
+.result-title.no { color: var(--danger); }
+.result-sub { font-size: 13px; color: var(--body); text-align: center; margin-top: 4px; }
+
+.txn-table {
+  margin-top: 22px; border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden;
+}
+.txn-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 14px; border-bottom: 1px solid var(--hairline); gap: 12px;
+}
+.txn-row:last-child { border-bottom: none; }
+.txn-k { font-size: 12px; color: var(--mute); text-transform: uppercase; letter-spacing: .03em; }
+.txn-v { font-family: var(--ui); font-size: 13px; color: var(--ink); text-align: right; }
+.txn-row.amt .txn-v { font-size: 15px; font-weight: 500; }
+
+.sheet-foot { padding: 16px 20px 20px; display: flex; gap: 10px; }
+.decline-link {
+  display: block; width: 100%; text-align: center; margin-top: 18px;
+  font-size: 12px; color: var(--mute); background: none; border: none; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.decline-link:hover { color: var(--body); }
+.sbtn {
+  flex: 1; height: 48px; border-radius: var(--r-md);
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  transition: opacity 150ms, background 150ms, border-color 150ms;
+}
+.sbtn.primary { background: var(--accent); color: var(--accent-text); border: none; }
+.sbtn.primary:hover { opacity: .9; }
+.sbtn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--hairline); }
+.sbtn.ghost:hover { background: var(--raised); border-color: var(--mute); }
+.sbtn.retry { background: transparent; color: var(--danger); border: 1px solid rgba(239,68,68,.4); }
+.sbtn.retry:hover { background: var(--danger-t); }
+
+/* ─── Receipt ────────────────────────────────────────────── */
+.receipt {
+  background: var(--surface); border: 1px solid var(--hairline);
+  border-radius: var(--r-xl); width: 380px; max-width: 100%;
+  max-height: 92vh; overflow-y: auto; box-shadow: var(--e3);
+  transform: scale(.96) translateY(10px); transition: transform 200ms;
+}
+.overlay.open .receipt { transform: scale(1) translateY(0); }
+.receipt::-webkit-scrollbar { width: 6px; }
+.receipt::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 3px; }
+.rc-inner { padding: 28px 26px; }
+.rc-store { text-align: center; padding-bottom: 18px; border-bottom: 1px dashed var(--hairline); }
+.rc-store .logomark { width: 40px; height: 40px; color: var(--ink); margin: 0 auto 8px; display: block; }
+.rc-store .rc-name { font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+.rc-store .rc-addr { font-size: 11px; color: var(--mute); margin-top: 4px; line-height: 1.5; }
+.rc-meta {
+  display: flex; justify-content: space-between; padding: 14px 0;
+  border-bottom: 1px dashed var(--hairline); font-family: var(--ui); font-size: 11px; color: var(--mute);
+}
+.rc-meta div { display: flex; flex-direction: column; gap: 3px; }
+.rc-meta .rc-mv { color: var(--body); }
+.rc-lines { padding: 14px 0; border-bottom: 1px dashed var(--hairline); }
+.rc-line { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; }
+.rc-line .rl-name { font-size: 13px; color: var(--ink); }
+.rc-line .rl-sub { font-family: var(--ui); font-size: 11px; color: var(--mute); margin-top: 1px; }
+.rc-line .rl-amt { font-family: var(--ui); font-size: 13px; color: var(--ink); white-space: nowrap; }
+.rc-tot { padding: 14px 0; border-bottom: 1px dashed var(--hairline); }
+.rc-trow { display: flex; justify-content: space-between; padding: 3px 0; }
+.rc-trow .rt-l { font-size: 13px; color: var(--body); }
+.rc-trow .rt-v { font-family: var(--ui); font-size: 13px; color: var(--ink); }
+.rc-trow.grand .rt-l { font-size: 15px; font-weight: 600; color: var(--ink); }
+.rc-trow.grand .rt-v { font-family: var(--ui); font-size: 17px; font-weight: 500; color: var(--ink); }
+.rc-pay { padding: 14px 0; border-bottom: 1px dashed var(--hairline); }
+.rc-payrow { display: flex; justify-content: space-between; padding: 3px 0; }
+.rc-payrow .rp-l { font-size: 12px; color: var(--mute); }
+.rc-payrow .rp-v { font-family: var(--ui); font-size: 12px; color: var(--body); text-align: right; }
+.rc-thanks { text-align: center; padding-top: 18px; }
+.rc-thanks .rt1 { font-size: 13px; font-weight: 500; color: var(--ink); }
+.rc-thanks .rt2 { font-size: 11px; color: var(--mute); margin-top: 4px; }
+.rc-barcode {
+  height: 40px; margin: 16px auto 0; width: 70%;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 9px);
+  opacity: .8;
+}
+.rc-foot { padding: 16px 20px 20px; display: flex; gap: 10px; }
+
+/* ─── Prototype hub link ─────────────────────────────────── */
+.proto-link {
+  position: fixed; bottom: 14px; left: 14px; z-index: 90;
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 34px; padding: 0 12px; border-radius: var(--r-pill);
+  background: var(--surface); border: 1px solid var(--hairline);
+  font-size: 12px; color: var(--mute); text-decoration: none;
+  transition: color 150ms, border-color 150ms;
+}
+.proto-link:hover { color: var(--ink); border-color: var(--mute); }
+
+/* ─── Toast ──────────────────────────────────────────────── */
+.toast {
+  position: fixed; top: 64px; right: 16px;
+  background: var(--surface); border: 1px solid var(--hairline);
+  border-radius: var(--r-md); padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--ink); box-shadow: var(--e2); z-index: 200;
+  transform: translateX(130%); transition: transform 250ms cubic-bezier(.25,.8,.25,1); max-width: 280px;
+}
+.toast.show { transform: translateX(0); }
+.toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.toast-dot.success { background: var(--success); }
+.toast-dot.warning { background: var(--warning); }
+
+/* ─── Vinyl-groove cover (from foundation) ───────────────── */
+.cover-art {
+  position: relative; width: 100%; height: 100%; background: var(--surface);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.cover-art .grooves {
+  width: 64%; height: 64%; border-radius: 50%; position: relative;
+  background: repeating-radial-gradient(circle at 50% 50%, #000 0 3px, #1f1f1f 3px 6px);
+}
+html[data-theme="light"] .cover-art .grooves, .light .cover-art .grooves {
+  background: repeating-radial-gradient(circle at 50% 50%, #d8d8d8 0 3px, #fff 3px 6px);
+}
+.cover-art .grooves::after { content:""; position:absolute; inset:42%; border-radius:50%; background:var(--accent); }
+.cover-tile {
+  position: relative; width: 100%; height: 100%; background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+}
+.cover-tile svg { width: 34%; height: 34%; color: var(--mute); }
+
+@media (max-width: 900px) {
+  .panel-order { width: 34%; min-width: 300px; }
+  .tile-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<!-- ─── Status Bar ──────────────────────────────────────── -->
+<div class="status-bar">
+  <div class="brand-lockup">
+    <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+  </div>
+  <div class="register-tag">REG-02</div>
+  <a class="back-link" href="mockup-pos.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to sale
+  </a>
+
+  <div class="status-center">
+    <div class="status-chip"><span class="dot dot-success"></span><span>Online</span></div>
+    <div class="status-chip">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      <span>Terminal OK</span>
+    </div>
+    <div class="status-chip"><span class="dot dot-success"></span><span>Synced</span></div>
+  </div>
+
+  <div class="status-right">
+    <div class="clock" id="clock">09:41</div>
+    <div class="staff-pill"><div class="staff-avatar">RZ</div>Rizal</div>
+    <button class="icon-btn" title="Toggle theme" onclick="toggleTheme()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ─── Body ──────────────────────────────────────────────── -->
+<div class="checkout-body">
+
+  <!-- LEFT: Order summary -->
+  <div class="panel-order">
+    <div class="order-head">
+      <h1>Order summary</h1>
+      <div class="sale-meta">
+        <span>Sale #MF-20260701-0042</span><span class="sep">·</span><span>4 items</span>
+      </div>
+    </div>
+
+    <div class="order-items">
+      <div class="oi">
+        <div class="oi-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="oi-body">
+          <div class="oi-artist">Floating Points</div>
+          <div class="oi-title">Promises</div>
+          <div class="oi-cat">LP · NF-13 · VG+</div>
+        </div>
+        <div class="oi-right"><div class="oi-qty">1 ×</div><div class="oi-line">Rp 450.000</div></div>
+      </div>
+
+      <div class="oi">
+        <div class="oi-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="oi-body">
+          <div class="oi-artist">Khruangbin</div>
+          <div class="oi-title">Mordechai</div>
+          <div class="oi-cat">LP · DE-565 · M</div>
+        </div>
+        <div class="oi-right"><div class="oi-qty">1 ×</div><div class="oi-line">Rp 520.000</div></div>
+      </div>
+
+      <div class="oi">
+        <div class="oi-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+        <div class="oi-body">
+          <div class="oi-artist">Sade</div>
+          <div class="oi-title">Love Deluxe</div>
+          <div class="oi-cat">LP · EPC-472 · VG+</div>
+        </div>
+        <div class="oi-right"><div class="oi-qty">1 ×</div><div class="oi-line">Rp 540.000</div></div>
+      </div>
+
+      <div class="oi">
+        <div class="oi-thumb"><div class="cover-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 4 6v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6l-2-4z"/><path d="M4 6h16"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div></div>
+        <div class="oi-body">
+          <div class="oi-artist">Medium Format</div>
+          <div class="oi-title">Tote Bag — Logo</div>
+          <div class="oi-cat">MERCH · MF-TOTE-01</div>
+        </div>
+        <div class="oi-right"><div class="oi-qty">1 ×</div><div class="oi-line">Rp 120.000</div></div>
+      </div>
+    </div>
+
+    <div class="order-totals">
+      <div class="t-row"><span class="t-label">Subtotal</span><span class="t-val" id="subtotal">Rp 1.630.000</span></div>
+      <div class="t-row"><span class="t-label">PPN 11%</span><span class="t-val" id="tax">Rp 179.300</span></div>
+      <div class="t-row grand"><span class="t-label">Total</span><span class="t-val" id="grand">Rp 1.809.300</span></div>
+      <div class="cust-line"><span class="cust-dot"></span>Walk-in customer · Cashier Rizal</div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Payment -->
+  <div class="panel-pay">
+    <div class="pay-scroll">
+      <div class="pay-title">Payment</div>
+      <div class="pay-title-sub">Choose a method family — card terminal (EDC) or Xendit online gateway.</div>
+
+      <!-- FAMILY A — CARD TERMINAL (EDC) -->
+      <div class="family open" id="famEdc">
+        <div class="family-head" onclick="toggleFamily('famEdc')">
+          <div class="family-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="4" rx="1"/><circle cx="8.5" cy="13" r="1"/><circle cx="12" cy="13" r="1"/><circle cx="15.5" cy="13" r="1"/><circle cx="8.5" cy="17" r="1"/><circle cx="12" cy="17" r="1"/><circle cx="15.5" cy="17" r="1"/></svg>
+          </div>
+          <div class="family-meta">
+            <div class="family-name">Card terminal <span class="family-tag">EDC · Acquirer</span></div>
+            <div class="family-desc">Physical bank terminals — insert, tap, or swipe. Settles on the acquirer.</div>
+          </div>
+          <svg class="family-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="family-body">
+          <div class="family-inner">
+            <div class="tile-grid">
+              <div class="bank-tile" onclick="startEdc('BCA')">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg>
+                <div class="bank-name">BCA</div><div class="bank-acq">Terminal</div>
+              </div>
+              <div class="bank-tile" onclick="startEdc('Mandiri')">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg>
+                <div class="bank-name">Mandiri</div><div class="bank-acq">Terminal</div>
+              </div>
+              <div class="bank-tile" onclick="startEdc('BNI')">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg>
+                <div class="bank-name">BNI</div><div class="bank-acq">Terminal</div>
+              </div>
+              <div class="bank-tile" onclick="startEdc('BRI')">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg>
+                <div class="bank-name">BRI</div><div class="bank-acq">Terminal</div>
+              </div>
+              <div class="bank-tile" onclick="startEdc('CIMB Niaga')">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg>
+                <div class="bank-name">CIMB Niaga</div><div class="bank-acq">Terminal</div>
+              </div>
+              <div class="bank-tile" onclick="startEdc('Permata')">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg>
+                <div class="bank-name">Permata</div><div class="bank-acq">Terminal</div>
+              </div>
+            </div>
+            <div class="secured-note">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Card data captured on the physical terminal — never touches this device.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILY B — XENDIT -->
+      <div class="family" id="famXendit">
+        <div class="family-head" onclick="toggleFamily('famXendit')">
+          <div class="family-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12a10 10 0 0 1 20 0"/><path d="M2 12a10 10 0 0 0 20 0"/><path d="M12 2v20M7 5.5l10 13M17 5.5l-10 13"/></svg>
+          </div>
+          <div class="family-meta">
+            <div class="family-name">Xendit <span class="family-tag">Online gateway</span></div>
+            <div class="family-desc">Secured by Xendit — QRIS, virtual account, e-wallet, or hosted card.</div>
+          </div>
+          <svg class="family-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="family-body">
+          <div class="family-inner">
+            <div class="x-chips">
+              <div class="x-chip active" onclick="selectXendit(this,'qris')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
+                QRIS
+              </div>
+              <div class="x-chip" onclick="selectXendit(this,'va')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 15h4"/></svg>
+                Virtual Account
+              </div>
+              <div class="x-chip" onclick="selectXendit(this,'ewallet')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v1"/><rect x="2" y="7" width="20" height="13" rx="2"/><circle cx="17" cy="13.5" r="1.5"/></svg>
+                E-wallet
+              </div>
+              <div class="x-chip" onclick="selectXendit(this,'card')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>
+                Card
+              </div>
+            </div>
+
+            <!-- QRIS -->
+            <div class="x-panel active" id="xp-qris">
+              <div class="qris-block">
+                <div class="qr-box">
+                  <svg width="128" height="128" viewBox="0 0 42 42" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="2" fill="#000"/><rect x="4" y="4" width="10" height="10" rx="1" fill="#fff"/><rect x="6" y="6" width="6" height="6" rx="1" fill="#000"/>
+                    <rect x="26" y="2" width="14" height="14" rx="2" fill="#000"/><rect x="28" y="4" width="10" height="10" rx="1" fill="#fff"/><rect x="30" y="6" width="6" height="6" rx="1" fill="#000"/>
+                    <rect x="2" y="26" width="14" height="14" rx="2" fill="#000"/><rect x="4" y="28" width="10" height="10" rx="1" fill="#fff"/><rect x="6" y="30" width="6" height="6" rx="1" fill="#000"/>
+                    <rect x="18" y="2" width="4" height="4" rx="1" fill="#000"/><rect x="18" y="8" width="4" height="4" rx="1" fill="#000"/><rect x="18" y="14" width="4" height="4" rx="1" fill="#000"/>
+                    <rect x="2" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="8" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="18" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="24" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="30" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="36" y="18" width="4" height="4" rx="1" fill="#000"/>
+                    <rect x="18" y="24" width="4" height="4" rx="1" fill="#000"/><rect x="24" y="24" width="4" height="4" rx="1" fill="#000"/><rect x="30" y="24" width="4" height="4" rx="1" fill="#000"/>
+                    <rect x="18" y="30" width="4" height="4" rx="1" fill="#000"/><rect x="24" y="30" width="4" height="4" rx="1" fill="#000"/><rect x="36" y="30" width="4" height="4" rx="1" fill="#000"/>
+                    <rect x="18" y="36" width="4" height="4" rx="1" fill="#000"/><rect x="30" y="36" width="4" height="4" rx="1" fill="#000"/><rect x="36" y="36" width="4" height="4" rx="1" fill="#000"/>
+                  </svg>
+                </div>
+                <div class="qris-side">
+                  <div class="qh">Scan with any QRIS app</div>
+                  <div class="qs">GoPay · OVO · DANA · ShopeePay · mobile banking</div>
+                  <div class="qris-amt" id="qrisAmt">Rp 1.809.300</div>
+                  <div class="wait-line"><span class="wait-dot"></span>Waiting for customer scan…</div>
+                </div>
+              </div>
+              <div class="secured-note">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Secured by Xendit · QRIS ID MF-QR-8842
+              </div>
+            </div>
+
+            <!-- Virtual Account -->
+            <div class="x-panel" id="xp-va">
+              <div class="va-list">
+                <div class="va-row">
+                  <div class="va-bank">BCA</div>
+                  <div class="va-num">8808 0771 2450 0042</div>
+                  <button class="va-copy" onclick="copyVa(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
+                </div>
+                <div class="va-row">
+                  <div class="va-bank">Mandiri</div>
+                  <div class="va-num">8950 1177 2450 0042</div>
+                  <button class="va-copy" onclick="copyVa(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
+                </div>
+                <div class="va-row">
+                  <div class="va-bank">BNI</div>
+                  <div class="va-num">9881 0088 2450 0042</div>
+                  <button class="va-copy" onclick="copyVa(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
+                </div>
+              </div>
+              <div class="wait-line"><span class="wait-dot"></span>Awaiting transfer · expires in 23:59</div>
+              <div class="secured-note">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Secured by Xendit · VA auto-confirms on receipt
+              </div>
+            </div>
+
+            <!-- E-wallet -->
+            <div class="x-panel" id="xp-ewallet">
+              <div class="ew-grid">
+                <div class="ew-tile active" onclick="selectEw(this)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="17" cy="12" r="1.6"/></svg>
+                  <div class="ew-name">GoPay</div>
+                </div>
+                <div class="ew-tile" onclick="selectEw(this)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="17" cy="12" r="1.6"/></svg>
+                  <div class="ew-name">OVO</div>
+                </div>
+                <div class="ew-tile" onclick="selectEw(this)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="17" cy="12" r="1.6"/></svg>
+                  <div class="ew-name">DANA</div>
+                </div>
+                <div class="ew-tile" onclick="selectEw(this)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="17" cy="12" r="1.6"/></svg>
+                  <div class="ew-name">ShopeePay</div>
+                </div>
+              </div>
+              <div class="push-note">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                Push notification sent — customer approves in the GoPay app.
+              </div>
+              <div class="secured-note">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Secured by Xendit
+              </div>
+            </div>
+
+            <!-- Hosted card -->
+            <div class="x-panel" id="xp-card">
+              <div class="xcard-form">
+                <div class="field">
+                  <div class="field-label">Card number</div>
+                  <input type="text" placeholder="4000 0000 0000 0000" inputmode="numeric">
+                </div>
+                <div class="field-2">
+                  <div class="field">
+                    <div class="field-label">Expiry</div>
+                    <input type="text" placeholder="MM / YY" inputmode="numeric">
+                  </div>
+                  <div class="field">
+                    <div class="field-label">CVV</div>
+                    <input type="text" placeholder="•••" inputmode="numeric">
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="field-label">Name on card</div>
+                  <input type="text" placeholder="Cardholder name" style="font-family:var(--ui)">
+                </div>
+              </div>
+              <div class="secured-note">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Xendit-hosted form · PCI-DSS · 3-D Secure
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILY C — CASH -->
+      <div class="family" id="famCash">
+        <div class="family-head" onclick="toggleFamily('famCash')">
+          <div class="family-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 9v.01M18 15v.01"/></svg>
+          </div>
+          <div class="family-meta">
+            <div class="family-name">Cash <span class="family-tag">Drawer</span></div>
+            <div class="family-desc">Tender cash and compute change due.</div>
+          </div>
+          <svg class="family-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="family-body">
+          <div class="family-inner">
+            <div class="cash-block">
+              <div class="field">
+                <div class="field-label">Amount tendered</div>
+                <input type="text" id="cashInput" placeholder="Rp 0" inputmode="numeric" oninput="computeChange()">
+              </div>
+              <div class="cash-quick">
+                <button onclick="quickCash(1809300)">Exact</button>
+                <button onclick="quickCash(1850000)">Rp 1.850.000</button>
+                <button onclick="quickCash(2000000)">Rp 2.000.000</button>
+                <button onclick="quickCash(2500000)">Rp 2.500.000</button>
+              </div>
+              <div class="change-row">
+                <span class="cl">Change due</span>
+                <span class="cv" id="changeDue">Rp 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky action -->
+    <div class="pay-action">
+      <button class="btn-charge" id="chargeBtn" onclick="chargeSelected()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="chargeLabel">Complete Xendit · QRIS payment</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EDC / gateway overlay ──────────────────────────────── -->
+<div class="overlay" id="edcOverlay">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div class="sh-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="4" rx="1"/><circle cx="8.5" cy="13" r="1"/><circle cx="12" cy="13" r="1"/><circle cx="15.5" cy="13" r="1"/></svg>
+        <span id="edcTitle">BCA terminal</span>
+      </div>
+      <span class="sh-tag" id="edcTag">EDC · Acquirer</span>
+      <button class="sheet-close" onclick="closeEdc()" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="sheet-body" id="edcBody"><!-- populated by JS --></div>
+  </div>
+</div>
+
+<!-- ─── Receipt overlay ────────────────────────────────────── -->
+<div class="overlay" id="receiptOverlay">
+  <div class="receipt">
+    <div class="rc-inner">
+      <div class="rc-store">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+        <div class="rc-addr">Jl. Senopati No. 42, Kebayoran Baru<br>Jakarta Selatan · REG-02</div>
+      </div>
+
+      <div class="rc-meta">
+        <div><span>Receipt</span><span class="rc-mv" id="rcRef">MF-20260701-0042</span></div>
+        <div style="text-align:right"><span>Date</span><span class="rc-mv" id="rcDate">01/07/2026 09:41</span></div>
+      </div>
+
+      <div class="rc-lines">
+        <div class="rc-line"><div><div class="rl-name">Floating Points — Promises</div><div class="rl-sub">LP · NF-13 · ×1</div></div><div class="rl-amt">Rp 450.000</div></div>
+        <div class="rc-line"><div><div class="rl-name">Khruangbin — Mordechai</div><div class="rl-sub">LP · DE-565 · ×1</div></div><div class="rl-amt">Rp 520.000</div></div>
+        <div class="rc-line"><div><div class="rl-name">Sade — Love Deluxe</div><div class="rl-sub">LP · EPC-472 · ×1</div></div><div class="rl-amt">Rp 540.000</div></div>
+        <div class="rc-line"><div><div class="rl-name">Medium Format — Tote Bag</div><div class="rl-sub">MERCH · MF-TOTE-01 · ×1</div></div><div class="rl-amt">Rp 120.000</div></div>
+      </div>
+
+      <div class="rc-tot">
+        <div class="rc-trow"><span class="rt-l">Subtotal</span><span class="rt-v">Rp 1.630.000</span></div>
+        <div class="rc-trow"><span class="rt-l">PPN 11%</span><span class="rt-v">Rp 179.300</span></div>
+        <div class="rc-trow grand"><span class="rt-l">Total</span><span class="rt-v">Rp 1.809.300</span></div>
+      </div>
+
+      <div class="rc-pay" id="rcPay"><!-- payment lines populated by JS --></div>
+
+      <div class="rc-thanks">
+        <div class="rt1">Terima kasih — thank you</div>
+        <div class="rt2">Goods sold are not returnable · Keep this receipt</div>
+        <div class="rc-barcode"></div>
+      </div>
+    </div>
+    <div class="rc-foot">
+      <button class="sbtn ghost" onclick="printReceipt()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print receipt
+      </button>
+      <a class="sbtn primary" href="mockup-pos.html">New sale</a>
+    </div>
+  </div>
+</div>
+
+<!-- Prototype hub -->
+<a class="proto-link" href="index.html">◹ Prototype</a>
+
+<!-- Toast -->
+<div class="toast" id="toast"><div class="toast-dot success" id="toastDot"></div><span id="toastMsg">Done</span></div>
+
+<script>
+/* ── Constants ─────────────────────────────────────── */
+const TOTAL = 1809300;
+
+/* ── State ─────────────────────────────────────────── */
+let activeXendit = 'qris';   // qris | va | ewallet | card
+let activeEw = 'GoPay';
+let edcTimers = [];
+
+/* ── Format ────────────────────────────────────────── */
+function fmt(n){ if(n<=0) return 'Rp 0'; return 'Rp ' + n.toLocaleString('id-ID').replace(/,/g,'.'); }
+
+/* ── Family accordions (single-open) ───────────────── */
+function toggleFamily(id){
+  const el = document.getElementById(id);
+  const willOpen = !el.classList.contains('open');
+  document.querySelectorAll('.family').forEach(f=>f.classList.remove('open'));
+  if(willOpen){ el.classList.add('open'); }
+  updateChargeLabel();
+}
+
+/* ── Xendit sub-method ─────────────────────────────── */
+function selectXendit(chip, method){
+  document.querySelectorAll('#famXendit .x-chip').forEach(c=>c.classList.remove('active'));
+  chip.classList.add('active');
+  activeXendit = method;
+  document.querySelectorAll('#famXendit .x-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('xp-'+method).classList.add('active');
+  updateChargeLabel();
+}
+function selectEw(tile){
+  document.querySelectorAll('#xp-ewallet .ew-tile').forEach(t=>t.classList.remove('active'));
+  tile.classList.add('active');
+  activeEw = tile.querySelector('.ew-name').textContent;
+  const note = document.querySelector('#xp-ewallet .push-note');
+  note.lastChild.textContent = ` Push notification sent — customer approves in the ${activeEw} app.`;
+}
+function copyVa(btn){
+  const num = btn.parentElement.querySelector('.va-num').textContent;
+  if(navigator.clipboard) navigator.clipboard.writeText(num.replace(/\s/g,'')).catch(()=>{});
+  showToast('VA number copied', 'success');
+}
+
+/* ── Charge label reflects the open family ─────────── */
+function updateChargeLabel(){
+  const label = document.getElementById('chargeLabel');
+  const btn = document.getElementById('chargeBtn');
+  if(document.getElementById('famXendit').classList.contains('open')){
+    const names = { qris:'QRIS', va:'Virtual Account', ewallet:'E-wallet ('+activeEw+')', card:'Card' };
+    label.textContent = 'Confirm Xendit · ' + names[activeXendit] + ' payment';
+    btn.disabled = false;
+  } else if(document.getElementById('famCash').classList.contains('open')){
+    label.textContent = 'Complete cash payment';
+    btn.disabled = false;
+  } else {
+    // EDC family: charge happens by tapping a bank tile
+    label.textContent = 'Select a bank terminal above';
+    btn.disabled = true;
+  }
+}
+
+/* ── Charge (Xendit / Cash paths) ──────────────────── */
+function chargeSelected(){
+  if(document.getElementById('famXendit').classList.contains('open')){
+    runGateway();
+  } else if(document.getElementById('famCash').classList.contains('open')){
+    completeCash();
+  }
+}
+
+/* ── Cash ──────────────────────────────────────────── */
+function parseCash(){
+  const raw = document.getElementById('cashInput').value.replace(/[^\d]/g,'');
+  return raw ? parseInt(raw,10) : 0;
+}
+function computeChange(){
+  const tendered = parseCash();
+  const change = tendered - TOTAL;
+  document.getElementById('changeDue').textContent = change > 0 ? fmt(change) : 'Rp 0';
+}
+function quickCash(v){
+  document.getElementById('cashInput').value = fmt(v);
+  computeChange();
+}
+function completeCash(){
+  const tendered = parseCash();
+  if(tendered < TOTAL){ showToast('Amount tendered is short', 'warning'); return; }
+  const change = tendered - TOTAL;
+  showReceipt({
+    method: 'Cash · Drawer',
+    lines: [
+      ['Tendered', fmt(tendered)],
+      ['Change due', fmt(change)]
+    ]
+  });
+}
+
+/* ── Xendit gateway flow (waiting → confirmed) ─────── */
+function runGateway(){
+  const names = { qris:'QRIS', va:'Virtual Account', ewallet:'E-wallet · '+activeEw, card:'Card' };
+  const method = 'Xendit · ' + names[activeXendit];
+  const overlay = document.getElementById('edcOverlay');
+  document.getElementById('edcTitle').textContent = names[activeXendit];
+  document.getElementById('edcTag').textContent = 'Xendit · Gateway';
+  const body = document.getElementById('edcBody');
+
+  const waitCopy = {
+    qris:'Waiting for the customer to scan and approve in their QRIS app…',
+    va:'Waiting for the virtual-account transfer to settle…',
+    ewallet:'Push sent — waiting for approval in the '+activeEw+' app…',
+    card:'Processing card through Xendit · 3-D Secure…'
+  };
+  body.innerHTML = `
+    <div class="edc-steps"><div class="edc-step done"></div><div class="edc-step active"></div><div class="edc-step"></div></div>
+    <div class="edc-stage">
+      <div class="spinner"></div>
+      <div class="edc-headline">Secured by Xendit</div>
+      <div class="edc-sub">${waitCopy[activeXendit]}</div>
+      <div class="edc-amt">${fmt(TOTAL)}</div>
+      <div class="edc-bankline">Gateway ref XND-${refDigits()}</div>
+    </div>`;
+  overlay.classList.add('open');
+  clearTimers();
+  edcTimers.push(setTimeout(()=>gatewayApproved(names[activeXendit], method), 2400));
+}
+function gatewayApproved(sub, method){
+  const body = document.getElementById('edcBody');
+  body.innerHTML = `
+    <div class="edc-steps"><div class="edc-step done"></div><div class="edc-step done"></div><div class="edc-step done"></div></div>
+    <div class="result-icon ok">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="result-title ok">Payment confirmed</div>
+    <div class="result-sub">${method}</div>
+    <div class="txn-table">
+      <div class="txn-row amt"><span class="txn-k">Amount</span><span class="txn-v">${fmt(TOTAL)}</span></div>
+      <div class="txn-row"><span class="txn-k">Method</span><span class="txn-v">${sub}</span></div>
+      <div class="txn-row"><span class="txn-k">Gateway ref</span><span class="txn-v">XND-${refDigits()}</span></div>
+      <div class="txn-row"><span class="txn-k">Settlement</span><span class="txn-v">T+1 · Xendit</span></div>
+    </div>
+    <div class="sheet-foot" style="padding:16px 0 0">
+      <button class="sbtn primary" onclick="closeEdc(); showReceipt({ method:'${method}', lines:[['Gateway ref','XND-${refDigits()}'],['Settlement','T+1 · Xendit']] })">View receipt</button>
+    </div>`;
+}
+
+/* ── EDC flow (bank terminal stepper) ──────────────── */
+function startEdc(bank){
+  const overlay = document.getElementById('edcOverlay');
+  document.getElementById('edcTitle').textContent = bank + ' terminal';
+  document.getElementById('edcTag').textContent = 'EDC · Acquirer';
+  overlay.classList.add('open');
+  edcStep1(bank);
+}
+function edcStepsBar(idx){
+  // idx 1..4 ; 4 = approved
+  let html = '<div class="edc-steps">';
+  for(let i=1;i<=3;i++){
+    if(i < idx) html += '<div class="edc-step done"></div>';
+    else if(i === idx && idx < 4) html += '<div class="edc-step active"></div>';
+    else if(idx === 4) html += '<div class="edc-step done"></div>';
+    else html += '<div class="edc-step"></div>';
+  }
+  return html + '</div>';
+}
+function edcStep1(bank){
+  clearTimers();
+  const body = document.getElementById('edcBody');
+  body.innerHTML = `
+    ${edcStepsBar(1)}
+    <div class="edc-stage">
+      <div class="edc-illus">
+        <svg width="112" height="112" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4">
+          <rect x="34" y="14" width="52" height="80" rx="7"/>
+          <rect x="44" y="24" width="32" height="16" rx="3"/>
+          <circle cx="47" cy="52" r="3"/><circle cx="60" cy="52" r="3"/><circle cx="73" cy="52" r="3"/>
+          <circle cx="47" cy="65" r="3"/><circle cx="60" cy="65" r="3"/><circle cx="73" cy="65" r="3"/>
+          <rect x="44" y="76" width="32" height="10" rx="2"/>
+          <path d="M18 96h84" stroke-width="2.4"/>
+          <rect x="12" y="60" width="20" height="13" rx="2" transform="rotate(-12 22 66)"/>
+        </svg>
+      </div>
+      <div class="edc-headline">Insert, tap, or swipe card</div>
+      <div class="edc-sub">Present the card on the ${bank} terminal.</div>
+      <div class="edc-amt">${fmt(TOTAL)}</div>
+      <div class="edc-bankline">${bank} · Acquirer · REG-02</div>
+      <button class="decline-link" onclick="edcDeclined('${bank}')">Simulate decline</button>
+    </div>`;
+  edcTimers.push(setTimeout(()=>edcStep2(bank), 1900));
+}
+function edcStep2(bank){
+  const body = document.getElementById('edcBody');
+  body.innerHTML = `
+    ${edcStepsBar(2)}
+    <div class="edc-stage">
+      <div class="spinner"></div>
+      <div class="edc-headline">Reading card…</div>
+      <div class="edc-sub">Do not remove the card.</div>
+      <div class="edc-amt">${fmt(TOTAL)}</div>
+      <div class="edc-bankline">${bank} · Acquirer</div>
+    </div>`;
+  edcTimers.push(setTimeout(()=>edcStep3(bank), 1500));
+}
+function edcStep3(bank){
+  const body = document.getElementById('edcBody');
+  body.innerHTML = `
+    ${edcStepsBar(3)}
+    <div class="edc-stage">
+      <div class="spinner"></div>
+      <div class="edc-headline">Processing on ${bank} EDC…</div>
+      <div class="edc-sub">Authorising with the acquirer.</div>
+      <div class="edc-amt">${fmt(TOTAL)}</div>
+      <div class="edc-bankline">${bank} · Acquirer</div>
+    </div>`;
+  edcTimers.push(setTimeout(()=>edcApproved(bank), 1700));
+}
+function edcApproved(bank){
+  const scheme = ['Visa','Mastercard','GPN'][Math.floor(Math.random()*3)];
+  const entry = ['Chip','Contactless','Swipe'][Math.floor(Math.random()*3)];
+  const approval = 6 + Math.floor(Math.random()*900000);
+  const rrn = refDigits(12);
+  const batch = String(20 + Math.floor(Math.random()*80)).padStart(6,'0');
+  const trace = String(Math.floor(Math.random()*900000)+100000);
+  const pan = '**** **** **** ' + (1000 + Math.floor(Math.random()*9000));
+  const body = document.getElementById('edcBody');
+  body.innerHTML = `
+    ${edcStepsBar(4)}
+    <div class="result-icon ok">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="result-title ok">Approved</div>
+    <div class="result-sub">${bank} EDC · ${scheme} · ${entry}</div>
+    <div class="txn-table">
+      <div class="txn-row amt"><span class="txn-k">Amount</span><span class="txn-v">${fmt(TOTAL)}</span></div>
+      <div class="txn-row"><span class="txn-k">Approval code</span><span class="txn-v">${String(approval).padStart(6,'0')}</span></div>
+      <div class="txn-row"><span class="txn-k">RRN / Ref</span><span class="txn-v">${rrn}</span></div>
+      <div class="txn-row"><span class="txn-k">Batch</span><span class="txn-v">${batch}</span></div>
+      <div class="txn-row"><span class="txn-k">Trace</span><span class="txn-v">${trace}</span></div>
+      <div class="txn-row"><span class="txn-k">Card (PAN)</span><span class="txn-v">${pan}</span></div>
+      <div class="txn-row"><span class="txn-k">Scheme</span><span class="txn-v">${scheme}</span></div>
+      <div class="txn-row"><span class="txn-k">Entry mode</span><span class="txn-v">${entry}</span></div>
+    </div>
+    <div class="sheet-foot" style="padding:16px 0 0">
+      <button class="sbtn primary" onclick='closeEdc(); showReceipt({ method:"EDC · ${bank} · ${scheme} ${entry.toLowerCase()}", lines:[["Approval code","${String(approval).padStart(6,'0')}"],["RRN / Ref","${rrn}"],["Card","${pan}"]] })'>View receipt</button>
+    </div>`;
+}
+function edcDeclined(bank){
+  clearTimers();
+  const body = document.getElementById('edcBody');
+  body.innerHTML = `
+    ${edcStepsBar(4).replace(/edc-step done/g,'edc-step')}
+    <div class="result-icon no">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </div>
+    <div class="result-title no">Declined</div>
+    <div class="result-sub">${bank} EDC · issuer rejected the transaction</div>
+    <div class="txn-table">
+      <div class="txn-row amt"><span class="txn-k">Amount</span><span class="txn-v">${fmt(TOTAL)}</span></div>
+      <div class="txn-row"><span class="txn-k">Response</span><span class="txn-v">05 · Do not honour</span></div>
+      <div class="txn-row"><span class="txn-k">RRN / Ref</span><span class="txn-v">${refDigits(12)}</span></div>
+      <div class="txn-row"><span class="txn-k">Acquirer</span><span class="txn-v">${bank}</span></div>
+    </div>
+    <div class="sheet-foot" style="padding:16px 0 0">
+      <button class="sbtn ghost" onclick="closeEdc()">Cancel</button>
+      <button class="sbtn retry" onclick="startEdc('${bank}')">Retry card</button>
+    </div>`;
+}
+
+/* ── Helpers ───────────────────────────────────────── */
+function refDigits(n){
+  n = n || 10;
+  let s = '';
+  for(let i=0;i<n;i++) s += Math.floor(Math.random()*10);
+  return s;
+}
+function clearTimers(){ edcTimers.forEach(t=>clearTimeout(t)); edcTimers = []; }
+function closeEdc(){ clearTimers(); document.getElementById('edcOverlay').classList.remove('open'); }
+
+/* ── Receipt ───────────────────────────────────────── */
+function showReceipt(opts){
+  const pay = document.getElementById('rcPay');
+  let rows = `<div class="rc-payrow"><span class="rp-l">Payment</span><span class="rp-v">${opts.method}</span></div>`;
+  (opts.lines || []).forEach(([k,v])=>{
+    rows += `<div class="rc-payrow"><span class="rp-l">${k}</span><span class="rp-v">${v}</span></div>`;
+  });
+  pay.innerHTML = rows;
+  document.getElementById('receiptOverlay').classList.add('open');
+}
+function printReceipt(){ showToast('Sending to receipt printer…', 'success'); }
+
+/* ── Theme (persisted 'mf-theme') ──────────────────── */
+function toggleTheme(){
+  const root = document.documentElement;
+  const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('mf-theme', next);
+}
+(function initTheme(){
+  const saved = localStorage.getItem('mf-theme');
+  if(saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
+/* ── Toast ─────────────────────────────────────────── */
+let toastTimer;
+function showToast(msg, type='success'){
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toastDot').className = 'toast-dot ' + type;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+/* ── Clock ─────────────────────────────────────────── */
+function tick(){
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('clock').textContent = `${h}:${m}`;
+}
+tick(); setInterval(tick, 10000);
+
+/* ── Init ──────────────────────────────────────────── */
+updateChargeLabel();
+
+/* Close overlays on backdrop click */
+document.getElementById('edcOverlay').addEventListener('click', e=>{ if(e.target.id==='edcOverlay') closeEdc(); });
+</script>
+</body>
+</html>

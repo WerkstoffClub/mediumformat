@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "api",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@mf/api", "dev"],
+      "port": 3001
+    },
+    {
+      "name": "backoffice",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@mf/backoffice", "dev"],
+      "port": 5173
+    }
+  ]
+}

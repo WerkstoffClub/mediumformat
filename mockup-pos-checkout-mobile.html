@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<title>Medium Format — POS Checkout (Mobile)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .rc-store .brand-wordmark{height:28px;width:auto;margin:0 auto 8px;}
+
+/* ─── Tokens (v2.0 monochrome) — verbatim from mockup-pos.html ─── */
+:root{
+  --black:#000;--white:#fff;
+  --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+  --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+  --accent:#FFFFFF;--accent-text:#000000;
+  --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+  --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+  --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+  --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+  --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+  --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+  --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 4px 12px rgba(0,0,0,.6);--e3:0 8px 24px rgba(0,0,0,.7);
+  --focus:0 0 0 2px rgba(255,255,255,.6);
+}
+html[data-theme="light"],.light{
+  --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+  --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+  --focus:0 0 0 2px rgba(0,0,0,.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--ui);
+  background: #060606;
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 0;
+  font-size: 14px; line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+html[data-theme="light"] body, .light body { background: #E9E9E9; }
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-sm); }
+svg { flex-shrink: 0; }
+
+/* ─── Phone frame ────────────────────────────────────────── */
+.device {
+  width: 390px; height: 844px;
+  background: var(--canvas);
+  border-radius: 44px;
+  border: 1px solid var(--hairline);
+  box-shadow: var(--e3);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.notch {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 150px; height: 30px; background: var(--canvas);
+  border-radius: 0 0 18px 18px; z-index: 40;
+}
+.statusbar {
+  height: 46px; flex-shrink: 0;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 26px 6px; font-family: var(--ui); font-size: 13px; font-weight: 500; color: var(--ink);
+}
+.statusbar .sb-icons { display: flex; align-items: center; gap: 6px; }
+.statusbar svg { color: var(--ink); }
+
+/* ─── App header ─────────────────────────────────────────── */
+.appbar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px 12px; border-bottom: 1px solid var(--hairline); flex-shrink: 0;
+}
+.appbar .back {
+  width: 40px; height: 40px; border-radius: var(--r-md);
+  border: 1px solid var(--hairline); background: transparent; color: var(--body);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none;
+}
+.appbar .back:hover { background: var(--raised); color: var(--ink); }
+.appbar .title { font-size: 16px; font-weight: 600; letter-spacing: -.02em; flex: 1; }
+.appbar .reg { font-family: var(--ui); font-size: 11px; color: var(--mute); }
+.appbar .theme {
+  width: 40px; height: 40px; border-radius: var(--r-md);
+  border: 1px solid var(--hairline); background: transparent; color: var(--body);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.appbar .theme:hover { background: var(--raised); color: var(--ink); }
+
+/* ─── Scroll area ────────────────────────────────────────── */
+.scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.scroll::-webkit-scrollbar { display: none; }
+
+/* Order summary (collapsible) */
+.osum { border-bottom: 1px solid var(--hairline); }
+.osum-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; cursor: pointer; user-select: none;
+}
+.osum-head .oh-l { font-size: 13px; color: var(--body); }
+.osum-head .oh-r { display: flex; align-items: center; gap: 8px; }
+.osum-total { font-family: var(--ui); font-size: 16px; font-weight: 500; color: var(--ink); }
+.osum-chev { color: var(--mute); transition: transform 200ms; }
+.osum.open .osum-chev { transform: rotate(180deg); }
+.osum-body { max-height: 0; overflow: hidden; transition: max-height 260ms cubic-bezier(.4,0,.2,1); }
+.osum.open .osum-body { max-height: 620px; }
+.oi { display: flex; gap: 10px; padding: 10px 16px; border-top: 1px solid var(--hairline); }
+.oi-thumb { width: 42px; height: 42px; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--hairline); flex-shrink: 0; }
+.oi-thumb .cover-art .grooves { width: 58%; height: 58%; }
+.oi-thumb .cover-tile svg { width: 42%; height: 42%; }
+.oi-body { flex: 1; min-width: 0; }
+.oi-artist { font-size: 13px; font-weight: 500; color: var(--ink); }
+.oi-title { font-size: 12px; color: var(--mute); }
+.oi-cat { font-family: var(--ui); font-size: 10px; color: var(--mute); margin-top: 2px; }
+.oi-right { text-align: right; }
+.oi-qty { font-family: var(--ui); font-size: 11px; color: var(--body); }
+.oi-line { font-family: var(--ui); font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 2px; }
+.osum-totals { padding: 12px 16px; border-top: 1px solid var(--hairline); background: var(--surface); }
+.t-row { display: flex; justify-content: space-between; padding: 3px 0; }
+.t-label { font-size: 13px; color: var(--body); }
+.t-val { font-family: var(--ui); font-size: 13px; color: var(--ink); }
+.t-row.grand { margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--hairline); }
+.t-row.grand .t-label { font-size: 15px; font-weight: 600; color: var(--ink); }
+.t-row.grand .t-val { font-size: 18px; font-weight: 500; color: var(--ink); }
+
+/* Payment section */
+.pay { padding: 16px; }
+.pay-title { font-size: 15px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 3px; }
+.pay-sub { font-size: 12px; color: var(--mute); margin-bottom: 16px; }
+
+.family { border: 1px solid var(--hairline); border-radius: var(--r-lg); background: var(--surface); margin-bottom: 12px; overflow: hidden; }
+.family-head { display: flex; align-items: center; gap: 12px; padding: 14px; cursor: pointer; user-select: none; }
+.family-icon {
+  width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--r-md);
+  border: 1px solid var(--hairline); background: var(--canvas);
+  display: flex; align-items: center; justify-content: center; color: var(--ink);
+}
+.family-meta { flex: 1; min-width: 0; }
+.family-name { font-size: 14px; font-weight: 600; color: var(--ink); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.family-tag { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; padding: 2px 7px; border-radius: var(--r-pill); border: 1px solid var(--hairline); color: var(--mute); }
+.family-desc { font-size: 11px; color: var(--mute); margin-top: 3px; }
+.family-chev { color: var(--mute); transition: transform 200ms; }
+.family.open .family-chev { transform: rotate(180deg); }
+.family-body { max-height: 0; overflow: hidden; transition: max-height 300ms cubic-bezier(.4,0,.2,1); border-top: 1px solid transparent; }
+.family.open .family-body { max-height: 1200px; border-top-color: var(--hairline); }
+.family-inner { padding: 14px; }
+
+/* EDC bank tiles */
+.tile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.bank-tile {
+  border: 1px solid var(--hairline); border-radius: var(--r-md); background: var(--canvas);
+  cursor: pointer; padding: 14px 8px; min-height: 78px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+  transition: border-color 150ms, background 150ms;
+}
+.bank-tile:active { transform: scale(.98); }
+.bank-tile svg { color: var(--mute); }
+.bank-name { font-family: var(--ui); font-size: 13px; font-weight: 500; color: var(--body); text-align: center; }
+.bank-acq { font-size: 9px; color: var(--mute); text-transform: uppercase; letter-spacing: .04em; }
+
+.secured-note { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 10px; color: var(--mute); }
+.secured-note svg { color: var(--mute); }
+
+/* Xendit chips */
+.x-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.x-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 40px; padding: 0 12px; border-radius: var(--r-pill);
+  border: 1px solid var(--hairline); background: var(--canvas);
+  font-size: 12px; font-weight: 500; color: var(--mute); cursor: pointer;
+  transition: border-color 150ms, color 150ms;
+}
+.x-chip.active { border-color: var(--accent); color: var(--ink); }
+.x-panel { display: none; }
+.x-panel.active { display: block; }
+
+.qris-block { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 18px; border: 1px solid var(--hairline); border-radius: var(--r-lg); background: var(--canvas); text-align: center; }
+.qr-box { width: 150px; height: 150px; background: var(--white); border-radius: var(--r-md); padding: 10px; display: flex; align-items: center; justify-content: center; }
+html[data-theme="light"] .qr-box, .light .qr-box { border: 1px solid var(--hairline); }
+.qris-side .qh { font-size: 14px; font-weight: 600; color: var(--ink); }
+.qris-side .qs { font-size: 11px; color: var(--body); margin-top: 4px; }
+.qris-amt { font-family: var(--ui); font-size: 18px; font-weight: 500; color: var(--ink); margin-top: 8px; }
+.wait-line { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 11px; color: var(--body); }
+.wait-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warning); animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.va-list { display: flex; flex-direction: column; gap: 8px; }
+.va-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--hairline); border-radius: var(--r-md); background: var(--canvas); }
+.va-bank { font-family: var(--ui); font-size: 12px; font-weight: 500; color: var(--body); width: 60px; flex-shrink: 0; }
+.va-num { font-family: var(--ui); font-size: 13px; font-weight: 500; color: var(--ink); flex: 1; }
+.va-copy { width: 34px; height: 34px; border-radius: var(--r-md); border: 1px solid var(--hairline); background: transparent; color: var(--body); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+.va-copy:active { background: var(--raised); }
+
+.ew-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
+.ew-tile { border: 1px solid var(--hairline); border-radius: var(--r-md); background: var(--canvas); cursor: pointer; padding: 12px 8px; min-height: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; transition: border-color 150ms; }
+.ew-tile.active { border-color: var(--accent); background: var(--raised); }
+.ew-name { font-family: var(--ui); font-size: 12px; font-weight: 500; color: var(--body); }
+.ew-tile.active .ew-name { color: var(--ink); }
+.ew-tile svg { color: var(--mute); }
+.ew-tile.active svg { color: var(--ink); }
+.push-note { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--hairline); border-radius: var(--r-md); background: var(--canvas); font-size: 12px; color: var(--body); }
+
+.xcard-form { display: flex; flex-direction: column; gap: 10px; }
+.field-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--mute); margin-bottom: 5px; }
+.field input { width: 100%; height: 46px; background: var(--raised); border: 1px solid var(--hairline); border-radius: var(--r-md); padding: 0 14px; color: var(--ink); font-family: var(--ui); font-size: 15px; outline: none; transition: border-color 150ms; }
+.field input::placeholder { color: var(--mute); }
+.field input:focus { border-color: var(--accent); }
+.field-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.cash-block { display: flex; flex-direction: column; gap: 12px; }
+.cash-quick { display: flex; flex-wrap: wrap; gap: 8px; }
+.cash-quick button { height: 40px; padding: 0 12px; border-radius: var(--r-md); border: 1px solid var(--hairline); background: var(--canvas); font-family: var(--ui); font-size: 12px; color: var(--body); cursor: pointer; }
+.cash-quick button:active { background: var(--raised); }
+.change-row { display: flex; justify-content: space-between; align-items: center; padding: 14px; border: 1px solid var(--hairline); border-radius: var(--r-md); background: var(--canvas); }
+.change-row .cl { font-size: 13px; color: var(--body); }
+.change-row .cv { font-family: var(--ui); font-size: 18px; font-weight: 500; color: var(--ink); }
+
+/* Sticky action */
+.pay-action { border-top: 1px solid var(--hairline); background: var(--surface); padding: 12px 16px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.amt-block { flex-shrink: 0; }
+.amt-label { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: var(--mute); }
+.amt-value { font-family: var(--ui); font-size: 17px; font-weight: 500; color: var(--ink); }
+.btn-charge { flex: 1; height: 52px; border-radius: var(--r-md); background: var(--accent); border: none; color: var(--accent-text); font-family: var(--ui); font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 150ms, transform 120ms; }
+.btn-charge:active { transform: scale(.99); }
+.btn-charge:disabled { background: var(--raised); color: var(--mute); }
+
+/* ─── Bottom-sheet overlay (inside device) ───────────────── */
+.overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,.65); backdrop-filter: blur(3px);
+  z-index: 60; display: flex; align-items: flex-end;
+  opacity: 0; pointer-events: none; transition: opacity 200ms;
+}
+.overlay.open { opacity: 1; pointer-events: all; }
+.sheet {
+  width: 100%; max-height: 88%; overflow-y: auto;
+  background: var(--surface); border-top: 1px solid var(--hairline);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  transform: translateY(100%); transition: transform 280ms cubic-bezier(.25,.8,.25,1);
+}
+.overlay.open .sheet { transform: translateY(0); }
+.sheet::-webkit-scrollbar { display: none; }
+.drawer-handle { width: 40px; height: 4px; background: var(--hairline); border-radius: 2px; margin: 10px auto 4px; }
+.sheet-head { display: flex; align-items: center; gap: 10px; padding: 6px 18px 14px; border-bottom: 1px solid var(--hairline); }
+.sh-title { font-size: 15px; font-weight: 600; letter-spacing: -.02em; flex: 1; display: flex; align-items: center; gap: 8px; }
+.sh-tag { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; padding: 2px 7px; border-radius: var(--r-pill); border: 1px solid var(--hairline); color: var(--mute); }
+.sheet-close { width: 32px; height: 32px; border-radius: var(--r-md); border: 1px solid var(--hairline); background: transparent; color: var(--body); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.sheet-body { padding: 22px 18px; }
+
+.edc-steps { display: flex; align-items: center; gap: 6px; margin-bottom: 22px; }
+.edc-step { flex: 1; height: 4px; border-radius: 2px; background: var(--hairline); overflow: hidden; }
+.edc-step.done { background: var(--accent); }
+.edc-step.active::after { content:""; display:block; height:100%; width:40%; background:var(--accent); animation: sweep 1.1s ease-in-out infinite; }
+@keyframes sweep { 0%{margin-left:-40%} 100%{margin-left:100%} }
+
+.edc-stage { text-align: center; }
+.edc-illus { width: 110px; height: 110px; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; }
+.edc-illus svg { color: var(--ink); }
+.edc-headline { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 5px; }
+.edc-sub { font-size: 12px; color: var(--body); }
+.edc-amt { font-family: var(--ui); font-size: 26px; font-weight: 500; color: var(--ink); margin: 14px 0 4px; }
+.edc-bankline { font-family: var(--ui); font-size: 11px; color: var(--mute); }
+.spinner { width: 40px; height: 40px; margin: 0 auto 8px; border: 3px solid var(--hairline); border-top-color: var(--accent); border-radius: 50%; animation: spin .9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.result-icon { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+.result-icon.ok { background: var(--success-t); border: 1.5px solid var(--success); }
+.result-icon.no { background: var(--danger-t); border: 1.5px solid var(--danger); }
+.result-title { font-size: 20px; font-weight: 600; letter-spacing: -.02em; text-align: center; }
+.result-title.ok { color: var(--success); }
+.result-title.no { color: var(--danger); }
+.result-sub { font-size: 12px; color: var(--body); text-align: center; margin-top: 4px; }
+.txn-table { margin-top: 20px; border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; }
+.txn-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--hairline); gap: 10px; }
+.txn-row:last-child { border-bottom: none; }
+.txn-k { font-size: 11px; color: var(--mute); text-transform: uppercase; letter-spacing: .03em; }
+.txn-v { font-family: var(--ui); font-size: 12px; color: var(--ink); text-align: right; }
+.txn-row.amt .txn-v { font-size: 14px; font-weight: 500; }
+.decline-link { display: block; width: 100%; text-align: center; margin-top: 16px; font-size: 12px; color: var(--mute); background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.sheet-foot { padding: 16px 18px 20px; display: flex; gap: 10px; }
+.sbtn { flex: 1; height: 48px; border-radius: var(--r-md); font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; text-decoration: none; transition: opacity 150ms, background 150ms; }
+.sbtn.primary { background: var(--accent); color: var(--accent-text); border: none; }
+.sbtn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--hairline); }
+.sbtn.retry { background: transparent; color: var(--danger); border: 1px solid rgba(239,68,68,.4); }
+
+/* Receipt (inside sheet) */
+.rc-store { text-align: center; padding-bottom: 16px; border-bottom: 1px dashed var(--hairline); }
+.rc-store .logomark { width: 36px; height: 36px; color: var(--ink); margin: 0 auto 8px; display: block; }
+.rc-name { font-size: 15px; font-weight: 600; letter-spacing: -.02em; }
+.rc-addr { font-size: 10px; color: var(--mute); margin-top: 4px; line-height: 1.5; }
+.rc-meta { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed var(--hairline); font-family: var(--ui); font-size: 10px; color: var(--mute); }
+.rc-meta div { display: flex; flex-direction: column; gap: 3px; }
+.rc-mv { color: var(--body); }
+.rc-lines { padding: 12px 0; border-bottom: 1px dashed var(--hairline); }
+.rc-line { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; }
+.rl-name { font-size: 12px; color: var(--ink); }
+.rl-sub { font-family: var(--ui); font-size: 10px; color: var(--mute); margin-top: 1px; }
+.rl-amt { font-family: var(--ui); font-size: 12px; color: var(--ink); white-space: nowrap; }
+.rc-tot { padding: 12px 0; border-bottom: 1px dashed var(--hairline); }
+.rc-trow { display: flex; justify-content: space-between; padding: 3px 0; }
+.rt-l { font-size: 12px; color: var(--body); }
+.rt-v { font-family: var(--ui); font-size: 12px; color: var(--ink); }
+.rc-trow.grand .rt-l { font-size: 14px; font-weight: 600; color: var(--ink); }
+.rc-trow.grand .rt-v { font-size: 16px; font-weight: 500; color: var(--ink); }
+.rc-pay { padding: 12px 0; border-bottom: 1px dashed var(--hairline); }
+.rc-payrow { display: flex; justify-content: space-between; padding: 3px 0; gap: 10px; }
+.rp-l { font-size: 11px; color: var(--mute); }
+.rp-v { font-family: var(--ui); font-size: 11px; color: var(--body); text-align: right; }
+.rc-thanks { text-align: center; padding-top: 16px; }
+.rt1 { font-size: 12px; font-weight: 500; color: var(--ink); }
+.rt2 { font-size: 10px; color: var(--mute); margin-top: 4px; }
+.rc-barcode { height: 36px; margin: 14px auto 0; width: 70%; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 9px); opacity: .8; }
+
+/* Vinyl-groove cover */
+.cover-art { position: relative; width: 100%; height: 100%; background: var(--surface); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.cover-art .grooves { width: 64%; height: 64%; border-radius: 50%; position: relative; background: repeating-radial-gradient(circle at 50% 50%, #000 0 3px, #1f1f1f 3px 6px); }
+html[data-theme="light"] .cover-art .grooves, .light .cover-art .grooves { background: repeating-radial-gradient(circle at 50% 50%, #d8d8d8 0 3px, #fff 3px 6px); }
+.cover-art .grooves::after { content:""; position:absolute; inset:42%; border-radius:50%; background:var(--accent); }
+.cover-tile { position: relative; width: 100%; height: 100%; background: var(--surface); display: flex; align-items: center; justify-content: center; }
+.cover-tile svg { width: 34%; height: 34%; color: var(--mute); }
+
+/* Prototype hub */
+.proto-link {
+  position: fixed; bottom: 14px; left: 14px; z-index: 90;
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 32px; padding: 0 12px; border-radius: var(--r-pill);
+  background: var(--surface); border: 1px solid var(--hairline);
+  font-size: 12px; color: var(--mute); text-decoration: none;
+}
+.proto-link:hover { color: var(--ink); border-color: var(--mute); }
+
+/* Toast */
+.toast { position: absolute; top: 56px; left: 50%; transform: translateX(-50%) translateY(-16px); z-index: 80; background: var(--raised); border: 1px solid var(--hairline); border-radius: var(--r-pill); padding: 9px 16px; display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--ink); box-shadow: var(--e2); opacity: 0; pointer-events: none; transition: opacity 220ms, transform 220ms; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast-dot { width: 7px; height: 7px; border-radius: 50%; }
+.toast-dot.success { background: var(--success); }
+.toast-dot.warning { background: var(--warning); }
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <!-- Status bar -->
+  <div class="statusbar">
+    <span>09:41</span>
+    <div class="sb-icons">
+      <svg width="16" height="11" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="5" y="4" width="3" height="8" rx="1"/><rect x="10" y="1" width="3" height="11" rx="1" opacity=".4"/><rect x="15" y="1" width="3" height="11" rx="1" opacity=".4"/></svg>
+      <svg width="16" height="12" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5a13 13 0 0 1 18 0M4 8a9 9 0 0 1 12 0M7 11a4 4 0 0 1 6 0"/></svg>
+      <svg width="24" height="12" viewBox="0 0 26 13" fill="none"><rect x="1" y="1" width="21" height="11" rx="3" stroke="currentColor" stroke-width="1.2" opacity=".5"/><rect x="3" y="3" width="16" height="7" rx="1.5" fill="currentColor"/><rect x="23" y="4.5" width="2" height="4" rx="1" fill="currentColor" opacity=".5"/></svg>
+    </div>
+  </div>
+
+  <!-- App header -->
+  <div class="appbar">
+    <a class="back" href="mockup-pos-mobile.html" aria-label="Back to sale">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="title">Checkout</div>
+    <span class="reg">REG-02</span>
+    <button class="theme" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </div>
+
+  <!-- Scroll -->
+  <div class="scroll">
+
+    <!-- Order summary -->
+    <div class="osum open" id="osum">
+      <div class="osum-head" onclick="document.getElementById('osum').classList.toggle('open')">
+        <div class="oh-l">Order summary · 4 items</div>
+        <div class="oh-r">
+          <span class="osum-total">Rp 1.809.300</span>
+          <svg class="osum-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="osum-body">
+        <div class="oi">
+          <div class="oi-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+          <div class="oi-body"><div class="oi-artist">Floating Points</div><div class="oi-title">Promises</div><div class="oi-cat">LP · NF-13 · VG+</div></div>
+          <div class="oi-right"><div class="oi-qty">1 ×</div><div class="oi-line">Rp 450.000</div></div>
+        </div>
+        <div class="oi">
+          <div class="oi-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+          <div class="oi-body"><div class="oi-artist">Khruangbin</div><div class="oi-title">Mordechai</div><div class="oi-cat">LP · DE-565 · M</div></div>
+          <div class="oi-right"><div class="oi-qty">1 ×</div><div class="oi-line">Rp 520.000</div></div>
+        </div>
+        <div class="oi">
+          <div class="oi-thumb"><div class="cover-art"><div class="grooves"></div></div></div>
+          <div class="oi-body"><div class="oi-artist">Sade</div><div class="oi-title">Love Deluxe</div><div class="oi-cat">LP · EPC-472 · VG+</div></div>
+          <div class="oi-right"><div class="oi-qty">1 ×</div><div class="oi-line">Rp 540.000</div></div>
+        </div>
+        <div class="oi">
+          <div class="oi-thumb"><div class="cover-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 4 6v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6l-2-4z"/><path d="M4 6h16"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div></div>
+          <div class="oi-body"><div class="oi-artist">Medium Format</div><div class="oi-title">Tote Bag — Logo</div><div class="oi-cat">MERCH · MF-TOTE-01</div></div>
+          <div class="oi-right"><div class="oi-qty">1 ×</div><div class="oi-line">Rp 120.000</div></div>
+        </div>
+      </div>
+      <div class="osum-totals">
+        <div class="t-row"><span class="t-label">Subtotal</span><span class="t-val">Rp 1.630.000</span></div>
+        <div class="t-row"><span class="t-label">PPN 11%</span><span class="t-val">Rp 179.300</span></div>
+        <div class="t-row grand"><span class="t-label">Total</span><span class="t-val">Rp 1.809.300</span></div>
+      </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="pay">
+      <div class="pay-title">Payment</div>
+      <div class="pay-sub">Card terminal (EDC) or Xendit online gateway.</div>
+
+      <!-- FAMILY A — EDC -->
+      <div class="family open" id="famEdc">
+        <div class="family-head" onclick="toggleFamily('famEdc')">
+          <div class="family-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="4" rx="1"/><circle cx="8.5" cy="13" r="1"/><circle cx="12" cy="13" r="1"/><circle cx="15.5" cy="13" r="1"/><circle cx="8.5" cy="17" r="1"/><circle cx="12" cy="17" r="1"/><circle cx="15.5" cy="17" r="1"/></svg></div>
+          <div class="family-meta"><div class="family-name">Card terminal <span class="family-tag">EDC · Acquirer</span></div><div class="family-desc">Physical bank terminals — insert / tap / swipe.</div></div>
+          <svg class="family-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="family-body"><div class="family-inner">
+          <div class="tile-grid">
+            <div class="bank-tile" onclick="startEdc('BCA')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg><div class="bank-name">BCA</div><div class="bank-acq">Terminal</div></div>
+            <div class="bank-tile" onclick="startEdc('Mandiri')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg><div class="bank-name">Mandiri</div><div class="bank-acq">Terminal</div></div>
+            <div class="bank-tile" onclick="startEdc('BNI')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg><div class="bank-name">BNI</div><div class="bank-acq">Terminal</div></div>
+            <div class="bank-tile" onclick="startEdc('BRI')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg><div class="bank-name">BRI</div><div class="bank-acq">Terminal</div></div>
+            <div class="bank-tile" onclick="startEdc('CIMB Niaga')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg><div class="bank-name">CIMB Niaga</div><div class="bank-acq">Terminal</div></div>
+            <div class="bank-tile" onclick="startEdc('Permata')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="1"/><path d="M8 12h8M8 15h8M8 18h4"/></svg><div class="bank-name">Permata</div><div class="bank-acq">Terminal</div></div>
+          </div>
+          <div class="secured-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Card data stays on the physical terminal.</div>
+        </div></div>
+      </div>
+
+      <!-- FAMILY B — XENDIT -->
+      <div class="family" id="famXendit">
+        <div class="family-head" onclick="toggleFamily('famXendit')">
+          <div class="family-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12a10 10 0 0 1 20 0"/><path d="M2 12a10 10 0 0 0 20 0"/><path d="M12 2v20M7 5.5l10 13M17 5.5l-10 13"/></svg></div>
+          <div class="family-meta"><div class="family-name">Xendit <span class="family-tag">Online gateway</span></div><div class="family-desc">QRIS, VA, e-wallet, or hosted card.</div></div>
+          <svg class="family-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="family-body"><div class="family-inner">
+          <div class="x-chips">
+            <div class="x-chip active" onclick="selectXendit(this,'qris')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>QRIS</div>
+            <div class="x-chip" onclick="selectXendit(this,'va')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 15h4"/></svg>VA</div>
+            <div class="x-chip" onclick="selectXendit(this,'ewallet')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="13" rx="2"/><circle cx="17" cy="13.5" r="1.5"/></svg>E-wallet</div>
+            <div class="x-chip" onclick="selectXendit(this,'card')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>Card</div>
+          </div>
+
+          <div class="x-panel active" id="xp-qris">
+            <div class="qris-block">
+              <div class="qr-box">
+                <svg width="130" height="130" viewBox="0 0 42 42" fill="none">
+                  <rect x="2" y="2" width="14" height="14" rx="2" fill="#000"/><rect x="4" y="4" width="10" height="10" rx="1" fill="#fff"/><rect x="6" y="6" width="6" height="6" rx="1" fill="#000"/>
+                  <rect x="26" y="2" width="14" height="14" rx="2" fill="#000"/><rect x="28" y="4" width="10" height="10" rx="1" fill="#fff"/><rect x="30" y="6" width="6" height="6" rx="1" fill="#000"/>
+                  <rect x="2" y="26" width="14" height="14" rx="2" fill="#000"/><rect x="4" y="28" width="10" height="10" rx="1" fill="#fff"/><rect x="6" y="30" width="6" height="6" rx="1" fill="#000"/>
+                  <rect x="18" y="2" width="4" height="4" rx="1" fill="#000"/><rect x="18" y="8" width="4" height="4" rx="1" fill="#000"/><rect x="18" y="14" width="4" height="4" rx="1" fill="#000"/>
+                  <rect x="2" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="8" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="18" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="24" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="30" y="18" width="4" height="4" rx="1" fill="#000"/><rect x="36" y="18" width="4" height="4" rx="1" fill="#000"/>
+                  <rect x="18" y="24" width="4" height="4" rx="1" fill="#000"/><rect x="24" y="24" width="4" height="4" rx="1" fill="#000"/><rect x="30" y="24" width="4" height="4" rx="1" fill="#000"/>
+                  <rect x="18" y="30" width="4" height="4" rx="1" fill="#000"/><rect x="24" y="30" width="4" height="4" rx="1" fill="#000"/><rect x="36" y="30" width="4" height="4" rx="1" fill="#000"/>
+                  <rect x="18" y="36" width="4" height="4" rx="1" fill="#000"/><rect x="30" y="36" width="4" height="4" rx="1" fill="#000"/><rect x="36" y="36" width="4" height="4" rx="1" fill="#000"/>
+                </svg>
+              </div>
+              <div class="qris-side">
+                <div class="qh">Scan with any QRIS app</div>
+                <div class="qs">GoPay · OVO · DANA · ShopeePay</div>
+                <div class="qris-amt">Rp 1.809.300</div>
+                <div class="wait-line"><span class="wait-dot"></span>Waiting for customer scan…</div>
+              </div>
+            </div>
+            <div class="secured-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secured by Xendit · MF-QR-8842</div>
+          </div>
+
+          <div class="x-panel" id="xp-va">
+            <div class="va-list">
+              <div class="va-row"><div class="va-bank">BCA</div><div class="va-num">8808 0771 2450 0042</div><button class="va-copy" onclick="copyVa(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+              <div class="va-row"><div class="va-bank">Mandiri</div><div class="va-num">8950 1177 2450 0042</div><button class="va-copy" onclick="copyVa(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+              <div class="va-row"><div class="va-bank">BNI</div><div class="va-num">9881 0088 2450 0042</div><button class="va-copy" onclick="copyVa(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+            </div>
+            <div class="wait-line"><span class="wait-dot"></span>Awaiting transfer · expires 23:59</div>
+            <div class="secured-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secured by Xendit</div>
+          </div>
+
+          <div class="x-panel" id="xp-ewallet">
+            <div class="ew-grid">
+              <div class="ew-tile active" onclick="selectEw(this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="17" cy="12" r="1.6"/></svg><div class="ew-name">GoPay</div></div>
+              <div class="ew-tile" onclick="selectEw(this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="17" cy="12" r="1.6"/></svg><div class="ew-name">OVO</div></div>
+              <div class="ew-tile" onclick="selectEw(this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="17" cy="12" r="1.6"/></svg><div class="ew-name">DANA</div></div>
+              <div class="ew-tile" onclick="selectEw(this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="17" cy="12" r="1.6"/></svg><div class="ew-name">ShopeePay</div></div>
+            </div>
+            <div class="push-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Push sent — approve in the GoPay app.</div>
+            <div class="secured-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secured by Xendit</div>
+          </div>
+
+          <div class="x-panel" id="xp-card">
+            <div class="xcard-form">
+              <div class="field"><div class="field-label">Card number</div><input type="text" placeholder="4000 0000 0000 0000" inputmode="numeric"></div>
+              <div class="field-2">
+                <div class="field"><div class="field-label">Expiry</div><input type="text" placeholder="MM / YY" inputmode="numeric"></div>
+                <div class="field"><div class="field-label">CVV</div><input type="text" placeholder="•••" inputmode="numeric"></div>
+              </div>
+              <div class="field"><div class="field-label">Name on card</div><input type="text" placeholder="Cardholder name" style="font-family:var(--ui)"></div>
+            </div>
+            <div class="secured-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Xendit-hosted · PCI-DSS · 3-D Secure</div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- FAMILY C — CASH -->
+      <div class="family" id="famCash">
+        <div class="family-head" onclick="toggleFamily('famCash')">
+          <div class="family-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 9v.01M18 15v.01"/></svg></div>
+          <div class="family-meta"><div class="family-name">Cash <span class="family-tag">Drawer</span></div><div class="family-desc">Tender cash, compute change.</div></div>
+          <svg class="family-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="family-body"><div class="family-inner">
+          <div class="cash-block">
+            <div class="field"><div class="field-label">Amount tendered</div><input type="text" id="cashInput" placeholder="Rp 0" inputmode="numeric" oninput="computeChange()"></div>
+            <div class="cash-quick">
+              <button onclick="quickCash(1809300)">Exact</button>
+              <button onclick="quickCash(1850000)">1.850.000</button>
+              <button onclick="quickCash(2000000)">2.000.000</button>
+              <button onclick="quickCash(2500000)">2.500.000</button>
+            </div>
+            <div class="change-row"><span class="cl">Change due</span><span class="cv" id="changeDue">Rp 0</span></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky action -->
+  <div class="pay-action">
+    <button class="btn-charge" id="chargeBtn" onclick="chargeSelected()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <span id="chargeLabel">Confirm Xendit · QRIS</span>
+    </button>
+  </div>
+
+  <!-- Bottom sheet overlay -->
+  <div class="overlay" id="edcOverlay">
+    <div class="sheet">
+      <div class="drawer-handle"></div>
+      <div class="sheet-head">
+        <div class="sh-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="4" rx="1"/><circle cx="8.5" cy="13" r="1"/><circle cx="12" cy="13" r="1"/><circle cx="15.5" cy="13" r="1"/></svg>
+          <span id="edcTitle">BCA terminal</span>
+        </div>
+        <span class="sh-tag" id="edcTag">EDC · Acquirer</span>
+        <button class="sheet-close" onclick="closeEdc()" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="sheet-body" id="edcBody"></div>
+    </div>
+  </div>
+
+  <!-- Receipt overlay -->
+  <div class="overlay" id="receiptOverlay">
+    <div class="sheet">
+      <div class="drawer-handle"></div>
+      <div class="sheet-body">
+        <div class="rc-store">
+          <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+          <div class="rc-addr">Jl. Senopati No. 42, Kebayoran Baru<br>Jakarta Selatan · REG-02</div>
+        </div>
+        <div class="rc-meta">
+          <div><span>Receipt</span><span class="rc-mv">MF-20260701-0042</span></div>
+          <div style="text-align:right"><span>Date</span><span class="rc-mv">01/07/2026 09:41</span></div>
+        </div>
+        <div class="rc-lines">
+          <div class="rc-line"><div><div class="rl-name">Floating Points — Promises</div><div class="rl-sub">LP · NF-13 · ×1</div></div><div class="rl-amt">Rp 450.000</div></div>
+          <div class="rc-line"><div><div class="rl-name">Khruangbin — Mordechai</div><div class="rl-sub">LP · DE-565 · ×1</div></div><div class="rl-amt">Rp 520.000</div></div>
+          <div class="rc-line"><div><div class="rl-name">Sade — Love Deluxe</div><div class="rl-sub">LP · EPC-472 · ×1</div></div><div class="rl-amt">Rp 540.000</div></div>
+          <div class="rc-line"><div><div class="rl-name">Medium Format — Tote Bag</div><div class="rl-sub">MERCH · MF-TOTE-01 · ×1</div></div><div class="rl-amt">Rp 120.000</div></div>
+        </div>
+        <div class="rc-tot">
+          <div class="rc-trow"><span class="rt-l">Subtotal</span><span class="rt-v">Rp 1.630.000</span></div>
+          <div class="rc-trow"><span class="rt-l">PPN 11%</span><span class="rt-v">Rp 179.300</span></div>
+          <div class="rc-trow grand"><span class="rt-l">Total</span><span class="rt-v">Rp 1.809.300</span></div>
+        </div>
+        <div class="rc-pay" id="rcPay"></div>
+        <div class="rc-thanks">
+          <div class="rt1">Terima kasih — thank you</div>
+          <div class="rt2">Goods sold are not returnable · Keep this receipt</div>
+          <div class="rc-barcode"></div>
+        </div>
+      </div>
+      <div class="sheet-foot">
+        <button class="sbtn ghost" onclick="printReceipt()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print</button>
+        <a class="sbtn primary" href="mockup-pos-mobile.html">New sale</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"><div class="toast-dot success" id="toastDot"></div><span id="toastMsg">Done</span></div>
+</div>
+
+<a class="proto-link" href="index.html">◹ Prototype</a>
+
+<script>
+const TOTAL = 1809300;
+let activeXendit = 'qris';
+let activeEw = 'GoPay';
+let edcTimers = [];
+
+function fmt(n){ if(n<=0) return 'Rp 0'; return 'Rp ' + n.toLocaleString('id-ID').replace(/,/g,'.'); }
+
+function toggleFamily(id){
+  const el = document.getElementById(id);
+  const willOpen = !el.classList.contains('open');
+  document.querySelectorAll('.family').forEach(f=>f.classList.remove('open'));
+  if(willOpen) el.classList.add('open');
+  updateChargeLabel();
+}
+function selectXendit(chip, method){
+  document.querySelectorAll('#famXendit .x-chip').forEach(c=>c.classList.remove('active'));
+  chip.classList.add('active');
+  activeXendit = method;
+  document.querySelectorAll('#famXendit .x-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('xp-'+method).classList.add('active');
+  updateChargeLabel();
+}
+function selectEw(tile){
+  document.querySelectorAll('#xp-ewallet .ew-tile').forEach(t=>t.classList.remove('active'));
+  tile.classList.add('active');
+  activeEw = tile.querySelector('.ew-name').textContent;
+  document.querySelector('#xp-ewallet .push-note').lastChild.textContent = ` Push sent — approve in the ${activeEw} app.`;
+}
+function copyVa(btn){
+  const num = btn.parentElement.querySelector('.va-num').textContent;
+  if(navigator.clipboard) navigator.clipboard.writeText(num.replace(/\s/g,'')).catch(()=>{});
+  showToast('VA number copied','success');
+}
+function updateChargeLabel(){
+  const label = document.getElementById('chargeLabel');
+  const btn = document.getElementById('chargeBtn');
+  if(document.getElementById('famXendit').classList.contains('open')){
+    const names = { qris:'QRIS', va:'Virtual Account', ewallet:'E-wallet', card:'Card' };
+    label.textContent = 'Confirm Xendit · ' + names[activeXendit];
+    btn.disabled = false;
+  } else if(document.getElementById('famCash').classList.contains('open')){
+    label.textContent = 'Complete cash payment';
+    btn.disabled = false;
+  } else {
+    label.textContent = 'Select a bank terminal';
+    btn.disabled = true;
+  }
+}
+function chargeSelected(){
+  if(document.getElementById('famXendit').classList.contains('open')) runGateway();
+  else if(document.getElementById('famCash').classList.contains('open')) completeCash();
+}
+
+function parseCash(){ const raw = document.getElementById('cashInput').value.replace(/[^\d]/g,''); return raw ? parseInt(raw,10) : 0; }
+function computeChange(){ const c = parseCash() - TOTAL; document.getElementById('changeDue').textContent = c>0 ? fmt(c) : 'Rp 0'; }
+function quickCash(v){ document.getElementById('cashInput').value = fmt(v); computeChange(); }
+function completeCash(){
+  const tendered = parseCash();
+  if(tendered < TOTAL){ showToast('Amount tendered is short','warning'); return; }
+  showReceipt({ method:'Cash · Drawer', lines:[['Tendered',fmt(tendered)],['Change due',fmt(tendered-TOTAL)]] });
+}
+
+function runGateway(){
+  const names = { qris:'QRIS', va:'Virtual Account', ewallet:'E-wallet · '+activeEw, card:'Card' };
+  const method = 'Xendit · ' + names[activeXendit];
+  document.getElementById('edcTitle').textContent = names[activeXendit];
+  document.getElementById('edcTag').textContent = 'Xendit · Gateway';
+  const waitCopy = {
+    qris:'Waiting for the customer to scan and approve…',
+    va:'Waiting for the transfer to settle…',
+    ewallet:'Push sent — waiting for approval in '+activeEw+'…',
+    card:'Processing card · 3-D Secure…'
+  };
+  document.getElementById('edcBody').innerHTML = `
+    <div class="edc-steps"><div class="edc-step done"></div><div class="edc-step active"></div><div class="edc-step"></div></div>
+    <div class="edc-stage"><div class="spinner"></div><div class="edc-headline">Secured by Xendit</div>
+    <div class="edc-sub">${waitCopy[activeXendit]}</div><div class="edc-amt">${fmt(TOTAL)}</div>
+    <div class="edc-bankline">Gateway ref XND-${refDigits()}</div></div>`;
+  document.getElementById('edcOverlay').classList.add('open');
+  clearTimers();
+  edcTimers.push(setTimeout(()=>gatewayApproved(names[activeXendit], method), 2400));
+}
+function gatewayApproved(sub, method){
+  document.getElementById('edcBody').innerHTML = `
+    <div class="edc-steps"><div class="edc-step done"></div><div class="edc-step done"></div><div class="edc-step done"></div></div>
+    <div class="result-icon ok"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="result-title ok">Payment confirmed</div><div class="result-sub">${method}</div>
+    <div class="txn-table">
+      <div class="txn-row amt"><span class="txn-k">Amount</span><span class="txn-v">${fmt(TOTAL)}</span></div>
+      <div class="txn-row"><span class="txn-k">Method</span><span class="txn-v">${sub}</span></div>
+      <div class="txn-row"><span class="txn-k">Gateway ref</span><span class="txn-v">XND-${refDigits()}</span></div>
+      <div class="txn-row"><span class="txn-k">Settlement</span><span class="txn-v">T+1 · Xendit</span></div>
+    </div>
+    <div class="sheet-foot" style="padding:16px 0 0"><button class="sbtn primary" onclick="closeEdc(); showReceipt({ method:'${method}', lines:[['Gateway ref','XND-${refDigits()}'],['Settlement','T+1 · Xendit']] })">View receipt</button></div>`;
+}
+
+function startEdc(bank){
+  document.getElementById('edcTitle').textContent = bank + ' terminal';
+  document.getElementById('edcTag').textContent = 'EDC · Acquirer';
+  document.getElementById('edcOverlay').classList.add('open');
+  edcStep1(bank);
+}
+function edcStepsBar(idx){
+  let html = '<div class="edc-steps">';
+  for(let i=1;i<=3;i++){
+    if(idx===4) html += '<div class="edc-step done"></div>';
+    else if(i<idx) html += '<div class="edc-step done"></div>';
+    else if(i===idx) html += '<div class="edc-step active"></div>';
+    else html += '<div class="edc-step"></div>';
+  }
+  return html + '</div>';
+}
+function edcStep1(bank){
+  clearTimers();
+  document.getElementById('edcBody').innerHTML = `
+    ${edcStepsBar(1)}
+    <div class="edc-stage">
+      <div class="edc-illus"><svg width="104" height="104" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4">
+        <rect x="34" y="14" width="52" height="80" rx="7"/><rect x="44" y="24" width="32" height="16" rx="3"/>
+        <circle cx="47" cy="52" r="3"/><circle cx="60" cy="52" r="3"/><circle cx="73" cy="52" r="3"/>
+        <circle cx="47" cy="65" r="3"/><circle cx="60" cy="65" r="3"/><circle cx="73" cy="65" r="3"/>
+        <rect x="44" y="76" width="32" height="10" rx="2"/><path d="M18 96h84"/><rect x="12" y="60" width="20" height="13" rx="2" transform="rotate(-12 22 66)"/></svg></div>
+      <div class="edc-headline">Insert, tap, or swipe card</div>
+      <div class="edc-sub">Present the card on the ${bank} terminal.</div>
+      <div class="edc-amt">${fmt(TOTAL)}</div>
+      <div class="edc-bankline">${bank} · Acquirer · REG-02</div>
+      <button class="decline-link" onclick="edcDeclined('${bank}')">Simulate decline</button>
+    </div>`;
+  edcTimers.push(setTimeout(()=>edcStep2(bank), 1900));
+}
+function edcStep2(bank){
+  document.getElementById('edcBody').innerHTML = `
+    ${edcStepsBar(2)}
+    <div class="edc-stage"><div class="spinner"></div><div class="edc-headline">Reading card…</div>
+    <div class="edc-sub">Do not remove the card.</div><div class="edc-amt">${fmt(TOTAL)}</div>
+    <div class="edc-bankline">${bank} · Acquirer</div></div>`;
+  edcTimers.push(setTimeout(()=>edcStep3(bank), 1500));
+}
+function edcStep3(bank){
+  document.getElementById('edcBody').innerHTML = `
+    ${edcStepsBar(3)}
+    <div class="edc-stage"><div class="spinner"></div><div class="edc-headline">Processing on ${bank} EDC…</div>
+    <div class="edc-sub">Authorising with the acquirer.</div><div class="edc-amt">${fmt(TOTAL)}</div>
+    <div class="edc-bankline">${bank} · Acquirer</div></div>`;
+  edcTimers.push(setTimeout(()=>edcApproved(bank), 1700));
+}
+function edcApproved(bank){
+  const scheme = ['Visa','Mastercard','GPN'][Math.floor(Math.random()*3)];
+  const entry = ['Chip','Contactless','Swipe'][Math.floor(Math.random()*3)];
+  const approval = String(6 + Math.floor(Math.random()*900000)).padStart(6,'0');
+  const rrn = refDigits(12);
+  const batch = String(20 + Math.floor(Math.random()*80)).padStart(6,'0');
+  const trace = String(Math.floor(Math.random()*900000)+100000);
+  const pan = '**** **** **** ' + (1000 + Math.floor(Math.random()*9000));
+  document.getElementById('edcBody').innerHTML = `
+    ${edcStepsBar(4)}
+    <div class="result-icon ok"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="result-title ok">Approved</div><div class="result-sub">${bank} EDC · ${scheme} · ${entry}</div>
+    <div class="txn-table">
+      <div class="txn-row amt"><span class="txn-k">Amount</span><span class="txn-v">${fmt(TOTAL)}</span></div>
+      <div class="txn-row"><span class="txn-k">Approval</span><span class="txn-v">${approval}</span></div>
+      <div class="txn-row"><span class="txn-k">RRN / Ref</span><span class="txn-v">${rrn}</span></div>
+      <div class="txn-row"><span class="txn-k">Batch</span><span class="txn-v">${batch}</span></div>
+      <div class="txn-row"><span class="txn-k">Trace</span><span class="txn-v">${trace}</span></div>
+      <div class="txn-row"><span class="txn-k">Card</span><span class="txn-v">${pan}</span></div>
+      <div class="txn-row"><span class="txn-k">Scheme</span><span class="txn-v">${scheme}</span></div>
+      <div class="txn-row"><span class="txn-k">Entry mode</span><span class="txn-v">${entry}</span></div>
+    </div>
+    <div class="sheet-foot" style="padding:16px 0 0"><button class="sbtn primary" onclick='closeEdc(); showReceipt({ method:"EDC · ${bank} · ${scheme} ${entry.toLowerCase()}", lines:[["Approval","${approval}"],["RRN / Ref","${rrn}"],["Card","${pan}"]] })'>View receipt</button></div>`;
+}
+function edcDeclined(bank){
+  clearTimers();
+  document.getElementById('edcBody').innerHTML = `
+    <div class="edc-steps"><div class="edc-step"></div><div class="edc-step"></div><div class="edc-step"></div></div>
+    <div class="result-icon no"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    <div class="result-title no">Declined</div><div class="result-sub">${bank} EDC · issuer rejected</div>
+    <div class="txn-table">
+      <div class="txn-row amt"><span class="txn-k">Amount</span><span class="txn-v">${fmt(TOTAL)}</span></div>
+      <div class="txn-row"><span class="txn-k">Response</span><span class="txn-v">05 · Do not honour</span></div>
+      <div class="txn-row"><span class="txn-k">RRN / Ref</span><span class="txn-v">${refDigits(12)}</span></div>
+      <div class="txn-row"><span class="txn-k">Acquirer</span><span class="txn-v">${bank}</span></div>
+    </div>
+    <div class="sheet-foot" style="padding:16px 0 0">
+      <button class="sbtn ghost" onclick="closeEdc()">Cancel</button>
+      <button class="sbtn retry" onclick="startEdc('${bank}')">Retry card</button>
+    </div>`;
+}
+
+function refDigits(n){ n=n||10; let s=''; for(let i=0;i<n;i++) s+=Math.floor(Math.random()*10); return s; }
+function clearTimers(){ edcTimers.forEach(t=>clearTimeout(t)); edcTimers=[]; }
+function closeEdc(){ clearTimers(); document.getElementById('edcOverlay').classList.remove('open'); }
+
+function showReceipt(opts){
+  let rows = `<div class="rc-payrow"><span class="rp-l">Payment</span><span class="rp-v">${opts.method}</span></div>`;
+  (opts.lines||[]).forEach(([k,v])=>{ rows += `<div class="rc-payrow"><span class="rp-l">${k}</span><span class="rp-v">${v}</span></div>`; });
+  document.getElementById('rcPay').innerHTML = rows;
+  document.getElementById('receiptOverlay').classList.add('open');
+}
+function printReceipt(){ showToast('Sending to receipt printer…','success'); }
+
+function toggleTheme(){
+  const root = document.documentElement;
+  const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('mf-theme', next);
+}
+(function initTheme(){ const saved = localStorage.getItem('mf-theme'); if(saved) document.documentElement.setAttribute('data-theme', saved); })();
+
+let toastTimer;
+function showToast(msg, type='success'){
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toastDot').className = 'toast-dot ' + type;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+updateChargeLabel();
+document.getElementById('edcOverlay').addEventListener('click', e=>{ if(e.target.id==='edcOverlay') closeEdc(); });
+document.getElementById('receiptOverlay').addEventListener('click', e=>{ if(e.target.id==='receiptOverlay') e.currentTarget.classList.remove('open'); });
+</script>
+</body>
+</html>

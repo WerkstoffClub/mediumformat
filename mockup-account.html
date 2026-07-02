@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format® — My Account</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .nav-logo .brand-wordmark{height:22px;width:auto;}
+    .fbrand-name .brand-wordmark{height:22px;width:auto;}
+
+    /* ─── Tokens (dark default) ─────────────────────── */
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+      --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 4px 12px rgba(0,0,0,.6);--e3:0 8px 24px rgba(0,0,0,.7);
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --nav-h:56px;--player-h:68px;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --focus:0 0 0 2px rgba(0,0,0,.5);
+      --e1:0 1px 2px rgba(0,0,0,.08);--e2:0 4px 12px rgba(0,0,0,.12);--e3:0 8px 24px rgba(0,0,0,.16);
+    }
+
+    /* ─── Reset ──────────────────────────────────── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:var(--ui);font-size:14px;line-height:1.45;
+      background:var(--canvas);color:var(--ink);
+      padding-bottom:var(--player-h);transition:background .3s,color .3s;-webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    ::-webkit-scrollbar{width:6px;height:6px;}
+    ::-webkit-scrollbar-track{background:var(--canvas);}
+    ::-webkit-scrollbar-thumb{background:var(--hairline);border-radius:3px;}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    /* ─── Announcement ───────────────────────────── */
+    .announce{height:32px;background:var(--accent);border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--accent-text);}
+    .announce strong{color:inherit;font-weight:600;}
+    .announce a{color:inherit;text-decoration:none;font-weight:500;border-bottom:1px solid currentColor;padding-bottom:1px;opacity:.8;transition:opacity .15s;}
+    .announce a:hover{opacity:1;}
+    
+    html[data-theme="light"] .announce strong{color:#fff;}
+    html[data-theme="light"] .announce a{color:#fff;border-color:rgba(255,255,255,.55);}
+    html[data-theme="light"] .announce a:hover{border-color:#fff;}
+
+    /* ─── Nav ────────────────────────────────────── */
+    .nav{position:sticky;top:0;z-index:100;height:var(--nav-h);background:var(--surface);border-bottom:1px solid var(--hairline);
+      display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;}
+    .nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0;}
+    .nav-logo .mark{width:42px;height:42px;color:var(--ink);flex-shrink:0;}
+    .nav-logo .mark svg{width:100%;height:100%;display:block;}
+    .nav-logo-main{font-size:18px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:1;display:flex;align-items:flex-start;}
+    .nav-logo-main sup{font-size:8px;font-weight:500;margin-left:1px;top:-.2em;}
+    .nav-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:500;color:var(--body);text-decoration:none;padding:7px 11px;border-radius:var(--r-md);transition:color .15s,background .15s;cursor:pointer;}
+    .nav-link:hover{color:var(--ink);background:var(--raised);}
+    .nav-link.active{color:var(--ink);}
+    .nav-actions{display:flex;align-items:center;gap:2px;justify-self:end;}
+    /* ─── Centered mega-menu ─────────────────────── */
+    .nav-menu{display:flex;align-items:center;gap:4px;justify-self:center;}
+    .menu-item{position:relative;}
+    .menu-item::after{content:"";position:absolute;left:0;right:0;top:100%;height:14px;}
+    .nav-link .chev{font-size:9px;opacity:.7;}
+    .submenu{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);
+      min-width:200px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);
+      box-shadow:var(--e2);padding:8px;opacity:0;visibility:hidden;transition:opacity .15s,transform .15s;z-index:120;}
+    .menu-item:hover .submenu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+    .submenu a{display:block;padding:8px 12px;border-radius:var(--r-md);font-size:13px;color:var(--body);text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
+    .submenu a:hover{background:var(--raised);color:var(--ink);}
+    .submenu.grid{display:grid;grid-template-columns:1fr 1fr;min-width:320px;}
+    /* ─── Wishlist heart toggle ──────────────────── */
+    .wish-btn{position:absolute;top:8px;right:8px;z-index:3;width:30px;height:30px;border-radius:var(--r-pill);border:1px solid var(--hairline);background:var(--surface);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s,border-color .15s;backdrop-filter:blur(4px);}
+    .wish-btn:hover{border-color:var(--mute);}
+    .wish-btn svg{width:15px;height:15px;}
+    .wish-btn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-text);}
+    .wish-btn.on .wish-out{display:none;}
+    .wish-btn.on .wish-fill{display:block!important;}
+    .nav-btn{width:38px;height:38px;border-radius:var(--r-md);border:none;background:transparent;color:var(--body);cursor:pointer;
+      display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;text-decoration:none;}
+    .nav-btn:hover{background:var(--raised);color:var(--ink);}
+    .nav-btn.on{background:var(--raised);color:var(--ink);}
+    .nav-btn svg{width:18px;height:18px;}
+    .cur-switch{display:flex;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:2px;margin-left:4px;}
+    .cur-btn{font-family:var(--ui);font-size:11px;font-weight:500;color:var(--mute);background:transparent;border:none;border-radius:var(--r-pill);padding:5px 10px;cursor:pointer;transition:background .15s,color .15s;}
+    .cur-btn.on{background:var(--accent);color:var(--accent-text);}
+    .cart-wrap{position:relative;}
+    .cart-badge{position:absolute;top:4px;right:4px;min-width:15px;height:15px;padding:0 3px;border-radius:var(--r-pill);
+      background:var(--accent);color:var(--accent-text);font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+
+    /* ─── Cover art (vinyl groove) ───────────────── */
+    .cover-art{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .cover-art .grooves{width:64%;height:64%;border-radius:50%;position:relative;background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);}
+    html[data-theme="light"] .cover-art .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px);}
+    .cover-art .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+    .cover-art::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05),transparent 60%);pointer-events:none;}
+    html[data-theme="light"] .cover-art::before{background:linear-gradient(135deg,rgba(0,0,0,.04),transparent 60%);}
+    .cover-art.sm .grooves{width:72%;height:72%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 2px,#1f1f1f 2px 4px);}
+    html[data-theme="light"] .cover-art.sm .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 2px,#fff 2px 4px);}
+
+    /* ─── Account header ─────────────────────────── */
+    .acct-hero{background:var(--surface);border-bottom:1px solid var(--hairline);padding:32px 24px;}
+    .acct-hero-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:20px;}
+    .avatar{width:64px;height:64px;border-radius:50%;background:var(--raised);border:1px solid var(--hairline);flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .acct-h1{font-size:24px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .acct-sub{font-size:13px;color:var(--body);margin-top:4px;}
+    .acct-sub .mono{color:var(--ink);}
+    .acct-hero-spacer{flex:1;}
+    .acct-stats{display:flex;gap:28px;}
+    .astat{text-align:right;}
+    .astat-num{font-family:var(--ui);font-size:20px;font-weight:500;color:var(--ink);}
+    .astat-label{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-top:2px;}
+
+    /* ─── Layout ─────────────────────────────────── */
+    .shell{max-width:1180px;margin:0 auto;display:flex;gap:32px;padding:28px 24px 48px;align-items:flex-start;}
+
+    /* ─── Left rail tabs ─────────────────────────── */
+    .rail{width:212px;flex-shrink:0;position:sticky;top:calc(var(--nav-h) + 20px);}
+    .rail-nav{display:flex;flex-direction:column;gap:2px;}
+    .rtab{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:var(--r-md);border:none;background:transparent;
+      color:var(--body);font-family:var(--ui);font-size:14px;font-weight:500;cursor:pointer;text-align:left;width:100%;transition:background .15s,color .15s;}
+    .rtab svg{width:17px;height:17px;flex-shrink:0;}
+    .rtab:hover{background:var(--raised);color:var(--ink);}
+    .rtab.on{background:var(--raised);color:var(--ink);}
+    .rtab .rtab-badge{margin-left:auto;font-family:var(--ui);font-size:11px;color:var(--mute);}
+    .rail-sep{height:1px;background:var(--hairline);margin:12px 0;}
+    .btn-ghost{display:flex;align-items:center;gap:9px;width:100%;padding:10px 12px;border-radius:var(--r-md);border:none;background:transparent;
+      color:var(--body);font-family:var(--ui);font-size:14px;font-weight:500;cursor:pointer;transition:background .15s,color .15s;}
+    .btn-ghost:hover{background:var(--raised);color:var(--ink);}
+    .btn-ghost svg{width:16px;height:16px;}
+
+    /* ─── Main panel ─────────────────────────────── */
+    .main{flex:1;min-width:0;}
+    .panel{display:none;}
+    .panel.on{display:block;}
+    .panel-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+    .panel-h2{font-size:20px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .panel-note{font-size:13px;color:var(--mute);}
+    .panel-note strong{font-family:var(--ui);color:var(--ink);font-weight:500;}
+
+    /* filter chips row (order status) */
+    .chiprow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+    .fchip{font-size:13px;padding:5px 13px;border-radius:var(--r-pill);cursor:pointer;border:1px solid var(--hairline);color:var(--mute);background:transparent;transition:border-color .15s,color .15s;}
+    .fchip.on{border-color:var(--accent);color:var(--ink);}
+
+    /* ─── Order cards ────────────────────────────── */
+    .orders{display:flex;flex-direction:column;gap:14px;}
+    .order{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;}
+    .order-top{display:flex;align-items:center;gap:16px;padding:16px 18px;flex-wrap:wrap;}
+    .order-id{display:flex;flex-direction:column;gap:2px;min-width:150px;}
+    .order-no{font-family:var(--ui);font-size:14px;font-weight:500;color:var(--ink);}
+    .order-date{font-size:12px;color:var(--mute);}
+    .order-mid{display:flex;align-items:center;gap:20px;flex:1;flex-wrap:wrap;}
+    .order-fact{display:flex;flex-direction:column;gap:2px;}
+    .order-fact-label{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);}
+    .order-fact-val{font-size:14px;color:var(--body);}
+    .order-fact-val.mono{font-family:var(--ui);color:var(--ink);font-weight:500;}
+    .order-actions{display:flex;align-items:center;gap:8px;margin-left:auto;}
+
+    /* status badge */
+    .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:4px 11px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--body);white-space:nowrap;}
+    .badge .dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+    .b-pending{color:var(--warning);background:var(--warning-t);border-color:rgba(245,158,11,.3);}
+    .b-processing,.b-packed,.b-shipped{color:var(--info);background:var(--info-t);border-color:rgba(59,130,246,.3);}
+    .b-delivered,.b-completed{color:var(--success);background:var(--success-t);border-color:rgba(34,197,94,.3);}
+    .b-cancelled,.b-refunded{color:var(--danger);background:var(--danger-t);border-color:rgba(239,68,68,.3);}
+
+    /* buttons */
+    .btn-primary{background:var(--accent);color:var(--accent-text);border:none;border-radius:var(--r-md);padding:8px 15px;font-family:var(--ui);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s;}
+    .btn-primary:hover{opacity:.9;}
+    .btn-secondary{background:transparent;color:var(--ink);border:1px solid var(--hairline);border-radius:var(--r-md);padding:8px 15px;font-family:var(--ui);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:border-color .15s,background .15s;}
+    .btn-secondary:hover{border-color:var(--mute);background:var(--raised);}
+    .btn-secondary svg{width:14px;height:14px;transition:transform .2s;}
+    .expander{border:none;background:transparent;color:var(--body);cursor:pointer;width:34px;height:34px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;}
+    .expander:hover{background:var(--raised);color:var(--ink);}
+    .expander svg{width:16px;height:16px;transition:transform .2s;}
+    .order.open .expander svg{transform:rotate(180deg);}
+
+    /* order line items (expander) */
+    .order-detail{display:none;border-top:1px solid var(--hairline);background:var(--raised);padding:6px 18px 14px;}
+    .order.open .order-detail{display:block;}
+    .oline{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--hairline);}
+    .oline:last-of-type{border-bottom:none;}
+    .oline-cover{width:48px;height:48px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--hairline);flex-shrink:0;}
+    .oline-info{flex:1;min-width:0;}
+    .oline-artist{font-size:13px;font-weight:500;color:var(--ink);}
+    .oline-title{font-size:12px;color:var(--mute);margin-top:1px;}
+    .oline-cat{font-family:var(--ui);font-size:11px;color:var(--mute);margin-top:3px;}
+    .oline-qty{font-family:var(--ui);font-size:12px;color:var(--body);}
+    .oline-price{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);min-width:96px;text-align:right;}
+    .order-totals{display:flex;flex-direction:column;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid var(--hairline);max-width:280px;margin-left:auto;}
+    .otrow{display:flex;justify-content:space-between;font-size:13px;color:var(--body);}
+    .otrow .mono{color:var(--body);}
+    .otrow.grand{font-weight:500;color:var(--ink);padding-top:6px;border-top:1px solid var(--hairline);}
+    .otrow.grand .mono{color:var(--ink);}
+
+    /* ─── Wishlist grid (reuse release card) ─────── */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .rcard{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;position:relative;transition:transform .2s,border-color .2s;text-decoration:none;display:block;color:inherit;}
+    .rcard:hover{transform:translateY(-2px);border-color:var(--mute);}
+    .cover{aspect-ratio:1;position:relative;overflow:hidden;background:var(--surface);}
+    .cover-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+    .rcard:hover .cover-overlay{background:rgba(0,0,0,.5);}
+    html[data-theme="light"] .rcard:hover .cover-overlay{background:rgba(255,255,255,.45);}
+    .playbtn{width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--accent-text);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.85);transition:opacity .2s,transform .2s;}
+    .rcard:hover .playbtn{opacity:1;transform:scale(1);}
+    .playbtn svg{width:19px;height:19px;margin-left:2px;}
+    .rinfo{padding:12px;}
+    .rartist{font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .rtitle{font-size:13px;color:var(--mute);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .rlabel{font-family:var(--ui);font-size:12px;color:var(--mute);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .chips{display:flex;align-items:center;gap:5px;margin-top:10px;flex-wrap:wrap;}
+    .chip{font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--body);background:transparent;line-height:1.4;}
+    .chip.fmt{font-family:var(--ui);}
+    .chip.cond{font-family:var(--ui);color:var(--mute);}
+    .chip.stock{border:none;}
+    .chip.stock.in{color:var(--success);background:var(--success-t);}
+    .chip.stock.low{color:var(--warning);background:var(--warning-t);}
+    .chip.stock.out{color:var(--danger);background:var(--danger-t);}
+    .price-row-card{display:flex;align-items:center;justify-content:space-between;margin-top:12px;}
+    .rprice{font-family:var(--ui);font-size:14px;font-weight:500;color:var(--ink);}
+    .add-btn{width:28px;height:28px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s,border-color .15s;}
+    .add-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-text);}
+    .add-btn svg{width:14px;height:14px;}
+
+    /* ─── Addresses ──────────────────────────────── */
+    .addr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+    .addr{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:18px;position:relative;}
+    .addr.default{border-color:var(--mute);}
+    .addr-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:10px;}
+    .addr-tag.def{color:var(--success);}
+    .addr-tag .dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .addr-name{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;}
+    .addr-lines{font-size:13px;color:var(--body);line-height:1.6;}
+    .addr-phone{font-family:var(--ui);font-size:12px;color:var(--mute);margin-top:8px;}
+    .addr-actions{display:flex;gap:8px;margin-top:14px;}
+    .link-btn{background:transparent;border:none;color:var(--body);font-family:var(--ui);font-size:13px;font-weight:500;cursor:pointer;padding:0;transition:color .15s;}
+    .link-btn:hover{color:var(--ink);}
+    .link-btn.danger{color:var(--danger);opacity:.85;}
+    .link-btn.danger:hover{opacity:1;}
+    .addr-add{border:1px dashed var(--hairline);border-radius:var(--r-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mute);cursor:pointer;min-height:150px;background:transparent;font-family:var(--ui);font-size:14px;font-weight:500;transition:border-color .15s,color .15s;}
+    .addr-add:hover{border-color:var(--mute);color:var(--ink);}
+    .addr-add svg{width:22px;height:22px;}
+
+    /* ─── Profile form ───────────────────────────── */
+    .form-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:22px;max-width:560px;}
+    .frow{margin-bottom:18px;}
+    .frow:last-child{margin-bottom:0;}
+    .flabel{display:block;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:8px;}
+    .finput{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--ink);font-family:var(--ui);font-size:14px;padding:10px 12px;transition:border-color .15s;}
+    .finput.mono{font-family:var(--ui);}
+    .finput::placeholder{color:var(--mute);}
+    .finput:focus{border-color:var(--accent);outline:none;}
+    .fgrid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .form-actions{display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid var(--hairline);}
+
+    /* ─── Footer ─────────────────────────────────── */
+    footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:48px 24px 28px;}
+    .fgrid{max-width:1180px;margin:0 auto 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
+    .fbrand-name{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:600;letter-spacing:-.04em;color:var(--ink);margin-bottom:12px;}
+    .fbrand-name .mark{width:22px;height:22px;color:var(--ink);}
+    .fbrand-name sup{font-size:9px;font-weight:500;}
+    .ftagline{font-size:13px;color:var(--body);line-height:1.6;max-width:240px;margin-bottom:16px;}
+    .floc{font-size:13px;color:var(--body);display:flex;align-items:flex-start;gap:6px;}
+    .floc svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;color:var(--mute);}
+    .fcol-h{font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:14px;}
+    .flinks{display:flex;flex-direction:column;gap:10px;}
+    .flink{font-size:13px;color:var(--body);text-decoration:none;transition:color .15s;width:fit-content;}
+    .flink:hover{color:var(--ink);}
+    .fbot{max-width:1180px;margin:0 auto;border-top:1px solid var(--hairline);padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .flegal{font-family:var(--ui);font-size:12px;color:var(--mute);}
+    .pay-logos{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .pay-logos svg{height:18px;width:auto;color:var(--mute);}
+
+    /* ─── Now Playing ────────────────────────────── */
+    .player{position:fixed;bottom:0;left:0;right:0;height:var(--player-h);background:var(--surface);border-top:1px solid var(--hairline);box-shadow:var(--e2);
+      display:flex;align-items:center;padding:0 16px;gap:14px;z-index:200;transition:background .3s;}
+    .pcover{width:44px;height:44px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;border:1px solid var(--hairline);}
+    .pinfo{flex:0 0 200px;min-width:0;}
+    .ptrack{font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .prelease{font-size:12px;color:var(--mute);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .psource{display:none;font-size:11px;font-weight:500;padding:3px 9px;border-radius:var(--r-pill);background:transparent;color:var(--body);border:1px solid var(--hairline);flex-shrink:0;}
+    .pcontrols{display:flex;align-items:center;gap:4px;}
+    .pbtn{width:34px;height:34px;border-radius:var(--r-md);background:transparent;border:none;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .15s,background .15s;}
+    .pbtn:hover{color:var(--ink);background:var(--raised);}
+    .pbtn svg{width:16px;height:16px;}
+    .pplay{width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-text);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .1s;}
+    .pplay:hover{transform:scale(1.06);}
+    .pplay svg{width:16px;height:16px;}
+    .pplay .ico-pause{display:none;}
+    .pplay.playing .ico-play{display:none;}
+    .pplay.playing .ico-pause{display:block;}
+    .pprog{flex:1;min-width:0;}
+    .pbar-wrap{position:relative;height:4px;background:var(--hairline);border-radius:2px;cursor:pointer;margin-bottom:5px;}
+    .pbar-fill{position:absolute;left:0;top:0;bottom:0;width:38%;background:var(--accent);border-radius:2px;}
+    .pbar-thumb{position:absolute;top:50%;left:38%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:var(--accent);opacity:0;transition:opacity .2s;}
+    .pbar-wrap:hover .pbar-thumb{opacity:1;}
+    .ptimes{display:flex;justify-content:space-between;font-family:var(--ui);font-size:11px;color:var(--mute);}
+    .pvol{display:flex;align-items:center;gap:7px;flex-shrink:0;}
+    .pvol svg{width:15px;height:15px;color:var(--mute);}
+    .pvol-slider{width:68px;-webkit-appearance:none;appearance:none;height:2px;border-radius:2px;background:linear-gradient(to right,var(--ink) 70%,var(--hairline) 70%);cursor:pointer;}
+    .pvol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--ink);cursor:pointer;}
+    .pvol-slider::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--ink);cursor:pointer;border:none;}
+    .pclose{width:30px;height:30px;background:transparent;border:none;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .15s;flex-shrink:0;}
+    .pclose:hover{color:var(--ink);}
+    .pclose svg{width:15px;height:15px;}
+
+    /* ─── Search overlay ─────────────────────────── */
+    .search-ov{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:flex-start;justify-content:center;padding-top:88px;}
+    html[data-theme="light"] .search-ov{background:rgba(255,255,255,.6);}
+    .search-ov.open{display:flex;}
+    .sbox{width:100%;max-width:580px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--e3);}
+    .srow{display:flex;align-items:center;padding:16px;gap:11px;border-bottom:1px solid var(--hairline);}
+    .srow svg{width:18px;height:18px;color:var(--mute);flex-shrink:0;}
+    .sinput{flex:1;background:transparent;border:none;outline:none;font-size:16px;font-family:var(--ui);color:var(--ink);}
+    .sinput::placeholder{color:var(--mute);}
+    .shint{font-size:12px;color:var(--mute);padding:12px 16px;}
+    .kbd{font-family:var(--ui);font-size:10px;color:var(--mute);border:1px solid var(--hairline);border-radius:var(--r-sm);padding:2px 5px;margin:0 2px;}
+
+    /* ─── Prototype hub link ─────────────────────── */
+    .proto-link{position:fixed;left:14px;bottom:calc(var(--player-h) + 14px);z-index:250;display:inline-flex;align-items:center;gap:7px;
+      font-size:12px;font-weight:500;color:var(--body);background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-pill);
+      padding:7px 13px;text-decoration:none;box-shadow:var(--e2);transition:color .15s,border-color .15s;}
+    .proto-link:hover{color:var(--ink);border-color:var(--mute);}
+    .proto-link .glyph{font-size:13px;line-height:1;}
+
+    /* ─── Responsive ─────────────────────────────── */
+    @media (max-width:900px){
+      .shell{flex-direction:column;gap:20px;}
+      .rail{width:100%;position:static;}
+      .rail-nav{flex-direction:row;flex-wrap:wrap;}
+      .rtab{width:auto;}
+      .rail-sep{display:none;}
+      .grid{grid-template-columns:repeat(2,1fr);}
+      .addr-grid{grid-template-columns:1fr;}
+      .acct-stats{display:none;}
+    }
+    @media (max-width:768px){
+      .nav-menu{display:none;}
+      .fgrid{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width:520px){
+      .grid{grid-template-columns:1fr;}
+      .fgrid2{grid-template-columns:1fr;}
+      .order-actions{width:100%;margin-left:0;}
+    }
+  
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+
+    /* MF: mega-menu with hero landing panel */
+    .submenu{min-width:220px;}
+    .submenu a{border-top:1px solid var(--hairline);}
+    .submenu a:first-child{border-top:none;}
+    .mega{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);
+      display:flex;width:560px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);
+      box-shadow:var(--e2);overflow:hidden;opacity:0;visibility:hidden;transition:opacity .15s,transform .15s;z-index:120;}
+    .menu-item:hover .mega{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+    .mega-links{flex:1;padding:10px;min-width:0;}
+    .mega-links.grid{display:grid;grid-template-columns:1fr 1fr;}
+    .mega-links a{display:block;padding:6px 12px;border-radius:var(--r-pill);font-size:13px;line-height:1.3;color:var(--body);text-decoration:none;
+      border:none;transition:background .12s,color .12s;}
+    .mega-links a:hover{background:#000;color:#fff;}
+    .mega-hero{width:220px;flex-shrink:0;background:var(--raised);border-left:1px solid var(--hairline);
+      padding:16px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;text-decoration:none;position:relative;overflow:hidden;}
+    .mega-hero:hover{background:var(--canvas);}
+    .mega-hero .mh-art{position:absolute;top:14px;right:14px;width:56px;height:56px;border-radius:50%;
+      background:repeating-radial-gradient(circle at 50% 50%,var(--hairline) 0 3px,transparent 3px 6px);opacity:.6;}
+    html[data-theme="light"] .mega-hero .mh-art{background:repeating-radial-gradient(circle at 50% 50%,#00000022 0 3px,transparent 3px 6px);}
+    .mega-hero .mh-eyebrow{font-family:var(--ui);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);}
+    .mega-hero .mh-title{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1.3;}
+    .mega-hero .mh-cta{font-size:12px;font-weight:500;color:var(--ink);display:flex;align-items:center;gap:4px;margin-top:4px;}
+    .mega-hero .mh-cta svg{width:12px;height:12px;transition:transform .15s;}
+    .mega-hero:hover .mh-cta svg{transform:translateX(3px);}
+
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<!-- Announcement bar -->
+<div class="announce">
+  Free shipping on orders over <strong>Rp&nbsp;500.000</strong> within Jakarta —
+  <a href="mockup-storefront.html">Continue shopping</a>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+  </a>
+  <div class="nav-menu">
+    <div class="menu-item has-sub">
+      <a class="nav-link" href="mockup-storefront.html">Shop <span class="chev">▾</span></a>
+      <div class="mega"><div class="mega-links"><a href="mockup-storefront.html">New Releases</a><a href="mockup-storefront.html">Best Selling</a><a href="mockup-storefront.html">Pre-Orders</a><a href="mockup-storefront.html">On-Sale</a></div><a class="mega-hero" href="mockup-storefront.html"><span class="mh-art"></span><span class="mh-eyebrow">New this week</span><span class="mh-title">47 titles just landed</span><span class="mh-cta">Shop new arrivals <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+    </div>
+    <div class="menu-item has-sub">
+      <a class="nav-link" href="mockup-category.html">Formats <span class="chev">▾</span></a>
+      <div class="mega"><div class="mega-links grid"><a href="mockup-category.html">Vinyls</a><a href="mockup-category.html">Cassettes</a><a href="mockup-category.html">CD</a><a href="mockup-category.html">Books</a><a href="mockup-category.html">Prints</a><a href="mockup-category.html">Merchandise</a><a href="mockup-category.html">Audio</a><a href="mockup-category-players.html">Players</a><a href="mockup-category.html">Accessories</a></div><a class="mega-hero" href="mockup-category.html"><span class="mh-art"></span><span class="mh-eyebrow">9 formats</span><span class="mh-title">Vinyl, CD, cassette & more</span><span class="mh-cta">Browse all formats <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+    </div>
+    <div class="menu-item has-sub">
+      <span class="nav-link">Style <span class="chev">▾</span></span>
+      <div class="mega"><div class="mega-links grid"><a href="mockup-category.html">Electronic</a><a href="mockup-category.html">Jazz</a><a href="mockup-category.html">Soul</a><a href="mockup-category.html">Hip-Hop</a><a href="mockup-category.html">Rock</a><a href="mockup-category.html">Ambient</a><a href="mockup-category.html">Funk</a><a href="mockup-category.html">World</a><a href="mockup-category.html">Indie</a></div><a class="mega-hero" href="mockup-category.html"><span class="mh-art"></span><span class="mh-eyebrow">Curated by genre</span><span class="mh-title">From jazz to ambient</span><span class="mh-cta">Explore genres <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+    </div>
+    <div class="menu-item has-sub">
+      <a class="nav-link" href="mockup-journal.html">News <span class="chev">▾</span></a>
+      <div class="mega"><div class="mega-links"><a href="mockup-journal.html">Review</a><a href="mockup-journal.html">Staff Picks</a><a href="mockup-journal.html">New Arrivals</a><a href="mockup-journal.html">Feature</a><a href="mockup-journal.html">Selector</a></div><a class="mega-hero" href="mockup-journal.html"><span class="mh-art"></span><span class="mh-eyebrow">Latest story</span><span class="mh-title">Promises, kept — Floating Points & Pharoah Sanders</span><span class="mh-cta">Read the News <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+    </div>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" id="search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <a href="mockup-account.html" class="nav-btn on" aria-label="My account" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    </a>
+    <div class="cart-wrap">
+      <a href="mockup-cart.html" class="nav-btn" aria-label="Cart — 3 items">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+      </a>
+      <span class="cart-badge">3</span>
+    </div>
+    <div class="cur-switch" role="group" aria-label="Currency">
+      <button class="cur-btn on" data-cur="IDR" onclick="setCurrency('IDR')">IDR</button>
+      <button class="cur-btn" data-cur="USD" onclick="setCurrency('USD')">USD</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Account hero -->
+<section class="acct-hero" aria-labelledby="acct-heading">
+  <div class="acct-hero-inner">
+    <div class="avatar">AW</div>
+    <div>
+      <h1 class="acct-h1" id="acct-heading">Andra Wijaya</h1>
+      <p class="acct-sub">andra.wijaya@gmail.com · Member since <span class="mono">2021</span></p>
+    </div>
+    <div class="acct-hero-spacer"></div>
+    <div class="acct-stats">
+      <div class="astat"><div class="astat-num">24</div><div class="astat-label">Orders</div></div>
+      <div class="astat"><div class="astat-num">11</div><div class="astat-label">Wishlist</div></div>
+      <div class="astat"><div class="astat-num">Rp 9,7M</div><div class="astat-label">Lifetime</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Shell -->
+<div class="shell">
+
+  <!-- Left rail -->
+  <aside class="rail" aria-label="Account sections">
+    <nav class="rail-nav">
+      <button class="rtab on" data-panel="orders">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        Orders <span class="rtab-badge">24</span>
+      </button>
+      <button class="rtab" data-panel="wishlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Wishlist <span class="rtab-badge">11</span>
+      </button>
+      <button class="rtab" data-panel="addresses">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Addresses <span class="rtab-badge">2</span>
+      </button>
+      <button class="rtab" data-panel="profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        Profile
+      </button>
+    </nav>
+    <div class="rail-sep"></div>
+    <button class="btn-ghost" onclick="window.location.href='index.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg>
+      Sign out
+    </button>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Orders panel -->
+    <section class="panel on" id="panel-orders" aria-label="Order history">
+      <div class="panel-hdr">
+        <h2 class="panel-h2">Order history</h2>
+        <span class="panel-note"><strong>24</strong> orders · showing recent 6</span>
+      </div>
+      <div class="chiprow">
+        <span class="fchip on">All</span>
+        <span class="fchip">Processing</span>
+        <span class="fchip">Shipped</span>
+        <span class="fchip">Delivered</span>
+        <span class="fchip">Completed</span>
+        <span class="fchip">Cancelled</span>
+      </div>
+
+      <div class="orders">
+
+        <!-- Order 1 — Shipped, expanded by default -->
+        <div class="order open">
+          <div class="order-top">
+            <div class="order-id">
+              <span class="order-no">#MF-2026-0418</span>
+              <span class="order-date">18 May 2026</span>
+            </div>
+            <div class="order-mid">
+              <div class="order-fact"><span class="order-fact-label">Items</span><span class="order-fact-val">3 records</span></div>
+              <div class="order-fact"><span class="order-fact-label">Total</span><span class="order-fact-val mono">Rp 1.450.000</span></div>
+              <span class="badge b-shipped"><span class="dot"></span>Shipped</span>
+            </div>
+            <div class="order-actions">
+              <a href="mockup-order-detail.html" class="btn-secondary">View <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <button class="expander" aria-label="Toggle details" aria-expanded="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+          </div>
+          <div class="order-detail">
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Floating Points</div><div class="oline-title">Promises</div><div class="oline-cat">Ninja Tune · NTcd 269</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 450.000</span>
+            </div>
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Daft Punk</div><div class="oline-title">Random Access Memories</div><div class="oline-cat">Columbia · 88883 71381 1</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 680.000</span>
+            </div>
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Miles Davis</div><div class="oline-title">Kind of Blue</div><div class="oline-cat">Columbia · CL 1355</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 350.000</span>
+            </div>
+            <div class="order-totals">
+              <div class="otrow"><span>Subtotal</span><span class="mono">Rp 1.480.000</span></div>
+              <div class="otrow"><span>Shipping · JNE REG</span><span class="mono">Rp 0</span></div>
+              <div class="otrow"><span>Voucher · WELCOME30</span><span class="mono">−Rp 30.000</span></div>
+              <div class="otrow grand"><span>Total</span><span class="mono">Rp 1.450.000</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order 2 — Processing -->
+        <div class="order">
+          <div class="order-top">
+            <div class="order-id">
+              <span class="order-no">#MF-2026-0411</span>
+              <span class="order-date">11 May 2026</span>
+            </div>
+            <div class="order-mid">
+              <div class="order-fact"><span class="order-fact-label">Items</span><span class="order-fact-val">2 records</span></div>
+              <div class="order-fact"><span class="order-fact-label">Total</span><span class="order-fact-val mono">Rp 900.000</span></div>
+              <span class="badge b-processing"><span class="dot"></span>Processing</span>
+            </div>
+            <div class="order-actions">
+              <a href="mockup-order-detail.html" class="btn-secondary">View <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <button class="expander" aria-label="Toggle details" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+          </div>
+          <div class="order-detail">
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Khruangbin</div><div class="oline-title">Mordechai</div><div class="oline-cat">Dead Oceans · DOC-189</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 520.000</span>
+            </div>
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Sade</div><div class="oline-title">Diamond Life</div><div class="oline-cat">Portrait · PRT 26423</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 380.000</span>
+            </div>
+            <div class="order-totals">
+              <div class="otrow"><span>Subtotal</span><span class="mono">Rp 900.000</span></div>
+              <div class="otrow"><span>Shipping · SiCepat</span><span class="mono">Rp 0</span></div>
+              <div class="otrow grand"><span>Total</span><span class="mono">Rp 900.000</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order 3 — Pending -->
+        <div class="order">
+          <div class="order-top">
+            <div class="order-id">
+              <span class="order-no">#MF-2026-0407</span>
+              <span class="order-date">07 May 2026</span>
+            </div>
+            <div class="order-mid">
+              <div class="order-fact"><span class="order-fact-label">Items</span><span class="order-fact-val">1 record</span></div>
+              <div class="order-fact"><span class="order-fact-label">Total</span><span class="order-fact-val mono">Rp 590.000</span></div>
+              <span class="badge b-pending"><span class="dot"></span>Pending payment</span>
+            </div>
+            <div class="order-actions">
+              <a href="mockup-checkout.html" class="btn-primary">Pay now</a>
+              <button class="expander" aria-label="Toggle details" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+          </div>
+          <div class="order-detail">
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">The Midnight</div><div class="oline-title">Monsters</div><div class="oline-cat">Counter Records · CNT 189</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 590.000</span>
+            </div>
+            <div class="order-totals">
+              <div class="otrow"><span>Subtotal</span><span class="mono">Rp 590.000</span></div>
+              <div class="otrow"><span>Awaiting</span><span class="mono">BCA VA</span></div>
+              <div class="otrow grand"><span>Total</span><span class="mono">Rp 590.000</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order 4 — Delivered -->
+        <div class="order">
+          <div class="order-top">
+            <div class="order-id">
+              <span class="order-no">#MF-2026-0329</span>
+              <span class="order-date">29 Apr 2026</span>
+            </div>
+            <div class="order-mid">
+              <div class="order-fact"><span class="order-fact-label">Items</span><span class="order-fact-val">2 records</span></div>
+              <div class="order-fact"><span class="order-fact-label">Total</span><span class="order-fact-val mono">Rp 790.000</span></div>
+              <span class="badge b-delivered"><span class="dot"></span>Delivered</span>
+            </div>
+            <div class="order-actions">
+              <a href="mockup-order-detail.html" class="btn-secondary">View <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <button class="expander" aria-label="Toggle details" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+          </div>
+          <div class="order-detail">
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Björk</div><div class="oline-title">Vespertine</div><div class="oline-cat">One Little Indian · TPLP 101</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 410.000</span>
+            </div>
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Slum Village</div><div class="oline-title">Fantastic, Vol. 2</div><div class="oline-cat">Barak Records</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 480.000</span>
+            </div>
+            <div class="order-totals">
+              <div class="otrow"><span>Subtotal</span><span class="mono">Rp 890.000</span></div>
+              <div class="otrow"><span>Voucher · APRIL10</span><span class="mono">−Rp 100.000</span></div>
+              <div class="otrow grand"><span>Total</span><span class="mono">Rp 790.000</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order 5 — Completed -->
+        <div class="order">
+          <div class="order-top">
+            <div class="order-id">
+              <span class="order-no">#MF-2026-0312</span>
+              <span class="order-date">12 Apr 2026</span>
+            </div>
+            <div class="order-mid">
+              <div class="order-fact"><span class="order-fact-label">Items</span><span class="order-fact-val">1 record</span></div>
+              <div class="order-fact"><span class="order-fact-label">Total</span><span class="order-fact-val mono">Rp 350.000</span></div>
+              <span class="badge b-completed"><span class="dot"></span>Completed</span>
+            </div>
+            <div class="order-actions">
+              <a href="mockup-order-detail.html" class="btn-secondary">View <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <button class="expander" aria-label="Toggle details" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+          </div>
+          <div class="order-detail">
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Miles Davis</div><div class="oline-title">Kind of Blue</div><div class="oline-cat">Columbia · CL 1355</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 350.000</span>
+            </div>
+            <div class="order-totals">
+              <div class="otrow"><span>Subtotal</span><span class="mono">Rp 350.000</span></div>
+              <div class="otrow grand"><span>Total</span><span class="mono">Rp 350.000</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order 6 — Cancelled -->
+        <div class="order">
+          <div class="order-top">
+            <div class="order-id">
+              <span class="order-no">#MF-2026-0288</span>
+              <span class="order-date">02 Apr 2026</span>
+            </div>
+            <div class="order-mid">
+              <div class="order-fact"><span class="order-fact-label">Items</span><span class="order-fact-val">1 record</span></div>
+              <div class="order-fact"><span class="order-fact-label">Total</span><span class="order-fact-val mono">Rp 680.000</span></div>
+              <span class="badge b-cancelled"><span class="dot"></span>Cancelled</span>
+            </div>
+            <div class="order-actions">
+              <a href="mockup-order-detail.html" class="btn-secondary">View <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <button class="expander" aria-label="Toggle details" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+          </div>
+          <div class="order-detail">
+            <div class="oline">
+              <div class="oline-cover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+              <div class="oline-info"><div class="oline-artist">Daft Punk</div><div class="oline-title">Random Access Memories</div><div class="oline-cat">Columbia · 88883 71381 1</div></div>
+              <span class="oline-qty">×1</span>
+              <span class="oline-price">Rp 680.000</span>
+            </div>
+            <div class="order-totals">
+              <div class="otrow"><span>Subtotal</span><span class="mono">Rp 680.000</span></div>
+              <div class="otrow"><span>Refunded to</span><span class="mono">BCA VA</span></div>
+              <div class="otrow grand"><span>Total</span><span class="mono">Rp 680.000</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /orders -->
+    </section>
+
+    <!-- Wishlist panel -->
+    <section class="panel" id="panel-wishlist" aria-label="Wishlist">
+      <div class="panel-hdr">
+        <h2 class="panel-h2">Wishlist</h2>
+        <span class="panel-note"><strong>11</strong> saved records</span>
+      </div>
+      <div class="grid">
+
+        <a href="mockup-release.html" class="rcard">
+          <div class="cover">
+            <div class="cover-art"><div class="grooves"></div></div>
+            <div class="cover-overlay"><div class="playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            <button class="wish-btn on" aria-label="Add to wishlist" aria-pressed="true">
+              <svg class="wish-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg class="wish-fill" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="rinfo">
+            <div class="rartist">Aphex Twin</div>
+            <div class="rtitle">Selected Ambient Works 85–92</div>
+            <div class="rlabel">Apollo · AMB 3922 · 1992</div>
+            <div class="chips"><span class="chip fmt">2×LP</span><span class="chip cond">VG+</span><span class="chip stock in">In stock</span></div>
+            <div class="price-row-card"><span class="rprice">Rp 620.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div>
+          </div>
+        </a>
+
+        <a href="mockup-release.html" class="rcard">
+          <div class="cover">
+            <div class="cover-art"><div class="grooves"></div></div>
+            <div class="cover-overlay"><div class="playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            <button class="wish-btn on" aria-label="Add to wishlist" aria-pressed="true">
+              <svg class="wish-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg class="wish-fill" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="rinfo">
+            <div class="rartist">Radiohead</div>
+            <div class="rtitle">In Rainbows</div>
+            <div class="rlabel">XL Recordings · XLLP 324 · 2007</div>
+            <div class="chips"><span class="chip fmt">LP</span><span class="chip cond">M</span><span class="chip stock low">Low stock</span></div>
+            <div class="price-row-card"><span class="rprice">Rp 540.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div>
+          </div>
+        </a>
+
+        <a href="mockup-release.html" class="rcard">
+          <div class="cover">
+            <div class="cover-art"><div class="grooves"></div></div>
+            <div class="cover-overlay"><div class="playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            <button class="wish-btn on" aria-label="Add to wishlist" aria-pressed="true">
+              <svg class="wish-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg class="wish-fill" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="rinfo">
+            <div class="rartist">Erykah Badu</div>
+            <div class="rtitle">Mama's Gun</div>
+            <div class="rlabel">Motown · 013 407-1 · 2000</div>
+            <div class="chips"><span class="chip fmt">2×LP</span><span class="chip cond">VG+</span><span class="chip stock out">Out of stock</span></div>
+            <div class="price-row-card"><span class="rprice">Rp 710.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div>
+          </div>
+        </a>
+
+        <a href="mockup-release.html" class="rcard">
+          <div class="cover">
+            <div class="cover-art"><div class="grooves"></div></div>
+            <div class="cover-overlay"><div class="playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            <button class="wish-btn on" aria-label="Add to wishlist" aria-pressed="true">
+              <svg class="wish-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg class="wish-fill" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="rinfo">
+            <div class="rartist">Bonobo</div>
+            <div class="rtitle">Migration</div>
+            <div class="rlabel">Ninja Tune · ZEN 240 · 2017</div>
+            <div class="chips"><span class="chip fmt">2×LP</span><span class="chip cond">M</span><span class="chip stock in">In stock</span></div>
+            <div class="price-row-card"><span class="rprice">Rp 580.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div>
+          </div>
+        </a>
+
+        <a href="mockup-release.html" class="rcard">
+          <div class="cover">
+            <div class="cover-art"><div class="grooves"></div></div>
+            <div class="cover-overlay"><div class="playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            <button class="wish-btn on" aria-label="Add to wishlist" aria-pressed="true">
+              <svg class="wish-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg class="wish-fill" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="rinfo">
+            <div class="rartist">Madlib</div>
+            <div class="rtitle">Shades of Blue</div>
+            <div class="rlabel">Blue Note · 7243 5 39472 · 2003</div>
+            <div class="chips"><span class="chip fmt">2×LP</span><span class="chip cond">VG</span><span class="chip stock in">In stock</span></div>
+            <div class="price-row-card"><span class="rprice">Rp 495.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div>
+          </div>
+        </a>
+
+        <a href="mockup-release.html" class="rcard">
+          <div class="cover">
+            <div class="cover-art"><div class="grooves"></div></div>
+            <div class="cover-overlay"><div class="playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            <button class="wish-btn on" aria-label="Add to wishlist" aria-pressed="true">
+              <svg class="wish-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg class="wish-fill" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="rinfo">
+            <div class="rartist">John Coltrane</div>
+            <div class="rtitle">A Love Supreme</div>
+            <div class="rlabel">Impulse! · A-77 · 1965</div>
+            <div class="chips"><span class="chip fmt">LP</span><span class="chip cond">VG+</span><span class="chip stock in">In stock</span></div>
+            <div class="price-row-card"><span class="rprice">Rp 460.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Addresses panel -->
+    <section class="panel" id="panel-addresses" aria-label="Saved addresses">
+      <div class="panel-hdr">
+        <h2 class="panel-h2">Saved addresses</h2>
+        <span class="panel-note"><strong>2</strong> addresses</span>
+      </div>
+      <div class="addr-grid">
+        <div class="addr default">
+          <div class="addr-tag def"><span class="dot"></span>Default · Home</div>
+          <div class="addr-name">Andra Wijaya</div>
+          <div class="addr-lines">Jl. Kemang Selatan VIII No. 42<br>Bangka, Mampang Prapatan<br>Jakarta Selatan, DKI Jakarta 12730</div>
+          <div class="addr-phone">+62 812-8844-9021</div>
+          <div class="addr-actions">
+            <button class="link-btn">Edit</button>
+            <button class="link-btn">Set as billing</button>
+          </div>
+        </div>
+        <div class="addr">
+          <div class="addr-tag"><span class="dot"></span>Office</div>
+          <div class="addr-name">Andra Wijaya</div>
+          <div class="addr-lines">Menara BCA, Lantai 24<br>Jl. M.H. Thamrin No. 1<br>Jakarta Pusat, DKI Jakarta 10310</div>
+          <div class="addr-phone">+62 812-8844-9021</div>
+          <div class="addr-actions">
+            <button class="link-btn">Edit</button>
+            <button class="link-btn">Make default</button>
+            <button class="link-btn danger">Delete</button>
+          </div>
+        </div>
+        <button class="addr-add">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add new address
+        </button>
+      </div>
+    </section>
+
+    <!-- Profile panel -->
+    <section class="panel" id="panel-profile" aria-label="Profile">
+      <div class="panel-hdr">
+        <h2 class="panel-h2">Profile</h2>
+        <span class="panel-note">Account ID <strong>CUST-004821</strong></span>
+      </div>
+      <div class="form-card">
+        <div class="fgrid2">
+          <div class="frow"><label class="flabel" for="pf-first">First name</label><input class="finput" id="pf-first" type="text" value="Andra"></div>
+          <div class="frow"><label class="flabel" for="pf-last">Last name</label><input class="finput" id="pf-last" type="text" value="Wijaya"></div>
+        </div>
+        <div class="frow"><label class="flabel" for="pf-email">Email</label><input class="finput" id="pf-email" type="email" value="andra.wijaya@gmail.com"></div>
+        <div class="fgrid2">
+          <div class="frow"><label class="flabel" for="pf-phone">Phone</label><input class="finput mono" id="pf-phone" type="tel" value="+62 812-8844-9021"></div>
+          <div class="frow"><label class="flabel" for="pf-dob">Date of birth</label><input class="finput mono" id="pf-dob" type="text" value="14 / 03 / 1990"></div>
+        </div>
+        <div class="frow"><label class="flabel" for="pf-pref">Genre preferences</label><input class="finput" id="pf-pref" type="text" value="Jazz, Electronic, Soul / Funk"></div>
+        <div class="form-actions">
+          <button class="btn-primary">Save changes</button>
+          <button class="btn-secondary">Change password</button>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- Footer -->
+<footer>
+  <div class="fgrid">
+    <div>
+      <div class="fbrand-name">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </div>
+      <div class="ftagline">Independent record shop based in Jakarta, Indonesia. Curating the finest in vinyl, CD, and music culture since 2019.</div>
+      <div class="floc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Jl. Kemang Raya No. 15, Jakarta Selatan
+      </div>
+    </div>
+    <div>
+      <div class="fcol-h">Shop</div>
+      <div class="flinks">
+        <a href="mockup-storefront.html" class="flink">New Arrivals</a>
+        <a href="mockup-storefront.html" class="flink">Vinyl</a>
+        <a href="mockup-storefront.html" class="flink">CDs</a>
+        <a href="#" class="flink">Merch</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-h">Account</div>
+      <div class="flinks">
+        <a href="mockup-account.html" class="flink">Orders</a>
+        <a href="mockup-account.html" class="flink">Wishlist</a>
+        <a href="mockup-account.html" class="flink">Addresses</a>
+        <a href="mockup-account.html" class="flink">Profile</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-h">Info</div>
+      <div class="flinks">
+        <a href="mockup-journal.html" class="flink">News</a>
+        <a href="#" class="flink">Shipping &amp; Returns</a>
+        <a href="#" class="flink">Sell Your Records</a>
+        <a href="#" class="flink">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="flegal">© 2026 Medium Format</div>
+    <div class="pay-logos">
+      <svg class="paylogo" viewBox="0 0 40 18" role="img" aria-label="Visa"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="15" fill="currentColor" letter-spacing="-.5" font-style="italic">VISA</text></svg>
+      <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="Mastercard"><circle cx="8" cy="9" r="6" fill="currentColor" opacity=".65"/><circle cx="17" cy="9" r="6" fill="currentColor"/></svg>
+      <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="JCB"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.5">JCB</text></svg>
+      <svg class="paylogo" viewBox="0 0 40 18" role="img" aria-label="QRIS"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">QRIS</text></svg>
+      <svg class="paylogo" viewBox="0 0 48 18" role="img" aria-label="GoPay"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">GoPay</text></svg>
+      <svg class="paylogo" viewBox="0 0 32 18" role="img" aria-label="OVO"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">OVO</text></svg>
+      <svg class="paylogo" viewBox="0 0 40 18" role="img" aria-label="DANA"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">DANA</text></svg>
+      <svg class="paylogo" viewBox="0 0 66 18" role="img" aria-label="ShopeePay"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">ShopeePay</text></svg>
+      <svg class="paylogo" viewBox="0 0 30 18" role="img" aria-label="BCA"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">BCA</text></svg>
+    </div>
+  </div>
+</footer>
+
+<!-- Now Playing Bar -->
+<div class="player" id="player">
+  <div class="pcover"><div class="cover-art sm"><div class="grooves"></div></div></div>
+  <div class="pinfo">
+    <div class="ptrack">LesAlpx</div>
+    <div class="prelease">Floating Points — Promises</div>
+  </div>
+  <span class="psource">Bandcamp</span>
+  <div class="pcontrols">
+    <button class="pbtn" aria-label="Previous track">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+    </button>
+    <button class="pplay playing" id="pplay-btn" aria-label="Pause">
+      <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button class="pbtn" aria-label="Next track">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="pprog">
+    <div class="pbar-wrap">
+      <div class="pbar-fill"></div>
+      <div class="pbar-thumb"></div>
+    </div>
+    <div class="ptimes"><span>3:15</span><span>8:31</span></div>
+  </div>
+  <div class="pvol">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+    <input type="range" class="pvol-slider" min="0" max="100" value="70" aria-label="Volume">
+  </div>
+  <button class="pclose" id="pclose-btn" aria-label="Close player">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+</div>
+
+<!-- Search overlay -->
+<div class="search-ov" id="search-ov" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="sbox">
+    <div class="srow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="sinput" id="sinput" type="text" placeholder="Search artist, title, label, catalogue…">
+    </div>
+    <div class="shint">Try "Floating Points", "Blue Note", "jazz LP", "Ninja Tune" — press <span class="kbd">Esc</span> to close</div>
+  </div>
+</div>
+
+<!-- Prototype hub link -->
+<a href="index.html" class="proto-link" aria-label="Back to prototype hub"><span class="glyph">◹</span> Prototype</a>
+
+<script>
+  // ─── Theme (saved preference; no in-page toggle on account) ───
+  const root = document.documentElement;
+  root.setAttribute('data-theme', localStorage.getItem('mf-theme') || 'dark');
+
+  // ─── Currency switch (IDR / USD) ───
+  const FX = 16000;
+  const fmtUSD = v => '$' + Math.round(v / FX).toLocaleString('en-US');
+  const parseIDR = s => parseInt(s.replace(/[^0-9]/g, ''), 10);
+  function setCurrency(cur){
+    document.querySelectorAll('.cur-btn').forEach(b => b.classList.toggle('on', b.dataset.cur === cur));
+    localStorage.setItem('mf-cur', cur);
+    document.querySelectorAll('body *').forEach(el => {
+      if (el.children.length) return;
+      const t = el.textContent.trim();
+      if (cur === 'USD'){
+        const m = t.match(/^Rp\s?([\d.]+)$/);
+        if (m){ if(!el.dataset.idr) el.dataset.idr = el.textContent; el.textContent = fmtUSD(parseIDR(m[1])); }
+      } else if (el.dataset.idr){ el.textContent = el.dataset.idr; }
+    });
+  }
+  setCurrency(localStorage.getItem('mf-cur') || 'IDR');
+
+  // ─── Left rail tab switching ────────────────────
+  const tabs = document.querySelectorAll('.rtab');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+    const target = tab.dataset.panel;
+    panels.forEach(p => p.classList.toggle('on', p.id === 'panel-' + target));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }));
+
+  // ─── Order detail expanders ─────────────────────
+  document.querySelectorAll('.expander').forEach(btn => btn.addEventListener('click', function(){
+    const order = this.closest('.order');
+    const open = order.classList.toggle('open');
+    this.setAttribute('aria-expanded', String(open));
+  }));
+
+  // ─── Order status filter chips ──────────────────
+  document.querySelectorAll('.chiprow .fchip').forEach(chip => chip.addEventListener('click', function(){
+    document.querySelectorAll('.chiprow .fchip').forEach(c => c.classList.remove('on'));
+    this.classList.add('on');
+  }));
+
+  // ─── Wishlist heart toggle ──────────────────────
+  document.addEventListener('click', e => {
+    const w = e.target.closest('.wish-btn');
+    if(w){ e.preventDefault(); e.stopPropagation(); const on = w.classList.toggle('on'); w.setAttribute('aria-pressed', String(on)); }
+  });
+
+  // ─── Now-playing play/pause ─────────────────────
+  document.getElementById('pplay-btn').addEventListener('click', function(){
+    const playing = this.classList.toggle('playing');
+    this.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  });
+  document.getElementById('pclose-btn').addEventListener('click', () => {
+    document.getElementById('player').style.display = 'none';
+    document.body.style.paddingBottom = '0';
+  });
+
+  // ─── Search overlay ─────────────────────────────
+  const searchOv = document.getElementById('search-ov');
+  function openSearch(){ searchOv.classList.add('open'); setTimeout(()=>document.getElementById('sinput').focus(),50); }
+  function closeSearch(){ searchOv.classList.remove('open'); }
+  document.getElementById('search-btn').addEventListener('click', openSearch);
+  searchOv.addEventListener('click', e => { if(e.target === searchOv) closeSearch(); });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape'){ closeSearch(); }
+    if((e.metaKey || e.ctrlKey) && e.key === 'k'){ e.preventDefault(); openSearch(); }
+  });
+
+  // ─── Real album art (iTunes Search API, JSONP) ───
+  function mfCover(coverEl, query){
+    if(!coverEl || !query) return;
+    const cb = 'itcb_' + Math.random().toString(36).slice(2);
+    window[cb] = function(data){
+      const r = data && data.results && data.results[0];
+      if(r && r.artworkUrl100){
+        const url = r.artworkUrl100.replace('100x100','600x600');
+        const img = new Image();
+        img.onload = function(){ coverEl.style.background = '#fff'; coverEl.innerHTML = ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block'; coverEl.appendChild(img); };
+        img.src = url;
+      }
+      delete window[cb];
+    };
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://itunes.apple.com/search?media=music&entity=album&limit=1&term=' + encodeURIComponent(query) + '&callback=' + cb;
+    s.onerror = function(){ delete window[cb]; };
+    document.head.appendChild(s);
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('#panel-wishlist .rcard').forEach(function(card){
+      const artist = card.querySelector('.rartist');
+      const title  = card.querySelector('.rtitle');
+      const cover  = card.querySelector('.cover-art');
+      if(artist && title && cover){ mfCover(cover, artist.textContent.trim() + ' ' + title.textContent.trim()); }
+    });
+  });
+</script>
+</body>
+</html>

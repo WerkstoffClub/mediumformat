@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format — Orders (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .app-brand .brand-wordmark{height:16px;width:auto;}
+
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --neutral-t:rgba(255,255,255,.06);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-pill:999px;
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --page-bg:#161616;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --neutral-t:rgba(0,0,0,.05);--focus:0 0 0 2px rgba(0,0,0,.5);--page-bg:#E8E8E8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--ui);background:var(--page-bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;-webkit-font-smoothing:antialiased;transition:background .2s;}
+    button{cursor:pointer;font-family:inherit;color:inherit;border:none;background:none;}
+    svg{display:block;}
+    a{text-decoration:none;color:inherit;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    /* phone frame */
+    .device{width:390px;height:844px;border-radius:44px;background:var(--canvas);border:1px solid var(--hairline);box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+    .status-bar{height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:relative;z-index:5;background:var(--surface);}
+    .status-bar .time{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);}
+    .status-bar .icons{display:flex;align-items:center;gap:6px;color:var(--ink);}
+    .status-bar .icons svg{width:16px;height:16px;}
+    .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--canvas);border-radius:14px;z-index:6;}
+    ::-webkit-scrollbar{width:0;}
+
+    /* ─── Announce bar (running text, sticky) ───────────────────────── */
+    :root{--announce-h:26px;}
+    .announce{flex-shrink:0;position:sticky;top:0;z-index:23;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:40px;padding-left:100%;animation:mf-marquee 20s linear infinite;font-size:10px;font-family:var(--ui);}
+    .announce-track strong{font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+
+    /* app header */
+    .app-hdr{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:8px 16px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);position:sticky;top:var(--announce-h);z-index:22;}
+    .app-hdr .ham{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .app-hdr .ham:active{background:var(--raised);}
+    .app-hdr .ham svg{width:20px;height:20px;}
+    .app-brand{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;}
+    .app-brand .mark{width:28px;height:28px;color:var(--ink);}
+    .app-brand .wm{font-size:15px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .app-brand .wm sup{font-size:8px;color:var(--mute);vertical-align:super;}
+    .hdr-btn{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);position:relative;}
+    .hdr-btn:active{background:var(--raised);}
+    .hdr-btn svg{width:18px;height:18px;}
+    .hdr-btn .dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--danger);border:1.5px solid var(--surface);}
+
+    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:16px 16px 88px;}
+    .page-title{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:28px;}
+    .page-sub{font-size:12px;color:var(--mute);margin-top:2px;margin-bottom:14px;}
+
+    /* summary 2x2 */
+    .sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+    .sum-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:12px 13px;text-align:left;}
+    .sum-card.active{border-color:var(--accent);background:var(--raised);}
+    .sum-top{display:flex;align-items:center;gap:6px;margin-bottom:7px;}
+    .sum-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+    .sum-lbl{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .sum-val{font-family:var(--ui);font-size:20px;font-weight:500;color:var(--ink);line-height:1;}
+    .sum-meta{font-size:10px;color:var(--body);margin-top:6px;}
+    .sum-meta .mono{color:var(--ink);}
+
+    /* status tabs scroll */
+    .stabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px;padding-bottom:2px;}
+    .stabs::-webkit-scrollbar{height:0;}
+    .stab{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 12px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--mute);background:transparent;min-height:32px;}
+    .stab.on{border-color:var(--accent);color:var(--ink);}
+    .stab .cnt{font-family:var(--ui);font-size:10px;color:var(--mute);}
+    .stab .st-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+    /* channel chips scroll */
+    .chips{display:flex;gap:6px;overflow-x:auto;margin-bottom:16px;padding-bottom:2px;}
+    .chips::-webkit-scrollbar{height:0;}
+    .chan-chip{flex-shrink:0;font-family:var(--ui);font-size:11px;padding:5px 12px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--body);background:transparent;min-height:30px;}
+    .chan-chip.on{border-color:var(--accent);color:var(--ink);background:var(--raised);}
+
+    /* order cards (tables → cards) */
+    .ord-card{display:block;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;margin-bottom:10px;}
+    .oc-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;}
+    .oc-id{display:flex;align-items:center;gap:8px;}
+    .ord-no{font-family:var(--ui);font-size:12px;color:var(--ink);font-weight:500;}
+    .channel-tag{display:inline-flex;align-items:center;font-family:var(--ui);font-size:10px;padding:2px 7px;border-radius:var(--r-sm);color:var(--body);border:1px solid var(--hairline);}
+    .status-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);}
+    .status-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .st-pending{background:var(--warning-t);color:var(--warning);}
+    .st-processing{background:var(--info-t);color:var(--info);}
+    .st-packed{background:var(--info-t);color:var(--info);}
+    .st-shipped{background:var(--info-t);color:var(--info);}
+    .st-delivered{background:var(--success-t);color:var(--success);}
+    .st-completed{background:var(--success-t);color:var(--success);}
+    .st-cancelled{background:var(--danger-t);color:var(--danger);}
+    .st-refunded{background:var(--danger-t);color:var(--danger);}
+    .oc-cust{font-size:13px;color:var(--ink);margin-bottom:10px;}
+    .oc-cust small{display:block;font-family:var(--ui);font-size:11px;color:var(--mute);margin-top:2px;}
+    .oc-figs{display:flex;justify-content:space-between;gap:8px;padding-top:10px;border-top:1px solid var(--hairline);}
+    .oc-fig{display:flex;flex-direction:column;gap:3px;}
+    .oc-fig .k{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .oc-fig .v{font-family:var(--ui);font-size:12px;color:var(--ink);}
+    .oc-fig.right{align-items:flex-end;}
+    .load-more{width:100%;padding:11px;border-radius:var(--r-md);border:1px solid var(--hairline);color:var(--body);font-size:13px;font-weight:500;background:transparent;margin-top:4px;}
+    .load-more:active{background:var(--raised);}
+
+    /* bottom tab bar */
+    .tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;z-index:8;background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:flex-start;justify-content:space-around;padding:10px 8px 0;}
+    .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);width:64px;}
+    .tabbar a.on{color:var(--ink);}
+    .tabbar a svg{width:21px;height:21px;}
+    .tabbar a span{font-size:10px;font-weight:500;}
+    .tabbar a .nav-dot{position:relative;}
+    .tabbar a .nav-dot::after{content:"";position:absolute;top:-2px;right:-4px;width:6px;height:6px;border-radius:50%;background:var(--warning);}
+
+    /* drawer */
+    .drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:20;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .drawer-overlay.show{opacity:1;pointer-events:auto;}
+    .drawer{position:absolute;top:0;bottom:0;left:0;width:248px;z-index:21;background:var(--surface);border-right:1px solid var(--hairline);transform:translateX(-100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .drawer.open{transform:translateX(0);}
+    /* ─── Notifications drawer ───────────────────────────────────── */
+    .notif-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .notif-overlay.show{opacity:1;pointer-events:auto;}
+    .notif-drawer{position:absolute;top:0;bottom:0;right:0;width:280px;max-width:86vw;z-index:41;
+      background:var(--surface);border-left:1px solid var(--hairline);
+      transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .notif-drawer.open{transform:translateX(0);}
+    .notif-hdr{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:var(--accent);color:var(--accent-text);}
+    .notif-hdr .notif-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+    .notif-hdr .notif-clear{font-size:11px;font-weight:500;color:inherit;opacity:.85;background:none;border:none;}
+    .notif-hdr .notif-clear:active{opacity:1;}
+    .notif-list{flex:1;overflow-y:auto;padding:6px;}
+    .notif-item{display:flex;gap:10px;padding:10px;border-radius:var(--r-md);position:relative;}
+    .notif-item:active{background:var(--raised);}
+    .notif-ico{width:32px;height:32px;border-radius:50%;background:var(--raised);color:var(--body);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .notif-ico svg{width:16px;height:16px;}
+    .notif-body{flex:1;min-width:0;}
+    .notif-text{font-size:12.5px;color:var(--ink);line-height:1.4;}
+    .notif-text strong{font-weight:600;}
+    .notif-meta{font-size:11px;color:var(--mute);margin-top:2px;}
+    .notif-unread{position:absolute;top:14px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--danger);}
+    .drawer-brand{display:flex;align-items:center;gap:9px;padding:20px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-brand .mark{width:22px;height:22px;color:var(--ink);}
+    .drawer-brand .wm{font-size:14px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .drawer-nav{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:2px;}
+    .dn-group{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);padding:12px 12px 5px;}
+    .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+    .drawer-theme{display:flex;align-items:center;gap:8px;width:100%;margin-top:8px;padding:9px 10px;
+      background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--ink);
+      font-family:var(--ui);font-size:12px;font-weight:500;cursor:pointer;min-height:40px;}
+    .drawer-theme svg{width:15px;height:15px;flex-shrink:0;}
+    .dn-user{display:flex;align-items:center;gap:10px;padding:4px 4px;}
+    .dn-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-text);font-size:12px;font-weight:600;font-family:var(--ui);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .dn-user-name{font-size:13px;font-weight:500;color:var(--ink);line-height:1.3;}
+    .dn-user-role{font-size:11px;color:var(--mute);line-height:1.3;}
+    .dn-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--r-md);font-size:13px;font-weight:500;color:var(--body);}
+    .dn-item.active{color:var(--ink);background:var(--raised);}
+    .dn-item svg{width:17px;height:17px;flex-shrink:0;}
+    .dn-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--warning);}
+    .drawer-foot{border-top:1px solid var(--hairline);padding:12px;}
+    .sb-status{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .sb-status-text{font-size:11px;color:var(--body);}
+
+    /* prototype link */
+    .proto-link{position:absolute;left:12px;bottom:80px;z-index:9;display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--body);background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-pill);padding:5px 10px;box-shadow:0 4px 12px rgba(0,0,0,.4);}
+  
+    /* Channel colour key (channel indicators only; status column stays semantic) */
+    .channel-tag{display:inline-flex;align-items:center;gap:5px;}
+    .channel-tag::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+    .ch-website{color:#6366F1;}.ch-pos{color:#0EA5E9;}.ch-tokopedia{color:#22C55E;}.ch-shopee{color:#F97316;}
+    .ch-discogs{color:#9CA3AF;}.ch-bandcamp{color:#14B8A6;}.ch-ebay{color:#EAB308;}.ch-event{color:#EC4899;}
+  </style>
+</head>
+<body>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <span class="icons">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="13" width="3" height="6" rx="1"/><rect x="7" y="9" width="3" height="10" rx="1"/><rect x="12" y="5" width="3" height="14" rx="1"/><rect x="17" y="2" width="3" height="17" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13a10 10 0 0114 0M8.5 16.5a5 5 0 017 0M2 9.5a15 15 0 0120 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2.5"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><rect x="21" y="10" width="1.6" height="4" rx="1" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <!-- Announce bar -->
+  <div class="announce"><div class="announce-track"><span>12 orders awaiting fulfillment · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>12 orders awaiting fulfillment · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
+
+  <div class="app-hdr">
+    <button class="ham" id="ham-btn" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="index.html" class="app-brand" aria-label="Medium Format home">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <button class="hdr-btn" id="notifBtn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </button>
+  </div>
+
+  <div class="screen">
+    <h1 class="page-title">Orders</h1>
+    <div class="page-sub">Unified inbox — every channel</div>
+
+    <!-- summary 2x2 -->
+    <div class="sum-grid">
+      <button class="sum-card active" onclick="setSummary(this)">
+        <div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Pending</span></div>
+        <div class="sum-val">12</div>
+        <div class="sum-meta"><span class="mono">Rp 6.4M</span> awaiting</div>
+      </button>
+      <button class="sum-card" onclick="setSummary(this)">
+        <div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">To ship</span></div>
+        <div class="sum-val">28</div>
+        <div class="sum-meta"><span class="mono">18</span> packed · <span class="mono">10</span> proc.</div>
+      </button>
+      <button class="sum-card" onclick="setSummary(this)">
+        <div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">In transit</span></div>
+        <div class="sum-val">41</div>
+        <div class="sum-meta"><span class="mono">7</span> couriers active</div>
+      </button>
+      <button class="sum-card" onclick="setSummary(this)">
+        <div class="sum-top"><span class="sum-dot" style="background:var(--danger)"></span><span class="sum-lbl">Review</span></div>
+        <div class="sum-val">3</div>
+        <div class="sum-meta"><span class="mono">2</span> refunds · <span class="mono">1</span> cancel</div>
+      </button>
+    </div>
+
+    <!-- status tabs -->
+    <div class="stabs">
+      <button class="stab on" onclick="setStab(this)">All <span class="cnt">148</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--warning)"></span>Pending <span class="cnt">12</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--info)"></span>Processing <span class="cnt">10</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--info)"></span>Packed <span class="cnt">18</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--info)"></span>Shipped <span class="cnt">41</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--success)"></span>Delivered <span class="cnt">33</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--success)"></span>Completed <span class="cnt">28</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--danger)"></span>Cancelled <span class="cnt">4</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--danger)"></span>Refunded <span class="cnt">2</span></button>
+    </div>
+
+    <!-- channel chips -->
+    <div class="chips">
+      <button class="chan-chip on" onclick="toggleChan(this)">All</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Website</button>
+      <button class="chan-chip" onclick="toggleChan(this)">POS</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Tokopedia</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Shopee</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Discogs</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Bandcamp</button>
+      <button class="chan-chip" onclick="toggleChan(this)">eBay</button>
+    </div>
+
+    <!-- order cards -->
+    <a class="ord-card" href="mockup-order-detail.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0842</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-pending">Pending</span></div>
+      <div class="oc-cust">Rizky Pratama<small>rizky.p@gmail.com</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">2</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">2 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 970.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-order-detail.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0841</span><span class="channel-tag ch-tokopedia">Tokopedia</span></div><span class="status-pill st-processing">Processing</span></div>
+      <div class="oc-cust">Linda Kusuma<small>linda.k@gmail.com</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">2 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 485.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-order-detail.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0840</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-packed">Packed</span></div>
+      <div class="oc-cust">Bagus Wicaksono<small>bagus.w@outlook.com</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">3</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">1 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 1.425.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-order-detail.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0839</span><span class="channel-tag ch-shopee">Shopee</span></div><span class="status-pill st-shipped">Shipped</span></div>
+      <div class="oc-cust">Sarah Tanuwijaya<small>sarah.t@gmail.com</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">1 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 520.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-order-detail.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0838</span><span class="channel-tag ch-pos">POS</span></div><span class="status-pill st-completed">Completed</span></div>
+      <div class="oc-cust">Andra Halim<small>walk-in · POS</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">2</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">1 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 690.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-order-detail.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0837</span><span class="channel-tag ch-discogs">Discogs</span></div><span class="status-pill st-delivered">Delivered</span></div>
+      <div class="oc-cust">Marcus Delgado<small>m.delgado@proton.me</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">30 Apr</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 560.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-order-detail.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0834</span><span class="channel-tag ch-ebay">eBay</span></div><span class="status-pill st-refunded">Refunded</span></div>
+      <div class="oc-cust">Priya Sharma<small>priya.s@ebay.com</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">29 Apr</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 725.000</span></div></div>
+    </a>
+    <button class="load-more">Load more · 141 remaining</button>
+  </div>
+
+  <!-- drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="drawer">
+    <a href="index.html" class="drawer-brand" aria-label="Medium Format home">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <nav class="drawer-nav">
+      <div class="dn-group">Overview</div>
+      <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+
+      <div class="dn-group">Selling</div>
+      <a href="mockup-orders-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-dot"></span></a>
+      <a href="mockup-inventory-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</a>
+      <a href="mockup-customers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Customers</a>
+      <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 012-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 010 4v4a2 2 0 002 2h16a2 2 0 002-2v-4a2 2 0 01-2-2z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="2 3"/></svg>Vouchers</a>
+      <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
+      <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
+
+      <div class="dn-group">Content</div>
+      <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
+      <a href="mockup-news-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>News</a>
+      <a href="mockup-news-categories-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>Categories &amp; Tags</a>
+
+      <div class="dn-group">Shop</div>
+      <a href="mockup-purchase-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Purchase orders</a>
+
+      <div class="dn-group">Config</div>
+      <a href="mockup-preferences-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</a>
+    </nav>
+    <div class="drawer-foot">
+      <div class="dn-user">
+        <div class="dn-avatar">RP</div>
+        <div>
+          <div class="dn-user-name">Raka Pratama</div>
+          <div class="dn-user-role">Owner</div>
+        </div>
+            <button class="drawer-theme" id="theme-btn" aria-label="Toggle theme">
+      <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span id="theme-label">Dark</span>
+    </button>
+    </div>
+    </div>
+  </aside>
+
+  <!-- Notifications drawer -->
+  <div class="notif-overlay" id="notifOverlay"></div>
+  <aside class="notif-drawer" id="notifDrawer" aria-label="Notifications">
+    <div class="notif-hdr">
+      <span class="notif-title">Notifications</span>
+      <button class="notif-clear" id="notifClearBtn">Mark all read</button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-meta">2 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text"><strong>3 items</strong> are running low on stock</div>
+          <div class="notif-meta">28 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">PO-0032 was <strong>partially received</strong> from Analog Distro</div>
+          <div class="notif-meta">Yesterday</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <a class="proto-link" href="index.html" aria-label="Back to prototype hub">◹ Prototype</a>
+
+  <!-- bottom tab bar -->
+  <nav class="tabbar">
+    <a href="mockup-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Home</span></a>
+    <a href="mockup-inventory.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg><span>Stock</span></a>
+    <a href="mockup-orders.html" class="on"><span class="nav-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Orders</span></a>
+    <a href="mockup-customers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>People</span></a>
+  </nav>
+</div>
+
+<script>
+  function setSummary(el){el.closest('.sum-grid').querySelectorAll('.sum-card').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
+  function setStab(el){el.parentNode.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));el.classList.add('on');}
+  function toggleChan(el){
+    const row=el.parentNode;const all=row.querySelector('.chan-chip');
+    if(el===all){row.querySelectorAll('.chan-chip').forEach(c=>c.classList.remove('on'));all.classList.add('on');return;}
+    all.classList.remove('on');el.classList.toggle('on');
+    if(!row.querySelector('.chan-chip.on')){all.classList.add('on');}
+  }
+  const drawer=document.getElementById('drawer');
+  const dOverlay=document.getElementById('drawer-overlay');
+  function closeDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('show');}
+  document.getElementById('ham-btn').addEventListener('click',()=>{drawer.classList.add('open');dOverlay.classList.add('show');});
+  dOverlay.addEventListener('click',closeDrawer);
+
+  // Notifications drawer
+  const notifDrawer=document.getElementById('notifDrawer');
+  const notifOverlay=document.getElementById('notifOverlay');
+  function closeNotif(){notifDrawer.classList.remove('open');notifOverlay.classList.remove('show');}
+  document.getElementById('notifBtn').addEventListener('click',()=>{notifDrawer.classList.add('open');notifOverlay.classList.add('show');});
+  notifOverlay.addEventListener('click',closeNotif);
+  document.getElementById('notifClearBtn').addEventListener('click',()=>{
+    document.querySelectorAll('.notif-unread').forEach(d=>d.remove());
+  });
+
+  const root=document.documentElement;
+  const moon=document.getElementById('ico-moon');
+  const sun=document.getElementById('ico-sun');
+  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';}
+  applyTheme(localStorage.getItem('mf-theme')||'dark');
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    localStorage.setItem('mf-theme',next);applyTheme(next);
+  });
+</script>
+</body>
+</html>

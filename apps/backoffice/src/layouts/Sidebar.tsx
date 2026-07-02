@@ -50,8 +50,9 @@ const NAV_GROUPS: NavGroup[] = [
 export function Sidebar() {
   return (
     <aside className="w-[186px] min-w-[186px] bg-[#0d0d0d] border-r border-[#1e1e1e] flex flex-col">
-      <div className="px-[18px] py-4 text-[15px] font-black tracking-tight text-white border-b border-[#1e1e1e]">
-        Medium<span className="text-[var(--brand)]">Format</span>
+      <div className="px-[18px] py-4 border-b border-[#1e1e1e]">
+        {/* sidebar chrome is always dark, so the white lockup is used in both themes */}
+        <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[16px] w-auto" />
       </div>
 
       <nav className="flex-1 overflow-y-auto py-2">

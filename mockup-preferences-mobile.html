@@ -7,7 +7,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <title>Medium Format — Channels (Mobile)</title>
+  <title>Medium Format — Preferences (Mobile)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -77,65 +77,67 @@
     .hdr-btn svg{width:18px;height:18px;}
     .hdr-btn .dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--danger);border:1.5px solid var(--surface);}
 
-    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:16px 16px 88px;}
+    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:16px 16px 150px;}
     .page-title{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:28px;}
     .page-sub{font-size:12px;color:var(--mute);margin-top:2px;margin-bottom:14px;}
 
-    .kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
-    .kpi{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:11px 13px;}
-    .kpi-lbl{font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;font-weight:500;margin-bottom:6px;}
-    .kpi-val{font-family:var(--ui);font-size:16px;font-weight:500;color:var(--ink);}
+    /* sub-nav chips */
+    .subnav{display:flex;gap:6px;overflow-x:auto;margin-bottom:16px;padding-bottom:2px;}
+    .subnav::-webkit-scrollbar{height:0;}
+    .subnav a{flex-shrink:0;font-size:12px;font-weight:500;padding:6px 13px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--mute);background:transparent;min-height:32px;display:inline-flex;align-items:center;}
+    .subnav a.on{border-color:var(--accent);color:var(--ink);}
 
-    .syncall{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:14px;font-weight:500;margin-bottom:16px;}
-    .syncall svg{width:15px;height:15px;}
+    .card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;margin-bottom:12px;scroll-margin-top:12px;}
+    .card-hdr{padding:14px 16px;border-bottom:1px solid var(--hairline);}
+    .card-title{font-size:14px;font-weight:600;color:var(--ink);}
+    .card-desc{font-size:11px;color:var(--mute);margin-top:3px;}
+    .card-body{padding:16px;display:flex;flex-direction:column;gap:14px;}
+    .field label{display:block;font-size:12px;font-weight:500;color:var(--body);margin-bottom:6px;}
+    .field .hint{font-size:11px;color:var(--mute);margin-top:5px;}
+    .input,.textarea,.select{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px 12px;color:var(--ink);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s;}
+    .input::placeholder{color:var(--mute);}
+    .input:focus,.textarea:focus,.select:focus{border-color:var(--accent);}
+    .input.mono{font-family:var(--ui);}
+    .textarea{resize:vertical;min-height:70px;line-height:1.5;}
+    .select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236E6E6E' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
 
-    /* channel cards */
-    .ch-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;margin-bottom:10px;}
-    .ch-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
-    .ch-id{display:flex;align-items:center;gap:10px;}
-    .ch-icon{width:34px;height:34px;border-radius:var(--r-md);background:var(--raised);border:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--ink);}
-    .ch-icon svg{width:17px;height:17px;}
-    .ch-name{font-size:14px;font-weight:600;color:var(--ink);}
-    .ch-kind{font-family:var(--ui);font-size:10px;color:var(--mute);margin-top:2px;}
+    .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--hairline);}
+    .toggle-row:first-child{border-top:none;padding-top:0;}
+    .tr-title{font-size:13px;color:var(--ink);font-weight:500;}
+    .tr-desc{font-size:11px;color:var(--mute);margin-top:2px;}
+    .toggle{position:relative;width:40px;height:23px;flex-shrink:0;}
+    .toggle input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;}
+    .toggle .track{position:absolute;inset:0;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);transition:background .18s,border-color .18s;}
+    .toggle .knob{position:absolute;top:3px;left:3px;width:15px;height:15px;border-radius:50%;background:var(--mute);transition:transform .18s,background .18s;}
+    .toggle input:checked+.track{background:var(--accent);border-color:var(--accent);}
+    .toggle input:checked+.track+.knob{transform:translateX(17px);background:var(--accent-text);}
+    .toggle input:focus-visible+.track{box-shadow:var(--focus);}
+
+    .conn,.acq,.member{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .acq-list,.team{display:flex;flex-direction:column;gap:8px;}
+    .conn-id,.member-id{display:flex;align-items:center;gap:10px;min-width:0;}
+    .conn-icon,.avatar{width:32px;height:32px;border-radius:var(--r-md);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+    .conn-icon{background:var(--surface);border:1px solid var(--hairline);color:var(--ink);}
+    .conn-icon svg{width:16px;height:16px;}
+    .avatar{border-radius:50%;background:var(--accent);color:var(--accent-text);font-family:var(--ui);font-size:11px;font-weight:600;}
+    .conn-name,.acq-name,.member-name{font-size:13px;font-weight:500;color:var(--ink);}
+    .conn-meta,.acq-tid,.member-mail{font-family:var(--ui);font-size:10px;color:var(--mute);margin-top:2px;}
     .status-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);flex-shrink:0;}
     .status-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;}
     .st-connected{background:var(--success-t);color:var(--success);}
-    .st-syncing{background:var(--info-t);color:var(--info);}
-    .st-error{background:var(--danger-t);color:var(--danger);}
     .st-off{background:var(--neutral-t);color:var(--mute);}
-    .ch-metrics{display:flex;gap:20px;margin:12px 0;padding:12px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
-    .metric .m-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:500;margin-bottom:4px;}
-    .metric .m-val{font-family:var(--ui);font-size:13px;color:var(--ink);}
-    .metric .m-val.mut{color:var(--mute);}
-    .ch-actions{display:flex;align-items:center;gap:8px;}
-    .btn-sec{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);color:var(--ink);font-size:12px;font-weight:500;}
-    .btn-ghost{display:inline-flex;align-items:center;padding:8px 10px;border-radius:var(--r-md);background:transparent;border:none;color:var(--body);font-size:12px;font-weight:500;}
-    .toggle{position:relative;width:38px;height:22px;flex-shrink:0;}
-    .toggle input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;}
-    .toggle .track{position:absolute;inset:0;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);transition:background .18s,border-color .18s;}
-    .toggle .knob{position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--mute);transition:transform .18s,background .18s;}
-    .toggle input:checked+.track{background:var(--accent);border-color:var(--accent);}
-    .toggle input:checked+.track+.knob{transform:translateX(16px);background:var(--accent-text);}
-    .toggle input:focus-visible+.track{box-shadow:var(--focus);}
+    .role-select{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--body);font-size:11px;font-family:inherit;padding:6px 26px 6px 10px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236E6E6E' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;outline:none;flex-shrink:0;}
 
-    /* activity log */
-    .widget{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;margin-top:6px;}
-    .widget-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-bottom:1px solid var(--hairline);}
-    .widget-title{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--body);}
-    .widget-note{font-size:10px;color:var(--mute);font-family:var(--ui);}
-    .log-item{display:flex;gap:10px;padding:11px 14px;border-top:1px solid var(--hairline);align-items:flex-start;}
-    .log-item:first-child{border-top:none;}
-    .log-icon{width:26px;height:26px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .log-icon svg{width:13px;height:13px;}
-    .li-ok{background:var(--success-t);color:var(--success);}
-    .li-info{background:var(--info-t);color:var(--info);}
-    .li-warn{background:var(--warning-t);color:var(--warning);}
-    .li-danger{background:var(--danger-t);color:var(--danger);}
-    .log-body{flex:1;min-width:0;}
-    .log-title{font-size:12px;color:var(--ink);line-height:1.4;}
-    .log-title .ch{color:var(--body);}
-    .log-meta{font-size:11px;color:var(--mute);margin-top:2px;font-family:var(--ui);}
-    .log-time{font-family:var(--ui);font-size:10px;color:var(--mute);flex-shrink:0;}
+    .segment{display:inline-flex;gap:2px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:3px;}
+    .segment button{font-size:12px;font-weight:500;padding:7px 18px;border-radius:var(--r-sm);color:var(--mute);background:transparent;}
+    .segment button.on{background:var(--surface);color:var(--ink);}
+    .accent-note{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mute);margin-top:12px;line-height:1.4;}
+    .accent-swatch{width:20px;height:20px;border-radius:var(--r-sm);border:1px solid var(--hairline);background:var(--ink);flex-shrink:0;}
+
+    /* sticky save (above tabbar) */
+    .save-bar{position:absolute;left:0;right:0;bottom:72px;z-index:9;background:var(--surface);border-top:1px solid var(--hairline);padding:12px 16px;display:flex;align-items:center;gap:10px;}
+    .save-note{font-size:11px;color:var(--mute);flex:1;}
+    .btn-primary{display:inline-flex;align-items:center;justify-content:center;padding:10px 18px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:13px;font-weight:500;}
 
     .tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;z-index:8;background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:flex-start;justify-content:space-around;padding:10px 8px 0;}
     .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);width:64px;}
@@ -198,16 +200,6 @@
     .proto-link{position:fixed;left:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--body);font-size:12px;font-weight:500;box-shadow:0 4px 12px rgba(0,0,0,.4);}
     .proto-link:active{color:var(--ink);background:var(--raised);}
   
-    /* channel colour key on integration cards */
-    .chi-website{color:#6366F1;}
-    .chi-pos{color:#0EA5E9;}
-    .chi-tokopedia{color:#22C55E;}
-    .chi-shopee{color:#F97316;}
-    .chi-discogs{color:#9CA3AF;}
-    .chi-bandcamp{color:#14B8A6;}
-    .chi-event{color:#EC4899;}
-    .ch-icon[class*="chi-"]{background:color-mix(in srgb,currentColor 13%,var(--raised));border-color:color-mix(in srgb,currentColor 32%,var(--hairline));}
-  
     /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
@@ -229,7 +221,7 @@
   </div>
 
   <!-- Announce bar -->
-  <div class="announce"><div class="announce-track"><span>Discogs sync completed 4 minutes ago · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>Discogs sync completed 4 minutes ago · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
+  <div class="announce"><div class="announce-track"><span>Store preferences last updated today · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>Store preferences last updated today · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
 
   <div class="app-hdr">
     <button class="ham" id="ham-btn" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -240,81 +232,105 @@
   </div>
 
   <div class="screen">
-    <h1 class="page-title">Channels</h1>
-    <div class="page-sub">Connections &amp; sync health</div>
+    <h1 class="page-title">Preferences</h1>
+    <div class="page-sub">Store, tax, payments &amp; team</div>
 
-    <div class="kpi-grid">
-      <div class="kpi"><div class="kpi-lbl">Active</div><div class="kpi-val">5 / 7</div></div>
-      <div class="kpi"><div class="kpi-lbl">Listings</div><div class="kpi-val">3,914</div></div>
-      <div class="kpi"><div class="kpi-lbl">Last sync</div><div class="kpi-val">4m ago</div></div>
-      <div class="kpi"><div class="kpi-lbl">Errors 24h</div><div class="kpi-val">2</div></div>
-    </div>
+    <nav class="subnav" aria-label="Settings sections">
+      <a href="#store" class="on">Store profile</a>
+      <a href="#tax">Tax &amp; currency</a>
+      <a href="#pay">Payments</a>
+      <a href="#ship">Shipping</a>
+      <a href="#team">Team</a>
+      <a href="#notify">Notifications</a>
+      <a href="#appearance">Appearance</a>
+    </nav>
 
-    <button class="syncall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>Sync all channels</button>
-
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div><div class="ch-name">Website</div><div class="ch-kind">storefront</div></div></div>
-        <span class="status-pill st-connected">Connected</span>
+    <section class="card" id="store">
+      <div class="card-hdr"><div class="card-title">Store profile</div><div class="card-desc">Name, address &amp; contact</div></div>
+      <div class="card-body">
+        <div class="field"><label>Store name</label><input class="input" value="Medium Format"></div>
+        <div class="field"><label>Address</label><textarea class="textarea">Jl. Senopati No. 42, Kebayoran Baru
+Jakarta Selatan, DKI Jakarta 12190</textarea></div>
+        <div class="field"><label>Phone</label><input class="input mono" value="+62 21 5099 1042"></div>
+        <div class="field"><label>Contact email</label><input class="input mono" value="hello@mediumformat.id"></div>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">2m ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1,482</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Website"><span class="track"></span><span class="knob"></span></label></div>
-    </div>
+    </section>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-pos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="8" y1="9" x2="16" y2="9"/></svg></div><div><div class="ch-name">POS</div><div class="ch-kind">in-store · Jakarta</div></div></div>
-        <span class="status-pill st-connected">Connected</span>
+    <section class="card" id="tax">
+      <div class="card-hdr"><div class="card-title">Tax &amp; currency</div><div class="card-desc">VAT &amp; display currency</div></div>
+      <div class="card-body">
+        <div class="toggle-row"><div><div class="tr-title">Charge PPN (VAT) 11%</div><div class="tr-desc">On taxable items</div></div><label class="toggle"><input type="checkbox" checked aria-label="PPN"><span class="track"></span><span class="knob"></span></label></div>
+        <div class="field"><label>NPWP (tax ID)</label><input class="input mono" value="09.254.881.7-013.000"></div>
+        <div class="field"><label>Primary currency</label><select class="select"><option>IDR — Rupiah (Rp)</option><option>USD — Dollar ($)</option></select></div>
+        <div class="toggle-row"><div><div class="tr-title">Show USD display price</div><div class="tr-desc">Beside IDR for intl visitors</div></div><label class="toggle"><input type="checkbox" checked aria-label="USD display"><span class="track"></span><span class="knob"></span></label></div>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">Live</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1,482</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="POS"><span class="track"></span><span class="knob"></span></label></div>
-    </div>
+    </section>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-tokopedia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><div><div class="ch-name">Tokopedia</div><div class="ch-kind">marketplace</div></div></div>
-        <span class="status-pill st-syncing">Syncing</span>
+    <section class="card" id="pay">
+      <div class="card-hdr"><div class="card-title">Payments</div><div class="card-desc">Gateway &amp; EDC terminals</div></div>
+      <div class="card-body">
+        <div class="field"><label>Online gateway</label>
+          <div class="conn"><div class="conn-id"><div class="conn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><div><div class="conn-name">Xendit</div><div class="conn-meta">QRIS · VA · e-wallet</div></div></div><span class="status-pill st-connected">Connected</span></div>
+        </div>
+        <div class="field"><label>EDC terminals (acquirers)</label>
+          <div class="acq-list">
+            <div class="acq"><div><div class="acq-name">BCA</div><div class="acq-tid">TID 71042219</div></div><span class="status-pill st-connected">Active</span></div>
+            <div class="acq"><div><div class="acq-name">Mandiri</div><div class="acq-tid">TID 88301157</div></div><span class="status-pill st-connected">Active</span></div>
+            <div class="acq"><div><div class="acq-name">BNI</div><div class="acq-tid">TID 60219944</div></div><span class="status-pill st-connected">Active</span></div>
+            <div class="acq"><div><div class="acq-name">BRI</div><div class="acq-tid">Not paired</div></div><span class="status-pill st-off">Off</span></div>
+          </div>
+          <div class="hint">Terminal names as plain text — no bank brand colours.</div>
+        </div>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">now</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">612</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Tokopedia"><span class="track"></span><span class="knob"></span></label></div>
-    </div>
+    </section>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-shopee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><div><div class="ch-name">Shopee</div><div class="ch-kind">marketplace</div></div></div>
-        <span class="status-pill st-connected">Connected</span>
+    <section class="card" id="ship">
+      <div class="card-hdr"><div class="card-title">Shipping</div><div class="card-desc">Couriers &amp; free-shipping</div></div>
+      <div class="card-body">
+        <div class="toggle-row"><div><div class="tr-title">JNE</div><div class="tr-desc">REG &amp; YES</div></div><label class="toggle"><input type="checkbox" checked aria-label="JNE"><span class="track"></span><span class="knob"></span></label></div>
+        <div class="toggle-row"><div><div class="tr-title">SiCepat</div><div class="tr-desc">BEST</div></div><label class="toggle"><input type="checkbox" checked aria-label="SiCepat"><span class="track"></span><span class="knob"></span></label></div>
+        <div class="toggle-row"><div><div class="tr-title">Gojek (GoSend)</div><div class="tr-desc">Same-day Jakarta</div></div><label class="toggle"><input type="checkbox" checked aria-label="GoSend"><span class="track"></span><span class="knob"></span></label></div>
+        <div class="field"><label>Free-shipping threshold</label><input class="input mono" value="Rp 500.000"></div>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">11m ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">548</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Shopee"><span class="track"></span><span class="knob"></span></label></div>
-    </div>
+    </section>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-discogs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div><div><div class="ch-name">Discogs</div><div class="ch-kind">collector</div></div></div>
-        <span class="status-pill st-error">Error</span>
+    <section class="card" id="team">
+      <div class="card-hdr"><div class="card-title">Team</div><div class="card-desc">Members &amp; roles</div></div>
+      <div class="card-body">
+        <div class="team">
+          <div class="member"><div class="member-id"><div class="avatar">MF</div><div><div class="member-name">Maya Fitri</div><div class="member-mail">maya@mediumformat.id</div></div></div><select class="role-select" aria-label="Maya role"><option>Owner</option><option>Manager</option></select></div>
+          <div class="member"><div class="member-id"><div class="avatar">AP</div><div><div class="member-name">Andra Prakoso</div><div class="member-mail">andra@mediumformat.id</div></div></div><select class="role-select" aria-label="Andra role"><option>Manager</option><option>Staff</option></select></div>
+          <div class="member"><div class="member-id"><div class="avatar">RS</div><div><div class="member-name">Rani Saputra</div><div class="member-mail">rani@mediumformat.id</div></div></div><select class="role-select" aria-label="Rani role"><option>Editor</option><option>Staff</option></select></div>
+          <div class="member"><div class="member-id"><div class="avatar">YT</div><div><div class="member-name">Yosef Tanaya</div><div class="member-mail">yosef@mediumformat.id</div></div></div><select class="role-select" aria-label="Yosef role"><option>Staff</option><option>Editor</option></select></div>
+        </div>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val mut">3h ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">291</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Discogs"><span class="track"></span><span class="knob"></span></label></div>
-    </div>
+    </section>
 
-    <div class="ch-card">
-      <div class="ch-top">
-        <div class="ch-id"><div class="ch-icon chi-bandcamp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15l4-6 4 6z"/></svg></div><div><div class="ch-name">Bandcamp</div><div class="ch-kind">digital + physical</div></div></div>
-        <span class="status-pill st-connected">Connected</span>
+    <section class="card" id="notify">
+      <div class="card-hdr"><div class="card-title">Notifications</div><div class="card-desc">Which events alert the team</div></div>
+      <div class="card-body">
+        <div class="toggle-row"><div><div class="tr-title">New order received</div><div class="tr-desc">All channels</div></div><label class="toggle"><input type="checkbox" checked aria-label="New order"><span class="track"></span><span class="knob"></span></label></div>
+        <div class="toggle-row"><div><div class="tr-title">Low stock warning</div><div class="tr-desc">Below reorder point</div></div><label class="toggle"><input type="checkbox" checked aria-label="Low stock"><span class="track"></span><span class="knob"></span></label></div>
+        <div class="toggle-row"><div><div class="tr-title">Channel sync errors</div><div class="tr-desc">Connection failures</div></div><label class="toggle"><input type="checkbox" checked aria-label="Sync errors"><span class="track"></span><span class="knob"></span></label></div>
+        <div class="toggle-row"><div><div class="tr-title">Weekly finance digest</div><div class="tr-desc">Monday email</div></div><label class="toggle"><input type="checkbox" aria-label="Digest"><span class="track"></span><span class="knob"></span></label></div>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">27m ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">184</div></div></div>
-      <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Bandcamp"><span class="track"></span><span class="knob"></span></label></div>
-    </div>
+    </section>
 
-    <!-- Activity log -->
-    <div class="widget">
-      <div class="widget-hdr"><span class="widget-title">Sync Activity</span><span class="widget-note">24h</span></div>
-      <div class="log-item"><div class="log-icon li-danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Discogs</span> — sync failed: OAuth expired</div><div class="log-meta">reauthorise to resume</div></div><span class="log-time">14:52</span></div>
-      <div class="log-item"><div class="log-icon li-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Tokopedia</span> — incremental sync</div><div class="log-meta">418 / 612 listings</div></div><span class="log-time">14:48</span></div>
-      <div class="log-item"><div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Website</span> — full sync completed</div><div class="log-meta">1,482 listings · 3 adjustments</div></div><span class="log-time">14:50</span></div>
-      <div class="log-item"><div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Shopee</span> — 4 orders imported</div><div class="log-meta">MF-0844 … MF-0847</div></div><span class="log-time">14:39</span></div>
-      <div class="log-item"><div class="log-icon li-warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Bandcamp</span> — 2 SKUs skipped</div><div class="log-meta">missing barcode · 182 / 184</div></div><span class="log-time">14:25</span></div>
-    </div>
+    <section class="card" id="appearance">
+      <div class="card-hdr"><div class="card-title">Appearance</div><div class="card-desc">Default theme</div></div>
+      <div class="card-body">
+        <div class="field"><label>Theme</label>
+          <div class="segment" id="theme-seg"><button class="on" data-theme-val="dark" onclick="segTheme(this)">Dark</button><button data-theme-val="light" onclick="segTheme(this)">Light</button></div>
+          <div class="accent-note"><span class="accent-swatch"></span>Accent is monochrome — the opposite of the canvas. No custom accent colour.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Sticky save -->
+  <div class="save-bar">
+    <span class="save-note">Unsaved changes</span>
+    <button class="btn-primary">Save changes</button>
   </div>
 
   <!-- Drawer -->
@@ -332,7 +348,7 @@
       <a href="mockup-inventory-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</a>
       <a href="mockup-customers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Customers</a>
       <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a2 2 0 000-4z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="1 3"/></svg>Vouchers</a>
-      <a href="mockup-channels-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
+      <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
       <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
 
       <div class="dn-group">Content</div>
@@ -344,7 +360,7 @@
       <a href="mockup-purchase-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Purchase Orders</a>
 
       <div class="dn-group">Config</div>
-      <a href="mockup-preferences-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</a>
+      <a href="mockup-preferences-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</a>
     </nav>
     <div class="drawer-foot">
       <div class="drawer-user">
@@ -399,13 +415,17 @@
     <a href="mockup-dashboard-mobile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Home</span></a>
     <a href="mockup-orders-mobile.html"><span class="nav-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Orders</span></a>
     <a href="mockup-inventory-mobile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg><span>Stock</span></a>
-    <a href="mockup-channels-mobile.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span>Channels</span></a>
+    <a href="mockup-preferences-mobile.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Settings</span></a>
   </nav>
 </div>
 
 <a href="index.html" class="proto-link" aria-label="Back to prototype hub">◹ Prototype</a>
 
 <script>
+  const subnav=document.querySelectorAll('.subnav a');
+  subnav.forEach(a=>a.addEventListener('click',()=>{subnav.forEach(x=>x.classList.remove('on'));a.classList.add('on');}));
+  function segTheme(el){el.closest('.segment').querySelectorAll('button').forEach(b=>b.classList.remove('on'));el.classList.add('on');const t=el.dataset.themeVal;localStorage.setItem('mf-theme',t);applyTheme(t);}
+
   const drawer=document.getElementById('drawer');
   const dOverlay=document.getElementById('drawer-overlay');
   function closeDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('show');}
@@ -425,7 +445,7 @@
   const root=document.documentElement;
   const moon=document.getElementById('ico-moon');
   const sun=document.getElementById('ico-sun');
-  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';}
+  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';document.querySelectorAll('#theme-seg button').forEach(b=>b.classList.toggle('on',b.dataset.themeVal===t));}
   applyTheme(localStorage.getItem('mf-theme')||'dark');
   document.getElementById('theme-btn').addEventListener('click',()=>{
     const next=root.getAttribute('data-theme')==='dark'?'light':'dark';

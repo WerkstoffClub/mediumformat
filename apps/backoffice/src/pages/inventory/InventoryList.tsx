@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { getReleases, deleteRelease, type ReleaseFilter } from '../../api/inventory';
 import { Badge } from '../../components/ui/Badge';
 import type { Release } from '@mf/shared';
@@ -12,7 +12,8 @@ export function InventoryList() {
   const [releases, setReleases] = useState<Release[]>([]);
   const [total, setTotal]       = useState(0);
   const [page, setPage]         = useState(1);
-  const [search, setSearch]     = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('q') ?? '';
   const [loading, setLoading]   = useState(false);
 
   const load = useCallback(async (filter: ReleaseFilter) => {
@@ -27,7 +28,7 @@ export function InventoryList() {
   }, []);
 
   useEffect(() => {
-    load({ page, limit: 50, artist: search || undefined, title: search || undefined });
+    load({ page, limit: 50, q: search || undefined });
   }, [page, search, load]);
 
   const handleDelete = async (id: string) => {
@@ -45,7 +46,10 @@ export function InventoryList() {
             className="bg-transparent text-[11px] outline-none text-[var(--text-primary)] placeholder:text-[var(--text-faint)] w-full"
             placeholder="Search artist, title..."
             value={search}
-            onChange={e => { setSearch(e.target.value); setPage(1); }}
+            onChange={e => {
+              setSearchParams(e.target.value ? { q: e.target.value } : {}, { replace: true });
+              setPage(1);
+            }}
           />
         </div>
         <div className="flex-1" />

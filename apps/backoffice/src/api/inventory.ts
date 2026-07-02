@@ -9,6 +9,7 @@ export interface ReleaseListResponse {
 }
 
 export interface ReleaseFilter {
+  q?: string;
   artist?: string;
   title?: string;
   format?: string;

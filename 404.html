@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medium Format — Not found</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .box .brand-wordmark{height:28px;width:auto;margin:0 auto 26px;}
+
+:root{--canvas:#0F0F0F;--surface:#0E0E0E;--hairline:#2A2A2A;--ink:#FFF;--body:#B4B4B4;--mute:#6E6E6E;--accent:#FFF;--accent-text:#000;--ui:"Geist","Helvetica Neue",Arial,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;}
+html[data-theme="light"]{--canvas:#F0F0F0;--surface:#FFF;--hairline:#E4E4E4;--ink:#000;--body:#525252;--mute:#8A8A8A;--accent:#000;--accent-text:#FFF;}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--canvas);color:var(--body);font:400 14px/20px var(--ui);display:flex;align-items:center;justify-content:center;padding:24px;-webkit-font-smoothing:antialiased}
+.box{max-width:460px;text-align:center}
+.mark{width:64px;height:64px;color:var(--ink);margin:0 auto 26px}
+.code{font:500 13px/16px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+h1{font:600 32px/40px var(--ui);letter-spacing:-.06em;color:var(--ink);margin:0 0 12px}
+p{font:400 16px/24px var(--ui);margin:0 0 28px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:500 14px/20px var(--ui);background:var(--accent);color:var(--accent-text);border-radius:6px;padding:11px 18px;text-decoration:none}
+.btn svg{width:15px;height:15px}
+</style>
+</head>
+<body>
+<div class="box">
+  <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+  <div class="code">Error 404</div>
+  <h1>Off the record.</h1>
+  <p>The page you're after isn't in the crate. Let's get you back to the shop.</p>
+  <a class="btn" href="/">Back to Medium Format <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('mf-theme')||'dark');</script>
+</body>
+</html>

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format — Edit Release</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .sb-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .box .brand-wordmark{height:28px;width:auto;margin:0 auto 26px;}
+
+    /* ─── Tokens (v2.0 monochrome — from foundation) ─────────────── */
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --neutral-t:rgba(255,255,255,.06);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 4px 12px rgba(0,0,0,.6);
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --neutral-t:rgba(0,0,0,.05);
+      --focus:0 0 0 2px rgba(0,0,0,.5);
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────────── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;overflow:hidden;}
+    body{font-family:var(--ui);font-size:14px;line-height:20px;background:var(--canvas);color:var(--ink);-webkit-font-smoothing:antialiased;}
+    ::-webkit-scrollbar{width:5px;height:5px;}
+    ::-webkit-scrollbar-track{background:transparent;}
+    ::-webkit-scrollbar-thumb{background:var(--hairline);border-radius:3px;}
+    button{cursor:pointer;font-family:inherit;color:inherit;}
+    svg{display:block;}
+    a{text-decoration:none;color:inherit;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    /* ─── Shell ──────────────────────────────────────────────────── */
+    .shell{display:flex;height:100vh;overflow:hidden;}
+
+    /* ─── Sidebar (reference chrome v2.2) ────────────────────────── */
+    .sidebar{
+      width:232px;min-width:232px;background:var(--surface);
+      border-right:1px solid var(--hairline);
+      display:flex;flex-direction:column;
+    }
+    .sb-brand{
+      display:flex;align-items:center;gap:9px;
+      padding:18px 18px;border-bottom:1px solid var(--hairline);
+    }
+    .sb-brand .mark{width:30px;height:30px;color:var(--ink);flex-shrink:0;}
+    .sb-brand .wm{font-size:14px;font-weight:600;letter-spacing:-.03em;color:var(--ink);white-space:nowrap;}
+    .sb-brand .wm sup{font-size:8px;font-weight:400;color:var(--mute);vertical-align:super;}
+    .sb-nav{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:2px;}
+    .sb-group{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);padding:14px 12px 6px;}
+    .sb-group:first-child{padding-top:2px;}
+    .sb-item{
+      display:flex;align-items:center;gap:11px;
+      padding:8px 12px;border-radius:var(--r-md);
+      font-size:13px;font-weight:500;color:var(--body);
+      transition:background .15s,color .15s;position:relative;
+    }
+    .sb-item:hover{color:var(--ink);background:var(--raised);}
+    .sb-item.active{color:var(--ink);background:var(--raised);}
+    .sb-item svg{width:17px;height:17px;flex-shrink:0;color:currentColor;}
+    .sb-item .sb-txt{flex:1;}
+    .sb-count{
+      font-family:var(--ui);font-size:11px;font-weight:500;
+      color:var(--body);background:var(--raised);border:1px solid var(--hairline);
+      border-radius:var(--r-pill);padding:1px 8px;min-width:22px;text-align:center;
+    }
+    .sb-item.active .sb-count{background:var(--surface);}
+    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+    .sb-foot{border-top:1px solid var(--hairline);padding:12px;}
+    .sb-theme{display:flex;align-items:center;gap:8px;width:100%;margin-top:8px;padding:8px 10px;
+      background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--ink);
+      font-family:var(--ui);font-size:12px;font-weight:500;cursor:pointer;}
+    .sb-theme svg{width:15px;height:15px;flex-shrink:0;}
+    .sb-user{display:flex;align-items:center;gap:10px;padding:6px 6px;}
+    .sb-avatar{
+      width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-text);
+      font-size:12px;font-weight:600;font-family:var(--ui);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    }
+    .sb-user-name{font-size:13px;font-weight:500;color:var(--ink);line-height:1.3;}
+    .sb-user-role{font-size:11px;color:var(--mute);line-height:1.3;}
+
+    /* ─── Main ───────────────────────────────────────────────────── */
+    .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+
+    /* ─── Topbar (reference chrome v2.2) ─────────────────────────── */
+    .topbar{
+      height:60px;background:var(--surface);
+      border-bottom:1px solid var(--hairline);
+      display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;
+    }
+    .crumb{display:flex;align-items:center;gap:7px;font-family:var(--ui);font-size:12px;white-space:nowrap;}
+    .crumb .c-mute{color:var(--mute);}
+    .crumb .c-sep{color:var(--mute);}
+    .crumb .c-ink{color:var(--ink);}
+    .topbar-search{
+      display:flex;align-items:center;gap:9px;
+      background:var(--raised);border:1px solid var(--hairline);
+      border-radius:var(--r-lg);padding:9px 12px;flex:1;max-width:480px;margin:0 auto;
+      transition:border-color .15s;
+    }
+    .topbar-search
+    .topbar-search svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
+    .topbar-search input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
+    .topbar-search input::placeholder{color:var(--mute);}
+    .kbd{
+      font-family:var(--ui);font-size:11px;color:var(--mute);
+      background:var(--surface);border:1px solid var(--hairline);
+      border-radius:var(--r-sm);padding:1px 6px;flex-shrink:0;
+    }
+    .tb-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .tb-btn{
+      width:36px;height:36px;border-radius:var(--r-md);background:transparent;border:none;
+      color:var(--body);display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;
+    }
+    .tb-btn:hover{background:var(--raised);color:var(--ink);}
+    .tb-btn svg{width:17px;height:17px;}
+    .tb-bell{position:relative;}
+    .tb-bell-dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--danger);border:1.5px solid var(--surface);}
+
+    /* ─── Mobile nav ─────────────────────────────────────────────── */
+    .hamburger{display:none;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--r-md);background:transparent;border:none;color:var(--body);flex-shrink:0;}
+    .hamburger:hover{background:var(--raised);color:var(--ink);}
+    .hamburger svg{width:19px;height:19px;}
+    .sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;}
+
+    /* ─── Content (scroll wraps form + sticky footer inside main) ── */
+    .content{flex:1;overflow-y:auto;background:var(--canvas);}
+    .form-wrap{padding:24px 24px 0;max-width:940px;margin:0 auto;}
+
+    /* ─── Page header ────────────────────────────────────────────── */
+    .page-hdr{margin-bottom:18px;}
+    .page-title{font-size:24px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:32px;}
+    .page-sub{font-size:13px;color:var(--mute);margin-top:2px;}
+
+    /* ─── Sections ───────────────────────────────────────────────── */
+    .section{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);margin-bottom:14px;overflow:hidden;}
+    .section-hdr{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--hairline);}
+    .section-hdr .n{width:22px;height:22px;border-radius:var(--r-sm);background:var(--raised);border:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;font-family:var(--ui);font-size:11px;font-weight:500;color:var(--body);flex-shrink:0;}
+    .section-title{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--ink);}
+    .section-note{font-size:12px;color:var(--mute);margin-left:auto;}
+    .section-body{padding:18px;}
+
+    /* ─── Form grid + fields ─────────────────────────────────────── */
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .span-2{grid-column:span 2;}
+    .field-label{display:block;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-bottom:7px;}
+    .field-label .req{color:var(--body);}
+    .field-hint{font-size:11px;color:var(--mute);margin-top:6px;}
+    .input,.select,.textarea{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px 12px;color:var(--ink);font-family:var(--ui);font-size:14px;line-height:20px;outline:none;transition:border-color .15s;}
+    .input::placeholder,.textarea::placeholder{color:var(--mute);}
+    .input:focus,.select:focus,.textarea:focus{border-color:var(--accent);}
+    .input.mono{font-family:var(--ui);}
+    .textarea{resize:vertical;min-height:96px;}
+    .select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236E6E6E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
+    /* input with currency prefix */
+    .input-prefix{display:flex;align-items:stretch;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden;transition:border-color .15s;}
+    .input-prefix
+    .input-prefix .pfx{display:flex;align-items:center;padding:0 12px;font-family:var(--ui);font-size:13px;color:var(--mute);border-right:1px solid var(--hairline);background:var(--surface);}
+    .input-prefix input{flex:1;background:transparent;border:none;outline:none;padding:10px 12px;color:var(--ink);font-family:var(--ui);font-size:14px;font-variant-numeric:tabular-nums;}
+
+    /* condition grade segmented */
+    .grades{display:flex;gap:6px;flex-wrap:wrap;}
+    .grade{font-family:var(--ui);font-size:13px;font-weight:500;padding:7px 12px;border-radius:var(--r-md);background:var(--raised);border:1px solid var(--hairline);color:var(--mute);transition:all .15s;min-width:44px;}
+    .grade:hover{color:var(--body);}
+    .grade.on{border-color:var(--accent);color:var(--ink);background:var(--surface);}
+
+    /* channels checkbox list */
+    .check-list{display:flex;flex-direction:column;gap:2px;}
+    .check{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:var(--r-md);border:1px solid var(--hairline);background:var(--raised);cursor:pointer;transition:border-color .15s,background .15s;}
+    .check:hover{border-color:var(--mute);}
+    .check.on{border-color:var(--accent);background:var(--surface);}
+    .check .box{width:18px;height:18px;border-radius:var(--r-sm);border:1.5px solid var(--mute);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+    .check.on .box{background:var(--accent);border-color:var(--accent);}
+    .check .box svg{width:12px;height:12px;color:var(--accent-text);opacity:0;}
+    .check.on .box svg{opacity:1;}
+    .check .name{font-size:13px;font-weight:500;color:var(--ink);}
+    .check .meta{font-family:var(--ui);font-size:11px;color:var(--mute);margin-left:auto;}
+
+    /* cover dropzone */
+    .media-row{display:grid;grid-template-columns:180px 1fr;gap:18px;align-items:start;}
+    .dropzone{aspect-ratio:1;border:1.5px dashed var(--hairline);border-radius:var(--r-lg);background:var(--raised);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;transition:border-color .15s,background .15s;cursor:pointer;position:relative;overflow:hidden;}
+    .dropzone:hover{border-color:var(--mute);}
+    .dropzone .preview{position:absolute;inset:0;}
+    .dropzone .cover-art{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .dropzone .cover-art .grooves{width:64%;height:64%;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);}
+    html[data-theme="light"] .dropzone .cover-art .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px);}
+    .dropzone .cover-art .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+    .dz-overlay{position:absolute;left:0;right:0;bottom:0;padding:8px;background:linear-gradient(transparent,rgba(0,0,0,.7));display:flex;justify-content:center;}
+    .dz-overlay span{font-size:11px;color:#fff;font-weight:500;}
+    .dz-icon{width:26px;height:26px;color:var(--mute);}
+    .dz-text{font-size:12px;color:var(--body);}
+    .dz-text b{color:var(--ink);font-weight:600;}
+    .dz-sub{font-family:var(--ui);font-size:10px;color:var(--mute);}
+
+    /* tracklist repeater */
+    .tracks{display:flex;flex-direction:column;gap:8px;}
+    .track-row{display:grid;grid-template-columns:28px 1fr 96px 32px 32px;gap:8px;align-items:center;}
+    .track-no{font-family:var(--ui);font-size:12px;color:var(--mute);text-align:center;}
+    .track-remove{width:32px;height:32px;border-radius:var(--r-md);border:1px solid transparent;background:transparent;color:var(--mute);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+    .track-remove:hover{color:var(--danger);border-color:rgba(239,68,68,.4);}
+    .track-remove svg{width:14px;height:14px;}
+    .add-track{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 13px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);color:var(--ink);font-size:13px;font-weight:500;transition:background .15s;}
+    .add-track:hover{background:var(--raised);}
+    .add-track svg{width:14px;height:14px;}
+    /* per-track audio preview */
+    .track{display:flex;flex-direction:column;}
+    .track-pv{width:32px;height:32px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--mute);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+    .track-pv:hover{color:var(--ink);border-color:var(--mute);}
+    .track-pv.set{border-color:var(--accent);color:var(--ink);}
+    .track-pv svg{width:15px;height:15px;}
+    .track-preview{display:none;margin:8px 0 4px 36px;padding:13px 14px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .track.open .track-preview{display:block;}
+    .tp-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin-bottom:10px;}
+    .tp-sources{display:flex;flex-wrap:wrap;gap:6px;}
+    .tp-src{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 11px;border-radius:var(--r-pill);border:1px solid var(--hairline);background:var(--surface);color:var(--body);transition:all .15s;}
+    .tp-src:hover{border-color:var(--mute);color:var(--ink);}
+    .tp-src.on{border-color:var(--accent);color:var(--ink);}
+    .tp-src svg{width:13px;height:13px;}
+    .tp-link,.tp-drop,.tp-linked{margin-top:11px;}
+    .tp-input-wrap{display:flex;gap:8px;}
+    .tp-input-wrap .input{flex:1;}
+    .tp-hint{font-size:11px;color:var(--mute);margin-top:7px;}
+    .tp-drop{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px dashed var(--hairline);border-radius:var(--r-md);color:var(--mute);font-size:12px;cursor:pointer;}
+    .tp-drop:hover{border-color:var(--mute);color:var(--ink);}
+    .tp-drop svg{width:16px;height:16px;flex-shrink:0;}
+    .tp-linked{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink);}
+    .tp-linked svg{width:14px;height:14px;color:var(--success);flex-shrink:0;}
+    .tp-linked .src{font-family:var(--ui);color:var(--body);}
+    .tp-clear{margin-left:auto;font-size:12px;color:var(--mute);background:transparent;border:none;}
+    .tp-clear:hover{color:var(--danger);}
+
+    /* ─── Per-location stock allocation ──────────────────────────── */
+    .stock-alloc{display:flex;flex-direction:column;gap:8px;}
+    .stock-head{display:grid;grid-template-columns:1fr 140px 96px 32px;gap:10px;padding:0 2px 2px;}
+    .stock-head span{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+    .stock-head .qty-col{text-align:right;}
+    .stock-row{display:grid;grid-template-columns:1fr 140px 96px 32px;gap:10px;align-items:center;}
+    .stock-row .qty-in{text-align:right;}
+    .stock-remove{width:32px;height:32px;border-radius:var(--r-md);border:1px solid transparent;background:transparent;color:var(--mute);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+    .stock-remove:hover{color:var(--danger);border-color:rgba(239,68,68,.4);}
+    .stock-remove svg{width:14px;height:14px;}
+    .add-loc{display:inline-flex;align-items:center;gap:6px;margin-top:2px;padding:9px 13px;border-radius:var(--r-md);background:transparent;border:1px dashed var(--hairline);color:var(--body);font-size:13px;font-weight:500;transition:border-color .15s,color .15s;justify-content:center;}
+    .add-loc:hover{color:var(--ink);border-color:var(--mute);}
+    .add-loc svg{width:14px;height:14px;}
+    .stock-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--hairline);}
+    .stock-total{font-size:13px;color:var(--body);}
+    .stock-total strong{color:var(--ink);font-weight:600;}
+    .stock-manage{font-size:12px;color:var(--mute);text-decoration:none;transition:color .15s;}
+    .stock-manage:hover{color:var(--ink);}
+
+    /* ─── Sticky footer ──────────────────────────────────────────── */
+    .footer-bar{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--hairline);box-shadow:var(--e2);display:flex;align-items:center;gap:10px;padding:14px 24px;z-index:10;}
+    .footer-inner{max-width:940px;margin:0 auto;width:100%;display:flex;align-items:center;gap:10px;}
+    .footer-meta{font-size:12px;color:var(--mute);display:flex;align-items:center;gap:7px;}
+    .footer-meta .dot{width:6px;height:6px;border-radius:50%;background:var(--warning);}
+    .footer-spacer{flex:1;}
+    .btn-ghost{padding:10px 14px;border-radius:var(--r-md);background:transparent;border:none;color:var(--body);font-size:14px;font-weight:500;transition:background .15s,color .15s;}
+    .btn-ghost:hover{background:var(--raised);color:var(--ink);}
+    .btn-secondary{padding:10px 16px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);color:var(--ink);font-size:14px;font-weight:500;transition:background .15s;}
+    .btn-secondary:hover{background:var(--raised);}
+    .btn-primary{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);border:none;font-size:14px;font-weight:500;line-height:20px;transition:opacity .15s;}
+    .btn-primary:hover{opacity:.88;}
+
+    /* ─── Prototype hub link ─────────────────────────────────────── */
+    .proto-hub{position:fixed;right:16px;bottom:78px;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--mute);font-size:12px;font-weight:500;box-shadow:var(--e1);transition:color .15s,border-color .15s;}
+    .proto-hub:hover{color:var(--ink);border-color:var(--mute);}
+
+    /* ─── Responsive ─────────────────────────────────────────────── */
+    @media (max-width:820px){
+      .grid,.grid-3{grid-template-columns:1fr;}
+      .span-2{grid-column:auto;}
+      .media-row{grid-template-columns:1fr;}
+      .dropzone{max-width:200px;}
+      .stock-head{grid-template-columns:1fr 110px 76px 32px;gap:8px;}
+      .stock-row{grid-template-columns:1fr 110px 76px 32px;gap:8px;}
+      .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:50;width:250px;min-width:250px;transform:translateX(-100%);transition:transform .22s ease;}
+      .sidebar.open{transform:translateX(0);}
+      .sb-overlay.show{display:block;}
+      .hamburger{display:flex;}
+      .topbar-search{display:none;}
+      .crumb{display:none;}
+    }
+    @media (max-width:720px){
+      .form-wrap{padding:16px 16px 0;}
+      .footer-bar{padding:12px 16px;}
+      .footer-meta{display:none;}
+      .track-row{grid-template-columns:24px 1fr 80px 30px 30px;}
+    }
+  
+    .opt{font-family:var(--ui);font-size:10px;color:var(--mute);font-weight:400;margin-left:4px;}
+    .input-suffix{display:flex;align-items:stretch;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden;transition:border-color .15s;}
+    .input-suffix
+    .input-suffix input{flex:1;background:transparent;border:none;outline:none;padding:10px 12px;color:var(--ink);font-family:var(--ui);}
+    .input-suffix .sfx{display:flex;align-items:center;padding:0 12px;font-family:var(--ui);font-size:13px;color:var(--mute);border-left:1px solid var(--hairline);background:var(--surface);}
+    .dim-row{display:flex;align-items:center;gap:6px;}
+    .dim-row .input{flex:1;text-align:center;}
+    .dim-x{color:var(--mute);}
+    .dim-unit{font-family:var(--ui);font-size:12px;color:var(--mute);padding-left:2px;}
+    .size-table{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+    .size-row{display:grid;grid-template-columns:1fr 1fr 1fr 32px;gap:8px;align-items:center;}
+    .size-head{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);}
+    .size-head span{padding:0 4px;}
+    .ai-btn{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--ink);background:transparent;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:5px 11px;cursor:pointer;transition:border-color .15s,background .15s;}
+    .ai-btn:hover{border-color:var(--accent);background:var(--raised);}
+    .ai-btn svg{width:13px;height:13px;}
+    .ai-btn.sm{padding:3px 9px;font-size:11px;margin-left:0;}
+    .label-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;}
+    .label-row .field-label{margin:0;}
+    .mf-toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--canvas);font-size:13px;font-weight:500;padding:9px 16px;border-radius:var(--r-pill);box-shadow:var(--e2);z-index:400;opacity:0;transition:opacity .2s;pointer-events:none;}
+    .mf-toast.show{opacity:1;}
+
+    /* ─── Merchandising toggles ──────────────────────────────────── */
+    .mrow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--hairline);}
+    .mrow:last-child{border-bottom:none;}
+    .mrow-text{flex:1;}
+    .mrow-title{font-size:13px;font-weight:600;color:var(--ink);}
+    .mrow-hint{font-size:12px;color:var(--mute);margin-top:3px;}
+    .tswitch{width:34px;height:20px;border-radius:var(--r-pill);background:var(--accent);cursor:pointer;position:relative;flex-shrink:0;transition:background .2s;}
+    .tswitch::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:var(--surface);top:3px;right:3px;transition:transform .2s;}
+    .tswitch.off{background:var(--hairline);}
+    .tswitch.off::after{transform:translateX(-14px);background:var(--mute);}
+    .mrow-extra{display:none;padding:0 0 14px;margin-top:-4px;}
+    .mrow-extra.show{display:block;}
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- Sidebar (reference chrome v2.2 — grouped nav) -->
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="sb-brand" aria-label="Medium Format — hub">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <nav class="sb-nav">
+      <div class="sb-group">Overview</div>
+      <a href="mockup-dashboard.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span class="sb-txt">Dashboard</span>
+      </a>
+
+      <div class="sb-group">Selling</div>
+      <a href="mockup-orders.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="sb-txt">Orders</span>
+        <span class="sb-count mono">12</span>
+      </a>
+      <a href="mockup-inventory.html" class="sb-item active" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
+        <span class="sb-txt">Inventory</span>
+      </a>
+      <a href="mockup-customers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="sb-txt">Customers</span>
+      </a>
+      <a href="mockup-vouchers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 012-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 010 4v4a2 2 0 002 2h16a2 2 0 002-2v-4a2 2 0 01-2-2z"/><line x1="9" y1="8" x2="9" y2="16"/></svg>
+        <span class="sb-txt">Vouchers</span>
+      </a>
+      <a href="mockup-channels.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        <span class="sb-txt">Channels</span>
+        <span class="sb-status-dot" title="All channels online"></span>
+      </a>
+      <a href="mockup-pos-checkout.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <span class="sb-txt">POS Checkout</span>
+      </a>
+
+      <div class="sb-group">Content</div>
+      <a href="mockup-newsletter.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="sb-txt">Newsletter</span>
+      </a>
+      <a href="mockup-news.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span class="sb-txt">News</span>
+      </a>
+      <a href="mockup-news-categories.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>
+        <span class="sb-txt">Categories &amp; Tags</span>
+      </a>
+
+      <div class="sb-group">Shop</div>
+      <a href="mockup-purchase-orders.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        <span class="sb-txt">Purchase orders</span>
+      </a>
+
+      <div class="sb-group">Config</div>
+      <a href="mockup-preferences.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span class="sb-txt">Preferences</span>
+      </a>
+    </nav>
+    <div class="sb-foot">
+      <div class="sb-user">
+        <div class="sb-avatar">RP</div>
+        <div>
+          <div class="sb-user-name">Raka Pratama</div>
+          <div class="sb-user-role">Owner</div>
+              <button class="sb-theme" id="theme-btn" aria-label="Toggle theme">
+          <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span id="theme-label">Dark</span>
+        </button>
+    </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sb-overlay" id="sb-overlay"></div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="hamburger" id="ham-btn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <nav class="crumb" aria-label="Breadcrumb">
+        <span class="c-mute">Medium Format</span>
+        <span class="c-sep">/</span>
+        <a href="mockup-inventory.html" class="c-mute">Inventory</a>
+        <span class="c-sep">/</span>
+        <span class="c-ink">Edit release</span>
+      </nav>
+      <div class="topbar-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input placeholder="Search orders, catalogue, customers…">
+        <span class="kbd">⌘K</span>
+      </div>
+      <div class="tb-right">
+        <button class="tb-btn tb-bell" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="tb-bell-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <div class="form-wrap">
+
+        <div class="page-hdr">
+          <h1 class="page-title">Edit release</h1>
+          <div class="page-sub">Floating Points — Crush · <span class="mono">NINJA-CD/LP</span></div>
+        </div>
+
+        <form onsubmit="return false">
+
+          <!-- 1. Basics -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">1</span><span class="section-title">Basics</span></div>
+            <div class="section-body">
+              <div class="grid">
+                <div><label class="field-label" for="artist">Artist <span class="req">*</span></label><input class="input" id="artist" value="Floating Points"></div>
+                <div><label class="field-label" for="title">Title <span class="req">*</span></label><input class="input" id="title" value="Crush"></div>
+                <div><label class="field-label" for="label">Label</label><input class="input" id="label" value="Ninja Tune"></div>
+                <div><label class="field-label" for="cat">Cat. number</label><input class="input mono" id="cat" value="NINJA-CD/LP"></div>
+                <div><label class="field-label" for="year">Year</label><input class="input mono" id="year" type="number" value="2019" min="1900" max="2099"></div>
+                <div>
+                  <label class="field-label" for="country">Country</label>
+                  <select class="select" id="country">
+                    <option>United Kingdom</option><option>United States</option><option>Japan</option><option>Germany</option><option>Indonesia</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Format & condition -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">2</span><span class="section-title">Format &amp; condition</span></div>
+            <div class="section-body">
+              <div class="grid-3">
+                <div>
+                  <label class="field-label" for="format">Format <span class="req">*</span></label>
+                  <select class="select" id="format">
+                    <option>LP</option><option>2xLP</option><option>3xLP</option><option>12"</option><option>7"</option><option>CD</option><option>2xCD</option><option>Merch</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="field-label" for="genre">Genre</label>
+                  <select class="select" id="genre">
+                    <option>Electronic</option><option>Jazz</option><option>Soul</option><option>Hip-Hop</option><option>Rock</option><option>Ambient</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="field-label" for="barcode">Barcode</label>
+                  <input class="input mono" id="barcode" value="5054429145922" placeholder="EAN-13 / Code128">
+                </div>
+              </div>
+              <div class="grid-3" style="margin-top:16px;">
+                <div>
+                  <label class="field-label">Condition grade <span class="req">*</span></label>
+                  <div class="grades" role="group" aria-label="Overall condition">
+                    <button type="button" class="grade on" onclick="pickGrade(this)">M</button>
+                    <button type="button" class="grade" onclick="pickGrade(this)">VG+</button>
+                    <button type="button" class="grade" onclick="pickGrade(this)">VG</button>
+                    <button type="button" class="grade" onclick="pickGrade(this)">G+</button>
+                    <button type="button" class="grade" onclick="pickGrade(this)">G</button>
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="media">Media grade</label>
+                  <select class="select" id="media">
+                    <option>Mint (M)</option><option>Near Mint (NM)</option><option>Very Good Plus (VG+)</option><option>Very Good (VG)</option><option>Good (G)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="field-label" for="sleeve">Sleeve grade</label>
+                  <select class="select" id="sleeve">
+                    <option>Mint (M)</option><option>Near Mint (NM)</option><option>Very Good Plus (VG+)</option><option>Very Good (VG)</option><option>Good (G)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Pricing -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">3</span><span class="section-title">Pricing</span><span class="section-note">Idr · incl. PPN 11%</span></div>
+            <div class="section-body">
+              <div class="grid-3">
+                <div>
+                  <label class="field-label" for="price">Price <span class="req">*</span></label>
+                  <div class="input-prefix"><span class="pfx">Rp</span><input id="price" inputmode="numeric" value="485.000"></div>
+                </div>
+                <div>
+                  <label class="field-label" for="compare">Compare-at</label>
+                  <div class="input-prefix"><span class="pfx">Rp</span><input id="compare" inputmode="numeric" value="540.000"></div>
+                  <div class="field-hint">Shown struck-through on the storefront.</div>
+                </div>
+                <div>
+                  <label class="field-label" for="cost">Cost (COGS)</label>
+                  <div class="input-prefix"><span class="pfx">Rp</span><input id="cost" inputmode="numeric" value="310.000"></div>
+                  <div class="field-hint">Margin <span class="mono">36.1%</span> · <span class="mono">Rp 175.000</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Stock & location -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">4</span><span class="section-title">Stock &amp; location</span></div>
+            <div class="section-body">
+              <div class="stock-alloc" id="stock-alloc">
+                <div class="stock-head">
+                  <span>Location</span><span>Shelf</span><span class="qty-col">Qty</span><span></span>
+                </div>
+                <div class="stock-row">
+                  <select class="select" aria-label="Location">
+                    <option selected>Main Store</option><option>Warehouse</option><option>Pop-up · ATM Fair</option><option>Consignment · Sunday Vinyl</option>
+                  </select>
+                  <input class="input" value="A3" placeholder="e.g. A3" aria-label="Shelf">
+                  <input class="input mono qty-in" type="number" value="10" min="0" aria-label="Qty" oninput="recalcStock()">
+                  <button type="button" class="stock-remove" onclick="removeStockRow(this)" aria-label="Remove location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                </div>
+                <div class="stock-row">
+                  <select class="select" aria-label="Location">
+                    <option>Main Store</option><option selected>Warehouse</option><option>Pop-up · ATM Fair</option><option>Consignment · Sunday Vinyl</option>
+                  </select>
+                  <input class="input" value="C2" placeholder="e.g. C2" aria-label="Shelf">
+                  <input class="input mono qty-in" type="number" value="4" min="0" aria-label="Qty" oninput="recalcStock()">
+                  <button type="button" class="stock-remove" onclick="removeStockRow(this)" aria-label="Remove location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                </div>
+              </div>
+              <button type="button" class="add-loc" onclick="addStockRow()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add location</button>
+              <div class="stock-foot">
+                <div class="stock-total">Total stock: <strong class="mono" id="stock-total">14</strong> across <strong id="stock-locs">2</strong> locations</div>
+                <a class="stock-manage" href="mockup-locations.html">Manage locations &amp; shelves →</a>
+              </div>
+              <div class="grid" style="margin-top:16px;">
+                <div>
+                  <label class="field-label" for="low">Low-stock threshold</label>
+                  <input class="input mono" id="low" type="number" value="4" min="0">
+                  <div class="field-hint">Flags a Low badge in inventory when qty ≤ this.</div>
+                </div>
+                <div>
+                  <label class="field-label" for="sku">Internal SKU</label>
+                  <input class="input mono" id="sku" value="MF-VNL-0417">
+                </div>
+              </div>
+              <div class="grid" style="margin-top:16px;">
+                <div>
+                  <label class="field-label" for="weight">Weight <span class="opt">optional</span></label>
+                  <div class="input-suffix"><input class="mono" id="weight" placeholder="e.g. 250"><span class="sfx">g</span></div>
+                </div>
+                <div>
+                  <label class="field-label">Dimensions <span class="opt">L × W × H · optional</span></label>
+                  <div class="dim-row"><input class="input mono" id="dimL" placeholder="L"><span class="dim-x">×</span><input class="input mono" id="dimW" placeholder="W"><span class="dim-x">×</span><input class="input mono" id="dimH" placeholder="H"><span class="dim-unit">cm</span></div>
+                </div>
+              </div>
+              <div class="field-hint">Weight &amp; dimensions feed shipping estimates — left blank, they stay hidden on the product page.</div>
+            </div>
+          </div>
+
+          <!-- 5. Channels -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">5</span><span class="section-title">Channels</span><span class="section-note">Where this release is listed</span></div>
+            <div class="section-body">
+              <div class="check-list">
+                <label class="check on" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">Website</span><span class="meta">Rp 485.000</span></label>
+                <label class="check on" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">POS</span><span class="meta">in-store</span></label>
+                <label class="check on" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">Tokopedia</span><span class="meta">synced 2h ago</span></label>
+                <label class="check" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">Shopee</span><span class="meta">not listed</span></label>
+                <label class="check on" onclick="toggleCheck(this)"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="name">Discogs</span><span class="meta">Rp 505.000</span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Media -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">6</span><span class="section-title">Media</span></div>
+            <div class="section-body">
+              <div class="media-row">
+                <div>
+                  <label class="field-label">Cover art</label>
+                  <label class="dropzone" for="cover-file">
+                    <div class="preview"><div class="cover-art"><span class="grooves"></span></div></div>
+                    <div class="dz-overlay"><span>Replace image</span></div>
+                    <input id="cover-file" type="file" accept="image/*" hidden>
+                  </label>
+                  <div class="dz-sub" style="margin-top:8px;">JPG / PNG · square · ≥ 1000px</div>
+                </div>
+                <div>
+                  <label class="field-label">Tracklist</label>
+                  <div class="tracks" id="tracks"><div class="track open"><div class="track-row"><span class="track-no">A1</span><input class="input" value="Falaise"><input class="input mono" value="3:12" placeholder="0:00" aria-label="Duration"><button type="button" class="track-pv set" onclick="togglePreview(this)" aria-label="Audio preview" title="Audio preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></button><button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove track"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div><div class="track-preview" data-source="Spotify"><div class="tp-label">Audio preview — link a source or upload your own</div><div class="tp-sources"><button type="button" class="tp-src" onclick="selectSource(this,'Bandcamp')">Bandcamp</button><button type="button" class="tp-src on" onclick="selectSource(this,'Spotify')">Spotify</button><button type="button" class="tp-src" onclick="selectSource(this,'Apple Music')">Apple Music</button><button type="button" class="tp-src" onclick="selectSource(this,'YouTube')">YouTube</button><button type="button" class="tp-src" onclick="selectSource(this,'SoundCloud')">SoundCloud</button><button type="button" class="tp-src tp-upload" onclick="selectSource(this,'Upload')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Upload audio</button></div><div class="tp-link"><div class="tp-input-wrap"><input class="input tp-url" placeholder="Paste Spotify track link…" value="https://open.spotify.com/track/2Fxm…"><button type="button" class="btn-sec" onclick="attachLink(this)" aria-label="Attach preview" title="Attach"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button></div><div class="tp-hint">Paste a public track URL — the storefront plays a ~30-second preview.</div></div><label class="tp-drop" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span>Choose audio — MP3 or WAV · ≤ 10 MB</span><input type="file" accept="audio/*" hidden onchange="fileChosen(this)"></label><div class="tp-linked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Preview linked from <span class="src">Spotify</span></span><button type="button" class="tp-clear" onclick="clearPreview(this)">Remove</button></div></div></div><div class="track"><div class="track-row"><span class="track-no">A2</span><input class="input" value="Last Bloom"><input class="input mono" value="4:05" placeholder="0:00" aria-label="Duration"><button type="button" class="track-pv" onclick="togglePreview(this)" aria-label="Audio preview" title="Audio preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></button><button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove track"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div><div class="track"><div class="track-row"><span class="track-no">A3</span><input class="input" value="Anasickmodular"><input class="input mono" value="2:41" placeholder="0:00" aria-label="Duration"><button type="button" class="track-pv" onclick="togglePreview(this)" aria-label="Audio preview" title="Audio preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></button><button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove track"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div><div class="track"><div class="track-row"><span class="track-no">B1</span><input class="input" value="Requiem for CS70 and Strings"><input class="input mono" value="7:34" placeholder="0:00" aria-label="Duration"><button type="button" class="track-pv" onclick="togglePreview(this)" aria-label="Audio preview" title="Audio preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></button><button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove track"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div></div>
+                  <button type="button" class="add-track" onclick="addTrack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add track</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sizing guide (apparel / merchandise only) -->
+          <div class="section" id="sizing-card" style="display:none">
+            <div class="section-hdr"><span class="n">↕</span><span class="section-title">Sizing guide</span><span class="section-note">Shown for apparel &amp; merchandise</span></div>
+            <div class="section-body">
+              <div class="size-table" id="size-table">
+                <div class="size-row size-head"><span>Size</span><span>Chest (cm)</span><span>Length (cm)</span><span></span></div>
+                <div class="size-row"><input class="input" value="S"><input class="input mono" value="46"><input class="input mono" value="69"><button type="button" class="track-remove" onclick="this.closest('.size-row').remove()" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>
+                <div class="size-row"><input class="input" value="M"><input class="input mono" value="49"><input class="input mono" value="72"><button type="button" class="track-remove" onclick="this.closest('.size-row').remove()" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>
+                <div class="size-row"><input class="input" value="L"><input class="input mono" value="52"><input class="input mono" value="74"><button type="button" class="track-remove" onclick="this.closest('.size-row').remove()" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>
+                <div class="size-row"><input class="input" value="XL"><input class="input mono" value="55"><input class="input mono" value="76"><button type="button" class="track-remove" onclick="this.closest('.size-row').remove()" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>
+              </div>
+              <button type="button" class="add-track" onclick="addSizeRow()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add size</button>
+            </div>
+          </div>
+
+          <!-- 7. Description -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">7</span><span class="section-title">Description</span><button type="button" class="ai-btn" onclick="aiAssist('desc')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.3L19 9l-5.3 1.7L12 16l-1.7-5.3L5 9l5.3-1.7z"/></svg>AI assist</button></div>
+            <div class="section-body">
+              <label class="field-label" for="desc">Storefront description</label>
+              <textarea class="textarea" id="desc" placeholder="Tell the story of this record…">Sam Shepherd's third album under the Floating Points name — a lush, exploratory record moving between modular synthesis, strings and rhythm. Pressed on 180g vinyl with a printed inner sleeve.</textarea>
+            </div>
+          </div>
+
+          <!-- 8. SEO -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">8</span><span class="section-title">SEO</span><span class="section-note">Search &amp; social preview</span></div>
+            <div class="section-body">
+              <div class="grid">
+                <div class="span-2"><label class="field-label" for="slug">URL slug</label><div class="input-prefix"><span class="pfx">/release/</span><input id="slug" value="floating-points-crush" style="font-family:var(--ui)"></div></div>
+                <div class="span-2"><div class="label-row"><label class="field-label" for="metatitle">Meta title</label><button type="button" class="ai-btn sm" onclick="aiAssist('metatitle')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.3L19 9l-5.3 1.7L12 16l-1.7-5.3L5 9l5.3-1.7z"/></svg>AI</button></div><input class="input" id="metatitle" value="Floating Points — Crush (LP) | Medium Format"></div>
+                <div class="span-2"><div class="label-row"><label class="field-label" for="metadesc">Meta description</label><button type="button" class="ai-btn sm" onclick="aiAssist('metadesc')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.3L19 9l-5.3 1.7L12 16l-1.7-5.3L5 9l5.3-1.7z"/></svg>AI</button></div><textarea class="textarea" id="metadesc" style="min-height:72px">Buy Floating Points — Crush on 180g vinyl. Ninja Tune, 2019. In stock at Medium Format, Jakarta. Ships nationwide.</textarea></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. Merchandising -->
+          <div class="section">
+            <div class="section-hdr"><span class="n">9</span><span class="section-title">Merchandising</span><span class="section-note">Storefront placement &amp; promotion</span></div>
+            <div class="section-body">
+              <div class="mrow">
+                <div class="mrow-text">
+                  <div class="mrow-title">Featured</div>
+                  <div class="mrow-hint">Show in the homepage featured slider and category hero placements.</div>
+                </div>
+                <span class="tswitch" id="toggle-featured" role="switch" aria-checked="false" tabindex="0" onclick="flipToggle(this)" onkeydown="toggleKeydown(event,this)"></span>
+              </div>
+              <div class="mrow">
+                <div class="mrow-text">
+                  <div class="mrow-title">Pre-order</div>
+                  <div class="mrow-hint">List before release with an estimated delivery date shown to customers.</div>
+                </div>
+                <span class="tswitch" id="toggle-preorder" role="switch" aria-checked="false" tabindex="0" onclick="flipToggle(this);togglePreorderFields()" onkeydown="toggleKeydown(event,this,true)"></span>
+              </div>
+              <div class="mrow-extra" id="preorder-fields">
+                <label class="field-label" for="preorder-date">Estimated delivery</label>
+                <input class="input mono" id="preorder-date" type="date" value="2026-03-01">
+                <div class="field-hint">Shown on the release page as "Pre-order · Ships …" and in the Pre-order badge.</div>
+              </div>
+              <div class="mrow">
+                <div class="mrow-text">
+                  <div class="mrow-title">On-sale</div>
+                  <div class="mrow-hint">Enable to show the struck-through Compare-at price (Section 3 — Pricing) on the storefront.</div>
+                </div>
+                <span class="tswitch" id="toggle-onsale" role="switch" aria-checked="false" tabindex="0" onclick="flipToggle(this)" onkeydown="toggleKeydown(event,this)"></span>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Sticky footer -->
+      <div class="footer-bar">
+        <div class="footer-inner">
+          <div class="footer-meta"><span class="dot"></span>Unsaved changes · draft autosaved 14:32</div>
+          <div class="footer-spacer"></div>
+          <a href="mockup-inventory.html" class="btn-ghost">Cancel</a>
+          <button type="button" class="btn-secondary">Save draft</button>
+          <a href="mockup-inventory.html" class="btn-primary">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Publish
+          </a>
+        </div>
+      </div>
+    </main>
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- Prototype hub link -->
+<a href="index.html" class="proto-hub" aria-label="Back to prototype hub">◹ Prototype</a>
+
+<script>
+  // Condition grade picker
+  function pickGrade(el){el.closest('.grades').querySelectorAll('.grade').forEach(g=>g.classList.remove('on'));el.classList.add('on');}
+  // Channel checkbox toggle
+  function toggleCheck(el){el.classList.toggle('on');}
+  // Tracklist repeater
+  let trackSeq=5;
+  function sideLabel(i){const side=String.fromCharCode(65+Math.floor(i/6));return side+((i%6)+1);}
+  function removeTrack(btn){const tracks=document.querySelectorAll('#tracks .track');if(tracks.length<=1)return;btn.closest('.track').remove();relabel();}
+  function relabel(){document.querySelectorAll('#tracks .track-row').forEach((r,i)=>{r.querySelector('.track-no').textContent=sideLabel(i);});}
+  const PV_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>';
+  const UP_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>';
+  const SRC_NAMES=['Bandcamp','Spotify','Apple Music','YouTube','SoundCloud'];
+  function addTrack(){
+    const wrap=document.getElementById('tracks');
+    const t=document.createElement('div');
+    t.className='track';
+    t.innerHTML='<div class="track-row"><span class="track-no"></span>'+
+      '<input class="input" placeholder="Track title">'+
+      '<input class="input mono" placeholder="0:00" aria-label="Duration">'+
+      '<button type="button" class="track-pv" onclick="togglePreview(this)" aria-label="Audio preview" title="Audio preview">'+PV_ICON+'</button>'+
+      '<button type="button" class="track-remove" onclick="removeTrack(this)" aria-label="Remove track"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>';
+    wrap.appendChild(t);relabel();t.querySelector('.input').focus();
+  }
+  function buildPanel(){
+    let chips=SRC_NAMES.map(function(n){return '<button type="button" class="tp-src" onclick="selectSource(this,\''+n+'\')">'+n+'</button>';}).join('');
+    chips+='<button type="button" class="tp-src tp-upload" onclick="selectSource(this,\'Upload\')">'+UP_ICON+'Upload audio</button>';
+    return '<div class="track-preview"><div class="tp-label">Audio preview — link a source or upload your own</div>'+
+      '<div class="tp-sources">'+chips+'</div>'+
+      '<div class="tp-link" hidden><div class="tp-input-wrap"><input class="input tp-url" placeholder="Paste track link…"><button type="button" class="btn-sec" onclick="attachLink(this)" aria-label="Attach preview" title="Attach"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button></div><div class="tp-hint">Paste a public track URL — the storefront plays a ~30-second preview.</div></div>'+
+      '<label class="tp-drop" hidden>'+UP_ICON+'<span>Choose audio — MP3 or WAV · ≤ 10 MB</span><input type="file" accept="audio/*" hidden onchange="fileChosen(this)"></label>'+
+      '<div class="tp-linked" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Preview linked from <span class="src"></span></span><button type="button" class="tp-clear" onclick="clearPreview(this)">Remove</button></div></div>';
+  }
+  function togglePreview(btn){
+    const t=btn.closest('.track');
+    if(!t.querySelector('.track-preview')) t.insertAdjacentHTML('beforeend',buildPanel());
+    t.classList.toggle('open');
+  }
+  function selectSource(chip,source){
+    const p=chip.closest('.track-preview');
+    p.querySelectorAll('.tp-src').forEach(function(s){s.classList.remove('on');});
+    chip.classList.add('on');
+    const isUpload=source==='Upload';
+    p.querySelector('.tp-link').hidden=isUpload;
+    p.querySelector('.tp-drop').hidden=!isUpload;
+    if(!isUpload) p.querySelector('.tp-url').placeholder='Paste '+source+' track link…';
+    p.querySelector('.tp-linked').hidden=true;
+    p.dataset.source=source;
+    chip.closest('.track').querySelector('.track-pv').classList.add('set');
+  }
+  function attachLink(btn){
+    const p=btn.closest('.track-preview');const src=p.dataset.source||'link';
+    const lk=p.querySelector('.tp-linked');lk.querySelector('.src').textContent=src;lk.hidden=false;
+  }
+  function fileChosen(inp){
+    const p=inp.closest('.track-preview');const name=(inp.files&&inp.files[0])?inp.files[0].name:'audio file';
+    const lk=p.querySelector('.tp-linked');lk.querySelector('.src').textContent=name;lk.hidden=false;
+  }
+  function clearPreview(btn){
+    const p=btn.closest('.track-preview');
+    p.querySelectorAll('.tp-src').forEach(function(s){s.classList.remove('on');});
+    p.querySelector('.tp-link').hidden=true;p.querySelector('.tp-drop').hidden=true;p.querySelector('.tp-linked').hidden=true;
+    const u=p.querySelector('.tp-url');if(u)u.value='';
+    btn.closest('.track').querySelector('.track-pv').classList.remove('set');
+    delete p.dataset.source;
+  }
+
+  // Per-location stock allocation
+  const STOCK_LOCS=['Main Store','Warehouse','Pop-up · ATM Fair','Consignment · Sunday Vinyl'];
+  function recalcStock(){
+    const rows=document.querySelectorAll('#stock-alloc .stock-row');
+    let total=0;
+    rows.forEach(r=>{const v=parseInt(r.querySelector('.qty-in').value,10);if(!isNaN(v))total+=v;});
+    document.getElementById('stock-total').textContent=total;
+    document.getElementById('stock-locs').textContent=rows.length;
+  }
+  function removeStockRow(btn){
+    const rows=document.querySelectorAll('#stock-alloc .stock-row');
+    if(rows.length<=1)return;
+    btn.closest('.stock-row').remove();
+    recalcStock();
+  }
+  function addStockRow(){
+    const wrap=document.getElementById('stock-alloc');
+    const row=document.createElement('div');
+    row.className='stock-row';
+    const opts=STOCK_LOCS.map(l=>'<option>'+l+'</option>').join('');
+    row.innerHTML='<select class="select" aria-label="Location">'+opts+'</select>'+
+      '<input class="input" placeholder="e.g. A3" aria-label="Shelf">'+
+      '<input class="input mono qty-in" type="number" value="0" min="0" aria-label="Qty" oninput="recalcStock()">'+
+      '<button type="button" class="stock-remove" onclick="removeStockRow(this)" aria-label="Remove location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>';
+    wrap.appendChild(row);
+    recalcStock();
+    row.querySelector('.select').focus();
+  }
+
+  // Cover preview swap
+  document.getElementById('cover-file').addEventListener('change',function(e){
+    const f=e.target.files&&e.target.files[0];if(!f)return;
+    const url=URL.createObjectURL(f);
+    const prev=document.querySelector('.dropzone .preview');
+    prev.innerHTML='<img src="'+url+'" alt="Cover preview" style="width:100%;height:100%;object-fit:cover">';
+  });
+
+  // Mobile sidebar drawer
+  const sidebar=document.getElementById('sidebar');
+  const overlay=document.getElementById('sb-overlay');
+  function closeSidebar(){sidebar.classList.remove('open');overlay.classList.remove('show');}
+  document.getElementById('ham-btn').addEventListener('click',()=>{sidebar.classList.toggle('open');overlay.classList.toggle('show');});
+  overlay.addEventListener('click',closeSidebar);
+
+  // Theme toggle (localStorage; data-theme="dark"|"light")
+  const root=document.documentElement;
+  const moon=document.getElementById('ico-moon');
+  const sun=document.getElementById('ico-sun');
+  function applyTheme(theme){
+    root.setAttribute('data-theme',theme);
+    const dark=theme==='dark';
+    moon.style.display=dark?'':'none';
+    sun.style.display=dark?'none':'';
+    const lbl=document.getElementById('theme-label'); if(lbl) lbl.textContent = dark?'Dark':'Light';
+  }
+  applyTheme(localStorage.getItem('mf-theme')||'dark');
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    localStorage.setItem('mf-theme',next);
+    applyTheme(next);
+  });
+
+  // ── AI assist (mock web content generation) ──
+  const AI_TEXT={
+    desc:"Recorded between 2015 and 2019, Crush is Floating Points at his most expansive — modular synthesis threaded through live strings and restless, elastic rhythm. Lush yet patient, it moves from ambient hush to euphoric release without ever raising its voice. Pressed on 180g vinyl with a printed inner sleeve. A standout for any electronic or contemporary-jazz shelf.",
+    metatitle:"Floating Points — Crush (180g LP) | Buy Vinyl at Medium Format Jakarta",
+    metadesc:"Shop Floating Points — Crush on 180g vinyl (Ninja Tune, 2019). In stock at Medium Format, Jakarta's independent record shop. QRIS, cards & e-wallets. Ships nationwide."
+  };
+  function aiAssist(id){
+    const el=document.getElementById(id); if(!el) return;
+    const btn=event.currentTarget, orig=btn.innerHTML;
+    btn.disabled=true; btn.style.opacity=.7; btn.innerHTML=btn.innerHTML.replace(/AI( assist)?/, 'Generating…');
+    setTimeout(function(){ el.value=AI_TEXT[id]||el.value; btn.innerHTML=orig; btn.disabled=false; btn.style.opacity=1; mfToast('Generated with AI · sourced from the web'); }, 900);
+  }
+  function mfToast(msg){ let t=document.querySelector('.mf-toast'); if(!t){t=document.createElement('div');t.className='mf-toast';document.body.appendChild(t);} t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},1800); }
+  function addSizeRow(){ const tb=document.getElementById('size-table'); const r=document.createElement('div'); r.className='size-row'; r.innerHTML='<input class="input" placeholder="Size"><input class="input mono" placeholder="—"><input class="input mono" placeholder="—"><button type="button" class="track-remove" onclick="this.closest(\'.size-row\').remove()" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>'; tb.appendChild(r); }
+  (function(){ const fmt=document.getElementById('format'), card=document.getElementById('sizing-card'); if(!fmt||!card) return; function upd(){ card.style.display=(fmt.value||'').toLowerCase().includes('merch')?'':'none'; } fmt.addEventListener('change',upd); upd(); })();
+
+  // ── Merchandising toggles (Featured / Pre-order / On-sale) ──
+  function flipToggle(el){
+    const off=el.classList.toggle('off');
+    el.setAttribute('aria-checked',String(!off));
+  }
+  function toggleKeydown(ev,el,isPreorder){
+    if(ev.key===' '||ev.key==='Enter'){
+      ev.preventDefault();
+      flipToggle(el);
+      if(isPreorder) togglePreorderFields();
+    }
+  }
+  function togglePreorderFields(){
+    const on=document.getElementById('toggle-preorder').getAttribute('aria-checked')==='true';
+    document.getElementById('preorder-fields').classList.toggle('show',on);
+  }
+</script>
+</body>
+</html>

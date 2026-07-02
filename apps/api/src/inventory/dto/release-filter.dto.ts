@@ -3,6 +3,8 @@ import { Type } from 'class-transformer';
 import { RecordFormat, RecordCondition, StoreLocation } from '@prisma/client';
 
 export class ReleaseFilterDto {
+  /** Free-text search across artist, title, label, cat#/SKU and barcode */
+  @IsOptional() @IsString() q?: string;
   @IsOptional() @IsString() artist?: string;
   @IsOptional() @IsString() title?: string;
   @IsOptional() @IsString() label?: string;

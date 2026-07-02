@@ -47,9 +47,14 @@ function presetRange(key: PresetKey): { from: string; to: string } {
 
 function Kpi({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3.5 py-2.5">
+    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3.5 py-2.5 min-w-0">
       <p className="text-[9px] uppercase tracking-[0.08em] text-[var(--text-muted)] mb-1">{label}</p>
-      <p className="text-[20px] font-black font-mono text-[var(--text-primary)] leading-none">{value}</p>
+      <p
+        className="text-[15px] font-bold font-mono text-[var(--text-primary)] leading-none whitespace-nowrap overflow-hidden text-ellipsis"
+        title={value}
+      >
+        {value}
+      </p>
       {sub && <p className="text-[9px] mt-1 text-[var(--text-faint)]">{sub}</p>}
     </div>
   );
@@ -90,19 +95,22 @@ function RevenueChart({ rows }: { rows: TimeseriesRow[] }) {
   }
   const W = 720, H = 150, PAD = 4;
   const max = Math.max(...rows.map(r => r.revenue), 1);
-  const bw = (W - PAD * 2) / rows.length;
+  const slot = (W - PAD * 2) / rows.length;
+  const bw = Math.min(slot - 2, 48);
+  const inset = (slot - bw) / 2;
   return (
     <div>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-36" preserveAspectRatio="none" role="img" aria-label="Revenue over time">
         {rows.map((r, i) => {
           const h = Math.max(1, (r.revenue / max) * (H - 22));
           const mh = Math.max(0, (Math.max(r.margin, 0) / max) * (H - 22));
+          const x = PAD + i * slot + inset;
           return (
             <g key={r.period}>
-              <rect x={PAD + i * bw + 1} y={H - h} width={Math.max(1, bw - 2)} height={h} fill="var(--text-muted)">
+              <rect x={x} y={H - h} width={Math.max(1, bw)} height={h} fill="var(--text-muted)">
                 <title>{`${r.period} · ${fmtRp(r.revenue)} · ${r.orders} orders`}</title>
               </rect>
-              <rect x={PAD + i * bw + 1} y={H - mh} width={Math.max(1, bw - 2)} height={mh} fill="var(--text-primary)">
+              <rect x={x} y={H - mh} width={Math.max(1, bw)} height={mh} fill="var(--text-primary)">
                 <title>{`${r.period} margin ${fmtRp(r.margin)}`}</title>
               </rect>
             </g>

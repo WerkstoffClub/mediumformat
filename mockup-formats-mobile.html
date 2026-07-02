@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format — Product Categories (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .app-brand .brand-wordmark{height:16px;width:auto;}
+
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --neutral-t:rgba(255,255,255,.06);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --page-bg:#161616;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --neutral-t:rgba(0,0,0,.05);--focus:0 0 0 2px rgba(0,0,0,.5);--page-bg:#E8E8E8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--ui);background:var(--page-bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;-webkit-font-smoothing:antialiased;transition:background .2s;}
+    button{cursor:pointer;font-family:inherit;color:inherit;border:none;background:none;}
+    svg{display:block;}
+    a{text-decoration:none;color:inherit;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    .device{width:390px;height:844px;border-radius:44px;background:var(--canvas);border:1px solid var(--hairline);box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+    .status-bar{height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:relative;z-index:5;background:var(--surface);}
+    .status-bar .time{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);}
+    .status-bar .icons{display:flex;align-items:center;gap:6px;color:var(--ink);}
+    .status-bar .icons svg{width:16px;height:16px;}
+    .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--canvas);border-radius:14px;z-index:6;}
+    ::-webkit-scrollbar{width:0;}
+
+    /* ─── Announce bar (running text, sticky) ───────────────────────── */
+    :root{--announce-h:26px;}
+    .announce{flex-shrink:0;position:sticky;top:0;z-index:23;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:40px;padding-left:100%;animation:mf-marquee 20s linear infinite;font-size:10px;font-family:var(--ui);}
+    .announce-track strong{font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+
+    .app-hdr{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:8px 16px 12px;background:var(--surface);border-bottom:1px solid var(--hairline);position:sticky;top:var(--announce-h);z-index:22;}
+    .app-hdr .ham{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+    .app-hdr .ham:active{background:var(--raised);}
+    .app-hdr .ham svg{width:20px;height:20px;}
+    .app-brand{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;}
+    .app-brand .mark{width:28px;height:28px;color:var(--ink);}
+    .app-brand .wm{font-size:15px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .app-brand .wm sup{font-size:8px;color:var(--mute);vertical-align:super;}
+    .hdr-btn{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);position:relative;}
+    .hdr-btn:active{background:var(--raised);}
+    .hdr-btn svg{width:18px;height:18px;}
+
+    .screen{flex:1;overflow-y:auto;background:var(--canvas);padding:16px 16px 88px;}
+
+    /* breadcrumb */
+    .breadcrumb{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mute);margin-bottom:8px;}
+    .breadcrumb a{color:var(--mute);}
+    .breadcrumb a:active{color:var(--ink);}
+    .breadcrumb .sep{color:var(--hairline);}
+    .breadcrumb .cur{color:var(--ink);font-weight:500;}
+
+    .page-title{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink);line-height:28px;}
+    .page-sub{font-size:12px;color:var(--mute);margin-top:2px;margin-bottom:14px;}
+
+    .add-fmt-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:var(--accent);color:var(--accent-text);border-radius:var(--r-md);padding:11px 14px;font-size:14px;font-weight:500;min-height:44px;margin-bottom:16px;}
+    .add-fmt-btn svg{width:16px;height:16px;}
+
+    /* category cards */
+    .fmt-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:14px;display:flex;flex-direction:column;gap:12px;margin-bottom:12px;}
+    .fmt-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+    .fmt-ico{width:38px;height:38px;border-radius:var(--r-md);background:var(--raised);border:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--ink);}
+    .fmt-ico svg{width:18px;height:18px;}
+    .fmt-name-wrap{flex:1;min-width:0;}
+    .fmt-name{font-size:15px;font-weight:600;color:var(--ink);letter-spacing:-.01em;}
+    .fmt-desc{font-size:12px;color:var(--mute);margin-top:1px;}
+    .fmt-code{display:inline-flex;align-items:center;font-family:var(--mono);font-size:10px;font-weight:500;padding:2px 7px;border-radius:var(--r-sm);border:1px solid var(--hairline);color:var(--body);margin-top:6px;}
+    .fmt-menu-wrap{position:relative;flex-shrink:0;}
+    .fmt-menu-btn{width:32px;height:32px;border-radius:var(--r-sm);background:transparent;border:none;color:var(--mute);display:flex;align-items:center;justify-content:center;}
+    .fmt-menu-btn:active{background:var(--raised);color:var(--ink);}
+    .fmt-menu-btn svg{width:16px;height:16px;}
+    .fmt-menu{display:none;position:absolute;top:34px;right:0;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);box-shadow:0 4px 12px rgba(0,0,0,.6);min-width:150px;z-index:5;overflow:hidden;}
+    .fmt-menu.open{display:block;}
+    .fmt-menu button{display:flex;align-items:center;gap:9px;width:100%;padding:11px 12px;background:transparent;border:none;color:var(--body);font-size:13px;text-align:left;min-height:44px;}
+    .fmt-menu button:active{background:var(--raised);color:var(--ink);}
+    .fmt-menu button svg{width:14px;height:14px;}
+    .fmt-menu button.danger:active{color:var(--danger);}
+    .fmt-figs{display:flex;gap:18px;padding-top:10px;border-top:1px solid var(--hairline);}
+    .fmt-fig{display:flex;flex-direction:column;gap:2px;}
+    .fmt-fig .k{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);font-weight:600;}
+    .fmt-fig .v{font-family:var(--ui);font-size:15px;font-weight:500;color:var(--ink);}
+
+    .fmt-add-card{background:transparent;border:1px dashed var(--hairline);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:20px 16px;min-height:110px;color:var(--mute);width:100%;margin-bottom:12px;}
+    .fmt-add-card:active{border-color:var(--mute);color:var(--ink);}
+    .fmt-add-card svg{width:20px;height:20px;}
+    .fmt-add-card span{font-size:13px;font-weight:500;}
+
+    /* bottom-sheet modals */
+    .sheet-ov{display:none;position:absolute;inset:0;z-index:30;background:rgba(0,0,0,.6);align-items:flex-end;justify-content:center;}
+    .sheet-ov.open{display:flex;}
+    .sheet{background:var(--surface);border-top:1px solid var(--hairline);border-radius:20px 20px 0 0;width:100%;max-height:82%;overflow-y:auto;box-shadow:0 -4px 24px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .26s ease;}
+    .sheet-ov.open .sheet{transform:translateY(0);}
+    .sheet-grip{width:36px;height:4px;border-radius:2px;background:var(--hairline);margin:10px auto 4px;}
+    .sheet-head{display:flex;align-items:center;justify-content:space-between;padding:8px 18px 14px;border-bottom:1px solid var(--hairline);}
+    .sheet-head h3{font-size:16px;font-weight:600;color:var(--ink);letter-spacing:-.02em;}
+    .sheet-x{width:30px;height:30px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--mute);}
+    .sheet-x:active{background:var(--raised);color:var(--ink);}
+    .sheet-x svg{width:16px;height:16px;}
+    .sheet-pad{padding:16px 18px;display:flex;flex-direction:column;gap:14px;}
+    .field{display:flex;flex-direction:column;gap:6px;}
+    .field label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);}
+    .field input,.field select,.field textarea{background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:11px 12px;color:var(--ink);font-size:13px;font-family:inherit;width:100%;min-height:44px;}
+    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
+    .field textarea{min-height:60px;resize:vertical;}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .sheet-foot{display:flex;gap:10px;padding:14px 18px;border-top:1px solid var(--hairline);position:sticky;bottom:0;background:var(--surface);}
+    .sheet-foot button{flex:1;padding:12px 14px;border-radius:var(--r-md);font-size:13px;font-weight:500;min-height:44px;}
+    .btn-primary{background:var(--accent);color:var(--accent-text);border:none;}
+    .btn-sec{background:transparent;color:var(--ink);border:1px solid var(--hairline);}
+    .btn-destructive{background:transparent;border:1px solid rgba(239,68,68,.4);color:var(--danger);}
+    .confirm-body{padding:16px 18px;font-size:13px;color:var(--body);line-height:1.5;}
+    .confirm-body b{color:var(--ink);}
+
+    /* bottom tab bar */
+    .tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;z-index:8;background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:flex-start;justify-content:space-around;padding:10px 8px 0;}
+    .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);width:64px;}
+    .tabbar a.on{color:var(--ink);}
+    .tabbar a svg{width:21px;height:21px;}
+    .tabbar a span{font-size:10px;font-weight:500;}
+    .tabbar a .nav-dot{position:relative;}
+    .tabbar a .nav-dot::after{content:"";position:absolute;top:-2px;right:-4px;width:6px;height:6px;border-radius:50%;background:var(--warning);}
+
+    /* drawer */
+    .drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:20;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .drawer-overlay.show{opacity:1;pointer-events:auto;}
+    .drawer{position:absolute;top:0;bottom:0;left:0;width:248px;z-index:21;background:var(--surface);border-right:1px solid var(--hairline);transform:translateX(-100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .drawer.open{transform:translateX(0);}
+
+    /* ─── Notifications drawer ───────────────────────────────────── */
+    .notif-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .notif-overlay.show{opacity:1;pointer-events:auto;}
+    .notif-drawer{position:absolute;top:0;bottom:0;right:0;width:280px;max-width:86vw;z-index:41;
+      background:var(--surface);border-left:1px solid var(--hairline);
+      transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;}
+    .notif-drawer.open{transform:translateX(0);}
+    .notif-hdr{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:var(--accent);color:var(--accent-text);}
+    .notif-hdr .notif-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+    .notif-hdr .notif-clear{font-size:11px;font-weight:500;color:inherit;opacity:.85;background:none;border:none;}
+    .notif-hdr .notif-clear:active{opacity:1;}
+    .notif-list{flex:1;overflow-y:auto;padding:6px;}
+    .notif-item{display:flex;gap:10px;padding:10px;border-radius:var(--r-md);position:relative;}
+    .notif-item:active{background:var(--raised);}
+    .notif-ico{width:32px;height:32px;border-radius:50%;background:var(--raised);color:var(--body);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .notif-ico svg{width:16px;height:16px;}
+    .notif-body{flex:1;min-width:0;}
+    .notif-text{font-size:12.5px;color:var(--ink);line-height:1.4;}
+    .notif-text strong{font-weight:600;}
+    .notif-meta{font-size:11px;color:var(--mute);margin-top:2px;}
+    .notif-unread{position:absolute;top:14px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--danger);}
+    .drawer-brand{display:flex;align-items:center;gap:9px;padding:20px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-brand .mark{width:22px;height:22px;color:var(--ink);}
+    .drawer-brand .wm{font-size:14px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .drawer-nav{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:2px;}
+    .dn-group{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);padding:10px 12px 4px;}
+    .dn-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--r-md);font-size:13px;font-weight:500;color:var(--body);}
+    .dn-item.active{color:var(--ink);background:var(--raised);}
+    .dn-item svg{width:17px;height:17px;flex-shrink:0;}
+    .dn-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--warning);}
+    .dn-count{margin-left:auto;font-family:var(--ui);font-size:11px;font-weight:500;color:var(--body);background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);padding:1px 8px;min-width:22px;text-align:center;}
+    .dn-item.active .dn-count{background:var(--surface);}
+    .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .drawer-foot{border-top:1px solid var(--hairline);padding:12px;}
+    .drawer-theme{display:flex;align-items:center;gap:8px;width:100%;margin-top:8px;padding:9px 10px;
+      background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--ink);
+      font-family:var(--ui);font-size:12px;font-weight:500;cursor:pointer;min-height:40px;}
+    .drawer-theme svg{width:15px;height:15px;flex-shrink:0;}
+    .drawer-user{display:flex;align-items:center;gap:10px;padding:6px 6px;}
+    .drawer-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-text);font-size:12px;font-weight:600;font-family:var(--ui);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .drawer-user-name{font-size:13px;font-weight:500;color:var(--ink);line-height:1.3;}
+    .drawer-user-role{font-size:11px;color:var(--mute);line-height:1.3;}
+    .sb-status{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);}
+    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
+    .sb-status-text{font-size:11px;color:var(--body);}
+
+    .proto-hub{position:fixed;right:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--mute);font-size:12px;font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.5);}
+    .proto-hub:hover{color:var(--ink);border-color:var(--mute);}
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <span class="icons">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="13" width="3" height="6" rx="1"/><rect x="7" y="9" width="3" height="10" rx="1"/><rect x="12" y="5" width="3" height="14" rx="1"/><rect x="17" y="2" width="3" height="17" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13a10 10 0 0114 0M8.5 16.5a5 5 0 017 0M2 9.5a15 15 0 0120 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2.5"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><rect x="21" y="10" width="1.6" height="4" rx="1" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <!-- Announce bar -->
+  <div class="announce"><div class="announce-track"><span>Transfer to Kemang location pending confirmation · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span><span>Transfer to Kemang location pending confirmation · New order <strong>#MF-1044</strong> just came in · PO-0032 partially received</span></div></div>
+
+  <div class="app-hdr">
+    <button class="ham" id="ham-btn" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="index.html" class="app-brand" aria-label="Medium Format — hub">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <button class="hdr-btn" id="notifBtn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </button>
+  </div>
+
+  <div class="screen">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="mockup-inventory-mobile.html">Inventory</a>
+      <span class="sep">/</span>
+      <span class="cur">Product Categories</span>
+    </nav>
+    <h1 class="page-title">Product Categories</h1>
+    <div class="page-sub">6 categories · 1,172 SKUs across all categories</div>
+
+    <button class="add-fmt-btn" onclick="openFmtModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add category
+    </button>
+
+    <!-- 12" Vinyl LP -->
+    <div class="fmt-card">
+      <div class="fmt-top">
+        <div style="display:flex;gap:11px;min-width:0;">
+          <div class="fmt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/></svg></div>
+          <div class="fmt-name-wrap">
+            <div class="fmt-name">12&quot; Vinyl LP</div>
+            <div class="fmt-desc">Standard full-length vinyl album</div>
+            <span class="fmt-code">LP</span>
+          </div>
+        </div>
+        <div class="fmt-menu-wrap">
+          <button class="fmt-menu-btn" onclick="toggleFmtMenu(this)" aria-label="Category actions"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+          <div class="fmt-menu">
+            <button onclick="openFmtModal('12&quot; Vinyl LP','LP','Standard full-length vinyl album')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit category</button>
+            <button class="danger" onclick="openRemoveModal('12&quot; Vinyl LP')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="fmt-figs">
+        <div class="fmt-fig"><span class="k">SKUs</span><span class="v">612</span></div>
+        <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">4,180</span></div>
+      </div>
+    </div>
+
+    <!-- 7" Single -->
+    <div class="fmt-card">
+      <div class="fmt-top">
+        <div style="display:flex;gap:11px;min-width:0;">
+          <div class="fmt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <div class="fmt-name-wrap">
+            <div class="fmt-name">7&quot; Single</div>
+            <div class="fmt-desc">Two-track vinyl single</div>
+            <span class="fmt-code">7IN</span>
+          </div>
+        </div>
+        <div class="fmt-menu-wrap">
+          <button class="fmt-menu-btn" onclick="toggleFmtMenu(this)" aria-label="Category actions"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+          <div class="fmt-menu">
+            <button onclick="openFmtModal('7&quot; Single','7IN','Two-track vinyl single')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit category</button>
+            <button class="danger" onclick="openRemoveModal('7&quot; Single')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="fmt-figs">
+        <div class="fmt-fig"><span class="k">SKUs</span><span class="v">94</span></div>
+        <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">560</span></div>
+      </div>
+    </div>
+
+    <!-- Cassette -->
+    <div class="fmt-card">
+      <div class="fmt-top">
+        <div style="display:flex;gap:11px;min-width:0;">
+          <div class="fmt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="8" cy="12" r="2.6"/><circle cx="16" cy="12" r="2.6"/></svg></div>
+          <div class="fmt-name-wrap">
+            <div class="fmt-name">Cassette</div>
+            <div class="fmt-desc">Compact cassette tape</div>
+            <span class="fmt-code">MC</span>
+          </div>
+        </div>
+        <div class="fmt-menu-wrap">
+          <button class="fmt-menu-btn" onclick="toggleFmtMenu(this)" aria-label="Category actions"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+          <div class="fmt-menu">
+            <button onclick="openFmtModal('Cassette','MC','Compact cassette tape')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit category</button>
+            <button class="danger" onclick="openRemoveModal('Cassette')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="fmt-figs">
+        <div class="fmt-fig"><span class="k">SKUs</span><span class="v">168</span></div>
+        <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">920</span></div>
+      </div>
+    </div>
+
+    <!-- CD -->
+    <div class="fmt-card">
+      <div class="fmt-top">
+        <div style="display:flex;gap:11px;min-width:0;">
+          <div class="fmt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="1.5"/><circle cx="12" cy="10" r="4.5"/><circle cx="12" cy="10" r="1"/></svg></div>
+          <div class="fmt-name-wrap">
+            <div class="fmt-name">CD</div>
+            <div class="fmt-desc">Compact disc, jewel or digipak</div>
+            <span class="fmt-code">CD</span>
+          </div>
+        </div>
+        <div class="fmt-menu-wrap">
+          <button class="fmt-menu-btn" onclick="toggleFmtMenu(this)" aria-label="Category actions"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+          <div class="fmt-menu">
+            <button onclick="openFmtModal('CD','CD','Compact disc, jewel or digipak')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit category</button>
+            <button class="danger" onclick="openRemoveModal('CD')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="fmt-figs">
+        <div class="fmt-fig"><span class="k">SKUs</span><span class="v">240</span></div>
+        <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">1,340</span></div>
+      </div>
+    </div>
+
+    <!-- Box Set -->
+    <div class="fmt-card">
+      <div class="fmt-top">
+        <div style="display:flex;gap:11px;min-width:0;">
+          <div class="fmt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9h18"/><circle cx="8" cy="14" r="2"/></svg></div>
+          <div class="fmt-name-wrap">
+            <div class="fmt-name">Box Set</div>
+            <div class="fmt-desc">Multi-disc or deluxe boxed edition</div>
+            <span class="fmt-code">BOX</span>
+          </div>
+        </div>
+        <div class="fmt-menu-wrap">
+          <button class="fmt-menu-btn" onclick="toggleFmtMenu(this)" aria-label="Category actions"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+          <div class="fmt-menu">
+            <button onclick="openFmtModal('Box Set','BOX','Multi-disc or deluxe boxed edition')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit category</button>
+            <button class="danger" onclick="openRemoveModal('Box Set')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="fmt-figs">
+        <div class="fmt-fig"><span class="k">SKUs</span><span class="v">37</span></div>
+        <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">142</span></div>
+      </div>
+    </div>
+
+    <!-- Picture Disc -->
+    <div class="fmt-card">
+      <div class="fmt-top">
+        <div style="display:flex;gap:11px;min-width:0;">
+          <div class="fmt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div>
+          <div class="fmt-name-wrap">
+            <div class="fmt-name">Picture Disc</div>
+            <div class="fmt-desc">Printed-image vinyl pressing</div>
+            <span class="fmt-code">PD</span>
+          </div>
+        </div>
+        <div class="fmt-menu-wrap">
+          <button class="fmt-menu-btn" onclick="toggleFmtMenu(this)" aria-label="Category actions"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+          <div class="fmt-menu">
+            <button onclick="openFmtModal('Picture Disc','PD','Printed-image vinyl pressing')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit category</button>
+            <button class="danger" onclick="openRemoveModal('Picture Disc')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="fmt-figs">
+        <div class="fmt-fig"><span class="k">SKUs</span><span class="v">21</span></div>
+        <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">68</span></div>
+      </div>
+    </div>
+
+    <button class="fmt-add-card" onclick="openFmtModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <span>Add a category</span>
+    </button>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="drawer">
+    <a href="index.html" class="drawer-brand" aria-label="Medium Format — hub">
+      <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+    </a>
+    <nav class="drawer-nav">
+      <div class="dn-group">Overview</div>
+      <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+
+      <div class="dn-group">Selling</div>
+      <a href="mockup-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-count mono">12</span></a>
+      <a href="mockup-inventory-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>Inventory</a>
+      <a href="mockup-customers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Customers</a>
+      <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 012-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 010 4v4a2 2 0 002 2h16a2 2 0 002-2v-4a2 2 0 01-2-2z"/><line x1="9" y1="8" x2="9" y2="16"/></svg>Vouchers</a>
+      <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
+      <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
+
+      <div class="dn-group">Content</div>
+      <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
+      <a href="mockup-news-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>News</a>
+      <a href="mockup-news-categories-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>Categories &amp; Tags</a>
+
+      <div class="dn-group">Shop</div>
+      <a href="mockup-purchase-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Purchase orders</a>
+
+      <div class="dn-group">Config</div>
+      <a href="mockup-preferences-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</a>
+    </nav>
+    <div class="drawer-foot">
+      <div class="drawer-user">
+        <div class="drawer-avatar">RP</div>
+        <div>
+          <div class="drawer-user-name">Raka Pratama</div>
+          <div class="drawer-user-role">Owner</div>
+        </div>
+            <button class="drawer-theme" id="theme-btn" aria-label="Toggle theme">
+      <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span id="theme-label">Dark</span>
+    </button>
+    </div>
+    </div>
+  </aside>
+
+  <!-- Notifications drawer -->
+  <div class="notif-overlay" id="notifOverlay"></div>
+  <aside class="notif-drawer" id="notifDrawer" aria-label="Notifications">
+    <div class="notif-hdr">
+      <span class="notif-title">Notifications</span>
+      <button class="notif-clear" id="notifClearBtn">Mark all read</button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-meta">2 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text"><strong>3 items</strong> are running low on stock</div>
+          <div class="notif-meta">28 minutes ago</div>
+        </div>
+        <span class="notif-unread"></span>
+      </div>
+      <div class="notif-item">
+        <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <div class="notif-body">
+          <div class="notif-text">PO-0032 was <strong>partially received</strong> from Analog Distro</div>
+          <div class="notif-meta">Yesterday</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Bottom tab bar -->
+  <nav class="tabbar">
+    <a href="mockup-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Home</span></a>
+    <a href="mockup-inventory-mobile.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg><span>Stock</span></a>
+    <a href="mockup-orders.html"><span class="nav-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Orders</span></a>
+    <a href="mockup-customers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Customers</span></a>
+  </nav>
+
+  <!-- Add / Edit category bottom sheet -->
+  <div class="sheet-ov" id="fmtOv" role="dialog" aria-modal="true" aria-label="Add or edit category">
+    <div class="sheet">
+      <div class="sheet-grip"></div>
+      <div class="sheet-head"><h3 id="fmtModalTitle">Add category</h3><button class="sheet-x" onclick="closeFmtModal()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+      <div class="sheet-pad">
+        <div class="field"><label>Category name</label><input id="fmtName" placeholder="e.g. 12&quot; Vinyl LP"></div>
+        <div class="field-row">
+          <div class="field"><label>Abbreviation</label><input id="fmtAbbr" placeholder="e.g. LP"></div>
+          <div class="field"><label>Status</label><select id="fmtStatus"><option>Active</option><option>Inactive</option></select></div>
+        </div>
+        <div class="field"><label>Description</label><textarea id="fmtDesc" rows="2" placeholder="Short description shown on catalogue and inventory screens"></textarea></div>
+      </div>
+      <div class="sheet-foot">
+        <button class="btn-sec" onclick="closeFmtModal()">Cancel</button>
+        <button class="btn-primary" onclick="closeFmtModal()">Save category</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Remove-confirm bottom sheet -->
+  <div class="sheet-ov" id="removeOv" role="dialog" aria-modal="true" aria-label="Remove category">
+    <div class="sheet">
+      <div class="sheet-grip"></div>
+      <div class="sheet-head"><h3>Remove category?</h3><button class="sheet-x" onclick="closeRemoveModal()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+      <div class="confirm-body">Remove <b id="removeFmtName">this category</b>? Releases currently using this category will need to be reassigned to another category before it can be deleted.</div>
+      <div class="sheet-foot">
+        <button class="btn-sec" onclick="closeRemoveModal()">Cancel</button>
+        <button class="btn-destructive" onclick="closeRemoveModal()">Remove category</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="index.html" class="proto-hub" aria-label="Back to prototype hub">◹ Prototype</a>
+
+<script>
+  // Category card ⋯ menu
+  function toggleFmtMenu(btn){
+    document.querySelectorAll('.fmt-menu.open').forEach(m=>{if(m!==btn.nextElementSibling)m.classList.remove('open');});
+    btn.nextElementSibling.classList.toggle('open');
+  }
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('.fmt-menu-wrap')) document.querySelectorAll('.fmt-menu.open').forEach(m=>m.classList.remove('open'));
+  });
+
+  // Add/Edit sheet
+  function openFmtModal(name,abbr,desc){
+    document.getElementById('fmtModalTitle').textContent = name ? 'Edit category' : 'Add category';
+    document.getElementById('fmtName').value = name || '';
+    document.getElementById('fmtAbbr').value = abbr || '';
+    document.getElementById('fmtDesc').value = desc || '';
+    document.getElementById('fmtOv').classList.add('open');
+  }
+  function closeFmtModal(){ document.getElementById('fmtOv').classList.remove('open'); }
+
+  // Remove-confirm sheet
+  function openRemoveModal(name){
+    document.getElementById('removeFmtName').textContent = name;
+    document.getElementById('removeOv').classList.add('open');
+  }
+  function closeRemoveModal(){ document.getElementById('removeOv').classList.remove('open'); }
+  [document.getElementById('fmtOv'), document.getElementById('removeOv')].forEach(ov=>{
+    ov.addEventListener('click', e=>{ if(e.target===ov){ ov.classList.remove('open'); } });
+  });
+  document.addEventListener('keydown', e=>{
+    if(e.key==='Escape'){ closeFmtModal(); closeRemoveModal(); }
+  });
+
+  // Drawer
+  const drawer=document.getElementById('drawer');
+  const dOverlay=document.getElementById('drawer-overlay');
+  function closeDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('show');}
+  document.getElementById('ham-btn').addEventListener('click',()=>{drawer.classList.add('open');dOverlay.classList.add('show');});
+  dOverlay.addEventListener('click',closeDrawer);
+
+  // Notifications drawer
+  const notifDrawer=document.getElementById('notifDrawer');
+  const notifOverlay=document.getElementById('notifOverlay');
+  function closeNotif(){notifDrawer.classList.remove('open');notifOverlay.classList.remove('show');}
+  document.getElementById('notifBtn').addEventListener('click',()=>{notifDrawer.classList.add('open');notifOverlay.classList.add('show');});
+  notifOverlay.addEventListener('click',closeNotif);
+  document.getElementById('notifClearBtn').addEventListener('click',()=>{
+    document.querySelectorAll('.notif-unread').forEach(d=>d.remove());
+  });
+
+  // Theme toggle (localStorage; data-theme="dark"|"light")
+  const root=document.documentElement;
+  const moon=document.getElementById('ico-moon');
+  const sun=document.getElementById('ico-sun');
+  function applyTheme(t){root.setAttribute('data-theme',t);const dark=t==='dark';moon.style.display=dark?'':'none';sun.style.display=dark?'none':'';const lbl=document.getElementById('theme-label'); if(lbl) lbl.textContent = dark?'Dark':'Light';}
+  applyTheme(localStorage.getItem('mf-theme')||'dark');
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    localStorage.setItem('mf-theme',next);applyTheme(next);
+  });
+</script>
+</body>
+</html>

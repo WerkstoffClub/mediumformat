@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format® — Checkout (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .appbar-logo .brand-wordmark{height:16px;width:auto;}
+
+    /* ─── Tokens (dark default) ─────────────────────── */
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+      --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 4px 12px rgba(0,0,0,.6);--e3:0 8px 24px rgba(0,0,0,.7);
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --bar-h:74px;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --focus:0 0 0 2px rgba(0,0,0,.5);
+      --e1:0 1px 2px rgba(0,0,0,.08);--e2:0 4px 12px rgba(0,0,0,.12);--e3:0 8px 24px rgba(0,0,0,.16);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    .mono{font-family:var(--ui);font-variant-numeric:tabular-nums;}
+
+    /* ─── Page stage ────────────────────────────── */
+    body{
+      font-family:var(--ui);background:#101012;
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      padding:32px 16px;-webkit-font-smoothing:antialiased;
+      background-image:radial-gradient(circle at 50% 0%,#1c1c20,#08080a 70%);
+    }
+    html[data-theme="light"] body{background:#e7e7ea;background-image:radial-gradient(circle at 50% 0%,#f4f4f6,#d8d8dc 70%);}
+
+    /* ─── Phone frame ───────────────────────────── */
+    .phone{
+      width:390px;height:844px;border-radius:44px;
+      background:var(--canvas);border:1px solid var(--hairline);
+      box-shadow:0 24px 70px rgba(0,0,0,.6),inset 0 0 0 6px #050505;
+      position:relative;overflow:hidden;color:var(--ink);display:flex;flex-direction:column;
+    }
+    html[data-theme="light"] .phone{box-shadow:0 24px 70px rgba(0,0,0,.25),inset 0 0 0 6px #c8c8cc;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+
+    .statusbar{
+      height:44px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;
+      padding:0 26px 8px;position:relative;z-index:5;
+      font-family:var(--ui);font-size:12px;font-weight:500;color:var(--ink);
+    }
+    .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:118px;height:30px;background:#000;border-radius:0 0 18px 18px;}
+    html[data-theme="light"] .notch{background:#111;}
+    .sb-right{display:flex;align-items:center;gap:6px;}
+    .sb-right svg{width:15px;height:13px;color:var(--ink);}
+
+    .screen{flex:1;overflow-y:auto;position:relative;background:var(--canvas);}
+    .screen::-webkit-scrollbar{width:0;}
+
+    /* ─── App header ────────────────────────────── */
+    .appbar{
+      position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--hairline);
+      display:flex;align-items:center;gap:10px;padding:10px 12px;
+    }
+    .icon-btn{width:38px;height:38px;border:none;background:transparent;color:var(--body);border-radius:var(--r-md);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+    .icon-btn:active{background:var(--raised);color:var(--ink);}
+    .icon-btn svg{width:20px;height:20px;}
+    .appbar-title{flex:1;font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--ink);text-align:center;}
+    a{color:inherit;text-decoration:none;}
+
+    /* ─── Category bar ──────────────────────────── */
+    .cat-bar{background:var(--surface);border-bottom:1px solid var(--hairline);}
+    .cat-bar-inner{display:flex;align-items:center;gap:16px;padding:8px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .cat-bar-inner::-webkit-scrollbar{display:none;}
+    .cat-link{font-size:12px;font-weight:500;color:var(--mute);text-decoration:none;white-space:nowrap;transition:color .15s;}
+    .cat-link:hover{color:var(--ink);}
+
+    /* progress steps */
+    .co-steps{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;
+      background:var(--surface);border-bottom:1px solid var(--hairline);}
+    .co-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mute);}
+    .co-step .num{width:18px;height:18px;border-radius:50%;border:1px solid var(--hairline);font-family:var(--ui);
+      font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .co-step.done{color:var(--body);}
+    .co-step.done .num{background:var(--accent);border-color:var(--accent);color:var(--accent-text);}
+    .co-step.active{color:var(--ink);font-weight:500;}
+    .co-step.active .num{border-color:var(--accent);color:var(--ink);}
+    .co-step-sep{width:16px;height:1px;background:var(--hairline);}
+
+    /* ─── Sections ──────────────────────────────── */
+    .co-body{padding:16px;}
+    .co-section{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:16px;margin-bottom:14px;}
+    .cs-hdr{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+    .cs-num{width:22px;height:22px;border-radius:50%;background:var(--raised);border:1px solid var(--hairline);
+      font-family:var(--ui);font-size:11px;color:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .cs-title{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .cs-note{margin-left:auto;font-size:11px;color:var(--mute);}
+    .cs-note a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mute);}
+
+    .field-label{display:block;font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:6px;}
+    .input{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);
+      color:var(--ink);font-size:14px;font-family:var(--ui);padding:11px 12px;}
+    .input::placeholder{color:var(--mute);}
+    .input:focus{border-color:var(--accent);outline:none;}
+    select.input{appearance:none;cursor:pointer;padding-right:30px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236E6E6E'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 10px center;background-size:15px;}
+    .field{margin-bottom:12px;}
+    .field:last-child{margin-bottom:0;}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+    /* selectable tiles */
+    .tile-group{display:flex;flex-direction:column;gap:9px;}
+    .tile{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid var(--hairline);
+      border-radius:var(--r-md);background:var(--raised);cursor:pointer;}
+    .tile.on{border-color:var(--accent);background:var(--surface);}
+    .tile-radio{width:17px;height:17px;border-radius:50%;border:1px solid var(--hairline);background:var(--canvas);flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;}
+    .tile.on .tile-radio{border-color:var(--accent);}
+    .tile.on .tile-radio::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--accent);}
+    .tile-ico{width:32px;height:32px;border-radius:var(--r-sm);background:var(--canvas);border:1px solid var(--hairline);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--ink);}
+    .tile-ico svg{width:17px;height:17px;}
+    .tile-ico.mono-tag{font-family:var(--ui);font-size:10px;font-weight:500;letter-spacing:-.02em;}
+    .tile-body{flex:1;min-width:0;display:flex;flex-direction:column;}
+    .tile-name{font-size:13px;font-weight:500;color:var(--ink);}
+    .tile-meta{font-size:11px;color:var(--mute);margin-top:1px;}
+    .tile-price{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink);flex-shrink:0;}
+    .tile-price.free{color:var(--success);}
+
+    /* payment tiles */
+    .pay-family-label{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin:14px 0 8px;}
+    .pay-family-label:first-child{margin-top:0;}
+    .pay-tile{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--hairline);
+      border-radius:var(--r-md);background:var(--raised);cursor:pointer;}
+    .pay-tile.on{border-color:var(--accent);background:var(--surface);}
+    .pt-radio{width:16px;height:16px;border-radius:50%;border:1px solid var(--hairline);background:var(--canvas);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+    .pay-tile.on .pt-radio{border-color:var(--accent);}
+    .pay-tile.on .pt-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);}
+    .pt-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+    .pt-name{font-size:13px;font-weight:500;color:var(--ink);}
+    .pt-meta{font-family:var(--ui);font-size:11px;color:var(--mute);margin-top:1px;}
+    .pt-badges{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap;}
+    .pt-badge{font-family:var(--ui);font-size:9px;padding:2px 6px;border:1px solid var(--hairline);border-radius:var(--r-sm);color:var(--mute);}
+    .xendit-note{display:flex;align-items:center;gap:8px;margin-top:12px;padding:10px 12px;
+      background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);font-size:11px;color:var(--body);line-height:1.5;}
+    .xendit-note svg{width:15px;height:15px;color:var(--success);flex-shrink:0;}
+    .xendit-note strong{color:var(--ink);font-weight:500;}
+
+    /* order summary */
+    .sum-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;}
+    .sum-hdr .cs-title{font-size:15px;}
+    .sum-hdr a{font-size:11px;color:var(--mute);text-decoration:none;}
+    .sum-item{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid var(--hairline);}
+    .sum-item:last-child{border-bottom:none;}
+    .sum-thumb{width:46px;height:46px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;border:1px solid var(--hairline);position:relative;}
+    .sum-thumb .qty{position:absolute;top:-6px;right:-6px;min-width:17px;height:17px;padding:0 4px;border-radius:var(--r-pill);
+      background:var(--accent);color:var(--accent-text);font-family:var(--ui);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface);}
+    .sum-info{flex:1;min-width:0;}
+    .sum-artist{font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .sum-title{font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
+    .sum-cat{font-family:var(--ui);font-size:10px;color:var(--mute);margin-top:3px;}
+    .sum-iprice{font-family:var(--ui);font-size:12px;font-weight:500;color:var(--ink);flex-shrink:0;}
+
+    .voucher{margin-top:14px;padding-top:14px;border-top:1px solid var(--hairline);}
+    .voucher-row{display:flex;gap:8px;}
+    .voucher-row .input{flex:1;}
+    .btn-apply{background:transparent;color:var(--ink);border:1px solid var(--hairline);border-radius:var(--r-md);
+      padding:0 16px;font-size:13px;font-weight:500;font-family:var(--ui);cursor:pointer;flex-shrink:0;}
+    .voucher-applied{display:flex;align-items:center;justify-content:space-between;margin-top:9px;font-size:11px;}
+    .voucher-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--ui);font-size:11px;color:var(--success);
+      background:var(--success-t);border:1px solid rgba(34,197,94,.3);border-radius:var(--r-pill);padding:3px 9px;}
+    .voucher-tag .dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+
+    .totals{margin-top:14px;padding-top:14px;border-top:1px solid var(--hairline);}
+    .total-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--body);margin-bottom:8px;}
+    .total-row .val{font-family:var(--ui);font-weight:500;color:var(--ink);}
+    .total-row.discount .val{color:var(--success);}
+    .total-grand{display:flex;align-items:baseline;justify-content:space-between;padding-top:12px;border-top:1px solid var(--hairline);margin-top:4px;}
+    .total-grand .lbl{font-size:14px;font-weight:600;color:var(--ink);}
+    .total-grand .amt{font-family:var(--ui);font-size:18px;font-weight:500;color:var(--ink);}
+    .total-grand .usd{font-family:var(--ui);font-size:11px;color:var(--mute);margin-left:5px;font-weight:400;}
+
+    .bottom-spacer{height:calc(var(--bar-h) + 8px);}
+
+    /* ─── Sticky place-order bar ────────────────── */
+    .order-bar{position:absolute;left:0;right:0;bottom:0;z-index:30;height:var(--bar-h);
+      background:var(--surface);border-top:1px solid var(--hairline);box-shadow:var(--e2);
+      display:flex;align-items:center;gap:12px;padding:0 16px;}
+    .ob-total{flex:0 0 auto;}
+    .ob-total .lbl{font-size:11px;color:var(--mute);}
+    .ob-total .amt{font-family:var(--ui);font-size:17px;font-weight:500;color:var(--ink);}
+    .btn-primary{flex:1;background:var(--accent);color:var(--accent-text);border:none;border-radius:var(--r-md);
+      padding:14px;font-size:15px;font-weight:500;font-family:var(--ui);cursor:pointer;text-decoration:none;
+      display:flex;align-items:center;justify-content:center;gap:7px;}
+    .btn-primary svg{width:16px;height:16px;}
+
+    /* ─── Cover art (vinyl groove) ───────────────── */
+    .cover-art{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .cover-art .grooves{width:64%;height:64%;border-radius:50%;position:relative;
+      background:repeating-radial-gradient(circle at 50% 50%,#000 0 3px,#1f1f1f 3px 6px);}
+    html[data-theme="light"] .cover-art .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 3px,#fff 3px 6px);}
+    .cover-art .grooves::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--accent);}
+    .cover-art::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05),transparent 60%);pointer-events:none;}
+    html[data-theme="light"] .cover-art::before{background:linear-gradient(135deg,rgba(0,0,0,.04),transparent 60%);}
+    .cover-art.sm .grooves{width:74%;height:74%;background:repeating-radial-gradient(circle at 50% 50%,#000 0 2px,#1f1f1f 2px 4px);}
+    html[data-theme="light"] .cover-art.sm .grooves{background:repeating-radial-gradient(circle at 50% 50%,#d8d8d8 0 2px,#fff 2px 4px);}
+
+    /* theme toggle (floating in frame) */
+    .theme-fab{position:absolute;top:50px;right:24px;z-index:6;width:32px;height:32px;
+      background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--body);}
+    .theme-fab svg{width:16px;height:16px;}
+
+    /* prototype hub link */
+    .proto-hub{position:absolute;left:14px;bottom:calc(var(--bar-h) + 12px);z-index:35;
+      display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--body);
+      background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-pill);
+      padding:6px 11px;text-decoration:none;box-shadow:var(--e1);opacity:.9;}
+    .proto-hub .glyph{font-size:12px;}
+  
+    /* three-zone appbar: hamburger LEFT · logo CENTERED · cart RIGHT */
+    .appbar{display:grid;grid-template-columns:1fr auto 1fr;gap:0;}
+    .appbar-lead{justify-self:start;}
+    .appbar-trail{justify-self:end;display:flex;align-items:center;gap:4px;}
+    .cart-wrap{position:relative;}
+    .cart-badge{position:absolute;top:3px;right:3px;min-width:15px;height:15px;padding:0 3px;border-radius:var(--r-pill);
+      background:var(--accent);color:var(--accent-text);font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+    .appbar-logo{display:flex;align-items:center;justify-content:center;gap:8px;justify-self:center;min-width:0;}
+    .appbar-logo .mark{width:36px;height:36px;color:var(--ink);flex-shrink:0;}
+    .appbar-logo .mark svg{width:100%;height:100%;display:block;}
+    .appbar-name{font-size:17px;font-weight:600;letter-spacing:-.04em;color:var(--ink);white-space:nowrap;}
+    .appbar-name sup{font-size:7px;font-weight:500;}
+
+    /* ─── Announcement — BLACK in light mode ─────── */
+    
+    html[data-theme="light"] .announce strong{color:#fff;}
+    html[data-theme="light"] .announce a{color:#fff;border-color:rgba(255,255,255,.55);}
+    html[data-theme="light"] .announce a:hover{border-color:#fff;}
+
+    /* ─── Nav drawer (opened by hamburger) ───────── */
+    .drawer-scrim{display:none;position:absolute;inset:0;z-index:60;background:rgba(0,0,0,.6);}
+    .drawer-scrim.open{display:block;}
+    html[data-theme="light"] .drawer-scrim{background:rgba(0,0,0,.35);}
+    .drawer{position:absolute;top:0;left:0;bottom:0;width:82%;max-width:320px;z-index:65;
+      background:var(--surface);border-right:1px solid var(--hairline);box-shadow:var(--e3);
+      transform:translateX(-100%);transition:transform .28s cubic-bezier(.16,1,.3,1);
+      display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+    .drawer::-webkit-scrollbar{width:0;}
+    .drawer.open{transform:translateX(0);}
+    .drawer-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--hairline);position:sticky;top:0;background:var(--surface);z-index:2;}
+    .drawer-brand{display:flex;align-items:center;gap:11px;font-size:18px;font-weight:600;letter-spacing:-.04em;color:var(--ink);flex:1;}
+    .drawer-brand .mark{width:32px;height:32px;color:var(--ink);flex-shrink:0;}
+    .drawer-brand .mark svg{width:100%;height:100%;display:block;}
+    .drawer-brand sup{font-size:7px;font-weight:500;}
+    .drawer-close{width:38px;height:38px;min-width:44px;min-height:44px;border:none;background:transparent;color:var(--body);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+    .drawer-close:active{background:var(--raised);color:var(--ink);}
+    .drawer-close svg{width:18px;height:18px;}
+    /* drawer search */
+    .drawer-search{padding:14px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-search .srow2{display:flex;align-items:center;gap:10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:11px 12px;}
+    .drawer-search .srow2 svg{width:16px;height:16px;color:var(--mute);flex-shrink:0;}
+    .drawer-search input{flex:1;background:transparent;border:none;outline:none;font-family:var(--ui);font-size:14px;color:var(--ink);min-width:0;}
+    .drawer-search input::placeholder{color:var(--mute);}
+    /* accordion menu */
+    .acc{padding:6px 8px;flex:1;}
+    .acc-item{border-bottom:1px solid var(--hairline);}
+    .acc-item:last-child{border-bottom:none;}
+    .acc-head{width:100%;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+      background:transparent;border:none;cursor:pointer;padding:12px 8px;font-family:var(--ui);font-size:15px;font-weight:500;color:var(--ink);text-align:left;}
+    .acc-head .chev{width:16px;height:16px;color:var(--mute);flex-shrink:0;transition:transform .2s;}
+    .acc-item.open .acc-head .chev{transform:rotate(180deg);}
+    .acc-panel{display:none;padding:2px 8px 10px;}
+    .acc-item.open .acc-panel{display:block;}
+    .acc-panel.grid{display:none;}
+    .acc-item.open .acc-panel.grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;}
+    .acc-link{display:flex;align-items:center;min-height:44px;padding:8px 10px;border-radius:var(--r-md);font-size:14px;color:var(--body);}
+    .acc-link:active{background:var(--raised);color:var(--ink);}
+    /* drawer footer: currency + theme + account */
+    .drawer-foot{border-top:1px solid var(--hairline);padding:14px 16px;display:flex;flex-direction:column;gap:12px;position:sticky;bottom:0;background:var(--surface);}
+    .drawer-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;}
+    .drawer-row-label{font-size:13px;color:var(--body);}
+    .cur-switch{display:flex;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:2px;}
+    .cur-btn{font-family:var(--ui);font-size:11px;font-weight:500;color:var(--mute);background:transparent;border:none;border-radius:var(--r-pill);padding:8px 14px;min-height:36px;cursor:pointer;}
+    .cur-btn.on{background:var(--accent);color:var(--accent-text);}
+    .theme-row-btn{display:flex;align-items:center;gap:8px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);color:var(--ink);font-family:var(--ui);font-size:13px;font-weight:500;padding:8px 14px;min-height:40px;cursor:pointer;}
+    .theme-row-btn svg{width:16px;height:16px;}
+
+    .drawer-account svg{width:18px;height:18px;color:var(--body);}
+    .drawer-account:active{background:var(--raised);}
+
+
+    /* MF: mobile chrome overhaul (announce marquee, full-screen drawer, redesigned account row) */
+    :root{--announce-h:28px;}
+    .announce{position:sticky;top:0;z-index:22;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:48px;padding-left:100%;animation:mf-marquee 16s linear infinite;font-size:11px;color:inherit;}
+    .announce-track strong{color:inherit;font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+    .drawer{width:100%!important;max-width:none!important;}
+    .drawer-hdr{border-bottom:none!important;}
+    .drawer-search{border-bottom:1px solid var(--hairline);}
+    .drawer-search .srow2{transition:border-color .15s;}
+    .drawer-search .srow2
+    .acc-panel .acc-link{border-top:1px solid var(--hairline);}
+    .acc-panel .acc-link:first-child{border-top:none;}
+    .acc-panel.grid{display:none;}
+    .acc-item.open .acc-panel.grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+    .acc-panel.grid .acc-link:nth-child(-n+2){border-top:none;}
+    .drawer-foot{padding:10px 16px 14px!important;gap:8px!important;}
+    .drawer-row{min-height:36px!important;}
+    .theme-row-btn{padding:6px 12px!important;min-height:34px!important;}
+    .cur-switch .cur-btn{padding:6px 11px!important;min-height:32px!important;}
+    .drawer-account{display:flex;align-items:center;gap:11px;min-height:56px;padding:10px 12px;
+      border:1px solid var(--hairline);border-radius:var(--r-lg);color:var(--ink);background:var(--raised);}
+    .drawer-account .da-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-text);
+      display:flex;align-items:center;justify-content:center;font-family:var(--ui);font-size:12px;font-weight:600;flex-shrink:0;}
+    .drawer-account .da-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+    .drawer-account .da-title{font-size:13px;font-weight:600;color:var(--ink);}
+    .drawer-account .da-sub{font-size:11px;color:var(--mute);margin-top:1px;}
+    .drawer-account .da-chev{color:var(--mute);flex-shrink:0;}
+    .psource{display:none!important;}
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<div class="phone" id="phone">
+
+  <!-- Status bar / notch -->
+  <div class="statusbar">
+    <span>9:41</span>
+    <div class="notch"></div>
+    <div class="sb-right">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="9" width="3" height="6" rx="1"/><rect x="7" y="6" width="3" height="9" rx="1"/><rect x="12" y="3" width="3" height="12" rx="1"/><rect x="17" y="6" width="3" height="9" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M2 8.8a16 16 0 0 1 20 0M12 20h.01"/></svg>
+      <svg viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="6" width="20" height="12" rx="3"/><rect x="3" y="8" width="15" height="8" rx="1.5" fill="currentColor"/><path d="M23 10v4" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+
+  <!-- theme toggle -->
+
+  <!-- Screen -->
+  <div class="screen" id="screen">
+
+    <!-- Announce -->
+    <div class="announce"><div class="announce-track"><span>Free shipping over <strong>$31</strong> within Jakarta — shop by category</span><span>Free shipping over <strong>$31</strong> within Jakarta — shop by category</span></div></div>
+
+    <!-- App bar -->
+    <div class="appbar">
+      <button class="icon-btn appbar-lead" id="menu-btn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="index.html" class="appbar-logo" aria-label="Medium Format">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </a>
+      <div class="appbar-trail">
+        <div class="cart-wrap"><a href="mockup-cart-mobile.html" class="icon-btn" aria-label="Cart — 3 items">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </a><span class="cart-badge">3</span></div>
+      </div>
+    </div>
+
+    <!-- Progress steps -->
+    <div class="co-steps" aria-label="Checkout progress">
+      <div class="co-step done"><span class="num">✓</span> Cart</div>
+      <span class="co-step-sep"></span>
+      <div class="co-step active"><span class="num">2</span> Payment</div>
+      <span class="co-step-sep"></span>
+      <div class="co-step"><span class="num">3</span> Done</div>
+    </div>
+
+    <div class="co-body">
+
+      <!-- Contact -->
+      <section class="co-section">
+        <div class="cs-hdr"><span class="cs-num">1</span><span class="cs-title">Contact</span>
+          <span class="cs-note"><a href="mockup-account.html">Sign in</a></span></div>
+        <div class="field">
+          <label class="field-label" for="email">Email address</label>
+          <input class="input" id="email" type="email" value="dinda.pratiwi@gmail.com">
+        </div>
+      </section>
+
+      <!-- Shipping -->
+      <section class="co-section">
+        <div class="cs-hdr"><span class="cs-num">2</span><span class="cs-title">Shipping address</span></div>
+        <div class="field"><label class="field-label" for="name">Nama lengkap</label>
+          <input class="input" id="name" type="text" value="Dinda Pratiwi"></div>
+        <div class="field"><label class="field-label" for="phone">Nomor telepon</label>
+          <input class="input" id="phone" type="tel" value="+62 812 3456 7890"></div>
+        <div class="field"><label class="field-label" for="addr">Alamat lengkap</label>
+          <input class="input" id="addr" type="text" value="Jl. Cikini Raya No. 42, RT 03 / RW 05"></div>
+        <div class="field field-row">
+          <div><label class="field-label" for="kota">Kota / Kab.</label><input class="input" id="kota" type="text" value="Jakarta Pusat"></div>
+          <div><label class="field-label" for="kec">Kecamatan</label><input class="input" id="kec" type="text" value="Menteng"></div>
+        </div>
+        <div class="field field-row">
+          <div><label class="field-label" for="prov">Provinsi</label>
+            <select class="input" id="prov"><option>DKI Jakarta</option><option>Jawa Barat</option><option>Jawa Tengah</option><option>Jawa Timur</option><option>Banten</option><option>DI Yogyakarta</option><option>Bali</option></select></div>
+          <div><label class="field-label" for="pos">Kode pos</label><input class="input mono" id="pos" inputmode="numeric" value="10330"></div>
+        </div>
+      </section>
+
+      <!-- Delivery method -->
+      <section class="co-section">
+        <div class="cs-hdr"><span class="cs-num">3</span><span class="cs-title">Delivery method</span></div>
+        <div class="tile-group">
+          <label class="tile" data-group="delivery"><span class="tile-radio"></span><span class="tile-ico mono-tag">JNE</span>
+            <span class="tile-body"><span class="tile-name">JNE Reguler</span><span class="tile-meta">2–3 hari kerja</span></span><span class="tile-price">Rp 22.000</span></label>
+          <label class="tile" data-group="delivery"><span class="tile-radio"></span><span class="tile-ico mono-tag">J&amp;T</span>
+            <span class="tile-body"><span class="tile-name">J&amp;T Express</span><span class="tile-meta">2–3 hari kerja</span></span><span class="tile-price">Rp 20.000</span></label>
+          <label class="tile on" data-group="delivery"><span class="tile-radio"></span><span class="tile-ico mono-tag">SiC</span>
+            <span class="tile-body"><span class="tile-name">SiCepat REG</span><span class="tile-meta">1–2 hari kerja</span></span><span class="tile-price">Rp 18.000</span></label>
+          <label class="tile" data-group="delivery"><span class="tile-radio"></span>
+            <span class="tile-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
+            <span class="tile-body"><span class="tile-name">GoSend Same-day</span><span class="tile-meta">Tiba hari ini</span></span><span class="tile-price">Rp 35.000</span></label>
+          <label class="tile" data-group="delivery"><span class="tile-radio"></span>
+            <span class="tile-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg></span>
+            <span class="tile-body"><span class="tile-name">Store pickup — Kemang</span><span class="tile-meta">Siap dalam 2 jam</span></span><span class="tile-price free">Gratis</span></label>
+        </div>
+      </section>
+
+      <!-- Payment method -->
+      <section class="co-section">
+        <div class="cs-hdr"><span class="cs-num">4</span><span class="cs-title">Payment method</span></div>
+        <div class="pay-family-label">QRIS</div>
+        <label class="pay-tile on" data-group="payment"><span class="pt-radio"></span>
+          <span class="pt-body"><span class="pt-name">QRIS</span><span class="pt-meta">Scan any e-wallet / bank app</span></span></label>
+        <div class="pay-family-label">Virtual Account</div>
+        <label class="pay-tile" data-group="payment"><span class="pt-radio"></span>
+          <span class="pt-body"><span class="pt-name">Virtual Account</span><span class="pt-meta">ATM / m-banking</span>
+            <span class="pt-badges"><span class="pt-badge">BCA</span><span class="pt-badge">Mandiri</span><span class="pt-badge">BNI</span></span></span></label>
+        <div class="pay-family-label">E-wallet</div>
+        <label class="pay-tile" data-group="payment"><span class="pt-radio"></span>
+          <span class="pt-body"><span class="pt-name">E-wallet</span><span class="pt-meta">Push to pay</span>
+            <span class="pt-badges"><span class="pt-badge">GoPay</span><span class="pt-badge">OVO</span><span class="pt-badge">DANA</span><span class="pt-badge">ShopeePay</span></span></span></label>
+        <div class="pay-family-label">Card</div>
+        <label class="pay-tile" data-group="payment"><span class="pt-radio"></span>
+          <span class="pt-body"><span class="pt-name">Credit / Debit Card</span><span class="pt-meta">Visa · Mastercard · JCB</span></span></label>
+        <div class="xendit-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span><strong>Secured by Xendit</strong> — processed on Xendit's PCI-DSS certified gateway.</span>
+        </div>
+      </section>
+
+      <!-- Order summary -->
+      <section class="co-section">
+        <div class="sum-hdr"><span class="cs-title">Order summary</span><a href="mockup-cart.html">Edit cart</a></div>
+        <div class="sum-item">
+          <div class="sum-thumb"><div class="cover-art sm"><div class="grooves"></div></div><span class="qty">1</span></div>
+          <div class="sum-info"><div class="sum-artist">Floating Points</div><div class="sum-title">Promises · LP · M</div><div class="sum-cat">Ninja Tune · NTcd 269</div></div>
+          <div class="sum-iprice">Rp 450.000</div>
+        </div>
+        <div class="sum-item">
+          <div class="sum-thumb"><div class="cover-art sm"><div class="grooves"></div></div><span class="qty">1</span></div>
+          <div class="sum-info"><div class="sum-artist">Khruangbin</div><div class="sum-title">Mordechai · LP · M</div><div class="sum-cat">Dead Oceans · DOC-189</div></div>
+          <div class="sum-iprice">Rp 520.000</div>
+        </div>
+        <div class="sum-item">
+          <div class="sum-thumb"><div class="cover-art sm"><div class="grooves"></div></div><span class="qty">1</span></div>
+          <div class="sum-info"><div class="sum-artist">Miles Davis</div><div class="sum-title">Kind of Blue · LP · VG+</div><div class="sum-cat">Columbia · CL 1355</div></div>
+          <div class="sum-iprice">Rp 350.000</div>
+        </div>
+
+        <div class="voucher">
+          <label class="field-label" for="voucher">Voucher code</label>
+          <div class="voucher-row">
+            <input class="input mono" id="voucher" type="text" value="WAX10">
+            <button class="btn-apply" type="button">Apply</button>
+          </div>
+          <div class="voucher-applied">
+            <span class="voucher-tag"><span class="dot"></span>WAX10 applied</span>
+            <span class="mono" style="color:var(--success)">−Rp 132.000</span>
+          </div>
+        </div>
+
+        <div class="totals">
+          <div class="total-row"><span>Subtotal (3 items)</span><span class="val">Rp 1.320.000</span></div>
+          <div class="total-row discount"><span>Voucher — WAX10 (10%)</span><span class="val">−Rp 132.000</span></div>
+          <div class="total-row"><span>Shipping — SiCepat REG</span><span class="val">Rp 18.000</span></div>
+          <div class="total-row"><span>PPN 11% (included)</span><span class="val">Rp 130.812</span></div>
+          <div class="total-grand"><span class="lbl">Total</span>
+            <span><span class="amt">Rp 1.206.000</span><span class="usd">≈ $74</span></span></div>
+        </div>
+      </section>
+
+      <div class="bottom-spacer"></div>
+    </div>
+  </div><!-- /screen -->
+
+  <!-- Prototype hub link -->
+  <a class="proto-hub" href="index.html" aria-label="Back to prototype hub"><span class="glyph">◹</span> Prototype</a>
+
+  <!-- Sticky place-order bar -->
+  <div class="order-bar">
+    <div class="ob-total"><div class="lbl">Total</div><div class="amt">Rp 1.206.000</div></div>
+    <a class="btn-primary" href="mockup-confirmation.html">Place order
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+
+<div class="drawer-scrim" id="drawer-scrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Menu">
+    <div class="drawer-hdr">
+      <a href="index.html" class="drawer-brand" aria-label="Medium Format">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </a>
+      <button class="drawer-close" id="drawer-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-search">
+      <label class="srow2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="drawer-search-input" type="search" placeholder="Search artist, title, label…" aria-label="Search">
+      </label>
+    </div>
+
+    <nav class="acc" aria-label="Browse">
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">Shop
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel">
+          <a class="acc-link" href="mockup-storefront-mobile.html">New Releases</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">Best Selling</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">Pre-Orders</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">On-Sale</a>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">Formats
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel grid">
+          <a class="acc-link" href="mockup-category-mobile.html">Vinyls</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Cassettes</a>
+          <a class="acc-link" href="mockup-category-mobile.html">CD</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Books</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Prints</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Merchandise</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Audio</a>
+          <a class="acc-link" href="mockup-category-players-mobile.html">Players</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Accessories</a>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">Style
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel grid">
+          <a class="acc-link" href="mockup-category-mobile.html">Electronic</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Jazz</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Soul</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Hip-Hop</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Rock</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Ambient</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Funk</a>
+          <a class="acc-link" href="mockup-category-mobile.html">World</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Indie</a>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">News
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel">
+          <a class="acc-link" href="mockup-journal-mobile.html">Review</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Staff Picks</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">New Arrivals</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Feature</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Selector</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="drawer-foot">
+      <div class="drawer-row">
+        <span class="drawer-row-label">Currency</span>
+        <div class="cur-switch" role="group" aria-label="Currency">
+          <button class="cur-btn on" data-cur="IDR" onclick="setCurrency('IDR')">IDR</button>
+          <button class="cur-btn" data-cur="USD" onclick="setCurrency('USD')">USD</button>
+        </div>
+      </div>
+      <div class="drawer-row">
+        <span class="drawer-row-label">Theme</span>
+        <button class="theme-row-btn" id="theme-btn" aria-label="Toggle theme">
+          <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="ico-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <span id="theme-label">Dark</span>
+        </button>
+      </div>
+      <a class="drawer-account" href="mockup-account-mobile.html">
+        <span class="da-avatar">MF</span>
+        <span class="da-body"><span class="da-title">My Account</span><span class="da-sub">Orders, wishlist &amp; addresses</span></span>
+        <svg class="da-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </aside>
+</div><!-- /phone -->
+
+<script>
+  const root = document.documentElement;
+  const moon = document.getElementById('ico-moon');
+  const sun  = document.getElementById('ico-sun');
+  const themeLabel = document.getElementById('theme-label');
+  function applyTheme(theme){
+    root.setAttribute('data-theme', theme);
+    const dark = theme === 'dark';
+    if(moon) moon.style.display = dark ? '' : 'none';
+    if(sun)  sun.style.display  = dark ? 'none' : '';
+    if(themeLabel) themeLabel.textContent = dark ? 'Dark' : 'Light';
+  }
+  applyTheme(localStorage.getItem('mf-theme') || 'dark');
+  document.getElementById('theme-btn').addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('mf-theme', next);
+    applyTheme(next);
+  });
+
+  // ─── Nav drawer ───
+  const drawer = document.getElementById('drawer');
+  const drawerScrim = document.getElementById('drawer-scrim');
+  function openDrawer(){ drawer.classList.add('open'); drawerScrim.classList.add('open'); }
+  function closeDrawer(){ drawer.classList.remove('open'); drawerScrim.classList.remove('open'); }
+  document.getElementById('menu-btn').addEventListener('click', openDrawer);
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+  drawerScrim.addEventListener('click', closeDrawer);
+
+  // ─── Accordion (one open at a time) ───
+  document.querySelectorAll('.acc-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const item = head.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.acc-head').setAttribute('aria-expanded','false'); });
+      if(!isOpen){ item.classList.add('open'); head.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  // ─── Currency switcher (site-wide price conversion) ───
+  const FX=16000, fmtUSD=v=>'$'+Math.round(v/FX).toLocaleString('en-US'), parseIDR=s=>parseInt(s.replace(/[^0-9]/g,''),10);
+  function setCurrency(cur){
+    document.querySelectorAll('.cur-btn').forEach(b=>b.classList.toggle('on',b.dataset.cur===cur));
+    localStorage.setItem('mf-cur',cur);
+    document.querySelectorAll('body *').forEach(el=>{ if(el.children.length) return; const t=el.textContent.trim();
+      if(cur==='USD'){ const m=t.match(/^Rp\s?([\d.]+)$/); if(m){ if(!el.dataset.idr) el.dataset.idr=el.textContent; el.textContent=fmtUSD(parseIDR(m[1])); } }
+      else if(el.dataset.idr){ el.textContent=el.dataset.idr; } }); }
+  setCurrency(localStorage.getItem('mf-cur')||'IDR');
+
+  // Selectable tiles (single-select per group)
+  function bindGroup(selector){
+    document.querySelectorAll(selector).forEach(tile => {
+      tile.addEventListener('click', () => {
+        const group = tile.getAttribute('data-group');
+        document.querySelectorAll('[data-group="'+group+'"]').forEach(t => t.classList.remove('on'));
+        tile.classList.add('on');
+      });
+    });
+  }
+  bindGroup('.tile[data-group]');
+  bindGroup('.pay-tile[data-group]');
+</script>
+</body>
+</html>

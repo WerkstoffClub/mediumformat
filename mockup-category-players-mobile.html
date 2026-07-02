@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <title>Medium Format® — Players &amp; Turntables (Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .appbar-logo .brand-wordmark{height:16px;width:auto;}
+    .fbrand-name .brand-wordmark{height:22px;width:auto;}
+
+    /* ─── Tokens (dark default) ─────────────────────── */
+    :root{
+      --black:#000;--white:#fff;
+      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
+      --accent:#FFFFFF;--accent-text:#000000;
+      --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+      --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);
+      --warning-t:rgba(245,158,11,.12);--danger-t:rgba(239,68,68,.12);
+      --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+      --mono:"Geist Mono","SF Mono",ui-monospace,monospace;
+      --r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+      --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 4px 12px rgba(0,0,0,.6);--e3:0 8px 24px rgba(0,0,0,.7);
+      --focus:0 0 0 2px rgba(255,255,255,.6);
+      --player-h:62px;--tab-h:58px;
+    }
+    html[data-theme="light"]{
+      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
+      --focus:0 0 0 2px rgba(0,0,0,.5);
+      --e1:0 1px 2px rgba(0,0,0,.08);--e2:0 4px 12px rgba(0,0,0,.12);--e3:0 8px 24px rgba(0,0,0,.16);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    a{color:inherit;text-decoration:none;}
+    .mono{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+
+    /* ─── Page stage ────────────────────────────── */
+    body{
+      font-family:var(--ui);
+      background:#101012;
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      padding:32px 16px;-webkit-font-smoothing:antialiased;
+      background-image:radial-gradient(circle at 50% 0%,#1c1c20,#08080a 70%);
+    }
+    html[data-theme="light"] body{background:#e7e7ea;background-image:radial-gradient(circle at 50% 0%,#f4f4f6,#d8d8dc 70%);}
+
+    /* ─── Phone frame ───────────────────────────── */
+    .phone{
+      width:390px;height:844px;border-radius:44px;
+      background:var(--canvas);border:1px solid var(--hairline);
+      box-shadow:0 24px 70px rgba(0,0,0,.6),inset 0 0 0 6px #050505;
+      position:relative;overflow:hidden;color:var(--ink);
+      display:flex;flex-direction:column;
+    }
+    html[data-theme="light"] .phone{box-shadow:0 24px 70px rgba(0,0,0,.25),inset 0 0 0 6px #c8c8cc;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+
+    /* status notch */
+    .statusbar{
+      height:44px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;
+      padding:0 26px 8px;position:relative;z-index:25;
+      font-family:var(--ui);font-size:12px;font-weight:500;color:var(--ink);
+    }
+    .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:118px;height:30px;background:#000;border-radius:0 0 18px 18px;}
+    html[data-theme="light"] .notch{background:#111;}
+    .sb-right{display:flex;align-items:center;gap:6px;}
+    .sb-right svg{width:15px;height:13px;color:var(--ink);}
+    /* while the hero is at top, keep status-bar readable over artwork */
+    .phone.hero-top .statusbar{color:#fff;}
+    .phone.hero-top .sb-right svg{color:#fff;}
+
+    /* scroll area */
+    .screen{flex:1;overflow-y:auto;position:relative;background:var(--canvas);}
+    .screen::-webkit-scrollbar{width:0;}
+
+    /* ─── App header ────────────────────────────── */
+    .appbar{
+      position:sticky;top:var(--announce-h);z-index:20;background:var(--surface);
+      border-bottom:1px solid var(--hairline);
+      display:flex;align-items:center;gap:10px;padding:10px 16px;
+      transition:background .3s,border-color .3s,backdrop-filter .3s;
+    }
+    /* Transparent-over-hero app bar: overridden at top of the players hero */
+    .appbar.hero-appbar{
+      position:absolute;top:0;left:0;right:0;background:transparent;border-bottom-color:transparent;
+    }
+    .appbar.hero-appbar.scrolled{
+      position:sticky;background:rgba(14,14,14,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+      border-bottom-color:var(--hairline);
+    }
+    html[data-theme="light"] .appbar.hero-appbar.scrolled{background:rgba(255,255,255,.72);}
+    .appbar.hero-appbar:not(.scrolled) .icon-btn,
+    .appbar.hero-appbar:not(.scrolled) .appbar-name{color:#fff;}
+    .appbar.hero-appbar:not(.scrolled) .appbar-logo .mark{color:#fff;}
+    .icon-btn{width:38px;height:38px;border:none;background:transparent;color:var(--body);border-radius:var(--r-md);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+    .icon-btn:active{background:var(--raised);color:var(--ink);}
+    .icon-btn svg{width:20px;height:20px;}
+    .appbar-logo{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
+    .appbar-logo .mark{width:36px;height:36px;color:var(--ink);flex-shrink:0;}
+    .appbar-logo .mark svg{width:100%;height:100%;display:block;}
+    .appbar-name{font-size:15px;font-weight:600;letter-spacing:-.04em;color:var(--ink);}
+    .appbar-name sup{font-size:7px;font-weight:500;}
+    .cart-wrap{position:relative;}
+    .cart-badge{position:absolute;top:3px;right:3px;min-width:15px;height:15px;padding:0 3px;border-radius:var(--r-pill);
+      background:var(--accent);color:var(--accent-text);font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+
+    .announce strong{color:var(--ink);font-weight:500;}
+
+    /* ─── Players hero (full-width slider) ───────── */
+    .players-hero{position:relative;height:64vh;min-height:420px;overflow:hidden;background:var(--canvas);border-bottom:1px solid var(--hairline);}
+    .ph-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s ease;display:flex;align-items:center;justify-content:center;}
+    .ph-slide.on{opacity:1;visibility:visible;z-index:2;}
+    .ph-slide-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .ph-slide-art .disc{width:420px;height:420px;max-width:110vw;max-height:110vw;border-radius:50%;position:relative;
+      background:repeating-radial-gradient(circle at 50% 50%,#000 0 4px,#191919 4px 8px);opacity:.55;}
+    html[data-theme="light"] .ph-slide-art .disc{background:repeating-radial-gradient(circle at 50% 50%,#dedede 0 4px,#fff 4px 8px);opacity:.75;}
+    .ph-slide-art .disc::after{content:"";position:absolute;inset:44%;border-radius:50%;background:var(--accent);opacity:.7;}
+    .ph-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.6) 100%);pointer-events:none;z-index:1;}
+    html[data-theme="light"] .ph-veil{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.05) 40%,rgba(0,0,0,.42) 100%);}
+    .ph-content{position:relative;z-index:3;padding:0 20px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;width:100%;}
+    .ph-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+      padding:5px 11px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.5);color:#fff;background:rgba(0,0,0,.25);backdrop-filter:blur(6px);}
+    .ph-badge .dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .ph-title{font-size:30px;font-weight:600;letter-spacing:-.05em;line-height:1.05;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.4);}
+    .ph-sub{font-size:13px;color:rgba(255,255,255,.78);max-width:34ch;line-height:1.5;}
+    .ph-cta{
+      display:inline-flex;align-items:center;gap:7px;margin-top:2px;
+      font-size:13px;font-weight:500;padding:11px 18px;border-radius:var(--r-pill);
+      background:#fff;color:#000;
+    }
+    .ph-cta svg{width:13px;height:13px;}
+
+    .ph-arrow{
+      position:absolute;bottom:16px;z-index:4;
+      width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.4);
+      background:rgba(0,0,0,.28);backdrop-filter:blur(6px);color:#fff;
+      display:flex;align-items:center;justify-content:center;cursor:pointer;
+    }
+    .ph-arrow svg{width:16px;height:16px;}
+    .ph-arrow.prev{left:20px;}
+    .ph-arrow.next{right:20px;}
+
+    .ph-counter{
+      position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:4;
+      font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.85);
+      background:rgba(0,0,0,.3);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25);
+      padding:4px 10px;border-radius:var(--r-pill);letter-spacing:.02em;
+    }
+
+    /* ─── Page header ───────────────────────────── */
+    .page-head{padding:18px 16px 0;background:var(--surface);border-bottom:1px solid var(--hairline);}
+    .breadcrumb{font-family:var(--ui);font-size:11px;color:var(--mute);display:flex;align-items:center;gap:6px;margin-bottom:10px;}
+    .breadcrumb .sep{color:var(--hairline);}
+    .breadcrumb .crumb-cur{color:var(--ink);}
+    .sec-title{font-size:26px;font-weight:600;letter-spacing:-.05em;color:var(--ink);line-height:1.05;}
+    .sec-title em{font-style:normal;color:var(--mute);}
+    .sec-count{font-family:var(--ui);font-size:12px;color:var(--body);margin-top:6px;}
+    .sec-count strong{color:var(--ink);font-weight:500;font-family:var(--mono);}
+
+    /* ─── Filter / sort row ─────────────────────── */
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--hairline);background:var(--canvas);position:sticky;top:0;z-index:12;}
+    .result-count{font-size:13px;color:var(--mute);}
+    .result-count strong{font-family:var(--mono);color:var(--ink);}
+    .cb-actions{display:flex;align-items:center;gap:8px;}
+    .pill-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--ink);
+      background:transparent;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:6px 12px;cursor:pointer;}
+    .pill-btn:active{background:var(--raised);}
+    .pill-btn svg{width:14px;height:14px;}
+
+    /* ─── Non-music tile ────────────────────────── */
+    .tile{position:relative;width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .tile::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04),transparent 62%);pointer-events:none;}
+    html[data-theme="light"] .tile::before{background:linear-gradient(135deg,rgba(0,0,0,.03),transparent 62%);}
+    .tile svg{width:34%;height:34%;color:var(--mute);stroke-width:1.25;}
+
+    /* ─── Product grid (2-up) ───────────────────── */
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 16px;}
+    .pcard{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;position:relative;}
+    .pcard-media{display:block;aspect-ratio:1;position:relative;overflow:hidden;background:var(--surface);}
+    .stock{position:absolute;top:7px;left:7px;display:inline-flex;align-items:center;gap:4px;
+      font-size:9px;font-weight:500;letter-spacing:.03em;text-transform:uppercase;
+      padding:2px 7px;border-radius:var(--r-pill);backdrop-filter:blur(4px);}
+    .stock .dot{width:4px;height:4px;border-radius:50%;background:currentColor;}
+    .st-in{color:var(--success);background:var(--success-t);border:1px solid rgba(34,197,94,.35);}
+    .st-low{color:var(--warning);background:var(--warning-t);border:1px solid rgba(245,158,11,.35);}
+    .st-out{color:var(--danger);background:var(--danger-t);border:1px solid rgba(239,68,68,.35);}
+    .wish{position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:50%;
+      border:1px solid var(--hairline);background:rgba(0,0,0,.35);backdrop-filter:blur(4px);
+      color:var(--body);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;}
+    html[data-theme="light"] .wish{background:rgba(255,255,255,.55);}
+    .wish svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;}
+    .wish:active{color:var(--ink);}
+    .wish.on{color:var(--danger);border-color:rgba(239,68,68,.4);}
+    .wish.on svg{fill:var(--danger);stroke:var(--danger);}
+    .pinfo{padding:10px;}
+    .pname{font-size:13px;font-weight:500;color:var(--ink);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .psub{font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .pmeta{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .chips{display:flex;align-items:center;gap:4px;margin-top:8px;flex-wrap:wrap;}
+    .chip{font-size:10px;font-weight:500;padding:2px 7px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--body);background:transparent;line-height:1.4;}
+    .chip.fmt{font-family:var(--mono);}
+    .chip.cond{font-family:var(--mono);color:var(--mute);}
+    .price-row-card{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px;}
+    .pprice{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);}
+    .add-btn{width:28px;height:28px;border-radius:var(--r-md);background:transparent;border:1px solid var(--hairline);
+      color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .add-btn:active{background:var(--accent);border-color:var(--accent);color:var(--accent-text);}
+    .add-btn svg{width:14px;height:14px;}
+    .add-btn.disabled{opacity:.45;pointer-events:none;font-family:var(--ui);font-size:10px;width:auto;padding:0 8px;}
+
+    /* pagination */
+    .pagination{display:flex;align-items:center;justify-content:center;gap:5px;padding:18px 16px 8px;}
+    .ppage{min-width:32px;height:32px;padding:0 6px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;
+      color:var(--body);font-family:var(--mono);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .ppage.on{background:var(--accent);border-color:var(--accent);color:var(--accent-text);font-weight:500;}
+    .pdot{font-size:13px;color:var(--mute);padding:0 2px;}
+
+    /* ─── Footer ────────────────────────────────── */
+    footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:24px 16px;}
+    .fbrand-name{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;letter-spacing:-.04em;color:var(--ink);margin-bottom:10px;}
+    .fbrand-name .mark{width:20px;height:20px;color:var(--ink);}
+    .fbrand-name sup{font-size:8px;font-weight:500;}
+    .ftagline{font-size:12px;color:var(--body);line-height:1.6;margin-bottom:14px;}
+    .floc{font-size:12px;color:var(--body);display:flex;align-items:flex-start;gap:6px;margin-bottom:18px;}
+    .floc svg{width:13px;height:13px;flex-shrink:0;margin-top:2px;color:var(--mute);}
+    .pay-logos{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+    .pay-logos svg{height:18px;width:auto;color:var(--mute);}
+    .flegal{font-family:var(--ui);font-size:11px;color:var(--mute);border-top:1px solid var(--hairline);padding-top:14px;}
+
+    /* spacer so content clears player + tab bar */
+    .bottom-spacer{height:calc(var(--player-h) + var(--tab-h) + 8px);}
+
+    /* ─── Now Playing (pinned in frame) ─────────── */
+    .player{position:absolute;left:0;right:0;bottom:var(--tab-h);height:var(--player-h);z-index:30;
+      background:var(--surface);border-top:1px solid var(--hairline);box-shadow:var(--e2);
+      display:flex;align-items:center;gap:11px;padding:0 12px;}
+    .pcover{width:42px;height:42px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;border:1px solid var(--hairline);}
+    .pinfo-bar{flex:1;min-width:0;}
+    .ptrack{font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .prelease{font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px;}
+    .psource{font-size:9px;font-weight:500;padding:1px 6px;border-radius:var(--r-pill);background:transparent;color:var(--body);border:1px solid var(--hairline);flex-shrink:0;}
+    .pplay{width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-text);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .pplay svg{width:15px;height:15px;}
+    .pplay .ico-pause{display:none;}
+    .pplay.playing .ico-play{display:none;}
+    .pplay.playing .ico-pause{display:block;}
+    .pclose{width:30px;height:30px;background:transparent;border:none;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .pclose svg{width:14px;height:14px;}
+    .player-progress{position:absolute;left:0;right:0;top:0;height:2px;background:var(--hairline);}
+    .player-progress .fill{position:absolute;left:0;top:0;bottom:0;width:38%;background:var(--accent);}
+
+    /* ─── Bottom tab bar ────────────────────────── */
+    .tabbar{position:absolute;left:0;right:0;bottom:0;height:var(--tab-h);z-index:30;
+      background:var(--surface);border-top:1px solid var(--hairline);
+      display:flex;align-items:stretch;padding-bottom:8px;}
+    .tab{flex:1;border:none;background:transparent;color:var(--mute);cursor:pointer;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:500;}
+    .tab svg{width:21px;height:21px;}
+    .tab.on{color:var(--ink);}
+
+    /* ─── Search overlay (in frame) ─────────────── */
+    .search-ov{display:none;position:absolute;inset:0;z-index:50;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);padding:60px 16px 0;}
+    html[data-theme="light"] .search-ov{background:rgba(255,255,255,.65);}
+    .search-ov.open{display:block;}
+    .sbox{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--e3);}
+    .srow{display:flex;align-items:center;padding:14px;gap:10px;border-bottom:1px solid var(--hairline);}
+    .srow svg{width:17px;height:17px;color:var(--mute);flex-shrink:0;}
+    .sinput{flex:1;background:transparent;border:none;outline:none;font-size:15px;font-family:var(--ui);color:var(--ink);}
+    .sinput::placeholder{color:var(--mute);}
+    .shint{font-size:11px;color:var(--mute);padding:11px 14px;line-height:1.5;}
+
+    /* ─── Bottom-sheet (category + filters) ─────── */
+    .sheet-scrim{display:none;position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.6);}
+    .sheet-scrim.open{display:block;}
+    .sheet{position:absolute;left:0;right:0;bottom:0;z-index:45;max-height:80%;overflow-y:auto;
+      background:var(--surface);border-top:1px solid var(--hairline);border-radius:var(--r-xl) var(--r-xl) 0 0;
+      transform:translateY(100%);transition:transform .28s cubic-bezier(.16,1,.3,1);box-shadow:var(--e3);}
+    .sheet.open{transform:translateY(0);}
+    .sheet-handle{width:38px;height:4px;border-radius:2px;background:var(--hairline);margin:10px auto 4px;}
+    .sheet-hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 18px 14px;border-bottom:1px solid var(--hairline);}
+    .sheet-hdr h3{font-size:16px;font-weight:600;letter-spacing:-.02em;}
+    .sheet-close{width:30px;height:30px;border:none;background:transparent;color:var(--body);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:var(--r-md);}
+    .sheet-close svg{width:15px;height:15px;}
+    .fsec{padding:16px 18px;border-bottom:1px solid var(--hairline);}
+    .fsec:last-child{border-bottom:none;}
+    .flabel{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:12px;}
+    .cat-list{display:flex;flex-direction:column;gap:2px;}
+    .cat-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:var(--r-md);cursor:pointer;border:1px solid transparent;}
+    .cat-row:active{background:var(--raised);}
+    .cat-row.on{background:var(--accent);color:var(--accent-text);}
+    .cat-row-l{display:flex;align-items:center;gap:11px;font-size:14px;color:var(--ink);}
+    .cat-row.on .cat-row-l{color:var(--accent-text);}
+    .cat-row-l svg{width:18px;height:18px;color:var(--mute);}
+    .cat-row.on .cat-row-l svg{color:var(--accent-text);}
+    .cat-row-n{font-family:var(--mono);font-size:12px;color:var(--mute);}
+    .cat-row.on .cat-row-n{color:var(--accent-text);}
+    .fselect{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);color:var(--body);font-size:13px;font-family:var(--ui);padding:9px 28px 9px 11px;appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236E6E6E'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;background-size:14px;}
+    .cond-chips{display:flex;flex-wrap:wrap;gap:7px;}
+    .cchip{font-family:var(--ui);font-size:13px;padding:6px 14px;border-radius:var(--r-pill);cursor:pointer;border:1px solid var(--hairline);color:var(--mute);background:transparent;}
+    .cchip.on{border-color:var(--accent);color:var(--ink);}
+    .sheet-apply{padding:14px 18px;position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--hairline);}
+    .btn-primary{width:100%;background:var(--accent);color:var(--accent-text);border:none;border-radius:var(--r-md);padding:12px;font-size:14px;font-weight:500;font-family:var(--ui);cursor:pointer;}
+
+    /* three-zone appbar: hamburger LEFT · logo CENTERED · cart RIGHT */
+    .appbar{display:grid;grid-template-columns:1fr auto 1fr;gap:0;}
+    .appbar-lead{justify-self:start;}
+    .appbar-trail{justify-self:end;display:flex;align-items:center;gap:4px;}
+    .appbar-logo{display:flex;align-items:center;justify-content:center;gap:8px;justify-self:center;min-width:0;}
+    .appbar-logo .mark{width:36px;height:36px;color:var(--ink);flex-shrink:0;}
+    .appbar-logo .mark svg{width:100%;height:100%;display:block;}
+    .appbar-name{font-size:17px;font-weight:600;letter-spacing:-.04em;color:var(--ink);white-space:nowrap;}
+    .appbar-name sup{font-size:7px;font-weight:500;}
+
+    /* ─── Announcement — BLACK in light mode ─────── */
+    html[data-theme="light"] .announce strong{color:#fff;}
+    html[data-theme="light"] .announce a{color:#fff;border-color:rgba(255,255,255,.55);}
+    html[data-theme="light"] .announce a:hover{border-color:#fff;}
+
+    /* ─── Nav drawer (opened by hamburger) ───────── */
+    .drawer-scrim{display:none;position:absolute;inset:0;z-index:60;background:rgba(0,0,0,.6);}
+    .drawer-scrim.open{display:block;}
+    html[data-theme="light"] .drawer-scrim{background:rgba(0,0,0,.35);}
+    .drawer{position:absolute;top:0;left:0;bottom:0;width:82%;max-width:320px;z-index:65;
+      background:var(--surface);border-right:1px solid var(--hairline);box-shadow:var(--e3);
+      transform:translateX(-100%);transition:transform .28s cubic-bezier(.16,1,.3,1);
+      display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+    .drawer::-webkit-scrollbar{width:0;}
+    .drawer.open{transform:translateX(0);}
+    .drawer-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--hairline);position:sticky;top:0;background:var(--surface);z-index:2;}
+    .drawer-brand{display:flex;align-items:center;gap:11px;font-size:18px;font-weight:600;letter-spacing:-.04em;color:var(--ink);flex:1;}
+    .drawer-brand .mark{width:32px;height:32px;color:var(--ink);flex-shrink:0;}
+    .drawer-brand .mark svg{width:100%;height:100%;display:block;}
+    .drawer-brand sup{font-size:7px;font-weight:500;}
+    .drawer-close{width:38px;height:38px;min-width:44px;min-height:44px;border:none;background:transparent;color:var(--body);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+    .drawer-close:active{background:var(--raised);color:var(--ink);}
+    .drawer-close svg{width:18px;height:18px;}
+    /* drawer search */
+    .drawer-search{padding:14px 16px;border-bottom:1px solid var(--hairline);}
+    .drawer-search .srow2{display:flex;align-items:center;gap:10px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:11px 12px;}
+    .drawer-search .srow2 svg{width:16px;height:16px;color:var(--mute);flex-shrink:0;}
+    .drawer-search input{flex:1;background:transparent;border:none;outline:none;font-family:var(--ui);font-size:14px;color:var(--ink);min-width:0;}
+    .drawer-search input::placeholder{color:var(--mute);}
+    /* accordion menu */
+    .acc{padding:6px 8px;flex:1;}
+    .acc-item{border-bottom:1px solid var(--hairline);}
+    .acc-item:last-child{border-bottom:none;}
+    .acc-head{width:100%;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+      background:transparent;border:none;cursor:pointer;padding:12px 8px;font-family:var(--ui);font-size:15px;font-weight:500;color:var(--ink);text-align:left;}
+    .acc-head .chev{width:16px;height:16px;color:var(--mute);flex-shrink:0;transition:transform .2s;}
+    .acc-item.open .acc-head .chev{transform:rotate(180deg);}
+    .acc-panel{display:none;padding:2px 8px 10px;}
+    .acc-item.open .acc-panel{display:block;}
+    .acc-panel.grid{display:none;}
+    .acc-item.open .acc-panel.grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;}
+    .acc-link{display:flex;align-items:center;min-height:44px;padding:8px 10px;border-radius:var(--r-md);font-size:14px;color:var(--body);}
+    .acc-link:active{background:var(--raised);color:var(--ink);}
+    /* drawer footer: currency + theme + account */
+    .drawer-foot{border-top:1px solid var(--hairline);padding:14px 16px;display:flex;flex-direction:column;gap:12px;position:sticky;bottom:0;background:var(--surface);}
+    .drawer-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;}
+    .drawer-row-label{font-size:13px;color:var(--body);}
+    .cur-switch{display:flex;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:2px;}
+    .cur-btn{font-family:var(--ui);font-size:11px;font-weight:500;color:var(--mute);background:transparent;border:none;border-radius:var(--r-pill);padding:8px 14px;min-height:36px;cursor:pointer;}
+    .cur-btn.on{background:var(--accent);color:var(--accent-text);}
+    .theme-row-btn{display:flex;align-items:center;gap:8px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-pill);color:var(--ink);font-family:var(--ui);font-size:13px;font-weight:500;padding:8px 14px;min-height:40px;cursor:pointer;}
+    .theme-row-btn svg{width:16px;height:16px;}
+
+    .drawer-account svg{width:18px;height:18px;color:var(--body);}
+    .drawer-account:active{background:var(--raised);}
+
+
+    /* MF: mobile chrome overhaul (announce marquee, full-screen drawer, redesigned account row) */
+    :root{--announce-h:28px;}
+    .announce{position:sticky;top:0;z-index:22;height:var(--announce-h);overflow:hidden;white-space:nowrap;
+      display:flex;align-items:center;padding:0;border-bottom:1px solid var(--hairline);background:var(--accent);color:var(--accent-text);}
+    .announce-track{display:inline-flex;align-items:center;gap:48px;padding-left:100%;animation:mf-marquee 16s linear infinite;font-size:11px;color:inherit;}
+    .announce-track strong{color:inherit;font-weight:700;}
+    @keyframes mf-marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    @media (prefers-reduced-motion: reduce){.announce-track{animation:none;padding-left:16px;}}
+    .drawer{width:100%!important;max-width:none!important;}
+    .drawer-hdr{border-bottom:none!important;}
+    .drawer-search{border-bottom:1px solid var(--hairline);}
+    .drawer-search .srow2{transition:border-color .15s;}
+    .acc-panel .acc-link{border-top:1px solid var(--hairline);}
+    .acc-panel .acc-link:first-child{border-top:none;}
+    .acc-panel.grid{display:none;}
+    .acc-item.open .acc-panel.grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+    .acc-panel.grid .acc-link:nth-child(-n+2){border-top:none;}
+    .drawer-foot{padding:10px 16px 14px!important;gap:8px!important;}
+    .drawer-row{min-height:36px!important;}
+    .theme-row-btn{padding:6px 12px!important;min-height:34px!important;}
+    .cur-switch .cur-btn{padding:6px 11px!important;min-height:32px!important;}
+    .drawer-account{display:flex;align-items:center;gap:11px;min-height:56px;padding:10px 12px;
+      border:1px solid var(--hairline);border-radius:var(--r-lg);color:var(--ink);background:var(--raised);}
+    .drawer-account .da-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-text);
+      display:flex;align-items:center;justify-content:center;font-family:var(--ui);font-size:12px;font-weight:600;flex-shrink:0;}
+    .drawer-account .da-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+    .drawer-account .da-title{font-size:13px;font-weight:600;color:var(--ink);}
+    .drawer-account .da-sub{font-size:11px;color:var(--mute);margin-top:1px;}
+    .drawer-account .da-chev{color:var(--mute);flex-shrink:0;}
+    .psource{display:none!important;}
+
+    /* MF: panel/section header bars — gray (raised) bar + ink text; active tab = accent fill */
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr){background:var(--raised)!important;border-bottom:1px solid var(--hairline)!important;color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
+    :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+  </style>
+</head>
+<body>
+
+<div class="phone hero-top" id="phone">
+
+  <!-- Status bar / notch -->
+  <div class="statusbar">
+    <span>9:41</span>
+    <div class="notch"></div>
+    <div class="sb-right">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="9" width="3" height="6" rx="1"/><rect x="7" y="6" width="3" height="9" rx="1"/><rect x="12" y="3" width="3" height="12" rx="1"/><rect x="17" y="6" width="3" height="9" rx="1" opacity=".4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M2 8.8a16 16 0 0 1 20 0M12 20h.01"/></svg>
+      <svg viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="6" width="20" height="12" rx="3"/><rect x="3" y="8" width="15" height="8" rx="1.5" fill="currentColor"/><path d="M23 10v4" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+
+  <!-- Screen -->
+  <div class="screen" id="screen">
+
+    <!-- App bar (transparent-over-hero; picks up opaque chrome once scrolled) -->
+    <div class="appbar hero-appbar" id="site-appbar">
+      <button class="icon-btn" id="menu-btn" aria-label="Open categories &amp; filters">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+      <a href="mockup-storefront-mobile.html" class="appbar-logo">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </a>
+      <button class="icon-btn" id="search-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <div class="cart-wrap">
+        <a href="mockup-cart-mobile.html" class="icon-btn" aria-label="Cart — 3 items">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        </a>
+        <span class="cart-badge">3</span>
+      </div>
+    </div>
+
+    <!-- ══════════ PLAYERS HERO SLIDER ══════════ -->
+    <section class="players-hero" id="players-hero" aria-roledescription="carousel" aria-label="Featured players">
+
+      <!-- Slide 1 -->
+      <div class="ph-slide on" data-slide="0">
+        <div class="ph-slide-art"><div class="disc"></div></div>
+        <div class="ph-veil"></div>
+        <div class="ph-content">
+          <span class="ph-badge"><span class="dot"></span>Featured</span>
+          <h2 class="ph-title">Technics<br>SL-1200MK7</h2>
+          <p class="ph-sub">The direct-drive standard, reborn — coreless motor, twin-gyro platter.</p>
+          <a class="ph-cta" href="mockup-release-mobile.html">See details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="ph-slide" data-slide="1">
+        <div class="ph-slide-art"><div class="disc"></div></div>
+        <div class="ph-veil"></div>
+        <div class="ph-content">
+          <span class="ph-badge"><span class="dot"></span>Featured</span>
+          <h2 class="ph-title">Rega<br>Planar 3</h2>
+          <p class="ph-sub">A 40-year lineage distilled into one plinth — low-mass tonearm, glass platter.</p>
+          <a class="ph-cta" href="mockup-release-mobile.html">See details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="ph-slide" data-slide="2">
+        <div class="ph-slide-art"><div class="disc"></div></div>
+        <div class="ph-veil"></div>
+        <div class="ph-content">
+          <span class="ph-badge"><span class="dot"></span>Featured</span>
+          <h2 class="ph-title">Pro-Ject<br>Debut Carbon EVO</h2>
+          <p class="ph-sub">Carbon-fibre tonearm with a factory-fitted Ortofon 2M Red cartridge.</p>
+          <a class="ph-cta" href="mockup-release-mobile.html">See details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="ph-slide" data-slide="3">
+        <div class="ph-slide-art"><div class="disc"></div></div>
+        <div class="ph-veil"></div>
+        <div class="ph-content">
+          <span class="ph-badge"><span class="dot"></span>Featured</span>
+          <h2 class="ph-title">U-Turn<br>Orbit Plus</h2>
+          <p class="ph-sub">Hand-built in Massachusetts — acrylic platter, adjustable counterweight.</p>
+          <a class="ph-cta" href="mockup-release-mobile.html">See details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <button class="ph-arrow prev" id="ph-prev" aria-label="Previous featured player">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="ph-arrow next" id="ph-next" aria-label="Next featured player">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+
+      <span class="ph-counter mono" id="ph-counter">1 / 4</span>
+    </section>
+
+    <!-- Page header -->
+    <header class="page-head">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <span>Shop</span><span class="sep">/</span><span class="crumb-cur">Players</span>
+      </nav>
+      <h1 class="sec-title">Shop <em>—</em> Players &amp; Turntables</h1>
+      <div class="sec-count"><strong>14</strong> products in Players</div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="result-count"><strong>14</strong> results</div>
+      <div class="cb-actions">
+        <button class="pill-btn" id="sort-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+          Sort
+        </button>
+        <button class="pill-btn" id="filter-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+          Filters
+        </button>
+      </div>
+    </div>
+
+    <!-- Shop players & turntables -->
+    <section aria-label="Players &amp; Turntables">
+      <div class="grid">
+        <article class="pcard">
+          <a class="pcard-media" href="mockup-release-mobile.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><path d="M17 8v4"/></svg></div><span class="stock st-in"><span class="dot"></span>In stock</span></a>
+          <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <div class="pinfo"><div class="pname">Technics</div><div class="psub">SL-1200MK7</div><div class="pmeta">Direct-drive · Coreless</div>
+            <div class="chips"><span class="chip">Turntable</span></div>
+            <div class="price-row-card"><span class="pprice">Rp 13.900.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div></div>
+        </article>
+        <article class="pcard">
+          <a class="pcard-media" href="mockup-release-mobile.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><path d="M17 8v4"/></svg></div><span class="stock st-in"><span class="dot"></span>In stock</span></a>
+          <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <div class="pinfo"><div class="pname">Rega</div><div class="psub">Planar 3</div><div class="pmeta">Belt-drive · Glass</div>
+            <div class="chips"><span class="chip">Turntable</span></div>
+            <div class="price-row-card"><span class="pprice">Rp 10.400.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div></div>
+        </article>
+        <article class="pcard">
+          <a class="pcard-media" href="mockup-release-mobile.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><path d="M17 8v4"/></svg></div><span class="stock st-in"><span class="dot"></span>In stock</span></a>
+          <button class="wish on" aria-label="Remove from wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <div class="pinfo"><div class="pname">Pro-Ject</div><div class="psub">Debut Carbon EVO</div><div class="pmeta">Belt · 2M Red</div>
+            <div class="chips"><span class="chip">Turntable</span></div>
+            <div class="price-row-card"><span class="pprice">Rp 9.100.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div></div>
+        </article>
+        <article class="pcard">
+          <a class="pcard-media" href="mockup-release-mobile.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><path d="M17 8v4"/></svg></div><span class="stock st-low"><span class="dot"></span>Low</span></a>
+          <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <div class="pinfo"><div class="pname">U-Turn</div><div class="psub">Orbit Plus</div><div class="pmeta">Belt · Acrylic platter</div>
+            <div class="chips"><span class="chip">Turntable</span></div>
+            <div class="price-row-card"><span class="pprice">Rp 6.800.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div></div>
+        </article>
+        <article class="pcard">
+          <a class="pcard-media" href="mockup-release-mobile.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><path d="M17 8v4"/></svg></div><span class="stock st-in"><span class="dot"></span>In stock</span></a>
+          <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <div class="pinfo"><div class="pname">Audio-Technica</div><div class="psub">AT-LP120XUSB</div><div class="pmeta">Direct-drive · USB</div>
+            <div class="chips"><span class="chip">Turntable</span></div>
+            <div class="price-row-card"><span class="pprice">Rp 5.400.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div></div>
+        </article>
+        <article class="pcard">
+          <a class="pcard-media" href="mockup-release-mobile.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><path d="M17 8v4"/></svg></div><span class="stock st-out"><span class="dot"></span>Sold out</span></a>
+          <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <div class="pinfo"><div class="pname">Technics</div><div class="psub">SL-1500C</div><div class="pmeta">Direct · Built-in phono</div>
+            <div class="chips"><span class="chip">Turntable</span></div>
+            <div class="price-row-card"><span class="pprice">Rp 16.500.000</span><button class="add-btn disabled" aria-label="Sold out" tabindex="-1">Notify</button></div></div>
+        </article>
+        <article class="pcard">
+          <a class="pcard-media" href="mockup-release-mobile.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="9" width="16" height="8" rx="2"/><circle cx="8" cy="13" r="1.4"/><circle cx="16" cy="13" r="1.4"/><path d="M4 9V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"/></svg></div><span class="stock st-in"><span class="dot"></span>In stock</span></a>
+          <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <div class="pinfo"><div class="pname">Cambridge Audio</div><div class="psub">Duo Phono Preamp</div><div class="pmeta">MM/MC · Low noise</div>
+            <div class="chips"><span class="chip">Phono Preamp</span></div>
+            <div class="price-row-card"><span class="pprice">Rp 1.950.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div></div>
+        </article>
+        <article class="pcard">
+          <a class="pcard-media" href="mockup-release-mobile.html"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h4l3-3v16l-3-3H6a2 2 0 0 1-2-2z"/><path d="M17 8a5 5 0 0 1 0 8M20 5a9 9 0 0 1 0 14"/></svg></div><span class="stock st-in"><span class="dot"></span>In stock</span></a>
+          <button class="wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <div class="pinfo"><div class="pname">Edifier</div><div class="psub">R1280T Speakers</div><div class="pmeta">Powered pair · 42 W</div>
+            <div class="chips"><span class="chip">Speakers</span></div>
+            <div class="price-row-card"><span class="pprice">Rp 2.650.000</span><button class="add-btn" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></button></div></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Pagination -->
+    <nav class="pagination" aria-label="Pagination">
+      <button class="ppage on" aria-current="page">1</button>
+      <button class="ppage">2</button>
+      <span class="pdot">…</span>
+      <button class="ppage" id="page-last">2</button>
+    </nav>
+
+    <!-- Footer -->
+    <footer>
+      <div class="fbrand-name">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </div>
+      <div class="ftagline">Independent record shop based in Jakarta, Indonesia. Curating vinyl, CD, and music culture since 2019.</div>
+      <div class="floc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Jl. Kemang Raya No. 15, Jakarta Selatan
+      </div>
+      <div class="pay-logos">
+        <svg class="paylogo" viewBox="0 0 44 18" role="img" aria-label="Visa"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="15" fill="currentColor" letter-spacing="-.5" font-style="italic">VISA</text></svg>
+        <svg class="paylogo" viewBox="0 0 30 18" role="img" aria-label="Mastercard"><circle cx="11" cy="9" r="6.5" fill="currentColor" opacity=".55"/><circle cx="19" cy="9" r="6.5" fill="currentColor"/></svg>
+        <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="JCB"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="14" fill="currentColor" letter-spacing="-.3">JCB</text></svg>
+        <svg class="paylogo" viewBox="0 0 40 18" role="img" aria-label="QRIS"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="0">QRIS</text></svg>
+        <svg class="paylogo" viewBox="0 0 48 18" role="img" aria-label="GoPay"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">GoPay</text></svg>
+        <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="OVO"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="0">OVO</text></svg>
+        <svg class="paylogo" viewBox="0 0 42 18" role="img" aria-label="DANA"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.2">DANA</text></svg>
+        <svg class="paylogo" viewBox="0 0 74 18" role="img" aria-label="ShopeePay"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.3">ShopeePay</text></svg>
+        <svg class="paylogo" viewBox="0 0 34 18" role="img" aria-label="BCA"><text x="0" y="14" font-family="Geist, sans-serif" font-weight="700" font-size="13" fill="currentColor" letter-spacing="-.2">BCA</text></svg>
+      </div>
+      <div class="flegal">© 2026 Medium Format</div>
+    </footer>
+
+    <div class="bottom-spacer"></div>
+  </div><!-- /screen -->
+
+  <!-- Now Playing (pinned) -->
+  <div class="player" id="player">
+    <div class="player-progress"><div class="fill"></div></div>
+    <div class="pcover"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div></div>
+    <div class="pinfo-bar">
+      <div class="ptrack">LesAlpx</div>
+      <div class="prelease">Floating Points — Promises <span class="psource">Bandcamp</span></div>
+    </div>
+    <button class="pplay playing" id="pplay-btn" aria-label="Pause">
+      <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button class="pclose" id="pclose-btn" aria-label="Close player">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- Bottom tab bar -->
+  <nav class="tabbar" aria-label="Primary">
+    <button class="tab on">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      Shop
+    </button>
+    <button class="tab" id="tab-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Search
+    </button>
+    <button class="tab" id="tab-saved">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Saved
+    </button>
+    <button class="tab" id="tab-cats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Categories
+    </button>
+  </nav>
+
+  <!-- Search overlay -->
+  <div class="search-ov" id="search-ov" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="sbox">
+      <div class="srow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="sinput" id="sinput" type="text" placeholder="Search artist, title, product…">
+      </div>
+      <div class="shint">Try "Technics", "Rega Planar", "phono preamp"</div>
+    </div>
+  </div>
+
+  <!-- Bottom-sheet: filters -->
+  <div class="sheet-scrim" id="sheet-scrim"></div>
+  <div class="sheet" id="sheet" aria-label="Filters">
+    <div class="sheet-handle"></div>
+    <div class="sheet-hdr">
+      <h3>Filters</h3>
+      <button class="sheet-close" id="sheet-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="fsec">
+      <div class="flabel">Sort by</div>
+      <select class="fselect" aria-label="Sort by">
+        <option>Featured</option>
+        <option>Newest first</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Name A–Z</option>
+      </select>
+    </div>
+    <div class="fsec">
+      <div class="flabel">Drive type</div>
+      <div class="cond-chips">
+        <span class="cchip on">Belt-drive</span><span class="cchip on">Direct-drive</span><span class="cchip">Idler</span>
+      </div>
+    </div>
+    <div class="sheet-apply">
+      <button class="btn-primary" id="sheet-apply">Show <span id="apply-count">14</span> products</button>
+    </div>
+  </div>
+
+  <!-- Theme toggle (floating in frame) -->
+  <button class="icon-btn" id="theme-toggle-btn" aria-label="Toggle theme"
+    style="position:absolute;top:50px;right:64px;z-index:26;width:32px;height:32px;background:rgba(0,0,0,.28);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:50%;">
+    <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg id="ico-sun" style="display:none;width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <!-- Prototype hub link -->
+  <a href="index.html" class="icon-btn" aria-label="Back to prototype hub"
+    style="position:absolute;top:50px;left:14px;z-index:26;width:auto;padding:0 10px;height:28px;gap:5px;font-family:var(--ui);font-size:11px;color:#fff;text-decoration:none;background:rgba(0,0,0,.28);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);border-radius:var(--r-pill);display:flex;align-items:center;">◹ Prototype</a>
+
+<div class="drawer-scrim" id="drawer-scrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Menu">
+    <div class="drawer-hdr">
+      <a href="index.html" class="drawer-brand" aria-label="Medium Format">
+        <img src="assets/MF_Logo/SVG/MF_Wordmark_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
+      </a>
+      <button class="drawer-close" id="drawer-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-search">
+      <label class="srow2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="drawer-search-input" type="search" placeholder="Search artist, title, label…" aria-label="Search">
+      </label>
+    </div>
+
+    <nav class="acc" aria-label="Browse">
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">Shop
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel">
+          <a class="acc-link" href="mockup-storefront-mobile.html">New Releases</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">Best Selling</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">Pre-Orders</a>
+          <a class="acc-link" href="mockup-storefront-mobile.html">On-Sale</a>
+        </div>
+      </div>
+      <div class="acc-item open">
+        <button class="acc-head" aria-expanded="true">Formats
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel grid">
+          <a class="acc-link" href="mockup-category-mobile.html">Vinyls</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Cassettes</a>
+          <a class="acc-link" href="mockup-category-mobile.html">CD</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Books</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Prints</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Merchandise</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Audio</a>
+          <a class="acc-link" href="mockup-category-players-mobile.html">Players</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Accessories</a>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">Style
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel grid">
+          <a class="acc-link" href="mockup-category-mobile.html">Electronic</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Jazz</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Soul</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Hip-Hop</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Rock</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Ambient</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Funk</a>
+          <a class="acc-link" href="mockup-category-mobile.html">World</a>
+          <a class="acc-link" href="mockup-category-mobile.html">Indie</a>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" aria-expanded="false">News
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-panel">
+          <a class="acc-link" href="mockup-journal-mobile.html">Review</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Staff Picks</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">New Arrivals</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Feature</a>
+          <a class="acc-link" href="mockup-journal-mobile.html">Selector</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="drawer-foot">
+      <div class="drawer-row">
+        <span class="drawer-row-label">Currency</span>
+        <div class="cur-switch" role="group" aria-label="Currency">
+          <button class="cur-btn on" data-cur="IDR" onclick="setCurrency('IDR')">IDR</button>
+          <button class="cur-btn" data-cur="USD" onclick="setCurrency('USD')">USD</button>
+        </div>
+      </div>
+      <div class="drawer-row">
+        <span class="drawer-row-label">Theme</span>
+        <button class="theme-row-btn" id="theme-btn" aria-label="Toggle theme">
+          <svg id="ico-moon-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="ico-sun-2" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <span id="theme-label">Dark</span>
+        </button>
+      </div>
+      <a class="drawer-account" href="mockup-account-mobile.html">
+        <span class="da-avatar">MF</span>
+        <span class="da-body"><span class="da-title">My Account</span><span class="da-sub">Orders, wishlist &amp; addresses</span></span>
+        <svg class="da-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </aside>
+</div><!-- /phone -->
+
+<script>
+  const root = document.documentElement;
+  const moon = document.getElementById('ico-moon');
+  const sun  = document.getElementById('ico-sun');
+  const moon2 = document.getElementById('ico-moon-2');
+  const sun2  = document.getElementById('ico-sun-2');
+  const themeLabel = document.getElementById('theme-label');
+  function applyTheme(theme){
+    root.setAttribute('data-theme', theme);
+    const dark = theme === 'dark';
+    if(moon) moon.style.display = dark ? '' : 'none';
+    if(sun)  sun.style.display  = dark ? 'none' : '';
+    if(moon2) moon2.style.display = dark ? '' : 'none';
+    if(sun2)  sun2.style.display  = dark ? 'none' : '';
+    if(themeLabel) themeLabel.textContent = dark ? 'Dark' : 'Light';
+  }
+  applyTheme(localStorage.getItem('mf-theme') || 'dark');
+  function toggleTheme(){
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('mf-theme', next);
+    applyTheme(next);
+  }
+  document.getElementById('theme-btn').addEventListener('click', toggleTheme);
+  document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
+
+  // ─── Nav drawer ───
+  const drawer = document.getElementById('drawer');
+  const drawerScrim = document.getElementById('drawer-scrim');
+  function openDrawer(){ drawer.classList.add('open'); drawerScrim.classList.add('open'); }
+  function closeDrawer(){ drawer.classList.remove('open'); drawerScrim.classList.remove('open'); }
+  document.getElementById('menu-btn').addEventListener('click', openDrawer);
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+  drawerScrim.addEventListener('click', closeDrawer);
+
+  // ─── Accordion (one open at a time) ───
+  document.querySelectorAll('.acc-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const item = head.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.acc-head').setAttribute('aria-expanded','false'); });
+      if(!isOpen){ item.classList.add('open'); head.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  // ─── Currency switcher (site-wide price conversion) ───
+  const FX=16000, fmtUSD=v=>'$'+Math.round(v/FX).toLocaleString('en-US'), parseIDR=s=>parseInt(s.replace(/[^0-9]/g,''),10);
+  function setCurrency(cur){
+    document.querySelectorAll('.cur-btn').forEach(b=>b.classList.toggle('on',b.dataset.cur===cur));
+    localStorage.setItem('mf-cur',cur);
+    document.querySelectorAll('body *').forEach(el=>{ if(el.children.length) return; const t=el.textContent.trim();
+      if(cur==='USD'){ const m=t.match(/^Rp\s?([\d.]+)$/); if(m){ if(!el.dataset.idr) el.dataset.idr=el.textContent; el.textContent=fmtUSD(parseIDR(m[1])); } }
+      else if(el.dataset.idr){ el.textContent=el.dataset.idr; } }); }
+  setCurrency(localStorage.getItem('mf-cur')||'IDR');
+
+  // ─── Transparent-over-hero app bar: toggle .scrolled ─
+  const siteAppbar = document.getElementById('site-appbar');
+  const phone = document.getElementById('phone');
+  const playersHero = document.getElementById('players-hero');
+  const screenEl = document.getElementById('screen');
+  function updateAppbarChrome(){
+    const heroBottom = playersHero.getBoundingClientRect().bottom;
+    const screenTop = screenEl.getBoundingClientRect().top;
+    const scrolledPast = (heroBottom - screenTop) <= 56;
+    siteAppbar.classList.toggle('scrolled', scrolledPast);
+    phone.classList.toggle('hero-top', !scrolledPast);
+  }
+  updateAppbarChrome();
+  screenEl.addEventListener('scroll', updateAppbarChrome, { passive: true });
+
+  // ─── Players hero slider ─────────────────────────
+  const phSlides = Array.from(document.querySelectorAll('.ph-slide'));
+  const phCounter = document.getElementById('ph-counter');
+  const phTotal = phSlides.length;
+  let phIndex = 0;
+  let phTimer = null;
+
+  function phGoTo(i){
+    phIndex = (i + phTotal) % phTotal;
+    phSlides.forEach((s, idx) => s.classList.toggle('on', idx === phIndex));
+    phCounter.textContent = (phIndex + 1) + ' / ' + phTotal;
+  }
+  function phNext(){ phGoTo(phIndex + 1); }
+  function phPrev(){ phGoTo(phIndex - 1); }
+
+  document.getElementById('ph-next').addEventListener('click', () => { phNext(); restartAutoAdvance(); });
+  document.getElementById('ph-prev').addEventListener('click', () => { phPrev(); restartAutoAdvance(); });
+
+  function startAutoAdvance(){ phTimer = setInterval(phNext, 6000); }
+  function stopAutoAdvance(){ if(phTimer){ clearInterval(phTimer); phTimer = null; } }
+  function restartAutoAdvance(){ stopAutoAdvance(); startAutoAdvance(); }
+  startAutoAdvance();
+
+  // ─── Wishlist heart toggle ──────────────────────
+  document.addEventListener('click', e => {
+    const w = e.target.closest('.wish');
+    if(w){
+      e.preventDefault();
+      const on = w.classList.toggle('on');
+      w.setAttribute('aria-label', on ? 'Remove from wishlist' : 'Add to wishlist');
+      return;
+    }
+    const cc = e.target.closest('.cchip');
+    if(cc){ cc.classList.toggle('on'); }
+  });
+
+  // ─── Now-playing play/pause ─────────────────────
+  document.getElementById('pplay-btn').addEventListener('click', function(){
+    const playing = this.classList.toggle('playing');
+    this.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  });
+  document.getElementById('pclose-btn').addEventListener('click', () => {
+    document.getElementById('player').style.display = 'none';
+  });
+
+  // ─── Search overlay ─────────────────────────────
+  const searchOv = document.getElementById('search-ov');
+  function openSearch(){ searchOv.classList.add('open'); setTimeout(()=>document.getElementById('sinput').focus(),50); }
+  function closeSearch(){ searchOv.classList.remove('open'); }
+  document.getElementById('search-btn').addEventListener('click', openSearch);
+  document.getElementById('tab-search').addEventListener('click', openSearch);
+  searchOv.addEventListener('click', e => { if(e.target === searchOv) closeSearch(); });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape'){ closeSearch(); closeSheet(); }
+    if((e.metaKey || e.ctrlKey) && e.key === 'k'){ e.preventDefault(); openSearch(); }
+  });
+
+  // ─── Bottom-sheet (filters) ──────────────────────
+  const sheet = document.getElementById('sheet');
+  const sheetScrim = document.getElementById('sheet-scrim');
+  function openSheet(){ sheet.classList.add('open'); sheetScrim.classList.add('open'); }
+  function closeSheet(){ sheet.classList.remove('open'); sheetScrim.classList.remove('open'); }
+  document.getElementById('filter-btn').addEventListener('click', openSheet);
+  document.getElementById('sort-btn').addEventListener('click', openSheet);
+  document.getElementById('tab-cats').addEventListener('click', openSheet);
+  document.getElementById('sheet-close').addEventListener('click', closeSheet);
+  document.getElementById('sheet-apply').addEventListener('click', closeSheet);
+  sheetScrim.addEventListener('click', closeSheet);
+</script>
+</body>
+</html>
