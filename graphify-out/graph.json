@@ -382,6 +382,15 @@
       "norm_label": "test-setup.ts"
     },
     {
+      "label": "vite-env.d.ts",
+      "file_type": "code",
+      "source_file": "apps/backoffice/src/vite-env.d.ts",
+      "source_location": "L1",
+      "id": "apps_backoffice_src_vite_env_d_ts",
+      "community": 66,
+      "norm_label": "vite-env.d.ts"
+    },
+    {
       "label": "ThemeToggle.tsx",
       "file_type": "code",
       "source_file": "apps/backoffice/src/components/ThemeToggle.tsx",
@@ -459,7 +468,7 @@
       "source_file": "apps/backoffice/src/layouts/Sidebar.tsx",
       "source_location": "L1",
       "id": "apps_backoffice_src_layouts_sidebar_tsx",
-      "community": 66,
+      "community": 67,
       "norm_label": "sidebar.tsx"
     },
     {
@@ -468,7 +477,7 @@
       "source_file": "apps/backoffice/src/hooks/useTheme.test.ts",
       "source_location": "L1",
       "id": "apps_backoffice_src_hooks_usetheme_test_ts",
-      "community": 67,
+      "community": 68,
       "norm_label": "usetheme.test.ts"
     },
     {
@@ -630,7 +639,7 @@
       "source_file": "apps/backoffice/src/api/client.ts",
       "source_location": "L1",
       "id": "apps_backoffice_src_api_client_ts",
-      "community": 68,
+      "community": 69,
       "norm_label": "client.ts"
     },
     {
@@ -1098,7 +1107,7 @@
       "source_file": "apps/api/test/inventory.e2e-spec.ts",
       "source_location": "L1",
       "id": "apps_api_test_inventory_e2e_spec_ts",
-      "community": 69,
+      "community": 70,
       "norm_label": "inventory.e2e-spec.ts"
     },
     {
@@ -1107,7 +1116,7 @@
       "source_file": "apps/api/test/auth.e2e-spec.ts",
       "source_location": "L1",
       "id": "apps_api_test_auth_e2e_spec_ts",
-      "community": 70,
+      "community": 71,
       "norm_label": "auth.e2e-spec.ts"
     },
     {
@@ -1143,7 +1152,7 @@
       "source_file": "apps/api/prisma/seed.d.ts",
       "source_location": "L1",
       "id": "apps_api_prisma_seed_d_ts",
-      "community": 71,
+      "community": 72,
       "norm_label": "seed.d.ts"
     },
     {
@@ -1449,7 +1458,7 @@
       "source_file": "apps/api/src/dealpos/dealpos.mapper.spec.ts",
       "source_location": "L1",
       "id": "apps_api_src_dealpos_dealpos_mapper_spec_ts",
-      "community": 72,
+      "community": 73,
       "norm_label": "dealpos.mapper.spec.ts"
     },
     {
@@ -2007,7 +2016,7 @@
       "source_file": "apps/api/src/auth/decorators/current-user.decorator.ts",
       "source_location": "L1",
       "id": "apps_api_src_auth_decorators_current_user_decorator_ts",
-      "community": 73,
+      "community": 74,
       "norm_label": "current-user.decorator.ts"
     },
     {
@@ -3051,7 +3060,7 @@
       "source_file": "apps/api/src/finance/finance.service.spec.ts",
       "source_location": "L1",
       "id": "apps_api_src_finance_finance_service_spec_ts",
-      "community": 74,
+      "community": 75,
       "norm_label": "finance.service.spec.ts"
     },
     {
