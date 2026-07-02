@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './hooks/useAuth';
 import { AppShell } from './layouts/AppShell';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import { Finance } from './pages/finance/Finance';
 import { InventoryList } from './pages/inventory/InventoryList';
 import { ReleaseForm } from './pages/inventory/ReleaseForm';
 import { BlogList } from './pages/blog/BlogList';
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard"          element={<Dashboard />} />
+          <Route path="/finance"            element={<Finance />} />
           <Route path="/inventory"          element={<InventoryList />} />
           <Route path="/inventory/new"      element={<ReleaseForm />} />
           <Route path="/inventory/:id/edit" element={<ReleaseForm />} />
