@@ -28,9 +28,10 @@ fi
 
 # --- What ships (the web root). Everything else stays out. ---
 INCLUDES=(
-  index.html 404.html favicon.svg robots.txt sitemap.xml site.webmanifest
+  index.html preview.html 404.html favicon.svg robots.txt sitemap.xml site.webmanifest
   "mockup-*.html"
   design-system
+  assets
 )
 
 DRYFLAG=""
@@ -48,7 +49,7 @@ for item in "${INCLUDES[@]}"; do
 done
 
 echo ">> Syncing web root -> ${STACK_DIR}/site"
-rsync -avz $DRYFLAG --delete \
+rsync -avz $DRYFLAG --delete --delete-excluded --exclude=".DS_Store" \
   -e "ssh -p ${SSH_PORT}" \
   "$STAGE"/ \
   "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/site/"
