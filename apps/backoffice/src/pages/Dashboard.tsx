@@ -153,7 +153,7 @@ export default function Dashboard() {
   return (
     <div>
       {/* tab strip — quick navigation, mockup chrome */}
-      <div className="inline-flex gap-[2px] bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] p-[3px] mb-6 flex-wrap" role="tablist" aria-label="Sections">
+      <div className="max-md:hidden inline-flex gap-[2px] bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] p-[3px] mb-6 flex-wrap" role="tablist" aria-label="Sections">
         {tabs.map(([label, to]) => (
           <button
             key={to}
@@ -196,7 +196,7 @@ export default function Dashboard() {
       </div>
 
       {/* KPI cards */}
-      <div className="grid grid-cols-4 gap-3.5 mb-3.5 max-[1100px]:grid-cols-2">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-3.5 max-md:gap-2.5 mb-3.5">
         {(kpis || [null, null, null, null]).map((kpi, i) => (
           <div key={kpi?.label ?? i} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] px-[18px] py-4 min-w-0">
             <p className="text-[11px] font-medium uppercase tracking-[0.05em] text-[var(--text-muted)] mb-3">{kpi?.label ?? '…'}</p>

@@ -98,6 +98,24 @@ export class OpsService {
     return { data, total, page, limit, suppliers };
   }
 
+  /** Catalogue shape: releases grouped by format, genre and store location. */
+  async catalogSummary() {
+    const [formats, genres, locations] = await Promise.all([
+      this.prisma.release.groupBy({ by: ['format'], _count: { _all: true }, _sum: { stock: true } }),
+      this.prisma.release.groupBy({ by: ['genre'], _count: { _all: true }, _sum: { stock: true } }),
+      this.prisma.release.groupBy({ by: ['storeLocation'], _count: { _all: true }, _sum: { stock: true } }),
+    ]);
+    const shape = (rows: Array<{ _count: { _all: number }; _sum: { stock: number | null } }>, key: (r: never) => string | null) =>
+      rows
+        .map(r => ({ name: key(r as never) ?? 'Uncategorised', releases: r._count._all, units: r._sum.stock ?? 0 }))
+        .sort((a, b) => b.releases - a.releases);
+    return {
+      formats: shape(formats, (r: { format: string }) => r.format),
+      genres: shape(genres, (r: { genre: string | null }) => r.genre),
+      locations: shape(locations, (r: { storeLocation: string }) => r.storeLocation),
+    };
+  }
+
   /** Per-channel (invoice Tag) totals + configured payment methods. */
   async channels(query: ChannelsQueryDto) {
     const clauses = [Prisma.sql`i."isVoid" = false`];

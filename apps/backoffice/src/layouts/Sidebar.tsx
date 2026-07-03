@@ -21,6 +21,10 @@ const icons = {
   home:       ic(<><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></>),
   dashboard:  ic(<><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>),
   finance:    ic(<><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></>),
+  analytics:  ic(<><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></>),
+  settlements: ic(<><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>),
+  preorders:  ic(<><path d="M20 12v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8"/><rect x="2" y="7" width="20" height="5" rx="1"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></>),
+  tags:       ic(<><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></>),
   orders:     ic(<><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></>),
   inventory:  ic(<><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></>),
   customers:  ic(<><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></>),
@@ -33,7 +37,7 @@ const icons = {
   settings:   ic(<><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></>),
 };
 
-export function Sidebar() {
+export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; onClose?: () => void }) {
   const { user, logout } = useAuth();
   const { theme, toggle } = useTheme();
   const [pendingOrders, setPendingOrders] = useState<number | null>(null);
@@ -48,6 +52,7 @@ export function Sidebar() {
       items: [
         { label: 'Home',      to: '/home',      icon: icons.home },
         { label: 'Dashboard', to: '/dashboard', icon: icons.dashboard },
+        { label: 'Analytics', to: '/analytics', icon: icons.analytics },
         { label: 'Finance',   to: '/finance',   icon: icons.finance },
       ],
     },
@@ -58,12 +63,15 @@ export function Sidebar() {
         { label: 'Inventory', to: '/inventory', icon: icons.inventory },
         { label: 'Customers', to: '/customers', icon: icons.customers },
         { label: 'Channels',  to: '/channels',  icon: icons.channels, statusDot: true },
+        { label: 'Categories & Tags', to: '/categories', icon: icons.tags },
       ],
     },
     {
       label: 'Shop',
       items: [
         { label: 'Purchase orders', to: '/purchase-orders', icon: icons.po },
+        { label: 'Settlements',     to: '/settlements',     icon: icons.settlements },
+        { label: 'Preorders',       to: '/preorders',       icon: icons.preorders },
         { label: 'Vouchers',        to: '/vouchers',        icon: icons.vouchers },
       ],
     },
@@ -85,8 +93,12 @@ export function Sidebar() {
   const isDark = theme === 'dark';
 
   return (
-    <aside className="w-[232px] min-w-[232px] bg-[var(--bg-surface)] border-r border-[var(--border)] flex flex-col">
-      <NavLink to="/home" className="flex items-center px-[18px] py-[18px]" aria-label="Medium Format — home">
+    <aside
+      className={`w-[232px] min-w-[232px] bg-[var(--bg-surface)] border-r border-[var(--border)] flex flex-col
+        max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-50 max-md:transition-transform max-md:duration-200
+        ${open ? 'max-md:translate-x-0 max-md:shadow-[0_8px_24px_rgba(0,0,0,.7)]' : 'max-md:-translate-x-full'}`}
+    >
+      <NavLink to="/home" onClick={onClose} className="flex items-center px-[18px] py-[18px]" aria-label="Medium Format — home">
         <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="h-[17px] w-auto dark:hidden" />
         <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[17px] w-auto hidden dark:block" />
       </NavLink>
@@ -101,6 +113,7 @@ export function Sidebar() {
               <NavLink
                 key={item.to}
                 to={item.to}
+                onClick={onClose}
                 className={({ isActive }) =>
                   `flex items-center gap-[11px] px-3 py-2 rounded-[6px] text-[13px] font-medium transition-colors ${
                     isActive

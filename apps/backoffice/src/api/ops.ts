@@ -66,6 +66,9 @@ export interface PurchaseOrderRow {
   _count?: { lines: number };
 }
 
+export interface CatalogGroup { name: string; releases: number; units: number; }
+export interface CatalogSummary { formats: CatalogGroup[]; genres: CatalogGroup[]; locations: CatalogGroup[]; }
+
 export interface ChannelSummary {
   channels: Array<{ tag: string; orders: number; revenue: number; lastOrderAt: string }>;
   paymentMethods: Array<{ id: number; name: string; type: string | null; suspended: boolean }>;
@@ -98,6 +101,11 @@ export async function getCustomers(filter: { q?: string; page?: number; limit?: 
 
 export async function getPurchaseOrders(filter: { q?: string; page?: number; limit?: number } = {}): Promise<Paged<PurchaseOrderRow> & { suppliers: number }> {
   const res = await api.get<Paged<PurchaseOrderRow> & { suppliers: number }>('/purchase-orders', { params: filter });
+  return res.data;
+}
+
+export async function getCatalogSummary(): Promise<CatalogSummary> {
+  const res = await api.get<CatalogSummary>('/catalog-summary');
   return res.data;
 }
 

@@ -12,6 +12,10 @@ import { Channels } from './pages/channels/Channels';
 import { Vouchers } from './pages/vouchers/Vouchers';
 import { Newsletter } from './pages/newsletter/Newsletter';
 import { Preferences } from './pages/preferences/Preferences';
+import { Analytics } from './pages/analytics/Analytics';
+import { Settlements } from './pages/settlements/Settlements';
+import { Preorders } from './pages/preorders/Preorders';
+import { Categories } from './pages/categories/Categories';
 import { Finance } from './pages/finance/Finance';
 import { SocialMedia } from './pages/social/SocialMedia';
 import { InventoryList } from './pages/inventory/InventoryList';
@@ -40,6 +44,10 @@ export default function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path="/home"               element={<Home />} />
           <Route path="/dashboard"          element={<Dashboard />} />
+          <Route path="/analytics"          element={<Analytics />} />
+          <Route path="/settlements"        element={<Settlements />} />
+          <Route path="/preorders"          element={<Preorders />} />
+          <Route path="/categories"         element={<Categories />} />
           <Route path="/orders"             element={<OrdersList />} />
           <Route path="/orders/:id"         element={<OrderDetail />} />
           <Route path="/customers"          element={<CustomersList />} />

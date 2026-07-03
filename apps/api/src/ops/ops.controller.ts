@@ -32,6 +32,11 @@ export class OpsController {
     return this.ops.purchaseOrders(query);
   }
 
+  @Get('catalog-summary')
+  catalogSummary() {
+    return this.ops.catalogSummary();
+  }
+
   @Roles(Role.ADMIN, Role.MANAGER)
   @Get('channels-summary')
   channels(@Query() query: ChannelsQueryDto) {
