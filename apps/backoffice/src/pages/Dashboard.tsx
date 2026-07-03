@@ -110,7 +110,7 @@ export default function Dashboard() {
 
   const now = new Date();
   const hour = now.getHours();
-  const sapaan = hour < 11 ? 'Selamat pagi' : hour < 15 ? 'Selamat siang' : hour < 19 ? 'Selamat sore' : 'Selamat malam';
+  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
   const firstName = user?.name?.split(' ')[0] ?? '';
 
   const unpaidSum = unpaid.rows.reduce((sum, o) => sum + Number(o.amount), 0);
@@ -175,7 +175,7 @@ export default function Dashboard() {
           <p className="text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)] mb-2">
             {now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
-          <h1 className="text-[30px] font-semibold tracking-[-0.03em] leading-[1.1] text-[var(--text-primary)]">{sapaan}{firstName ? `, ${firstName}` : ''}</h1>
+          <h1 className="text-[30px] font-semibold tracking-[-0.03em] leading-[1.1] text-[var(--text-primary)]">{greeting}{firstName ? `, ${firstName}` : ''}</h1>
           <p className="text-[14px] text-[var(--text-muted)] mt-[7px]">
             {unpaid.total} awaiting settlement · {lowStock.total} low stock · {alerts.length} item{alerts.length === 1 ? '' : 's'} need attention
           </p>
