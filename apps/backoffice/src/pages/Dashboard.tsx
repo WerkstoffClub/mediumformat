@@ -200,7 +200,7 @@ export default function Dashboard() {
         {(kpis || [null, null, null, null]).map((kpi, i) => (
           <div key={kpi?.label ?? i} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] px-[18px] py-4 min-w-0">
             <p className="text-[11px] font-medium uppercase tracking-[0.05em] text-[var(--text-muted)] mb-3">{kpi?.label ?? '…'}</p>
-            <p className="text-[24px] font-medium tracking-[-0.02em] text-[var(--text-primary)] leading-none font-mono whitespace-nowrap overflow-hidden text-ellipsis" title={kpi?.value}>
+            <p className="text-[27px] font-medium tracking-[-0.02em] text-[var(--text-primary)] leading-none [font-variant-numeric:tabular-nums] whitespace-nowrap overflow-hidden text-ellipsis" title={kpi?.value}>
               {kpi?.value ?? '—'}
             </p>
             <div className="flex items-end justify-between gap-2 mt-3.5">
@@ -231,7 +231,7 @@ export default function Dashboard() {
               ].map(([label, value]) => (
                 <div key={label as string}>
                   <p className="text-[10px] font-medium uppercase tracking-[0.05em] text-[var(--text-muted)] mb-1.5">{label}</p>
-                  <p className="text-[18px] font-medium tracking-[-0.02em] text-[var(--text-primary)] font-mono">{value}</p>
+                  <p className="text-[18px] font-medium tracking-[-0.02em] text-[var(--text-primary)] [font-variant-numeric:tabular-nums]">{value}</p>
                 </div>
               ))}
               <div>

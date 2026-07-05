@@ -4,8 +4,8 @@ export function PageHeader({ title, sub, actions }: { title: string; sub?: strin
   return (
     <div className="flex items-start justify-between mb-4">
       <div>
-        <h1 className="text-[18px] font-black tracking-tight text-[var(--text-primary)]">{title}</h1>
-        {sub && <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{sub}</p>}
+        <h1 className="text-[24px] font-semibold tracking-[-0.04em] leading-8 text-[var(--text-primary)]">{title}</h1>
+        {sub && <p className="text-[13px] text-[var(--text-muted)] mt-0.5">{sub}</p>}
       </div>
       {actions}
     </div>

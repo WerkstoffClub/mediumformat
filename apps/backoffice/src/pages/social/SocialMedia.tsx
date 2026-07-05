@@ -92,8 +92,8 @@ export function SocialMedia() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-[18px] font-black tracking-tight text-[var(--text-primary)]">Social Media</h1>
-        <p className="text-[11px] text-[var(--text-muted)] mt-0.5">
+        <h1 className="text-[24px] font-semibold tracking-[-0.04em] leading-8 text-[var(--text-primary)]">Social Media</h1>
+        <p className="text-[13px] text-[var(--text-muted)] mt-0.5">
           One Meta catalogue → Facebook Shop, Instagram tags & WhatsApp Business — Buy Now opens a WhatsApp chat
         </p>
       </div>

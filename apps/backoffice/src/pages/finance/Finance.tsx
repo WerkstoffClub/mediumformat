@@ -18,6 +18,7 @@ import {
   type SyncEntityState,
   type TimeseriesRow,
 } from '../../api/finance';
+import { channelColor, getChannels, type ChannelSummary } from '../../api/ops';
 
 const idr = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 });
 const fmtRp = (v: number) => idr.format(v);
@@ -50,7 +51,7 @@ function Kpi({ label, value, sub }: { label: string; value: string; sub?: string
     <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3.5 py-2.5 min-w-0">
       <p className="text-[9px] uppercase tracking-[0.08em] text-[var(--text-muted)] mb-1">{label}</p>
       <p
-        className="text-[15px] font-bold font-mono text-[var(--text-primary)] leading-none whitespace-nowrap overflow-hidden text-ellipsis"
+        className="text-[20px] font-medium tracking-[-0.02em] [font-variant-numeric:tabular-nums] text-[var(--text-primary)] leading-none whitespace-nowrap overflow-hidden text-ellipsis"
         title={value}
       >
         {value}
@@ -147,6 +148,7 @@ export function Finance() {
   const [payments, setPayments] = useState<PaymentRow[]>([]);
   const [margins, setMargins] = useState<MarginRow[]>([]);
   const [sync, setSync] = useState<{ running: boolean; entities: SyncEntityState[] } | null>(null);
+  const [channelRevenue, setChannelRevenue] = useState<ChannelSummary['channels']>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -174,6 +176,9 @@ export function Finance() {
   }, [filters, granularity, groupBy]);
 
   useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    getChannels({ from: filters.from, to: filters.to }).then(r => setChannelRevenue(r.channels)).catch(() => setChannelRevenue([]));
+  }, [filters.from, filters.to]);
   useEffect(() => {
     getFilterOptions().then(setOptions).catch(() => {});
     getSyncStatus().then(setSync).catch(() => {});
@@ -204,8 +209,8 @@ export function Finance() {
     <div className="space-y-4">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-[18px] font-black tracking-tight text-[var(--text-primary)]">Finance</h1>
-          <p className="text-[11px] text-[var(--text-muted)] mt-0.5">
+          <h1 className="text-[24px] font-semibold tracking-[-0.04em] leading-8 text-[var(--text-primary)]">Finance</h1>
+          <p className="text-[13px] text-[var(--text-muted)] mt-0.5">
             Sales, margins and payments — synced from DealPOS{lastSync ? ` · last sync ${new Date(lastSync).toLocaleString('en-GB')}` : ''}
           </p>
         </div>
@@ -282,6 +287,22 @@ export function Finance() {
       >
         <RevenueChart rows={series} />
       </Panel>
+
+      {/* Revenue by channel — merged from the old Channels page */}
+      {channelRevenue.length > 0 && (
+        <div className="grid grid-cols-3 gap-3 max-md:grid-cols-1">
+          {channelRevenue.map(c => (
+            <div key={c.tag} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2.5">
+                <span className="w-2 h-2 rounded-full" style={{ background: channelColor(c.tag) }} />
+                <h3 className="text-[13px] font-semibold text-[var(--text-primary)]">{c.tag}</h3>
+              </div>
+              <p className="text-[18px] font-medium tracking-[-0.02em] [font-variant-numeric:tabular-nums] text-[var(--text-primary)]">{fmtRp(c.revenue)}</p>
+              <p className="text-[10px] text-[var(--text-muted)] mt-1">{c.orders} orders in range</p>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-3">
         <Panel title="Payments reconciliation" onExport={() => exportCsv('payments')}>

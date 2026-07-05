@@ -19,5 +19,6 @@ export class CreateReleaseDto {
   @IsOptional() @IsEnum(StoreLocation) storeLocation?: StoreLocation;
   @IsOptional() @IsString() shelfLocation?: string;
   @IsOptional() @IsInt() @Min(0) lowStockThreshold?: number;
+  @IsOptional() @IsInt() @Min(0) costIdr?: number;
   @IsOptional() @IsString() discogsId?: string;
 }

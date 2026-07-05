@@ -27,8 +27,8 @@ export function OrderDetail() {
             <span className="text-[var(--text-faint)]">/</span>
             <span className="font-mono text-[var(--text-primary)]">{order.number}</span>
           </div>
-          <h1 className="text-[18px] font-black tracking-tight text-[var(--text-primary)] font-mono">{order.number}</h1>
-          <p className="text-[11px] text-[var(--text-muted)] mt-0.5">
+          <h1 className="text-[24px] font-semibold tracking-[-0.04em] leading-8 text-[var(--text-primary)] font-mono">{order.number}</h1>
+          <p className="text-[13px] text-[var(--text-muted)] mt-0.5">
             {fmtDate(order.date)} · {order.outlet ?? '—'} · {order.customerName || 'Walk-in'}
           </p>
         </div>

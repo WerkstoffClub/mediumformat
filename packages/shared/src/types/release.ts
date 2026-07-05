@@ -28,6 +28,9 @@ export interface Release {
   priceIdr: number;
   stock: number;
   notes: string | null;
+  costIdr?: number | null;
+  dealposProductId?: string | null;
+  dealposVariantId?: string | null;
   imageUrl: string | null;
   barcode: string | null;
   storeLocation: StoreLocation;
