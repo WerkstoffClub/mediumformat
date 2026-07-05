@@ -3,7 +3,6 @@ import { AuthProvider, useAuth } from './hooks/useAuth';
 import { AppShell } from './layouts/AppShell';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Home from './pages/Home';
 import { OrdersList } from './pages/orders/OrdersList';
 import { OrderDetail } from './pages/orders/OrderDetail';
 import { CustomersList } from './pages/customers/CustomersList';
@@ -42,7 +41,6 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path="/home"               element={<Home />} />
           <Route path="/dashboard"          element={<Dashboard />} />
           <Route path="/analytics"          element={<Analytics />} />
           <Route path="/settlements"        element={<Settlements />} />
@@ -64,9 +62,9 @@ export default function App() {
           <Route path="/blog"               element={<BlogList />} />
           <Route path="/blog/new"           element={<PostForm />} />
           <Route path="/blog/:id/edit"      element={<PostForm />} />
-          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
-        <Route path="*" element={<Navigate to="/home" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </AuthProvider>
   );

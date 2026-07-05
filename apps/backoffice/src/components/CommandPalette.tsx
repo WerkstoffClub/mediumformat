@@ -7,7 +7,6 @@ import type { Release } from '@mf/shared';
 interface PageEntry { label: string; to: string; hint: string; }
 
 const PAGES: PageEntry[] = [
-  { label: 'Home', to: '/home', hint: 'Overview' },
   { label: 'Dashboard', to: '/dashboard', hint: 'Overview' },
   { label: 'Finance', to: '/finance', hint: 'Overview' },
   { label: 'Analytics', to: '/analytics', hint: 'Overview' },

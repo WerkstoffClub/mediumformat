@@ -18,10 +18,15 @@ export class InventoryService {
   }
 
   async findAll(filter: ReleaseFilterDto) {
-    const { page = 1, limit = 50, lowStockOnly, q, ...rest } = filter;
+    const { page = 1, limit = 50, lowStockOnly, q, stock, sort, genre, ...rest } = filter;
     const skip = (page - 1) * limit;
+    const LOW_AT = 2; // matches the default Release.lowStockThreshold
 
     const where: Prisma.ReleaseWhereInput = {};
+    if (genre)          where.genre = { contains: genre, mode: 'insensitive' };
+    if (stock === 'in')  where.stock = { gt: LOW_AT };
+    if (stock === 'low') where.stock = { gt: 0, lte: LOW_AT };
+    if (stock === 'out') where.stock = 0;
     if (q) {
       where.OR = [
         { artist:    { contains: q, mode: 'insensitive' } },
@@ -41,8 +46,15 @@ export class InventoryService {
     // Phase 2: replace with per-item threshold comparison via raw query
     if (lowStockOnly)       where.stock         = { lte: 2 };
 
+    const orderBy: Prisma.ReleaseOrderByWithRelationInput[] =
+      sort === 'price_asc'  ? [{ priceIdr: 'asc' }]
+      : sort === 'price_desc' ? [{ priceIdr: 'desc' }]
+      : sort === 'artist'     ? [{ artist: 'asc' }, { title: 'asc' }]
+      : sort === 'stock_asc'  ? [{ stock: 'asc' }, { artist: 'asc' }]
+      : [{ updatedAt: 'desc' }];
+
     const [data, total] = await this.prisma.$transaction([
-      this.prisma.release.findMany({ where, skip, take: limit, orderBy: { updatedAt: 'desc' } }),
+      this.prisma.release.findMany({ where, skip, take: limit, orderBy }),
       this.prisma.release.count({ where }),
     ]);
 

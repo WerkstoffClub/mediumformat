@@ -10,6 +10,9 @@ export interface ReleaseListResponse {
 
 export interface ReleaseFilter {
   q?: string;
+  genre?: string;
+  stock?: 'in' | 'low' | 'out';
+  sort?: 'newest' | 'price_asc' | 'price_desc' | 'artist' | 'stock_asc';
   artist?: string;
   title?: string;
   format?: string;

@@ -18,7 +18,6 @@ const ic = (paths: React.ReactNode) => (
 );
 
 const icons = {
-  home:       ic(<><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></>),
   dashboard:  ic(<><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>),
   finance:    ic(<><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></>),
   analytics:  ic(<><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></>),
@@ -50,7 +49,6 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
     {
       label: 'Overview',
       items: [
-        { label: 'Home',      to: '/home',      icon: icons.home },
         { label: 'Dashboard', to: '/dashboard', icon: icons.dashboard },
         { label: 'Analytics', to: '/analytics', icon: icons.analytics },
         { label: 'Finance',   to: '/finance',   icon: icons.finance },
@@ -98,7 +96,7 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
         max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-50 max-md:transition-transform max-md:duration-200
         ${open ? 'max-md:translate-x-0 max-md:shadow-[0_8px_24px_rgba(0,0,0,.7)]' : 'max-md:-translate-x-full'}`}
     >
-      <NavLink to="/home" onClick={onClose} className="flex items-center px-[18px] py-[18px]" aria-label="Medium Format — home">
+      <NavLink to="/dashboard" onClick={onClose} className="flex items-center px-[18px] py-[18px]" aria-label="Medium Format — dashboard">
         <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="h-[17px] w-auto dark:hidden" />
         <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[17px] w-auto hidden dark:block" />
       </NavLink>
