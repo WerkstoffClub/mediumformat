@@ -9,6 +9,7 @@ import { logger } from "../lib/logger";
 import { resolveTracksForRelease } from "./handlers/resolve-tracks";
 import { syncChannelListing } from "./handlers/sync-channel-listing";
 import { pollDiscogsOrders } from "./handlers/poll-discogs-orders";
+import { enrichCatalog } from "./handlers/enrich-catalog";
 
 const log = logger.child({ component: "worker" });
 
@@ -34,6 +35,7 @@ const workers = [
     async (job) => {
       log.info({ jobId: job.id, name: job.name }, "discogs-sync start");
       if (job.name === "poll-orders") await pollDiscogsOrders();
+      else if (job.name === "enrich-catalog") await enrichCatalog(job.data ?? {});
     },
     bullConnection,
   ),
