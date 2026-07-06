@@ -8,6 +8,9 @@ interface LocationStats { items: number; units: number; shelves: number; lowStoc
 interface EventSales { revenue: number; orders: number; avgOrder: number; }
 export type LocationWithStats = Location & { stats: LocationStats; sales?: EventSales };
 
+/** Arbitrary, stable key for the seed advisory lock (any app-unique bigint). */
+const SEED_LOCK = 4823001;
+
 /** First-run defaults so the page is populated from the physical stores the
  *  inventory already uses. Only created when the table is empty. */
 const SEED: Array<Pick<CreateLocationDto, 'name' | 'kind' | 'storeLocation'> & { sortOrder: number }> = [
@@ -20,11 +23,17 @@ const SEED: Array<Pick<CreateLocationDto, 'name' | 'kind' | 'storeLocation'> & {
 export class LocationsService {
   constructor(private prisma: PrismaService) {}
 
+  /** Seed the physical stores once, idempotently. Fast-path skips the lock
+   *  after the table is populated; concurrent first-runs serialise on a
+   *  transaction-scoped advisory lock so the seed can't be double-inserted. */
   private async ensureSeeded() {
-    const count = await this.prisma.location.count();
-    if (count === 0) {
-      await this.prisma.location.createMany({ data: SEED });
-    }
+    if (await this.prisma.location.count() > 0) return;
+    await this.prisma.$transaction(async tx => {
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(${SEED_LOCK})`;
+      if (await tx.location.count() === 0) {
+        await tx.location.createMany({ data: SEED });
+      }
+    });
   }
 
   /** Inventory rollups per StoreLocation enum, computed once and attached to
