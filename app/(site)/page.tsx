@@ -1,9 +1,15 @@
 import Link from "next/link";
+import { getCatalogProducts } from "@/lib/catalog";
+import { ProductCard } from "@/components/site/ProductCard";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const products = await getCatalogProducts(24);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
-      <section className="mb-16 rounded-lg border border-zinc-200 bg-zinc-50 p-12 dark:border-zinc-800 dark:bg-zinc-900">
+      <section className="mb-12 rounded-lg border border-zinc-200 bg-zinc-50 p-12 dark:border-zinc-800 dark:bg-zinc-900">
         <p className="font-mono text-xs uppercase tracking-widest text-zinc-500">
           New arrivals · Restocks · Pre-orders
         </p>
@@ -31,17 +37,29 @@ export default function HomePage() {
       </section>
 
       <section>
-        <h2 className="mb-4 font-mono text-xs uppercase tracking-widest text-zinc-500">
-          Featured releases
-        </h2>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className="aspect-square rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900"
-            />
-          ))}
+        <div className="mb-4 flex items-baseline justify-between">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">
+            In the shop
+          </h2>
+          <Link
+            href="/shop"
+            className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+          >
+            View all →
+          </Link>
         </div>
+
+        {products.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-zinc-300 px-6 py-16 text-center text-sm text-zinc-500 dark:border-zinc-700">
+            No releases in the catalog yet. Check back soon.
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );
