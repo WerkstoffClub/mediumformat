@@ -153,6 +153,14 @@ export function channelLabel(tag: string | null | undefined): string {
   return tag.replace(/^Penjualan\s+/i, '');
 }
 
+/** Display name for a customer. DealPOS uses a placeholder customer named
+ *  "TikTok" for marketplace orders that are actually Tokopedia. Display-only;
+ *  the stored record and search still use the raw name. */
+export function customerLabel(name: string | null | undefined): string {
+  if (!name) return '';
+  return name.trim().toLowerCase() === 'tiktok' ? 'Tokopedia' : name;
+}
+
 /* v2.1 channel colour key — the ONLY non-status colour in the system.
    Dot + text on a neutral pill, channel indicators only. Keyed on the
    display label so the Tokopedia mapping picks up its green. */

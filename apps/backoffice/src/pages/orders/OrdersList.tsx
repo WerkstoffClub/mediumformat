@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { channelLabel, fmtDate, fmtIdr, getOrders, type OrderRow, type OrdersFilter } from '../../api/ops';
+import { channelLabel, customerLabel, fmtDate, fmtIdr, getOrders, type OrderRow, type OrdersFilter } from '../../api/ops';
 import { getFilterOptions } from '../../api/finance';
 import { ChannelPill, EmptyRow, PageHeader, Paginator, SearchBox, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 
@@ -135,7 +135,7 @@ export function OrdersList() {
                 className="border-b border-[var(--border-sub)] hover:bg-[var(--bg-hover)] cursor-pointer"
               >
                 <td className={`${tdCls} font-mono font-medium text-[var(--text-primary)]`}>{o.number}</td>
-                <td className={`${tdCls} max-w-[170px] truncate`}>{o.customerName || <span className="text-[var(--text-faint)]">Walk-in</span>}</td>
+                <td className={`${tdCls} max-w-[170px] truncate`}>{o.customerName ? customerLabel(o.customerName) : <span className="text-[var(--text-faint)]">Walk-in</span>}</td>
                 <td className={tdCls}><ChannelPill tag={o.tag} /></td>
                 <td className={`${tdCls} font-mono text-right`}>{o._count?.lines ?? '—'}</td>
                 <td className={`${tdCls} font-mono text-right whitespace-nowrap text-[var(--text-primary)]`}>{fmtIdr(o.amount)}</td>

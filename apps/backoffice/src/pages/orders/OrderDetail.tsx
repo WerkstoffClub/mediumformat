@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { channelLabel, fmtDate, fmtIdr, getOrder, type OrderDetail as Order } from '../../api/ops';
+import { channelLabel, customerLabel, fmtDate, fmtIdr, getOrder, type OrderDetail as Order } from '../../api/ops';
 import { ChannelPill, Panel, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 import { ReleaseCover } from '../../components/ui/Cover';
 
@@ -85,7 +85,7 @@ function printReceipt(order: Order) {
     .foot{text-align:center;margin-top:14px;color:#555}
   </style>
   <h1>Medium Format</h1>
-  <div class="sub">${order.number} · ${fmtDate(order.date)}${order.customerName ? ` · ${order.customerName}` : ''}</div>
+  <div class="sub">${order.number} · ${fmtDate(order.date)}${order.customerName ? ` · ${customerLabel(order.customerName)}` : ''}</div>
   <table>
     ${lines}
     <tr class="rule"><td colspan="3"></td></tr>
@@ -241,7 +241,7 @@ export function OrderDetail() {
         <div className="space-y-4">
           <Panel title="Customer">
             <div className="p-3.5">
-              <p className="text-[14px] font-medium text-[var(--text-primary)]">{order.customerName || 'Walk-in customer'}</p>
+              <p className="text-[14px] font-medium text-[var(--text-primary)]">{customerLabel(order.customerName) || 'Walk-in customer'}</p>
               <p className="text-[11px] text-[var(--text-muted)] mt-1">
                 {order.customerName
                   ? <Link to={`/customers?q=${encodeURIComponent(order.customerName)}`} className="underline hover:text-[var(--text-primary)]">View profile →</Link>

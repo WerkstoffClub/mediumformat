@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   channelColor,
+  customerLabel,
   fmtIdrCompact,
   getCustomers,
   getCustomersSummary,
@@ -237,10 +238,10 @@ export function CustomersList() {
                   <tr key={c.id} className="border-t border-[var(--border)] transition-colors hover:bg-[var(--bg-overlay)] hover:shadow-[inset_3px_0_0_var(--accent)]">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-[11px] min-w-0">
-                        <Avatar name={c.name} />
+                        <Avatar name={customerLabel(c.name)} />
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 text-[13px] font-medium text-[var(--text-primary)] truncate">
-                            {c.name} <SegBadge segment={c.segment} />
+                            {customerLabel(c.name)} <SegBadge segment={c.segment} />
                           </div>
                           <div className="text-[11px] text-[var(--text-muted)] mt-px">{memberSince(c.joinDate)}</div>
                         </div>
@@ -275,9 +276,9 @@ export function CustomersList() {
               {summary?.topCustomers.map((c, i) => (
                 <div key={c.id} className="flex items-center gap-[11px] px-4 py-3 border-t border-[var(--border)] first:border-t-0">
                   <span className="font-mono text-[12px] text-[var(--text-muted)] w-4 text-right flex-shrink-0">{i + 1}</span>
-                  <Avatar name={c.name} size={30} />
+                  <Avatar name={customerLabel(c.name)} size={30} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-[12px] font-medium text-[var(--text-primary)] truncate">{c.name}</div>
+                    <div className="text-[12px] font-medium text-[var(--text-primary)] truncate">{customerLabel(c.name)}</div>
                     <div className="text-[11px] text-[var(--text-muted)] mt-px">{c.orders} orders · {c.channel ?? 'Direct'}</div>
                   </div>
                   <span className="font-mono text-[12px] font-medium text-[var(--text-primary)] flex-shrink-0">{fmtIdrCompact(c.lifetime)}</span>
