@@ -1,66 +1,107 @@
 import Link from "next/link";
-import { getCatalogProducts } from "@/lib/catalog";
-import { ProductCard } from "@/components/site/ProductCard";
+import {
+  getCatalogProducts,
+  countActiveProducts,
+  getLatestNews,
+} from "@/lib/catalog";
+import { ReleaseCard } from "@/components/site/ReleaseCard";
 
 export const dynamic = "force-dynamic";
 
+const ArrowRight = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M5 12h14M12 5l7 7-7 7" />
+  </svg>
+);
+
 export default async function HomePage() {
-  const products = await getCatalogProducts(24);
+  const [products, activeCount, news] = await Promise.all([
+    getCatalogProducts(20),
+    countActiveProducts(),
+    getLatestNews(3),
+  ]);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <section className="mb-12 rounded-lg border border-zinc-200 bg-zinc-50 p-12 dark:border-zinc-800 dark:bg-zinc-900">
-        <p className="font-mono text-xs uppercase tracking-widest text-zinc-500">
-          New arrivals · Restocks · Pre-orders
-        </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
-          Records, carefully selected.
+    <>
+      {/* Hero */}
+      <section className="hero">
+        <p className="hero-eyebrow">New &amp; used · Vinyl · CD · Cassette</p>
+        <h1 className="hero-h1">
+          Records,
+          <br />
+          <em>carefully selected.</em>
         </h1>
-        <p className="mt-3 max-w-prose text-zinc-600 dark:text-zinc-400">
-          Independent record shop in Jakarta. New & used vinyl, CDs, cassettes, books.
-          We ship across Indonesia and worldwide.
-        </p>
-        <div className="mt-6 flex gap-3">
-          <Link
-            href="/shop"
-            className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900"
-          >
-            Browse shop
-          </Link>
-          <Link
-            href="/news"
-            className="rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
-          >
-            Read news
+        <div className="hero-meta">
+          <span className="hero-count">
+            <strong>{activeCount} titles</strong> in the shop
+          </span>
+          <span className="hero-sep" />
+          <Link href="/shop" className="hero-cta">
+            Browse the catalogue <ArrowRight />
           </Link>
         </div>
       </section>
 
-      <section>
-        <div className="mb-4 flex items-baseline justify-between">
-          <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">
-            In the shop
-          </h2>
-          <Link
-            href="/shop"
-            className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
-          >
-            View all →
+      {/* Catalogue */}
+      <div className="content">
+        <div className="content-bar">
+          <div className="result-count">
+            <strong>{activeCount}</strong> releases
+          </div>
+          <Link href="/shop" className="hero-cta">
+            View all <ArrowRight />
           </Link>
         </div>
 
         {products.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-zinc-300 px-6 py-16 text-center text-sm text-zinc-500 dark:border-zinc-700">
-            No releases in the catalog yet. Check back soon.
+          <div className="empty">
+            No releases in the catalogue yet. Check back soon.
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+          <div className="grid">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ReleaseCard key={product.id} product={product} />
             ))}
           </div>
         )}
-      </section>
-    </div>
+      </div>
+
+      {/* News */}
+      {news.length > 0 && (
+        <section className="journal">
+          <div className="sec-hdr">
+            <h2 className="sec-h2">Latest from the News</h2>
+            <Link href="/news" className="sec-link">
+              View all <ArrowRight />
+            </Link>
+          </div>
+          <div className="jgrid">
+            {news.map((post) => (
+              <Link key={post.id} href={`/news/${post.slug}`} className="jcard">
+                <div className="jcover">
+                  <div className="cover-art">
+                    <div className="grooves" />
+                  </div>
+                </div>
+                <div className="jbody">
+                  <span className="jbadge">
+                    <span className="dot" />
+                    News
+                  </span>
+                  <div className="jtitle">{post.title}</div>
+                  <div className="jmeta">
+                    {post.publishedAt?.toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+    </>
   );
 }
