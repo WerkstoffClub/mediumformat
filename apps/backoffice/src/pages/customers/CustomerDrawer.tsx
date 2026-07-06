@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   channelColor, channelLabel, customerLabel, fmtDate, fmtIdr, fmtIdrCompact,
@@ -25,26 +25,33 @@ export function CustomerDrawer({ customerId, onClose }: { customerId: string; on
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
 
+  // Latest onClose without re-subscribing the key handler on every render.
+  const onCloseRef = useRef(onClose);
+  useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+  const close = useCallback(() => { setOpen(false); setTimeout(() => onCloseRef.current(), ANIM_MS); }, []);
+
   // Slide in on mount; slide out before unmounting.
   useEffect(() => {
     const t = requestAnimationFrame(() => setOpen(true));
     return () => cancelAnimationFrame(t);
   }, []);
 
-  const close = () => { setOpen(false); setTimeout(onClose, ANIM_MS); };
-
+  // Fetch on customer change; ignore a stale response if the id changed first.
   useEffect(() => {
+    let active = true;
     setDetail(null);
     setError(false);
-    getCustomerDetail(customerId).then(setDetail).catch(() => setError(true));
+    getCustomerDetail(customerId)
+      .then(d => { if (active) setDetail(d); })
+      .catch(() => { if (active) setError(true); });
+    return () => { active = false; };
   }, [customerId]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [close]);
 
   const name = detail ? customerLabel(detail.name) : '';
   const chMax = Math.max(...(detail?.channels.map(c => c.revenue) ?? [1]), 1);

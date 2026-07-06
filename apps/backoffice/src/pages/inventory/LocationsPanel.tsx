@@ -222,7 +222,7 @@ export function LocationsPanel() {
 
               <div className="flex items-center gap-2 mt-auto pt-1">
                 <Link
-                  to={l.storeLocation ? `/inventory?tab=catalogue` : '/inventory?tab=catalogue'}
+                  to="/inventory?tab=catalogue"
                   className="text-[12px] px-2.5 py-1.5 rounded-[6px] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)] transition-colors"
                 >
                   View items

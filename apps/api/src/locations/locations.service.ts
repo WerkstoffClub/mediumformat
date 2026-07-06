@@ -8,6 +8,9 @@ interface LocationStats { items: number; units: number; shelves: number; lowStoc
 interface EventSales { revenue: number; orders: number; avgOrder: number; }
 export type LocationWithStats = Location & { stats: LocationStats; sales?: EventSales };
 
+/** Arbitrary, stable key for the seed advisory lock (any app-unique bigint). */
+const SEED_LOCK = 4823001;
+
 /** First-run defaults so the page is populated from the physical stores the
  *  inventory already uses. Only created when the table is empty. */
 const SEED: Array<Pick<CreateLocationDto, 'name' | 'kind' | 'storeLocation'> & { sortOrder: number }> = [
@@ -20,11 +23,17 @@ const SEED: Array<Pick<CreateLocationDto, 'name' | 'kind' | 'storeLocation'> & {
 export class LocationsService {
   constructor(private prisma: PrismaService) {}
 
+  /** Seed the physical stores once, idempotently. Fast-path skips the lock
+   *  after the table is populated; concurrent first-runs serialise on a
+   *  transaction-scoped advisory lock so the seed can't be double-inserted. */
   private async ensureSeeded() {
-    const count = await this.prisma.location.count();
-    if (count === 0) {
-      await this.prisma.location.createMany({ data: SEED });
-    }
+    if (await this.prisma.location.count() > 0) return;
+    await this.prisma.$transaction(async tx => {
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(${SEED_LOCK})`;
+      if (await tx.location.count() === 0) {
+        await tx.location.createMany({ data: SEED });
+      }
+    });
   }
 
   /** Inventory rollups per StoreLocation enum, computed once and attached to
@@ -48,33 +57,48 @@ export class LocationsService {
     return out;
   }
 
-  /** Sales an event actually took, from the DealPOS mirror. Scoped to the run
-   *  window (start–end, end inclusive) and, when set, the matchKey against the
-   *  invoice tag / outlet / customer. Requires at least one of dates or matchKey
-   *  so an unconfigured event never sweeps up every invoice. */
-  private async eventSales(loc: Location): Promise<EventSales> {
-    const where: Prisma.DpInvoiceWhereInput = { isVoid: false };
-    if (loc.startDate || loc.endDate) {
-      const end = loc.endDate ? new Date(loc.endDate.getTime() + 86_400_000) : undefined; // end-of-day inclusive
-      where.date = {
-        ...(loc.startDate ? { gte: loc.startDate } : {}),
-        ...(end ? { lt: end } : {}),
-      };
+  /** Sales each event took, from the DealPOS mirror, in a SINGLE query (no
+   *  N+1). Each event is scoped to its run window (start–end, end-of-day
+   *  inclusive) and, when set, its matchKey — matched as a substring on the
+   *  channel tag / outlet, but as an EXACT case-insensitive name on
+   *  customerName so a short/common key can't sweep up unrelated customers.
+   *  Events with neither a date nor a matchKey report zero (never all-invoices). */
+  private async eventSalesBatch(events: Location[]): Promise<Map<string, EventSales>> {
+    const zero: EventSales = { revenue: 0, orders: 0, avgOrder: 0 };
+    const out = new Map<string, EventSales>();
+    for (const e of events) out.set(e.id, zero);
+
+    const usable = events.filter(e => e.startDate || e.endDate || e.matchKey);
+    if (usable.length === 0) return out;
+
+    const rows = usable.map(e => {
+      const endExcl = e.endDate ? new Date(e.endDate.getTime() + 86_400_000) : null; // end-of-day inclusive
+      return Prisma.sql`(${e.id}::text, ${e.startDate}::timestamptz, ${endExcl}::timestamptz, ${e.matchKey}::text)`;
+    });
+
+    const agg = await this.prisma.$queryRaw<Array<{ id: string; revenue: unknown; orders: bigint }>>`
+      SELECT e.id,
+             COALESCE(SUM(i."amount"), 0) AS revenue,
+             COUNT(i."id")                AS orders
+      FROM (VALUES ${Prisma.join(rows)}) AS e(id, start_at, end_at, match_key)
+      LEFT JOIN "DpInvoice" i
+        ON i."isVoid" = false
+       AND (e.start_at IS NULL OR i."date" >= e.start_at)
+       AND (e.end_at   IS NULL OR i."date" <  e.end_at)
+       AND (
+         e.match_key IS NULL
+         OR i."tag"    ILIKE '%' || e.match_key || '%'
+         OR i."outlet" ILIKE '%' || e.match_key || '%'
+         OR lower(btrim(i."customerName")) = lower(btrim(e.match_key))
+       )
+      GROUP BY e.id`;
+
+    for (const r of agg) {
+      const revenue = Number(r.revenue);
+      const orders = Number(r.orders);
+      out.set(r.id, { revenue, orders, avgOrder: orders > 0 ? Math.round(revenue / orders) : 0 });
     }
-    if (loc.matchKey) {
-      where.OR = [
-        { tag: { contains: loc.matchKey, mode: 'insensitive' } },
-        { outlet: { contains: loc.matchKey, mode: 'insensitive' } },
-        { customerName: { contains: loc.matchKey, mode: 'insensitive' } },
-      ];
-    }
-    if (!loc.startDate && !loc.endDate && !loc.matchKey) {
-      return { revenue: 0, orders: 0, avgOrder: 0 };
-    }
-    const agg = await this.prisma.dpInvoice.aggregate({ where, _sum: { amount: true }, _count: { _all: true } });
-    const revenue = Number(agg._sum.amount ?? 0);
-    const orders = agg._count._all;
-    return { revenue, orders, avgOrder: orders > 0 ? Math.round(revenue / orders) : 0 };
+    return out;
   }
 
   async findAll(): Promise<LocationWithStats[]> {
@@ -85,8 +109,7 @@ export class LocationsService {
     ]);
 
     const events = locations.filter(l => l.kind === LocationKind.TEMPORARY);
-    const salesById = new Map<string, EventSales>();
-    await Promise.all(events.map(async l => { salesById.set(l.id, await this.eventSales(l)); }));
+    const salesById = events.length ? await this.eventSalesBatch(events) : new Map<string, EventSales>();
 
     return locations.map(l => {
       const s = l.storeLocation ? stats.get(l.storeLocation) : undefined;
