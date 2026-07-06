@@ -169,21 +169,20 @@
     .ph-sub{font-size:14px;color:rgba(255,255,255,.78);max-width:36ch;line-height:1.5;}
     .ph-cta{
       display:inline-flex;align-items:center;gap:8px;margin-top:4px;
-      font-size:13px;font-weight:500;padding:8px 2px;border-radius:0;
-      background:transparent;color:#fff;border-bottom:1px solid rgba(255,255,255,.45);
-      transition:border-color .15s,gap .15s;
+      font-size:13px;font-weight:500;padding:8px 2px;
+      background:transparent;color:#fff;
+      transition:opacity .15s,gap .15s;
     }
-    .ph-cta:hover{border-color:#fff;gap:12px;}
+    .ph-cta:hover{opacity:.8;gap:12px;}
     .ph-cta svg{width:14px;height:14px;}
 
     .ph-arrow{
       position:absolute;top:50%;transform:translateY(-50%);z-index:4;
-      width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.4);
-      background:rgba(0,0,0,.22);backdrop-filter:blur(6px);color:#fff;
-      display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s,border-color .15s,transform .15s;
+      width:44px;height:44px;border:none;background:transparent;color:rgba(255,255,255,.65);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color .15s,transform .15s;
     }
-    .ph-arrow:hover{background:rgba(255,255,255,.16);border-color:#fff;transform:translateY(-50%) scale(1.05);}
-    .ph-arrow svg{width:18px;height:18px;}
+    .ph-arrow:hover{color:#fff;transform:translateY(-50%) scale(1.08);}
+    .ph-arrow svg{width:30px;height:30px;stroke-width:1.2;}
     .ph-arrow.prev{left:24px;}
     .ph-arrow.next{right:24px;}
 

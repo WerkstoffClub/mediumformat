@@ -23,7 +23,7 @@
     /* ─── Tokens (dark default) ─────────────────────── */
     :root{
       --black:#000;--white:#fff;
-      --canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
+      --canvas:#000000;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;
       --ink:#FFFFFF;--body:#B4B4B4;--mute:#6E6E6E;
       --accent:#FFFFFF;--accent-text:#000000;
       --success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
@@ -37,7 +37,7 @@
       --player-h:62px;--tab-h:58px;
     }
     html[data-theme="light"]{
-      --canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
+      --canvas:#FFFFFF;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;
       --ink:#000000;--body:#525252;--mute:#8A8A8A;--accent:#000000;--accent-text:#FFFFFF;
       --focus:0 0 0 2px rgba(0,0,0,.5);
       --e1:0 1px 2px rgba(0,0,0,.08);--e2:0 4px 12px rgba(0,0,0,.12);--e3:0 8px 24px rgba(0,0,0,.16);
@@ -442,16 +442,15 @@
 
     <!-- App bar (transparent-over-hero; picks up opaque chrome once scrolled) -->
     <div class="appbar hero-appbar" id="site-appbar">
-      <button class="icon-btn" id="menu-btn" aria-label="Open categories &amp; filters">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-      </button>
+      <div class="appbar-lead">
+        <button class="icon-btn" id="menu-btn" aria-label="Open categories &amp; filters">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+      </div>
       <a href="mockup-storefront-mobile.html" class="appbar-logo">
         <img src="assets/MF_Logo/SVG/MF_Lockup_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light">
       </a>
-      <button class="icon-btn" id="search-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </button>
-      <div class="cart-wrap">
+      <div class="cart-wrap appbar-trail">
         <a href="mockup-cart-mobile.html" class="icon-btn" aria-label="Cart — 3 items">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
         </a>
@@ -720,12 +719,6 @@
     </div>
   </div>
 
-  <!-- Theme toggle (floating in frame) -->
-  <button class="icon-btn" id="theme-toggle-btn" aria-label="Toggle theme"
-    style="position:absolute;top:50px;right:64px;z-index:26;width:32px;height:32px;background:rgba(0,0,0,.28);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:50%;">
-    <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg id="ico-sun" style="display:none;width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-  </button>
 
   <!-- Prototype hub link -->
   <a href="index.html" class="icon-btn" aria-label="Back to prototype hub"
@@ -855,7 +848,6 @@
     applyTheme(next);
   }
   document.getElementById('theme-btn').addEventListener('click', toggleTheme);
-  document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
 
   // ─── Nav drawer ───
   const drawer = document.getElementById('drawer');
@@ -950,7 +942,6 @@
   const searchOv = document.getElementById('search-ov');
   function openSearch(){ searchOv.classList.add('open'); setTimeout(()=>document.getElementById('sinput').focus(),50); }
   function closeSearch(){ searchOv.classList.remove('open'); }
-  document.getElementById('search-btn').addEventListener('click', openSearch);
   document.getElementById('tab-search').addEventListener('click', openSearch);
   searchOv.addEventListener('click', e => { if(e.target === searchOv) closeSearch(); });
   document.addEventListener('keydown', e => {
