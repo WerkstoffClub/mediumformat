@@ -45,3 +45,16 @@ export async function updateRelease(id: string, data: Partial<Release>): Promise
 export async function deleteRelease(id: string): Promise<void> {
   await api.delete(`/inventory/${id}`);
 }
+
+export type AssistKind = 'desc' | 'metatitle' | 'metadesc';
+
+export async function aiAssist(kind: AssistKind, release: Partial<Release>): Promise<string> {
+  const res = await api.post<{ text: string }>('/inventory/ai-assist', {
+    kind,
+    release: {
+      artist: release.artist, title: release.title, label: release.label,
+      year: release.year, format: release.format, genre: release.genre, priceIdr: release.priceIdr,
+    },
+  });
+  return res.data.text;
+}

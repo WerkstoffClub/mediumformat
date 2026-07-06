@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsInt, IsEnum, Min, IsPositive, IsUrl } from 'class-validator';
+import { IsArray, IsBoolean, IsDateString, IsString, IsOptional, IsInt, IsEnum, Min, IsPositive, IsUrl } from 'class-validator';
 import { RecordFormat, RecordCondition, StoreLocation } from '@prisma/client';
 
 export class CreateReleaseDto {
@@ -21,4 +21,20 @@ export class CreateReleaseDto {
   @IsOptional() @IsInt() @Min(0) lowStockThreshold?: number;
   @IsOptional() @IsInt() @Min(0) costIdr?: number;
   @IsOptional() @IsString() discogsId?: string;
+
+  // Editorial fields (release-edit prototype)
+  @IsOptional() @IsString() country?: string;
+  @IsOptional() @IsInt() @Min(0) compareAtIdr?: number;
+  @IsOptional() @IsEnum(RecordCondition) mediaGrade?: RecordCondition;
+  @IsOptional() @IsEnum(RecordCondition) sleeveGrade?: RecordCondition;
+  @IsOptional() @IsArray() tracks?: Array<Record<string, unknown>>;
+  @IsOptional() @IsArray() sizing?: Array<Record<string, unknown>>;
+  @IsOptional() @IsArray() channelListings?: string[];
+  @IsOptional() @IsString() slug?: string;
+  @IsOptional() @IsString() seoTitle?: string;
+  @IsOptional() @IsString() seoDescription?: string;
+  @IsOptional() @IsBoolean() featured?: boolean;
+  @IsOptional() @IsBoolean() preorder?: boolean;
+  @IsOptional() @IsDateString() preorderEta?: string;
+  @IsOptional() @IsBoolean() onSale?: boolean;
 }

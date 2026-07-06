@@ -77,12 +77,12 @@
 10. `FinanceController` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `load()` --calls--> `getReleases()`  [INFERRED]
-  apps/backoffice/src/pages/channels/Channels.tsx → apps/backoffice/src/api/inventory.ts
-- `load()` --calls--> `getChannels()`  [INFERRED]
-  apps/backoffice/src/pages/channels/Channels.tsx → apps/backoffice/src/api/ops.ts
-- `load()` --calls--> `getSocialSettings()`  [INFERRED]
-  apps/backoffice/src/pages/channels/Channels.tsx → apps/backoffice/src/api/social.ts
+- `getReleases()` --calls--> `load()`  [INFERRED]
+  apps/backoffice/src/api/inventory.ts → apps/backoffice/src/pages/channels/Channels.tsx
+- `getChannels()` --calls--> `load()`  [INFERRED]
+  apps/backoffice/src/api/ops.ts → apps/backoffice/src/pages/channels/Channels.tsx
+- `getSocialSettings()` --calls--> `load()`  [INFERRED]
+  apps/backoffice/src/api/social.ts → apps/backoffice/src/pages/channels/Channels.tsx
 - `handleDelete()` --calls--> `load()`  [INFERRED]
   apps/backoffice/src/pages/blog/BlogList.tsx → apps/backoffice/src/pages/channels/Channels.tsx
 - `Item` --uses--> `Catalog Title with edition appended in parens if Edition is set.`  [INFERRED]

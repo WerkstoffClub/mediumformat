@@ -89,6 +89,13 @@ else
 fi
 REMOTE
 
+# Pass OpenRouter creds through when set locally (AI assist); append once if missing
+OPENROUTER_API_KEY=$(grep -o 'OPENROUTER_API_KEY="[^"]*"' .env | cut -d'"' -f2)
+OPENROUTER_BASE_URL=$(grep -o 'OPENROUTER_BASE_URL="[^"]*"' .env | cut -d'"' -f2)
+if [ -n "$OPENROUTER_API_KEY" ] && [ "$OPENROUTER_API_KEY" != "sk-or-..." ]; then
+  "${SSH[@]}" "grep -q OPENROUTER_API_KEY '${STACK_DIR}/api.env' || printf 'OPENROUTER_API_KEY=%s\nOPENROUTER_BASE_URL=%s\n' '$OPENROUTER_API_KEY' '$OPENROUTER_BASE_URL' >> '${STACK_DIR}/api.env'"
+fi
+
 echo ">> [6/6] docker compose up -d --build (first build takes a few minutes)"
 "${SSH[@]}" "cd '${STACK_DIR}' && docker compose up -d --build && docker compose ps --format 'table {{.Name}}\t{{.Status}}'"
 

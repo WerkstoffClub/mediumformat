@@ -107,6 +107,20 @@ model Release {
   shelfLocation     String?
   lowStockThreshold Int             @default(2)
   discogsId         String?         @unique
+  country           String?
+  compareAtIdr      Int?
+  mediaGrade        RecordCondition?
+  sleeveGrade       RecordCondition?
+  tracks            Json?
+  sizing            Json?
+  channelListings   Json?
+  slug              String?         @unique
+  seoTitle          String?
+  seoDescription    String?
+  featured          Boolean         @default(false)
+  preorder          Boolean         @default(false)
+  preorderEta       DateTime?
+  onSale            Boolean         @default(false)
   dealposProductId  String?
   dealposVariantId  String?         @unique
   costIdr           Int?

@@ -3,6 +3,7 @@ import {
   Body, Param, Query, UseGuards, HttpCode, HttpStatus,
 } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
+import { AiAssistService, AssistKind } from './ai-assist.service';
 import { CreateReleaseDto } from './dto/create-release.dto';
 import { UpdateReleaseDto } from './dto/update-release.dto';
 import { ReleaseFilterDto } from './dto/release-filter.dto';
@@ -14,7 +15,17 @@ import { Role, STAFF_ROLES } from '@mf/shared';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('inventory')
 export class InventoryController {
-  constructor(private inventory: InventoryService) {}
+  constructor(
+    private inventory: InventoryService,
+    private aiAssist: AiAssistService,
+  ) {}
+
+  @Roles(Role.ADMIN, Role.MANAGER)
+  @Post('ai-assist')
+  async assist(@Body() body: { kind: AssistKind; release: { artist: string; title: string; label?: string; year?: number; format?: string; genre?: string; priceIdr?: number } }) {
+    const text = await this.aiAssist.generate(body.kind, body.release);
+    return { text };
+  }
 
   @Roles(Role.ADMIN, Role.MANAGER)
   @Post()

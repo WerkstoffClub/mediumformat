@@ -14,7 +14,8 @@ export class InventoryService {
       const exists = await this.prisma.release.findUnique({ where: { barcode: dto.barcode } });
       if (exists) throw new ConflictException('Barcode already in use');
     }
-    return this.prisma.release.create({ data: dto });
+    // DTO array fields (tracks/sizing/channelListings) narrow to Prisma Json inputs
+    return this.prisma.release.create({ data: dto as unknown as Prisma.ReleaseUncheckedCreateInput });
   }
 
   async findAll(filter: ReleaseFilterDto) {
@@ -69,7 +70,7 @@ export class InventoryService {
 
   async update(id: string, dto: UpdateReleaseDto) {
     await this.findOne(id);
-    return this.prisma.release.update({ where: { id }, data: dto });
+    return this.prisma.release.update({ where: { id }, data: dto as unknown as Prisma.ReleaseUncheckedUpdateInput });
   }
 
   async remove(id: string) {
