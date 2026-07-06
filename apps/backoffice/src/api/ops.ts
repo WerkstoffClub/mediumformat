@@ -193,7 +193,10 @@ export function channelLabel(tag: string | null | undefined): string {
  *  the stored record and search still use the raw name. */
 export function customerLabel(name: string | null | undefined): string {
   if (!name) return '';
-  return name.trim().toLowerCase() === 'tiktok' ? 'Tokopedia' : name;
+  const key = name.trim().toLowerCase();
+  if (key === 'tiktok') return 'Tokopedia';
+  if (key === 'shopee') return 'Shopee';
+  return name;
 }
 
 /* v2.1 channel colour key — the ONLY non-status colour in the system.

@@ -14,7 +14,7 @@ export default {
       },
       fontFamily: {
         sans: ['Geist', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        mono: ['Geist Mono', 'ui-monospace', 'monospace'],
+        mono: ['Geist', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
     },
   },
