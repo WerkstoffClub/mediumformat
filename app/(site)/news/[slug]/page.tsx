@@ -13,14 +13,16 @@ export default async function NewsDetailPage({
   if (!post || post.status !== "PUBLISHED") return notFound();
 
   return (
-    <article className="mx-auto max-w-2xl px-4 py-12">
-      <p className="font-mono text-xs text-zinc-400">
-        {post.publishedAt?.toLocaleDateString("en-US")}
+    <article className="article">
+      <p className="article-date">
+        {post.publishedAt?.toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })}
       </p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight">{post.title}</h1>
-      <div className="prose prose-zinc dark:prose-invert mt-6 whitespace-pre-wrap">
-        {post.bodyMd}
-      </div>
+      <h1>{post.title}</h1>
+      <div className="article-body">{post.bodyMd}</div>
     </article>
   );
 }

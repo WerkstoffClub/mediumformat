@@ -9,27 +9,31 @@ export default async function NewsListPage() {
     orderBy: { publishedAt: "desc" },
     take: 30,
   });
+
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="text-3xl font-semibold tracking-tight">News</h1>
-      <ul className="mt-8 divide-y divide-zinc-200 dark:divide-zinc-800">
-        {posts.length === 0 && (
-          <li className="py-8 text-zinc-500">No posts yet.</li>
-        )}
-        {posts.map((p) => (
-          <li key={p.id} className="py-6">
-            <Link href={`/news/${p.slug}`} className="block">
-              <h2 className="text-xl font-medium">{p.title}</h2>
-              {p.excerpt && (
-                <p className="mt-1 text-sm text-zinc-500">{p.excerpt}</p>
-              )}
-              <p className="mt-2 font-mono text-xs text-zinc-400">
-                {p.publishedAt?.toLocaleDateString("en-US")}
-              </p>
+    <div className="page-narrow">
+      <h1 className="page-title">News</h1>
+      <p className="page-lead">Reviews, staff picks, new arrivals and features.</p>
+
+      {posts.length === 0 ? (
+        <p className="page-lead">No posts yet.</p>
+      ) : (
+        <div className="news-list">
+          {posts.map((p) => (
+            <Link key={p.id} href={`/news/${p.slug}`} className="news-item">
+              <h2>{p.title}</h2>
+              {p.excerpt && <p className="news-excerpt">{p.excerpt}</p>}
+              <div className="news-date">
+                {p.publishedAt?.toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </div>
             </Link>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

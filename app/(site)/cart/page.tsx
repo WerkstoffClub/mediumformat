@@ -1,8 +1,13 @@
+import Link from "next/link";
+
 export default function CartPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight">Cart</h1>
-      <p className="mt-4 text-zinc-500">Your cart is empty.</p>
+    <div className="page-narrow">
+      <h1 className="page-title">Cart</h1>
+      <p className="page-lead">Your cart is empty.</p>
+      <Link href="/shop" className="page-link">
+        Browse the catalogue →
+      </Link>
     </div>
   );
 }

@@ -1,10 +1,15 @@
+import Link from "next/link";
+
 export default function CheckoutPage() {
   return (
-    <div className="mx-auto max-w-xl px-4 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight">Checkout</h1>
-      <p className="mt-4 text-zinc-500">
-        Xendit unified checkout will be wired here in MVP-1.
+    <div className="page-narrow">
+      <h1 className="page-title">Checkout</h1>
+      <p className="page-lead">
+        Xendit unified checkout (QRIS, VA, e-wallets) will be wired here.
       </p>
+      <Link href="/cart" className="page-link">
+        Back to cart →
+      </Link>
     </div>
   );
 }
