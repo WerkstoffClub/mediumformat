@@ -94,7 +94,7 @@ export function Channels() {
       icon: ic(<><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="8" y1="9" x2="16" y2="9"/></>),
       metrics: [['Last sync', ago(lastSync)], ['Listings', String(totalReleases)]],
       action: { label: syncRunning ? 'Syncing…' : 'Sync now', onClick: onSyncNow, busy: syncRunning },
-      configureTo: '/finance',
+      configureTo: '/sales',
       toggle: { checked: true, disabled: true },
     },
     {

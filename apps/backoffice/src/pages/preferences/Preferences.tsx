@@ -41,7 +41,7 @@ export function Preferences() {
               <p className="text-[var(--text-primary)]">DealPOS sync</p>
               <p className="text-[10px] text-[var(--text-muted)]">Products, orders, customers — status on the Finance page</p>
             </div>
-            <Link to="/finance" className="text-[11px] text-[var(--text-secondary)] underline hover:text-[var(--text-primary)]">Open</Link>
+            <Link to="/sales" className="text-[11px] text-[var(--text-secondary)] underline hover:text-[var(--text-primary)]">Open</Link>
           </div>
           <div className="flex justify-between items-center">
             <div>

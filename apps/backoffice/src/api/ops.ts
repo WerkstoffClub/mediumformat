@@ -44,6 +44,8 @@ export interface OrderDetail extends OrderRow {
   payments: OrderPayment[];
 }
 
+export type CustomerSegment = 'vip' | 'new' | null;
+
 export interface CustomerRow {
   id: string;
   name: string;
@@ -51,6 +53,23 @@ export interface CustomerRow {
   mobile: string | null;
   email: string | null;
   joinDate: string | null;
+  orders: number;
+  lifetime: number;
+  lastOrderAt: string | null;
+  channel: string | null;
+  segment: CustomerSegment;
+}
+
+export interface CustomersSummary {
+  totalCustomers: number;
+  newThisMonth: number;
+  vipCount: number;
+  avgLifetime: number;
+  avgOrders: number;
+  repeatRate: number;
+  vipRevenueShare: number;
+  topCustomers: CustomerRow[];
+  acquisition: Array<{ channel: string; count: number }>;
 }
 
 export interface PurchaseOrderRow {
@@ -94,8 +113,15 @@ export async function getOrder(id: string): Promise<OrderDetail> {
   return res.data;
 }
 
-export async function getCustomers(filter: { q?: string; page?: number; limit?: number } = {}): Promise<Paged<CustomerRow>> {
+export async function getCustomers(
+  filter: { q?: string; page?: number; limit?: number; segment?: 'vip' | 'new' | 'repeat' } = {},
+): Promise<Paged<CustomerRow>> {
   const res = await api.get<Paged<CustomerRow>>('/customers-list', { params: filter });
+  return res.data;
+}
+
+export async function getCustomersSummary(): Promise<CustomersSummary> {
+  const res = await api.get<CustomersSummary>('/customers-summary');
   return res.data;
 }
 
@@ -136,6 +162,14 @@ export function channelColor(tag: string | null): string {
 
 export const fmtIdr = (v: string | number | null | undefined): string =>
   new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number(v ?? 0));
+
+/** Compact IDR for dense figures: Rp 18.4M, Rp 970K, Rp 0. */
+export const fmtIdrCompact = (v: string | number | null | undefined): string => {
+  const n = Number(v ?? 0);
+  if (n >= 1_000_000) return `Rp ${(n / 1_000_000).toFixed(n >= 10_000_000 ? 1 : 2)}M`;
+  if (n >= 1_000) return `Rp ${Math.round(n / 1_000)}K`;
+  return `Rp ${Math.round(n)}`;
+};
 
 export const fmtDate = (v: string | null | undefined): string =>
   v ? new Date(v).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';

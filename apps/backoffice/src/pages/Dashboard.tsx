@@ -119,7 +119,7 @@ export default function Dashboard() {
       severity: 'danger' as const,
       title: `DealPOS sync failing — ${syncErrors.length} ${syncErrors.length === 1 ? 'entity' : 'entities'}`,
       meta: syncErrors.map(e => e.entity).join(' · '),
-      to: '/finance',
+      to: '/sales',
     }] : []),
     ...(lowStock.total > 0 ? [{
       severity: 'warn' as const,
@@ -148,7 +148,7 @@ export default function Dashboard() {
     { label: 'Gross margin', value: summary.grossMarginPct != null ? `${summary.grossMarginPct.toFixed(1)}%` : '—', cur: summary.grossMarginPct ?? 0, prev: prevSummary?.grossMarginPct ?? 0, spark: series.map(r => Math.max(r.margin, 0)), fmt: (v: number) => `${v.toFixed(1)}%` },
   ];
 
-  const tabs = [['Dashboard', '/dashboard'], ['Orders', '/orders'], ['Inventory', '/inventory'], ['Customers', '/customers'], ['Finance', '/finance'], ['Channels', '/channels']] as const;
+  const tabs = [['Dashboard', '/dashboard'], ['Orders', '/orders'], ['Inventory', '/inventory'], ['Customers', '/customers'], ['Sales', '/sales'], ['Channels', '/channels']] as const;
 
   return (
     <div>

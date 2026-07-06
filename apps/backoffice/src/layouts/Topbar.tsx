@@ -5,7 +5,8 @@ import { getSyncStatus } from '../api/finance';
 
 const CRUMBS: Array<[RegExp, string]> = [
   [/^\/dashboard/, 'Dashboard'],
-  [/^\/finance/, 'Finance'],
+  [/^\/sales/, 'Sales'],
+  [/^\/pos/, 'POS'],
   [/^\/orders\/.+/, 'Order detail'],
   [/^\/orders/, 'Orders'],
   [/^\/inventory\/new/, 'Add release'],

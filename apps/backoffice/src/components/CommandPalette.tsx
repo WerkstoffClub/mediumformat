@@ -8,8 +8,8 @@ interface PageEntry { label: string; to: string; hint: string; }
 
 const PAGES: PageEntry[] = [
   { label: 'Dashboard', to: '/dashboard', hint: 'Overview' },
-  { label: 'Finance', to: '/finance', hint: 'Overview' },
-  { label: 'Analytics', to: '/analytics', hint: 'Overview' },
+  { label: 'Sales', to: '/sales', hint: 'Overview' },
+  { label: 'POS', to: '/pos', hint: 'Selling' },
   { label: 'Orders', to: '/orders', hint: 'Selling' },
   { label: 'Inventory', to: '/inventory', hint: 'Selling' },
   { label: 'Customers', to: '/customers', hint: 'Selling' },

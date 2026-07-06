@@ -19,8 +19,8 @@ const ic = (paths: React.ReactNode) => (
 
 const icons = {
   dashboard:  ic(<><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>),
-  finance:    ic(<><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></>),
-  analytics:  ic(<><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></>),
+  sales:      ic(<><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></>),
+  pos:        ic(<><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><path d="M8 14h4"/><circle cx="15.5" cy="16.5" r="1.5" fill="currentColor" stroke="none"/></>),
   settlements: ic(<><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>),
   preorders:  ic(<><path d="M20 12v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8"/><rect x="2" y="7" width="20" height="5" rx="1"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></>),
   tags:       ic(<><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></>),
@@ -50,13 +50,13 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
       label: 'Overview',
       items: [
         { label: 'Dashboard', to: '/dashboard', icon: icons.dashboard },
-        { label: 'Analytics', to: '/analytics', icon: icons.analytics },
-        { label: 'Finance',   to: '/finance',   icon: icons.finance },
+        { label: 'Sales',     to: '/sales',     icon: icons.sales },
       ],
     },
     {
       label: 'Selling',
       items: [
+        { label: 'POS',       to: '/pos',       icon: icons.pos },
         { label: 'Orders',    to: '/orders',    icon: icons.orders, count: pendingOrders },
         { label: 'Inventory', to: '/inventory', icon: icons.inventory },
         { label: 'Customers', to: '/customers', icon: icons.customers },

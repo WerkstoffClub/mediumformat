@@ -1,14 +1,62 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { ChannelsQueryDto, OrdersQueryDto, PagedQueryDto } from './dto/ops-query.dto';
+import { ChannelsQueryDto, CustomersQueryDto, OrdersQueryDto, PagedQueryDto } from './dto/ops-query.dto';
 
 const num = (v: unknown): number => (v == null ? 0 : Number(v));
+
+/** Customer segmentation thresholds, applied over the DealPOS sales mirror. */
+const VIP_LIFETIME_IDR = 5_000_000; // high-value customer cutoff
+const REPEAT_MIN_ORDERS = 2; // bought more than once
+
+type CustomerAggRow = {
+  id: string;
+  name: string;
+  code: string | null;
+  mobile: string | null;
+  email: string | null;
+  joinDate: Date | null;
+  orders: unknown;
+  lifetime: unknown;
+  lastOrderAt: Date | null;
+  channel: string | null;
+  isNew: boolean;
+};
 
 /** Read-only operations views over the DealPOS mirror tables. */
 @Injectable()
 export class OpsService {
   constructor(private prisma: PrismaService) {}
+
+  /** Join key between the customer directory and the invoice stream.
+      DealPOS invoices carry a free-text customer name, not a FK. */
+  private readonly custJoin = Prisma.sql`
+    LEFT JOIN "DpInvoice" i
+      ON i."isVoid" = false
+     AND lower(btrim(i."customerName")) = lower(btrim(c."name"))`;
+
+  private segment(lifetime: number, isNew: boolean): 'vip' | 'new' | null {
+    if (lifetime >= VIP_LIFETIME_IDR) return 'vip';
+    if (isNew) return 'new';
+    return null;
+  }
+
+  private shapeCustomer(r: CustomerAggRow) {
+    const lifetime = num(r.lifetime);
+    return {
+      id: r.id,
+      name: r.name,
+      code: r.code,
+      mobile: r.mobile,
+      email: r.email,
+      joinDate: r.joinDate,
+      orders: Number(r.orders),
+      lifetime,
+      lastOrderAt: r.lastOrderAt,
+      channel: r.channel,
+      segment: this.segment(lifetime, r.isNew),
+    };
+  }
 
   async orders(query: OrdersQueryDto) {
     const { page = 1, limit = 50 } = query;
@@ -55,23 +103,144 @@ export class OpsService {
     return invoice;
   }
 
-  async customers(query: PagedQueryDto) {
+  /** Paginated customer list enriched with lifetime value, order count,
+      last order, acquisition channel and derived segment. */
+  async customers(query: CustomersQueryDto) {
     const { page = 1, limit = 50 } = query;
-    const where: Prisma.DpCustomerWhereInput = query.q
-      ? {
-          OR: [
-            { name: { contains: query.q, mode: 'insensitive' } },
-            { email: { contains: query.q, mode: 'insensitive' } },
-            { mobile: { contains: query.q } },
-            { code: { contains: query.q, mode: 'insensitive' } },
-          ],
-        }
-      : {};
-    const [data, total] = await this.prisma.$transaction([
-      this.prisma.dpCustomer.findMany({ where, orderBy: { name: 'asc' }, skip: (page - 1) * limit, take: limit }),
-      this.prisma.dpCustomer.count({ where }),
-    ]);
-    return { data, total, page, limit };
+    const offset = (page - 1) * limit;
+
+    const search = query.q
+      ? Prisma.sql`(c."name" ILIKE ${'%' + query.q + '%'} OR c."email" ILIKE ${'%' + query.q + '%'}
+                    OR c."mobile" ILIKE ${'%' + query.q + '%'} OR c."code" ILIKE ${'%' + query.q + '%'})`
+      : Prisma.sql`TRUE`;
+
+    // Segment filter is applied after aggregation (VIP = lifetime cutoff),
+    // except "new" which is a cheap join-date predicate on the customer row.
+    const having =
+      query.segment === 'vip'
+        ? Prisma.sql`HAVING COALESCE(SUM(i."amount"), 0) >= ${VIP_LIFETIME_IDR}`
+        : query.segment === 'repeat'
+          ? Prisma.sql`HAVING COUNT(i."id") >= ${REPEAT_MIN_ORDERS}`
+          : Prisma.empty;
+    const newOnly =
+      query.segment === 'new'
+        ? Prisma.sql`AND c."joinDate" >= date_trunc('month', now())`
+        : Prisma.empty;
+
+    const rows = await this.prisma.$queryRaw<CustomerAggRow[]>`
+      SELECT c."id", c."name", c."code", c."mobile", c."email", c."joinDate",
+             COUNT(i."id")                                                        AS orders,
+             COALESCE(SUM(i."amount"), 0)                                         AS lifetime,
+             MAX(i."date")                                                        AS "lastOrderAt",
+             (array_agg(i."tag" ORDER BY i."date" ASC)
+                FILTER (WHERE i."tag" IS NOT NULL))[1]                            AS channel,
+             (c."joinDate" >= date_trunc('month', now()))                         AS "isNew"
+      FROM "DpCustomer" c
+      ${this.custJoin}
+      WHERE ${search} ${newOnly}
+      GROUP BY c."id"
+      ${having}
+      ORDER BY lifetime DESC NULLS LAST, c."name" ASC
+      LIMIT ${limit} OFFSET ${offset}`;
+
+    // Total respects the segment filter so the paginator stays honest.
+    const totalRows = await this.prisma.$queryRaw<Array<{ count: bigint }>>`
+      SELECT COUNT(*) AS count FROM (
+        SELECT c."id"
+        FROM "DpCustomer" c
+        ${this.custJoin}
+        WHERE ${search} ${newOnly}
+        GROUP BY c."id"
+        ${having}
+      ) s`;
+
+    return {
+      data: rows.map(r => this.shapeCustomer(r)),
+      total: Number(totalRows[0]?.count ?? 0),
+      page,
+      limit,
+    };
+  }
+
+  /** Headline customer metrics, top customers and acquisition mix for the
+      Customers overview strip and side panels. */
+  async customersSummary() {
+    const [agg] = await this.prisma.$queryRaw<
+      Array<{
+        total: bigint;
+        newThisMonth: bigint;
+        vip: bigint;
+        repeat: bigint;
+        withOrders: bigint;
+        avgLifetime: unknown;
+        avgOrders: unknown;
+        totalRevenue: unknown;
+        vipRevenue: unknown;
+      }>
+    >`
+      WITH per AS (
+        SELECT c."id", c."joinDate",
+               COUNT(i."id")                 AS orders,
+               COALESCE(SUM(i."amount"), 0)  AS lifetime
+        FROM "DpCustomer" c
+        ${this.custJoin}
+        GROUP BY c."id"
+      )
+      SELECT COUNT(*)                                                          AS total,
+             COUNT(*) FILTER (WHERE "joinDate" >= date_trunc('month', now()))  AS "newThisMonth",
+             COUNT(*) FILTER (WHERE lifetime >= ${VIP_LIFETIME_IDR})           AS vip,
+             COUNT(*) FILTER (WHERE orders >= ${REPEAT_MIN_ORDERS})            AS repeat,
+             COUNT(*) FILTER (WHERE orders > 0)                                AS "withOrders",
+             COALESCE(AVG(lifetime) FILTER (WHERE orders > 0), 0)              AS "avgLifetime",
+             COALESCE(AVG(orders) FILTER (WHERE orders > 0), 0)                AS "avgOrders",
+             COALESCE(SUM(lifetime), 0)                                        AS "totalRevenue",
+             COALESCE(SUM(lifetime) FILTER (WHERE lifetime >= ${VIP_LIFETIME_IDR}), 0) AS "vipRevenue"
+      FROM per`;
+
+    const topRows = await this.prisma.$queryRaw<CustomerAggRow[]>`
+      SELECT c."id", c."name", c."code", c."mobile", c."email", c."joinDate",
+             COUNT(i."id")                                            AS orders,
+             COALESCE(SUM(i."amount"), 0)                             AS lifetime,
+             MAX(i."date")                                            AS "lastOrderAt",
+             (array_agg(i."tag" ORDER BY i."date" ASC)
+                FILTER (WHERE i."tag" IS NOT NULL))[1]                AS channel,
+             (c."joinDate" >= date_trunc('month', now()))            AS "isNew"
+      FROM "DpCustomer" c
+      ${this.custJoin}
+      GROUP BY c."id"
+      HAVING COALESCE(SUM(i."amount"), 0) > 0
+      ORDER BY lifetime DESC
+      LIMIT 5`;
+
+    const acquisition = await this.prisma.$queryRaw<Array<{ channel: string | null; count: bigint }>>`
+      WITH firsttag AS (
+        SELECT c."id",
+               (array_agg(i."tag" ORDER BY i."date" ASC)
+                  FILTER (WHERE i."tag" IS NOT NULL))[1] AS channel
+        FROM "DpCustomer" c
+        ${this.custJoin}
+        GROUP BY c."id"
+        HAVING COUNT(i."id") > 0
+      )
+      SELECT COALESCE(channel, 'Direct') AS channel, COUNT(*) AS count
+      FROM firsttag
+      GROUP BY 1
+      ORDER BY 2 DESC`;
+
+    const total = Number(agg?.total ?? 0);
+    const totalRevenue = num(agg?.totalRevenue);
+    const withOrders = Number(agg?.withOrders ?? 0);
+    return {
+      totalCustomers: total,
+      newThisMonth: Number(agg?.newThisMonth ?? 0),
+      vipCount: Number(agg?.vip ?? 0),
+      avgLifetime: num(agg?.avgLifetime),
+      avgOrders: num(agg?.avgOrders),
+      repeatRate: withOrders > 0 ? Math.round((Number(agg?.repeat ?? 0) / withOrders) * 100) : 0,
+      vipRevenueShare: totalRevenue > 0 ? Math.round((num(agg?.vipRevenue) / totalRevenue) * 100) : 0,
+      topCustomers: topRows.map(r => this.shapeCustomer(r)),
+      acquisition: acquisition.map(a => ({ channel: a.channel ?? 'Direct', count: Number(a.count) })),
+    };
   }
 
   async purchaseOrders(query: PagedQueryDto) {

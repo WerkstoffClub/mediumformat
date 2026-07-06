@@ -11,11 +11,11 @@ import { Channels } from './pages/channels/Channels';
 import { Vouchers } from './pages/vouchers/Vouchers';
 import { Newsletter } from './pages/newsletter/Newsletter';
 import { Preferences } from './pages/preferences/Preferences';
-import { Analytics } from './pages/analytics/Analytics';
 import { Settlements } from './pages/settlements/Settlements';
 import { Preorders } from './pages/preorders/Preorders';
 import { Categories } from './pages/categories/Categories';
-import { Finance } from './pages/finance/Finance';
+import { Sales } from './pages/sales/Sales';
+import { Pos } from './pages/pos/Pos';
 import { SocialMedia } from './pages/social/SocialMedia';
 import { InventoryList } from './pages/inventory/InventoryList';
 import { ReleaseForm } from './pages/inventory/ReleaseForm';
@@ -42,10 +42,13 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard"          element={<Dashboard />} />
-          <Route path="/analytics"          element={<Analytics />} />
+          <Route path="/sales"              element={<Sales />} />
+          <Route path="/analytics"          element={<Navigate to="/sales" replace />} />
+          <Route path="/finance"            element={<Navigate to="/sales" replace />} />
           <Route path="/settlements"        element={<Settlements />} />
           <Route path="/preorders"          element={<Preorders />} />
           <Route path="/categories"         element={<Categories />} />
+          <Route path="/pos"                element={<Pos />} />
           <Route path="/orders"             element={<OrdersList />} />
           <Route path="/orders/:id"         element={<OrderDetail />} />
           <Route path="/customers"          element={<CustomersList />} />
@@ -54,7 +57,6 @@ export default function App() {
           <Route path="/vouchers"           element={<Vouchers />} />
           <Route path="/newsletter"         element={<Newsletter />} />
           <Route path="/preferences"        element={<Preferences />} />
-          <Route path="/finance"            element={<Finance />} />
           <Route path="/social"             element={<SocialMedia />} />
           <Route path="/inventory"          element={<InventoryList />} />
           <Route path="/inventory/new"      element={<ReleaseForm />} />
