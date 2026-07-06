@@ -1,4 +1,4 @@
-import { channelColor } from '../../api/ops';
+import { channelColor, channelLabel } from '../../api/ops';
 
 export function PageHeader({ title, sub, actions }: { title: string; sub?: string; actions?: React.ReactNode }) {
   return (
@@ -35,7 +35,7 @@ export function ChannelPill({ tag }: { tag: string | null }) {
   return (
     <span className="inline-flex items-center gap-1.5 text-[10px] px-2 py-0.5 rounded-full border border-[var(--border)] text-[var(--text-secondary)] whitespace-nowrap">
       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: channelColor(tag) }} />
-      {tag}
+      {channelLabel(tag)}
     </span>
   );
 }

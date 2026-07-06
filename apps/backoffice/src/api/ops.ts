@@ -143,10 +143,20 @@ export async function getChannels(filter: { from?: string; to?: string } = {}): 
   return res.data;
 }
 
+/** Display label for a DealPOS channel tag. Business-specific mapping:
+ *  the "Penjualan Tiktok" tag is Tokopedia; "Penjualan Shopee" is Shopee.
+ *  Data is left untouched (re-synced from DealPOS) — this is display-only. */
+export function channelLabel(tag: string | null | undefined): string {
+  if (!tag) return '';
+  if (/tiktok/i.test(tag)) return 'Tokopedia';
+  if (/shopee/i.test(tag)) return 'Shopee';
+  return tag.replace(/^Penjualan\s+/i, '');
+}
+
 /* v2.1 channel colour key — the ONLY non-status colour in the system.
-   Dot + text on a neutral pill, channel indicators only. */
+   Dot + text on a neutral pill, channel indicators only. Keyed on the
+   display label so the Tokopedia mapping picks up its green. */
 const CHANNEL_COLORS: Array<[RegExp, string]> = [
-  [/tiktok/i, '#69C9D0'],
   [/shopee/i, '#F97316'],
   [/tokopedia/i, '#22C55E'],
   [/whatsapp/i, '#25D366'],
@@ -156,9 +166,10 @@ const CHANNEL_COLORS: Array<[RegExp, string]> = [
 ];
 
 export function channelColor(tag: string | null): string {
-  if (!tag) return '#9CA3AF';
+  const label = channelLabel(tag);
+  if (!label) return '#9CA3AF';
   for (const [pattern, color] of CHANNEL_COLORS) {
-    if (pattern.test(tag)) return color;
+    if (pattern.test(label)) return color;
   }
   return '#9CA3AF';
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { channelColor, getCatalogSummary, getChannels, type CatalogSummary, type ChannelSummary } from '../../api/ops';
+import { channelColor, channelLabel, getCatalogSummary, getChannels, type CatalogSummary, type ChannelSummary } from '../../api/ops';
 import { PageHeader, Panel } from '../../components/ui/Page';
 
 function GroupList({ rows, linkBase }: { rows: CatalogSummary['formats']; linkBase?: string }) {
@@ -56,7 +56,7 @@ export function Categories() {
             {channels.map(c => (
               <span key={c.tag} className="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full border border-[var(--border)] text-[var(--text-secondary)]">
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: channelColor(c.tag) }} />
-                {c.tag}
+                {channelLabel(c.tag)}
                 <span className="font-mono text-[10px] text-[var(--text-muted)]">{c.orders}</span>
               </span>
             ))}

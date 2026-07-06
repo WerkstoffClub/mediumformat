@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getPayments, type PaymentRow } from '../../api/finance';
-import { channelColor, fmtDate, fmtIdr, getOrders, type OrderRow } from '../../api/ops';
+import { channelColor, channelLabel, fmtDate, fmtIdr, getOrders, type OrderRow } from '../../api/ops';
 import { ChannelPill, PageHeader, Panel, tdCls, thCls } from '../../components/ui/Page';
 
 const iso = (d: Date) => d.toISOString().slice(0, 10);
@@ -46,7 +46,7 @@ export function Settlements() {
           <div key={tag} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] p-4">
             <div className="flex items-center gap-2 mb-3">
               <span className="w-2 h-2 rounded-full" style={{ background: channelColor(tag) }} />
-              <h3 className="text-[13px] font-semibold text-[var(--text-primary)]">{tag}</h3>
+              <h3 className="text-[13px] font-semibold text-[var(--text-primary)]">{channelLabel(tag)}</h3>
             </div>
             <p className="text-[18px] font-bold font-mono text-[var(--text-primary)]">{fmtIdr(g.sum)}</p>
             <p className="text-[10px] text-[var(--text-muted)] mt-1">{g.count} order{g.count === 1 ? '' : 's'} awaiting payout</p>

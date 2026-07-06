@@ -18,7 +18,7 @@ import {
   type SyncEntityState,
   type TimeseriesRow,
 } from '../../api/finance';
-import { channelColor, fmtIdr, getChannels, type ChannelSummary } from '../../api/ops';
+import { channelColor, channelLabel, fmtIdr, getChannels, type ChannelSummary } from '../../api/ops';
 
 const fmtRp = fmtIdr;
 const fmtPct = (v: number | null) => (v == null ? '—' : `${v.toFixed(1)}%`);
@@ -283,7 +283,7 @@ export function Sales() {
         </select>
         <select value={tag} onChange={e => setTag(e.target.value)} className={selectCls}>
           <option value="">All channels</option>
-          {options.tags.map(t => <option key={t} value={t}>{t}</option>)}
+          {options.tags.map(t => <option key={t} value={t}>{channelLabel(t)}</option>)}
         </select>
         {loading && <span className="text-[10px] text-[var(--text-faint)] animate-pulse">Loading…</span>}
       </div>
@@ -319,7 +319,7 @@ export function Sales() {
               <div key={c.tag}>
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="inline-flex items-center gap-1.5 text-[12px] text-[var(--text-primary)]">
-                    <span className="w-2 h-2 rounded-full" style={{ background: channelColor(c.tag) }} />{c.tag}
+                    <span className="w-2 h-2 rounded-full" style={{ background: channelColor(c.tag) }} />{channelLabel(c.tag)}
                     <span className="text-[10px] text-[var(--text-muted)]">· {c.orders} orders</span>
                   </span>
                   <span className="font-mono text-[12px] text-[var(--text-primary)]">{fmtRp(c.revenue)}</span>
@@ -390,7 +390,7 @@ export function Sales() {
               )}
               {margins.map(m => (
                 <tr key={m.group} className="hover:bg-[var(--bg-overlay)] transition-colors">
-                  <td className={`${td} max-w-[280px] truncate text-[var(--text-primary)]`} title={m.group}>{m.group}</td>
+                  <td className={`${td} max-w-[280px] truncate text-[var(--text-primary)]`} title={m.group}>{groupBy === 'tag' ? channelLabel(m.group) : m.group}</td>
                   <td className={tdNum}>{m.unitsSold.toLocaleString('en-GB')}</td>
                   <td className={`${tdNum} text-[var(--text-primary)]`}>{fmtRp(m.revenue)}</td>
                   <td className={`${tdNum} text-[var(--text-muted)]`}>{fmtRp(m.cogs)}</td>

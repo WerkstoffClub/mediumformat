@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fmtDate, fmtIdr, getOrders, type OrderRow, type OrdersFilter } from '../../api/ops';
+import { channelLabel, fmtDate, fmtIdr, getOrders, type OrderRow, type OrdersFilter } from '../../api/ops';
 import { getFilterOptions } from '../../api/finance';
 import { ChannelPill, EmptyRow, PageHeader, Paginator, SearchBox, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 
@@ -111,7 +111,7 @@ export function OrdersList() {
           className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-md px-2 py-1.5 text-[11px] text-[var(--text-primary)]"
         >
           <option value="">All channels</option>
-          {tags.map(t => <option key={t} value={t}>{t}</option>)}
+          {tags.map(t => <option key={t} value={t}>{channelLabel(t)}</option>)}
         </select>
       </div>
 

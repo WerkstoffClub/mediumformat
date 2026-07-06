@@ -1,11 +1,69 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { fmtDate, fmtIdr, getOrder, type OrderDetail as Order } from '../../api/ops';
+import { channelLabel, fmtDate, fmtIdr, getOrder, type OrderDetail as Order } from '../../api/ops';
 import { ChannelPill, Panel, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 import { ReleaseCover } from '../../components/ui/Cover';
 
 const fmtTime = (v: string | null | undefined) =>
   v ? new Date(v).toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+
+const MARKETPLACE_STEPS = ['Placed', 'Packed', 'Shipped', 'Delivered', 'Settled'] as const;
+
+/** Step-by-step lifecycle for marketplace/shipping orders (mockup-order-detail).
+ *  Marketplace flow: pack → ship → deliver → platform settles the payout.
+ *  Every state is inferred from real DealPOS fields (fulfillment + payment). */
+function LifecycleStepper({ order }: { order: Order }) {
+  if (order.fulfillment === 'Returned') {
+    return (
+      <div className="bg-[var(--bg-surface)] border border-[var(--danger)] rounded-[8px] px-4 py-3 flex items-center gap-2 text-[13px] text-[var(--danger)]">
+        <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+        Order returned — reversed in DealPOS.
+      </div>
+    );
+  }
+  const paid = order.paymentStatus === 'Paid';
+  const sent = order.fulfillment === 'Sent';
+  const partial = order.fulfillment === 'Partial';
+  let reached = 0;              // Placed always done
+  if (partial) reached = 1;     // Packed
+  if (sent) reached = 2;        // Shipped (handed to courier)
+  if (paid) reached = 4;        // Settled — payout implies delivery
+  const subtitle = (i: number, done: boolean, current: boolean): string => {
+    if (i === 0) return fmtTime(order.created ?? order.date);
+    if (i === 4 && paid) return fmtTime(order.payments[0]?.date ?? order.date);
+    return done ? '✓' : current ? 'in progress' : '—';
+  };
+  const fill = (reached / (MARKETPLACE_STEPS.length - 1)) * 100;
+  return (
+    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] px-6 py-5">
+      <div className="relative flex items-start justify-between">
+        <div className="absolute left-0 right-0 top-[13px] h-[1.5px] bg-[var(--border)]" />
+        <div className="absolute left-0 top-[13px] h-[1.5px] bg-[var(--accent)] transition-all" style={{ width: `${fill}%` }} />
+        {MARKETPLACE_STEPS.map((label, i) => {
+          const done = i <= reached;
+          const current = i === reached + 1;
+          return (
+            <div key={label} className="relative z-[2] flex flex-col items-center gap-2 flex-1">
+              <span className={`w-[26px] h-[26px] rounded-full border-[1.5px] flex items-center justify-center ${
+                done ? 'bg-[var(--accent)] border-[var(--accent)] text-[var(--accent-text)]'
+                  : current ? 'border-[var(--info)] text-[var(--info)] bg-[var(--info-t)]'
+                    : 'border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg-surface)]'}`}>
+                {done
+                  ? <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  : <span className="w-1.5 h-1.5 rounded-full bg-current" />}
+              </span>
+              <span className={`text-[12px] font-medium text-center whitespace-nowrap ${done || current ? 'text-[var(--text-primary)]' : 'text-[var(--text-muted)]'}`}>{label}</span>
+              <span className="text-[10px] text-[var(--text-muted)] whitespace-nowrap">{subtitle(i, done, current)}</span>
+            </div>
+          );
+        })}
+      </div>
+      {order.paymentStatus === 'Unpaid' && (
+        <p className="text-[11px] text-[var(--warning)] mt-3">Awaiting settlement — {channelLabel(order.tag) || 'the marketplace'} pays out on its own schedule.</p>
+      )}
+    </div>
+  );
+}
 
 /** Simple printable receipt for a walk-in sale (black-on-white, like the barcode label). */
 function printReceipt(order: Order) {
@@ -60,7 +118,7 @@ export function OrderDetail() {
 
   /* timeline from what actually happened: sale created → payments received */
   const events: Array<{ title: string; meta: string; ok: boolean }> = [
-    { title: `Sale rung up${isWalkIn ? ' at the register' : ` on ${order.tag}`}`, meta: fmtTime(order.created ?? order.date), ok: true },
+    { title: `Sale rung up${isWalkIn ? ' at the register' : ` on ${channelLabel(order.tag)}`}`, meta: fmtTime(order.created ?? order.date), ok: true },
     ...order.payments.map(p => ({
       title: `Payment received — ${p.method}`,
       meta: `${fmtIdr(p.amount)} · ${fmtTime(p.date)}`,
@@ -99,6 +157,9 @@ export function OrderDetail() {
           </button>
         </div>
       </div>
+
+      {/* marketplace/shipping orders get the step-by-step lifecycle stepper */}
+      {!isWalkIn && <LifecycleStepper order={order} />}
 
       <div className="grid grid-cols-[1.6fr_1fr] gap-4 max-md:grid-cols-1 items-start">
         {/* ── main column ── */}
@@ -192,7 +253,7 @@ export function OrderDetail() {
           <Panel title="Sale summary">
             <div className="p-3.5 space-y-2 text-[12px]">
               {[
-                ['Channel', order.tag ?? 'POS'],
+                ['Channel', channelLabel(order.tag) || 'POS'],
                 ['Outlet', order.outlet ?? 'MF Store'],
                 ['Items', String(order.lines.reduce((sum, l) => sum + Number(l.quantity), 0))],
                 ['COGS', fmtIdr(cogs)],

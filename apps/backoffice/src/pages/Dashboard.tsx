@@ -132,7 +132,7 @@ export default function Dashboard() {
     ...(unpaid.total > 0 ? [{
       severity: 'info' as const,
       title: `${unpaid.total} order${unpaid.total === 1 ? '' : 's'} awaiting settlement`,
-      meta: 'Marketplace payouts (TikTok / Shopee) settle on platform schedule',
+      meta: 'Marketplace payouts (Tokopedia / Shopee) settle on platform schedule',
       fig: fmtIdr(unpaidSum),
       figClass: 'text-[var(--info)]',
       to: '/orders',
