@@ -43,6 +43,14 @@ enum StoreLocation {
   CONSIGNMENT
 }
 
+/// Kind of a sales/stock location. TEMPORARY covers pop-ups and events.
+enum LocationKind {
+  RETAIL
+  STORAGE
+  TEMPORARY
+  CONSIGNMENT
+}
+
 enum PostCategory {
   STAFF_PICKS
   HIGHLIGHTS
@@ -280,4 +288,26 @@ model SocialSettings {
   storefrontUrlBase String?
   feedEnabled       Boolean  @default(true)
   updatedAt         DateTime @updatedAt
+}
+
+/// Local, writable registry of sales/stock locations and events (pop-ups).
+/// Not part of the read-only DealPOS mirror. Physical stores may link to the
+/// StoreLocation enum for item counts; TEMPORARY entries are events with a
+/// date window and an optional matchKey used to attribute DealPOS sales.
+model Location {
+  id            String         @id @default(cuid())
+  name          String
+  kind          LocationKind   @default(RETAIL)
+  address       String?
+  active        Boolean        @default(true)
+  startDate     DateTime?
+  endDate       DateTime?
+  shelves       String[]       @default([])
+  matchKey      String?
+  storeLocation StoreLocation?
+  sortOrder     Int            @default(0)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([kind])
 }

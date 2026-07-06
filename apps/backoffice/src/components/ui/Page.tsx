@@ -60,6 +60,37 @@ export function StatusPill({ value }: { value: string | null }) {
 export const thCls = 'text-left px-3.5 py-2 text-[9px] uppercase tracking-[0.07em] text-[var(--text-faint)] font-semibold border-b border-[var(--border-sub)] whitespace-nowrap';
 export const tdCls = 'px-3.5 py-2.5 text-[11.5px]';
 
+export interface TabDef { key: string; label: string; count?: number | null; }
+
+/** Page-level tab bar — underline style, distinct from filter pills and panel headers. */
+export function Tabs({ tabs, active, onChange }: { tabs: TabDef[]; active: string; onChange: (key: string) => void }) {
+  return (
+    <div role="tablist" className="flex items-center gap-0.5 border-b border-[var(--border)] mb-4 overflow-x-auto">
+      {tabs.map(t => {
+        const on = t.key === active;
+        return (
+          <button
+            key={t.key}
+            role="tab"
+            aria-selected={on}
+            onClick={() => onChange(t.key)}
+            className={`relative -mb-px flex items-center gap-1.5 px-3.5 py-2.5 text-[13px] font-medium whitespace-nowrap border-b-2 transition-colors ${
+              on
+                ? 'border-[var(--accent)] text-[var(--text-primary)]'
+                : 'border-transparent text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
+            }`}
+          >
+            {t.label}
+            {t.count != null && (
+              <span className={`font-mono text-[11px] ${on ? 'text-[var(--text-secondary)]' : 'text-[var(--text-faint)]'}`}>{t.count}</span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export function SearchBox({ value, onChange, placeholder }: {
   value: string; onChange: (v: string) => void; placeholder: string;
 }) {

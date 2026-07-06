@@ -11,13 +11,11 @@ import { Channels } from './pages/channels/Channels';
 import { Vouchers } from './pages/vouchers/Vouchers';
 import { Newsletter } from './pages/newsletter/Newsletter';
 import { Preferences } from './pages/preferences/Preferences';
-import { Settlements } from './pages/settlements/Settlements';
 import { Preorders } from './pages/preorders/Preorders';
-import { Categories } from './pages/categories/Categories';
 import { Sales } from './pages/sales/Sales';
 import { Pos } from './pages/pos/Pos';
 import { SocialMedia } from './pages/social/SocialMedia';
-import { InventoryList } from './pages/inventory/InventoryList';
+import { Inventory } from './pages/inventory/Inventory';
 import { ReleaseForm } from './pages/inventory/ReleaseForm';
 import { BlogList } from './pages/blog/BlogList';
 import { PostForm } from './pages/blog/PostForm';
@@ -45,9 +43,9 @@ export default function App() {
           <Route path="/sales"              element={<Sales />} />
           <Route path="/analytics"          element={<Navigate to="/sales" replace />} />
           <Route path="/finance"            element={<Navigate to="/sales" replace />} />
-          <Route path="/settlements"        element={<Settlements />} />
+          <Route path="/settlements"        element={<Navigate to="/sales?tab=settlements" replace />} />
           <Route path="/preorders"          element={<Preorders />} />
-          <Route path="/categories"         element={<Categories />} />
+          <Route path="/categories"         element={<Navigate to="/inventory?tab=categories" replace />} />
           <Route path="/pos"                element={<Pos />} />
           <Route path="/orders"             element={<OrdersList />} />
           <Route path="/orders/:id"         element={<OrderDetail />} />
@@ -58,7 +56,7 @@ export default function App() {
           <Route path="/newsletter"         element={<Newsletter />} />
           <Route path="/preferences"        element={<Preferences />} />
           <Route path="/social"             element={<SocialMedia />} />
-          <Route path="/inventory"          element={<InventoryList />} />
+          <Route path="/inventory"          element={<Inventory />} />
           <Route path="/inventory/new"      element={<ReleaseForm />} />
           <Route path="/inventory/:id/edit" element={<ReleaseForm />} />
           <Route path="/blog"               element={<BlogList />} />

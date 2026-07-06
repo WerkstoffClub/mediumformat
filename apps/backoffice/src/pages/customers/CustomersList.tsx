@@ -9,6 +9,7 @@ import {
   type CustomersSummary,
 } from '../../api/ops';
 import { PageHeader } from '../../components/ui/Page';
+import { CustomerDrawer } from './CustomerDrawer';
 
 const LIMIT = 50;
 
@@ -104,6 +105,7 @@ export function CustomersList() {
   const [seg, setSeg] = useState<SegKey>('all');
   const [loading, setLoading] = useState(false);
   const [summary, setSummary] = useState<CustomersSummary | null>(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
     getCustomersSummary().then(setSummary).catch(() => setSummary(null));
@@ -235,7 +237,11 @@ export function CustomersList() {
                   <tr><td colSpan={7} className="px-4 py-10 text-center text-[12px] text-[var(--text-faint)]">No customers match.</td></tr>
                 )}
                 {!loading && rows.map(c => (
-                  <tr key={c.id} className="border-t border-[var(--border)] transition-colors hover:bg-[var(--bg-overlay)] hover:shadow-[inset_3px_0_0_var(--accent)]">
+                  <tr
+                    key={c.id}
+                    onClick={() => setSelected(c.id)}
+                    className="border-t border-[var(--border)] cursor-pointer transition-colors hover:bg-[var(--bg-overlay)] hover:shadow-[inset_3px_0_0_var(--accent)]"
+                  >
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-[11px] min-w-0">
                         <Avatar name={customerLabel(c.name)} />
@@ -274,7 +280,11 @@ export function CustomersList() {
                 <p className="px-4 py-6 text-[11px] text-[var(--text-faint)] text-center">No sales yet.</p>
               )}
               {summary?.topCustomers.map((c, i) => (
-                <div key={c.id} className="flex items-center gap-[11px] px-4 py-3 border-t border-[var(--border)] first:border-t-0">
+                <div
+                  key={c.id}
+                  onClick={() => setSelected(c.id)}
+                  className="flex items-center gap-[11px] px-4 py-3 border-t border-[var(--border)] first:border-t-0 cursor-pointer hover:bg-[var(--bg-overlay)] transition-colors"
+                >
                   <span className="font-mono text-[12px] text-[var(--text-muted)] w-4 text-right flex-shrink-0">{i + 1}</span>
                   <Avatar name={customerLabel(c.name)} size={30} />
                   <div className="flex-1 min-w-0">
@@ -310,6 +320,8 @@ export function CustomersList() {
           </Widget>
         </div>
       </div>
+
+      {selected && <CustomerDrawer customerId={selected} onClose={() => setSelected(null)} />}
     </div>
   );
 }

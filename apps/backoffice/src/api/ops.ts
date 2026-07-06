@@ -128,6 +128,41 @@ export async function getCustomersSummary(): Promise<CustomersSummary> {
   return res.data;
 }
 
+export interface CustomerChannelStat { tag: string; orders: number; revenue: number; }
+
+export interface CustomerOrderRow {
+  id: string;
+  number: string;
+  date: string;
+  tag: string | null;
+  amount: number;
+  paymentStatus: string | null;
+  fulfillment: string | null;
+  lines: number;
+}
+
+export interface CustomerDetail {
+  id: string;
+  name: string;
+  code: string | null;
+  mobile: string | null;
+  email: string | null;
+  joinDate: string | null;
+  orders: number;
+  lifetime: number;
+  avgOrder: number;
+  firstOrderAt: string | null;
+  lastOrderAt: string | null;
+  segment: CustomerSegment;
+  channels: CustomerChannelStat[];
+  recentOrders: CustomerOrderRow[];
+}
+
+export async function getCustomerDetail(id: string): Promise<CustomerDetail> {
+  const res = await api.get<CustomerDetail>(`/customers/${id}`);
+  return res.data;
+}
+
 export async function getPurchaseOrders(filter: { q?: string; page?: number; limit?: number } = {}): Promise<Paged<PurchaseOrderRow> & { suppliers: number }> {
   const res = await api.get<Paged<PurchaseOrderRow> & { suppliers: number }>('/purchase-orders', { params: filter });
   return res.data;
