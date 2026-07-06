@@ -14,6 +14,7 @@ export interface OrderRow {
   customerName: string | null;
   tag: string | null;
   date: string;
+  created?: string;
   amount: string | number;
   paymentStatus: string | null;
   fulfillment: string | null;
@@ -29,6 +30,7 @@ export interface OrderLine {
   price: string | number;
   discountAmount: string | number | null;
   sales: string | number | null;
+  release?: { id: string; artist: string; title: string; imageUrl: string | null; format: string } | null;
 }
 
 export interface OrderPayment {
@@ -97,6 +99,7 @@ export interface OrdersFilter {
   q?: string;
   tag?: string;
   payment?: string;
+  fulfillment?: string;
   from?: string;
   to?: string;
   page?: number;

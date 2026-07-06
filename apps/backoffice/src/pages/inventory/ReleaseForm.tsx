@@ -2,6 +2,7 @@ import { useState, useEffect, type FormEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { aiAssist, createRelease, getRelease, updateRelease, type AssistKind } from '../../api/inventory';
 import type { Release } from '@mf/shared';
+import { ReleaseCover } from '../../components/ui/Cover';
 
 type Track = { no?: string; title: string; duration?: string; previewUrl?: string; previewSource?: string };
 type SizeRow = { size: string; chest?: string; length?: string };
@@ -313,10 +314,8 @@ export function ReleaseForm() {
           <div className="grid grid-cols-[128px_1fr] gap-4 max-md:grid-cols-1">
             <div>
               <p className="text-[12px] font-medium text-[var(--text-muted)] uppercase tracking-[0.04em] mb-1.5">Cover art</p>
-              <span className="w-[128px] h-[128px] rounded-[8px] block overflow-hidden bg-[var(--bg-overlay)] border border-[var(--border)] flex items-center justify-center">
-                {form.imageUrl
-                  ? <img src={form.imageUrl} alt="Cover preview" className="w-full h-full object-cover" />
-                  : <span className="w-16 h-16 rounded-full" style={{ background: 'repeating-radial-gradient(circle at 50% 50%, var(--text-faint) 0 1.5px, transparent 1.5px 4px)' }} />}
+              <span className="w-[128px] h-[128px] rounded-[8px] block overflow-hidden border border-[var(--border)]">
+                <ReleaseCover imageUrl={form.imageUrl} format={form.format} alt="Cover preview" />
               </span>
               <input className={`${inputCls} font-mono text-[10.5px] mt-2`} value={form.imageUrl ?? ''} onChange={set('imageUrl')} placeholder="https://…" aria-label="Cover art URL" />
               <p className="text-[10px] text-[var(--text-faint)] mt-1.5">JPG / PNG · square · ≥ 1000px</p>

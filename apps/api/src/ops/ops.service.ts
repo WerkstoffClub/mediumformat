@@ -72,6 +72,7 @@ export class OpsService {
         : {}),
       ...(query.tag ? { tag: query.tag } : {}),
       ...(query.payment ? { paymentStatus: query.payment } : {}),
+      ...(query.fulfillment ? { fulfillment: query.fulfillment } : {}),
       ...(query.q
         ? {
             OR: [
@@ -100,7 +101,21 @@ export class OpsService {
       include: { lines: true, payments: true },
     });
     if (!invoice) throw new NotFoundException('Order not found');
-    return invoice;
+    // Enrich lines with the matching catalogue release (cover, link)
+    const variantIds = invoice.lines.map(l => l.variantId).filter((v): v is string => Boolean(v));
+    const codes = invoice.lines.map(l => l.code).filter((c): c is string => Boolean(c));
+    const releases = await this.prisma.release.findMany({
+      where: { OR: [{ dealposVariantId: { in: variantIds } }, { catNumber: { in: codes } }] },
+      select: { id: true, artist: true, title: true, imageUrl: true, format: true, dealposVariantId: true, catNumber: true },
+    });
+    const lines = invoice.lines.map(line => ({
+      ...line,
+      release:
+        releases.find(r => r.dealposVariantId && r.dealposVariantId === line.variantId) ??
+        releases.find(r => r.catNumber && r.catNumber === line.code) ??
+        null,
+    }));
+    return { ...invoice, lines };
   }
 
   /** Paginated customer list enriched with lifetime value, order count,

@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { getReleases, deleteRelease, type ReleaseFilter } from '../../api/inventory';
 import { getCatalogSummary } from '../../api/ops';
 import { PageHeader, Paginator, SearchBox } from '../../components/ui/Page';
+import { ReleaseCover } from '../../components/ui/Cover';
 import type { Release } from '@mf/shared';
 
 const USD_RATE = 16_300; // display-only approximation, like the prototype's "≈ $"
@@ -193,10 +194,8 @@ export function InventoryList() {
               <tr key={r.id} className="group border-b border-[var(--border-sub)] hover:bg-[var(--bg-hover)]">
                 <td className={td}>
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="w-9 h-9 rounded-[6px] flex-shrink-0 overflow-hidden bg-[var(--bg-overlay)] border border-[var(--border-sub)] flex items-center justify-center">
-                      {r.imageUrl
-                        ? <img src={r.imageUrl} alt="" loading="lazy" className="w-full h-full object-cover" />
-                        : <span className="w-6 h-6 rounded-full" style={{ background: 'repeating-radial-gradient(circle at 50% 50%, var(--text-faint) 0 1px, transparent 1px 3px)' }} />}
+                    <span className="w-9 h-9 rounded-[6px] flex-shrink-0 overflow-hidden border border-[var(--border-sub)]">
+                      <ReleaseCover imageUrl={r.imageUrl} format={r.format} />
                     </span>
                     <span className="min-w-0">
                       <span className="block font-medium text-[var(--text-primary)] truncate max-w-[240px]">{r.artist}</span>

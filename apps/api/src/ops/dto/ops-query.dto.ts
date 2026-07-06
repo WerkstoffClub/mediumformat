@@ -16,6 +16,7 @@ export class OrdersQueryDto extends PagedQueryDto {
   @IsOptional() @IsISO8601() to?: string;
   @IsOptional() @IsString() tag?: string;
   @IsOptional() @IsString() payment?: string;
+  @IsOptional() @IsString() fulfillment?: string;
 }
 
 export class ChannelsQueryDto {
