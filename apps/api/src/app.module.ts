@@ -8,8 +8,9 @@ import { DealposModule } from './dealpos/dealpos.module';
 import { FinanceModule } from './finance/finance.module';
 import { SocialModule } from './social/social.module';
 import { OpsModule } from './ops/ops.module';
+import { LocationsModule } from './locations/locations.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, UsersModule, InventoryModule, PostsModule, DealposModule, FinanceModule, SocialModule, OpsModule],
+  imports: [PrismaModule, AuthModule, UsersModule, InventoryModule, PostsModule, DealposModule, FinanceModule, SocialModule, OpsModule, LocationsModule],
 })
 export class AppModule {}

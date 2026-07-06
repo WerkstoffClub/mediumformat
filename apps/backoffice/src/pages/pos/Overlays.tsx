@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { fmtIdr } from '../../api/ops';
+import { ReceiptModal, type ReceiptData } from '../../components/ui/Receipt';
 import type { EdcBank } from './PaymentPanel';
 
 type EdcStage = 'insert' | 'reading' | 'processing' | 'approved';
@@ -100,49 +101,60 @@ export function EdcOverlay({
   );
 }
 
+export interface SaleReceiptLine {
+  name: string;
+  meta: string;
+  amount: number;
+}
+
 export interface SaleSummary {
   orderNumber: string;
+  datetime: string;
   method: string;
+  lines: SaleReceiptLine[];
+  subtotal: number;
+  discount: number;
+  tax: number;
   amount: number;
   change?: number;
   edc?: EdcResult;
 }
 
-/** Payment-approved success modal with a "New sale" reset. */
+/** POS post-sale receipt — the same paper the Orders screen prints, with a
+ *  "New sale" reset as the primary action. */
 export function SuccessModal({ sale, onNewSale }: { sale: SaleSummary; onNewSale: () => void }) {
+  const summary: ReceiptData['summary'] = [{ label: 'Subtotal', value: sale.subtotal }];
+  if (sale.discount > 0) summary.push({ label: 'Discount', value: sale.discount, kind: 'discount' });
+  summary.push({ label: 'PPN 11%', value: sale.tax });
+
+  const payment: ReceiptData['payment'] = [{ label: 'Payment', value: sale.method }];
+  if (sale.change != null && sale.change > 0) payment.push({ label: 'Change', value: fmtIdr(sale.change), mono: true });
+  if (sale.edc) {
+    payment.push({ label: 'Approval code', value: sale.edc.approvalCode, mono: true });
+    payment.push({ label: 'RRN / Ref', value: sale.edc.rrn, mono: true });
+    payment.push({ label: 'Card', value: sale.edc.pan, mono: true });
+  }
+
+  const data: ReceiptData = {
+    address: ['Jl. Senopati No. 42, Kebayoran Baru', 'Jakarta Selatan · REG-01'],
+    number: sale.orderNumber,
+    datetime: sale.datetime,
+    lines: sale.lines,
+    summary,
+    total: sale.amount,
+    payment,
+    footer: ['Terima kasih — thank you', 'Goods sold are not returnable · Keep this receipt'],
+  };
+
   return (
-    <Overlay>
-      <Sheet title="Payment approved" tag="Sale complete">
-        <div className="text-center">
-          <span className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center border-[1.5px] border-[var(--success)] bg-[var(--success-t)]">
-            <svg viewBox="0 0 24 24" className="w-7 h-7 text-[var(--success)]" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-          </span>
-          <p className="text-[20px] font-semibold tracking-[-0.02em] text-[var(--success)]">Payment approved</p>
-          <p className="text-[13px] text-[var(--text-secondary)] mt-1">{sale.method}</p>
-        </div>
-
-        <div className="mt-5 border border-[var(--border)] rounded-md overflow-hidden">
-          <Row k="Amount" v={fmtIdr(sale.amount)} strong />
-          {sale.change != null && sale.change > 0 && <Row k="Change due" v={fmtIdr(sale.change)} />}
-          <Row k="Order #" v={sale.orderNumber} mono />
-          {sale.edc && (
-            <>
-              <Row k="Approval code" v={sale.edc.approvalCode} mono />
-              <Row k="RRN / Ref" v={sale.edc.rrn} mono />
-              <Row k="Card" v={sale.edc.pan} mono />
-            </>
-          )}
-        </div>
-
-        <button
-          onClick={onNewSale}
-          className="w-full h-12 mt-5 rounded-md bg-[var(--accent)] text-[var(--accent-text)] text-[14px] font-semibold flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.99] transition-all"
-        >
-          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-          New sale
-        </button>
-      </Sheet>
-    </Overlay>
+    <ReceiptModal
+      data={data}
+      primary={{
+        label: 'New sale',
+        onClick: onNewSale,
+        icon: <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>,
+      }}
+    />
   );
 }
 
@@ -179,15 +191,6 @@ function Sheet({
         )}
       </div>
       <div className="px-6 py-6">{children}</div>
-    </div>
-  );
-}
-
-function Row({ k, v, strong, mono }: { k: string; v: string; strong?: boolean; mono?: boolean }) {
-  return (
-    <div className="flex items-center justify-between gap-3 px-3.5 py-2.5 border-b border-[var(--border-sub)] last:border-b-0">
-      <span className="text-[11px] uppercase tracking-[0.03em] text-[var(--text-muted)]">{k}</span>
-      <span className={`text-right ${mono ? 'font-mono' : ''} ${strong ? 'text-[15px] font-medium' : 'text-[13px]'} text-[var(--text-primary)]`}>{v}</span>
     </div>
   );
 }

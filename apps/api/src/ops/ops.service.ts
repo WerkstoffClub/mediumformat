@@ -72,6 +72,7 @@ export class OpsService {
         : {}),
       ...(query.tag ? { tag: query.tag } : {}),
       ...(query.payment ? { paymentStatus: query.payment } : {}),
+      ...(query.fulfillment ? { fulfillment: query.fulfillment } : {}),
       ...(query.q
         ? {
             OR: [
@@ -100,7 +101,21 @@ export class OpsService {
       include: { lines: true, payments: true },
     });
     if (!invoice) throw new NotFoundException('Order not found');
-    return invoice;
+    // Enrich lines with the matching catalogue release (cover, link)
+    const variantIds = invoice.lines.map(l => l.variantId).filter((v): v is string => Boolean(v));
+    const codes = invoice.lines.map(l => l.code).filter((c): c is string => Boolean(c));
+    const releases = await this.prisma.release.findMany({
+      where: { OR: [{ dealposVariantId: { in: variantIds } }, { catNumber: { in: codes } }] },
+      select: { id: true, artist: true, title: true, imageUrl: true, format: true, dealposVariantId: true, catNumber: true },
+    });
+    const lines = invoice.lines.map(line => ({
+      ...line,
+      release:
+        releases.find(r => r.dealposVariantId && r.dealposVariantId === line.variantId) ??
+        releases.find(r => r.catNumber && r.catNumber === line.code) ??
+        null,
+    }));
+    return { ...invoice, lines };
   }
 
   /** Paginated customer list enriched with lifetime value, order count,
@@ -240,6 +255,81 @@ export class OpsService {
       vipRevenueShare: totalRevenue > 0 ? Math.round((num(agg?.vipRevenue) / totalRevenue) * 100) : 0,
       topCustomers: topRows.map(r => this.shapeCustomer(r)),
       acquisition: acquisition.map(a => ({ channel: a.channel ?? 'Direct', count: Number(a.count) })),
+    };
+  }
+
+  /** One customer's full profile: lifetime aggregates, channel mix and recent
+   *  orders — all matched to the DealPOS invoice stream by name, read-only. */
+  async customerDetail(id: string) {
+    const c = await this.prisma.dpCustomer.findUnique({ where: { id } });
+    if (!c) throw new NotFoundException('Customer not found');
+
+    const match = Prisma.sql`i."isVoid" = false AND lower(btrim(i."customerName")) = lower(btrim(${c.name}))`;
+
+    const [agg] = await this.prisma.$queryRaw<
+      Array<{ orders: bigint; lifetime: unknown; firstOrderAt: Date | null; lastOrderAt: Date | null }>
+    >`
+      SELECT COUNT(i."id")                AS orders,
+             COALESCE(SUM(i."amount"), 0) AS lifetime,
+             MIN(i."date")                AS "firstOrderAt",
+             MAX(i."date")                AS "lastOrderAt"
+      FROM "DpInvoice" i
+      WHERE ${match}`;
+
+    const channels = await this.prisma.$queryRaw<Array<{ tag: string; orders: bigint; revenue: unknown }>>`
+      SELECT COALESCE(i."tag", 'Untagged') AS tag,
+             COUNT(*)                      AS orders,
+             COALESCE(SUM(i."amount"), 0)  AS revenue
+      FROM "DpInvoice" i
+      WHERE ${match}
+      GROUP BY 1
+      ORDER BY 3 DESC`;
+
+    const recentOrders = await this.prisma.$queryRaw<
+      Array<{
+        id: string; number: string; date: Date; tag: string | null; amount: unknown;
+        paymentStatus: string | null; fulfillment: string | null; lines: bigint;
+      }>
+    >`
+      SELECT i."id", i."number", i."date", i."tag", i."amount",
+             i."paymentStatus", i."fulfillment",
+             (SELECT COUNT(*) FROM "DpInvoiceLine" l WHERE l."invoiceId" = i."id") AS lines
+      FROM "DpInvoice" i
+      WHERE ${match}
+      ORDER BY i."date" DESC
+      LIMIT 10`;
+
+    const orders = Number(agg?.orders ?? 0);
+    const lifetime = num(agg?.lifetime);
+    const startOfMonth = new Date();
+    startOfMonth.setDate(1);
+    startOfMonth.setHours(0, 0, 0, 0);
+    const isNew = c.joinDate ? c.joinDate >= startOfMonth : false;
+
+    return {
+      id: c.id,
+      name: c.name,
+      code: c.code,
+      mobile: c.mobile,
+      email: c.email,
+      joinDate: c.joinDate,
+      orders,
+      lifetime,
+      avgOrder: orders > 0 ? Math.round(lifetime / orders) : 0,
+      firstOrderAt: agg?.firstOrderAt ?? null,
+      lastOrderAt: agg?.lastOrderAt ?? null,
+      segment: this.segment(lifetime, isNew),
+      channels: channels.map(ch => ({ tag: ch.tag, orders: Number(ch.orders), revenue: num(ch.revenue) })),
+      recentOrders: recentOrders.map(o => ({
+        id: o.id,
+        number: o.number,
+        date: o.date,
+        tag: o.tag,
+        amount: num(o.amount),
+        paymentStatus: o.paymentStatus,
+        fulfillment: o.fulfillment,
+        lines: Number(o.lines),
+      })),
     };
   }
 

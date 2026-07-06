@@ -61,14 +61,12 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
         { label: 'Inventory', to: '/inventory', icon: icons.inventory },
         { label: 'Customers', to: '/customers', icon: icons.customers },
         { label: 'Channels',  to: '/channels',  icon: icons.channels, statusDot: true },
-        { label: 'Categories & Tags', to: '/categories', icon: icons.tags },
       ],
     },
     {
       label: 'Shop',
       items: [
         { label: 'Purchase orders', to: '/purchase-orders', icon: icons.po },
-        { label: 'Settlements',     to: '/settlements',     icon: icons.settlements },
         { label: 'Preorders',       to: '/preorders',       icon: icons.preorders },
         { label: 'Vouchers',        to: '/vouchers',        icon: icons.vouchers },
       ],

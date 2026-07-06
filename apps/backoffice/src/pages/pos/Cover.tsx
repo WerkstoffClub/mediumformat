@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { PosProduct } from '../../api/pos';
 
 /** Monochrome vinyl-groove disc — concentric grooves + a light label dot.
@@ -41,8 +42,9 @@ function MerchCover() {
 
 /** Choose the right cover treatment for a product. */
 export function ProductCover({ product, size = 'md' }: { product: PosProduct; size?: 'sm' | 'md' }) {
-  if (product.imageUrl) {
-    return <img src={product.imageUrl} alt="" loading="lazy" className="w-full h-full object-cover" />;
+  const [failed, setFailed] = useState(false);
+  if (product.imageUrl && !failed) {
+    return <img src={product.imageUrl} alt="" loading="lazy" className="w-full h-full object-cover" onError={() => setFailed(true)} />;
   }
   return product.category === 'merch' ? <MerchCover /> : <VinylCover size={size} />;
 }

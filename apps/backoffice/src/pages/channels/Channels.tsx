@@ -108,13 +108,13 @@ export function Channels() {
       toggle: { checked: social?.feedEnabled ?? false, onChange: onFeedToggle },
     },
     {
-      name: 'TikTok Shop',
+      name: 'Tokopedia',
       kind: 'marketplace · via DealPOS',
-      color: '#69C9D0',
+      color: '#22C55E',
       status: tiktok ? 'connected' : 'off',
-      icon: ic(<><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></>),
+      icon: ic(<><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></>),
       metrics: [['Orders', tiktok ? String(tiktok.orders) : '—'], ['Last order', tiktok ? ago(tiktok.lastOrderAt) : '—']],
-      configureTo: '/settlements',
+      configureTo: '/sales?tab=settlements',
       toggle: { checked: Boolean(tiktok), disabled: true },
     },
     {
@@ -124,7 +124,7 @@ export function Channels() {
       status: shopee ? 'connected' : 'off',
       icon: ic(<><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></>),
       metrics: [['Orders', shopee ? String(shopee.orders) : '—'], ['Last order', shopee ? ago(shopee.lastOrderAt) : '—']],
-      configureTo: '/settlements',
+      configureTo: '/sales?tab=settlements',
       toggle: { checked: Boolean(shopee), disabled: true },
     },
     {

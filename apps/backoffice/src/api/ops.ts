@@ -14,6 +14,7 @@ export interface OrderRow {
   customerName: string | null;
   tag: string | null;
   date: string;
+  created?: string;
   amount: string | number;
   paymentStatus: string | null;
   fulfillment: string | null;
@@ -29,6 +30,7 @@ export interface OrderLine {
   price: string | number;
   discountAmount: string | number | null;
   sales: string | number | null;
+  release?: { id: string; artist: string; title: string; imageUrl: string | null; format: string } | null;
 }
 
 export interface OrderPayment {
@@ -97,6 +99,7 @@ export interface OrdersFilter {
   q?: string;
   tag?: string;
   payment?: string;
+  fulfillment?: string;
   from?: string;
   to?: string;
   page?: number;
@@ -125,6 +128,41 @@ export async function getCustomersSummary(): Promise<CustomersSummary> {
   return res.data;
 }
 
+export interface CustomerChannelStat { tag: string; orders: number; revenue: number; }
+
+export interface CustomerOrderRow {
+  id: string;
+  number: string;
+  date: string;
+  tag: string | null;
+  amount: number;
+  paymentStatus: string | null;
+  fulfillment: string | null;
+  lines: number;
+}
+
+export interface CustomerDetail {
+  id: string;
+  name: string;
+  code: string | null;
+  mobile: string | null;
+  email: string | null;
+  joinDate: string | null;
+  orders: number;
+  lifetime: number;
+  avgOrder: number;
+  firstOrderAt: string | null;
+  lastOrderAt: string | null;
+  segment: CustomerSegment;
+  channels: CustomerChannelStat[];
+  recentOrders: CustomerOrderRow[];
+}
+
+export async function getCustomerDetail(id: string): Promise<CustomerDetail> {
+  const res = await api.get<CustomerDetail>(`/customers/${id}`);
+  return res.data;
+}
+
 export async function getPurchaseOrders(filter: { q?: string; page?: number; limit?: number } = {}): Promise<Paged<PurchaseOrderRow> & { suppliers: number }> {
   const res = await api.get<Paged<PurchaseOrderRow> & { suppliers: number }>('/purchase-orders', { params: filter });
   return res.data;
@@ -140,10 +178,31 @@ export async function getChannels(filter: { from?: string; to?: string } = {}): 
   return res.data;
 }
 
+/** Display label for a DealPOS channel tag. Business-specific mapping:
+ *  the "Penjualan Tiktok" tag is Tokopedia; "Penjualan Shopee" is Shopee.
+ *  Data is left untouched (re-synced from DealPOS) — this is display-only. */
+export function channelLabel(tag: string | null | undefined): string {
+  if (!tag) return '';
+  if (/tiktok/i.test(tag)) return 'Tokopedia';
+  if (/shopee/i.test(tag)) return 'Shopee';
+  return tag.replace(/^Penjualan\s+/i, '');
+}
+
+/** Display name for a customer. DealPOS uses a placeholder customer named
+ *  "TikTok" for marketplace orders that are actually Tokopedia. Display-only;
+ *  the stored record and search still use the raw name. */
+export function customerLabel(name: string | null | undefined): string {
+  if (!name) return '';
+  const key = name.trim().toLowerCase();
+  if (key === 'tiktok') return 'Tokopedia';
+  if (key === 'shopee') return 'Shopee';
+  return name;
+}
+
 /* v2.1 channel colour key — the ONLY non-status colour in the system.
-   Dot + text on a neutral pill, channel indicators only. */
+   Dot + text on a neutral pill, channel indicators only. Keyed on the
+   display label so the Tokopedia mapping picks up its green. */
 const CHANNEL_COLORS: Array<[RegExp, string]> = [
-  [/tiktok/i, '#69C9D0'],
   [/shopee/i, '#F97316'],
   [/tokopedia/i, '#22C55E'],
   [/whatsapp/i, '#25D366'],
@@ -153,9 +212,10 @@ const CHANNEL_COLORS: Array<[RegExp, string]> = [
 ];
 
 export function channelColor(tag: string | null): string {
-  if (!tag) return '#9CA3AF';
+  const label = channelLabel(tag);
+  if (!label) return '#9CA3AF';
   for (const [pattern, color] of CHANNEL_COLORS) {
-    if (pattern.test(tag)) return color;
+    if (pattern.test(label)) return color;
   }
   return '#9CA3AF';
 }

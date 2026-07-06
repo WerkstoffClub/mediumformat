@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { getReleases, deleteRelease, type ReleaseFilter } from '../../api/inventory';
 import { getCatalogSummary } from '../../api/ops';
-import { PageHeader, Paginator, SearchBox } from '../../components/ui/Page';
+import { Paginator, SearchBox } from '../../components/ui/Page';
+import { ReleaseCover } from '../../components/ui/Cover';
 import type { Release } from '@mf/shared';
 
 const USD_RATE = 16_300; // display-only approximation, like the prototype's "≈ $"
@@ -39,8 +40,8 @@ function printBarcode(release: Release) {
     .a{font-size:13px;font-weight:600}.t{font-size:11px;color:#525252;margin-top:2px}
     .bars{margin:12px auto 4px;height:44px;display:flex;align-items:stretch;justify-content:center;gap:0}
     .bars i{display:block;background:#000}
-    .code{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.12em}
-    .price{font-family:"Geist Mono",monospace;font-size:13px;font-weight:500;margin-top:6px}
+    .code{font-family:"Geist","Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.12em}
+    .price{font-family:"Geist","Helvetica Neue",Arial,sans-serif;font-size:13px;font-weight:500;margin-top:6px}
     @media print{body{height:auto}.label{border:none}}
   </style>
   <div class="label">
@@ -67,7 +68,8 @@ function Chip({ on, children, onClick }: { on: boolean; children: React.ReactNod
   );
 }
 
-export function InventoryList() {
+export function InventoryList({ onTotal }: { onTotal?: (n: number) => void } = {}) {
+  const navigate = useNavigate();
   const [releases, setReleases] = useState<Release[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -99,9 +101,9 @@ export function InventoryList() {
   useEffect(() => {
     setLoading(true);
     getReleases(filter)
-      .then(r => { setReleases(r.data); setTotal(r.total); })
+      .then(r => { setReleases(r.data); setTotal(r.total); onTotal?.(r.total); })
       .finally(() => setLoading(false));
-  }, [filter]);
+  }, [filter, onTotal]);
 
   const activeFilters = [format, condition, stock, genre].filter(Boolean).length;
 
@@ -116,16 +118,6 @@ export function InventoryList() {
 
   return (
     <div>
-      <PageHeader
-        title="Inventory"
-        sub={`${total} releases · synced from DealPOS`}
-        actions={
-          <Link to="/categories" className="text-[11px] px-3 py-1.5 rounded-[6px] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)] transition-colors">
-            Locations & categories
-          </Link>
-        }
-      />
-
       {/* toolbar — mockup pattern: search · Filters panel · Sort */}
       <div className="flex items-center gap-2 mb-3 flex-wrap">
         <SearchBox value={search} onChange={v => { setSearchParams(v ? { q: v } : {}, { replace: true }); setPage(1); }} placeholder="Search artist, title, label, cat# or barcode…" />
@@ -190,16 +182,27 @@ export function InventoryList() {
             {loading && <tr><td colSpan={8} className="px-3.5 py-8 text-center text-[11px] text-[var(--text-faint)]">Loading…</td></tr>}
             {!loading && releases.length === 0 && <tr><td colSpan={8} className="px-3.5 py-8 text-center text-[11px] text-[var(--text-faint)]">No releases match.</td></tr>}
             {releases.map(r => (
-              <tr key={r.id} className="group border-b border-[var(--border-sub)] hover:bg-[var(--bg-hover)]">
+              <tr
+                key={r.id}
+                onClick={e => {
+                  // Row opens the editor; inner links/buttons handle their own clicks.
+                  if ((e.target as HTMLElement).closest('a,button')) return;
+                  navigate(`/inventory/${r.id}/edit`);
+                }}
+                className="group cursor-pointer border-b border-[var(--border-sub)] hover:bg-[var(--bg-hover)]"
+              >
                 <td className={td}>
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="w-9 h-9 rounded-[6px] flex-shrink-0 overflow-hidden bg-[var(--bg-overlay)] border border-[var(--border-sub)] flex items-center justify-center">
-                      {r.imageUrl
-                        ? <img src={r.imageUrl} alt="" loading="lazy" className="w-full h-full object-cover" />
-                        : <span className="w-6 h-6 rounded-full" style={{ background: 'repeating-radial-gradient(circle at 50% 50%, var(--text-faint) 0 1px, transparent 1px 3px)' }} />}
+                    <span className="w-9 h-9 rounded-[6px] flex-shrink-0 overflow-hidden border border-[var(--border-sub)]">
+                      <ReleaseCover imageUrl={r.imageUrl} format={r.format} />
                     </span>
                     <span className="min-w-0">
-                      <span className="block font-medium text-[var(--text-primary)] truncate max-w-[240px]">{r.artist}</span>
+                      <Link
+                        to={`/inventory/${r.id}/edit`}
+                        className="block font-medium text-[var(--text-primary)] truncate max-w-[240px] rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] group-hover:underline decoration-[var(--border)] underline-offset-2"
+                      >
+                        {r.artist}
+                      </Link>
                       <span className="block text-[10.5px] text-[var(--text-muted)] truncate max-w-[240px]">{r.title}{r.genre ? ` · ${r.genre}` : ''}</span>
                     </span>
                   </div>
@@ -225,17 +228,24 @@ export function InventoryList() {
                   {r.storeLocation.replace('_', ' ')}{r.shelfLocation ? ` · ${r.shelfLocation}` : ''}
                 </td>
                 <td className={`${td} whitespace-nowrap`}>
-                  <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                  <div className="flex items-center gap-1 justify-end">
                     <button
-                      onClick={() => printBarcode(r)}
+                      onClick={e => { e.stopPropagation(); printBarcode(r); }}
                       title="Print barcode label"
                       aria-label="Print barcode label"
-                      className="w-7 h-7 rounded-[5px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]"
+                      className="w-7 h-7 rounded-[5px] flex items-center justify-center text-[var(--text-muted)] opacity-0 group-hover:opacity-100 focus:opacity-100 hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-opacity"
                     >
                       <svg viewBox="0 0 24 24" className="w-[14px] h-[14px]" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>
                     </button>
-                    <Link to={`/inventory/${r.id}/edit`} className="text-[10.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)]">Edit</Link>
-                    <button onClick={() => handleDelete(r.id)} className="text-[10.5px] text-[var(--danger)] hover:opacity-75">Delete</button>
+                    <button
+                      onClick={e => { e.stopPropagation(); handleDelete(r.id); }}
+                      title="Remove release"
+                      aria-label="Remove release"
+                      className="w-7 h-7 rounded-[5px] flex items-center justify-center text-[var(--text-muted)] opacity-0 group-hover:opacity-100 focus:opacity-100 hover:text-[var(--danger)] hover:bg-[var(--danger-t)] transition-opacity"
+                    >
+                      <svg viewBox="0 0 24 24" className="w-[13px] h-[13px]" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-[var(--text-faint)] flex-shrink-0 group-hover:text-[var(--text-muted)]" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
                   </div>
                 </td>
               </tr>

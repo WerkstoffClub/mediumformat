@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getPayments, type PaymentRow } from '../../api/finance';
-import { channelColor, fmtDate, fmtIdr, getOrders, type OrderRow } from '../../api/ops';
-import { ChannelPill, PageHeader, Panel, tdCls, thCls } from '../../components/ui/Page';
+import { channelColor, channelLabel, fmtDate, fmtIdr, getOrders, type OrderRow } from '../../api/ops';
+import { ChannelPill, Panel, tdCls, thCls } from '../../components/ui/Page';
 
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 const MARKETPLACE = /tiktok|shopee|tokopedia/i;
 
-/** Marketplace money: what the platforms still owe, and what already settled. */
-export function Settlements() {
+/** Marketplace money: what the platforms still owe, and what already settled.
+ *  Lives as the "Settlements" tab inside Sales — same data, no page chrome. */
+export function SettlementsPanel() {
   const [unpaid, setUnpaid] = useState<OrderRow[]>([]);
   const [unpaidTotal, setUnpaidTotal] = useState(0);
   const [recentPayments, setRecentPayments] = useState<PaymentRow[]>([]);
@@ -33,35 +34,49 @@ export function Settlements() {
   }, [unpaid]);
 
   const outstanding = unpaid.reduce((sum, o) => sum + Number(o.amount), 0);
+  const chMax = Math.max(...byChannel.map(([, g]) => g.sum), 1);
 
   return (
-    <div className="space-y-4">
-      <PageHeader
-        title="Settlements"
-        sub={`Marketplace payouts — ${unpaidTotal} order${unpaidTotal === 1 ? '' : 's'} awaiting settlement, ${fmtIdr(outstanding)} outstanding`}
-      />
-
-      <div className="grid grid-cols-3 gap-3 max-md:grid-cols-1">
-        {byChannel.map(([tag, g]) => (
-          <div key={tag} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full" style={{ background: channelColor(tag) }} />
-              <h3 className="text-[13px] font-semibold text-[var(--text-primary)]">{tag}</h3>
-            </div>
-            <p className="text-[18px] font-bold font-mono text-[var(--text-primary)]">{fmtIdr(g.sum)}</p>
-            <p className="text-[10px] text-[var(--text-muted)] mt-1">{g.count} order{g.count === 1 ? '' : 's'} awaiting payout</p>
-          </div>
-        ))}
-        {byChannel.length === 0 && (
-          <p className="text-[11px] text-[var(--text-faint)] col-span-3">Nothing outstanding — all marketplace orders are settled.</p>
-        )}
+    <div className="space-y-3.5">
+      {/* Outstanding banner — the one number that matters here, sized to lead */}
+      <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] px-5 py-4 flex items-baseline justify-between gap-4 flex-wrap">
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.08em] text-[var(--text-muted)]">Outstanding payouts</p>
+          <p className="font-mono text-[28px] font-medium tracking-[-0.02em] text-[var(--text-primary)] leading-none mt-2">{fmtIdr(outstanding)}</p>
+        </div>
+        <p className="text-[12px] text-[var(--text-muted)]">
+          {unpaidTotal} order{unpaidTotal === 1 ? '' : 's'} awaiting settlement across {byChannel.length} channel{byChannel.length === 1 ? '' : 's'}
+        </p>
       </div>
+
+      {/* Per-channel breakdown with share bars, not identical cards */}
+      <Panel title="Awaiting payout by channel" note={byChannel.length ? `${byChannel.length} channels` : undefined}>
+        <div className="p-4 space-y-3.5">
+          {byChannel.length === 0 && (
+            <p className="text-[11px] text-[var(--text-faint)]">Nothing outstanding — every marketplace order is settled.</p>
+          )}
+          {byChannel.map(([tag, g]) => (
+            <div key={tag}>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="inline-flex items-center gap-1.5 text-[12px] text-[var(--text-primary)]">
+                  <span className="w-2 h-2 rounded-full" style={{ background: channelColor(tag) }} />{channelLabel(tag)}
+                  <span className="text-[10px] text-[var(--text-muted)]">· {g.count} order{g.count === 1 ? '' : 's'}</span>
+                </span>
+                <span className="font-mono text-[12px] text-[var(--text-primary)]">{fmtIdr(g.sum)}</span>
+              </div>
+              <span className="block h-[6px] rounded-full bg-[var(--neutral-t)] overflow-hidden">
+                <span className="block h-full rounded-full" style={{ width: `${(g.sum / chMax) * 100}%`, background: channelColor(tag) }} />
+              </span>
+            </div>
+          ))}
+        </div>
+      </Panel>
 
       <Panel title="Awaiting settlement" note={unpaidTotal > unpaid.length ? `showing ${unpaid.length} of ${unpaidTotal}` : `${unpaid.length} orders`}>
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-[var(--bg-overlay)]">
-              {['Order', 'Date', 'Channel', 'Amount'].map(h => <th key={h} className={thCls}>{h}</th>)}
+              {['Order', 'Date', 'Channel', 'Amount'].map(h => <th key={h} className={h === 'Amount' ? `${thCls} text-right` : thCls}>{h}</th>)}
             </tr>
           </thead>
           <tbody>
@@ -78,11 +93,11 @@ export function Settlements() {
         </table>
       </Panel>
 
-      <Panel title="Settled via marketplace balance — last 30 days">
+      <Panel title="Settled via marketplace balance" note="last 30 days">
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-[var(--bg-overlay)]">
-              {['Method', 'Transactions', 'Amount'].map(h => <th key={h} className={thCls}>{h}</th>)}
+              {['Method', 'Transactions', 'Amount'].map(h => <th key={h} className={h === 'Method' ? thCls : `${thCls} text-right`}>{h}</th>)}
             </tr>
           </thead>
           <tbody>

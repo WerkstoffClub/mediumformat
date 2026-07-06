@@ -32,6 +32,11 @@ export class OpsController {
     return this.ops.customersSummary();
   }
 
+  @Get('customers/:id')
+  customerDetail(@Param('id') id: string) {
+    return this.ops.customerDetail(id);
+  }
+
   @Get('purchase-orders')
   purchaseOrders(@Query() query: PagedQueryDto) {
     return this.ops.purchaseOrders(query);
