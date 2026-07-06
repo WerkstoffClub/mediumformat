@@ -91,9 +91,21 @@ export function Pos() {
 
   const completeSale = (method: string, extra?: { change?: number; edc?: EdcResult }) => {
     // TODO: POST to /pos/checkout — persist the sale, decrement stock, record the payment.
+    const stamp = new Date().toLocaleString('en-GB', {
+      day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit',
+    }).replace(',', '');
     setSale({
       orderNumber: newOrderNumber(),
+      datetime: stamp,
       method,
+      lines: cart.map(l => ({
+        name: `${l.product.artist} — ${l.product.title}`,
+        meta: [l.product.formatLabel, l.product.condition, `×${l.qty}`].filter(Boolean).join(' · '),
+        amount: l.product.priceIdr * l.qty,
+      })),
+      subtotal: totals.subtotal,
+      discount: totals.discount,
+      tax: totals.tax,
       amount: totals.total,
       change: extra?.change,
       edc: extra?.edc,

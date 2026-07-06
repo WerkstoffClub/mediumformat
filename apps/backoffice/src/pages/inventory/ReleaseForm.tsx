@@ -1,8 +1,14 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { aiAssist, createRelease, getRelease, updateRelease, type AssistKind } from '../../api/inventory';
+import { fmtIdr } from '../../api/ops';
 import type { Release } from '@mf/shared';
 import { ReleaseCover } from '../../components/ui/Cover';
+
+const LOW_AT = 2;
+const condLabel = (c?: string | null) => (c === 'VGP' ? 'VG+' : c === 'GP' ? 'G+' : c ?? null);
+const fmtFormat = (f?: string | null) =>
+  ({ TWO_LP: '2×LP', THREE_LP: '3×LP', TWELVE_INCH: '12"', SEVEN_INCH: '7"', TWO_CD: '2×CD' } as Record<string, string>)[f ?? ''] ?? f ?? null;
 
 type Track = { no?: string; title: string; duration?: string; previewUrl?: string; previewSource?: string };
 type SizeRow = { size: string; chest?: string; length?: string };
@@ -173,25 +179,71 @@ export function ReleaseForm() {
   const patchTrack = (i: number, patch: Partial<Track>) =>
     setTracks(list => list.map((t, j) => (j === i ? { ...t, ...patch } : t)));
 
+  const stock = Number(form.stock ?? 0);
+  const stockState = stock === 0 ? 'out' : stock <= (form.lowStockThreshold ?? LOW_AT) ? 'low' : 'in';
+  const stockPill = {
+    in:  ['In stock', 'text-[var(--success)] bg-[var(--success-t)]'],
+    low: ['Low stock', 'text-[var(--warning)] bg-[var(--warning-t)]'],
+    out: ['Out of stock', 'text-[var(--danger)] bg-[var(--danger-t)]'],
+  }[stockState];
+  const metaBits = [form.catNumber, fmtFormat(form.format), form.year ? String(form.year) : null].filter(Boolean);
+  const flags = [
+    form.featured && 'Featured', form.preorder && 'Pre-order', form.onSale && 'On sale',
+  ].filter(Boolean) as string[];
+
   return (
     <form onSubmit={handleSubmit} className="max-w-3xl pb-20">
-      {/* page header */}
-      <div className="flex items-end justify-between gap-3 mb-5 flex-wrap">
-        <div>
-          <div className="flex items-center gap-2 text-[11px] text-[var(--text-muted)] mb-1">
-            <Link to="/inventory" className="hover:text-[var(--text-primary)]">Inventory</Link>
-            <span className="text-[var(--text-faint)]">/</span>
-            <span className="text-[var(--text-primary)]">{isEdit ? 'Edit release' : 'Add release'}</span>
-          </div>
-          <h1 className="text-[24px] font-semibold tracking-[-0.04em] leading-8 text-[var(--text-primary)]">
-            {isEdit ? `${release.artist ?? ''} — ${release.title ?? ''}` : 'Add release'}
-          </h1>
-          {isEdit && release.dealposVariantId && (
-            <p className="text-[13px] text-[var(--text-muted)] mt-0.5">
-              Synced from DealPOS · variant <span className="font-mono text-[11px]">{release.dealposVariantId}</span>
-            </p>
-          )}
+      {/* page header — a live identity card that fills in as you edit */}
+      <div className="mb-5">
+        <div className="flex items-center gap-2 text-[11px] text-[var(--text-muted)] mb-3">
+          <Link to="/inventory" className="hover:text-[var(--text-primary)]">Inventory</Link>
+          <span className="text-[var(--text-faint)]">/</span>
+          <span className="text-[var(--text-secondary)]">{isEdit ? 'Edit release' : 'Add release'}</span>
         </div>
+
+        <div className="flex items-start gap-4 max-sm:flex-col">
+          <span className="w-[68px] h-[68px] rounded-[8px] overflow-hidden border border-[var(--border)] flex-shrink-0">
+            <ReleaseCover imageUrl={form.imageUrl} format={form.format} alt="Cover preview" />
+          </span>
+
+          <div className="min-w-0 flex-1">
+            <h1 className="text-[22px] font-semibold tracking-[-0.03em] leading-7 text-[var(--text-primary)] truncate">
+              {release.artist || (isEdit ? 'Untitled release' : 'Add release')}
+            </h1>
+            <p className="text-[14px] text-[var(--text-secondary)] leading-tight truncate mt-0.5">
+              {release.title || (isEdit ? '—' : 'New release for the catalogue')}
+            </p>
+            <div className="flex items-center gap-x-2.5 gap-y-1.5 flex-wrap mt-2.5">
+              {metaBits.length > 0 && (
+                <span className="font-mono text-[11px] text-[var(--text-muted)]">{metaBits.join(' · ')}</span>
+              )}
+              {condLabel(form.condition) && (
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-[var(--border)] text-[var(--text-secondary)]">{condLabel(form.condition)}</span>
+              )}
+              {isEdit && (
+                <span className={`text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap ${stockPill[1]}`}>
+                  {stockPill[0]} · <span className="font-mono">{stock}</span>
+                </span>
+              )}
+              {flags.map(f => (
+                <span key={f} className="text-[10px] px-2 py-0.5 rounded-full border border-[var(--border)] text-[var(--text-muted)]">{f}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-right flex-shrink-0 max-sm:text-left">
+            <p className="text-[10px] uppercase tracking-[0.08em] text-[var(--text-muted)]">Price</p>
+            <p className="font-mono text-[19px] font-semibold tracking-[-0.02em] text-[var(--text-primary)] leading-none mt-1.5">
+              {form.priceIdr ? fmtIdr(form.priceIdr) : '—'}
+            </p>
+          </div>
+        </div>
+
+        {isEdit && release.dealposVariantId && (
+          <p className="text-[12px] text-[var(--text-muted)] mt-3">
+            Synced from DealPOS · variant <span className="font-mono text-[11px]">{release.dealposVariantId}</span>
+          </p>
+        )}
       </div>
 
       {error && <div className="text-[12px] text-[var(--danger)] border border-[var(--danger)] rounded-md px-3 py-2 mb-4">{error}</div>}
@@ -472,13 +524,17 @@ export function ReleaseForm() {
         </Section>
       </div>
 
-      {/* sticky footer bar, mockup pattern */}
-      <div className="fixed bottom-0 left-[232px] right-0 max-md:left-0 z-30 bg-[var(--bg-surface)] border-t border-[var(--border)]">
+      {/* sticky footer bar — floats over the form (Level 2) */}
+      <div className="fixed bottom-0 left-[232px] right-0 max-md:left-0 z-30 bg-[var(--bg-surface)] border-t border-[var(--border)] shadow-[0_-4px_12px_rgba(0,0,0,0.28)]">
         <div className="max-w-3xl flex items-center gap-3 px-6 max-md:px-4 py-3">
-          <span className="text-[11px] text-[var(--text-muted)]">{isEdit ? 'Editing saved release' : 'New release'}</span>
+          <span className="flex items-center gap-1.5 text-[11px] text-[var(--text-muted)]">
+            <span className={`w-1.5 h-1.5 rounded-full ${isEdit ? 'bg-[var(--success)]' : 'bg-[var(--text-muted)]'}`} />
+            {isEdit ? 'Editing saved release' : 'New release'}
+          </span>
           <span className="flex-1" />
           <Link to="/inventory" className="px-3.5 py-[9px] rounded-[6px] text-[13px] font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)] hover:text-[var(--text-primary)] transition-colors">Cancel</Link>
-          <button type="submit" disabled={loading} className="px-4 py-[9px] rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[13px] font-semibold hover:opacity-[.88] disabled:opacity-50 transition-opacity">
+          <button type="submit" disabled={loading} className="inline-flex items-center gap-1.5 px-4 py-[9px] rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[13px] font-semibold hover:opacity-[.88] disabled:opacity-50 transition-opacity">
+            {!loading && <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>}
             {loading ? 'Saving…' : 'Save release'}
           </button>
         </div>
