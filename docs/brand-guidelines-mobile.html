@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" class="portrait">
+<head>
+<meta charset="utf-8">
+<title>Medium Format — Brand Guidelines (Mobile)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-guidelines.css">
+<style>
+  @page{size:96mm 203mm;margin:0}
+  .m-cover{justify-content:space-between;align-items:flex-start}
+  .m-cover .disc{width:66mm;position:absolute;right:-20mm;bottom:-14mm}
+  .m-head{margin-bottom:9mm}
+  .m-head .kicker{margin-bottom:11px}
+  .m-head .lead{margin-top:10px;font-size:12.5px}
+  .toc-item{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:11px;
+    padding:7px 0;border-bottom:1px solid var(--hairline-soft)}
+  .toc-item .no{font:600 13px/1 var(--ui);color:var(--faint);font-variant-numeric:tabular-nums}
+  .toc-item .ti{color:var(--ink);font-size:12.5px}
+  .toc-item .pg{color:var(--mute);font-variant-numeric:tabular-nums;font-size:11px;letter-spacing:.05em}
+  .m-feel{display:grid;gap:15px;margin-top:4mm}
+  .m-feel h3{font:600 15px/1.2 var(--ui);color:var(--ink);letter-spacing:-.01em}
+  .m-feel p{margin:4px 0 0;font-size:12px;color:var(--body)}
+  .m-tiles{display:grid;gap:10px;margin-top:2mm}
+  .m-tile{background:var(--surface);border:1px solid var(--hairline);border-radius:10px;
+    padding:22px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;position:relative;min-height:74px}
+  .m-tile .cap{font:500 10px/1.3 var(--ui);color:var(--mute);text-align:center}
+  .portrait .m-split{flex-direction:column;padding:0}
+  .m-split .half{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+  .m-split .half.dark{background:#000} .m-split .half.lite{background:#fff}
+  .m-split .half .mark{width:58px;height:58px}
+  .m-split .half.dark .mark{color:#fff} .m-split .half.lite .mark{color:#000}
+  .m-split .lbl{font:600 13px/1 var(--ui)}
+  .m-split .half.dark .lbl{color:#fff} .m-split .half.lite .lbl{color:#000}
+  .m-split .over{position:absolute;top:12mm;left:11mm;right:11mm;z-index:2}
+  .m-split .over .kicker,.m-split .over .title{color:#fff;mix-blend-mode:difference}
+  .m-clear{margin-top:5mm}
+  .m-clear .frame{border:1.5px dashed var(--hairline);border-radius:4px;padding:16% 12%;position:relative;display:flex;justify-content:center}
+  .m-clear .xbox{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:24px;height:24px;
+    border:1px solid var(--mute);display:flex;align-items:center;justify-content:center;font:600 11px/1 var(--ui);color:var(--ink);background:var(--canvas)}
+  .m-sizes{display:flex;flex-direction:column;gap:16px;margin-top:4mm}
+  .m-sizes .r{display:flex;flex-direction:column;gap:9px}
+  .m-sizes .n{font:600 12px/1.2 var(--ui);color:var(--ink)}
+  .m-sizes .v{font-size:10.5px;color:var(--mute);font-variant-numeric:tabular-nums}
+  .m-grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:3mm}
+  .m-grid2 .demo{height:66px}
+  .m-swrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:2mm}
+  .m-gl{font:500 9px/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:6px 0 -2px}
+  .m-type{display:flex;flex-direction:column;margin-top:3mm}
+  .m-type .row{padding:11px 0;border-bottom:1px solid var(--hairline-soft)}
+  .m-type .m{font:500 8.5px/1.3 var(--ui);letter-spacing:.07em;text-transform:uppercase;color:var(--mute);margin-bottom:5px}
+  .m-write{margin-top:4mm}
+  .m-write .label{color:var(--ink)}
+  .m-write ul{margin:6px 0 14px;padding-left:0;list-style:none}
+  .m-write li{position:relative;padding-left:15px;margin:6px 0;font-size:12px;color:var(--body)}
+  .m-write li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--mute)}
+  .m-quote{border-top:1px solid var(--hairline);padding-top:10px;margin-top:8px;font-size:12px;line-height:1.5}
+  .m-quote .who{font:500 8.5px/1 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:6px}
+  .m-shop{margin-top:4mm;background:#000;border:1px solid var(--hairline);border-radius:11px;overflow:hidden;box-shadow:0 8px 26px rgba(0,0,0,.6)}
+  .m-shop .bar{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-bottom:1px solid var(--hairline)}
+  .m-shop .bar .nav{display:flex;gap:11px;font-size:9.5px;color:var(--mute)}
+  .m-shop .g{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:11px 12px}
+  .m-rel .cov{aspect-ratio:1;border-radius:6px;background:var(--surface);border:1px solid var(--hairline);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .m-rel .cov .disc{width:62%}
+  .m-rel .stk{position:absolute;top:6px;left:6px;font:500 8px/1 var(--ui);color:var(--ok);display:flex;gap:4px;align-items:center}
+  .m-rel .stk::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--ok)}
+  .m-rel .a{font:600 10.5px/1.2 var(--ui);color:var(--ink);margin-top:7px}
+  .m-rel .t{font-size:9px;color:var(--mute)}
+  .m-rel .p{font-size:10px;color:var(--ink);margin-top:2px;font-variant-numeric:tabular-nums}
+  .m-now{display:flex;align-items:center;gap:9px;padding:9px 12px;border-top:1px solid var(--hairline);background:#0b0b0b}
+  .m-now .th{width:26px;height:26px;border-radius:4px;background:var(--raised)}
+  .m-now .track{flex:1;height:3px;border-radius:2px;background:var(--hairline);position:relative}
+  .m-now .track::before{content:"";position:absolute;left:0;top:0;bottom:0;width:44%;background:var(--accent);border-radius:2px}
+  .m-sys{display:flex;flex-direction:column;margin-top:4mm}
+  .m-sys .row{padding:10px 0;border-bottom:1px solid var(--hairline-soft)}
+  .m-sys .f{color:var(--ink);font-weight:600;font-size:12px}
+  .m-sys .d{color:var(--body);font-size:11px;margin-top:3px;line-height:1.45}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mf" viewBox="0 0 1080 1080"><path d="M858.21,130.64c-53.14-66.98-130.64-83.97-212.83-81.02-25.27.91-46.84,2.92-65.66,5.82-22.46-5.24-46.36-6.78-70.85-5.9-144.29,5.17-131.46,57.34-223.49,99.9-100.65,46.56-92.46,129.42-125.95,175.35-49.06,67.27-68.46,143.78-62.64,226.59,1.02,14.48,3.33,28.3,6.95,41.41-7.49,40.09-9.63,81.66-6.62,124.51,5.51,78.44,39.27,142.57,105.31,186.44,23.67,15.72,46.2,41.64,66.06,62.8,111.62,118.98,233.6,49.34,285.88,40.01,94.53-16.87,175.2-53.51,244.66-121.56,33.1-32.43,55.07-73.46,79.26-114.18,17.31-29.13,40.36-55.02,53.07-87.61,66.75-171.18,96.6-429.31-73.14-552.56ZM247.28,694.57c-2.68-2.86-46.16-25.29-42.52-23.83,56.1,22.5,109.06-5.34,135.22-10.01,61.55-10.98,114.09-34.85,159.32-79.16,21.55-21.12,35.86-47.84,51.62-74.36,11.27-18.97,26.28-35.83,34.56-57.05,40.9-104.89,108.09-250.09,18.17-334.9,10.35,7.07,19.93,15.85,28.53,26.62.18.23.4.44.64.61,110.13,80.36,90.69,248.21,47.27,359.56-8.27,21.22-23.29,38.08-34.56,57.05-15.76,26.52-30.06,53.24-51.62,74.36-45.24,44.31-97.77,68.18-159.32,79.16-34.04,6.07-114.62,59.42-187.3-18.06ZM873.17,650.54c-11.01,28.23-30.98,50.66-45.98,75.9-20.96,35.28-39.99,70.83-68.67,98.93-60.18,58.96-130.08,90.71-211.97,105.32-45.29,8.08-150.98,68.42-247.68-34.67-.06-.06-.12-.13-.18-.19-3.56-3.8-40.36-36.05-35.52-34.11,74.64,29.93,145.1-7.11,179.9-13.32,81.9-14.61,151.79-46.36,211.97-105.32,28.68-28.09,47.71-63.64,68.67-98.93,14.99-25.24,34.97-47.67,45.98-75.9,54.41-139.56,121.41-319.5,1.78-432.33,13.78,9.41,30.33,19.61,41.77,33.94.24.31,1.86,1.51,2.17,1.74,146.52,106.92,115.52,330.78,57.75,478.94Z"/></symbol></svg>
+
+<!-- COVER -->
+<section class="page m-cover">
+  <div class="disc" aria-hidden="true"></div>
+  <div class="kicker" style="position:relative;z-index:2"><span>© 2026</span><span>·</span><span>Confidential</span></div>
+  <div style="position:relative;z-index:2;margin-top:auto;margin-bottom:auto">
+    <div class="lockup" style="font-size:30px">
+      <span class="mark" style="width:.92em;height:.92em"><svg><use href="#mf"/></svg></span>
+      <span class="wordmark">Medium Format<span class="r" style="font-size:.3em">®</span></span>
+    </div>
+    <div style="font:500 14px/1.3 var(--ui);color:var(--body);margin-top:14px;letter-spacing:-.01em">Brand Guidelines <span class="tnum">2026</span></div>
+  </div>
+  <div class="kicker" style="position:relative;z-index:2;color:var(--mute)"><span>Version 2.0</span></div>
+</section>
+
+<!-- CONTENTS -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span>Contents</span></div>
+    <h2 class="display" style="margin-top:12px">What&rsquo;s inside</h2>
+  </div>
+  <div class="toc-item"><span class="no">01</span><span class="ti">About Medium Format</span><span class="pg">03</span></div>
+  <div class="toc-item"><span class="no">02</span><span class="ti">How the brand should feel</span><span class="pg">04</span></div>
+  <div class="toc-item"><span class="no">03</span><span class="ti">The logo</span><span class="pg">05</span></div>
+  <div class="toc-item"><span class="no">04</span><span class="ti">Black and white</span><span class="pg">06</span></div>
+  <div class="toc-item"><span class="no">05</span><span class="ti">Clear space</span><span class="pg">07</span></div>
+  <div class="toc-item"><span class="no">06</span><span class="ti">Smallest sizes</span><span class="pg">08</span></div>
+  <div class="toc-item"><span class="no">07</span><span class="ti">Backgrounds</span><span class="pg">09</span></div>
+  <div class="toc-item"><span class="no">08</span><span class="ti">What not to do</span><span class="pg">10</span></div>
+  <div class="toc-item"><span class="no">09</span><span class="ti">Colour</span><span class="pg">11</span></div>
+  <div class="toc-item"><span class="no">10</span><span class="ti">Interface greys</span><span class="pg">12</span></div>
+  <div class="toc-item"><span class="no">11</span><span class="ti">Typography</span><span class="pg">13</span></div>
+  <div class="toc-item"><span class="no">12</span><span class="ti">How we write</span><span class="pg">14</span></div>
+  <div class="toc-item"><span class="no">13</span><span class="ti">Photography and imagery</span><span class="pg">15</span></div>
+  <div class="toc-item"><span class="no">14</span><span class="ti">In use</span><span class="pg">16</span></div>
+  <div class="toc-item"><span class="no">15</span><span class="ti">The design system</span><span class="pg">17</span></div>
+  <div class="foot"><span>Medium Format</span><span class="pg">02</span></div>
+</section>
+
+<!-- 01 ABOUT -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">01</span><span>·</span><span>About</span></div>
+    <h2 class="display" style="margin-top:12px">Records, the way<br>they should<br>be sold.</h2>
+  </div>
+  <p class="lead">Medium Format is an independent record shop in Jakarta. The name comes from film photography, where the medium format is the larger negative that holds more detail. It also points to what we sell: the LP, the 12-inch, the 7-inch and the CD.</p>
+  <p class="lead" style="margin-top:12px">One platform sits behind the shop, the website and the marketplaces, keeping stock, orders and music in sync. The identity matches it: black and white, one typeface, and a single mark drawn from a record seen side-on.</p>
+  <div class="pillrow" style="margin-top:16px">
+    <span class="pill">Independent</span><span class="pill">Record shop</span><span class="pill">Jakarta</span>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">03</span></div>
+</section>
+
+<!-- 02 FEEL -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">02</span><span>·</span><span>How the brand should feel</span></div>
+    <h2 class="display" style="margin-top:12px">Plain, and<br>sure of itself.</h2>
+    <p class="lead">The character is in the words we choose and the restraint we keep, not in decoration. Let the records lead.</p>
+  </div>
+  <div class="m-feel">
+    <div><h3>Plain</h3><p>Clear words, clean layouts, no clutter. If something can come out, take it out.</p></div>
+    <div><h3>Confident</h3><p>Say things once and mean them. No hype, no exclamation marks doing the work.</p></div>
+    <div><h3>Quiet</h3><p>The records are the interest. The design stays in the background and lets them lead.</p></div>
+    <div><h3>Honest</h3><p>Describe what is real: the pressing, the condition, the price. Nothing dressed up.</p></div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">04</span></div>
+</section>
+
+<!-- 03 THE LOGO -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">03</span><span>·</span><span>The logo</span></div>
+    <h2 class="title" style="margin-top:12px">One logo,<br>three forms.</h2>
+    <p class="lead">Use the form that fits the space. The wordmark is set in <strong>Geist SemiBold</strong>.</p>
+  </div>
+  <div class="m-tiles">
+    <div class="m-tile">
+      <div class="lockup" style="font-size:19px"><span class="mark" style="width:.95em;height:.95em"><svg><use href="#mf"/></svg></span><span class="wordmark">Medium Format<span class="r" style="font-size:.32em">®</span></span></div>
+      <span class="cap">The lockup · the default wherever there is room.</span>
+    </div>
+    <div class="m-tile"><span class="wordmark" style="font-size:19px">Medium Format<span class="r" style="font-size:.32em">®</span></span><span class="cap">The wordmark.</span></div>
+    <div class="m-tile"><span class="mark" style="width:42px;height:42px"><svg><use href="#mf"/></svg></span><span class="cap">The logomark · avatars, icons, stamps.</span></div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">05</span></div>
+</section>
+
+<!-- 04 BLACK AND WHITE -->
+<section class="page m-split">
+  <div class="half dark"><span class="mark"><svg><use href="#mf"/></svg></span><span class="lbl">White on dark</span></div>
+  <div class="half lite"><span class="mark"><svg><use href="#mf"/></svg></span><span class="lbl">Black on light</span></div>
+  <div class="over">
+    <div class="kicker"><span class="n">04</span><span>·</span><span>Black and white</span></div>
+    <h2 class="title" style="margin-top:10px">Two versions.<br>That&rsquo;s all.</h2>
+  </div>
+  <div class="foot" style="color:#fff;mix-blend-mode:difference"><span>Black or white, nothing else.</span><span class="pg">06</span></div>
+</section>
+
+<!-- 05 CLEAR SPACE -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">05</span><span>·</span><span>Clear space</span></div>
+    <h2 class="title" style="margin-top:12px">Give it room.</h2>
+    <p class="lead">Keep a clear margin around the logo of at least <strong>X</strong> on every side, where X is the cap height of the wordmark. Nothing sits inside it.</p>
+  </div>
+  <div class="m-clear">
+    <div class="frame">
+      <span class="xbox">X</span>
+      <div class="lockup" style="font-size:22px"><span class="mark" style="width:.95em;height:.95em"><svg><use href="#mf"/></svg></span><span class="wordmark">Medium&nbsp;Format</span></div>
+    </div>
+    <p class="small" style="text-align:center;color:var(--mute);margin-top:11px">Minimum clear space = X on every side.</p>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">07</span></div>
+</section>
+
+<!-- 06 SMALLEST SIZES -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">06</span><span>·</span><span>Smallest sizes</span></div>
+    <h2 class="title" style="margin-top:12px">Small, but<br>still legible.</h2>
+    <p class="lead">Below these sizes the logo stops being clear. When space is tight, use the logomark on its own.</p>
+  </div>
+  <div class="m-sizes">
+    <div class="r">
+      <div class="lockup" style="font-size:18px"><span class="mark" style="width:.95em;height:.95em"><svg><use href="#mf"/></svg></span><span class="wordmark">Medium Format</span></div>
+      <div><div class="n">Logo lockup</div><div class="v">Min 160&nbsp;px on screen · 28&nbsp;mm in print</div></div>
+    </div>
+    <hr class="rule">
+    <div class="r">
+      <span class="wordmark" style="font-size:18px">Medium Format</span>
+      <div><div class="n">Wordmark</div><div class="v">Min 120&nbsp;px on screen · 22&nbsp;mm in print</div></div>
+    </div>
+    <hr class="rule">
+    <div class="r">
+      <span class="mark" style="width:28px;height:28px"><svg><use href="#mf"/></svg></span>
+      <div><div class="n">Logomark</div><div class="v">Down to 24&nbsp;px · favicons, avatars, app tile</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">08</span></div>
+</section>
+
+<!-- 07 BACKGROUNDS -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">07</span><span>·</span><span>Backgrounds</span></div>
+    <h2 class="title" style="margin-top:12px">Keep the<br>contrast clear.</h2>
+    <p class="lead">Black on light grounds, white on dark ones. Avoid mid-greys that leave the mark half-visible.</p>
+  </div>
+  <div class="m-grid2">
+    <div class="demo" style="background:#fff"><span class="mark" style="width:30px;height:30px;color:#000"><svg><use href="#mf"/></svg></span><span class="cap"><span class="judge do">Do</span><span style="color:#666">On white</span></span></div>
+    <div class="demo" style="background:#000"><span class="mark" style="width:30px;height:30px;color:#fff"><svg><use href="#mf"/></svg></span><span class="cap"><span class="judge do">Do</span>On black</span></div>
+    <div class="demo" style="background:#242424"><span class="mark" style="width:30px;height:30px;color:#fff"><svg><use href="#mf"/></svg></span><span class="cap"><span class="judge do">Do</span>Dark photo</span></div>
+    <div class="demo" style="background:#e6e6e6"><span class="mark" style="width:30px;height:30px;color:#fff"><svg><use href="#mf"/></svg></span><span class="cap"><span class="judge no">Don&rsquo;t</span><span style="color:#666">Pale ground</span></span></div>
+    <div class="demo" style="background:#2b2b2b"><span class="mark" style="width:30px;height:30px;color:#000"><svg><use href="#mf"/></svg></span><span class="cap"><span class="judge no">Don&rsquo;t</span>Dark ground</span></div>
+    <div class="demo" style="background:#fff"><span class="mark" style="width:30px;height:30px;color:#6c63ff"><svg><use href="#mf"/></svg></span><span class="cap"><span class="judge no">Don&rsquo;t</span><span style="color:#666">Any colour</span></span></div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">09</span></div>
+</section>
+
+<!-- 08 WHAT NOT TO DO -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">08</span><span>·</span><span>What not to do</span></div>
+    <h2 class="title" style="margin-top:12px">Please<br>don&rsquo;t.</h2>
+    <p class="lead">The artwork is final. Each of these breaks the logo.</p>
+  </div>
+  <div class="m-grid2">
+    <div class="demo" style="background:#fff"><span class="ban"></span><span class="mark" style="width:52px;height:24px;color:#000"><svg preserveAspectRatio="none"><use href="#mf"/></svg></span><span class="cap"><span style="color:#666">Stretch or squash</span></span></div>
+    <div class="demo" style="background:#fff"><span class="ban"></span><span class="mark" style="width:30px;height:30px;color:#6c63ff"><svg><use href="#mf"/></svg></span><span class="cap"><span style="color:#666">Add colour</span></span></div>
+    <div class="demo" style="background:#fff"><span class="ban"></span><span class="mark" style="width:30px;height:30px;color:#000;transform:rotate(18deg)"><svg><use href="#mf"/></svg></span><span class="cap"><span style="color:#666">Rotate or tilt</span></span></div>
+    <div class="demo" style="background:#fff"><span class="ban"></span><span class="mark" style="width:30px;height:30px;color:#000;filter:drop-shadow(3px 4px 3px rgba(0,0,0,.5))"><svg><use href="#mf"/></svg></span><span class="cap"><span style="color:#666">Add shadows</span></span></div>
+    <div class="demo" style="background:#fff"><span class="ban"></span><span class="lockup" style="font-size:11px;color:#000;letter-spacing:.14em"><span class="mark" style="width:16px;height:16px;color:#000"><svg><use href="#mf"/></svg></span><span class="wordmark" style="letter-spacing:.14em">Medium&nbsp;Format</span></span><span class="cap"><span style="color:#666">Respace it</span></span></div>
+    <div class="demo" style="background:#fff"><span class="ban"></span><span class="wordmark" style="font-size:13px;color:transparent;-webkit-text-stroke:1px #000">Medium&nbsp;Format</span><span class="cap"><span style="color:#666">Outline the letters</span></span></div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">10</span></div>
+</section>
+
+<!-- 09 COLOUR -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">09</span><span>·</span><span>Colour</span></div>
+    <h2 class="title" style="margin-top:12px">Black on white,<br>white on black.</h2>
+    <p class="lead">That contrast is the whole palette. Colour has one job in the product: showing the state of stock and orders. It never appears in the logo or in marketing.</p>
+  </div>
+  <div style="display:grid;gap:11px;margin-top:3mm">
+    <div class="bigsw" style="border-radius:11px">
+      <div class="chip" style="height:88px;display:flex;align-items:flex-end;padding:12px;background:#000"><span class="mark" style="width:34px;height:34px;color:#fff"><svg><use href="#mf"/></svg></span></div>
+      <div class="m" style="padding:11px 13px"><div class="nm">Black</div><div class="hx" style="margin:3px 0 6px">#000000 · RGB 0 0 0</div><div class="u" style="font-size:11px;color:var(--body)">Logo and text on light grounds. The base of the dark interface.</div></div>
+    </div>
+    <div class="bigsw" style="border-radius:11px">
+      <div class="chip" style="height:88px;display:flex;align-items:flex-end;padding:12px;background:#fff;border-bottom:1px solid var(--hairline)"><span class="mark" style="width:34px;height:34px;color:#000"><svg><use href="#mf"/></svg></span></div>
+      <div class="m" style="padding:11px 13px"><div class="nm">White</div><div class="hx" style="margin:3px 0 6px">#FFFFFF · RGB 255 255 255</div><div class="u" style="font-size:11px;color:var(--body)">Logo and text on dark grounds. The base of the light interface.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">11</span></div>
+</section>
+
+<!-- 10 INTERFACE GREYS -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">10</span><span>·</span><span>Interface greys</span></div>
+    <h2 class="title" style="margin-top:12px">A few greys<br>for the screen.</h2>
+  </div>
+  <div class="m-gl">Surfaces · dark (default)</div>
+  <div class="m-swrow">
+    <div class="sw"><div class="chip" style="background:#000;height:48px"></div><div class="m"><div class="nm">Canvas</div><div class="hx">#000000</div></div></div>
+    <div class="sw"><div class="chip" style="background:#0E0E0E;height:48px"></div><div class="m"><div class="nm">Surface</div><div class="hx">#0E0E0E</div></div></div>
+    <div class="sw"><div class="chip" style="background:#1A1A1A;height:48px"></div><div class="m"><div class="nm">Raised</div><div class="hx">#1A1A1A</div></div></div>
+    <div class="sw"><div class="chip" style="background:#2A2A2A;height:48px"></div><div class="m"><div class="nm">Hairline</div><div class="hx">#2A2A2A</div></div></div>
+  </div>
+  <div class="m-gl">Text, status · signals only</div>
+  <div class="m-swrow">
+    <div class="sw"><div class="chip" style="background:#fff;height:48px"></div><div class="m"><div class="nm">Ink</div><div class="hx">#FFFFFF</div></div></div>
+    <div class="sw"><div class="chip" style="background:#6E6E6E;height:48px"></div><div class="m"><div class="nm">Mute</div><div class="hx">#6E6E6E</div></div></div>
+    <div class="sw"><div class="chip" style="background:#22C55E;height:48px"></div><div class="m"><div class="nm">OK · in stock</div><div class="hx">#22C55E</div></div></div>
+    <div class="sw"><div class="chip" style="background:#EF4444;height:48px"></div><div class="m"><div class="nm">Danger · out</div><div class="hx">#EF4444</div></div></div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">12</span></div>
+</section>
+
+<!-- 11 TYPOGRAPHY -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">11</span><span>·</span><span>Typography</span></div>
+    <h2 class="title" style="margin-top:12px">One typeface<br>does it all.</h2>
+    <p class="lead"><strong>Geist</strong> sets everything. Figures that must line up (prices, cat&nbsp;numbers, barcodes) use its <strong>tabular numerals</strong>.</p>
+  </div>
+  <div class="m-type">
+    <div class="row"><div class="m">Heading · SemiBold</div><div style="font:600 20px/1.1 var(--ui);color:var(--ink);letter-spacing:-.02em">New this week</div></div>
+    <div class="row"><div class="m">Body · Regular</div><div style="font:400 13px/1.4 var(--ui);color:var(--body)">Independent record shop in Jakarta.</div></div>
+    <div class="row"><div class="m">Label · uppercase</div><div style="font:500 11px/1.3 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)">Condition · Genre · Format</div></div>
+    <div class="row"><div class="m">Price · tabular</div><div class="tnum" style="font:500 19px/1.2 var(--ui);color:var(--ink)">Rp 485.000</div></div>
+    <div class="row"><div class="m">Meta · tabular</div><div class="tnum" style="font:400 13px/1.4 var(--ui);color:var(--body);letter-spacing:.02em">CAT# DOC120 · 8 991002 110017</div></div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">13</span></div>
+</section>
+
+<!-- 12 HOW WE WRITE -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">12</span><span>·</span><span>How we write</span></div>
+    <h2 class="title" style="margin-top:12px">Talk like<br>the shop.</h2>
+    <p class="lead">Clear, friendly and to the point. We work in Indonesian and English, prices in Rupiah first.</p>
+  </div>
+  <div class="m-write">
+    <div class="label">Do</div>
+    <ul>
+      <li>Lead with the record and why it is worth hearing.</li>
+      <li>Be specific about the label, year and condition.</li>
+      <li>Keep it short. One good line is plenty.</li>
+    </ul>
+    <div class="label">Don&rsquo;t</div>
+    <ul>
+      <li>Oversell, or invent scarcity to push a sale.</li>
+      <li>Use jargon that shuts newcomers out.</li>
+    </ul>
+    <div class="m-quote" style="color:var(--mute)"><span class="who">Instead of</span>&ldquo;INSANE restock!! Don&rsquo;t sleep on this heater, link in bio.&rdquo;</div>
+    <div class="m-quote"><span class="who">We&rsquo;d say</span>&ldquo;Back in stock: Khruangbin, <em>Mordechai</em>. A few copies on the wall, come and have a listen.&rdquo;</div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">14</span></div>
+</section>
+
+<!-- 13 PHOTOGRAPHY -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">13</span><span>·</span><span>Photography and imagery</span></div>
+    <h2 class="title" style="margin-top:12px">Let the records<br>be the colour.</h2>
+    <p class="lead">Pictures should feel real and unfussy: records, sleeves, the shop, hands going through a crate. Plain light and honest framing. The cover art brings the colour.</p>
+  </div>
+  <div style="margin-top:4mm;display:flex;flex-direction:column;gap:14px">
+    <div><div class="h3" style="margin-bottom:5px">What to shoot</div><p class="small" style="color:var(--body)">Records and sleeves, the shop and its shelves, the turntable, people listening. Real moments over staged ones.</p></div>
+    <div><div class="h3" style="margin-bottom:5px">How it should look</div><p class="small" style="color:var(--body)">Clean and a little understated. Black and white for the shop; let the sleeves carry the colour.</p></div>
+    <hr class="rule">
+    <p class="small" style="color:var(--mute)">A simple test: would it sit happily on a record sleeve or a gig poster? If it looks like a tech advert, take it back a step.</p>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">15</span></div>
+</section>
+
+<!-- 14 IN USE -->
+<section class="page">
+  <div class="m-head">
+    <div class="kicker"><span class="n">14</span><span>·</span><span>In use</span></div>
+    <h2 class="title" style="margin-top:12px">Out in<br>the world.</h2>
+    <p class="lead">The same parts repeat across the shop, the merchandise and the screen, held together by black, white and the mark.</p>
+  </div>
+  <div class="m-shop">
+    <div class="bar">
+      <span class="lockup" style="font-size:12px"><span class="mark" style="width:14px;height:14px"><svg><use href="#mf"/></svg></span><span class="wordmark">Medium Format</span></span>
+      <span class="nav"><span>Shop</span><span>Cart</span></span>
+    </div>
+    <div class="g">
+      <div class="m-rel"><div class="cov"><span class="stk">In stock</span><div class="disc"></div></div><div class="a">Khruangbin</div><div class="t">Mordechai</div><div class="p">Rp 485.000</div></div>
+      <div class="m-rel"><div class="cov"><span class="stk">In stock</span><div class="disc"></div></div><div class="a">Sault</div><div class="t">Untitled</div><div class="p">Rp 540.000</div></div>
+    </div>
+    <div class="m-now">
+      <span class="th"></span>
+      <div><div style="font:600 9.5px/1.2 var(--ui);color:var(--ink)">White Gloves</div><div style="font-size:8px;color:var(--mute)">Khruangbin · Bandcamp</div></div>
+      <div class="track"></div>
+      <span style="color:var(--ink);font-size:11px">▶</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:22px;margin-top:14px">
+    <div><div class="label" style="color:var(--ink)">Physical</div><p class="small" style="margin-top:4px;font-size:11px">Stickers use the logomark; totes and tees the wordmark.</p></div>
+    <div><div class="label" style="color:var(--ink)">Digital</div><p class="small" style="margin-top:4px;font-size:11px">Shop, back-office, POS, emails.</p></div>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">16</span></div>
+</section>
+
+<!-- 15 THE DESIGN SYSTEM -->
+<section class="page">
+  <div class="groovefield" style="width:120mm;height:120mm;right:-52mm;bottom:-40mm" aria-hidden="true"></div>
+  <div class="m-head">
+    <div class="kicker"><span class="n">15</span><span>·</span><span>The design system</span></div>
+    <h2 class="display" style="margin-top:12px">From brand<br>to build.</h2>
+    <p class="lead">Everything here becomes reusable design tokens, written in the DESIGN.md format so designers and AI tools can apply it directly.</p>
+  </div>
+  <div class="m-sys">
+    <div class="row"><div class="f">DESIGN.md</div><div class="d">The full design system in ten sections.</div></div>
+    <div class="row"><div class="f">preview.html</div><div class="d">A live page showing every token, with a light/dark switch.</div></div>
+    <div class="row"><div class="f">tokens.json · tokens.css</div><div class="d">Machine-readable tokens and ready-to-use CSS variables.</div></div>
+    <div class="row"><div class="f">Brand-Assets</div><div class="d">The logo lockup, wordmark and logomark in black and white.</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;margin-top:16px;position:relative;z-index:2">
+    <span class="mark" style="width:30px;height:30px"><svg><use href="#mf"/></svg></span>
+    <span class="small" style="color:var(--mute)">Keep it plain. Let the records do the talking.</span>
+  </div>
+  <div class="foot"><span>Medium Format</span><span class="pg">17</span></div>
+</section>
+
+</body>
+</html>

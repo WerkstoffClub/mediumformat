@@ -1,0 +1,215 @@
+/* ==========================================================================
+   Medium Format — Brand Guidelines
+   Dark-first print design system. Shared by desktop (landscape) + mobile
+   (phone portrait). Layout mode is set by .landscape / .portrait on <html>;
+   each document sets its own @page size inline.
+   Type: Geist, tabular numerals for figures. Monochrome. Vinyl-groove motif.
+   ========================================================================== */
+
+:root{
+  --canvas:#000000;        /* true brand black — the page field           */
+  --surface:#0E0E0E;       /* panels, tiles, cards                        */
+  --raised:#171717;        /* inputs, hovered rows                        */
+  --hairline:#282828;      /* borders, dividers                           */
+  --hairline-soft:#1C1C1C; /* quiet rules                                 */
+  --ink:#FFFFFF;           /* headings, primary                          */
+  --body:#B4B4B4;          /* body copy                                  */
+  --mute:#6E6E6E;          /* metadata, kickers                          */
+  --faint:#3A3A3A;         /* huge decorative numerals, watermarks       */
+  --accent:#FFFFFF;        /* interactive accent = opposite of canvas    */
+  --on-accent:#000000;
+
+  --ok:#22C55E;   --info:#3B82F6;   --warn:#F59E0B;   --danger:#EF4444;
+  --ok-t:rgba(34,197,94,.14); --info-t:rgba(59,130,246,.14);
+  --warn-t:rgba(245,158,11,.14); --danger-t:rgba(239,68,68,.14);
+
+  --ui:"Geist","Helvetica Neue",Arial,sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font:400 13px/1.55 var(--ui);
+  color:var(--body);
+  background:#000;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+  text-rendering:geometricPrecision;
+  -webkit-font-smoothing:antialiased;
+}
+.tnum{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ---- page shell ---------------------------------------------------------- */
+.page{
+  position:relative;
+  background:var(--canvas);
+  color:var(--body);
+  overflow:hidden;
+  page-break-after:always;
+  break-after:page;
+  display:flex;
+  flex-direction:column;
+}
+.page:last-child{page-break-after:auto;break-after:auto}
+.page.light{
+  --canvas:#FFFFFF;--surface:#F5F5F5;--raised:#EDEDED;--hairline:#E4E4E4;
+  --hairline-soft:#EFEFEF;--ink:#000000;--body:#4A4A4A;--mute:#8A8A8A;
+  --faint:#D8D8D8;--accent:#000000;--on-accent:#FFFFFF;
+  background:#fff;color:#4A4A4A;
+}
+
+/* landscape spread = padded content block */
+.landscape .page{width:297mm;height:210mm;padding:17mm 20mm 15mm}
+.portrait  .page{width:96mm;height:203mm;padding:12mm 11mm 10mm}
+
+/* ---- running furniture --------------------------------------------------- */
+.kicker{
+  font:500 11px/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);display:flex;gap:.7em;align-items:baseline;
+}
+.kicker .n{color:var(--ink);font-variant-numeric:tabular-nums}
+.foot{
+  position:absolute;left:0;right:0;bottom:0;
+  display:flex;justify-content:space-between;align-items:center;
+  color:var(--mute);font:400 9.5px/1 var(--ui);letter-spacing:.04em;
+}
+.landscape .foot{padding:0 20mm 11mm}
+.portrait  .foot{padding:0 11mm 8mm}
+.foot .pg{font-variant-numeric:tabular-nums;letter-spacing:.1em}
+
+/* ---- type ---------------------------------------------------------------- */
+h1,h2,h3,h4{margin:0;color:var(--ink);font-weight:600;letter-spacing:-.02em}
+.display{
+  font-weight:600;letter-spacing:-.035em;line-height:.98;color:var(--ink);
+}
+.landscape .display{font-size:56px}
+.portrait  .display{font-size:31px;line-height:1.02}
+.title{font-weight:600;letter-spacing:-.03em;color:var(--ink);line-height:1.04}
+.landscape .title{font-size:38px}
+.portrait  .title{font-size:26px}
+.lead{color:var(--body);max-width:64ch}
+.landscape .lead{font-size:14.5px;line-height:1.6}
+.portrait  .lead{font-size:13.5px;line-height:1.62}
+.sub{color:var(--mute)}
+.h3{font:600 15px/1.25 var(--ui);color:var(--ink);letter-spacing:-.01em}
+.small{font-size:12px;line-height:1.5}
+.label{
+  font:500 10.5px/1.3 var(--ui);letter-spacing:.09em;text-transform:uppercase;
+  color:var(--mute);
+}
+
+/* ---- spread grid (heading rail + content) -------------------------------- */
+.spread{flex:1;display:grid;min-height:0}
+.landscape .spread{grid-template-columns:minmax(72mm,1fr) 1.55fr;column-gap:22mm;align-items:start}
+.portrait  .spread{grid-template-columns:1fr;row-gap:7mm}
+.rail{display:flex;flex-direction:column;gap:16px}
+.landscape .rail{gap:20px}
+.rail .lead{margin-top:2px}
+
+/* ---- vinyl groove motif -------------------------------------------------- */
+.disc{
+  position:relative;border-radius:50%;aspect-ratio:1;
+  background:
+    radial-gradient(circle at 50% 50%, #000 0 8.5%, transparent 8.6%),
+    repeating-radial-gradient(circle at 50% 50%,
+      #0a0a0a 0 1.6px, #000 1.6px 3.4px);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.disc::before{ /* label */
+  content:"";position:absolute;inset:38%;border-radius:50%;
+  background:radial-gradient(circle at 42% 38%,#242424,#0c0c0c);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.disc::after{ /* spindle */
+  content:"";position:absolute;inset:48.4%;border-radius:50%;background:#000;
+}
+.light .disc{
+  background:
+    radial-gradient(circle at 50% 50%, #fff 0 8.5%, transparent 8.6%),
+    repeating-radial-gradient(circle at 50% 50%,#eee 0 1.6px,#fff 1.6px 3.4px);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);
+}
+.light .disc::before{background:radial-gradient(circle at 42% 38%,#e6e6e6,#f4f4f4)}
+.light .disc::after{background:#fff}
+
+/* faint full-page groove field, bleeds off an edge */
+.groovefield{
+  position:absolute;border-radius:50%;pointer-events:none;opacity:.5;
+  background:repeating-radial-gradient(circle at 50% 50%,
+    transparent 0 5px, rgba(255,255,255,.028) 5px 6px);
+  -webkit-mask:radial-gradient(circle at 50% 50%, #000 60%, transparent 72%);
+          mask:radial-gradient(circle at 50% 50%, #000 60%, transparent 72%);
+}
+.light .groovefield{
+  background:repeating-radial-gradient(circle at 50% 50%,
+    transparent 0 5px, rgba(0,0,0,.04) 5px 6px);
+}
+
+/* logomark (the brand disc-and-groove path) */
+.mark{display:block;color:var(--ink)}
+.mark svg{display:block;width:100%;height:100%;fill:currentColor}
+
+/* ---- lockups ------------------------------------------------------------- */
+.wordmark{font-weight:600;letter-spacing:-.035em;color:var(--ink);white-space:nowrap}
+.wordmark .r{font-weight:500;vertical-align:super;letter-spacing:0}
+.lockup{display:inline-flex;align-items:center;gap:.42em;white-space:nowrap}
+
+/* ---- pills / tags -------------------------------------------------------- */
+.pillrow{display:flex;flex-wrap:wrap;gap:8px}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  border:1px solid var(--hairline);border-radius:999px;padding:5px 13px;
+  font:500 11px/1 var(--ui);color:var(--body);letter-spacing:.01em;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:6px;
+  border:1px solid var(--hairline);border-radius:5px;padding:3px 9px;
+  font:500 10.5px/1.3 var(--ui);color:var(--body);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---- swatches ------------------------------------------------------------ */
+.swrow{display:grid;gap:10px}
+.sw{border:1px solid var(--hairline);border-radius:8px;overflow:hidden;background:var(--surface)}
+.sw .chip{height:64px;border-bottom:1px solid var(--hairline)}
+.sw .m{padding:8px 11px}
+.sw .nm{font:600 11.5px/1.2 var(--ui);color:var(--ink)}
+.sw .hx{font:500 10px/1.3 var(--ui);color:var(--mute);margin-top:2px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+
+/* ---- do / don't tiles ---------------------------------------------------- */
+.demo{
+  position:relative;background:var(--surface);border:1px solid var(--hairline);
+  border-radius:9px;overflow:hidden;display:flex;align-items:center;
+  justify-content:center;
+}
+.demo .cap{
+  position:absolute;left:10px;bottom:9px;display:flex;align-items:center;gap:7px;
+  font:500 10px/1 var(--ui);color:var(--mute);letter-spacing:.02em;
+}
+.judge{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:9.5px}
+.judge.do{color:var(--ok)} .judge.no{color:var(--danger)}
+.demo .ban{
+  position:absolute;top:9px;right:9px;width:15px;height:15px;border-radius:50%;
+  border:1.5px solid var(--danger);opacity:.85;
+}
+.demo .ban::after{content:"";position:absolute;inset:6px 1px;background:var(--danger);
+  transform:rotate(45deg);transform-origin:center}
+
+/* ---- data table ---------------------------------------------------------- */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{
+  text-align:left;font:500 9.5px/1.3 var(--ui);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--mute);padding:0 14px 9px 0;
+  border-bottom:1px solid var(--hairline);
+}
+.tbl td{padding:11px 14px 11px 0;border-bottom:1px solid var(--hairline-soft);
+  vertical-align:top;color:var(--body)}
+.tbl td.k{color:var(--ink);font-weight:500}
+.tbl .figure{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+
+/* ---- misc ---------------------------------------------------------------- */
+.rule{height:1px;background:var(--hairline);border:0;margin:0}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.stat{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+strong{color:var(--ink);font-weight:600}
+em{font-style:italic}
