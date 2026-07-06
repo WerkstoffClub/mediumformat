@@ -3,9 +3,16 @@ import { Link, useParams } from 'react-router-dom';
 import { channelLabel, customerLabel, fmtDate, fmtIdr, getOrder, type OrderDetail as Order } from '../../api/ops';
 import { ChannelPill, Panel, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 import { ReleaseCover } from '../../components/ui/Cover';
+import { ReceiptModal, type ReceiptData } from '../../components/ui/Receipt';
 
 const fmtTime = (v: string | null | undefined) =>
   v ? new Date(v).toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+
+const fmtStamp = (v: string | null | undefined) =>
+  v ? new Date(v).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '') : '—';
+
+const fmtFormat = (f?: string | null) =>
+  f ? f.replace('TWO_', '2×').replace('THREE_', '3×').replace('TWELVE_INCH', '12"').replace('SEVEN_INCH', '7"').replace('_', ' ') : null;
 
 const MARKETPLACE_STEPS = ['Placed', 'Packed', 'Shipped', 'Delivered', 'Settled'] as const;
 
@@ -65,42 +72,44 @@ function LifecycleStepper({ order }: { order: Order }) {
   );
 }
 
-/** Simple printable receipt for a walk-in sale (black-on-white, like the barcode label). */
-function printReceipt(order: Order) {
-  const win = window.open('', 'mf-receipt', 'width=380,height=640');
-  if (!win) return;
-  const lines = order.lines.map(l =>
-    `<tr><td>${l.name}</td><td class="n">${Number(l.quantity)}×</td><td class="n">${fmtIdr(l.sales ?? l.price)}</td></tr>`).join('');
-  const pays = order.payments.map(p => `<tr><td>${p.method}</td><td class="n" colspan="2">${fmtIdr(p.amount)}</td></tr>`).join('');
-  win.document.write(`<!doctype html><title>Receipt ${order.number}</title>
-  <style>
-    body{font-family:"Geist Mono",monospace;font-size:11px;color:#000;background:#fff;padding:18px;max-width:300px;margin:0 auto}
-    h1{font-family:"Geist",sans-serif;font-size:14px;text-align:center;margin:0 0 2px}
-    .sub{text-align:center;color:#555;margin-bottom:12px}
-    table{width:100%;border-collapse:collapse}
-    td{padding:3px 0;vertical-align:top}
-    .n{text-align:right;white-space:nowrap}
-    .rule td{border-top:1px dashed #000;padding:0;height:8px}
-    .tot td{font-weight:700;font-size:12px}
-    .foot{text-align:center;margin-top:14px;color:#555}
-  </style>
-  <h1>Medium Format</h1>
-  <div class="sub">${order.number} · ${fmtDate(order.date)}${order.customerName ? ` · ${customerLabel(order.customerName)}` : ''}</div>
-  <table>
-    ${lines}
-    <tr class="rule"><td colspan="3"></td></tr>
-    <tr class="tot"><td>Total</td><td class="n" colspan="2">${fmtIdr(order.amount)}</td></tr>
-    ${pays}
-  </table>
-  <div class="foot">Terima kasih! · mediumformat.info</div>
-  <script>setTimeout(()=>window.print(),150)</script>`);
-  win.document.close();
+/** Map an order onto the shared receipt shape. Storefront/POS prices are
+ *  tax-inclusive, so PPN is broken out under the total, not added to it. */
+function buildReceipt(order: Order, isWalkIn: boolean): ReceiptData {
+  const subtotal = order.lines.reduce((sum, l) => sum + Number(l.price) * Number(l.quantity), 0);
+  const discount = order.lines.reduce((sum, l) => sum + Number(l.discountAmount ?? 0), 0);
+  const ppn = Math.round(Number(order.amount) - Number(order.amount) / 1.11);
+
+  const summary: ReceiptData['summary'] = [{ label: 'Subtotal', value: subtotal }];
+  if (discount > 0) summary.push({ label: 'Discount', value: discount, kind: 'discount' });
+
+  const payment: ReceiptData['payment'] = order.payments.length
+    ? order.payments.map(p => ({ label: 'Payment', value: p.method }))
+    : [{ label: 'Payment', value: order.paymentStatus === 'Unpaid' ? 'Awaiting settlement' : 'Paid' }];
+  payment.push({ label: 'Channel', value: channelLabel(order.tag) || 'POS' });
+
+  return {
+    address: ['Jl. Senopati No. 42, Kebayoran Baru', `Jakarta Selatan · ${order.outlet ?? 'MF Store'}`],
+    number: order.number,
+    datetime: fmtStamp(order.date),
+    customer: isWalkIn ? undefined : customerLabel(order.customerName) || undefined,
+    lines: order.lines.map(l => ({
+      name: l.name,
+      meta: [fmtFormat(l.release?.format), l.code, `×${Number(l.quantity)}`].filter(Boolean).join(' · '),
+      amount: Number(l.sales ?? Number(l.price) * Number(l.quantity)),
+    })),
+    summary,
+    total: Number(order.amount),
+    totalNote: `Incl. PPN 11% · ${fmtIdr(ppn)}`,
+    payment,
+    footer: ['Terima kasih — thank you', 'Goods sold are not returnable · Keep this receipt'],
+  };
 }
 
 export function OrderDetail() {
   const { id } = useParams<{ id: string }>();
   const [order, setOrder] = useState<Order | null>(null);
   const [error, setError] = useState(false);
+  const [showReceipt, setShowReceipt] = useState(false);
 
   useEffect(() => {
     if (id) getOrder(id).then(setOrder).catch(() => setError(true));
@@ -131,29 +140,35 @@ export function OrderDetail() {
 
   return (
     <div className="space-y-4 max-w-5xl">
-      {/* header */}
-      <div className="flex items-end justify-between gap-3 flex-wrap">
-        <div>
-          <div className="flex items-center gap-2 text-[11px] text-[var(--text-muted)] mb-1">
+      {/* header — number + state on the left, the total figure leads on the right */}
+      <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 text-[11px] text-[var(--text-muted)] mb-1.5">
             <Link to="/orders" className="hover:text-[var(--text-primary)]">Orders</Link>
             <span className="text-[var(--text-faint)]">/</span>
-            <span className="font-mono text-[var(--text-primary)]">{order.number}</span>
+            <span className="font-mono text-[var(--text-secondary)]">{order.number}</span>
           </div>
-          <h1 className="text-[24px] font-semibold tracking-[-0.04em] leading-8 text-[var(--text-primary)] font-mono">{order.number}</h1>
-          <p className="text-[13px] text-[var(--text-muted)] mt-0.5">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <h1 className="text-[24px] font-semibold tracking-[-0.04em] leading-8 text-[var(--text-primary)] font-mono">{order.number}</h1>
+            <ChannelPill tag={order.tag ?? 'POS'} />
+            <StatusPill value={order.paymentStatus} />
+            {!isWalkIn && <StatusPill value={order.fulfillment} />}
+          </div>
+          <p className="text-[13px] text-[var(--text-muted)] mt-1">
             {fmtDate(order.date)} · {order.outlet ?? 'MF Store'} · {isWalkIn ? 'in-store sale' : 'marketplace order'}
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <ChannelPill tag={order.tag ?? 'POS'} />
-          <StatusPill value={order.paymentStatus} />
-          {!isWalkIn && <StatusPill value={order.fulfillment} />}
+        <div className="flex flex-col items-end gap-2.5">
+          <div className="text-right">
+            <p className="text-[10px] uppercase tracking-[0.08em] text-[var(--text-muted)]">Order total</p>
+            <p className="font-mono text-[24px] font-semibold tracking-[-0.02em] text-[var(--text-primary)] leading-none mt-1.5">{fmtIdr(order.amount)}</p>
+          </div>
           <button
-            onClick={() => printReceipt(order)}
+            onClick={() => setShowReceipt(true)}
             className="flex items-center gap-1.5 px-3 py-[7px] rounded-[6px] border border-[var(--border)] text-[12px] font-medium text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors"
           >
-            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            Print receipt
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6}><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+            Receipt
           </button>
         </div>
       </div>
@@ -283,6 +298,15 @@ export function OrderDetail() {
           </Panel>
         </div>
       </div>
+
+      {showReceipt && (
+        <ReceiptModal
+          data={buildReceipt(order, isWalkIn)}
+          primary={{ label: 'Done', onClick: () => setShowReceipt(false) }}
+          onClose={() => setShowReceipt(false)}
+          dismissible
+        />
+      )}
     </div>
   );
 }
