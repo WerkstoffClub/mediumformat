@@ -3,8 +3,8 @@
 > An independent record shop in Jakarta, and the platform that runs it.
 > The system is black and white: a near-black canvas in the dark theme, white in
 > the light theme, and one neutral grey scale in between. Geist sets every
-> word; Geist Mono sets the numbers that have to line up — prices, catalogue
-> numbers, barcodes. The only mark with any expression is the logomark, a record
+> word, and the numbers that have to line up — prices, catalogue
+> numbers, barcodes — using tabular numerals. The only mark with any expression is the logomark, a record
 > seen side-on. Everything else stays plain so the records and the artwork are
 > what you look at.
 
@@ -15,7 +15,7 @@ players, and dense operational dashboards.
 - **Character:** plain, modern, understated
 - **Surfaces:** black by default, white in the light theme
 - **Colour discipline:** the brand is monochrome; colour appears only to signal status (stock, orders)
-- **Type:** Geist (interface) · Geist Mono (numbers) · the logomark + wordmark for the brand itself
+- **Type:** Geist (interface and numbers, tabular numerals for figures) · the logomark + wordmark for the brand itself
 - **Tokens:** every value here is also in `design-system/tokens.json` as standard W3C design tokens — import-ready for OpenDesign, Penpot, Figma (Tokens Studio) and code. See `design-system/IMPORT.md`.
 
 ---
@@ -82,9 +82,9 @@ these for emphasis or decoration.
 
 ## 02 / Typography Scale
 
-One family does almost everything: **Geist**, in Regular (400), Medium (500)
-and SemiBold (600). **Geist Mono** is used only where figures must align —
-IDR prices, catalogue numbers, SKUs, barcodes, order IDs. Headings use SemiBold;
+One family does everything: **Geist**, in Regular (400), Medium (500)
+and SemiBold (600). Figures that must align — IDR prices, catalogue numbers,
+SKUs, barcodes, order IDs — use Geist's **tabular numerals**. Headings use SemiBold;
 body is Regular. Sentence case throughout; UPPERCASE is reserved for small
 labels.
 
@@ -100,8 +100,8 @@ labels.
 | `body-medium` | 14 / 500 / 20 | Geist | Emphasis, button labels |
 | `small` | 13 / 400 / 18 | Geist | Captions, secondary metadata |
 | `label` | 12 / 500 / 16 · UPPERCASE · +0.04em | Geist | Field labels, table headers, badges |
-| `mono-price` | 14 / 500 / 20 | Geist Mono | IDR price (USD secondary, in `small` mute) |
-| `mono-meta` | 12 / 400 / 16 | Geist Mono | Catalogue no., SKU, barcode, order ID |
+| `mono-price` | 14 / 500 / 20 | Geist · tabular | IDR price (USD secondary, in `small` mute) |
+| `mono-meta` | 12 / 400 / 16 | Geist · tabular | Catalogue no., SKU, barcode, order ID |
 
 ---
 

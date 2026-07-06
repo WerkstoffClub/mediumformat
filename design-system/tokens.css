@@ -1,7 +1,7 @@
 /* ==========================================================================
    Medium Format — Design Tokens (CSS custom properties)
    Monochrome (black & white), dark-first. v2.0
-   Type: Geist + Geist Mono.
+   Type: Geist (single face; tabular numerals for aligned figures).
    Drop into a stylesheet and reference with var(--mf-...).
    ========================================================================== */
 
@@ -34,7 +34,7 @@
 
   /* --- Typography --- */
   --mf-font-ui:   "Geist", "Helvetica Neue", Arial, sans-serif;
-  --mf-font-mono: "Geist Mono", "SF Mono", ui-monospace, monospace;
+  --mf-font-mono: "Geist", "Helvetica Neue", Arial, sans-serif;
 
   --mf-display-xl:  600 40px/48px var(--mf-font-ui);
   --mf-display-lg:  600 32px/40px var(--mf-font-ui);
