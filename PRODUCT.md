@@ -33,7 +33,7 @@ tables; the custom POS is what replaces it going forward.
   (a coloured dot + text on a neutral pill) on channel indicators only.
 - **Covers are the vinyl-groove disc** — album art is never coloured.
 - Tone: plain, modern, understated, confident. Sentence case. Numbers that must
-  align are set in Geist Mono. No decoration for its own sake.
+  align are set in Geist with tabular numerals. No decoration for its own sake.
 
 ## Anti-references
 
