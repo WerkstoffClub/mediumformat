@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Medium Format — Investor Offering</title>
+  <style>
+    /* Page setup — A4, four pages, no browser margins. */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    /* Design tokens ported 1:1 from app/(site)/storefront.css "monochrome v2.0". */
+    :root {
+      --canvas: #0f0f0f;
+      --surface: #0e0e0e;
+      --raised: #1a1a1a;
+      --hairline: #2a2a2a;
+      --hairline-2: #333333;
+      --ink: #ffffff;
+      --body: #b4b4b4;
+      --mute: #6e6e6e;
+      --accent: #ffffff;
+      --accent-text: #000000;
+      --success: #22c55e;
+      --info: #3b82f6;
+      --warning: #f59e0b;
+      --success-t: rgba(34, 197, 94, 0.12);
+      --info-t: rgba(59, 130, 246, 0.12);
+      --warning-t: rgba(245, 158, 11, 0.12);
+      --brand: #d6451f;
+      --ui: "Helvetica Neue", Arial, system-ui, sans-serif;
+      --mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+      --r-sm: 4px;
+      --r-md: 6px;
+      --r-lg: 8px;
+      --r-xl: 12px;
+      --r-pill: 999px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #000;
+      color: var(--ink);
+      font-family: var(--ui);
+      font-size: 11px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* One printable page = A4. */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: var(--canvas);
+      color: var(--ink);
+      position: relative;
+      page-break-after: always;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .page:last-child { page-break-after: auto; }
+
+    .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+    /* Shared header strip. */
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14mm 14mm 0;
+      font-size: 10px;
+      color: var(--mute);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      font-size: 12px;
+      text-transform: none;
+    }
+    .brand-mark {
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      position: relative;
+    }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      background: var(--ink);
+      border-radius: 1px;
+    }
+    .top-meta { display: flex; gap: 14px; font-family: var(--mono); }
+    .top-meta span { color: var(--mute); }
+    .top-meta strong { color: var(--body); font-weight: 500; }
+
+    .bot {
+      margin-top: auto;
+      padding: 8mm 14mm 10mm;
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .bot .pg { color: var(--body); }
+
+    /* ─── PAGE 1 · COVER ─── */
+    .cover-body {
+      flex: 1;
+      padding: 0 14mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 8mm;
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mute);
+      margin-bottom: 14px;
+    }
+    .cover-h1 {
+      font-size: 62px;
+      font-weight: 600;
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      color: var(--ink);
+      max-width: 155mm;
+    }
+    .cover-h1 em {
+      font-style: normal;
+      color: var(--mute);
+    }
+    .cover-sub {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--body);
+      max-width: 130mm;
+      margin-top: 22px;
+    }
+    .cover-strip {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 0;
+      margin-top: 34px;
+      border-top: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+      padding: 18px 0;
+    }
+    .cover-strip .cell + .cell {
+      border-left: 1px solid var(--hairline);
+      padding-left: 18px;
+    }
+    .cover-strip .cell { padding-right: 18px; }
+    .cover-strip .k {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .cover-strip .v {
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+    }
+    .cover-strip .v.big {
+      font-size: 22px;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+    }
+    .cover-strip .vsub {
+      font-size: 11px;
+      color: var(--mute);
+      margin-top: 3px;
+    }
+
+    /* Grooves motif in the cover top, echoing the cover-art fallback. */
+    .cover-motif {
+      position: absolute;
+      right: -60mm;
+      top: -30mm;
+      width: 180mm;
+      height: 180mm;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle at 50% 50%, #000 0 2px, #1a1a1a 2px 4px);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .cover-motif::after {
+      content: "";
+      position: absolute;
+      inset: 44%;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+
+    /* ─── PAGE 2 · SCOPE ─── */
+    .content {
+      flex: 1;
+      padding: 10mm 14mm 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .h2 {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+    }
+    .h2 em {
+      font-style: normal;
+      color: var(--mute);
+    }
+    .lead {
+      font-size: 12px;
+      color: var(--body);
+      line-height: 1.55;
+      max-width: 160mm;
+      margin-bottom: 16px;
+    }
+    .count-pill {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--body);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-pill);
+      background: var(--surface);
+    }
+
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      flex: 1;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 11px 13px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card.wide { grid-column: 1 / -1; }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .num {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      background: var(--raised);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      padding: 2px 5px;
+      letter-spacing: 0.06em;
+    }
+    .card-sub {
+      font-size: 10.5px;
+      color: var(--body);
+      line-height: 1.4;
+    }
+    .feat {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 12px;
+      margin-top: 2px;
+    }
+    .feat li {
+      list-style: none;
+      font-size: 10px;
+      color: var(--body);
+      padding-left: 12px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .feat li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 6px;
+      height: 1px;
+      background: var(--mute);
+    }
+    .feat.single { grid-template-columns: 1fr; }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+    .chip {
+      font-size: 9px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--hairline);
+      color: var(--body);
+      background: var(--surface);
+      letter-spacing: 0.01em;
+    }
+    .chip.on {
+      color: var(--success);
+      background: var(--success-t);
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+    .chip.info {
+      color: var(--info);
+      background: var(--info-t);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+    .chip.warn {
+      color: var(--warning);
+      background: var(--warning-t);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    /* ─── PAGE 3 · PACKAGE RATIONALE ─── */
+    .why-hero {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+    .why-hero .quote {
+      font-size: 17px;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      font-weight: 500;
+      max-width: 165mm;
+    }
+    .why-hero .quote em {
+      font-style: normal;
+      color: var(--mute);
+    }
+    .why-hero .attr {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 12px 13px 13px;
+    }
+    .pillar .n {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .pillar h3 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .pillar p {
+      font-size: 10px;
+      color: var(--body);
+      line-height: 1.5;
+    }
+
+    .split-note {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--mute);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .unbundle {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .unbundle-row {
+      display: grid;
+      grid-template-columns: 62mm 1fr;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .unbundle-row:last-child { border-bottom: none; }
+    .unbundle-k {
+      padding: 11px 14px;
+      border-right: 1px solid var(--hairline);
+      background: var(--raised);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .unbundle-k .strike {
+      font-size: 11.5px;
+      color: var(--body);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-decoration: line-through;
+      text-decoration-color: var(--mute);
+    }
+    .unbundle-k .lost {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: var(--warning);
+      background: var(--warning-t);
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      border-radius: var(--r-pill);
+      padding: 2px 7px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .unbundle-v {
+      padding: 11px 14px;
+      font-size: 10.5px;
+      color: var(--body);
+      line-height: 1.5;
+    }
+
+    /* ─── PAGE 4 · PRICING ─── */
+    .price-hero {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-xl);
+      padding: 20px 22px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .price-hero .k {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--mute);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .price-hero .amount {
+      font-size: 46px;
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      color: var(--ink);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .price-hero .amount .cur {
+      font-size: 22px;
+      color: var(--mute);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-right: 8px;
+    }
+    .price-hero .amount .unit {
+      font-size: 16px;
+      color: var(--mute);
+      font-weight: 500;
+      margin-left: 10px;
+      letter-spacing: 0;
+    }
+    .price-hero .note {
+      font-size: 11px;
+      color: var(--body);
+      line-height: 1.5;
+      margin-top: 8px;
+      max-width: 105mm;
+    }
+    .price-badge {
+      justify-self: end;
+      background: var(--accent);
+      color: var(--accent-text);
+      border-radius: var(--r-md);
+      padding: 14px 18px;
+      text-align: center;
+    }
+    .price-badge .lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+    .price-badge .val {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 13px 14px 14px;
+    }
+    .panel h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .panel h4 .tag {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: var(--mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    .kv {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--hairline);
+      font-size: 10.5px;
+    }
+    .kv:last-child { border-bottom: none; }
+    .kv .k { color: var(--body); }
+    .kv .v {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      font-size: 10.5px;
+      text-align: right;
+    }
+    .kv.mute .v { color: var(--mute); }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .phase {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      padding: 10px 11px 11px;
+      position: relative;
+    }
+    .phase .step {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .phase .name {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .phase .dur {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      color: var(--body);
+      margin-bottom: 6px;
+    }
+    .phase .desc {
+      font-size: 9.5px;
+      color: var(--mute);
+      line-height: 1.45;
+    }
+
+    .signblock {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 14px 16px 16px;
+    }
+    .sig h5 {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      font-weight: 500;
+    }
+    .sig .line {
+      border-bottom: 1px solid var(--body);
+      height: 1px;
+      margin-bottom: 6px;
+    }
+    .sig .who {
+      font-size: 10.5px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .sig .role {
+      font-size: 9.5px;
+      color: var(--mute);
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 1 · COVER ═══ -->
+<section class="page">
+  <div class="cover-motif"></div>
+
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta">
+      <span>Doc</span><strong>MF-OFFER-01</strong>
+      <span>Rev</span><strong>1.0</strong>
+    </div>
+  </div>
+
+  <div class="cover-body">
+    <div class="eyebrow">Investor Offering · Build &amp; Development Package</div>
+    <h1 class="cover-h1">
+      One record shop.<br />
+      <em>Five sales channels.</em><br />
+      One build.
+    </h1>
+    <p class="cover-sub">
+      A complete public storefront, a unified back office, an in-store POS,
+      and marketplace sync across Discogs, Tokopedia and Shopee — proposed as
+      a single, indivisible package for the Medium Format build.
+    </p>
+
+    <div class="cover-strip">
+      <div class="cell">
+        <div class="k">All-inclusive build fee</div>
+        <div class="v big">IDR&nbsp;120,000,000</div>
+        <div class="vsub">Retainer / hosting excluded · One-time · Package pricing</div>
+      </div>
+      <div class="cell">
+        <div class="k">Prepared for</div>
+        <div class="v">Investors, Medium Format</div>
+        <div class="vsub">Jakarta · Independent record shop</div>
+      </div>
+      <div class="cell">
+        <div class="k">Issued</div>
+        <div class="v mono">10&nbsp;Jul&nbsp;2026</div>
+        <div class="vsub">Valid through 09 Aug 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">01 / 04</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 2 · SCOPE ═══ -->
+<section class="page">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Section</span><strong>02 · Scope</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div>
+        <h2 class="h2">What's inside the build. <em>Every module. Every channel.</em></h2>
+      </div>
+      <span class="count-pill">6 Modules · 40+ Features</span>
+    </div>
+    <p class="lead">
+      The build ships as one system across public storefront, admin back office,
+      in-store POS, marketplace channels, marketing and reporting. Each module
+      is priced only as part of the package.
+    </p>
+
+    <div class="scope-grid">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span class="num">01</span> Public Storefront</div>
+          <span class="chip">Website</span>
+        </div>
+        <div class="card-sub">Common-ground-inspired dark storefront tuned for Jakarta buyers.</div>
+        <ul class="feat">
+          <li>Homepage &amp; journal</li>
+          <li>Shop / release browser</li>
+          <li>Release detail + tracklist</li>
+          <li>Track previews (Apple / YT / Bandcamp)</li>
+          <li>Cart &amp; guest checkout</li>
+          <li>Xendit payments (QRIS, VA, cards)</li>
+          <li>Biteship shipping quotes</li>
+          <li>Customer accounts &amp; wantlist</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span class="num">02</span> Admin Back Office</div>
+          <span class="chip">Ops</span>
+        </div>
+        <div class="card-sub">Single dashboard operating catalog, inventory, orders and staff roles.</div>
+        <ul class="feat">
+          <li>Dashboard &amp; live KPIs</li>
+          <li>Catalog + Discogs import</li>
+          <li>Inventory &amp; variants</li>
+          <li>Unified order pipeline</li>
+          <li>Customers &amp; wantlist CRM</li>
+          <li>News / journal CMS</li>
+          <li>Unified messages inbox</li>
+          <li>5 roles (Admin / Staff / Shopkeeper / Wholesaler / Customer)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span class="num">03</span> POS &amp; In-Store</div>
+          <span class="chip info">Tablet</span>
+        </div>
+        <div class="card-sub">Same catalog, same stock, same customer records — usable from the counter.</div>
+        <ul class="feat">
+          <li>Tablet web POS</li>
+          <li>Barcode scanning</li>
+          <li>Label &amp; receipt printing</li>
+          <li>Cash + Xendit terminal</li>
+          <li>Walk-in customer capture</li>
+          <li>Shift &amp; drawer reports</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span class="num">04</span> Marketplace Channels</div>
+          <span class="chip">Sync</span>
+        </div>
+        <div class="card-sub">One inventory pushed &amp; reconciled across every marketplace.</div>
+        <ul class="feat">
+          <li>Discogs Marketplace</li>
+          <li>Tokopedia</li>
+          <li>Shopee</li>
+          <li>Website + POS</li>
+          <li>Webhook order intake</li>
+          <li>Per-channel pricing</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span class="num">05</span> Marketing &amp; Newsletter</div>
+          <span class="chip warn">AI-assisted</span>
+        </div>
+        <div class="card-sub">Owned audience. Listmonk-driven newsletter with OpenRouter copy assist.</div>
+        <ul class="feat">
+          <li>Listmonk newsletter</li>
+          <li>AI copy assist (OpenRouter)</li>
+          <li>Promo &amp; discount codes</li>
+          <li>Segments &amp; sign-up forms</li>
+          <li>Automated new-arrivals digest</li>
+          <li>Wholesale role &amp; pricing</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span class="num">06</span> Reports &amp; Settings</div>
+          <span class="chip">Insight</span>
+        </div>
+        <div class="card-sub">Actionable reports and the boring plumbing that makes it all legal.</div>
+        <ul class="feat">
+          <li>Sales report</li>
+          <li>Inventory report</li>
+          <li>Channel profitability</li>
+          <li>Tax report (PPN 11%)</li>
+          <li>Store, users, integrations</li>
+          <li>Payments &amp; shipping settings</li>
+        </ul>
+      </div>
+
+      <div class="card wide">
+        <div class="card-head">
+          <div class="card-title"><span class="num">07</span> Foundations included in every module</div>
+          <span class="chip on">Included</span>
+        </div>
+        <div class="chips">
+          <span class="chip">Next.js 15</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Tailwind v4</span>
+          <span class="chip">PostgreSQL 16</span>
+          <span class="chip">Prisma 5</span>
+          <span class="chip">Auth.js v5</span>
+          <span class="chip">BullMQ + Redis</span>
+          <span class="chip">Xendit</span>
+          <span class="chip">Biteship</span>
+          <span class="chip">Listmonk</span>
+          <span class="chip">OpenRouter AI</span>
+          <span class="chip">Discogs API</span>
+          <span class="chip">Apple Music</span>
+          <span class="chip">YouTube</span>
+          <span class="chip">Docker Compose</span>
+          <span class="chip">nginx + Let's Encrypt</span>
+          <span class="chip">Cloudflare DNS</span>
+          <span class="chip">Monochrome v2.0 design system</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">02 / 04</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 3 · PACKAGE ═══ -->
+<section class="page">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Section</span><strong>03 · Package</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div>
+        <h2 class="h2">Why one package. <em>Not six line items.</em></h2>
+      </div>
+      <span class="count-pill">Package · Indivisible</span>
+    </div>
+    <p class="lead">
+      The modules aren't independent products — they share one database,
+      one auth layer, one design system and one build. Split them and the
+      shop stops being a shop. The offering is priced accordingly.
+    </p>
+
+    <div class="why-hero">
+      <div class="quote">
+        A shop needs to sell everywhere at once from one truth of stock.
+        <em>Pull any module and something visible to the buyer breaks.</em>
+      </div>
+      <div class="attr">Package Thesis · Medium Format Build</div>
+    </div>
+
+    <div class="why-grid">
+      <div class="pillar">
+        <div class="n">01 · Compounding value</div>
+        <h3>Every module lifts the others</h3>
+        <p>
+          POS sales top up marketplace stock in real time. Newsletters
+          promote new arrivals from the same catalog. Reports read every
+          channel. Value grows with each connection, not in isolation.
+        </p>
+      </div>
+      <div class="pillar">
+        <div class="n">02 · One codebase</div>
+        <h3>Shared foundations, priced once</h3>
+        <p>
+          Auth, roles, data model, design tokens, jobs queue and deploy
+          pipeline are built once and reused six times. Splitting the
+          package doesn't save money — it duplicates the foundation.
+        </p>
+      </div>
+      <div class="pillar">
+        <div class="n">03 · One truth of stock</div>
+        <h3>Stock isn't a feature — it's the axis</h3>
+        <p>
+          Every module reads &amp; writes the same inventory. Selling from
+          POS while Tokopedia is offline, or missing a wantlist, is a
+          business failure — not a de-scope.
+        </p>
+      </div>
+    </div>
+
+    <div class="split-note">// If you unbundle · what breaks</div>
+    <div class="unbundle">
+      <div class="unbundle-row">
+        <div class="unbundle-k">
+          <span class="strike">Skip POS</span>
+          <span class="lost">Split stock</span>
+        </div>
+        <div class="unbundle-v">
+          In-store sales stop decrementing website stock. Online shoppers
+          buy records that were sold at the counter an hour earlier.
+          Chargebacks and refunds follow.
+        </div>
+      </div>
+      <div class="unbundle-row">
+        <div class="unbundle-k">
+          <span class="strike">Skip Newsletter</span>
+          <span class="lost">Rent your audience</span>
+        </div>
+        <div class="unbundle-v">
+          You keep paying Meta and Tokopedia to reach buyers you've already
+          converted. First-party newsletter is the only channel that
+          survives platform pricing changes.
+        </div>
+      </div>
+      <div class="unbundle-row">
+        <div class="unbundle-k">
+          <span class="strike">Skip Marketplaces</span>
+          <span class="lost">Miss 60% of demand</span>
+        </div>
+        <div class="unbundle-v">
+          Indonesian vinyl demand lives on Tokopedia, Shopee and Discogs.
+          Website-only means a store that only serves the buyers who
+          already know the brand.
+        </div>
+      </div>
+      <div class="unbundle-row">
+        <div class="unbundle-k">
+          <span class="strike">Skip Reports</span>
+          <span class="lost">Fly blind on tax</span>
+        </div>
+        <div class="unbundle-v">
+          PPN 11% and channel profitability aren't optional — they decide
+          which titles you re-order. Without unified reports, restocking
+          becomes guesswork.
+        </div>
+      </div>
+      <div class="unbundle-row">
+        <div class="unbundle-k">
+          <span class="strike">Skip Back Office</span>
+          <span class="lost">Manual everything</span>
+        </div>
+        <div class="unbundle-v">
+          Every order, message, and label goes back to spreadsheets and
+          screenshots. Staff cost balloons faster than the software you
+          declined to build.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">03 / 04</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 4 · PRICING ═══ -->
+<section class="page">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Section</span><strong>04 · Pricing &amp; Terms</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div>
+        <h2 class="h2">One price. <em>All-inclusive build.</em></h2>
+      </div>
+      <span class="count-pill">Fixed · One-time</span>
+    </div>
+
+    <div class="price-hero">
+      <div>
+        <div class="k">Total build &amp; development</div>
+        <div class="amount">
+          <span class="cur">IDR</span>120,000,000<span class="unit">/ project</span>
+        </div>
+        <p class="note">
+          Fixed price for the entire package as scoped on pages 02–03.
+          Payable across milestones. Retainer, hosting and third-party
+          service fees are excluded and quoted separately.
+        </p>
+      </div>
+      <div class="price-badge">
+        <div class="lbl">Package</div>
+        <div class="val">All 6 modules</div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="panel">
+        <h4>Included <span class="tag">All modules</span></h4>
+        <div class="kv"><span class="k">Public storefront (8 features)</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">Admin back office (8 features)</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">POS &amp; in-store (6 features)</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">Marketplace sync (Discogs / Toped / Shopee)</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">Newsletter + AI copy assist</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">Reports + tax + settings</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">Deploy to VPS (Docker + nginx + TLS)</span><span class="v">✓</span></div>
+      </div>
+      <div class="panel">
+        <h4>Excluded <span class="tag">Quoted separately</span></h4>
+        <div class="kv mute"><span class="k">Monthly retainer / maintenance</span><span class="v">—</span></div>
+        <div class="kv mute"><span class="k">VPS, domain &amp; TLS renewal</span><span class="v">—</span></div>
+        <div class="kv mute"><span class="k">Xendit / Biteship processing fees</span><span class="v">pass-through</span></div>
+        <div class="kv mute"><span class="k">Listmonk email / SMTP volume</span><span class="v">pass-through</span></div>
+        <div class="kv mute"><span class="k">OpenRouter AI token usage</span><span class="v">pass-through</span></div>
+        <div class="kv mute"><span class="k">Post-launch feature requests</span><span class="v">retainer</span></div>
+        <div class="kv mute"><span class="k">Physical hardware (scanner, printer)</span><span class="v">—</span></div>
+      </div>
+    </div>
+
+    <div class="split-note">// Delivery milestones · Payment tied to phase acceptance</div>
+    <div class="timeline">
+      <div class="phase">
+        <div class="step">M1 · 25%</div>
+        <div class="name">MVP-1</div>
+        <div class="dur mono">Weeks 1–6</div>
+        <div class="desc">Auth, catalog, inventory, orders, website, cart, Xendit, news, previews.</div>
+      </div>
+      <div class="phase">
+        <div class="step">M2 · 25%</div>
+        <div class="name">MVP-2</div>
+        <div class="dur mono">Weeks 7–11</div>
+        <div class="desc">POS, barcode, label print, Discogs marketplace, customers, wantlist, messages.</div>
+      </div>
+      <div class="phase">
+        <div class="step">M3 · 25%</div>
+        <div class="name">MVP-3</div>
+        <div class="dur mono">Weeks 12–15</div>
+        <div class="desc">Tokopedia, newsletter (Listmonk + OpenRouter), reports.</div>
+      </div>
+      <div class="phase">
+        <div class="step">M4 · 25%</div>
+        <div class="name">MVP-4</div>
+        <div class="dur mono">Weeks 16–18</div>
+        <div class="desc">Shopee, wholesale role &amp; pricing, advanced reports, handover.</div>
+      </div>
+    </div>
+
+    <div class="signblock">
+      <div class="sig">
+        <h5>For Medium Format</h5>
+        <div class="line"></div>
+        <div class="who">Founder / Investor</div>
+        <div class="role">Signature · Date</div>
+      </div>
+      <div class="sig">
+        <h5>For the Build Team</h5>
+        <div class="line"></div>
+        <div class="who">Lead Engineer</div>
+        <div class="role">Signature · Date</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">04 / 04</span>
+  </div>
+</section>
+
+</body>
+</html>
