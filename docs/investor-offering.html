@@ -4,11 +4,15 @@
   <meta charset="utf-8" />
   <title>Medium Format — Investor Offering</title>
   <style>
-    /* Page setup — A4, five pages, zero browser margins. */
+    /* Print — A4, ten pages, zero browser margins. */
     @page { size: A4; margin: 0; }
 
-    /* Design tokens ported 1:1 from app/(site)/storefront.css "monochrome v2.0". */
+    /* ═══ TOKENS ═══
+       Dark tokens = defaults, used by the cover.
+       Light tokens = the ".page.light" override, used by all interior pages.
+       Copper (#d6451f) is the shared brand accent — same value in both themes. */
     :root {
+      /* Dark (monochrome v2.0 — matches app/(site)/storefront.css) */
       --canvas: #0f0f0f;
       --surface: #0e0e0e;
       --raised: #1a1a1a;
@@ -27,10 +31,32 @@
       --info-t: rgba(59, 130, 246, 0.12);
       --warning-t: rgba(245, 158, 11, 0.12);
       --danger-t: rgba(239, 68, 68, 0.12);
-      --brand: #d6451f;
+      --brand: #d6451f;               /* copper — mf-accent from globals.css */
       --ui: "Helvetica Neue", Arial, system-ui, sans-serif;
       --mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
       --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 12px; --r-pill: 999px;
+    }
+
+    /* Light theme — bone paper + ink, copper as brand */
+    .page.light {
+      --canvas: #f7f5f0;              /* mf-bone */
+      --surface: #ffffff;
+      --raised: #efece4;
+      --hairline: #dcd8ce;
+      --hairline-2: #c9c4b8;
+      --ink: #0b0b0b;                 /* mf-ink */
+      --body: #3a3a38;
+      --mute: #857f70;
+      --accent: #d6451f;              /* copper — mf-accent */
+      --accent-text: #ffffff;
+      --success: #16a34a;
+      --info: #2563eb;
+      --warning: #b45309;
+      --danger: #b91c1c;
+      --success-t: rgba(22, 163, 74, 0.10);
+      --info-t: rgba(37, 99, 235, 0.10);
+      --warning-t: rgba(180, 83, 9, 0.12);
+      --danger-t: rgba(185, 28, 28, 0.10);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,12 +85,10 @@
     }
     .page:last-child { page-break-after: auto; }
 
-    /* Shared header + footer. */
+    /* Shared page chrome */
     .top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14mm 14mm 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12mm 14mm 0;
       font-size: 10px;
       color: var(--mute);
       letter-spacing: 0.06em;
@@ -85,11 +109,8 @@
       position: relative;
     }
     .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 3px;
-      background: var(--ink);
-      border-radius: 1px;
+      content: ""; position: absolute; inset: 3px;
+      background: var(--ink); border-radius: 1px;
     }
     .top-meta { display: flex; gap: 14px; font-family: var(--mono); }
     .top-meta span { color: var(--mute); }
@@ -97,7 +118,7 @@
 
     .bot {
       margin-top: auto;
-      padding: 8mm 14mm 10mm;
+      padding: 6mm 14mm 8mm;
       border-top: 1px solid var(--hairline);
       display: flex; justify-content: space-between; align-items: center;
       font-family: var(--mono);
@@ -108,7 +129,49 @@
     }
     .bot .pg { color: var(--body); }
 
-    /* ─── PAGE 1 · COVER ─── */
+    /* ═══ Content shell ═══ */
+    .content {
+      flex: 1;
+      padding: 8mm 14mm 0;
+      display: flex; flex-direction: column;
+      min-height: 0;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) max-content;
+      align-items: baseline;
+      gap: 18px;
+      margin-bottom: 8px;
+    }
+    .h2 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+    .h2 em { font-style: normal; color: var(--mute); }
+    .lead {
+      font-size: 11.5px;
+      color: var(--body);
+      line-height: 1.55;
+      max-width: 165mm;
+      margin-bottom: 12px;
+    }
+    .count-pill {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--body);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-pill);
+      background: var(--surface);
+      white-space: nowrap;
+    }
+
+    /* ─── Cover (dark) ─── */
     .cover-body {
       flex: 1;
       padding: 0 14mm;
@@ -174,80 +237,25 @@
     }
     .cover-motif {
       position: absolute;
-      right: -60mm;
-      top: -30mm;
-      width: 180mm;
-      height: 180mm;
+      right: -60mm; top: -30mm;
+      width: 180mm; height: 180mm;
       border-radius: 50%;
       background: repeating-radial-gradient(circle at 50% 50%, #000 0 2px, #1a1a1a 2px 4px);
       opacity: 0.4;
       pointer-events: none;
     }
     .cover-motif::after {
-      content: "";
-      position: absolute;
-      inset: 44%;
+      content: ""; position: absolute; inset: 44%;
       border-radius: 50%;
       background: var(--brand);
     }
 
-    /* ─── Content shell ─── */
-    .content {
-      flex: 1;
-      padding: 10mm 14mm 0;
-      display: flex; flex-direction: column;
-      min-height: 0;
-    }
-    .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) max-content;
-      align-items: baseline;
-      gap: 18px;
-      margin-bottom: 10px;
-    }
-    .h2 {
-      font-size: 26px;
-      font-weight: 600;
-      letter-spacing: -0.035em;
-      color: var(--ink);
-    }
-    .h2 em { font-style: normal; color: var(--mute); }
-    .lead {
-      font-size: 12px;
-      color: var(--body);
-      line-height: 1.55;
-      max-width: 160mm;
-      margin-bottom: 16px;
-    }
-    .count-pill {
-      font-family: var(--mono);
-      font-size: 9px;
-      color: var(--body);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 5px 10px;
-      border: 1px solid var(--hairline);
-      border-radius: var(--r-pill);
-      background: var(--surface);
-    }
-
-    /* ─── PAGE 2 · SCOPE ─── */
-    .scope-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      flex: 1;
-    }
+    /* ═══ Light-page primitives ═══ */
     .card {
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--r-lg);
-      padding: 11px 13px 12px;
-      display: flex; flex-direction: column; gap: 8px;
-    }
-    .card.wide { grid-column: 1 / -1; }
-    .card-head {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 12px 14px 13px;
     }
     .card-title {
       font-size: 12.5px;
@@ -255,6 +263,7 @@
       letter-spacing: -0.015em;
       color: var(--ink);
       display: flex; align-items: center; gap: 8px;
+      margin-bottom: 6px;
     }
     .card-title .num {
       font-family: var(--mono);
@@ -266,29 +275,7 @@
       padding: 2px 5px;
       letter-spacing: 0.06em;
     }
-    .card-sub { font-size: 10.5px; color: var(--body); line-height: 1.4; }
-    .feat {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px 12px;
-      margin-top: 2px;
-    }
-    .feat li {
-      list-style: none;
-      font-size: 10px;
-      color: var(--body);
-      padding-left: 12px;
-      position: relative;
-      line-height: 1.5;
-    }
-    .feat li::before {
-      content: "";
-      position: absolute;
-      left: 0; top: 6px;
-      width: 6px; height: 1px;
-      background: var(--mute);
-    }
-    .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+    .card-sub { font-size: 10.5px; color: var(--body); line-height: 1.5; }
     .chip {
       font-size: 9px;
       font-weight: 500;
@@ -297,13 +284,813 @@
       border: 1px solid var(--hairline);
       color: var(--body);
       background: var(--surface);
+      display: inline-flex; align-items: center; gap: 4px;
       letter-spacing: 0.01em;
     }
-    .chip.on { color: var(--success); background: var(--success-t); border-color: rgba(34, 197, 94, 0.3); }
-    .chip.info { color: var(--info); background: var(--info-t); border-color: rgba(59, 130, 246, 0.3); }
-    .chip.warn { color: var(--warning); background: var(--warning-t); border-color: rgba(245, 158, 11, 0.3); }
+    .chip.brand {
+      color: #ffffff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .chip.on { color: var(--success); background: var(--success-t); border-color: rgba(22, 163, 74, 0.30); }
+    .chip.warn { color: var(--warning); background: var(--warning-t); border-color: rgba(180, 83, 9, 0.30); }
+    .chip.bad  { color: var(--danger);  background: var(--danger-t);  border-color: rgba(185, 28, 28, 0.30); }
+    .chip.info { color: var(--info);    background: var(--info-t);    border-color: rgba(37, 99, 235, 0.30); }
 
-    /* ─── PAGE 3 · BUILD PRICING TABLE ─── */
+    .split-note {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--mute);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 12px 0 8px;
+    }
+    .note {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      color: var(--mute);
+      letter-spacing: 0.04em;
+      margin-top: 10px;
+      display: flex; gap: 8px;
+    }
+    .note::before { content: "//"; color: var(--hairline-2); }
+
+    /* ─── PAGE 2 · WHY NOW (strategic pillars) ─── */
+    .pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 14px 15px 15px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .pillar .lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .pillar h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+    .pillar p {
+      font-size: 10.5px;
+      color: var(--body);
+      line-height: 1.55;
+    }
+    .pillar .datapoint {
+      background: var(--raised);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      padding: 8px 10px;
+      font-size: 10px;
+      color: var(--ink);
+    }
+    .pillar .datapoint b { color: var(--accent); }
+    .pillar .datapoint .k {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: var(--mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .bottom-line {
+      margin-top: 12px;
+      background: #0b0b0b;
+      color: #ffffff;
+      border-radius: var(--r-lg);
+      padding: 16px 20px 18px;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+    .bottom-line .lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--brand);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .bottom-line .msg {
+      font-size: 14px;
+      line-height: 1.45;
+      letter-spacing: -0.015em;
+      font-weight: 500;
+    }
+    .bottom-line .msg em { font-style: normal; color: var(--brand); }
+
+    /* ═══ Device mockups (dark, sit inside light pages) ═══ */
+    .mockup {
+      background: #0e0e0e;
+      border: 1px solid #262626;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      color: #ffffff;
+      font-family: var(--ui);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+      display: flex; flex-direction: column;
+    }
+    .mockup .mk-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 10px;
+      background: #141414;
+      border-bottom: 1px solid #262626;
+      font-size: 9px;
+      color: #b4b4b4;
+    }
+    .mockup .mk-bar .lhs { display: flex; align-items: center; gap: 8px; }
+    .mockup .mk-bar .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #2a2a2a; display: inline-block;
+    }
+    .mockup .mk-bar .dot.r { background: #d6451f; }
+    .mockup .mk-bar .dot.y { background: #f59e0b; }
+    .mockup .mk-bar .dot.g { background: #22c55e; }
+    .mockup .mk-bar .url {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: #8a8a8a;
+      background: #0e0e0e;
+      border: 1px solid #262626;
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+
+    /* POS mockup */
+    .mk-pos {
+      display: grid;
+      grid-template-columns: 1fr 65mm;
+      min-height: 92mm;
+    }
+    .mk-pos .catalog {
+      padding: 8px 10px;
+      border-right: 1px solid #262626;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .mk-pos .search {
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 9px;
+      color: #6e6e6e;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .mk-pos .search::before { content: "⌕"; color: #b4b4b4; }
+    .mk-pos .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+    .mk-pos .prod {
+      aspect-ratio: 1;
+      background: #1a1a1a;
+      border: 1px solid #262626;
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      position: relative;
+    }
+    .mk-pos .prod::before {
+      content: "";
+      position: absolute; inset: 20%;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle at 50% 50%, #000 0 1px, #262626 1px 2px);
+    }
+    .mk-pos .prod::after {
+      content: ""; position: absolute; inset: 42%;
+      border-radius: 50%; background: #d6451f;
+    }
+    .mk-pos .prod .lbl {
+      position: absolute; left: 3px; right: 3px; bottom: 3px;
+      font-family: var(--mono); font-size: 6.5px; color: #b4b4b4;
+      background: rgba(0,0,0,0.6); border-radius: 2px;
+      padding: 1px 4px; text-align: center;
+    }
+    .mk-pos .cart {
+      background: #0b0b0b;
+      display: flex; flex-direction: column;
+    }
+    .mk-pos .cart-hd {
+      padding: 7px 10px;
+      border-bottom: 1px solid #262626;
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: #6e6e6e;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .mk-pos .cart-item {
+      padding: 6px 10px;
+      border-bottom: 1px solid #1c1c1c;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+    .mk-pos .cart-item .n { font-size: 9px; color: #ffffff; font-weight: 500; letter-spacing: -0.005em; }
+    .mk-pos .cart-item .a { font-size: 8px; color: #8a8a8a; margin-top: 1px; }
+    .mk-pos .cart-item .p {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: #ffffff;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .mk-pos .totals {
+      padding: 8px 10px;
+      margin-top: auto;
+      border-top: 1px solid #262626;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .mk-pos .totals .r {
+      display: flex; justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: #8a8a8a;
+      font-variant-numeric: tabular-nums;
+    }
+    .mk-pos .totals .r.total {
+      font-size: 12px; color: #ffffff; font-weight: 600;
+      padding-top: 4px; margin-top: 3px;
+      border-top: 1px dashed #262626;
+      letter-spacing: -0.02em;
+    }
+    .mk-pos .pay {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4px;
+      padding: 8px 10px 10px;
+    }
+    .mk-pos .pay button {
+      background: #1a1a1a;
+      border: 1px solid #262626;
+      color: #ffffff;
+      border-radius: var(--r-sm);
+      font-family: var(--mono);
+      font-size: 8.5px;
+      padding: 6px 4px;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+    .mk-pos .pay button.pr {
+      background: #d6451f;
+      border-color: #d6451f;
+      color: #ffffff;
+    }
+
+    /* Browser / storefront mockup */
+    .mk-browser { min-height: 92mm; }
+    .mk-nav {
+      padding: 7px 12px;
+      border-bottom: 1px solid #262626;
+      display: flex; align-items: center; justify-content: space-between;
+      background: #141414;
+    }
+    .mk-nav .lhs { display: flex; align-items: center; gap: 8px; }
+    .mk-nav .logo {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; color: #ffffff; font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .mk-nav .logo .m {
+      width: 8px; height: 8px; border: 1px solid #ffffff; border-radius: 2px;
+      background: #ffffff;
+    }
+    .mk-nav .menu {
+      display: flex; gap: 12px;
+      font-size: 8.5px; color: #b4b4b4;
+    }
+    .mk-nav .icons { display: flex; gap: 6px; color: #b4b4b4; font-size: 9px; }
+    .mk-hero {
+      padding: 12px 14px;
+      border-bottom: 1px solid #262626;
+    }
+    .mk-hero .eb {
+      font-family: var(--mono);
+      font-size: 7.5px;
+      color: #6e6e6e;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .mk-hero .h {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      line-height: 1;
+    }
+    .mk-hero .h em { color: #6e6e6e; font-style: normal; }
+    .mk-shop {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      padding: 8px 10px 10px;
+    }
+    .mk-shop .r {
+      background: #1a1a1a;
+      border: 1px solid #262626;
+      border-radius: var(--r-sm);
+      overflow: hidden;
+    }
+    .mk-shop .cover {
+      aspect-ratio: 1;
+      position: relative;
+      background: #262626;
+    }
+    .mk-shop .cover::before {
+      content: "";
+      position: absolute; inset: 15%;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle at 50% 50%, #000 0 1px, #333 1px 2px);
+    }
+    .mk-shop .cover::after {
+      content: ""; position: absolute; inset: 42%;
+      border-radius: 50%; background: #d6451f;
+    }
+    .mk-shop .info { padding: 4px 5px 5px; }
+    .mk-shop .a { font-size: 6.5px; color: #ffffff; font-weight: 500; letter-spacing: -0.005em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mk-shop .t { font-size: 6px; color: #6e6e6e; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mk-shop .p { font-family: var(--mono); font-size: 6.5px; color: #ffffff; margin-top: 3px; font-variant-numeric: tabular-nums; }
+
+    /* Admin mockup */
+    .mk-admin { min-height: 88mm; display: grid; grid-template-columns: 32mm 1fr; }
+    .mk-side {
+      background: #0b0b0b;
+      border-right: 1px solid #262626;
+      padding: 10px 8px;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .mk-side .brand-r {
+      font-size: 9px; color: #ffffff; font-weight: 600;
+      letter-spacing: -0.02em;
+      padding: 3px 6px;
+      margin-bottom: 6px;
+    }
+    .mk-side a {
+      font-size: 8.5px;
+      color: #b4b4b4;
+      padding: 4px 8px;
+      border-radius: var(--r-sm);
+      display: block;
+    }
+    .mk-side a.on {
+      background: #1a1a1a; color: #ffffff;
+    }
+    .mk-side a.on::before { content: "▸ "; color: #d6451f; }
+    .mk-main { padding: 10px 12px; overflow: hidden; }
+    .mk-main .hd {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .mk-main .hd h5 {
+      font-size: 11px; color: #ffffff; font-weight: 600; letter-spacing: -0.015em;
+    }
+    .mk-main .hd .btn {
+      font-family: var(--mono); font-size: 7.5px;
+      background: #ffffff; color: #000; padding: 3px 8px; border-radius: 3px;
+      letter-spacing: 0.1em;
+    }
+    .mk-tbl {
+      border: 1px solid #262626;
+      border-radius: var(--r-sm);
+      overflow: hidden;
+    }
+    .mk-tbl .th, .mk-tbl .tr {
+      display: grid;
+      grid-template-columns: 12mm 14mm 1fr 12mm;
+      gap: 8px;
+      padding: 5px 8px;
+      font-size: 7.5px;
+      border-bottom: 1px solid #1c1c1c;
+    }
+    .mk-tbl .tr .amt {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      color: #ffffff;
+    }
+    .mk-tbl .th > div:nth-child(3),
+    .mk-tbl .tr > div:nth-child(3) { text-align: right; }
+    .mk-tbl .th {
+      background: #141414;
+      color: #6e6e6e;
+      font-family: var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .mk-tbl .tr { color: #b4b4b4; font-family: var(--mono); }
+    .mk-tbl .tr .id { color: #ffffff; }
+    .mk-tbl .tr .st { color: #22c55e; }
+    .mk-tbl .tr .st.p { color: #f59e0b; }
+    .mk-tbl .tr .st.d { color: #6e6e6e; }
+    .mk-tbl .tr:last-child { border-bottom: none; }
+
+    /* Email mockup (light) */
+    .mk-email {
+      background: #ffffff;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      color: #0b0b0b;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+    .mk-email .mkm-bar {
+      padding: 7px 12px;
+      border-bottom: 1px solid var(--hairline);
+      background: #efece4;
+      display: flex; justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: var(--mute);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .mk-email .mkm-body { padding: 14px 16px; }
+    .mk-email .mkm-eb {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .mk-email .mkm-h {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0b0b0b;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .mk-email .mkm-p {
+      font-size: 9.5px;
+      color: #3a3a38;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .mk-email .mkm-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin: 10px 0 12px;
+    }
+    .mk-email .mkm-r {
+      border: 1px solid var(--hairline);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .mk-email .mkm-r .cv {
+      aspect-ratio: 1; background: #efece4;
+      position: relative;
+    }
+    .mk-email .mkm-r .cv::before {
+      content: ""; position: absolute; inset: 18%;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle at 50%, #dcd8ce 0 1px, #efece4 1px 2px);
+    }
+    .mk-email .mkm-r .cv::after {
+      content: ""; position: absolute; inset: 42%;
+      border-radius: 50%; background: #d6451f;
+    }
+    .mk-email .mkm-r .cap {
+      padding: 4px 6px;
+      font-size: 6.5px;
+      color: #3a3a38;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .mk-email .mkm-r .cap .p {
+      font-family: var(--mono); font-size: 6px; color: var(--mute); margin-top: 1px;
+    }
+    .mk-email .mkm-cta {
+      background: #0b0b0b;
+      color: #ffffff;
+      padding: 7px 14px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      display: inline-block;
+    }
+
+    /* ─── Feature-detail two-column ─── */
+    .feat-row {
+      display: grid;
+      grid-template-columns: 92mm 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .feat-row.rev { grid-template-columns: 1fr 92mm; }
+    .feat-side { display: flex; flex-direction: column; gap: 8px; }
+    .feat-side h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+    }
+    .feat-side p {
+      font-size: 10.5px;
+      color: var(--body);
+      line-height: 1.55;
+    }
+    .feat-side ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px 12px;
+    }
+    .feat-side ul li {
+      font-size: 10px; color: var(--body);
+      padding-left: 12px; position: relative;
+      line-height: 1.45;
+    }
+    .feat-side ul li::before {
+      content: ""; position: absolute;
+      left: 0; top: 6px;
+      width: 6px; height: 1px;
+      background: var(--accent);
+    }
+    .feat-side ul.single { grid-template-columns: 1fr; }
+
+    /* ═══ Comparison table (vs external) ═══ */
+    .cmp {
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      overflow: hidden;
+    }
+    .cmp-head, .cmp-row {
+      display: grid;
+      grid-template-columns: 50mm 1fr 1fr;
+    }
+    .cmp-head {
+      background: var(--raised);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .cmp-head > div {
+      padding: 8px 12px;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-right: 1px solid var(--hairline);
+    }
+    .cmp-head > div:last-child { border-right: none; }
+    .cmp-head .them { color: var(--danger); }
+    .cmp-head .us { color: var(--accent); }
+    .cmp-row {
+      border-bottom: 1px solid var(--hairline);
+    }
+    .cmp-row:last-child { border-bottom: none; }
+    .cmp-row > div {
+      padding: 8px 12px;
+      border-right: 1px solid var(--hairline);
+      font-size: 10.5px;
+      line-height: 1.4;
+    }
+    .cmp-row > div:last-child { border-right: none; }
+    .cmp-k { color: var(--ink); font-weight: 500; }
+    .cmp-them { color: var(--body); }
+    .cmp-them::before {
+      content: "×";
+      color: var(--danger);
+      font-family: var(--mono);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    .cmp-us { color: var(--body); }
+    .cmp-us::before {
+      content: "✓";
+      color: var(--success);
+      font-family: var(--mono);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    /* Two-up callouts */
+    .callouts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 12px 14px 13px;
+      border-left: 3px solid var(--accent);
+    }
+    .callout .lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .callout h5 {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .callout p {
+      font-size: 10px;
+      color: var(--body);
+      line-height: 1.5;
+    }
+
+    /* Funnel (two-path) */
+    .funnel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .funnel .path {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 12px 14px 13px;
+    }
+    .funnel .path.bad { border-left: 3px solid var(--danger); }
+    .funnel .path.good { border-left: 3px solid var(--success); }
+    .funnel .path .lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .funnel .path.bad .lbl { color: var(--danger); }
+    .funnel .path.good .lbl { color: var(--success); }
+    .funnel .path h5 {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .funnel .path ol {
+      list-style: none; counter-reset: step;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .funnel .path ol li {
+      counter-increment: step;
+      font-size: 10px;
+      color: var(--body);
+      padding-left: 22px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .funnel .path ol li::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute; left: 0; top: 0;
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: var(--mute);
+      letter-spacing: 0.06em;
+      line-height: 1.55;
+    }
+
+    /* Fee / ROI panel */
+    .roi {
+      margin-top: 10px;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 14px 16px 15px;
+    }
+    .roi-hd {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .roi-hd h5 {
+      font-size: 12.5px;
+      color: var(--ink);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .roi-hd .basis {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .roi-cell {
+      padding: 10px 12px;
+      border-right: 1px solid var(--hairline);
+    }
+    .roi-cell:last-child { border-right: none; }
+    .roi-cell .k {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: var(--mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .roi-cell .v {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+      font-variant-numeric: tabular-nums;
+    }
+    .roi-cell .vsub {
+      font-size: 9.5px;
+      color: var(--mute);
+      margin-top: 3px;
+    }
+    .roi-cell.win .v { color: var(--accent); }
+    .roi-foot {
+      padding-top: 10px;
+      font-size: 11px;
+      color: var(--body);
+      line-height: 1.5;
+    }
+    .roi-foot b { color: var(--accent); font-weight: 600; }
+
+    /* ═══ Sync diagram ═══ */
+    .sync-diagram {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 18px 20px 20px;
+      margin-top: 10px;
+    }
+    .sync-tier {
+      display: flex;
+      justify-content: space-around;
+      gap: 8px;
+    }
+    .sync-node {
+      background: var(--raised);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      padding: 8px 12px 9px;
+      min-width: 26mm;
+      text-align: center;
+    }
+    .sync-node.pri {
+      background: #0b0b0b;
+      color: #ffffff;
+      border-color: #0b0b0b;
+      padding: 10px 16px 11px;
+    }
+    .sync-node.pri .k { color: var(--brand); }
+    .sync-node.pri .v { color: #ffffff; }
+    .sync-node .k {
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--mute);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .sync-node .v {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+    }
+    .sync-lines {
+      height: 24mm;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .sync-lines svg { width: 100%; height: 100%; }
+
+    /* ═══ Build pricing table (light) ═══ */
     .price-table {
       border: 1px solid var(--hairline);
       border-radius: var(--r-lg);
@@ -313,7 +1100,6 @@
     .pt-head, .pt-row, .pt-total {
       display: grid;
       grid-template-columns: 12mm 58mm 18mm 36mm 58mm;
-      gap: 0;
     }
     .pt-head {
       background: var(--raised);
@@ -334,7 +1120,7 @@
     }
     .pt-row:last-child { border-bottom: none; }
     .pt-row > div {
-      padding: 12px 12px 13px;
+      padding: 11px 12px 12px;
       border-right: 1px solid var(--hairline);
     }
     .pt-row > div:last-child { border-right: none; }
@@ -346,7 +1132,6 @@
       display: flex; align-items: flex-start;
     }
     .pt-num .badge {
-      display: inline-block;
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--r-sm);
@@ -398,8 +1183,7 @@
       font-size: 9.5px;
       color: var(--warning);
       line-height: 1.45;
-      display: flex;
-      gap: 6px;
+      display: flex; gap: 6px;
     }
     .pt-skip::before {
       content: "×";
@@ -416,7 +1200,7 @@
       border-top: 1px solid var(--hairline);
     }
     .pt-total > div {
-      padding: 13px 12px 14px;
+      padding: 12px 12px 13px;
       border-right: 1px solid var(--hairline);
     }
     .pt-total > div:last-child { border-right: none; }
@@ -437,39 +1221,14 @@
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
-    .pt-total .val .cur {
-      font-size: 10px;
-      color: var(--mute);
-      margin-right: 4px;
-    }
+    .pt-total .val .cur { font-size: 10px; color: var(--mute); margin-right: 4px; }
 
-    .note {
-      font-family: var(--mono);
-      font-size: 9.5px;
-      color: var(--mute);
-      letter-spacing: 0.06em;
-      margin-top: 10px;
-      display: flex; gap: 8px;
-    }
-    .note::before {
-      content: "//";
-      color: var(--hairline-2);
-    }
-    .split-note {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--mute);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin: 12px 0 8px;
-    }
-
-    /* ─── PAGE 4 · RETAINER + SUBS ─── */
+    /* ═══ Retainer tiers (light) ═══ */
     .tier-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .tier {
       background: var(--surface);
@@ -480,8 +1239,8 @@
       position: relative;
     }
     .tier.rec {
-      border-color: var(--ink);
-      background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
+      border-color: var(--accent);
+      background: linear-gradient(180deg, #fff9f5 0%, #ffffff 100%);
     }
     .tier .rec-flag {
       position: absolute;
@@ -538,7 +1297,7 @@
       padding-top: 8px;
       border-top: 1px solid var(--hairline);
     }
-    .tier ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .tier ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
     .tier ul li {
       font-size: 10px;
       color: var(--body);
@@ -548,17 +1307,13 @@
     }
     .tier ul li::before {
       content: "✓";
-      position: absolute;
-      left: 0; top: 0;
-      color: var(--success);
-      font-size: 10px;
+      position: absolute; left: 0; top: 0;
+      color: var(--success); font-size: 10px;
     }
-    .tier ul li.no {
-      color: var(--mute);
-      opacity: 0.7;
-    }
+    .tier ul li.no { color: var(--mute); opacity: 0.7; }
     .tier ul li.no::before { content: "—"; color: var(--mute); }
 
+    /* Subs panel (light) */
     .subs-panel {
       background: var(--surface);
       border: 1px solid var(--hairline);
@@ -569,15 +1324,10 @@
       padding: 12px 14px 10px;
       border-bottom: 1px solid var(--hairline);
       background: var(--raised);
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
+      display: flex; align-items: baseline; justify-content: space-between;
     }
     .subs-head h4 {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.015em;
+      font-size: 13px; font-weight: 600; color: var(--ink); letter-spacing: -0.015em;
     }
     .subs-head .h-note {
       font-family: var(--mono);
@@ -590,7 +1340,7 @@
       display: grid;
       grid-template-columns: 44mm 1fr 34mm;
       align-items: center;
-      padding: 9px 14px;
+      padding: 8px 14px;
       border-bottom: 1px solid var(--hairline);
       font-size: 10.5px;
     }
@@ -617,11 +1367,8 @@
     }
     .subs-foot .lbl {
       font-family: var(--mono);
-      font-size: 10px;
-      color: var(--ink);
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 10px; color: var(--ink); font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
     }
     .subs-foot .val {
       text-align: right;
@@ -633,12 +1380,12 @@
     }
     .subs-foot .val .cur { color: var(--mute); font-size: 10px; margin-right: 3px; font-weight: 500; }
 
-    /* ─── PAGE 5 · CHANGES + MILESTONES + SIGN ─── */
+    /* Rate card (light) */
     .rate-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .rate-card {
       background: var(--surface);
@@ -647,7 +1394,7 @@
       overflow: hidden;
     }
     .rate-hd {
-      padding: 12px 14px 10px;
+      padding: 11px 14px 9px;
       border-bottom: 1px solid var(--hairline);
       background: var(--raised);
       display: flex; align-items: baseline; justify-content: space-between;
@@ -698,32 +1445,18 @@
     }
     .phase .step {
       font-family: var(--mono);
-      font-size: 9px;
-      color: var(--mute);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-size: 9px; color: var(--mute);
+      letter-spacing: 0.12em; text-transform: uppercase;
       margin-bottom: 5px;
     }
     .phase .name {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-      margin-bottom: 4px;
+      font-size: 11.5px; font-weight: 600; color: var(--ink);
+      letter-spacing: -0.01em; margin-bottom: 4px;
     }
-    .phase .dur {
-      font-family: var(--mono);
-      font-size: 9.5px;
-      color: var(--body);
-      margin-bottom: 4px;
-    }
+    .phase .dur { font-family: var(--mono); font-size: 9.5px; color: var(--body); margin-bottom: 4px; }
     .phase .amt {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      color: var(--ink);
-      font-weight: 500;
-      font-variant-numeric: tabular-nums;
-      margin-bottom: 6px;
+      font-family: var(--mono); font-size: 10.5px; color: var(--ink);
+      font-weight: 500; font-variant-numeric: tabular-nums; margin-bottom: 6px;
     }
     .phase .amt .cur { color: var(--mute); font-size: 9px; margin-right: 3px; }
     .phase .desc { font-size: 9.5px; color: var(--mute); line-height: 1.45; }
@@ -739,29 +1472,47 @@
     }
     .sig h5 {
       font-family: var(--mono);
-      font-size: 9px;
-      color: var(--mute);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 22px;
-      font-weight: 500;
+      font-size: 9px; color: var(--mute);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 22px; font-weight: 500;
     }
     .sig .line { border-bottom: 1px solid var(--body); height: 1px; margin-bottom: 6px; }
     .sig .who { font-size: 10.5px; color: var(--ink); font-weight: 500; }
     .sig .role { font-size: 9.5px; color: var(--mute); margin-top: 2px; }
+
+    /* AI prompt panel */
+    .prompt {
+      background: var(--raised);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .prompt .lbl {
+      color: var(--accent);
+      font-size: 8.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .prompt.out { background: #ffffff; border-left: 3px solid var(--accent); }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════════ PAGE 1 · COVER ═══ -->
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 1 · COVER (dark) ═══ -->
 <section class="page">
   <div class="cover-motif"></div>
 
   <div class="top">
     <div class="brand"><span class="brand-mark"></span>Medium Format</div>
     <div class="top-meta">
-      <span>Doc</span><strong>MF-OFFER-02</strong>
-      <span>Rev</span><strong>2.0</strong>
+      <span>Doc</span><strong>MF-OFFER-03</strong>
+      <span>Rev</span><strong>3.0</strong>
     </div>
   </div>
 
@@ -770,13 +1521,13 @@
     <h1 class="cover-h1">
       One record shop.<br />
       <em>Five sales channels.</em><br />
-      Priced feature by feature.
+      Owned end-to-end.
     </h1>
     <p class="cover-sub">
-      A complete public storefront, a unified back office, an in-store POS,
-      marketplace sync across Discogs, Tokopedia and Shopee, marketing and
-      reports. Each feature is a line item — with its own timeline, its own
-      price, and its own cost of being skipped.
+      Public storefront, in-store POS, unified back office, marketplace sync
+      across Discogs, Tokopedia and Shopee, marketing and reports — built as
+      one system so every sale, every stock count and every customer belongs
+      to the shop, not the platform.
     </p>
 
     <div class="cover-strip">
@@ -787,8 +1538,8 @@
       </div>
       <div class="cell">
         <div class="k">Contents</div>
-        <div class="v">5 sections · 7 features</div>
-        <div class="vsub">Build · Retainer · Subscriptions · Add-ons</div>
+        <div class="v">10 sections · 7 features</div>
+        <div class="vsub">Strategy · Mockups · Pricing · Retainer</div>
       </div>
       <div class="cell">
         <div class="k">Issued</div>
@@ -800,162 +1551,705 @@
 
   <div class="bot">
     <span>Medium Format · Investor Offering</span>
-    <span class="pg">01 / 05</span>
+    <span class="pg">01 / 10</span>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ PAGE 2 · SCOPE ═══ -->
-<section class="page">
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 2 · WHY NOW (light) ═══ -->
+<section class="page light">
   <div class="top">
     <div class="brand"><span class="brand-mark"></span>Medium Format</div>
-    <div class="top-meta"><span>Section</span><strong>02 · Scope</strong></div>
+    <div class="top-meta"><span>Section</span><strong>02 · Why Now</strong></div>
   </div>
 
   <div class="content">
     <div class="section-head">
-      <div><h2 class="h2">What's inside the build. <em>Every module. Every channel.</em></h2></div>
-      <span class="count-pill">7 Features · 40+ Deliverables</span>
+      <div><h2 class="h2">Three forces make own software urgent. <em>Right now.</em></h2></div>
+      <span class="count-pill">Strategy · 2026</span>
     </div>
     <p class="lead">
-      The build ships as seven features across public storefront, admin back
-      office, in-store POS, marketplace channels, marketing and reporting.
-      Pricing per feature is on page 03; skip-costs are baked into each row.
+      Every extra year the shop operates on rented platforms and off-the-shelf
+      counter software, more margin leaks and more customer data belongs to
+      someone else. These are the three forces investors should weigh.
     </p>
 
-    <div class="scope-grid">
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title"><span class="num">01</span> Foundations &amp; Deploy</div>
-          <span class="chip on">Required</span>
-        </div>
-        <div class="card-sub">Framework, database, auth, jobs, design system and deploy pipeline. Nothing else runs without this.</div>
-        <ul class="feat">
-          <li>Next.js 15 + TypeScript</li>
-          <li>PostgreSQL 16 + Prisma 5</li>
-          <li>Auth.js v5 · 5 roles</li>
-          <li>BullMQ + Redis workers</li>
-          <li>Monochrome v2.0 tokens</li>
-          <li>Docker Compose + nginx + TLS</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title"><span class="num">02</span> Public Storefront</div>
-          <span class="chip">Website</span>
-        </div>
-        <div class="card-sub">Common-ground-inspired dark storefront tuned for Jakarta buyers.</div>
-        <ul class="feat">
-          <li>Homepage &amp; journal</li>
-          <li>Shop / release browser</li>
-          <li>Release detail + tracklist</li>
-          <li>Track previews (Apple / YT / Bandcamp)</li>
-          <li>Cart &amp; guest checkout</li>
-          <li>Xendit payments (QRIS, VA, cards)</li>
-          <li>Biteship shipping quotes</li>
-          <li>Customer accounts &amp; wantlist</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title"><span class="num">03</span> Admin Back Office</div>
-          <span class="chip">Ops</span>
-        </div>
-        <div class="card-sub">Single dashboard operating catalog, inventory, orders and staff roles.</div>
-        <ul class="feat">
-          <li>Dashboard &amp; live KPIs</li>
-          <li>Catalog + Discogs import</li>
-          <li>Inventory &amp; variants</li>
-          <li>Unified order pipeline</li>
-          <li>Customers &amp; wantlist CRM</li>
-          <li>News / journal CMS</li>
-          <li>Unified messages inbox</li>
-          <li>Users, roles, permissions</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title"><span class="num">04</span> POS &amp; In-Store</div>
-          <span class="chip info">Tablet</span>
-        </div>
-        <div class="card-sub">Same catalog, same stock, same customer records — usable from the counter.</div>
-        <ul class="feat">
-          <li>Tablet web POS</li>
-          <li>Barcode scanning</li>
-          <li>Label &amp; receipt printing</li>
-          <li>Cash + Xendit terminal</li>
-          <li>Walk-in customer capture</li>
-          <li>Shift &amp; drawer reports</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title"><span class="num">05</span> Marketplace Sync</div>
-          <span class="chip">3 Channels</span>
-        </div>
-        <div class="card-sub">One inventory pushed &amp; reconciled across every marketplace.</div>
-        <ul class="feat">
-          <li>Discogs Marketplace</li>
-          <li>Tokopedia</li>
-          <li>Shopee</li>
-          <li>Webhook order intake</li>
-          <li>Per-channel pricing</li>
-          <li>Sync health monitoring</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title"><span class="num">06</span> Marketing &amp; Newsletter</div>
-          <span class="chip warn">AI-assisted</span>
-        </div>
-        <div class="card-sub">Owned audience. Listmonk-driven newsletter with OpenRouter copy assist.</div>
-        <ul class="feat">
-          <li>Listmonk newsletter</li>
-          <li>AI copy assist (OpenRouter)</li>
-          <li>Promo &amp; discount codes</li>
-          <li>Segments &amp; sign-up forms</li>
-          <li>Automated new-arrivals digest</li>
-          <li>Wholesale role &amp; pricing</li>
-        </ul>
-      </div>
-
-      <div class="card wide">
-        <div class="card-head">
-          <div class="card-title"><span class="num">07</span> Reports &amp; Settings</div>
-          <span class="chip">Insight</span>
-        </div>
-        <div class="card-sub">Actionable reports and the boring plumbing that makes it all legal.</div>
-        <div class="chips">
-          <span class="chip">Sales report</span>
-          <span class="chip">Inventory report</span>
-          <span class="chip">Channel profitability</span>
-          <span class="chip">Tax report (PPN 11%)</span>
-          <span class="chip">Store profile</span>
-          <span class="chip">Payments &amp; shipping</span>
-          <span class="chip">Integrations config</span>
-          <span class="chip">Backup &amp; audit log</span>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="lbl">Force 01 · Fees</div>
+        <h3>Marketplace fees keep rising in Indonesia</h3>
+        <p>
+          Tokopedia and Shopee raised seller commissions across 2024–2025.
+          Every rupiah of margin now competes with the platform first,
+          other sellers second. Own site takes the transaction directly.
+        </p>
+        <div class="datapoint">
+          <span class="k">Per Rp 500,000 sale</span>
+          <b>Rp 32,500</b> lost to Toped commission + payment fee.<br />
+          Own site (Xendit QRIS ≈ 0.7%): only <b>Rp 3,500</b> lost.
         </div>
       </div>
 
+      <div class="pillar">
+        <div class="lbl">Force 02 · Funnel</div>
+        <h3>Instagram &amp; Facebook Marketplace are dark funnels</h3>
+        <p>
+          Buyers discover on IG or FB Marketplace, then DM to ask about
+          price and stock. Payment ends up as a screenshot &amp; bank
+          transfer photo. No cart, no email captured, no retargeting.
+        </p>
+        <div class="datapoint">
+          <span class="k">The redirect</span>
+          Every IG / FB click should land on a <b>Medium Format</b>
+          product page — cart, checkout, and customer captured on
+          <b>your</b> domain, not in a DM thread.
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="lbl">Force 03 · Ops</div>
+        <h3>Off-the-shelf POS splits the shop in half</h3>
+        <p>
+          Moka, Pawoon and similar counter apps run their own catalog,
+          their own stock, their own customer list. None of it talks
+          to the website or marketplaces. Every count, every price is
+          done twice.
+        </p>
+        <div class="datapoint">
+          <span class="k">Reality check</span>
+          A record sold at the counter at 14:00 can be sold again on
+          Tokopedia at 14:03. Refund, apology, review damage —
+          <b>every week</b>, until the two systems become one.
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-line">
+      <div class="lbl">Bottom line</div>
+      <div class="msg">
+        Every marketplace fee hike, every Instagram DM inquiry, and every
+        counter transaction that never touches the website is
+        <em>margin the shop is quietly leaking</em> — plus data the shop
+        never gets to own. The build stops the leak.
+      </div>
+    </div>
+
+    <div class="note">
+      Sources for fee data: public Tokopedia &amp; Shopee seller-fee schedules 2024–2025. Xendit QRIS pricing: xendit.co / pricing.
     </div>
   </div>
 
   <div class="bot">
     <span>Medium Format · Investor Offering</span>
-    <span class="pg">02 / 05</span>
+    <span class="pg">02 / 10</span>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ PAGE 3 · BUILD PRICING ═══ -->
-<section class="page">
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 3 · POS DETAIL (light) ═══ -->
+<section class="page light">
   <div class="top">
     <div class="brand"><span class="brand-mark"></span>Medium Format</div>
-    <div class="top-meta"><span>Section</span><strong>03 · Build Pricing</strong></div>
+    <div class="top-meta"><span>Feature</span><strong>03 · POS &amp; In-Store</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div><h2 class="h2">The counter, on one system. <em>Not two.</em></h2></div>
+      <span class="count-pill">Feature 04 · IDR 14M</span>
+    </div>
+
+    <div class="feat-row">
+      <div class="mockup">
+        <div class="mk-bar">
+          <div class="lhs">
+            <span class="dot g"></span><span>MF · POS · Cashier A</span>
+          </div>
+          <div>10:42 · Staff ▾</div>
+        </div>
+        <div class="mk-pos">
+          <div class="catalog">
+            <div class="search">Scan or search release…</div>
+            <div class="prod-grid">
+              <div class="prod"><span class="lbl">SAW II</span></div>
+              <div class="prod"><span class="lbl">MHTRT</span></div>
+              <div class="prod"><span class="lbl">CE-2</span></div>
+              <div class="prod"><span class="lbl">GAS</span></div>
+              <div class="prod"><span class="lbl">DEBUT</span></div>
+              <div class="prod"><span class="lbl">EMOL.</span></div>
+            </div>
+          </div>
+          <div class="cart">
+            <div class="cart-hd">Current sale · 2 items</div>
+            <div class="cart-item">
+              <div><div class="n">Aphex Twin</div><div class="a">Selected Ambient Works II</div></div>
+              <div class="p">750,000</div>
+            </div>
+            <div class="cart-item">
+              <div><div class="n">Boards of Canada</div><div class="a">Music Has the Right</div></div>
+              <div class="p">620,000</div>
+            </div>
+            <div class="totals">
+              <div class="r"><span>Subtotal</span><span>1,370,000</span></div>
+              <div class="r"><span>PPN 11%</span><span>150,700</span></div>
+              <div class="r total"><span>Total</span><span>IDR 1,520,700</span></div>
+            </div>
+            <div class="pay">
+              <button>CASH</button>
+              <button class="pr">QRIS</button>
+              <button>CARD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-side">
+        <h4>Tablet POS with a live tie to every other channel.</h4>
+        <p>
+          The same tablet that scans a walk-in customer's release decrements
+          the stock the website reads at the same moment. Same catalog,
+          same customers, same wantlist, same audit log.
+        </p>
+        <ul>
+          <li>Tablet web POS</li>
+          <li>Barcode scanning</li>
+          <li>Label &amp; receipt print</li>
+          <li>Cash + QRIS + card</li>
+          <li>Walk-in capture</li>
+          <li>Shift &amp; drawer reports</li>
+          <li>Refunds &amp; holds</li>
+          <li>Offline queue</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="split-note">// Custom POS vs off-the-shelf (Moka, Pawoon, iSeller)</div>
+    <div class="cmp">
+      <div class="cmp-head">
+        <div>Dimension</div>
+        <div class="them">Off-the-shelf POS SaaS</div>
+        <div class="us">Medium Format custom POS</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Catalog source</div>
+        <div class="cmp-them">Re-entered by hand — no Discogs metadata</div>
+        <div class="cmp-us">Same catalog as website &amp; marketplaces</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Stock &amp; inventory</div>
+        <div class="cmp-them">Separate database, reconciled in Excel</div>
+        <div class="cmp-us">One counter — web, POS, marketplaces read same rows</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Customer records</div>
+        <div class="cmp-them">Separate app, no wantlist</div>
+        <div class="cmp-us">Same profile as website · wantlist visible at counter</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Consolidated purchase orders</div>
+        <div class="cmp-them">Not supported — restock by memory</div>
+        <div class="cmp-us">AI-drafted from sell-through + wantlist + marketplace demand</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Data ownership &amp; export</div>
+        <div class="cmp-them">Vendor SaaS cloud · CSV export limits · vendor lock-in</div>
+        <div class="cmp-us">Your Postgres on your VPS · full SQL access</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Monthly cost</div>
+        <div class="cmp-them">IDR 300–700k / mo per terminal SaaS</div>
+        <div class="cmp-us">Included in retainer · no per-terminal fee</div>
+      </div>
+    </div>
+
+    <div class="callouts">
+      <div class="callout">
+        <div class="lbl">Why it's more secure</div>
+        <h5>Your VPS, your Postgres, your rules.</h5>
+        <p>
+          Every record — sales, stock movements, customer PII — lives on
+          <b>your</b> VPS, not on a vendor's shared cloud. TLS end-to-end
+          (Let's Encrypt), Auth.js JWT sessions, per-role RBAC on every
+          write, and a full audit log on stock, price and order changes.
+          Nightly encrypted Postgres backups to object storage.
+        </p>
+      </div>
+      <div class="callout">
+        <div class="lbl">AI-assisted purchase orders</div>
+        <h5>One draft PO per distributor, every morning.</h5>
+        <p>
+          Overnight job reads counter sell-through, website demand and
+          marketplace inquiries. Aggregates by title &amp; distributor,
+          then drafts a consolidated PO ready to send — the shop replaces
+          guessing with signal. Something off-the-shelf POS can't do,
+          because off-the-shelf POS can't see your website.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">03 / 10</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 4 · STOREFRONT (light) ═══ -->
+<section class="page light">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Feature</span><strong>04 · Public Storefront</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div><h2 class="h2">The own front door. <em>Not a rented shelf.</em></h2></div>
+      <span class="count-pill">Feature 02 · IDR 22M</span>
+    </div>
+
+    <div class="feat-row">
+      <div class="mockup">
+        <div class="mk-bar">
+          <div class="lhs">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          </div>
+          <div class="url">mediumformat.id/shop</div>
+          <div style="width:32px"></div>
+        </div>
+        <div class="mk-nav">
+          <div class="lhs">
+            <div class="logo"><span class="m"></span>Medium Format</div>
+            <div class="menu"><span>Shop</span><span>Journal</span><span>About</span></div>
+          </div>
+          <div class="icons">⌕ · ♥ · ⌂</div>
+        </div>
+        <div class="mk-hero">
+          <div class="eb">Newly arrived · Jul</div>
+          <div class="h">New this week. <em>32 releases.</em></div>
+        </div>
+        <div class="mk-shop">
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Aphex Twin</div><div class="t">SAW II</div><div class="p">Rp 750k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Boards of Canada</div><div class="t">MHTRT</div><div class="p">Rp 620k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">GAS</div><div class="t">Königsforst</div><div class="p">Rp 890k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Björk</div><div class="t">Debut</div><div class="p">Rp 550k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Autechre</div><div class="t">Confield</div><div class="p">Rp 780k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Burial</div><div class="t">Untrue</div><div class="p">Rp 920k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Steve Roach</div><div class="t">Structures</div><div class="p">Rp 680k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Emeralds</div><div class="t">Does It Look Like</div><div class="p">Rp 610k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Oval</div><div class="t">94diskont</div><div class="p">Rp 720k</div></div></div>
+          <div class="r"><div class="cover"></div><div class="info"><div class="a">Fennesz</div><div class="t">Endless Summer</div><div class="p">Rp 640k</div></div></div>
+        </div>
+      </div>
+
+      <div class="feat-side">
+        <h4>Every discovery, on your domain — cart, checkout, capture.</h4>
+        <p>
+          Instagram bio link, QR code on the sleeve at the counter, printed
+          flyer — they all land here. Every arrival goes through cart and
+          Xendit checkout on <b>mediumformat.id</b>, not a DM thread.
+        </p>
+        <ul>
+          <li>Homepage &amp; journal</li>
+          <li>Shop / release browser</li>
+          <li>Release detail + tracklist</li>
+          <li>Track previews · 3 sources</li>
+          <li>Cart &amp; guest checkout</li>
+          <li>Xendit QRIS · VA · card</li>
+          <li>Biteship shipping quotes</li>
+          <li>Wantlist &amp; accounts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="split-note">// The Instagram / Facebook redirect · today vs with the storefront</div>
+    <div class="funnel">
+      <div class="path bad">
+        <div class="lbl">× Today · DM funnel</div>
+        <h5>Discovery on IG → DM → screenshot → bank transfer photo</h5>
+        <ol>
+          <li>Buyer scrolls Instagram, sees a story or post</li>
+          <li>DMs "berapa harga?" — Medium Format replies manually</li>
+          <li>Payment link shared as screenshot, or bank details typed</li>
+          <li>Transfer photo posted back, reconciled in Excel</li>
+          <li>No email captured · no cart to abandon-recover · no retarget</li>
+          <li>Facebook Marketplace: same, plus platform picks the buyer</li>
+        </ol>
+      </div>
+      <div class="path good">
+        <div class="lbl">✓ With the storefront · Own funnel</div>
+        <h5>Every IG click lands on mediumformat.id — cart in your hands</h5>
+        <ol>
+          <li>Instagram post &amp; bio → mediumformat.id/r/{slug}</li>
+          <li>Product page: cover, tracks, condition, price, add-to-cart</li>
+          <li>Cart · Xendit checkout · QRIS · VA · card · Biteship rate</li>
+          <li>Confirmation email · customer + address recorded</li>
+          <li>Wantlist &amp; segments feed the newsletter (see feature 06)</li>
+          <li>Cart abandonment recovery + retarget lists via your database</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="roi">
+      <div class="roi-hd">
+        <h5>Marketplace fees &amp; own-site kept — per record sale</h5>
+        <span class="basis">Basis · IDR 500,000 record</span>
+      </div>
+      <div class="roi-grid">
+        <div class="roi-cell">
+          <div class="k">Tokopedia</div>
+          <div class="v">Rp 467,500</div>
+          <div class="vsub">Kept after 4.5% + 2% payment</div>
+        </div>
+        <div class="roi-cell">
+          <div class="k">Shopee</div>
+          <div class="v">Rp 460,000</div>
+          <div class="vsub">Kept after ~6% + 2% payment</div>
+        </div>
+        <div class="roi-cell win">
+          <div class="k">Own site · QRIS</div>
+          <div class="v">Rp 496,500</div>
+          <div class="vsub">Kept after ~0.7% Xendit QRIS</div>
+        </div>
+        <div class="roi-cell win">
+          <div class="k">Delta / month · 100 sales</div>
+          <div class="v">+Rp 2,900,000</div>
+          <div class="vsub">= Rp 34,800,000 / year kept</div>
+        </div>
+      </div>
+      <div class="roi-foot">
+        At 100 own-site sales / month, <b>the storefront line item pays for itself in ~9 months</b> —
+        before counting the customer data, newsletter audience, or the marketplace-fee hikes still ahead.
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">04 / 10</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 5 · BACK OFFICE (light) ═══ -->
+<section class="page light">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Feature</span><strong>05 · Admin Back Office</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div><h2 class="h2">One dashboard runs the whole shop. <em>Web, POS, marketplaces.</em></h2></div>
+      <span class="count-pill">Feature 03 · IDR 24M</span>
+    </div>
+
+    <div class="feat-row rev">
+      <div class="feat-side">
+        <h4>The single window every staff role logs into.</h4>
+        <p>
+          Orders from the website, POS, Discogs, Tokopedia and Shopee arrive
+          in one pipeline. Catalog imports pull metadata + artwork from Discogs.
+          Every write is audit-logged and role-gated.
+        </p>
+        <ul>
+          <li>Live KPI dashboard</li>
+          <li>Catalog + Discogs import</li>
+          <li>Inventory &amp; variants</li>
+          <li>Unified orders</li>
+          <li>Customers &amp; wantlist</li>
+          <li>News / journal CMS</li>
+          <li>Unified messages inbox</li>
+          <li>5 roles &amp; audit log</li>
+        </ul>
+        <div class="callout" style="border-left-color: var(--accent); margin-top: 4px;">
+          <div class="lbl">Roles built in</div>
+          <p>
+            Admin · Staff · Shopkeeper · Wholesaler · Customer.
+            Permission matrix lives in <span class="mono" style="font-size: 9.5px;">lib/permissions.ts</span>.
+          </p>
+        </div>
+      </div>
+
+      <div class="mockup">
+        <div class="mk-bar">
+          <div class="lhs">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          </div>
+          <div class="url">admin.mediumformat.id/orders</div>
+          <div style="width:32px"></div>
+        </div>
+        <div class="mk-admin">
+          <div class="mk-side">
+            <div class="brand-r">▪ Medium Format</div>
+            <a>Dashboard</a>
+            <a>Catalog</a>
+            <a>Inventory</a>
+            <a class="on">Orders</a>
+            <a>Customers</a>
+            <a>Messages</a>
+            <a>Marketing</a>
+            <a>News</a>
+            <a>Channels</a>
+            <a>Reports</a>
+            <a>Settings</a>
+          </div>
+          <div class="mk-main">
+            <div class="hd">
+              <h5>Orders</h5>
+              <span class="btn">+ NEW</span>
+            </div>
+            <div class="mk-tbl">
+              <div class="th"><div>ORDER</div><div>CHANNEL</div><div>TOTAL</div><div>STATUS</div></div>
+              <div class="tr"><div class="id">#1042</div><div>Website</div><div class="amt">1,520,700</div><div class="st">PAID</div></div>
+              <div class="tr"><div class="id">#1041</div><div>POS · A</div><div class="amt">620,000</div><div class="st">PAID</div></div>
+              <div class="tr"><div class="id">#1040</div><div>Discogs</div><div class="amt">1,150,000</div><div class="st p">PACKED</div></div>
+              <div class="tr"><div class="id">#1039</div><div>Tokopedia</div><div class="amt">890,000</div><div class="st p">PACKED</div></div>
+              <div class="tr"><div class="id">#1038</div><div>Shopee</div><div class="amt">720,000</div><div class="st d">SHIPPED</div></div>
+              <div class="tr"><div class="id">#1037</div><div>Website</div><div class="amt">2,340,000</div><div class="st d">SHIPPED</div></div>
+              <div class="tr"><div class="id">#1036</div><div>POS · A</div><div class="amt">450,000</div><div class="st d">SHIPPED</div></div>
+              <div class="tr"><div class="id">#1035</div><div>Discogs</div><div class="amt">1,780,000</div><div class="st d">SHIPPED</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split-note">// Common pain today · vs the unified back office</div>
+    <div class="cmp">
+      <div class="cmp-head">
+        <div>Job to be done</div>
+        <div class="them">Current state (spreadsheets + marketplace apps)</div>
+        <div class="us">Medium Format back office</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Import a new release</div>
+        <div class="cmp-them">Type title, artist, cover, tracks into 4 places</div>
+        <div class="cmp-us">Paste Discogs URL → metadata &amp; artwork imported once</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Reply to a buyer message</div>
+        <div class="cmp-them">Switch between Discogs, Toped, Shopee, IG DMs</div>
+        <div class="cmp-us">Unified inbox — reply from one screen, threaded per customer</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Give a staff member limited access</div>
+        <div class="cmp-them">Share a login, hope no one deletes a listing</div>
+        <div class="cmp-us">Role &amp; audit log — every change signed &amp; reversible</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-k">Publish a news / arrival post</div>
+        <div class="cmp-them">Post to IG only — website is static, ages fast</div>
+        <div class="cmp-us">In-app CMS · same voice on site + newsletter</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">05 / 10</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 6 · MARKETPLACE SYNC (light) ═══ -->
+<section class="page light">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Feature</span><strong>06 · Marketplace Sync</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div><h2 class="h2">One inventory. <em>Five channels.</em></h2></div>
+      <span class="count-pill">Feature 05 · IDR 20M</span>
+    </div>
+    <p class="lead">
+      Every marketplace listing, every counter sale, every website order reads
+      and writes the same stock counter in Postgres. When one sells, all the
+      others are decremented within seconds — no more double-sold records.
+    </p>
+
+    <div class="sync-diagram">
+      <div class="sync-tier">
+        <div class="sync-node">
+          <div class="k">Marketplace</div><div class="v">Discogs</div>
+        </div>
+        <div class="sync-node">
+          <div class="k">Marketplace</div><div class="v">Tokopedia</div>
+        </div>
+        <div class="sync-node">
+          <div class="k">Marketplace</div><div class="v">Shopee</div>
+        </div>
+        <div class="sync-node">
+          <div class="k">Direct</div><div class="v">Website</div>
+        </div>
+        <div class="sync-node">
+          <div class="k">Direct</div><div class="v">POS</div>
+        </div>
+      </div>
+
+      <div class="sync-lines">
+        <svg viewBox="0 0 500 100" preserveAspectRatio="none">
+          <path d="M 50 0 L 250 45" stroke="#dcd8ce" stroke-width="1.2" fill="none" />
+          <path d="M 150 0 L 250 45" stroke="#dcd8ce" stroke-width="1.2" fill="none" />
+          <path d="M 250 0 L 250 45" stroke="#dcd8ce" stroke-width="1.2" fill="none" />
+          <path d="M 350 0 L 250 45" stroke="#dcd8ce" stroke-width="1.2" fill="none" />
+          <path d="M 450 0 L 250 45" stroke="#dcd8ce" stroke-width="1.2" fill="none" />
+          <circle cx="250" cy="55" r="3" fill="#d6451f" />
+          <path d="M 250 65 L 250 100" stroke="#d6451f" stroke-width="1.6" fill="none" />
+        </svg>
+      </div>
+
+      <div class="sync-tier">
+        <div class="sync-node pri">
+          <div class="k">One truth of stock</div>
+          <div class="v">Medium Format · Postgres</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callouts" style="margin-top: 12px;">
+      <div class="callout">
+        <div class="lbl">Push · Listings</div>
+        <h5>Every arrival posts everywhere in one job.</h5>
+        <p>
+          One "publish" in the back office pushes the listing to Discogs,
+          Tokopedia and Shopee with the right per-channel price, image,
+          description and shipping profile. AI copy assist (see feature 06)
+          drafts marketplace-safe titles per platform.
+        </p>
+      </div>
+      <div class="callout">
+        <div class="lbl">Pull · Orders &amp; Stock</div>
+        <h5>Webhooks in. Reconciler nightly.</h5>
+        <p>
+          Every marketplace sale posts a webhook that decrements the
+          shared stock counter in seconds. An overnight reconciler
+          cross-checks each channel's inventory API vs Postgres and flags
+          drift on a sync-health dashboard.
+        </p>
+      </div>
+    </div>
+
+    <div class="split-note">// If this feature is dropped</div>
+    <div class="callout" style="border-left-color: var(--danger);">
+      <div class="lbl" style="color: var(--danger);">Skip cost</div>
+      <h5>The shop lists on marketplaces manually — the way it does today.</h5>
+      <p style="max-width: 165mm;">
+        Every price change happens 4 times. Every arrival is photographed
+        and typed 4 times. When something sells in the shop, staff have
+        30 minutes to unlist it in three other places before someone else
+        buys it. Marketplaces account for a majority of Indonesian vinyl
+        discovery — dropping the sync doesn't drop the workload, it
+        redistributes it to staff hours.
+      </p>
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">06 / 10</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 7 · NEWSLETTER (light) ═══ -->
+<section class="page light">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Feature</span><strong>07 · Marketing &amp; Newsletter</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div><h2 class="h2">Owned audience. <em>Written by AI, sent by you.</em></h2></div>
+      <span class="count-pill">Feature 06 · IDR 12M</span>
+    </div>
+
+    <div class="feat-row">
+      <div class="mk-email">
+        <div class="mkm-bar">
+          <div>From · newsletter@mediumformat.id</div>
+          <div>Sun 10 Jul · 09:00</div>
+        </div>
+        <div class="mkm-body">
+          <div class="mkm-eb">This week at Medium Format</div>
+          <div class="mkm-h">Six new arrivals. Two are already down to one copy.</div>
+          <div class="mkm-p">
+            The GAS reissue is finally back in the racks after four
+            months, plus a rare Steve Roach pressing that only surfaced
+            because a wantlist match pinged us. Play them at the shop
+            this Saturday.
+          </div>
+          <div class="mkm-grid">
+            <div class="mkm-r"><div class="cv"></div><div class="cap">GAS<div class="p">Rp 890k · 2 left</div></div></div>
+            <div class="mkm-r"><div class="cv"></div><div class="cap">Steve Roach<div class="p">Rp 680k · 1 left</div></div></div>
+            <div class="mkm-r"><div class="cv"></div><div class="cap">Emeralds<div class="p">Rp 610k · 3 left</div></div></div>
+          </div>
+          <div class="mkm-cta">Browse all six →</div>
+        </div>
+      </div>
+
+      <div class="feat-side">
+        <h4>Every buyer becomes an audience you actually own.</h4>
+        <p>
+          Newsletters run on self-hosted Listmonk — no per-subscriber SaaS
+          tax. OpenRouter drafts copy from the week's new arrivals, staff
+          edits it in the admin, one click to send. Segments split
+          retail from wholesale.
+        </p>
+        <ul>
+          <li>Self-hosted Listmonk</li>
+          <li>AI copy · OpenRouter</li>
+          <li>Auto new-arrivals digest</li>
+          <li>Promo &amp; discount codes</li>
+          <li>Segments &amp; sign-up forms</li>
+          <li>Wholesale pricing role</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="split-note">// AI copy assist — how a newsletter gets drafted</div>
+    <div class="prompt">
+      <div class="lbl">Prompt to OpenRouter (auto-composed)</div>
+      Weekly newsletter · shop: Medium Format · audience: retail vinyl buyers · voice: dry, informed, no exclamation marks.<br />
+      New arrivals this week (6): GAS – Königsforst reissue (Rp 890k, 2 left) · Steve Roach – Structures From Silence (Rp 680k, 1 left) · Emeralds – Does It Look Like… (Rp 610k, 3 left) · Björk – Debut (Rp 550k, 6 left) · Fennesz – Endless Summer (Rp 640k, 4 left) · Oval – 94diskont (Rp 720k, 5 left).<br />
+      Highlight the two lowest-stock titles. Keep to ≤ 90 words. Add a "Browse all six →" CTA.
+    </div>
+    <div class="prompt out" style="margin-top: 6px;">
+      <div class="lbl">Draft returned (staff edits, then sends)</div>
+      Six new arrivals. Two are already down to one copy. The GAS reissue is finally back in the racks after four months, plus a rare Steve Roach pressing that only surfaced because a wantlist match pinged us. Play them at the shop this Saturday. → Browse all six.
+    </div>
+
+    <div class="callouts" style="margin-top: 10px;">
+      <div class="callout">
+        <div class="lbl">Why owned audience</div>
+        <h5>The one channel platform pricing can't touch.</h5>
+        <p>
+          Toped and Shopee decide who sees your listings. Instagram
+          decides what part of a post the buyer sees. Your newsletter
+          list is the only channel where reach doesn't depend on someone
+          else's algorithm — or their price hike.
+        </p>
+      </div>
+      <div class="callout">
+        <div class="lbl">Wholesale segment built in</div>
+        <h5>A separate list, a separate price.</h5>
+        <p>
+          The wholesale role (from feature 03) segments the list
+          automatically. Wholesale buyers get their own newsletter with
+          role-priced records; retail never sees the trade prices.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">07 / 10</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 8 · BUILD PRICING (light) ═══ -->
+<section class="page light">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Section</span><strong>08 · Build Pricing</strong></div>
   </div>
 
   <div class="content">
@@ -997,7 +2291,7 @@
         </div>
         <div class="pt-weeks">5<span class="u">weeks</span></div>
         <div class="pt-price"><span class="cur">IDR</span>22,000,000</div>
-        <div class="pt-skip">No online store. No cart, no checkout, no direct-to-buyer channel.</div>
+        <div class="pt-skip">No online store. Every IG click still lands in a DM thread.</div>
       </div>
 
       <div class="pt-row">
@@ -1008,7 +2302,7 @@
         </div>
         <div class="pt-weeks">5<span class="u">weeks</span></div>
         <div class="pt-price"><span class="cur">IDR</span>24,000,000</div>
-        <div class="pt-skip">Ops moves back to spreadsheets. Every order becomes manual. Staff cost explodes.</div>
+        <div class="pt-skip">Ops moves back to spreadsheets. Every order manual. Staff cost explodes.</div>
       </div>
 
       <div class="pt-row">
@@ -1019,7 +2313,7 @@
         </div>
         <div class="pt-weeks">3<span class="u">weeks</span></div>
         <div class="pt-price"><span class="cur">IDR</span>14,000,000</div>
-        <div class="pt-skip">Counter sales don't touch online stock. Oversells, chargebacks, refund queue.</div>
+        <div class="pt-skip">Split stock. Counter oversells online buyers. Off-the-shelf SaaS retakes the counter.</div>
       </div>
 
       <div class="pt-row">
@@ -1065,21 +2359,21 @@
     </div>
 
     <div class="note">
-      Timelines run partially in parallel — total wall-clock delivery is 18 weeks, not the 28-week sum of feature weeks. Payment schedule &amp; milestones on page 05.
+      Timelines run partially in parallel — total wall-clock delivery is 18 weeks, not the 28-week sum of feature weeks. Payment schedule &amp; milestones on page 10.
     </div>
   </div>
 
   <div class="bot">
     <span>Medium Format · Investor Offering</span>
-    <span class="pg">03 / 05</span>
+    <span class="pg">08 / 10</span>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ PAGE 4 · RETAINER + SUBS ═══ -->
-<section class="page">
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 9 · RETAINER + SUBS (light) ═══ -->
+<section class="page light">
   <div class="top">
     <div class="brand"><span class="brand-mark"></span>Medium Format</div>
-    <div class="top-meta"><span>Section</span><strong>04 · Retainer &amp; Subscriptions</strong></div>
+    <div class="top-meta"><span>Section</span><strong>09 · Retainer &amp; Subscriptions</strong></div>
   </div>
 
   <div class="content">
@@ -1209,15 +2503,15 @@
 
   <div class="bot">
     <span>Medium Format · Investor Offering</span>
-    <span class="pg">04 / 05</span>
+    <span class="pg">09 / 10</span>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ PAGE 5 · CHANGES + MILESTONES ═══ -->
-<section class="page">
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 10 · CHANGES + MILESTONES + SIGN (light) ═══ -->
+<section class="page light">
   <div class="top">
     <div class="brand"><span class="brand-mark"></span>Medium Format</div>
-    <div class="top-meta"><span>Section</span><strong>05 · Add-ons &amp; Sign-off</strong></div>
+    <div class="top-meta"><span>Section</span><strong>10 · Add-ons &amp; Sign-off</strong></div>
   </div>
 
   <div class="content">
@@ -1345,7 +2639,7 @@
 
   <div class="bot">
     <span>Medium Format · Investor Offering</span>
-    <span class="pg">05 / 05</span>
+    <span class="pg">10 / 10</span>
   </div>
 </section>
 
