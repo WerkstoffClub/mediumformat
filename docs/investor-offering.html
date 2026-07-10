@@ -4,11 +4,8 @@
   <meta charset="utf-8" />
   <title>Medium Format — Investor Offering</title>
   <style>
-    /* Page setup — A4, four pages, no browser margins. */
-    @page {
-      size: A4;
-      margin: 0;
-    }
+    /* Page setup — A4, five pages, zero browser margins. */
+    @page { size: A4; margin: 0; }
 
     /* Design tokens ported 1:1 from app/(site)/storefront.css "monochrome v2.0". */
     :root {
@@ -25,17 +22,15 @@
       --success: #22c55e;
       --info: #3b82f6;
       --warning: #f59e0b;
+      --danger: #ef4444;
       --success-t: rgba(34, 197, 94, 0.12);
       --info-t: rgba(59, 130, 246, 0.12);
       --warning-t: rgba(245, 158, 11, 0.12);
+      --danger-t: rgba(239, 68, 68, 0.12);
       --brand: #d6451f;
       --ui: "Helvetica Neue", Arial, system-ui, sans-serif;
       --mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
-      --r-sm: 4px;
-      --r-md: 6px;
-      --r-lg: 8px;
-      --r-xl: 12px;
-      --r-pill: 999px;
+      --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 12px; --r-pill: 999px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,8 +44,8 @@
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
+    .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
-    /* One printable page = A4. */
     .page {
       width: 210mm;
       height: 297mm;
@@ -64,9 +59,7 @@
     }
     .page:last-child { page-break-after: auto; }
 
-    .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-
-    /* Shared header strip. */
+    /* Shared header + footer. */
     .top {
       display: flex;
       align-items: center;
@@ -78,9 +71,7 @@
       text-transform: uppercase;
     }
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
       color: var(--ink);
       font-weight: 600;
       letter-spacing: -0.02em;
@@ -88,8 +79,7 @@
       text-transform: none;
     }
     .brand-mark {
-      width: 14px;
-      height: 14px;
+      width: 14px; height: 14px;
       border: 1.5px solid var(--ink);
       border-radius: 3px;
       position: relative;
@@ -109,9 +99,7 @@
       margin-top: auto;
       padding: 8mm 14mm 10mm;
       border-top: 1px solid var(--hairline);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       font-family: var(--mono);
       font-size: 9px;
       color: var(--mute);
@@ -124,8 +112,7 @@
     .cover-body {
       flex: 1;
       padding: 0 14mm;
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
       justify-content: flex-end;
       padding-bottom: 8mm;
     }
@@ -145,10 +132,7 @@
       color: var(--ink);
       max-width: 155mm;
     }
-    .cover-h1 em {
-      font-style: normal;
-      color: var(--mute);
-    }
+    .cover-h1 em { font-style: normal; color: var(--mute); }
     .cover-sub {
       font-size: 14px;
       line-height: 1.55;
@@ -158,8 +142,7 @@
     }
     .cover-strip {
       display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 0;
+      grid-template-columns: 1fr 1fr 1fr;
       margin-top: 34px;
       border-top: 1px solid var(--hairline);
       border-bottom: 1px solid var(--hairline);
@@ -179,24 +162,16 @@
       margin-bottom: 8px;
     }
     .cover-strip .v {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--ink);
       font-weight: 500;
       letter-spacing: -0.01em;
-      font-variant-numeric: tabular-nums;
-    }
-    .cover-strip .v.big {
-      font-size: 22px;
-      letter-spacing: -0.03em;
-      font-weight: 600;
     }
     .cover-strip .vsub {
       font-size: 11px;
       color: var(--mute);
-      margin-top: 3px;
+      margin-top: 4px;
     }
-
-    /* Grooves motif in the cover top, echoing the cover-art fallback. */
     .cover-motif {
       position: absolute;
       right: -60mm;
@@ -216,18 +191,18 @@
       background: var(--brand);
     }
 
-    /* ─── PAGE 2 · SCOPE ─── */
+    /* ─── Content shell ─── */
     .content {
       flex: 1;
       padding: 10mm 14mm 0;
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
       min-height: 0;
     }
     .section-head {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) max-content;
       align-items: baseline;
-      justify-content: space-between;
+      gap: 18px;
       margin-bottom: 10px;
     }
     .h2 {
@@ -236,10 +211,7 @@
       letter-spacing: -0.035em;
       color: var(--ink);
     }
-    .h2 em {
-      font-style: normal;
-      color: var(--mute);
-    }
+    .h2 em { font-style: normal; color: var(--mute); }
     .lead {
       font-size: 12px;
       color: var(--body);
@@ -259,6 +231,7 @@
       background: var(--surface);
     }
 
+    /* ─── PAGE 2 · SCOPE ─── */
     .scope-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -270,25 +243,18 @@
       border: 1px solid var(--hairline);
       border-radius: var(--r-lg);
       padding: 11px 13px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      display: flex; flex-direction: column; gap: 8px;
     }
     .card.wide { grid-column: 1 / -1; }
     .card-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
     }
     .card-title {
       font-size: 12.5px;
       font-weight: 600;
       letter-spacing: -0.015em;
       color: var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
     }
     .card-title .num {
       font-family: var(--mono);
@@ -300,11 +266,7 @@
       padding: 2px 5px;
       letter-spacing: 0.06em;
     }
-    .card-sub {
-      font-size: 10.5px;
-      color: var(--body);
-      line-height: 1.4;
-    }
+    .card-sub { font-size: 10.5px; color: var(--body); line-height: 1.4; }
     .feat {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -322,19 +284,11 @@
     .feat li::before {
       content: "";
       position: absolute;
-      left: 0;
-      top: 6px;
-      width: 6px;
-      height: 1px;
+      left: 0; top: 6px;
+      width: 6px; height: 1px;
       background: var(--mute);
     }
-    .feat.single { grid-template-columns: 1fr; }
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 2px;
-    }
+    .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
     .chip {
       font-size: 9px;
       font-weight: 500;
@@ -345,258 +299,390 @@
       background: var(--surface);
       letter-spacing: 0.01em;
     }
-    .chip.on {
-      color: var(--success);
-      background: var(--success-t);
-      border-color: rgba(34, 197, 94, 0.3);
-    }
-    .chip.info {
-      color: var(--info);
-      background: var(--info-t);
-      border-color: rgba(59, 130, 246, 0.3);
-    }
-    .chip.warn {
-      color: var(--warning);
-      background: var(--warning-t);
-      border-color: rgba(245, 158, 11, 0.3);
-    }
+    .chip.on { color: var(--success); background: var(--success-t); border-color: rgba(34, 197, 94, 0.3); }
+    .chip.info { color: var(--info); background: var(--info-t); border-color: rgba(59, 130, 246, 0.3); }
+    .chip.warn { color: var(--warning); background: var(--warning-t); border-color: rgba(245, 158, 11, 0.3); }
 
-    /* ─── PAGE 3 · PACKAGE RATIONALE ─── */
-    .why-hero {
-      background: var(--surface);
+    /* ─── PAGE 3 · BUILD PRICING TABLE ─── */
+    .price-table {
       border: 1px solid var(--hairline);
       border-radius: var(--r-lg);
-      padding: 16px 20px;
-      margin-bottom: 12px;
+      background: var(--surface);
+      overflow: hidden;
     }
-    .why-hero .quote {
-      font-size: 17px;
-      line-height: 1.4;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      font-weight: 500;
-      max-width: 165mm;
-    }
-    .why-hero .quote em {
-      font-style: normal;
-      color: var(--mute);
-    }
-    .why-hero .attr {
-      font-family: var(--mono);
-      font-size: 9px;
-      color: var(--mute);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 10px;
-    }
-
-    .why-grid {
+    .pt-head, .pt-row, .pt-total {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 12px;
+      grid-template-columns: 12mm 58mm 18mm 36mm 58mm;
+      gap: 0;
     }
-    .pillar {
-      background: var(--surface);
-      border: 1px solid var(--hairline);
-      border-radius: var(--r-lg);
-      padding: 12px 13px 13px;
+    .pt-head {
+      background: var(--raised);
+      border-bottom: 1px solid var(--hairline);
     }
-    .pillar .n {
+    .pt-head > div {
+      padding: 10px 12px;
       font-family: var(--mono);
       font-size: 9px;
-      color: var(--mute);
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      color: var(--mute);
+      border-right: 1px solid var(--hairline);
     }
-    .pillar h3 {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      margin-bottom: 6px;
+    .pt-head > div:last-child { border-right: none; }
+    .pt-row {
+      border-bottom: 1px solid var(--hairline);
     }
-    .pillar p {
+    .pt-row:last-child { border-bottom: none; }
+    .pt-row > div {
+      padding: 12px 12px 13px;
+      border-right: 1px solid var(--hairline);
+    }
+    .pt-row > div:last-child { border-right: none; }
+    .pt-num {
+      font-family: var(--mono);
       font-size: 10px;
       color: var(--body);
-      line-height: 1.5;
+      letter-spacing: 0.06em;
+      display: flex; align-items: flex-start;
+    }
+    .pt-num .badge {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      padding: 3px 7px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .pt-feat .name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+      margin-bottom: 3px;
+    }
+    .pt-feat .desc {
+      font-size: 9.5px;
+      color: var(--mute);
+      line-height: 1.45;
+    }
+    .pt-weeks {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--body);
+      font-variant-numeric: tabular-nums;
+    }
+    .pt-weeks .u {
+      font-size: 9px;
+      color: var(--mute);
+      display: block;
+      margin-top: 1px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pt-price {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+    .pt-price .cur {
+      font-size: 9px;
+      color: var(--mute);
+      margin-right: 3px;
+      letter-spacing: 0.06em;
+    }
+    .pt-skip {
+      font-size: 9.5px;
+      color: var(--warning);
+      line-height: 1.45;
+      display: flex;
+      gap: 6px;
+    }
+    .pt-skip::before {
+      content: "×";
+      color: var(--danger);
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 1;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+    .pt-total {
+      background: var(--raised);
+      border-top: 1px solid var(--hairline);
+    }
+    .pt-total > div {
+      padding: 13px 12px 14px;
+      border-right: 1px solid var(--hairline);
+    }
+    .pt-total > div:last-child { border-right: none; }
+    .pt-total .lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .pt-total .val {
+      font-family: var(--mono);
+      font-size: 14.5px;
+      color: var(--ink);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .pt-total .val .cur {
+      font-size: 10px;
+      color: var(--mute);
+      margin-right: 4px;
     }
 
+    .note {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      color: var(--mute);
+      letter-spacing: 0.06em;
+      margin-top: 10px;
+      display: flex; gap: 8px;
+    }
+    .note::before {
+      content: "//";
+      color: var(--hairline-2);
+    }
     .split-note {
       font-family: var(--mono);
       font-size: 10px;
       color: var(--mute);
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      margin: 12px 0 8px;
+    }
+
+    /* ─── PAGE 4 · RETAINER + SUBS ─── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .tier {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 14px 14px 15px;
+      display: flex; flex-direction: column;
+      position: relative;
+    }
+    .tier.rec {
+      border-color: var(--ink);
+      background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
+    }
+    .tier .rec-flag {
+      position: absolute;
+      top: -1px; right: 12px;
+      background: var(--accent);
+      color: var(--accent-text);
+      font-family: var(--mono);
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 8px 4px;
+      border-radius: 0 0 var(--r-sm) var(--r-sm);
+    }
+    .tier .name {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      color: var(--mute);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .tier h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.02em;
       margin-bottom: 8px;
     }
-    .unbundle {
+    .tier .price {
+      font-family: var(--mono);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 2px;
+    }
+    .tier .price .cur { font-size: 10px; color: var(--mute); margin-right: 4px; }
+    .tier .price .per { font-size: 10px; color: var(--mute); margin-left: 4px; font-weight: 400; }
+    .tier .for {
+      font-size: 10px;
+      color: var(--body);
+      font-style: italic;
+      margin: 8px 0 10px;
+    }
+    .tier .incl-h {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      color: var(--mute);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      padding-top: 8px;
+      border-top: 1px solid var(--hairline);
+    }
+    .tier ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .tier ul li {
+      font-size: 10px;
+      color: var(--body);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.45;
+    }
+    .tier ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0; top: 0;
+      color: var(--success);
+      font-size: 10px;
+    }
+    .tier ul li.no {
+      color: var(--mute);
+      opacity: 0.7;
+    }
+    .tier ul li.no::before { content: "—"; color: var(--mute); }
+
+    .subs-panel {
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--r-lg);
       overflow: hidden;
     }
-    .unbundle-row {
-      display: grid;
-      grid-template-columns: 62mm 1fr;
+    .subs-head {
+      padding: 12px 14px 10px;
       border-bottom: 1px solid var(--hairline);
-    }
-    .unbundle-row:last-child { border-bottom: none; }
-    .unbundle-k {
-      padding: 11px 14px;
-      border-right: 1px solid var(--hairline);
       background: var(--raised);
       display: flex;
-      align-items: center;
-      gap: 10px;
+      align-items: baseline;
+      justify-content: space-between;
     }
-    .unbundle-k .strike {
-      font-size: 11.5px;
-      color: var(--body);
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      text-decoration: line-through;
-      text-decoration-color: var(--mute);
-    }
-    .unbundle-k .lost {
-      font-family: var(--mono);
-      font-size: 8.5px;
-      color: var(--warning);
-      background: var(--warning-t);
-      border: 1px solid rgba(245, 158, 11, 0.28);
-      border-radius: var(--r-pill);
-      padding: 2px 7px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .unbundle-v {
-      padding: 11px 14px;
-      font-size: 10.5px;
-      color: var(--body);
-      line-height: 1.5;
-    }
-
-    /* ─── PAGE 4 · PRICING ─── */
-    .price-hero {
-      background: var(--surface);
-      border: 1px solid var(--hairline);
-      border-radius: var(--r-xl);
-      padding: 20px 22px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .price-hero .k {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--mute);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .price-hero .amount {
-      font-size: 46px;
+    .subs-head h4 {
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: -0.045em;
       color: var(--ink);
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.015em;
     }
-    .price-hero .amount .cur {
-      font-size: 22px;
-      color: var(--mute);
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      margin-right: 8px;
-    }
-    .price-hero .amount .unit {
-      font-size: 16px;
-      color: var(--mute);
-      font-weight: 500;
-      margin-left: 10px;
-      letter-spacing: 0;
-    }
-    .price-hero .note {
-      font-size: 11px;
-      color: var(--body);
-      line-height: 1.5;
-      margin-top: 8px;
-      max-width: 105mm;
-    }
-    .price-badge {
-      justify-self: end;
-      background: var(--accent);
-      color: var(--accent-text);
-      border-radius: var(--r-md);
-      padding: 14px 18px;
-      text-align: center;
-    }
-    .price-badge .lbl {
+    .subs-head .h-note {
       font-family: var(--mono);
       font-size: 9px;
-      letter-spacing: 0.14em;
+      color: var(--mute);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      opacity: 0.7;
-      margin-bottom: 6px;
     }
-    .price-badge .val {
-      font-size: 16px;
+    .subs-row {
+      display: grid;
+      grid-template-columns: 44mm 1fr 34mm;
+      align-items: center;
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--hairline);
+      font-size: 10.5px;
+    }
+    .subs-row:last-child { border-bottom: none; }
+    .subs-row .svc { color: var(--ink); font-weight: 500; }
+    .subs-row .desc { color: var(--mute); font-size: 9.5px; line-height: 1.4; padding: 0 12px; }
+    .subs-row .amt {
+      font-family: var(--mono);
+      color: var(--body);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-size: 10.5px;
+    }
+    .subs-row .amt .cur { color: var(--mute); font-size: 9px; margin-right: 3px; }
+    .subs-row .amt em { font-style: normal; color: var(--warning); font-size: 9.5px; }
+    .subs-foot {
+      padding: 10px 14px;
+      background: var(--raised);
+      border-top: 1px solid var(--hairline);
+      display: grid;
+      grid-template-columns: 44mm 1fr 34mm;
+      font-size: 10.5px;
+      align-items: center;
+    }
+    .subs-foot .lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .subs-foot .val {
+      text-align: right;
+      font-family: var(--mono);
+      color: var(--ink);
       font-weight: 600;
-      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
     }
+    .subs-foot .val .cur { color: var(--mute); font-size: 10px; margin-right: 3px; font-weight: 500; }
 
-    .row-2 {
+    /* ─── PAGE 5 · CHANGES + MILESTONES + SIGN ─── */
+    .rate-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    .panel {
+    .rate-card {
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--r-lg);
-      padding: 13px 14px 14px;
+      overflow: hidden;
     }
-    .panel h4 {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .rate-hd {
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid var(--hairline);
+      background: var(--raised);
+      display: flex; align-items: baseline; justify-content: space-between;
     }
-    .panel h4 .tag {
+    .rate-hd h4 { font-size: 12.5px; font-weight: 600; color: var(--ink); letter-spacing: -0.015em; }
+    .rate-hd .tag {
       font-family: var(--mono);
       font-size: 8.5px;
       color: var(--mute);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      font-weight: 400;
     }
-    .kv {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      padding: 6px 0;
-      border-bottom: 1px dashed var(--hairline);
+    .rate-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--hairline);
       font-size: 10.5px;
+      gap: 12px;
     }
-    .kv:last-child { border-bottom: none; }
-    .kv .k { color: var(--body); }
-    .kv .v {
-      color: var(--ink);
+    .rate-row:last-child { border-bottom: none; }
+    .rate-row .k { color: var(--body); line-height: 1.45; }
+    .rate-row .k em { display: block; font-style: normal; color: var(--mute); font-size: 9.5px; margin-top: 1px; }
+    .rate-row .v {
       font-family: var(--mono);
+      color: var(--ink);
+      font-weight: 500;
       font-variant-numeric: tabular-nums;
-      font-size: 10.5px;
+      font-size: 11px;
       text-align: right;
+      white-space: nowrap;
     }
-    .kv.mute .v { color: var(--mute); }
+    .rate-row .v .cur { color: var(--mute); font-size: 9px; margin-right: 3px; font-weight: 400; }
+    .rate-row .v .u { color: var(--mute); font-size: 9px; margin-left: 3px; font-weight: 400; }
 
     .timeline {
       display: grid;
@@ -608,8 +694,7 @@
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--r-md);
-      padding: 10px 11px 11px;
-      position: relative;
+      padding: 11px 12px 12px;
     }
     .phase .step {
       font-family: var(--mono);
@@ -630,13 +715,18 @@
       font-family: var(--mono);
       font-size: 9.5px;
       color: var(--body);
+      margin-bottom: 4px;
+    }
+    .phase .amt {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--ink);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
       margin-bottom: 6px;
     }
-    .phase .desc {
-      font-size: 9.5px;
-      color: var(--mute);
-      line-height: 1.45;
-    }
+    .phase .amt .cur { color: var(--mute); font-size: 9px; margin-right: 3px; }
+    .phase .desc { font-size: 9.5px; color: var(--mute); line-height: 1.45; }
 
     .signblock {
       display: grid;
@@ -656,21 +746,9 @@
       margin-bottom: 22px;
       font-weight: 500;
     }
-    .sig .line {
-      border-bottom: 1px solid var(--body);
-      height: 1px;
-      margin-bottom: 6px;
-    }
-    .sig .who {
-      font-size: 10.5px;
-      color: var(--ink);
-      font-weight: 500;
-    }
-    .sig .role {
-      font-size: 9.5px;
-      color: var(--mute);
-      margin-top: 2px;
-    }
+    .sig .line { border-bottom: 1px solid var(--body); height: 1px; margin-bottom: 6px; }
+    .sig .who { font-size: 10.5px; color: var(--ink); font-weight: 500; }
+    .sig .role { font-size: 9.5px; color: var(--mute); margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -682,34 +760,35 @@
   <div class="top">
     <div class="brand"><span class="brand-mark"></span>Medium Format</div>
     <div class="top-meta">
-      <span>Doc</span><strong>MF-OFFER-01</strong>
-      <span>Rev</span><strong>1.0</strong>
+      <span>Doc</span><strong>MF-OFFER-02</strong>
+      <span>Rev</span><strong>2.0</strong>
     </div>
   </div>
 
   <div class="cover-body">
-    <div class="eyebrow">Investor Offering · Build &amp; Development Package</div>
+    <div class="eyebrow">Investor Offering · Build · Retainer · Add-ons</div>
     <h1 class="cover-h1">
       One record shop.<br />
       <em>Five sales channels.</em><br />
-      One build.
+      Priced feature by feature.
     </h1>
     <p class="cover-sub">
       A complete public storefront, a unified back office, an in-store POS,
-      and marketplace sync across Discogs, Tokopedia and Shopee — proposed as
-      a single, indivisible package for the Medium Format build.
+      marketplace sync across Discogs, Tokopedia and Shopee, marketing and
+      reports. Each feature is a line item — with its own timeline, its own
+      price, and its own cost of being skipped.
     </p>
 
     <div class="cover-strip">
       <div class="cell">
-        <div class="k">All-inclusive build fee</div>
-        <div class="v big">IDR&nbsp;120,000,000</div>
-        <div class="vsub">Retainer / hosting excluded · One-time · Package pricing</div>
-      </div>
-      <div class="cell">
         <div class="k">Prepared for</div>
         <div class="v">Investors, Medium Format</div>
         <div class="vsub">Jakarta · Independent record shop</div>
+      </div>
+      <div class="cell">
+        <div class="k">Contents</div>
+        <div class="v">5 sections · 7 features</div>
+        <div class="vsub">Build · Retainer · Subscriptions · Add-ons</div>
       </div>
       <div class="cell">
         <div class="k">Issued</div>
@@ -721,7 +800,7 @@
 
   <div class="bot">
     <span>Medium Format · Investor Offering</span>
-    <span class="pg">01 / 04</span>
+    <span class="pg">01 / 05</span>
   </div>
 </section>
 
@@ -734,22 +813,36 @@
 
   <div class="content">
     <div class="section-head">
-      <div>
-        <h2 class="h2">What's inside the build. <em>Every module. Every channel.</em></h2>
-      </div>
-      <span class="count-pill">6 Modules · 40+ Features</span>
+      <div><h2 class="h2">What's inside the build. <em>Every module. Every channel.</em></h2></div>
+      <span class="count-pill">7 Features · 40+ Deliverables</span>
     </div>
     <p class="lead">
-      The build ships as one system across public storefront, admin back office,
-      in-store POS, marketplace channels, marketing and reporting. Each module
-      is priced only as part of the package.
+      The build ships as seven features across public storefront, admin back
+      office, in-store POS, marketplace channels, marketing and reporting.
+      Pricing per feature is on page 03; skip-costs are baked into each row.
     </p>
 
     <div class="scope-grid">
 
       <div class="card">
         <div class="card-head">
-          <div class="card-title"><span class="num">01</span> Public Storefront</div>
+          <div class="card-title"><span class="num">01</span> Foundations &amp; Deploy</div>
+          <span class="chip on">Required</span>
+        </div>
+        <div class="card-sub">Framework, database, auth, jobs, design system and deploy pipeline. Nothing else runs without this.</div>
+        <ul class="feat">
+          <li>Next.js 15 + TypeScript</li>
+          <li>PostgreSQL 16 + Prisma 5</li>
+          <li>Auth.js v5 · 5 roles</li>
+          <li>BullMQ + Redis workers</li>
+          <li>Monochrome v2.0 tokens</li>
+          <li>Docker Compose + nginx + TLS</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span class="num">02</span> Public Storefront</div>
           <span class="chip">Website</span>
         </div>
         <div class="card-sub">Common-ground-inspired dark storefront tuned for Jakarta buyers.</div>
@@ -767,7 +860,7 @@
 
       <div class="card">
         <div class="card-head">
-          <div class="card-title"><span class="num">02</span> Admin Back Office</div>
+          <div class="card-title"><span class="num">03</span> Admin Back Office</div>
           <span class="chip">Ops</span>
         </div>
         <div class="card-sub">Single dashboard operating catalog, inventory, orders and staff roles.</div>
@@ -779,13 +872,13 @@
           <li>Customers &amp; wantlist CRM</li>
           <li>News / journal CMS</li>
           <li>Unified messages inbox</li>
-          <li>5 roles (Admin / Staff / Shopkeeper / Wholesaler / Customer)</li>
+          <li>Users, roles, permissions</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-title"><span class="num">03</span> POS &amp; In-Store</div>
+          <div class="card-title"><span class="num">04</span> POS &amp; In-Store</div>
           <span class="chip info">Tablet</span>
         </div>
         <div class="card-sub">Same catalog, same stock, same customer records — usable from the counter.</div>
@@ -801,23 +894,23 @@
 
       <div class="card">
         <div class="card-head">
-          <div class="card-title"><span class="num">04</span> Marketplace Channels</div>
-          <span class="chip">Sync</span>
+          <div class="card-title"><span class="num">05</span> Marketplace Sync</div>
+          <span class="chip">3 Channels</span>
         </div>
         <div class="card-sub">One inventory pushed &amp; reconciled across every marketplace.</div>
         <ul class="feat">
           <li>Discogs Marketplace</li>
           <li>Tokopedia</li>
           <li>Shopee</li>
-          <li>Website + POS</li>
           <li>Webhook order intake</li>
           <li>Per-channel pricing</li>
+          <li>Sync health monitoring</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-title"><span class="num">05</span> Marketing &amp; Newsletter</div>
+          <div class="card-title"><span class="num">06</span> Marketing &amp; Newsletter</div>
           <span class="chip warn">AI-assisted</span>
         </div>
         <div class="card-sub">Owned audience. Listmonk-driven newsletter with OpenRouter copy assist.</div>
@@ -831,235 +924,374 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card wide">
         <div class="card-head">
-          <div class="card-title"><span class="num">06</span> Reports &amp; Settings</div>
+          <div class="card-title"><span class="num">07</span> Reports &amp; Settings</div>
           <span class="chip">Insight</span>
         </div>
         <div class="card-sub">Actionable reports and the boring plumbing that makes it all legal.</div>
-        <ul class="feat">
-          <li>Sales report</li>
-          <li>Inventory report</li>
-          <li>Channel profitability</li>
-          <li>Tax report (PPN 11%)</li>
-          <li>Store, users, integrations</li>
-          <li>Payments &amp; shipping settings</li>
+        <div class="chips">
+          <span class="chip">Sales report</span>
+          <span class="chip">Inventory report</span>
+          <span class="chip">Channel profitability</span>
+          <span class="chip">Tax report (PPN 11%)</span>
+          <span class="chip">Store profile</span>
+          <span class="chip">Payments &amp; shipping</span>
+          <span class="chip">Integrations config</span>
+          <span class="chip">Backup &amp; audit log</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">02 / 05</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 3 · BUILD PRICING ═══ -->
+<section class="page">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Section</span><strong>03 · Build Pricing</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div><h2 class="h2">Priced by feature. <em>Skip-cost included.</em></h2></div>
+      <span class="count-pill">Fixed price · One-time build</span>
+    </div>
+    <p class="lead">
+      Every feature carries its own timeline and its own line item. The right
+      column names what breaks if the feature is dropped — the reason each
+      one belongs in the package.
+    </p>
+
+    <div class="price-table">
+      <div class="pt-head">
+        <div>#</div>
+        <div>Feature</div>
+        <div>Timeline</div>
+        <div>Price</div>
+        <div>If you skip</div>
+      </div>
+
+      <div class="pt-row">
+        <div class="pt-num"><span class="badge">01</span></div>
+        <div class="pt-feat">
+          <div class="name">Foundations &amp; Deploy</div>
+          <div class="desc">Next.js 15 · Postgres · Prisma · Auth.js · BullMQ · Docker · nginx · Let's Encrypt.</div>
+        </div>
+        <div class="pt-weeks">2<span class="u">weeks</span></div>
+        <div class="pt-price"><span class="cur">IDR</span>18,000,000</div>
+        <div class="pt-skip">No app runs. This is the base — cannot be dropped.</div>
+      </div>
+
+      <div class="pt-row">
+        <div class="pt-num"><span class="badge">02</span></div>
+        <div class="pt-feat">
+          <div class="name">Public Storefront</div>
+          <div class="desc">Homepage, shop, release detail, previews, cart, checkout, accounts, wantlist.</div>
+        </div>
+        <div class="pt-weeks">5<span class="u">weeks</span></div>
+        <div class="pt-price"><span class="cur">IDR</span>22,000,000</div>
+        <div class="pt-skip">No online store. No cart, no checkout, no direct-to-buyer channel.</div>
+      </div>
+
+      <div class="pt-row">
+        <div class="pt-num"><span class="badge">03</span></div>
+        <div class="pt-feat">
+          <div class="name">Admin Back Office</div>
+          <div class="desc">Dashboard, catalog, inventory, orders, customers, messages, news, roles.</div>
+        </div>
+        <div class="pt-weeks">5<span class="u">weeks</span></div>
+        <div class="pt-price"><span class="cur">IDR</span>24,000,000</div>
+        <div class="pt-skip">Ops moves back to spreadsheets. Every order becomes manual. Staff cost explodes.</div>
+      </div>
+
+      <div class="pt-row">
+        <div class="pt-num"><span class="badge">04</span></div>
+        <div class="pt-feat">
+          <div class="name">POS &amp; In-Store</div>
+          <div class="desc">Tablet POS, barcode scan, label &amp; receipt print, cash + Xendit, shift reports.</div>
+        </div>
+        <div class="pt-weeks">3<span class="u">weeks</span></div>
+        <div class="pt-price"><span class="cur">IDR</span>14,000,000</div>
+        <div class="pt-skip">Counter sales don't touch online stock. Oversells, chargebacks, refund queue.</div>
+      </div>
+
+      <div class="pt-row">
+        <div class="pt-num"><span class="badge">05</span></div>
+        <div class="pt-feat">
+          <div class="name">Marketplace Sync</div>
+          <div class="desc">Discogs · Tokopedia · Shopee. Listings, orders, webhooks, per-channel pricing.</div>
+        </div>
+        <div class="pt-weeks">6<span class="u">weeks</span></div>
+        <div class="pt-price"><span class="cur">IDR</span>20,000,000</div>
+        <div class="pt-skip">Miss ~60% of Indonesian vinyl demand. Every marketplace goes dark.</div>
+      </div>
+
+      <div class="pt-row">
+        <div class="pt-num"><span class="badge">06</span></div>
+        <div class="pt-feat">
+          <div class="name">Marketing &amp; Newsletter</div>
+          <div class="desc">Listmonk · OpenRouter AI copy · promos · segments · wholesale pricing.</div>
+        </div>
+        <div class="pt-weeks">4<span class="u">weeks</span></div>
+        <div class="pt-price"><span class="cur">IDR</span>12,000,000</div>
+        <div class="pt-skip">Rent your audience forever. Meta &amp; Tokopedia set your CAC.</div>
+      </div>
+
+      <div class="pt-row">
+        <div class="pt-num"><span class="badge">07</span></div>
+        <div class="pt-feat">
+          <div class="name">Reports &amp; Settings</div>
+          <div class="desc">Sales, inventory, channel profitability, PPN 11% tax, integrations, audit log.</div>
+        </div>
+        <div class="pt-weeks">3<span class="u">weeks</span></div>
+        <div class="pt-price"><span class="cur">IDR</span>10,000,000</div>
+        <div class="pt-skip">Fly blind on tax and restocking. Guessing which titles to re-order.</div>
+      </div>
+
+      <div class="pt-total">
+        <div></div>
+        <div class="lbl">Total build &amp; development</div>
+        <div class="lbl mono">18 wk</div>
+        <div class="val"><span class="cur">IDR</span>120,000,000</div>
+        <div class="lbl">Package price</div>
+      </div>
+    </div>
+
+    <div class="note">
+      Timelines run partially in parallel — total wall-clock delivery is 18 weeks, not the 28-week sum of feature weeks. Payment schedule &amp; milestones on page 05.
+    </div>
+  </div>
+
+  <div class="bot">
+    <span>Medium Format · Investor Offering</span>
+    <span class="pg">03 / 05</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 4 · RETAINER + SUBS ═══ -->
+<section class="page">
+  <div class="top">
+    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
+    <div class="top-meta"><span>Section</span><strong>04 · Retainer &amp; Subscriptions</strong></div>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <div><h2 class="h2">The store keeps running. <em>Monthly retainer &amp; infra.</em></h2></div>
+      <span class="count-pill">Monthly · Post-launch</span>
+    </div>
+    <p class="lead">
+      The build hands over on week 18. From week 19 onwards a monthly
+      retainer keeps the software alive; a separate line of pass-through
+      subscriptions keeps the servers, email and AI running.
+    </p>
+
+    <div class="tier-grid">
+      <div class="tier">
+        <div class="name">Tier A · Essential</div>
+        <h3>Keep the lights on</h3>
+        <div class="price"><span class="cur">IDR</span>8,000,000<span class="per">/ month</span></div>
+        <div class="for">For steady-state operation, no active feature work.</div>
+        <div class="incl-h">Included</div>
+        <ul>
+          <li>Bug fixes for build defects</li>
+          <li>Security patches (Node, Next, Postgres)</li>
+          <li>Weekly dependency updates</li>
+          <li>Daily backup verification</li>
+          <li>Uptime + error monitoring</li>
+          <li>Next-business-day SLA</li>
+          <li>Monthly ops report</li>
+          <li class="no">New features &amp; design changes</li>
         </ul>
       </div>
 
-      <div class="card wide">
-        <div class="card-head">
-          <div class="card-title"><span class="num">07</span> Foundations included in every module</div>
-          <span class="chip on">Included</span>
-        </div>
-        <div class="chips">
-          <span class="chip">Next.js 15</span>
-          <span class="chip">TypeScript</span>
-          <span class="chip">Tailwind v4</span>
-          <span class="chip">PostgreSQL 16</span>
-          <span class="chip">Prisma 5</span>
-          <span class="chip">Auth.js v5</span>
-          <span class="chip">BullMQ + Redis</span>
-          <span class="chip">Xendit</span>
-          <span class="chip">Biteship</span>
-          <span class="chip">Listmonk</span>
-          <span class="chip">OpenRouter AI</span>
-          <span class="chip">Discogs API</span>
-          <span class="chip">Apple Music</span>
-          <span class="chip">YouTube</span>
-          <span class="chip">Docker Compose</span>
-          <span class="chip">nginx + Let's Encrypt</span>
-          <span class="chip">Cloudflare DNS</span>
-          <span class="chip">Monochrome v2.0 design system</span>
-        </div>
+      <div class="tier rec">
+        <div class="rec-flag">Recommended</div>
+        <div class="name">Tier B · Standard</div>
+        <h3>Actively evolving</h3>
+        <div class="price"><span class="cur">IDR</span>15,000,000<span class="per">/ month</span></div>
+        <div class="for">For a store that keeps releasing small improvements.</div>
+        <div class="incl-h">Everything in Essential, plus</div>
+        <ul>
+          <li>8 hours / month feature work</li>
+          <li>Same-business-day SLA</li>
+          <li>Quarterly performance review</li>
+          <li>Feature backlog managed</li>
+          <li>Managed marketplace rule tuning</li>
+          <li>1× marketing campaign build / mo</li>
+          <li>Rollover of 4 unused hours</li>
+        </ul>
       </div>
 
+      <div class="tier">
+        <div class="name">Tier C · Growth</div>
+        <h3>Actively scaling</h3>
+        <div class="price"><span class="cur">IDR</span>28,000,000<span class="per">/ month</span></div>
+        <div class="for">For rapid expansion &amp; launch cycles.</div>
+        <div class="incl-h">Everything in Standard, plus</div>
+        <ul>
+          <li>20 hours / month feature work</li>
+          <li>4-hour SLA, business hours</li>
+          <li>Weekly 1-hour office hours</li>
+          <li>Priority queue for change requests</li>
+          <li>On-call for launches &amp; campaigns</li>
+          <li>Dedicated Slack channel</li>
+          <li>Rollover of 8 unused hours</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subs-panel">
+      <div class="subs-head">
+        <h4>Monthly pass-through subscriptions</h4>
+        <span class="h-note">Paid to third parties · Not to build team</span>
+      </div>
+
+      <div class="subs-row">
+        <div class="svc">VPS · 4 vCPU / 8 GB</div>
+        <div class="desc">Contabo / Hetzner / Vultr class · runs app, worker, Postgres, Redis, Listmonk, nginx.</div>
+        <div class="amt"><span class="cur">IDR</span>800,000</div>
+      </div>
+      <div class="subs-row">
+        <div class="svc">Domain (.id, annualised)</div>
+        <div class="desc">medium-format.id registration &amp; renewal, amortised monthly.</div>
+        <div class="amt"><span class="cur">IDR</span>25,000</div>
+      </div>
+      <div class="subs-row">
+        <div class="svc">Cloudflare DNS</div>
+        <div class="desc">DNS, CDN, TLS proxy — free tier is sufficient for launch traffic.</div>
+        <div class="amt">Free</div>
+      </div>
+      <div class="subs-row">
+        <div class="svc">SMTP (AWS SES / MailerSend)</div>
+        <div class="desc">Newsletter &amp; transactional email · up to ~10k emails / month.</div>
+        <div class="amt"><span class="cur">IDR</span>400,000</div>
+      </div>
+      <div class="subs-row">
+        <div class="svc">OpenRouter AI budget</div>
+        <div class="desc">Newsletter copy assist &amp; content drafting · soft cap, top-up as needed.</div>
+        <div class="amt"><span class="cur">IDR</span>500,000</div>
+      </div>
+      <div class="subs-row">
+        <div class="svc">Object storage (backups)</div>
+        <div class="desc">Cloudflare R2 or Backblaze B2 · 50 GB nightly Postgres + media backups.</div>
+        <div class="amt"><span class="cur">IDR</span>150,000</div>
+      </div>
+      <div class="subs-row">
+        <div class="svc">Uptime monitoring</div>
+        <div class="desc">BetterStack / Uptime Kuma paid · 1-min checks + status page.</div>
+        <div class="amt"><span class="cur">IDR</span>200,000</div>
+      </div>
+      <div class="subs-row">
+        <div class="svc">Xendit · Biteship · Discogs</div>
+        <div class="desc">Payments, shipping, marketplace APIs — no monthly, transaction fees only.</div>
+        <div class="amt"><em>Variable</em></div>
+      </div>
+
+      <div class="subs-foot">
+        <div class="lbl">Fixed monthly infra</div>
+        <div></div>
+        <div class="val"><span class="cur">IDR</span>2,075,000<span style="font-size:9px;color:var(--mute);margin-left:6px;">/ month</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      Transaction fees (Xendit ~2.9% cards / ~0.7% QRIS; Biteship per shipment) scale with sales volume and are not part of fixed monthly cost.
     </div>
   </div>
 
   <div class="bot">
     <span>Medium Format · Investor Offering</span>
-    <span class="pg">02 / 04</span>
+    <span class="pg">04 / 05</span>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ PAGE 3 · PACKAGE ═══ -->
+<!-- ═══════════════════════════════════════════════════════════════ PAGE 5 · CHANGES + MILESTONES ═══ -->
 <section class="page">
   <div class="top">
     <div class="brand"><span class="brand-mark"></span>Medium Format</div>
-    <div class="top-meta"><span>Section</span><strong>03 · Package</strong></div>
+    <div class="top-meta"><span>Section</span><strong>05 · Add-ons &amp; Sign-off</strong></div>
   </div>
 
   <div class="content">
     <div class="section-head">
-      <div>
-        <h2 class="h2">Why one package. <em>Not six line items.</em></h2>
-      </div>
-      <span class="count-pill">Package · Indivisible</span>
+      <div><h2 class="h2">Changing the shop later. <em>Rate card &amp; milestones.</em></h2></div>
+      <span class="count-pill">Rate card · Fixed pricing</span>
     </div>
     <p class="lead">
-      The modules aren't independent products — they share one database,
-      one auth layer, one design system and one build. Split them and the
-      shop stops being a shop. The offering is priced accordingly.
+      Post-launch add-ons, modifications and new integrations are priced
+      against this rate card. Time &amp; materials work is billed hourly.
+      Anything in the retainer's included hours is free at time of use.
     </p>
 
-    <div class="why-hero">
-      <div class="quote">
-        A shop needs to sell everywhere at once from one truth of stock.
-        <em>Pull any module and something visible to the buyer breaks.</em>
+    <div class="rate-grid">
+      <div class="rate-card">
+        <div class="rate-hd">
+          <h4>Change requests · Fixed price</h4>
+          <span class="tag">Per item</span>
+        </div>
+        <div class="rate-row">
+          <div class="k">Copy or style tweak<em>&lt; 2 hours · text, colour, spacing</em></div>
+          <div class="v"><span class="cur">IDR</span>500,000</div>
+        </div>
+        <div class="rate-row">
+          <div class="k">Small feature<em>0.5–1 day · single screen or field</em></div>
+          <div class="v"><span class="cur">IDR</span>3,500,000</div>
+        </div>
+        <div class="rate-row">
+          <div class="k">Medium feature<em>2–5 days · new flow or report</em></div>
+          <div class="v"><span class="cur">IDR</span>12,000,000</div>
+        </div>
+        <div class="rate-row">
+          <div class="k">Large feature<em>1–3 weeks · new module</em></div>
+          <div class="v"><span class="cur">IDR</span>35,000,000</div>
+        </div>
+        <div class="rate-row">
+          <div class="k">New marketplace integration<em>e.g. Bukalapak, Lazada, TikTok Shop</em></div>
+          <div class="v"><span class="cur">IDR</span>25,000,000</div>
+        </div>
+        <div class="rate-row">
+          <div class="k">Design revision<em>Per round of art direction</em></div>
+          <div class="v"><span class="cur">IDR</span>2,000,000</div>
+        </div>
       </div>
-      <div class="attr">Package Thesis · Medium Format Build</div>
-    </div>
 
-    <div class="why-grid">
-      <div class="pillar">
-        <div class="n">01 · Compounding value</div>
-        <h3>Every module lifts the others</h3>
-        <p>
-          POS sales top up marketplace stock in real time. Newsletters
-          promote new arrivals from the same catalog. Reports read every
-          channel. Value grows with each connection, not in isolation.
-        </p>
-      </div>
-      <div class="pillar">
-        <div class="n">02 · One codebase</div>
-        <h3>Shared foundations, priced once</h3>
-        <p>
-          Auth, roles, data model, design tokens, jobs queue and deploy
-          pipeline are built once and reused six times. Splitting the
-          package doesn't save money — it duplicates the foundation.
-        </p>
-      </div>
-      <div class="pillar">
-        <div class="n">03 · One truth of stock</div>
-        <h3>Stock isn't a feature — it's the axis</h3>
-        <p>
-          Every module reads &amp; writes the same inventory. Selling from
-          POS while Tokopedia is offline, or missing a wantlist, is a
-          business failure — not a de-scope.
-        </p>
-      </div>
-    </div>
-
-    <div class="split-note">// If you unbundle · what breaks</div>
-    <div class="unbundle">
-      <div class="unbundle-row">
-        <div class="unbundle-k">
-          <span class="strike">Skip POS</span>
-          <span class="lost">Split stock</span>
+      <div class="rate-card">
+        <div class="rate-hd">
+          <h4>Time &amp; materials · Hourly</h4>
+          <span class="tag">Ad hoc</span>
         </div>
-        <div class="unbundle-v">
-          In-store sales stop decrementing website stock. Online shoppers
-          buy records that were sold at the counter an hour earlier.
-          Chargebacks and refunds follow.
+        <div class="rate-row">
+          <div class="k">Standard hour<em>Business hours (09–18 WIB)</em></div>
+          <div class="v"><span class="cur">IDR</span>750,000<span class="u">/ hr</span></div>
         </div>
-      </div>
-      <div class="unbundle-row">
-        <div class="unbundle-k">
-          <span class="strike">Skip Newsletter</span>
-          <span class="lost">Rent your audience</span>
+        <div class="rate-row">
+          <div class="k">After-hours hour<em>18–24 WIB weekdays · weekends</em></div>
+          <div class="v"><span class="cur">IDR</span>1,125,000<span class="u">/ hr</span></div>
         </div>
-        <div class="unbundle-v">
-          You keep paying Meta and Tokopedia to reach buyers you've already
-          converted. First-party newsletter is the only channel that
-          survives platform pricing changes.
+        <div class="rate-row">
+          <div class="k">Emergency call-out<em>&lt; 2 hr response · site down</em></div>
+          <div class="v"><span class="cur">IDR</span>1,500,000<span class="u">/ hr</span></div>
         </div>
-      </div>
-      <div class="unbundle-row">
-        <div class="unbundle-k">
-          <span class="strike">Skip Marketplaces</span>
-          <span class="lost">Miss 60% of demand</span>
+        <div class="rate-row">
+          <div class="k">Bug fix<em>Build defect, in-warranty (12 months)</em></div>
+          <div class="v">Free</div>
         </div>
-        <div class="unbundle-v">
-          Indonesian vinyl demand lives on Tokopedia, Shopee and Discogs.
-          Website-only means a store that only serves the buyers who
-          already know the brand.
+        <div class="rate-row">
+          <div class="k">Retainer-included hours<em>Tier B: 8 hrs / mo · Tier C: 20 hrs / mo</em></div>
+          <div class="v">Free</div>
         </div>
-      </div>
-      <div class="unbundle-row">
-        <div class="unbundle-k">
-          <span class="strike">Skip Reports</span>
-          <span class="lost">Fly blind on tax</span>
+        <div class="rate-row">
+          <div class="k">Training session<em>Staff onboarding · 2 hr block</em></div>
+          <div class="v"><span class="cur">IDR</span>2,500,000</div>
         </div>
-        <div class="unbundle-v">
-          PPN 11% and channel profitability aren't optional — they decide
-          which titles you re-order. Without unified reports, restocking
-          becomes guesswork.
-        </div>
-      </div>
-      <div class="unbundle-row">
-        <div class="unbundle-k">
-          <span class="strike">Skip Back Office</span>
-          <span class="lost">Manual everything</span>
-        </div>
-        <div class="unbundle-v">
-          Every order, message, and label goes back to spreadsheets and
-          screenshots. Staff cost balloons faster than the software you
-          declined to build.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="bot">
-    <span>Medium Format · Investor Offering</span>
-    <span class="pg">03 / 04</span>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ PAGE 4 · PRICING ═══ -->
-<section class="page">
-  <div class="top">
-    <div class="brand"><span class="brand-mark"></span>Medium Format</div>
-    <div class="top-meta"><span>Section</span><strong>04 · Pricing &amp; Terms</strong></div>
-  </div>
-
-  <div class="content">
-    <div class="section-head">
-      <div>
-        <h2 class="h2">One price. <em>All-inclusive build.</em></h2>
-      </div>
-      <span class="count-pill">Fixed · One-time</span>
-    </div>
-
-    <div class="price-hero">
-      <div>
-        <div class="k">Total build &amp; development</div>
-        <div class="amount">
-          <span class="cur">IDR</span>120,000,000<span class="unit">/ project</span>
-        </div>
-        <p class="note">
-          Fixed price for the entire package as scoped on pages 02–03.
-          Payable across milestones. Retainer, hosting and third-party
-          service fees are excluded and quoted separately.
-        </p>
-      </div>
-      <div class="price-badge">
-        <div class="lbl">Package</div>
-        <div class="val">All 6 modules</div>
-      </div>
-    </div>
-
-    <div class="row-2">
-      <div class="panel">
-        <h4>Included <span class="tag">All modules</span></h4>
-        <div class="kv"><span class="k">Public storefront (8 features)</span><span class="v">✓</span></div>
-        <div class="kv"><span class="k">Admin back office (8 features)</span><span class="v">✓</span></div>
-        <div class="kv"><span class="k">POS &amp; in-store (6 features)</span><span class="v">✓</span></div>
-        <div class="kv"><span class="k">Marketplace sync (Discogs / Toped / Shopee)</span><span class="v">✓</span></div>
-        <div class="kv"><span class="k">Newsletter + AI copy assist</span><span class="v">✓</span></div>
-        <div class="kv"><span class="k">Reports + tax + settings</span><span class="v">✓</span></div>
-        <div class="kv"><span class="k">Deploy to VPS (Docker + nginx + TLS)</span><span class="v">✓</span></div>
-      </div>
-      <div class="panel">
-        <h4>Excluded <span class="tag">Quoted separately</span></h4>
-        <div class="kv mute"><span class="k">Monthly retainer / maintenance</span><span class="v">—</span></div>
-        <div class="kv mute"><span class="k">VPS, domain &amp; TLS renewal</span><span class="v">—</span></div>
-        <div class="kv mute"><span class="k">Xendit / Biteship processing fees</span><span class="v">pass-through</span></div>
-        <div class="kv mute"><span class="k">Listmonk email / SMTP volume</span><span class="v">pass-through</span></div>
-        <div class="kv mute"><span class="k">OpenRouter AI token usage</span><span class="v">pass-through</span></div>
-        <div class="kv mute"><span class="k">Post-launch feature requests</span><span class="v">retainer</span></div>
-        <div class="kv mute"><span class="k">Physical hardware (scanner, printer)</span><span class="v">—</span></div>
       </div>
     </div>
 
@@ -1067,27 +1299,31 @@
     <div class="timeline">
       <div class="phase">
         <div class="step">M1 · 25%</div>
-        <div class="name">MVP-1</div>
+        <div class="name">Foundations + MVP-1</div>
         <div class="dur mono">Weeks 1–6</div>
-        <div class="desc">Auth, catalog, inventory, orders, website, cart, Xendit, news, previews.</div>
+        <div class="amt"><span class="cur">IDR</span>30,000,000</div>
+        <div class="desc">Auth, catalog, inventory, orders, storefront, cart, Xendit, news, previews.</div>
       </div>
       <div class="phase">
         <div class="step">M2 · 25%</div>
         <div class="name">MVP-2</div>
         <div class="dur mono">Weeks 7–11</div>
+        <div class="amt"><span class="cur">IDR</span>30,000,000</div>
         <div class="desc">POS, barcode, label print, Discogs marketplace, customers, wantlist, messages.</div>
       </div>
       <div class="phase">
         <div class="step">M3 · 25%</div>
         <div class="name">MVP-3</div>
         <div class="dur mono">Weeks 12–15</div>
+        <div class="amt"><span class="cur">IDR</span>30,000,000</div>
         <div class="desc">Tokopedia, newsletter (Listmonk + OpenRouter), reports.</div>
       </div>
       <div class="phase">
         <div class="step">M4 · 25%</div>
-        <div class="name">MVP-4</div>
+        <div class="name">MVP-4 + Handover</div>
         <div class="dur mono">Weeks 16–18</div>
-        <div class="desc">Shopee, wholesale role &amp; pricing, advanced reports, handover.</div>
+        <div class="amt"><span class="cur">IDR</span>30,000,000</div>
+        <div class="desc">Shopee, wholesale role &amp; pricing, advanced reports, training &amp; handover.</div>
       </div>
     </div>
 
@@ -1109,7 +1345,7 @@
 
   <div class="bot">
     <span>Medium Format · Investor Offering</span>
-    <span class="pg">04 / 04</span>
+    <span class="pg">05 / 05</span>
   </div>
 </section>
 
