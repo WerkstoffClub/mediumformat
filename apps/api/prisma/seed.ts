@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-async function main() {
+async function seedAdmin() {
   const adminEmail = 'admin@mediumformat.id';
   const exists = await prisma.user.findUnique({ where: { email: adminEmail } });
   if (!exists) {
@@ -19,6 +19,62 @@ async function main() {
   } else {
     console.log('✓ Admin user already exists, skipping seed.');
   }
+}
+
+async function seedCategoryPages() {
+  const total = await prisma.categoryPage.count();
+  if (total > 0) {
+    console.log(`✓ Category pages already seeded (${total} rows), skipping.`);
+    return;
+  }
+
+  const now = new Date();
+
+  await prisma.categoryPage.createMany({
+    data: [
+      {
+        slug: 'lps',
+        title: 'LPs',
+        formatFilter: 'LP',
+        template: 'FULL_HERO',
+        kicker: 'FULL LENGTHS',
+        headline: 'The album, on vinyl.',
+        salesCopy:
+          "Twelve-inch records built to be listened to end-to-end — the format the shop was made for. New pressings, rare originals, and the ones we can't stop playing at the counter, all filed under one roof in Kemang.",
+        ctaLabel: 'Browse LPs',
+        ctaHref: '/pages/lps',
+        seoTitle: 'LPs — Medium Format',
+        seoDescription:
+          'A curated selection of long-play vinyl records at Medium Format, Jakarta.',
+        status: 'PUBLISHED',
+        publishedAt: now,
+      },
+      {
+        slug: 'cassettes',
+        title: 'Cassettes',
+        formatFilter: 'CASSETTE',
+        template: 'HALF_HERO',
+        kicker: 'HI-FI TAPE',
+        headline: 'The tape underground, curated.',
+        salesCopy:
+          'Cassettes never really left — they became the format small labels reach for when a record is too expensive and a stream is too weightless. Limited runs, hand-dubbed editions, and reissues you can hold in one hand and rewind with a pencil.',
+        ctaLabel: 'Browse cassettes',
+        ctaHref: '/pages/cassettes',
+        seoTitle: 'Cassettes — Medium Format',
+        seoDescription:
+          'Small-label cassette editions and reissues from around the world, at Medium Format, Jakarta.',
+        status: 'PUBLISHED',
+        publishedAt: now,
+      },
+    ],
+  });
+
+  console.log('✓ Seeded 2 example category pages: /pages/lps, /pages/cassettes');
+}
+
+async function main() {
+  await seedAdmin();
+  await seedCategoryPages();
 }
 
 main()
