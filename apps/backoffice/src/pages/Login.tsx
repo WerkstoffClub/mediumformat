@@ -28,8 +28,8 @@ export default function Login() {
     <div className="min-h-screen bg-[var(--bg-base)] flex items-center justify-center">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="h-[22px] w-auto mx-auto dark:hidden" />
-          <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[22px] w-auto mx-auto hidden dark:block" />
+          <img src={`${import.meta.env.BASE_URL}MF_Lockup_Black.svg`} alt="Medium Format" className="h-[22px] w-auto mx-auto dark:hidden" />
+          <img src={`${import.meta.env.BASE_URL}MF_Lockup_White.svg`} alt="Medium Format" className="h-[22px] w-auto mx-auto hidden dark:block" />
           <p className="text-[13px] text-[var(--text-muted)] mt-1">Backoffice</p>
         </div>
 

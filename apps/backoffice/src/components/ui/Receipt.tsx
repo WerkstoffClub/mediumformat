@@ -81,7 +81,7 @@ export function ReceiptPaper({ data }: { data: ReceiptData }) {
     <div className="mf-receipt-paper bg-white text-[#17120f] px-8 pt-7 pb-8 selection:bg-[#17120f] selection:text-white">
       {/* wordmark + outlet */}
       <div className="flex flex-col items-center gap-3 text-center">
-        <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="h-[22px] w-auto" />
+        <img src={`${import.meta.env.BASE_URL}MF_Lockup_Black.svg`} alt="Medium Format" className="h-[22px] w-auto" />
         <div className="text-[12.5px] leading-[1.45] text-[#8a8178]">
           {data.address.map((line, i) => <div key={i}>{line}</div>)}
         </div>

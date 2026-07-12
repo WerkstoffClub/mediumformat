@@ -42,7 +42,7 @@ export function PostForm() {
         title: p.title, slug: p.slug, excerpt: p.excerpt ?? '',
         body: p.body, coverUrl: p.coverUrl ?? '',
         category: p.category, status: p.status,
-      })).catch(() => navigate('/blog'));
+      })).catch(() => navigate('/cms?tab=news'));
     }
   }, [id, isEdit, navigate]);
 
@@ -68,7 +68,7 @@ export function PostForm() {
     try {
       if (isEdit && id) await updatePost(id, payload);
       else await createPost(payload);
-      navigate('/blog');
+      navigate('/cms?tab=news');
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { message?: string | string[] } } })?.response?.data?.message;
       setError(Array.isArray(msg) ? msg.join(', ') : (msg ?? 'Failed to save post.'));
@@ -116,7 +116,7 @@ export function PostForm() {
         </div>
         {error && <p className="text-[11px] text-[var(--danger)]">{error}</p>}
         <div className="flex gap-3">
-          <button type="button" onClick={() => navigate('/blog')} className="px-4 py-2 border border-[var(--border)] rounded-md text-[12px] text-[var(--text-secondary)] hover:text-[var(--text-primary)]">Cancel</button>
+          <button type="button" onClick={() => navigate('/cms?tab=news')} className="px-4 py-2 border border-[var(--border)] rounded-md text-[12px] text-[var(--text-secondary)] hover:text-[var(--text-primary)]">Cancel</button>
           <button type="submit" disabled={loading} className="px-4 py-2 bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-[var(--accent-text)] text-[12px] font-bold rounded-md disabled:opacity-50 transition-colors">
             {loading ? 'Saving...' : isEdit ? 'Save Changes' : 'Publish Post'}
           </button>

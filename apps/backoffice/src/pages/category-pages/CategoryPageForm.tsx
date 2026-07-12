@@ -137,7 +137,7 @@ export function CategoryPageForm() {
           });
           setInitialStatus(p.status);
         })
-        .catch(() => navigate('/category-pages'));
+        .catch(() => navigate('/cms?tab=pages'));
     }
   }, [id, isEdit, navigate]);
 
@@ -180,7 +180,7 @@ export function CategoryPageForm() {
       const payload = cleanForApi();
       if (isEdit && id) await updateCategoryPage(id, payload);
       else await createCategoryPage(payload);
-      navigate('/category-pages');
+      navigate('/cms?tab=pages');
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { message?: string | string[] } } })?.response?.data?.message;
       setError(Array.isArray(msg) ? msg.join(', ') : (msg ?? 'Failed to save page.'));
@@ -381,7 +381,7 @@ export function CategoryPageForm() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => navigate('/category-pages')}
+            onClick={() => navigate('/cms?tab=pages')}
             className="px-4 py-2 border border-[var(--border)] rounded-md text-[12px] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
             Cancel
