@@ -116,3 +116,25 @@
 * Then implement it safely
 
 **🚀** Final Rule Always act like a senior software engineerwho writes code that others can easily understand, use, and scale.
+
+## Backoffice storefront modules (2026-07-12)
+
+New editable-CRUD backoffice modules landed alongside public read APIs and Release-editor integrations. Key surface areas:
+
+- **Purchase Orders** (`/purchase-orders`) — sits above Inventory in the sidebar; editable canonical PO records with a DealPOS seed job (`POST /api/v1/purchase-orders/sync-from-dealpos`). Once a PO leaves DRAFT, sync leaves it alone.
+- **Preorders** (`/preorders`) — thin editor over `Release.preorder` + `Release.preorderEta`.
+- **Vouchers** (`/vouchers`) — code / kind / value / min-order / window / usage / active; validator lives in `apps/api/src/vouchers/vouchers.validator.ts` and is reused by the public storefront endpoint.
+- **Newsletter** (`/newsletter`) — Subscribers + Campaigns tabs. Send action is intentionally stubbed pending Resend / Mailchimp wiring.
+- **Storefront (public)** — unauthenticated `GET /api/v1/storefront/releases`, `/preorders`, `/posts` (list + `:slug`), `POST /storefront/newsletter/subscribe`, `POST /storefront/vouchers/validate`. Rate-limited via `@nestjs/throttler`.
+- **Release editor** — centered 940px layout, `Get details` (Discogs autofill), `Get media` (Discogs image gallery, re-hosted server-side), per-track preview popover with 6 sources (Apple, Spotify, YouTube, Bandcamp, SoundCloud, manual upload) and a "Fetch all previews from…" batch action.
+
+### Env vars
+
+All integrations degrade gracefully if unset — the corresponding endpoint returns 501 with a friendly reason.
+
+- `DISCOGS_TOKEN` — Discogs personal access token (higher rate limit)
+- `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET` — Spotify client credentials
+- `YOUTUBE_API_KEY` — YouTube Data API v3
+- `AWS_S3_BUCKET`, `AWS_S3_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` — S3 for uploads (falls back to `apps/api/uploads/` served at `/uploads/*`)
+
+iTunes and Bandcamp need no auth.
