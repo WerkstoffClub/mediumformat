@@ -6,6 +6,9 @@ import { prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { can } from "@/lib/permissions";
 import { slugify } from "@/lib/utils";
+import { writeFile, mkdir } from "node:fs/promises";
+import path from "node:path";
+import { randomUUID } from "node:crypto";
 import type { MediaCondition, SleeveCondition, ProductStatus, Prisma } from "@prisma/client";
 
 async function requireWriter() {
@@ -131,6 +134,37 @@ export async function updateProduct(formData: FormData) {
   });
 
   revalidatePath("/admin/catalog");
+  revalidatePath(`/admin/catalog/${id}`);
+  revalidatePath("/shop");
+  redirect(`/admin/catalog/${id}`);
+}
+
+// Upload a cover image file (stored under public/uploads) and set it as the
+// product hero + release cover. Note: on the VPS, public/uploads should be a
+// mounted volume so uploads persist across deploys.
+export async function uploadProductImage(formData: FormData) {
+  await requireWriter();
+  const id = str(formData.get("productId"));
+  if (!id) redirect("/admin/catalog");
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) redirect(`/admin/catalog/${id}`);
+
+  const maxMb = Number(process.env.MAX_UPLOAD_MB ?? 10);
+  if ((file as File).size > maxMb * 1024 * 1024) redirect(`/admin/catalog/${id}?error=size`);
+
+  const bytes = Buffer.from(await (file as File).arrayBuffer());
+  const ext = ((file as File).name.split(".").pop() ?? "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+  const name = `${randomUUID()}.${ext}`;
+  const dir = path.join(process.cwd(), "public", "uploads");
+  await mkdir(dir, { recursive: true });
+  await writeFile(path.join(dir, name), bytes);
+  const url = `/uploads/${name}`;
+
+  const product = await prisma.product.findUnique({ where: { id } });
+  await prisma.product.update({ where: { id }, data: { heroImage: url } });
+  if (product?.releaseId) {
+    await prisma.release.update({ where: { id: product.releaseId }, data: { coverUrl: url } });
+  }
   revalidatePath(`/admin/catalog/${id}`);
   revalidatePath("/shop");
   redirect(`/admin/catalog/${id}`);

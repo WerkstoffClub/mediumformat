@@ -5,7 +5,13 @@ import { formatIdr } from "@/lib/format";
 import { formatLabel, conditionLabel } from "@/lib/catalog";
 import { PageShell } from "@/components/admin/PageShell";
 import { CoverImg } from "@/components/site/CoverImg";
-import { updateProduct, deleteProduct, addVariant, deleteVariant } from "../actions";
+import {
+  updateProduct,
+  deleteProduct,
+  addVariant,
+  deleteVariant,
+  uploadProductImage,
+} from "../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -79,6 +85,22 @@ export default async function EditReleasePage({
         </div>
       }
     >
+      {/* Cover upload (own form — file inputs can't nest in the edit form) */}
+      <div className="panel" style={{ marginBottom: 16 }}>
+        <div className="panel-hdr"><span className="panel-title">Cover image</span></div>
+        <div className="panel-body" style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
+          <div className="cell-cover" style={{ width: 84, height: 84 }}>
+            <CoverImg src={cover} alt={product.title} />
+          </div>
+          <form action={uploadProductImage} className="upload">
+            <input type="hidden" name="productId" value={product.id} />
+            <input type="file" name="file" accept="image/*" required />
+            <button className="btn-sec" type="submit">Upload cover</button>
+          </form>
+          <span className="cell-sub">JPG/PNG/WebP · or paste a URL in “1 · Cover” below.</span>
+        </div>
+      </div>
+
       {/* Editable fields — one form laid out as two columns (cards 1-5 left, 6 right) */}
       <form action={updateProduct} className="edit-cols">
         <input type="hidden" name="id" value={product.id} />
@@ -89,14 +111,9 @@ export default async function EditReleasePage({
           <div className="panel">
             <div className="panel-hdr"><span className="panel-title">1 · Cover</span></div>
             <div className="panel-body">
-              <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                <div className="cell-cover" style={{ width: 84, height: 84 }}>
-                  <CoverImg src={cover} alt={product.title} />
-                </div>
-                <div className="field" style={{ flex: 1, marginBottom: 0 }}>
-                  <label htmlFor="coverUrl">Cover image URL</label>
-                  <input className="input" id="coverUrl" name="coverUrl" defaultValue={r?.coverUrl ?? ""} placeholder="https://…" />
-                </div>
+              <div className="field" style={{ marginBottom: 0 }}>
+                <label htmlFor="coverUrl">Cover image URL</label>
+                <input className="input" id="coverUrl" name="coverUrl" defaultValue={r?.coverUrl ?? ""} placeholder="https://… (or use Upload above)" />
               </div>
             </div>
           </div>

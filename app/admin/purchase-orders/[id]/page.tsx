@@ -3,7 +3,11 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { formatIdr } from "@/lib/format";
 import { PageShell } from "@/components/admin/PageShell";
+import { Timeline } from "@/components/admin/Timeline";
 import { assignLineVariant, receivePurchaseOrder, deletePurchaseOrder } from "../actions";
+
+const PO_STEPS = ["Draft", "Ordered", "Partial", "Received"];
+const PO_INDEX: Record<string, number> = { DRAFT: 0, ORDERED: 1, PARTIAL: 2, RECEIVED: 3 };
 
 export const dynamic = "force-dynamic";
 
@@ -57,6 +61,14 @@ export default async function PurchaseOrderDetailPage({
         </div>
       }
     >
+      {po.status === "CANCELLED" ? (
+        <div className="banner-ok" style={{ borderColor: "rgba(239,68,68,.3)", background: "var(--danger-t)", color: "var(--danger)" }}>
+          This purchase order is cancelled.
+        </div>
+      ) : (
+        <Timeline steps={PO_STEPS} currentIndex={PO_INDEX[po.status] ?? 0} />
+      )}
+
       <div className="panel" style={{ marginBottom: 16 }}>
         <div className="panel-body" style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
           <div>

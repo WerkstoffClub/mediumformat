@@ -4,7 +4,11 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { can } from "@/lib/permissions";
+import { commitOrderStock } from "@/lib/fulfillment";
 import type { OrderStatus } from "@prisma/client";
+
+// Statuses at which stock is considered sold and should be decremented.
+const COMMITTED: OrderStatus[] = ["PAID", "PACKED", "SHIPPED", "COMPLETED"];
 
 const VALID: OrderStatus[] = [
   "DRAFT",
@@ -26,6 +30,13 @@ export async function updateOrderStatus(formData: FormData) {
   if (!id || !VALID.includes(status)) return;
 
   await prisma.order.update({ where: { id }, data: { status } });
+
+  // Decrement stock the first time an order reaches a committed state.
+  if (COMMITTED.includes(status)) {
+    await commitOrderStock(id, session!.user.id);
+  }
+
   revalidatePath(`/admin/orders/${id}`);
   revalidatePath("/admin/orders");
+  revalidatePath("/admin/inventory/movements");
 }

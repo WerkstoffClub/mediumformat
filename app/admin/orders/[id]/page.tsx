@@ -3,7 +3,18 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { formatIdr } from "@/lib/format";
 import type { OrderStatus } from "@prisma/client";
+import { Timeline } from "@/components/admin/Timeline";
 import { updateOrderStatus } from "../actions";
+
+const TIMELINE_STEPS = ["Draft", "Pending", "Paid", "Packed", "Shipped", "Completed"];
+const TIMELINE_INDEX: Record<string, number> = {
+  DRAFT: 0,
+  PENDING_PAYMENT: 1,
+  PAID: 2,
+  PACKED: 3,
+  SHIPPED: 4,
+  COMPLETED: 5,
+};
 
 export const dynamic = "force-dynamic";
 
@@ -53,6 +64,14 @@ export default async function OrderDetailPage({
   });
   if (!order) return notFound();
 
+  const movements = await prisma.stockMovement.findMany({
+    where: { refType: "ORDER", refId: order.id },
+    orderBy: { createdAt: "desc" },
+    include: { variant: true, location: true },
+  });
+
+  const terminal = order.status === "CANCELLED" || order.status === "REFUNDED";
+
   return (
     <>
       <div className="greet">
@@ -93,6 +112,14 @@ export default async function OrderDetailPage({
           </form>
         </div>
       </div>
+
+      {terminal ? (
+        <div className="banner-ok" style={{ borderColor: "rgba(239,68,68,.3)", background: "var(--danger-t)", color: "var(--danger)" }}>
+          This order is {order.status.toLowerCase()}.
+        </div>
+      ) : (
+        <Timeline steps={TIMELINE_STEPS} currentIndex={TIMELINE_INDEX[order.status] ?? 0} />
+      )}
 
       <div className="order-grid">
         {/* Items */}
@@ -199,6 +226,31 @@ export default async function OrderDetailPage({
               </div>
             </div>
           )}
+
+          <div className="panel">
+            <div className="panel-hdr">
+              <span className="panel-title">Stock movements</span>
+              <Link href="/admin/inventory/movements" className="link">All →</Link>
+            </div>
+            <div className="panel-body">
+              {movements.length === 0 ? (
+                <p className="cell-sub">
+                  No stock booked yet. Mark the order Paid to decrement stock.
+                </p>
+              ) : (
+                movements.map((m) => (
+                  <div className="kv" key={m.id}>
+                    <span className="k">
+                      <span className="mono">{m.variant.sku}</span> · {m.location.name}
+                    </span>
+                    <span className="v mono" style={{ color: "var(--danger)" }}>
+                      {m.delta}
+                    </span>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>
