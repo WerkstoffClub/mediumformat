@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createConsolidation, getConsolidations, type ConsolidationRow } from '../../api/consolidations';
 import { fmtDate, fmtIdr } from '../../api/ops';
-import { EmptyRow, PageHeader, StatusPill, tdCls, thCls } from '../../components/ui/Page';
+import { EmptyRow, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 import { apiErrorMessage, CONSOLIDATION_STATUS_LABEL, Field, inputCls } from './shared';
 
 /** Inline creation form — a lighter-weight alternative to a full drawer/page,
@@ -91,18 +91,14 @@ export function ConsolidationsList() {
 
   return (
     <div>
-      <PageHeader
-        title="Forwarder Consolidations"
-        sub="Group international orders by freight forwarder, then split the forwarder invoice across lines by weight."
-        actions={(
-          <button
-            onClick={() => setShowNew(v => !v)}
-            className="text-[12px] px-3 py-2 rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] font-semibold hover:opacity-90 transition-opacity"
-          >
-            + New consolidation
-          </button>
-        )}
-      />
+      <div className="flex items-center justify-end gap-2 mb-3">
+        <button
+          onClick={() => setShowNew(v => !v)}
+          className="text-[12px] px-3 py-2 rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] font-semibold hover:opacity-90 transition-opacity"
+        >
+          + New consolidation
+        </button>
+      </div>
 
       {showNew && (
         <NewConsolidationForm

@@ -5,7 +5,7 @@ import {
   listPos, syncPosFromDealpos,
   type PoStatus, type PurchaseOrder,
 } from '../../api/purchaseOrders';
-import { EmptyRow, PageHeader, Paginator, SearchBox, StatusPill, tdCls, thCls } from '../../components/ui/Page';
+import { EmptyRow, Paginator, SearchBox, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 import { PurchaseOrderDrawer } from './PurchaseOrderDrawer';
 
 const TABS: Array<{ key: 'all' | PoStatus; label: string }> = [
@@ -137,8 +137,6 @@ export function PurchaseOrdersList() {
 
   return (
     <div>
-      <PageHeader title="Purchase Orders" sub="Buying stock — track POs from draft to fully received." />
-
       {/* KPI strip — mockup pattern, shared with Orders */}
       <div className="grid grid-cols-4 gap-3 mb-4 max-md:grid-cols-2">
         <KpiTile label="Open POs" value={String(kpi.openCount)} meta="SENT + PARTIAL" />
