@@ -1110,3 +1110,57 @@
     border-radius: 0;
   }
 }
+
+/* ─── Barcode label sheet ─── */
+.mfa .label-sheet {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.mfa .label {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  background: #fff;
+  color: #000;
+  padding: 10px 12px;
+  text-align: center;
+}
+.mfa .label .l-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mfa .label .l-sub {
+  font-size: 10px;
+  color: #555;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mfa .label img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.mfa .label .l-price {
+  font-size: 12px;
+  font-weight: 700;
+  color: #000;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media print {
+  .mfa .label-sheet {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .mfa .label {
+    border-color: #ccc;
+    break-inside: avoid;
+  }
+}

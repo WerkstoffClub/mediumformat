@@ -64,6 +64,13 @@ export default async function InventoryPage({
       description="Stock by variant, linked to the catalog. Enrich from Discogs + Apple Music."
       actions={
         <div className="greet-right">
+          <a href="/admin/inventory/labels" className="btn-sec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="2" />
+              <path d="M6 9v6M9 9v6M13 9v6M17 9v6" />
+            </svg>
+            Print labels
+          </a>
           <a href="/admin/inventory/movements" className="btn-sec">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 8v4l3 3M3 12a9 9 0 1 0 9-9 9 9 0 0 0-9 9zM3 12H1m2 0 2-2" />

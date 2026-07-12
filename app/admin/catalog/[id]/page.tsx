@@ -198,7 +198,14 @@ export default async function EditReleasePage({
         {/* 7 · Variants */}
         <div className="edit-col">
           <div className="panel">
-            <div className="panel-hdr"><span className="panel-title">7 · Copies (variants)</span></div>
+            <div className="panel-hdr">
+              <span className="panel-title">7 · Copies (variants)</span>
+              {product.variants.length > 0 && (
+                <Link href={`/admin/inventory/labels?product=${product.id}`} className="link">
+                  Print labels →
+                </Link>
+              )}
+            </div>
             <div className="panel-body">
               {product.variants.length === 0 && (
                 <p className="cell-sub" style={{ marginBottom: 12 }}>No copies yet.</p>

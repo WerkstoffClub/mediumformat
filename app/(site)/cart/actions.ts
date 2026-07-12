@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
+import { auth } from "@/lib/auth";
 import { CART_COOKIE, readCartLines, getCartView, type CartLine } from "@/lib/cart";
 import { xendit } from "@/lib/integrations/xendit/client";
 import type { Prisma } from "@prisma/client";
@@ -79,11 +80,15 @@ export async function placeOrder(formData: FormData) {
     });
   }
 
+  // Link the order to a logged-in customer's account, if any.
+  const session = await auth();
+
   const number = `WEB-${Date.now().toString(36).toUpperCase()}`;
   const order = await prisma.order.create({
     data: {
       number,
       channelId: channel.id,
+      customerId: session?.user?.id ?? null,
       status: "PENDING_PAYMENT",
       currency: "IDR",
       subtotal: cart.subtotal,
