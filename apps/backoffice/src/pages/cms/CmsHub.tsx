@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { PageHeader, Panel, Tabs, thCls, tdCls, StatusPill, EmptyRow, type TabDef } from '../../components/ui/Page';
 import { Badge } from '../../components/ui/Badge';
 import { BlogList } from '../blog/BlogList';
@@ -117,10 +117,11 @@ function ArchivesPanel() {
             {['Title', 'Kind', 'Slug', 'Template', 'Status'].map(h => (
               <th key={h} className={thCls}>{h}</th>
             ))}
+            <th className={`${thCls} text-right`}>Edit</th>
           </tr>
         </thead>
         <tbody>
-          {loading && <EmptyRow cols={5}>Loading…</EmptyRow>}
+          {loading && <EmptyRow cols={6}>Loading…</EmptyRow>}
           {!loading && pages.map(p => (
             <tr
               key={p.id}
@@ -134,9 +135,18 @@ function ArchivesPanel() {
               <td className={`${tdCls} font-mono text-[var(--text-muted)]`}>{slugHref(p)}</td>
               <td className={tdCls}>{TEMPLATE_LABELS[p.template] ?? p.template}</td>
               <td className={tdCls}><StatusPill value={STATUS_LABELS[p.status] ?? p.status} /></td>
+              <td className={`${tdCls} text-right`}>
+                <Link
+                  to={`/category-pages/${p.id}/edit`}
+                  onClick={e => e.stopPropagation()}
+                  className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 text-[10px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)] transition-colors"
+                >
+                  Edit
+                </Link>
+              </td>
             </tr>
           ))}
-          {!loading && pages.length === 0 && <EmptyRow cols={5}>No archive pages yet.</EmptyRow>}
+          {!loading && pages.length === 0 && <EmptyRow cols={6}>No archive pages yet.</EmptyRow>}
         </tbody>
       </table>
     </Panel>
