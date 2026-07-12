@@ -45,6 +45,7 @@ model User {
   stockMovements StockMovement[]
   newsPosts      NewsPost[]
   auditLogs      AuditLog[]
+  purchaseOrders PurchaseOrder[]
 }
 
 model Account {
@@ -236,11 +237,12 @@ model Variant {
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
 
-  product         Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
-  stock           Stock[]
-  movements       StockMovement[]
-  channelListings ChannelListing[]
-  orderItems      OrderItem[]
+  product            Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  stock              Stock[]
+  movements          StockMovement[]
+  channelListings    ChannelListing[]
+  orderItems         OrderItem[]
+  purchaseOrderLines PurchaseOrderLine[]
 
   @@index([productId])
 }
@@ -261,9 +263,10 @@ model Location {
   isDefault Boolean      @default(false)
   createdAt DateTime     @default(now())
 
-  stock       Stock[]
-  movements   StockMovement[]
-  posSessions PosSession[]
+  stock          Stock[]
+  movements      StockMovement[]
+  posSessions    PosSession[]
+  purchaseOrders PurchaseOrder[]
 }
 
 // On-hand and reserved stock per (variant, location). Reservations are made
@@ -637,4 +640,68 @@ model Setting {
   key       String   @id
   valueJson Json
   updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// Purchasing / Receiving
+// ============================================================
+
+enum PurchaseOrderStatus {
+  DRAFT
+  ORDERED
+  PARTIAL
+  RECEIVED
+  CANCELLED
+}
+
+model Supplier {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  phone     String?
+  notes     String?
+  createdAt DateTime @default(now())
+
+  purchaseOrders PurchaseOrder[]
+}
+
+// A purchase order groups the lines received from a supplier. Receiving a PO
+// creates RECEIVING StockMovements and bumps on-hand Stock at its location.
+model PurchaseOrder {
+  id           String              @id @default(cuid())
+  number       String              @unique
+  supplierId   String?
+  supplierName String?
+  status       PurchaseOrderStatus @default(DRAFT)
+  locationId   String
+  currency     String              @default("IDR")
+  subtotalIdr  Decimal             @default(0) @db.Decimal(14, 2)
+  notes        String?
+  createdById  String?
+  receivedAt   DateTime?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  supplier  Supplier?           @relation(fields: [supplierId], references: [id])
+  location  Location            @relation(fields: [locationId], references: [id])
+  createdBy User?               @relation(fields: [createdById], references: [id])
+  lines     PurchaseOrderLine[]
+
+  @@index([status])
+}
+
+model PurchaseOrderLine {
+  id              String  @id @default(cuid())
+  purchaseOrderId String
+  variantId       String?
+  description     String
+  qty             Int     @default(1)
+  qtyReceived     Int     @default(0)
+  unitCostIdr     Decimal @default(0) @db.Decimal(14, 2)
+
+  purchaseOrder PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  variant       Variant?      @relation(fields: [variantId], references: [id])
+
+  @@index([purchaseOrderId])
+  @@index([variantId])
 }
