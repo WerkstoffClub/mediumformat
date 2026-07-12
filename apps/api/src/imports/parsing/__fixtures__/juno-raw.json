@@ -1,0 +1,13 @@
+{
+  "vendorName": "Juno Records",
+  "orderDate": "2026-04-02",
+  "currency": "EUR",
+  "vendorShipping": 272.74,
+  "invoiceTotal": 1484.22,
+  "lines": [
+    { "artist": "TURNER, Alex", "title": "Submarine", "label": "Domino", "catNumber": "RUG 398CD", "format": "6 TRACK CD SINGLE", "qty": 2, "unitPrice": 4.52, "extended": 9.05 },
+    { "artist": "ONEOHTRIX POINT NEVER", "title": "R Plus Seven", "label": "Warp", "catNumber": "WARPLP 240", "format": "GATEFOLD 2XLP + MP3 DOWNLOAD CODE", "qty": 1, "unitPrice": 21.18, "extended": 21.18 },
+    { "artist": "AIAIAI", "title": "AIAIAI Tracks", "catNumber": "AIAIAI 05601", "format": "HI-FI HEADPHONES", "qty": 1, "unitPrice": 46.09, "extended": 46.09 },
+    { "artist": "ROBYN", "title": "Sexistential", "label": "Young", "catNumber": "YO 467MCE", "format": "CASSETTE", "qty": 1, "unitPrice": 9.26, "extended": 9.26 }
+  ]
+}
