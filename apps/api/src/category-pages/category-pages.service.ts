@@ -29,12 +29,13 @@ export class CategoryPagesService {
   }
 
   async findAll(filter: CategoryPageFilterDto) {
-    const { page = 1, limit = 50, status, template, search } = filter;
+    const { page = 1, limit = 50, status, template, search, kind } = filter;
     const skip = (page - 1) * limit;
 
     const where: Prisma.CategoryPageWhereInput = {};
     if (status) where.status = status;
     if (template) where.template = template;
+    if (kind) where.kind = kind;
     if (search)
       where.OR = [
         { title: { contains: search, mode: 'insensitive' } },

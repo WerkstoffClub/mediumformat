@@ -95,9 +95,79 @@ async function seedCategoryPages() {
   console.log('✓ Seeded 2 example category pages: /pages/lps, /pages/cassettes');
 }
 
+async function seedNewsCategories() {
+  const cats: Array<{
+    slug: string;
+    title: string;
+    newsCategoryKey: 'STAFF_PICKS' | 'HIGHLIGHTS' | 'NEWS' | 'INTERVIEW';
+    kicker: string;
+    headline: string;
+    salesCopy: string;
+  }> = [
+    {
+      slug: 'staff-picks',
+      title: 'Staff Picks',
+      newsCategoryKey: 'STAFF_PICKS',
+      kicker: 'FROM THE COUNTER',
+      headline: 'What we can’t stop playing.',
+      salesCopy:
+        'The records and tapes the shop keeps reaching for — chosen by the people who file them.',
+    },
+    {
+      slug: 'highlights',
+      title: 'Highlights',
+      newsCategoryKey: 'HIGHLIGHTS',
+      kicker: 'THIS WEEK',
+      headline: 'On the wall, right now.',
+      salesCopy: 'New arrivals and the pressings we want you to hear first.',
+    },
+    {
+      slug: 'news',
+      title: 'News',
+      newsCategoryKey: 'NEWS',
+      kicker: 'DISPATCHES',
+      headline: 'From the shop and the labels we love.',
+      salesCopy: 'Restocks, events, and word from the wider record community.',
+    },
+    {
+      slug: 'interview',
+      title: 'Interview',
+      newsCategoryKey: 'INTERVIEW',
+      kicker: 'IN CONVERSATION',
+      headline: 'The people behind the records.',
+      salesCopy: 'Artists, labels, and collectors, in their own words.',
+    },
+  ];
+
+  for (const c of cats) {
+    // Seeded DRAFT: the storefront resolver only serves PUBLISHED pages, and
+    // storefront rendering for news-category pages isn't implemented yet —
+    // publish these once that lands.
+    await prisma.categoryPage.upsert({
+      where: { newsCategoryKey: c.newsCategoryKey },
+      update: {}, // never clobber edits made in the CMS
+      create: {
+        slug: c.slug,
+        title: c.title,
+        kind: 'NEWS_CATEGORY',
+        newsCategoryKey: c.newsCategoryKey,
+        template: 'HALF_HERO',
+        kicker: c.kicker,
+        headline: c.headline,
+        salesCopy: c.salesCopy,
+        status: 'DRAFT',
+        publishedAt: null,
+      },
+    });
+  }
+
+  console.log('✓ Seeded/verified 4 news categories (staff-picks, highlights, news, interview) (DRAFT — publish when storefront rendering lands)');
+}
+
 async function main() {
   await seedAdmin();
   await seedCategoryPages();
+  await seedNewsCategories();
 }
 
 main()

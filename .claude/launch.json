@@ -16,7 +16,7 @@
       "runtimeExecutable": "sh",
       "runtimeArgs": [
         "-c",
-        "pnpm --filter @mf/backoffice exec vite dev --host 127.0.0.1 --port $PORT"
+        "VITE_API_TARGET=https://mediumformat.info pnpm --filter @mf/backoffice exec vite dev --host 127.0.0.1 --port $PORT"
       ]
     }
   ]

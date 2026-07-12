@@ -9,6 +9,8 @@ import {
 import {
   CategoryPageStatus,
   CategoryPageTemplate,
+  CategoryPageKind,
+  PostCategory,
   RecordFormat,
 } from '@prisma/client';
 
@@ -73,4 +75,12 @@ export class CreateCategoryPageDto {
   @IsOptional()
   @IsEnum(CategoryPageStatus)
   status?: CategoryPageStatus;
+
+  @IsOptional()
+  @IsEnum(CategoryPageKind)
+  kind?: CategoryPageKind;
+
+  @IsOptional()
+  @IsEnum(PostCategory)
+  newsCategoryKey?: PostCategory;
 }
