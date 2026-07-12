@@ -4,7 +4,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role, STAFF_ROLES } from '@mf/shared';
 import { OpsService } from './ops.service';
-import { ChannelsQueryDto, CustomersQueryDto, OrdersQueryDto, PagedQueryDto } from './dto/ops-query.dto';
+import { ChannelsQueryDto, CustomersQueryDto, OrdersQueryDto } from './dto/ops-query.dto';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(...STAFF_ROLES)
@@ -35,11 +35,6 @@ export class OpsController {
   @Get('customers/:id')
   customerDetail(@Param('id') id: string) {
     return this.ops.customerDetail(id);
-  }
-
-  @Get('purchase-orders')
-  purchaseOrders(@Query() query: PagedQueryDto) {
-    return this.ops.purchaseOrders(query);
   }
 
   @Get('catalog-summary')

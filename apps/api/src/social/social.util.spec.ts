@@ -43,6 +43,7 @@ const release = (overrides: Partial<Release> = {}): Release => ({
   preorder: false,
   preorderEta: null,
   onSale: false,
+  gallery: null,
   createdAt: new Date(),
   updatedAt: new Date(),
   ...overrides,
