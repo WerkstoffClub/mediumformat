@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { ImportOrigin, ImportRecordFormat, ImportStatus, PaymentMethod } from '../../api/imports';
+import type { ImportLineMatchStatus, ImportOrigin, ImportRecordFormat, ImportStatus, PaymentMethod } from '../../api/imports';
 
 export const inputCls =
   'w-full bg-[var(--bg-overlay)] border border-[var(--border)] rounded-[6px] px-3 py-[9px] text-[13px] text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--accent)]';
@@ -47,6 +47,14 @@ export const IMPORT_STATUS_LABEL: Record<ImportStatus, string> = {
   RECEIVED: 'Received',
   INVENTORY_UPDATED: 'Inventory updated',
   CANCELLED: 'Cancelled',
+};
+
+/** Per-line match result from POST /imports/:id/match — label feeds StatusPill,
+ *  which colors it via STATUS_COLORS['Matched'|'New'|'Ambiguous']. */
+export const MATCH_STATUS_LABEL: Record<ImportLineMatchStatus, string> = {
+  MATCHED: 'Matched',
+  NEW: 'New',
+  AMBIGUOUS: 'Ambiguous',
 };
 
 /** Native-currency figure (vendor invoices are USD/EUR/GBP/etc, not IDR) — falls

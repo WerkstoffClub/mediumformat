@@ -2,13 +2,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { fmtDate, fmtIdr } from '../../api/ops';
 import {
-  getImport, IMPORT_STATUS_STEPS, priceImport, uploadAttachment,
+  commitImport, getImport, IMPORT_STATUS_STEPS, matchImport, priceImport, uploadAttachment,
   type ImportAttachmentKind, type ImportChannelPrice, type ImportOrderDetail, type ImportOrderLine,
 } from '../../api/imports';
 import { Panel, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 import {
   CHANNEL_LABEL, CHANNEL_ORDER, fmtFormat, fmtNative,
-  IMPORT_STATUS_LABEL, ORIGIN_LABEL, PAYMENT_METHOD_LABEL,
+  IMPORT_STATUS_LABEL, MATCH_STATUS_LABEL, ORIGIN_LABEL, PAYMENT_METHOD_LABEL,
 } from './shared';
 
 const REIMBURSEMENT_LABEL: Record<string, string> = {
@@ -213,6 +213,11 @@ export function ImportDetail() {
   const [error, setError] = useState(false);
   const [pricing, setPricing] = useState(false);
   const [pricingError, setPricingError] = useState<string | null>(null);
+  const [matching, setMatching] = useState(false);
+  const [matchError, setMatchError] = useState<string | null>(null);
+  const [committing, setCommitting] = useState(false);
+  const [commitError, setCommitError] = useState<string | null>(null);
+  const [commitMessage, setCommitMessage] = useState<string | null>(null);
 
   const load = useCallback(() => {
     if (!id) return;
@@ -232,6 +237,36 @@ export function ImportDetail() {
       setPricingError('Could not calculate pricing. Check FX rate and try again.');
     } finally {
       setPricing(false);
+    }
+  };
+
+  const onMatch = async () => {
+    if (!id) return;
+    setMatching(true);
+    setMatchError(null);
+    try {
+      await matchImport(id);
+      load();
+    } catch {
+      setMatchError('Could not run matching. Try again.');
+    } finally {
+      setMatching(false);
+    }
+  };
+
+  const onCommit = async () => {
+    if (!id) return;
+    setCommitting(true);
+    setCommitError(null);
+    setCommitMessage(null);
+    try {
+      const result = await commitImport(id);
+      setCommitMessage(`Committed — ${result.created} created, ${result.updated} updated`);
+      load();
+    } catch {
+      setCommitError('Import must be priced before committing.');
+    } finally {
+      setCommitting(false);
     }
   };
 
@@ -268,15 +303,42 @@ export function ImportDetail() {
               {fmtNative(totalNative, order.currency)}
             </p>
           </div>
-          <button
-            onClick={onCalculatePricing}
-            disabled={pricing}
-            className="flex items-center gap-1.5 px-3 py-[7px] rounded-[6px] border border-[var(--border)] text-[12px] font-medium text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
-            {pricing ? 'Calculating…' : 'Calculate pricing'}
-          </button>
-          {pricingError && <p className="text-[11px] text-[var(--danger)] max-w-[220px] text-right">{pricingError}</p>}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onCalculatePricing}
+              disabled={pricing}
+              className="flex items-center gap-1.5 px-3 py-[7px] rounded-[6px] border border-[var(--border)] text-[12px] font-medium text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+              {pricing ? 'Calculating…' : 'Calculate pricing'}
+            </button>
+            <button
+              onClick={onMatch}
+              disabled={matching}
+              className="flex items-center gap-1.5 px-3 py-[7px] rounded-[6px] border border-[var(--border)] text-[12px] font-medium text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              {matching ? 'Matching…' : 'Match'}
+            </button>
+            {order.status === 'INVENTORY_UPDATED' ? (
+              <span className="flex items-center gap-1.5 px-3 py-[7px] text-[12px] font-medium text-[var(--success)]">
+                ✓ Inventory updated
+              </span>
+            ) : (
+              <button
+                onClick={onCommit}
+                disabled={committing || order.status !== 'PRICED'}
+                className="flex items-center gap-1.5 px-3 py-[7px] rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[12px] font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+                {committing ? 'Committing…' : 'Commit to inventory'}
+              </button>
+            )}
+          </div>
+          {pricingError && <p className="text-[11px] text-[var(--danger)] max-w-[260px] text-right">{pricingError}</p>}
+          {matchError && <p className="text-[11px] text-[var(--danger)] max-w-[260px] text-right">{matchError}</p>}
+          {commitError && <p className="text-[11px] text-[var(--danger)] max-w-[260px] text-right">{commitError}</p>}
+          {commitMessage && <p className="text-[11px] text-[var(--success)] max-w-[260px] text-right">{commitMessage}</p>}
         </div>
       </div>
 
@@ -288,14 +350,14 @@ export function ImportDetail() {
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-[var(--bg-overlay)]">
-                  {['Item', 'Format', 'Edition', 'Qty', 'Unit price', 'Landed cost'].map(h => (
+                  {['Item', 'Format', 'Edition', 'Qty', 'Unit price', 'Landed cost', 'Match'].map(h => (
                     <th key={h} className={thCls}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {order.lines.length === 0 && (
-                  <tr><td colSpan={6} className={`${tdCls} text-center text-[var(--text-faint)]`}>No lines.</td></tr>
+                  <tr><td colSpan={7} className={`${tdCls} text-center text-[var(--text-faint)]`}>No lines.</td></tr>
                 )}
                 {order.lines.map(line => (
                   <tr key={line.id} className="border-b border-[var(--border-sub)]">
@@ -316,6 +378,17 @@ export function ImportDetail() {
                     <td className={`${tdCls} font-mono text-right whitespace-nowrap`}>{fmtNative(line.unitPriceNative, order.currency)}</td>
                     <td className={`${tdCls} font-mono text-right whitespace-nowrap text-[var(--text-primary)]`}>
                       {Number(line.landedCostIdr) > 0 ? fmtIdr(line.landedCostIdr) : '—'}
+                    </td>
+                    <td className={`${tdCls} whitespace-nowrap`}>
+                      <StatusPill value={MATCH_STATUS_LABEL[line.matchStatus]} />
+                      {line.releaseId && (
+                        <Link
+                          to={`/inventory/${line.releaseId}/edit`}
+                          className="block text-[10px] text-[var(--info)] hover:underline mt-1"
+                        >
+                          → release{line.createdRelease ? ' (new)' : ''}
+                        </Link>
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -232,6 +232,23 @@ export const getImport = (id: string) =>
 export const priceImport = (id: string) =>
   api.post<ImportOrderDetail>(`/imports/${id}/price`, {}).then(r => r.data);
 
+/** Matches each line against existing releases (by barcode/catNumber), setting
+ *  `matchStatus`/`releaseId`/`createdRelease` per line. Safe to re-run as a
+ *  preview before committing. Returns the full detail. */
+export const matchImport = (id: string) =>
+  api.post<ImportOrderDetail>(`/imports/${id}/match`, {}).then(r => r.data);
+
+export interface CommitResult {
+  created: number;
+  updated: number;
+  importOrder: ImportOrderDetail;
+}
+
+/** Writes stock + prices into inventory. Requires the import to be PRICED;
+ *  sets status INVENTORY_UPDATED on success. */
+export const commitImport = (id: string) =>
+  api.post<CommitResult>(`/imports/${id}/commit`, {}).then(r => r.data);
+
 export const uploadAttachment = (id: string, file: File, kind: ImportAttachmentKind) => {
   const form = new FormData();
   form.append('file', file);
