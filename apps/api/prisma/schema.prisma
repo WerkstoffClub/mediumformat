@@ -64,6 +64,33 @@ enum PostStatus {
   ARCHIVED
 }
 
+enum PoStatus {
+  DRAFT
+  SENT
+  PARTIAL
+  RECEIVED
+  CANCELLED
+}
+
+enum VoucherKind {
+  PERCENT
+  FIXED_IDR
+}
+
+enum NewsletterSource {
+  STOREFRONT
+  CHECKOUT
+  POS
+  MANUAL
+  IMPORT
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  SENT
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -110,6 +137,7 @@ model Release {
   stock             Int             @default(0)
   notes             String?
   imageUrl          String?
+  gallery           Json?
   barcode           String?         @unique
   storeLocation     StoreLocation   @default(MAIN_STORE)
   shelfLocation     String?
@@ -310,4 +338,85 @@ model Location {
   updatedAt     DateTime       @updatedAt
 
   @@index([kind])
+}
+
+model PurchaseOrder {
+  id           String   @id @default(cuid())
+  poNumber     String   @unique
+  supplierId   String?
+  supplierName String
+  status       PoStatus @default(DRAFT)
+  currency     String   @default("IDR")
+  subtotalIdr  Int      @default(0)
+  taxIdr       Int      @default(0)
+  totalIdr     Int      @default(0)
+  orderedAt    DateTime?
+  etaAt        DateTime?
+  receivedAt   DateTime?
+  notes        String?
+  sourceBillId String?  @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  lines        PurchaseOrderLine[]
+
+  @@index([status, etaAt])
+}
+
+model PurchaseOrderLine {
+  id             String  @id @default(cuid())
+  purchaseOrder  PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  purchaseOrderId String
+  releaseId      String?
+  description    String
+  qtyOrdered     Int     @default(0)
+  qtyReceived    Int     @default(0)
+  unitCostIdr    Int     @default(0)
+  totalIdr       Int     @default(0)
+
+  @@index([purchaseOrderId])
+}
+
+model Voucher {
+  id           String      @id @default(cuid())
+  code         String      @unique
+  kind         VoucherKind
+  value        Int
+  minOrderIdr  Int         @default(0)
+  startsAt     DateTime?
+  expiresAt    DateTime?
+  usageLimit   Int?
+  usageCount   Int         @default(0)
+  active       Boolean     @default(true)
+  notes        String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@index([active, expiresAt])
+}
+
+model NewsletterSubscriber {
+  id             String           @id @default(cuid())
+  email          String           @unique
+  name           String?
+  source         NewsletterSource @default(MANUAL)
+  subscribedAt   DateTime         @default(now())
+  unsubscribedAt DateTime?
+  tags           String[]
+
+  @@index([source, subscribedAt])
+}
+
+model NewsletterCampaign {
+  id             String         @id @default(cuid())
+  subject        String
+  previewText    String?
+  body           String
+  status         CampaignStatus @default(DRAFT)
+  scheduledFor   DateTime?
+  sentAt         DateTime?
+  recipientCount Int            @default(0)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([status, scheduledFor])
 }
