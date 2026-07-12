@@ -20,6 +20,8 @@ declare module "next-auth" {
 }
 
 export const authConfig: NextAuthConfig = {
+  // Behind the nginx reverse proxy in production; required for OAuth callbacks.
+  trustHost: true,
   session: { strategy: "jwt" },
   pages: { signIn: "/admin/login" },
   providers: [], // populated in lib/auth.ts

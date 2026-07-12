@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GoogleButton } from "@/components/site/GoogleButton";
 import { registerCustomer } from "../actions";
 
 export const dynamic = "force-dynamic";
@@ -45,6 +46,8 @@ export default async function RegisterPage({
           Create account
         </button>
       </form>
+
+      <GoogleButton />
 
       <p className="page-lead" style={{ marginTop: 18 }}>
         Already have an account?{" "}

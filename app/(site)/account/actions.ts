@@ -47,6 +47,10 @@ export async function loginCustomer(formData: FormData) {
   }
 }
 
+export async function signInWithGoogle() {
+  await signIn("google", { redirectTo: "/account" });
+}
+
 export async function signOutCustomer() {
   await signOut({ redirectTo: "/account" });
 }

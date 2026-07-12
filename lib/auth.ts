@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
@@ -15,6 +16,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma),
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      // Link a Google sign-in to an existing account with the same (verified)
+      // email — so a customer who registered with a password can also use
+      // "Continue with Google".
+      allowDangerousEmailAccountLinking: true,
+    }),
     Credentials({
       credentials: {
         email: { label: "Email", type: "email" },

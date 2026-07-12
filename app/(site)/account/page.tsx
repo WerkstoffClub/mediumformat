@@ -2,6 +2,7 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { formatIdr } from "@/lib/format";
+import { GoogleButton } from "@/components/site/GoogleButton";
 import { loginCustomer, signOutCustomer } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -49,6 +50,8 @@ export default async function AccountPage({
             Sign in
           </button>
         </form>
+
+        <GoogleButton />
 
         <p className="page-lead" style={{ marginTop: 18 }}>
           New here?{" "}
