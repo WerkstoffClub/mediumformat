@@ -1773,3 +1773,25 @@
     height: 16px;
   }
 }
+
+/* ─── Release detail: two-column lower section ─── */
+.mf .rd-cols {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8px 24px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  border-top: 1px solid var(--hairline);
+  margin-top: 16px;
+  padding-top: 36px;
+}
+.mf .rd-info .tracklist {
+  margin-top: 22px;
+}
+@media (max-width: 900px) {
+  .mf .rd-cols {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}

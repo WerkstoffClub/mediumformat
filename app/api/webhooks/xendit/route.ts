@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyXenditCallback } from "@/lib/integrations/xendit/client";
+import { prisma } from "@/lib/db";
 import { logger } from "@/lib/logger";
 
 const log = logger.child({ component: "xendit-webhook" });
@@ -9,8 +10,33 @@ export async function POST(req: Request) {
   if (!verifyXenditCallback(token)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
-  const body = await req.json();
-  log.info({ event: body?.event ?? body?.status }, "xendit callback");
-  // TODO: enqueue order status update job, update Payment + Order.
+
+  const body = (await req.json()) as {
+    external_id?: string;
+    status?: string;
+    payment_method?: string;
+  };
+  const externalId = body.external_id;
+  const status = (body.status ?? "").toUpperCase();
+  log.info({ externalId, status }, "xendit callback");
+
+  if (externalId) {
+    const order = await prisma.order.findUnique({ where: { number: externalId } });
+    if (order) {
+      if (status === "PAID" || status === "SETTLED") {
+        await prisma.payment.updateMany({
+          where: { orderId: order.id, gateway: "XENDIT" },
+          data: { status: "PAID", paidAt: new Date(), method: body.payment_method ?? null },
+        });
+        await prisma.order.update({ where: { id: order.id }, data: { status: "PAID" } });
+      } else if (status === "EXPIRED") {
+        await prisma.payment.updateMany({
+          where: { orderId: order.id, gateway: "XENDIT" },
+          data: { status: "EXPIRED" },
+        });
+      }
+    }
+  }
+
   return NextResponse.json({ ok: true });
 }

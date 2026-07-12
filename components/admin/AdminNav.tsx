@@ -15,6 +15,7 @@ import {
   Cable,
   BarChart3,
   Settings,
+  FileText,
   type LucideIcon,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ const GROUPS: Group[] = [
     items: [
       { href: "/admin/catalog", label: "Catalog", icon: Disc3 },
       { href: "/admin/inventory", label: "Inventory", icon: Package },
+      { href: "/admin/purchase-orders", label: "Purchase orders", icon: FileText },
     ],
   },
   {

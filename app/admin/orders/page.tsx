@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageShell } from "@/components/admin/PageShell";
 import { prisma } from "@/lib/db";
 import { formatIdr } from "@/lib/format";
@@ -54,7 +55,11 @@ export default async function OrdersPage() {
               <tbody>
                 {orders.map((o) => (
                   <tr key={o.id}>
-                    <td className="mono t-ink">{o.number}</td>
+                    <td className="mono t-ink">
+                      <Link href={`/admin/orders/${o.id}`} className="link" style={{ color: "var(--ink)" }}>
+                        {o.number}
+                      </Link>
+                    </td>
                     <td>{o.channel.name}</td>
                     <td>
                       <span className={statusPill(o.status)}>

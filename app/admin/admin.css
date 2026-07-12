@@ -765,3 +765,146 @@
   font-size: 13px;
   color: var(--danger);
 }
+
+/* ─── Panel body + KV rows ─── */
+.mfa .panel-body {
+  padding: 16px;
+}
+.mfa .kv {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 13px;
+}
+.mfa .kv:last-child {
+  border-bottom: none;
+}
+.mfa .kv .k {
+  color: var(--mute);
+}
+.mfa .kv .v {
+  color: var(--ink);
+  text-align: right;
+}
+
+/* ─── Two-column edit (cards 1-5 left, 6-9 right) ─── */
+.mfa .edit-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.mfa .edit-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .mfa .edit-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Prev / next record nav ─── */
+.mfa .rec-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mfa .rec-nav .rn-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  background: transparent;
+  transition: background 0.15s;
+}
+.mfa .rec-nav .rn-btn:hover {
+  background: var(--raised);
+}
+.mfa .rec-nav .rn-btn.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.mfa .rec-nav .rn-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── Order detail (items | summary) ─── */
+.mfa .order-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .mfa .order-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Variant editor rows ─── */
+.mfa .vrow {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+  align-items: end;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.mfa .vrow:last-child {
+  border-bottom: none;
+}
+.mfa .field-mini label {
+  font-size: 11px;
+  color: var(--mute);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ─── Purchase-order invoice parser ─── */
+.mfa .po-drop {
+  border: 1px dashed var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  background: var(--surface);
+}
+.mfa .po-drop textarea {
+  width: 100%;
+  min-height: 150px;
+  background: var(--raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  color: var(--ink);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  padding: 12px;
+  resize: vertical;
+}
+.mfa .po-tot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--hairline);
+  background: var(--raised);
+}
+.mfa .po-tot .k {
+  color: var(--mute);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.mfa .po-tot .v {
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}

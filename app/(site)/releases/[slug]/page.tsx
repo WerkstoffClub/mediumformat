@@ -53,13 +53,20 @@ export default async function ReleasePage({
     .slice(0, 4);
 
   const metaBits = release
-    ? [
-        labelName(release.labelsJson),
-        release.catno,
-        release.country,
-        release.year,
-      ].filter(Boolean)
+    ? [labelName(release.labelsJson), release.catno, release.country, release.year].filter(Boolean)
     : [];
+
+  const facts: [string, string][] = [];
+  if (release) {
+    if (labelName(release.labelsJson)) facts.push(["Label", labelName(release.labelsJson)!]);
+    if (release.catno) facts.push(["Catalogue #", release.catno]);
+    if (fmt) facts.push(["Format", fmt]);
+    if (release.country) facts.push(["Country", release.country]);
+    if (release.year) facts.push(["Year", String(release.year)]);
+    if (release.genres?.length) facts.push(["Genre", release.genres.join(", ")]);
+    if (release.styles?.length) facts.push(["Styles", release.styles.join(", ")]);
+    if (release.extBarcode) facts.push(["Barcode", release.extBarcode]);
+  }
 
   return (
     <>
@@ -94,17 +101,13 @@ export default async function ReleasePage({
               </span>
             )}
             {conditionLabel(cheapest?.conditionMedia) && (
-              <span className="grade-pill">
-                {conditionLabel(cheapest?.conditionMedia)}
-              </span>
+              <span className="grade-pill">{conditionLabel(cheapest?.conditionMedia)}</span>
             )}
           </div>
 
           <h1 className="rd-artist">{artist}</h1>
           <div className="rd-title">{product.title}</div>
-          {metaBits.length > 0 && (
-            <div className="rd-meta">{metaBits.join(" · ")}</div>
-          )}
+          {metaBits.length > 0 && <div className="rd-meta">{metaBits.join(" · ")}</div>}
 
           <div className="rd-chips">
             {fmt && <span className="chip">{fmt}</span>}
@@ -120,13 +123,10 @@ export default async function ReleasePage({
               {cheapest ? formatIdr(cheapest.priceIdr.toString()) : "—"}
             </span>
             {product.variants.length > 1 && (
-              <span className="rd-price-note">
-                from · {product.variants.length} copies
-              </span>
+              <span className="rd-price-note">from · {product.variants.length} copies</span>
             )}
           </div>
 
-          {/* Copies / variants */}
           {product.variants.length > 0 && (
             <div className="rd-variants">
               {product.variants.map((v) => (
@@ -134,16 +134,12 @@ export default async function ReleasePage({
                   <div className="rd-variant-meta">
                     <span className="grade-pill">
                       {conditionLabel(v.conditionMedia) ?? "—"}
-                      {v.conditionSleeve
-                        ? ` / ${conditionLabel(v.conditionSleeve)}`
-                        : ""}
+                      {v.conditionSleeve ? ` / ${conditionLabel(v.conditionSleeve)}` : ""}
                     </span>
                     {v.color && <span>{v.color}</span>}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <span className="rd-variant-price">
-                      {formatIdr(v.priceIdr.toString())}
-                    </span>
+                    <span className="rd-variant-price">{formatIdr(v.priceIdr.toString())}</span>
                     <form action={addToCart}>
                       <input type="hidden" name="variantId" value={v.id} />
                       <button className="vadd" aria-label="Add this copy to cart">
@@ -177,89 +173,61 @@ export default async function ReleasePage({
             </button>
           </div>
 
-          {/* Facts */}
-          {release && (
-            <div className="rd-facts">
-              {labelName(release.labelsJson) && (
-                <div className="fact-row">
-                  <span className="fact-k">Label</span>
-                  <span className="fact-v">{labelName(release.labelsJson)}</span>
-                </div>
-              )}
-              {release.catno && (
-                <div className="fact-row">
-                  <span className="fact-k">Catalogue #</span>
-                  <span className="fact-v">{release.catno}</span>
-                </div>
-              )}
-              {fmt && (
-                <div className="fact-row">
-                  <span className="fact-k">Format</span>
-                  <span className="fact-v">{fmt}</span>
-                </div>
-              )}
-              {release.country && (
-                <div className="fact-row">
-                  <span className="fact-k">Country</span>
-                  <span className="fact-v">{release.country}</span>
-                </div>
-              )}
-              {release.year && (
-                <div className="fact-row">
-                  <span className="fact-k">Year</span>
-                  <span className="fact-v">{release.year}</span>
-                </div>
-              )}
-              {release.styles?.length > 0 && (
-                <div className="fact-row">
-                  <span className="fact-k">Styles</span>
-                  <span className="fact-v">{release.styles.join(", ")}</span>
-                </div>
-              )}
+          {/* Tracklist — now directly under Add to cart */}
+          {tracks.length > 0 && (
+            <div className="tracklist">
+              {tracks.map((t) => {
+                const hasPreview = Boolean(t.previewUrl) && t.previewSource !== "NONE";
+                return (
+                  <div key={t.id} className="track">
+                    <span className="tk-num">{t.position}</span>
+                    <span className={`tk-play${hasPreview ? "" : " muted"}`}>
+                      <PlayIcon />
+                    </span>
+                    <span className="tk-name">{t.title}</span>
+                    <span className="tk-dur">
+                      {t.durationSec
+                        ? `${Math.floor(t.durationSec / 60)}:${String(t.durationSec % 60).padStart(2, "0")}`
+                        : "—"}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>
       </div>
 
-      {/* Tracklist */}
-      {tracks.length > 0 && (
-        <section className="rd-section">
-          <h2 className="sec-h2">Tracklist</h2>
-          <p className="sec-sub">
-            {tracks.length} tracks · previews resolve from Apple Music &amp; Bandcamp
-          </p>
-          <div className="tracklist">
-            {tracks.map((t) => {
-              const hasPreview =
-                Boolean(t.previewUrl) && t.previewSource !== "NONE";
-              return (
-                <div key={t.id} className="track">
-                  <span className="tk-num">{t.position}</span>
-                  <span className={`tk-play${hasPreview ? "" : " muted"}`}>
-                    <PlayIcon />
-                  </span>
-                  <span className="tk-name">{t.title}</span>
-                  <span className="tk-dur">
-                    {t.durationSec
-                      ? `${Math.floor(t.durationSec / 60)}:${String(
-                          t.durationSec % 60,
-                        ).padStart(2, "0")}`
-                      : "—"}
-                  </span>
+      {/* Lower section: About this pressing (left) · Release information (right) */}
+      <div className="rd-cols">
+        <div>
+          <h2 className="sec-h2">About this pressing</h2>
+          <p className="sec-sub">Notes from the shop.</p>
+          {product.descriptionMd ? (
+            <div className="about-copy">{product.descriptionMd}</div>
+          ) : (
+            <p className="about-copy" style={{ color: "var(--mute)" }}>
+              No notes for this pressing yet.
+            </p>
+          )}
+        </div>
+        <div>
+          <h2 className="sec-h2">Release information</h2>
+          <p className="sec-sub">Discography &amp; pressing details.</p>
+          {facts.length > 0 ? (
+            <div className="rd-facts">
+              {facts.map(([k, v]) => (
+                <div className="fact-row" key={k}>
+                  <span className="fact-k">{k}</span>
+                  <span className="fact-v">{v}</span>
                 </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* About */}
-      {product.descriptionMd && (
-        <section className="rd-section rd-section-full">
-          <h2 className="sec-h2">About this release</h2>
-          <div className="about-copy">{product.descriptionMd}</div>
-        </section>
-      )}
+              ))}
+            </div>
+          ) : (
+            <p className="sec-sub">No release metadata yet.</p>
+          )}
+        </div>
+      </div>
 
       {/* You might also like */}
       {related.length > 0 && (

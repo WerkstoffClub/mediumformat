@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { CART_COOKIE, readCartLines, getCartView, type CartLine } from "@/lib/cart";
+import { xendit } from "@/lib/integrations/xendit/client";
+import type { Prisma } from "@prisma/client";
 
 async function writeCart(lines: CartLine[]) {
   const store = await cookies();
@@ -108,6 +110,40 @@ export async function placeOrder(formData: FormData) {
     },
   });
 
+  // Try Xendit unified checkout; fall back to a pending order if unconfigured.
+  let redirectTo = `/checkout/success?order=${order.number}`;
+  if (process.env.XENDIT_SECRET_KEY) {
+    const appUrl = process.env.PUBLIC_APP_URL ?? process.env.APP_URL ?? "";
+    try {
+      const invoice = (await xendit.createInvoice({
+        externalId: order.number,
+        amountIdr: Math.round(cart.total),
+        description: `Medium Format order ${order.number}`,
+        customer: {
+          email: email || undefined,
+          givenNames: name || undefined,
+          mobileNumber: phone || undefined,
+        },
+        successRedirectUrl: `${appUrl}/checkout/success?order=${order.number}`,
+        failureRedirectUrl: `${appUrl}/checkout?failed=1`,
+      })) as { id?: string; invoice_url?: string };
+
+      await prisma.payment.create({
+        data: {
+          orderId: order.id,
+          gateway: "XENDIT",
+          gatewayRef: invoice.id ?? null,
+          status: "PENDING",
+          amount: cart.total,
+          rawJson: invoice as unknown as Prisma.InputJsonValue,
+        },
+      });
+      if (invoice.invoice_url) redirectTo = invoice.invoice_url;
+    } catch {
+      // Xendit failed — leave the order pending and show the confirmation page.
+    }
+  }
+
   await writeCart([]);
-  redirect(`/checkout/success?order=${order.number}`);
+  redirect(redirectTo);
 }
