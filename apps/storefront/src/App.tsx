@@ -8,12 +8,11 @@ import NewsList from './pages/NewsList';
 import NewsDetail from './pages/NewsDetail';
 import NotFound from './pages/NotFound';
 
-// In production the app is served under /shop/. In dev, `pnpm dev` boots at /.
-const BASENAME = import.meta.env.PROD ? '/shop' : '';
-
+// Storefront is served at the site root in both dev and prod. The static
+// prototype has moved to /prototype/* on the VPS (see deploy/docker/Caddyfile).
 export default function App() {
   return (
-    <BrowserRouter basename={BASENAME}>
+    <BrowserRouter>
       <Routes>
         <Route element={<Shell />}>
           <Route path="/" element={<Home />} />
