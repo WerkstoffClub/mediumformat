@@ -66,11 +66,13 @@ export async function placeOrder(formData: FormData) {
   const cart = await getCartView();
   if (cart.items.length === 0) redirect("/cart");
 
-  const name = String(formData.get("name") ?? "").trim();
+  let name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
-  const address = String(formData.get("address") ?? "").trim();
-  const city = String(formData.get("city") ?? "").trim();
+  let phone = String(formData.get("phone") ?? "").trim();
+  let address = String(formData.get("address") ?? "").trim();
+  let city = String(formData.get("city") ?? "").trim();
+  const addressId = String(formData.get("addressId") ?? "").trim();
+  const saveAddress = formData.get("saveAddress") === "on";
 
   // Website channel (seeded as ch-website; create defensively if missing).
   let channel = await prisma.channel.findFirst({ where: { type: "WEBSITE" } });
@@ -82,20 +84,52 @@ export async function placeOrder(formData: FormData) {
 
   // Link the order to a logged-in customer's account, if any.
   const session = await auth();
+  const userId = session?.user?.id ?? null;
+
+  // Resolve the shipping address: a chosen saved address, else the typed one
+  // (optionally saved to the account).
+  let shippingAddressId: string | null = null;
+  if (userId && addressId) {
+    const saved = await prisma.address.findFirst({ where: { id: addressId, userId } });
+    if (saved) {
+      shippingAddressId = saved.id;
+      name = saved.name;
+      phone = saved.phone;
+      address = `${saved.line1}${saved.line2 ? `, ${saved.line2}` : ""}`;
+      city = [saved.city, saved.province].filter(Boolean).join(", ");
+    }
+  } else if (userId && saveAddress && address) {
+    const count = await prisma.address.count({ where: { userId } });
+    const created = await prisma.address.create({
+      data: {
+        userId,
+        name: name || email,
+        phone,
+        line1: address,
+        city: String(formData.get("city") ?? "").trim(),
+        province: String(formData.get("province") ?? "").trim(),
+        postal: String(formData.get("postal") ?? "").trim(),
+        country: "ID",
+        isDefault: count === 0,
+      },
+    });
+    shippingAddressId = created.id;
+  }
 
   const number = `WEB-${Date.now().toString(36).toUpperCase()}`;
   const order = await prisma.order.create({
     data: {
       number,
       channelId: channel.id,
-      customerId: session?.user?.id ?? null,
+      customerId: userId,
+      shippingAddressId,
       status: "PENDING_PAYMENT",
       currency: "IDR",
       subtotal: cart.subtotal,
       tax: cart.tax,
       total: cart.total,
       notes: [
-        `Guest checkout`,
+        `Web checkout`,
         name && `Name: ${name}`,
         email && `Email: ${email}`,
         phone && `Phone: ${phone}`,

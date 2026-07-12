@@ -29,7 +29,15 @@ export const authConfig: NextAuthConfig = {
     async jwt({ token, user }) {
       if (user) {
         token.uid = user.id;
-        token.role = (user as { role?: Role }).role;
+        token.role = (user as { role?: Role }).role ?? "CUSTOMER";
+        // Promote allow-listed emails (e.g. staff signing in with Google) to
+        // ADMIN. Env-only so this stays edge-safe for the middleware.
+        const allow = (process.env.ADMIN_GOOGLE_EMAILS ?? "")
+          .split(",")
+          .map((s) => s.trim().toLowerCase())
+          .filter(Boolean);
+        const email = (user.email ?? "").toLowerCase();
+        if (email && allow.includes(email)) token.role = "ADMIN";
       }
       return token;
     },

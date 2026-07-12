@@ -12,9 +12,25 @@ const credentialsSchema = z.object({
   password: z.string().min(1),
 });
 
+const ADMIN_EMAILS = (process.env.ADMIN_GOOGLE_EMAILS ?? "")
+  .split(",")
+  .map((s) => s.trim().toLowerCase())
+  .filter(Boolean);
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma),
+  events: {
+    // Keep the DB role in sync for allow-listed staff who sign in with Google.
+    async signIn({ user }) {
+      const email = (user.email ?? "").toLowerCase();
+      if (user.id && email && ADMIN_EMAILS.includes(email)) {
+        await prisma.user
+          .update({ where: { id: user.id }, data: { role: "ADMIN" } })
+          .catch(() => {});
+      }
+    },
+  },
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,

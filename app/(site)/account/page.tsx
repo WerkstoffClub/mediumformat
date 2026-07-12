@@ -3,7 +3,13 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { formatIdr } from "@/lib/format";
 import { GoogleButton } from "@/components/site/GoogleButton";
-import { loginCustomer, signOutCustomer } from "./actions";
+import {
+  loginCustomer,
+  signOutCustomer,
+  addAddress,
+  deleteAddress,
+  setDefaultAddress,
+} from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -14,9 +20,9 @@ function statusLabel(status: string) {
 export default async function AccountPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string; registered?: string }>;
+  searchParams: Promise<{ error?: string; registered?: string; reset?: string }>;
 }) {
-  const { error, registered } = await searchParams;
+  const { error, registered, reset } = await searchParams;
   const session = await auth();
 
   // ── Logged out: sign-in form ──
@@ -29,6 +35,11 @@ export default async function AccountPage({
         {registered && (
           <p className="page-lead" style={{ color: "var(--success)" }}>
             Account created — signing you in.
+          </p>
+        )}
+        {reset && (
+          <p className="page-lead" style={{ color: "var(--success)" }}>
+            Password updated — sign in with your new password.
           </p>
         )}
 
@@ -49,6 +60,9 @@ export default async function AccountPage({
           <button type="submit" className="btn-primary" style={{ marginTop: 8 }}>
             Sign in
           </button>
+          <Link href="/account/forgot" className="page-link" style={{ marginLeft: 14 }}>
+            Forgot password?
+          </Link>
         </form>
 
         <GoogleButton />
@@ -64,12 +78,18 @@ export default async function AccountPage({
   }
 
   // ── Logged in: dashboard ──
-  const orders = await prisma.order.findMany({
-    where: { customerId: session.user.id },
-    orderBy: { createdAt: "desc" },
-    take: 30,
-    include: { _count: { select: { items: true } } },
-  });
+  const [orders, addresses] = await Promise.all([
+    prisma.order.findMany({
+      where: { customerId: session.user.id },
+      orderBy: { createdAt: "desc" },
+      take: 30,
+      include: { _count: { select: { items: true } } },
+    }),
+    prisma.address.findMany({
+      where: { userId: session.user.id },
+      orderBy: [{ isDefault: "desc" }, { createdAt: "desc" }],
+    }),
+  ]);
 
   return (
     <div className="page">
@@ -105,6 +125,65 @@ export default async function AccountPage({
           ))}
         </div>
       )}
+
+      {/* Saved addresses */}
+      <h2 className="sec-h2" style={{ marginTop: 40, marginBottom: 16 }}>Addresses</h2>
+      {addresses.length > 0 && (
+        <div className="rd-facts" style={{ marginBottom: 20 }}>
+          {addresses.map((a) => (
+            <div className="fact-row" key={a.id} style={{ alignItems: "flex-start" }}>
+              <span className="fact-k">
+                <strong style={{ color: "var(--ink)" }}>{a.name}</strong>
+                {a.isDefault && (
+                  <span className="chip" style={{ marginLeft: 8 }}>Default</span>
+                )}
+                <br />
+                {a.line1}
+                {a.line2 ? `, ${a.line2}` : ""}, {a.city}, {a.province} {a.postal} · {a.phone}
+              </span>
+              <span className="fact-v" style={{ display: "flex", gap: 14 }}>
+                {!a.isDefault && (
+                  <form action={setDefaultAddress}>
+                    <input type="hidden" name="id" value={a.id} />
+                    <button className="page-link" style={{ marginTop: 0, background: "none", border: "none", cursor: "pointer" }}>
+                      Set default
+                    </button>
+                  </form>
+                )}
+                <form action={deleteAddress}>
+                  <input type="hidden" name="id" value={a.id} />
+                  <button
+                    style={{ background: "none", border: "none", color: "var(--danger, #ef4444)", cursor: "pointer", fontSize: 13 }}
+                  >
+                    Remove
+                  </button>
+                </form>
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <form action={addAddress} style={{ maxWidth: 560 }}>
+        <div className="field-row">
+          <div className="field"><label htmlFor="a-name">Name</label><input className="input" id="a-name" name="name" required /></div>
+          <div className="field"><label htmlFor="a-phone">Phone</label><input className="input" id="a-phone" name="phone" required /></div>
+        </div>
+        <div className="field"><label htmlFor="a-line1">Address</label><input className="input" id="a-line1" name="line1" required /></div>
+        <div className="field"><label htmlFor="a-line2">Address line 2</label><input className="input" id="a-line2" name="line2" /></div>
+        <div className="field-row">
+          <div className="field"><label htmlFor="a-city">City</label><input className="input" id="a-city" name="city" required /></div>
+          <div className="field"><label htmlFor="a-province">Province</label><input className="input" id="a-province" name="province" /></div>
+        </div>
+        <div className="field-row">
+          <div className="field"><label htmlFor="a-postal">Postal code</label><input className="input" id="a-postal" name="postal" /></div>
+          <div className="field"><label htmlFor="a-country">Country</label><input className="input" id="a-country" name="country" defaultValue="ID" /></div>
+        </div>
+        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--body)", marginBottom: 12 }}>
+          <input type="checkbox" name="isDefault" /> Set as default
+        </label>
+        <button type="submit" className="btn-secondary">Add address</button>
+      </form>
     </div>
   );
 }
