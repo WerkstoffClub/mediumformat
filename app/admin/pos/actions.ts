@@ -27,10 +27,11 @@ async function writePos(lines: PosLine[]) {
 
 export async function addPosItem(formData: FormData) {
   await requireSell();
-  const sku = String(formData.get("sku") ?? "").trim();
-  if (!sku) return;
-  const variant = await prisma.variant.findUnique({
-    where: { sku },
+  const code = String(formData.get("sku") ?? "").trim();
+  if (!code) return;
+  // Resolve by SKU or a scanned barcode (internal or external).
+  const variant = await prisma.variant.findFirst({
+    where: { OR: [{ sku: code }, { internalBarcode: code }, { extBarcode: code }] },
     include: { product: true },
   });
   if (!variant || variant.product.status === "ARCHIVED") {

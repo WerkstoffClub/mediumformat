@@ -1,7 +1,8 @@
 import { PageShell } from "@/components/admin/PageShell";
 import { getPosView } from "@/lib/pos";
 import { formatIdr } from "@/lib/format";
-import { addPosItem, setPosQty, removePosItem, clearPos, completeSale } from "./actions";
+import { PosScan } from "./PosScan";
+import { setPosQty, removePosItem, clearPos, completeSale } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -18,16 +19,7 @@ export default async function PosPage({
       <div className="pos-grid">
         {/* Cart */}
         <div>
-          <form action={addPosItem} className="pos-scan">
-            <input
-              className="input"
-              name="sku"
-              placeholder="Scan / type SKU and press Enter…"
-              autoFocus
-              autoComplete="off"
-            />
-            <button type="submit" className="btn-primary">Add</button>
-          </form>
+          <PosScan />
           {notfound && (
             <div className="banner-ok" style={{ borderColor: "rgba(239,68,68,.3)", background: "var(--danger-t)", color: "var(--danger)" }}>
               No active product with that SKU.

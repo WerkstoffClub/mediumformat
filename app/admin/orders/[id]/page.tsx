@@ -97,6 +97,9 @@ export default async function OrderDetailPage({
           <span className={statusPill(order.status)}>
             {order.status.replace(/_/g, " ").toLowerCase()}
           </span>
+          <Link href={`/admin/pos/receipt/${order.id}`} className="btn-sec">
+            Receipt
+          </Link>
           <form action={updateOrderStatus} style={{ display: "flex", gap: 8 }}>
             <input type="hidden" name="id" value={order.id} />
             <select className="select" name="status" defaultValue={order.status} style={{ width: 190 }}>

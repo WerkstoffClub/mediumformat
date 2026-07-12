@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { verifyXenditCallback } from "@/lib/integrations/xendit/client";
 import { prisma } from "@/lib/db";
+import { markOrderPaid } from "@/lib/fulfillment";
 import { logger } from "@/lib/logger";
 
 const log = logger.child({ component: "xendit-webhook" });
@@ -24,11 +25,7 @@ export async function POST(req: Request) {
     const order = await prisma.order.findUnique({ where: { number: externalId } });
     if (order) {
       if (status === "PAID" || status === "SETTLED") {
-        await prisma.payment.updateMany({
-          where: { orderId: order.id, gateway: "XENDIT" },
-          data: { status: "PAID", paidAt: new Date(), method: body.payment_method ?? null },
-        });
-        await prisma.order.update({ where: { id: order.id }, data: { status: "PAID" } });
+        await markOrderPaid(order.id, body.payment_method ?? "XENDIT");
       } else if (status === "EXPIRED") {
         await prisma.payment.updateMany({
           where: { orderId: order.id, gateway: "XENDIT" },

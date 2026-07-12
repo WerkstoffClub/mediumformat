@@ -1024,3 +1024,89 @@
   margin-right: 10px;
   cursor: pointer;
 }
+
+/* ─── POS camera scanner ─── */
+.mfa .pos-cam {
+  margin-bottom: 14px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: #000;
+  max-width: 420px;
+}
+.mfa .pos-cam video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Receipt (printable) ─── */
+.mfa .receipt {
+  max-width: 360px;
+  margin: 0 auto;
+  background: #fff;
+  color: #000;
+  border-radius: var(--r-lg);
+  padding: 22px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.mfa .receipt h2 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: 2px;
+}
+.mfa .receipt .r-sub {
+  text-align: center;
+  color: #555;
+  margin-bottom: 12px;
+}
+.mfa .receipt .r-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mfa .receipt .r-hr {
+  border-top: 1px dashed #999;
+  margin: 10px 0;
+}
+.mfa .receipt .r-item {
+  margin-bottom: 6px;
+}
+.mfa .receipt .r-total {
+  font-weight: 700;
+  font-size: 13px;
+}
+.mfa .receipt .r-foot {
+  text-align: center;
+  margin-top: 14px;
+  color: #555;
+}
+
+/* ─── Print: show only the receipt ─── */
+@media print {
+  .mfa .sidebar,
+  .mfa .topbar,
+  .mfa .greet,
+  .no-print {
+    display: none !important;
+  }
+  .mfa,
+  .mfa .shell,
+  .mfa .main,
+  .mfa .content {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+    padding: 0 !important;
+  }
+  .mfa .receipt {
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
+  }
+}
