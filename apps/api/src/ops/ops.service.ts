@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { ChannelsQueryDto, CustomersQueryDto, OrdersQueryDto, PagedQueryDto } from './dto/ops-query.dto';
+import { ChannelsQueryDto, CustomersQueryDto, OrdersQueryDto } from './dto/ops-query.dto';
 
 const num = (v: unknown): number => (v == null ? 0 : Number(v));
 
@@ -331,30 +331,6 @@ export class OpsService {
         lines: Number(o.lines),
       })),
     };
-  }
-
-  async purchaseOrders(query: PagedQueryDto) {
-    const { page = 1, limit = 50 } = query;
-    const where: Prisma.DpBillWhereInput = query.q
-      ? {
-          OR: [
-            { number: { contains: query.q, mode: 'insensitive' } },
-            { supplierName: { contains: query.q, mode: 'insensitive' } },
-          ],
-        }
-      : {};
-    const [data, total, suppliers] = await this.prisma.$transaction([
-      this.prisma.dpBill.findMany({
-        where,
-        orderBy: { date: 'desc' },
-        skip: (page - 1) * limit,
-        take: limit,
-        include: { _count: { select: { lines: true } } },
-      }),
-      this.prisma.dpBill.count({ where }),
-      this.prisma.dpSupplier.count(),
-    ]);
-    return { data, total, page, limit, suppliers };
   }
 
   /** Catalogue shape: releases grouped by format, genre and store location. */
