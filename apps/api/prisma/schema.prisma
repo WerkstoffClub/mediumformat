@@ -101,6 +101,11 @@ enum CategoryPageStatus {
   PUBLISHED
 }
 
+enum CategoryPageKind {
+  PRODUCT_PAGE
+  NEWS_CATEGORY
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -624,6 +629,8 @@ model CategoryPage {
   title          String
   formatFilter   RecordFormat?
   template       CategoryPageTemplate @default(FULL_HERO)
+  kind            CategoryPageKind     @default(PRODUCT_PAGE)
+  newsCategoryKey PostCategory?        @unique
   kicker         String?
   headline       String?
   salesCopy      String?
@@ -638,4 +645,5 @@ model CategoryPage {
   updatedAt      DateTime             @updatedAt
 
   @@index([status, publishedAt])
+  @@index([kind, status])
 }
