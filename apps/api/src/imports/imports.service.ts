@@ -119,7 +119,10 @@ export class ImportsService {
     const order = await this.prisma.importOrder.findUnique({
       where: { id },
       include: {
-        lines: { orderBy: { lineNo: 'asc' } },
+        lines: {
+          orderBy: { lineNo: 'asc' },
+          include: { channelPrices: { orderBy: { channel: 'asc' } } },
+        },
         attachments: true,
         consolidation: true,
       },
