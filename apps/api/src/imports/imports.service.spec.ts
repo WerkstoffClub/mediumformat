@@ -2,9 +2,12 @@ import { ImportsService } from './imports.service';
 import { ImportOrigin, ImportStatus, PaymentMethod, RecordFormat, ReimbursementStatus } from '@prisma/client';
 import { CreateImportDto } from './dto/create-import.dto';
 
-/** create()/findOne() don't touch FxService; a plain stub is enough to satisfy
- *  the constructor for those suites. price() suites build their own. */
+/** create()/findOne() don't touch FxService/MatchService/DiscogsService; plain
+ *  stubs are enough to satisfy the constructor for those suites. price() and
+ *  commit()/match() suites build their own where they need real behavior. */
 const fxStub = { getRate: jest.fn(), getUsdIdr: jest.fn() };
+const matcherStub = { matchLine: jest.fn() };
+const discogsStub = { lookup: jest.fn() };
 
 /** Minimal in-memory prisma stub covering the calls create()/findOne() make:
  *  importOrder.count, importOrder.create, importOrder.findUnique. */
@@ -57,7 +60,7 @@ function baseDto(overrides: Partial<CreateImportDto> = {}): CreateImportDto {
 describe('ImportsService.create', () => {
   test('generates a zero-padded sequential number from existing count', async () => {
     const { prisma, getCreated } = makePrismaMock(4);
-    const svc = new ImportsService(prisma as never, fxStub as never);
+    const svc = new ImportsService(prisma as never, fxStub as never, matcherStub as never, discogsStub as never);
     await svc.create(baseDto());
     const data = (prisma.importOrder.create.mock.calls[0][0] as { data: { number: string } }).data;
     expect(data.number).toBe('MF-I005');
@@ -66,7 +69,7 @@ describe('ImportsService.create', () => {
 
   test('pads to at least 3 digits for the first import', async () => {
     const { prisma } = makePrismaMock(0);
-    const svc = new ImportsService(prisma as never, fxStub as never);
+    const svc = new ImportsService(prisma as never, fxStub as never, matcherStub as never, discogsStub as never);
     await svc.create(baseDto());
     const data = (prisma.importOrder.create.mock.calls[0][0] as { data: { number: string } }).data;
     expect(data.number).toBe('MF-I001');
@@ -74,7 +77,7 @@ describe('ImportsService.create', () => {
 
   test('sums line extendedNative into subtotalNative', async () => {
     const { prisma } = makePrismaMock(0);
-    const svc = new ImportsService(prisma as never, fxStub as never);
+    const svc = new ImportsService(prisma as never, fxStub as never, matcherStub as never, discogsStub as never);
     await svc.create(baseDto());
     const data = (prisma.importOrder.create.mock.calls[0][0] as { data: { subtotalNative: number } }).data;
     expect(data.subtotalNative).toBe(55.5);
@@ -82,7 +85,7 @@ describe('ImportsService.create', () => {
 
   test('CREDIT_CARD payment method derives PENDING reimbursement status', async () => {
     const { prisma } = makePrismaMock(0);
-    const svc = new ImportsService(prisma as never, fxStub as never);
+    const svc = new ImportsService(prisma as never, fxStub as never, matcherStub as never, discogsStub as never);
     await svc.create(baseDto({ paymentMethod: PaymentMethod.CREDIT_CARD }));
     const data = (prisma.importOrder.create.mock.calls[0][0] as { data: { reimbursementStatus: ReimbursementStatus } }).data;
     expect(data.reimbursementStatus).toBe(ReimbursementStatus.PENDING);
@@ -90,7 +93,7 @@ describe('ImportsService.create', () => {
 
   test('non-credit-card payment methods derive NOT_REQUIRED reimbursement status', async () => {
     const { prisma } = makePrismaMock(0);
-    const svc = new ImportsService(prisma as never, fxStub as never);
+    const svc = new ImportsService(prisma as never, fxStub as never, matcherStub as never, discogsStub as never);
     await svc.create(baseDto({ paymentMethod: PaymentMethod.BANK_TRANSFER }));
     const data = (prisma.importOrder.create.mock.calls[0][0] as { data: { reimbursementStatus: ReimbursementStatus } }).data;
     expect(data.reimbursementStatus).toBe(ReimbursementStatus.NOT_REQUIRED);
@@ -98,7 +101,7 @@ describe('ImportsService.create', () => {
 
   test('new imports are created with status SUBMITTED', async () => {
     const { prisma } = makePrismaMock(0);
-    const svc = new ImportsService(prisma as never, fxStub as never);
+    const svc = new ImportsService(prisma as never, fxStub as never, matcherStub as never, discogsStub as never);
     await svc.create(baseDto());
     const data = (prisma.importOrder.create.mock.calls[0][0] as { data: { status: ImportStatus } }).data;
     expect(data.status).toBe(ImportStatus.SUBMITTED);
@@ -106,7 +109,7 @@ describe('ImportsService.create', () => {
 
   test('assigns sequential lineNo starting at 1', async () => {
     const { prisma } = makePrismaMock(0);
-    const svc = new ImportsService(prisma as never, fxStub as never);
+    const svc = new ImportsService(prisma as never, fxStub as never, matcherStub as never, discogsStub as never);
     await svc.create(baseDto());
     const data = (prisma.importOrder.create.mock.calls[0][0] as { data: { lines: { create: Array<{ lineNo: number }> } } }).data;
     expect(data.lines.create.map(l => l.lineNo)).toEqual([1, 2]);
@@ -116,7 +119,7 @@ describe('ImportsService.create', () => {
 describe('ImportsService.findOne', () => {
   test('throws NotFoundException when the import order does not exist', async () => {
     const { prisma } = makePrismaMock(0);
-    const svc = new ImportsService(prisma as never, fxStub as never);
+    const svc = new ImportsService(prisma as never, fxStub as never, matcherStub as never, discogsStub as never);
     await expect(svc.findOne('missing')).rejects.toThrow(/not found/i);
   });
 });
@@ -201,7 +204,7 @@ describe('ImportsService.price', () => {
   test('throws NotFoundException when the import order does not exist', async () => {
     const fx = { getRate: jest.fn(), getUsdIdr: jest.fn(async () => 15000) };
     const prisma = { importOrder: { findUnique: jest.fn(async () => null) } };
-    const svc = new ImportsService(prisma as never, fx as never);
+    const svc = new ImportsService(prisma as never, fx as never, matcherStub as never, discogsStub as never);
     await expect(svc.price('missing')).rejects.toThrow(/not found/i);
   });
 
@@ -211,7 +214,7 @@ describe('ImportsService.price', () => {
       getRate: jest.fn(async () => ({ rate: 15000, source: 'frankfurter:2026-06-30' })),
       getUsdIdr: jest.fn(async () => 15000),
     };
-    const svc = new ImportsService(prisma as never, fx as never);
+    const svc = new ImportsService(prisma as never, fx as never, matcherStub as never, discogsStub as never);
     await svc.price('imp1');
 
     expect(fx.getRate).toHaveBeenCalledWith('USD', '2026-07-01');
@@ -224,7 +227,7 @@ describe('ImportsService.price', () => {
   test('keeps a manual fxRate as-is and does not call getRate', async () => {
     const { prisma, txCalls } = makePriceMock({ fxRateManual: true, fxRate: 3 });
     const fx = { getRate: jest.fn(), getUsdIdr: jest.fn(async () => 15000) };
-    const svc = new ImportsService(prisma as never, fx as never);
+    const svc = new ImportsService(prisma as never, fx as never, matcherStub as never, discogsStub as never);
     await svc.price('imp1');
 
     expect(fx.getRate).not.toHaveBeenCalled();
@@ -236,7 +239,7 @@ describe('ImportsService.price', () => {
   test('allocates vendor shipping by weight*qty and computes landed cost per line', async () => {
     const { prisma, txCalls } = makePriceMock({ fxRateManual: true, fxRate: 15000 });
     const fx = { getRate: jest.fn(), getUsdIdr: jest.fn(async () => 15000) };
-    const svc = new ImportsService(prisma as never, fx as never);
+    const svc = new ImportsService(prisma as never, fx as never, matcherStub as never, discogsStub as never);
     await svc.price('imp1');
 
     // weights: line1 = 1kg*2qty = 2, line2 = 3kg*1qty = 3 -> 40%/60% of 100*15000 = 1,500,000
@@ -252,7 +255,7 @@ describe('ImportsService.price', () => {
   test('upserts channel prices for every active config, in the channel currency', async () => {
     const { prisma, txCalls } = makePriceMock({ fxRateManual: true, fxRate: 15000 });
     const fx = { getRate: jest.fn(), getUsdIdr: jest.fn(async () => 15000) };
-    const svc = new ImportsService(prisma as never, fx as never);
+    const svc = new ImportsService(prisma as never, fx as never, matcherStub as never, discogsStub as never);
     await svc.price('imp1');
 
     expect(txCalls.priceUpserts).toHaveLength(4); // 2 lines x 2 channels
@@ -274,7 +277,7 @@ describe('ImportsService.price', () => {
       overriddenChannels: [{ lineItemId: 'line1', channel: 'WEBSITE' }],
     });
     const fx = { getRate: jest.fn(), getUsdIdr: jest.fn(async () => 15000) };
-    const svc = new ImportsService(prisma as never, fx as never);
+    const svc = new ImportsService(prisma as never, fx as never, matcherStub as never, discogsStub as never);
     await svc.price('imp1');
 
     expect(txCalls.priceUpserts).toHaveLength(3); // 4 combinations minus the overridden one
@@ -287,10 +290,261 @@ describe('ImportsService.price', () => {
   test('marks the order PRICED as the final write', async () => {
     const { prisma, txCalls } = makePriceMock({ fxRateManual: true, fxRate: 15000 });
     const fx = { getRate: jest.fn(), getUsdIdr: jest.fn(async () => 15000) };
-    const svc = new ImportsService(prisma as never, fx as never);
+    const svc = new ImportsService(prisma as never, fx as never, matcherStub as never, discogsStub as never);
     await svc.price('imp1');
 
     const last = txCalls.orderUpdates[txCalls.orderUpdates.length - 1];
     expect(last).toEqual({ status: ImportStatus.PRICED });
+  });
+});
+
+interface CommitLineOverrides {
+  id?: string;
+  releaseId?: string | null;
+  matchStatus?: string;
+  qty?: number;
+  landedCostIdr?: number;
+  channelPrices?: Array<{ channel: string; currency: string; price: number }>;
+  barcode?: string | null;
+  catNumber?: string | null;
+  label?: string | null;
+}
+
+function makeCommitLine(overrides: CommitLineOverrides = {}) {
+  return {
+    id: overrides.id ?? 'line1',
+    lineNo: 1,
+    artist: 'Boards of Canada',
+    title: 'Music Has the Right to Children',
+    label: overrides.label ?? 'Warp',
+    catNumber: overrides.catNumber ?? 'WARPLP240',
+    barcode: overrides.barcode ?? null,
+    format: 'TWO_LP',
+    qty: overrides.qty ?? 3,
+    landedCostIdr: overrides.landedCostIdr ?? 150000,
+    releaseId: overrides.releaseId ?? null,
+    matchStatus: overrides.matchStatus ?? 'NEW',
+    channelPrices: overrides.channelPrices ?? [
+      { channel: 'WEBSITE', currency: 'IDR', price: 330000 },
+    ],
+  };
+}
+
+/** Builds a prisma stub for commit(): an ImportOrder with the given lines and
+ *  a $transaction stub that records every write against a fake tx client so
+ *  assertions can inspect Release create/update, channel-price upserts, and
+ *  line persistence without touching a real database. */
+function makeCommitMock(opts: { status?: string; lines: ReturnType<typeof makeCommitLine>[]; createThrows?: unknown }) {
+  const order = { id: 'imp1', status: opts.status ?? 'PRICED', lines: opts.lines };
+
+  const txCalls = {
+    releaseUpdates: [] as Array<{ id: string; data: Record<string, unknown> }>,
+    releaseCreates: [] as Array<Record<string, unknown>>,
+    channelPriceUpserts: [] as Array<{ where: unknown; create: Record<string, unknown> }>,
+    lineUpdates: [] as Array<{ id: string; data: Record<string, unknown> }>,
+    orderUpdates: [] as Array<Record<string, unknown>>,
+  };
+
+  let nextReleaseId = 100;
+  const tx = {
+    release: {
+      update: jest.fn(async ({ where, data }: { where: { id: string }; data: Record<string, unknown> }) => {
+        txCalls.releaseUpdates.push({ id: where.id, data });
+        return { id: where.id, ...data };
+      }),
+      create: jest.fn(async ({ data }: { data: Record<string, unknown> }) => {
+        if (opts.createThrows) throw opts.createThrows;
+        txCalls.releaseCreates.push(data);
+        const id = `rel${nextReleaseId++}`;
+        return { id, ...data };
+      }),
+      findFirst: jest.fn(async () => ({ id: 'relExisting' })),
+    },
+    releaseChannelPrice: {
+      upsert: jest.fn(async (args: { where: unknown; create: Record<string, unknown> }) => {
+        txCalls.channelPriceUpserts.push(args);
+        return args.create;
+      }),
+    },
+    importOrderLine: {
+      update: jest.fn(async ({ where, data }: { where: { id: string }; data: Record<string, unknown> }) => {
+        txCalls.lineUpdates.push({ id: where.id, data });
+        return { id: where.id, ...data };
+      }),
+    },
+    importOrder: {
+      update: jest.fn(async ({ data }: { data: Record<string, unknown> }) => {
+        txCalls.orderUpdates.push(data);
+        return { ...order, ...data };
+      }),
+    },
+  };
+
+  const prisma = {
+    importOrder: {
+      findUnique: jest.fn(async () => order),
+    },
+    $transaction: jest.fn(async (cb: (tx: unknown) => unknown) => cb(tx)),
+  };
+
+  return { prisma, tx, order, txCalls };
+}
+
+describe('ImportsService.commit', () => {
+  test('throws BadRequestException when the import is not yet PRICED', async () => {
+    const { prisma } = makeCommitMock({ status: 'SUBMITTED', lines: [makeCommitLine()] });
+    const svc = new ImportsService(prisma as never, {} as never, matcherStub as never, discogsStub as never);
+    await expect(svc.commit('imp1')).rejects.toThrow(/priced/i);
+  });
+
+  test('throws NotFoundException when the import order does not exist', async () => {
+    const prisma = { importOrder: { findUnique: jest.fn(async () => null) } };
+    const svc = new ImportsService(prisma as never, {} as never, matcherStub as never, discogsStub as never);
+    await expect(svc.commit('missing')).rejects.toThrow(/not found/i);
+  });
+
+  test('MATCHED line increments existing Release stock/cost/price and upserts channel prices', async () => {
+    const line = makeCommitLine({
+      id: 'line1',
+      releaseId: 'rel1',
+      matchStatus: 'MATCHED',
+      qty: 3,
+      landedCostIdr: 150000,
+      channelPrices: [
+        { channel: 'WEBSITE', currency: 'IDR', price: 330000 },
+        { channel: 'DISCOGS', currency: 'USD', price: 22 },
+      ],
+    });
+    const { prisma, txCalls } = makeCommitMock({ lines: [line] });
+    const matcher = { matchLine: jest.fn() };
+    const svc = new ImportsService(prisma as never, {} as never, matcher as never, discogsStub as never);
+
+    const result = await svc.commit('imp1');
+
+    expect(matcher.matchLine).not.toHaveBeenCalled();
+    expect(txCalls.releaseUpdates).toHaveLength(1);
+    expect(txCalls.releaseUpdates[0]).toEqual({
+      id: 'rel1',
+      data: { stock: { increment: 3 }, costIdr: 150000, priceIdr: 330000 },
+    });
+    expect(txCalls.channelPriceUpserts).toHaveLength(2);
+    expect(txCalls.channelPriceUpserts.every(
+      u => (u.where as { releaseId_channel: { releaseId: string } }).releaseId_channel.releaseId === 'rel1',
+    )).toBe(true);
+    const lineUpdate = txCalls.lineUpdates.find(u => u.id === 'line1')!;
+    expect(lineUpdate.data).toEqual({ releaseId: 'rel1', matchStatus: 'MATCHED', createdRelease: false });
+    expect(result.updated).toBe(1);
+    expect(result.created).toBe(0);
+  });
+
+  test('NEW line creates a draft Release (condition M, priceIdr from WEBSITE) and sets createdRelease', async () => {
+    const line = makeCommitLine({
+      id: 'line2',
+      releaseId: null,
+      matchStatus: 'NEW',
+      qty: 2,
+      landedCostIdr: 100000,
+      barcode: '0724386642211',
+      channelPrices: [{ channel: 'WEBSITE', currency: 'IDR', price: 220000 }],
+    });
+    const { prisma, txCalls } = makeCommitMock({ lines: [line] });
+    const matcher = { matchLine: jest.fn(async () => ({ releaseId: null, matchStatus: 'NEW' })) };
+    const discogs = { lookup: jest.fn(async () => null) };
+    const svc = new ImportsService(prisma as never, {} as never, matcher as never, discogs as never);
+
+    const result = await svc.commit('imp1');
+
+    expect(matcher.matchLine).toHaveBeenCalledTimes(1);
+    expect(txCalls.releaseCreates).toHaveLength(1);
+    expect(txCalls.releaseCreates[0]).toMatchObject({
+      artist: 'Boards of Canada',
+      title: 'Music Has the Right to Children',
+      label: 'Warp',
+      catNumber: 'WARPLP240',
+      barcode: '0724386642211',
+      format: 'TWO_LP',
+      condition: 'M',
+      priceIdr: 220000,
+      stock: 2,
+      costIdr: 100000,
+    });
+    const lineUpdate = txCalls.lineUpdates.find(u => u.id === 'line2')!;
+    expect(lineUpdate.data).toMatchObject({ matchStatus: 'NEW', createdRelease: true });
+    expect(result.created).toBe(1);
+    expect(result.updated).toBe(0);
+  });
+
+  test('falls back to updating the existing Release on a P2002 unique-constraint conflict', async () => {
+    const line = makeCommitLine({
+      id: 'line3',
+      releaseId: null,
+      matchStatus: 'NEW',
+      qty: 1,
+      landedCostIdr: 90000,
+      barcode: '0724386642211',
+      channelPrices: [{ channel: 'WEBSITE', currency: 'IDR', price: 200000 }],
+    });
+    const conflict = { code: 'P2002', meta: { target: ['barcode'] } };
+    const { prisma, txCalls } = makeCommitMock({ lines: [line], createThrows: conflict });
+    const matcher = { matchLine: jest.fn(async () => ({ releaseId: null, matchStatus: 'NEW' })) };
+    const discogs = { lookup: jest.fn(async () => null) };
+    const svc = new ImportsService(prisma as never, {} as never, matcher as never, discogs as never);
+
+    const result = await svc.commit('imp1');
+
+    expect(txCalls.releaseUpdates).toHaveLength(1);
+    expect(txCalls.releaseUpdates[0].id).toBe('relExisting');
+    const lineUpdate = txCalls.lineUpdates.find(u => u.id === 'line3')!;
+    expect(lineUpdate.data).toEqual({ releaseId: 'relExisting', matchStatus: 'MATCHED', createdRelease: false });
+    expect(result.updated).toBe(1);
+    expect(result.created).toBe(0);
+  });
+
+  test('sets the import order status to INVENTORY_UPDATED as the final write', async () => {
+    const line = makeCommitLine({ matchStatus: 'MATCHED', releaseId: 'rel1' });
+    const { prisma, txCalls } = makeCommitMock({ lines: [line] });
+    const svc = new ImportsService(prisma as never, {} as never, matcherStub as never, discogsStub as never);
+
+    await svc.commit('imp1');
+
+    const last = txCalls.orderUpdates[txCalls.orderUpdates.length - 1];
+    expect(last).toEqual({ status: 'INVENTORY_UPDATED' });
+  });
+});
+
+describe('ImportsService.match', () => {
+  test('persists matchLine results for every line without touching inventory', async () => {
+    const order = {
+      id: 'imp1',
+      lines: [
+        { id: 'line1', artist: 'A', title: 'B', format: 'LP', barcode: null, catNumber: null, discogsId: null },
+      ],
+    };
+    const prisma = {
+      importOrder: {
+        findUnique: jest.fn(async () => order),
+      },
+      importOrderLine: {
+        update: jest.fn(async ({ where, data }: { where: { id: string }; data: Record<string, unknown> }) => (
+          { id: where.id, ...data }
+        )),
+      },
+    };
+    const matcher = { matchLine: jest.fn(async () => ({ releaseId: 'rel9', matchStatus: 'MATCHED' })) };
+
+    // findOne() is called at the end of match(); stub it out via a second findUnique shape.
+    const findOneOrder = { ...order, attachments: [], consolidation: null };
+    (prisma.importOrder.findUnique as jest.Mock)
+      .mockResolvedValueOnce(order)
+      .mockResolvedValueOnce(findOneOrder);
+
+    const svc = new ImportsService(prisma as never, {} as never, matcher as never, discogsStub as never);
+    await svc.match('imp1');
+
+    expect(matcher.matchLine).toHaveBeenCalledTimes(1);
+    expect(prisma.importOrderLine.update).toHaveBeenCalledWith({
+      where: { id: 'line1' },
+      data: { releaseId: 'rel9', matchStatus: 'MATCHED' },
+    });
   });
 });

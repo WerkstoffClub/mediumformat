@@ -81,6 +81,18 @@ export class ImportsController {
   }
 
   @Roles(Role.ADMIN, Role.MANAGER)
+  @Post(':id/match')
+  match(@Param('id') id: string) {
+    return this.imports.match(id);
+  }
+
+  @Roles(Role.ADMIN, Role.MANAGER)
+  @Post(':id/commit')
+  commit(@Param('id') id: string) {
+    return this.imports.commit(id);
+  }
+
+  @Roles(Role.ADMIN, Role.MANAGER)
   @Post(':id/attachments')
   @UseInterceptors(FileInterceptor('file', { limits: { fileSize: MAX_UPLOAD_BYTES } }))
   async uploadAttachment(

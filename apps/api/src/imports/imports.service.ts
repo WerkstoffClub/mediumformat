@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import * as crypto from 'node:crypto';
 import {
-  ImportAttachmentKind, ImportOrigin, ImportStatus, PaymentMethod, Prisma, ReimbursementStatus, SalesChannel,
+  ImportAttachmentKind, ImportLineMatchStatus, ImportOrigin, ImportStatus, PaymentMethod, Prisma,
+  RecordCondition, ReimbursementStatus, SalesChannel,
 } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateImportDto } from './dto/create-import.dto';
@@ -13,12 +14,27 @@ import { FxService } from './pricing/fx.service';
 import {
   DEFAULT_TARGET_MARKUP, allocateByWeight, channelPrice, landedCostPerUnitIdr,
 } from './pricing/pricing';
+import { MatchService } from './matching/match.service';
+import { DiscogsService } from './matching/discogs.service';
+
+/** Fallback markup applied to landed cost when a line has no WEBSITE channel
+ *  price to draw from (channel prices should normally exist post-price()). */
+const NO_CHANNEL_PRICE_MARKUP = 2.2;
+
+/** Duck-types a Prisma unique-constraint violation (P2002), mirroring the
+ *  check used in storefront.service.ts rather than importing the Prisma
+ *  error class directly. */
+function isUniqueConstraintError(e: unknown): e is { code: 'P2002'; meta?: { target?: string[] } } {
+  return typeof e === 'object' && e !== null && 'code' in e && (e as { code: unknown }).code === 'P2002';
+}
 
 @Injectable()
 export class ImportsService {
   constructor(
     private prisma: PrismaService,
     private fx: FxService,
+    private matcher: MatchService,
+    private discogs: DiscogsService,
   ) {}
 
   private uploadsRoot(): string {
@@ -255,6 +271,169 @@ export class ImportsService {
     });
 
     return this.findOne(id);
+  }
+
+  /** Preview matching: resolves every line against the catalog and persists
+   *  the result, but makes no inventory writes. Safe to re-run any number of
+   *  times before committing. */
+  async match(id: string) {
+    const order = await this.prisma.importOrder.findUnique({
+      where: { id },
+      include: { lines: { orderBy: { lineNo: 'asc' } } },
+    });
+    if (!order) throw new NotFoundException('Import order not found');
+
+    for (const line of order.lines) {
+      const result = await this.matcher.matchLine(line);
+      await this.prisma.importOrderLine.update({
+        where: { id: line.id },
+        data: { releaseId: result.releaseId, matchStatus: result.matchStatus },
+      });
+    }
+
+    return this.findOne(id);
+  }
+
+  /** Commits a PRICED import: matches any not-yet-matched line, then in a
+   *  single transaction updates stock/cost/price on matched Releases,
+   *  creates draft Releases (optionally Discogs-enriched) for new/ambiguous
+   *  lines, and upserts per-channel prices from the priced import lines. */
+  async commit(id: string) {
+    const order = await this.prisma.importOrder.findUnique({
+      where: { id },
+      include: {
+        lines: {
+          orderBy: { lineNo: 'asc' },
+          include: { channelPrices: true },
+        },
+      },
+    });
+    if (!order) throw new NotFoundException('Import order not found');
+    if (order.status !== ImportStatus.PRICED) {
+      throw new BadRequestException('Import must be priced before committing');
+    }
+
+    // Resolve matches for any line that isn't already MATCHED before opening
+    // the transaction — matchLine only reads, so this is safe up front.
+    const resolved = new Map<string, { releaseId: string | null; matchStatus: ImportLineMatchStatus }>();
+    for (const line of order.lines) {
+      if (line.matchStatus === ImportLineMatchStatus.MATCHED && line.releaseId) {
+        resolved.set(line.id, { releaseId: line.releaseId, matchStatus: line.matchStatus });
+      } else {
+        resolved.set(line.id, await this.matcher.matchLine(line));
+      }
+    }
+
+    let created = 0;
+    let updated = 0;
+
+    await this.prisma.$transaction(async (tx) => {
+      for (const line of order.lines) {
+        const match = resolved.get(line.id)!;
+        let releaseId = match.releaseId;
+        let matchStatus = match.matchStatus;
+        let createdRelease = false;
+
+        const landedCostIdr = Math.round(Number(line.landedCostIdr));
+        const websitePrice = line.channelPrices.find(p => p.channel === SalesChannel.WEBSITE);
+        const websitePriceIdr = websitePrice ? Math.round(Number(websitePrice.price)) : undefined;
+
+        if (matchStatus === ImportLineMatchStatus.MATCHED && releaseId) {
+          await tx.release.update({
+            where: { id: releaseId },
+            data: {
+              stock: { increment: line.qty },
+              costIdr: landedCostIdr,
+              ...(websitePriceIdr !== undefined ? { priceIdr: websitePriceIdr } : {}),
+            },
+          });
+          updated++;
+        } else {
+          const enrich = await this.discogs.lookup({
+            barcode: line.barcode,
+            catNumber: line.catNumber,
+            artist: line.artist,
+            title: line.title,
+            format: line.format,
+          });
+
+          const priceIdr = websitePriceIdr ?? Math.round(landedCostIdr * NO_CHANNEL_PRICE_MARKUP);
+          const releaseData = {
+            artist: line.artist,
+            title: line.title,
+            label: line.label ?? undefined,
+            catNumber: line.catNumber ?? undefined,
+            barcode: (enrich?.barcode ?? line.barcode) || undefined,
+            format: line.format,
+            condition: RecordCondition.M,
+            priceIdr,
+            stock: line.qty,
+            costIdr: landedCostIdr,
+            discogsId: enrich?.discogsId,
+            genre: enrich?.genre,
+            year: enrich?.year,
+            imageUrl: enrich?.imageUrl,
+          };
+
+          try {
+            const release = await tx.release.create({ data: releaseData });
+            releaseId = release.id;
+            createdRelease = true;
+            created++;
+          } catch (e: unknown) {
+            if (!isUniqueConstraintError(e)) throw e;
+            const target = e.meta?.target ?? [];
+            const conflictField = target.includes('barcode')
+              ? 'barcode'
+              : target.includes('discogsId') ? 'discogsId' : null;
+            const conflictValue = conflictField
+              ? (releaseData as Record<string, unknown>)[conflictField] as string | undefined
+              : undefined;
+            if (!conflictField || !conflictValue) throw e;
+
+            const existing = await tx.release.findFirst({ where: { [conflictField]: conflictValue } });
+            if (!existing) throw e;
+
+            await tx.release.update({
+              where: { id: existing.id },
+              data: {
+                stock: { increment: line.qty },
+                costIdr: landedCostIdr,
+                ...(websitePriceIdr !== undefined ? { priceIdr: websitePriceIdr } : {}),
+              },
+            });
+            releaseId = existing.id;
+            matchStatus = ImportLineMatchStatus.MATCHED;
+            updated++;
+          }
+        }
+
+        for (const cp of line.channelPrices) {
+          await tx.releaseChannelPrice.upsert({
+            where: { releaseId_channel: { releaseId: releaseId!, channel: cp.channel } },
+            create: {
+              releaseId: releaseId!,
+              channel: cp.channel,
+              currency: cp.currency,
+              price: cp.price,
+            },
+            update: {
+              currency: cp.currency,
+              price: cp.price,
+            },
+          });
+        }
+
+        await tx.importOrderLine.update({
+          where: { id: line.id },
+          data: { releaseId, matchStatus, createdRelease },
+        });
+      }
+
+      await tx.importOrder.update({ where: { id }, data: { status: ImportStatus.INVENTORY_UPDATED } });
+    });
+
+    return { created, updated, importOrder: await this.findOne(id) };
   }
 
   async listChannelPricing() {
