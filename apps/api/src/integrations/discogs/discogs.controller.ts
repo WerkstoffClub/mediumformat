@@ -28,4 +28,10 @@ export class DiscogsController {
     }
     return { results: [] };
   }
+
+  @Roles(Role.ADMIN, Role.MANAGER)
+  @Post('rehost')
+  rehost(@Body() body: { uris: string[] }): Promise<string[]> {
+    return this.discogs.rehostImages(body.uris ?? []);
+  }
 }

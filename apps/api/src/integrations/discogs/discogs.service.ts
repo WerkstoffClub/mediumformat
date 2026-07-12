@@ -1,6 +1,7 @@
 import { Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
 import axios from 'axios';
 import { mapDiscogsRelease, DiscogsMapped } from './discogs.mapper';
+import { UploadService } from '../upload/upload.service';
 
 export interface DiscogsSearchResult {
   id: string;
@@ -16,6 +17,8 @@ export class DiscogsService {
   private readonly log = new Logger(DiscogsService.name);
   private readonly base = 'https://api.discogs.com';
   private readonly ua = 'MediumFormat/1.0 +https://mediumformat.info';
+
+  constructor(private uploads: UploadService) {}
 
   private get token(): string | undefined {
     return process.env.DISCOGS_TOKEN;
@@ -71,5 +74,26 @@ export class DiscogsService {
       this.log.error(`Discogs search failed: ${message}`);
       throw new ServiceUnavailableException('Discogs search failed');
     }
+  }
+
+  async rehostImages(uris: string[]): Promise<string[]> {
+    const out: string[] = [];
+    for (const uri of uris) {
+      try {
+        const { data, headers } = await axios.get<ArrayBuffer>(uri, {
+          responseType: 'arraybuffer',
+          headers: { 'User-Agent': this.ua, ...this.authHeader() },
+          timeout: 15_000,
+        });
+        const mime = String(headers['content-type'] ?? 'image/jpeg');
+        const buf = Buffer.from(data);
+        const { url } = this.uploads.saveRemoteImage(buf, mime, 'discogs');
+        out.push(url);
+      } catch (e: unknown) {
+        const message = e instanceof Error ? e.message : String(e);
+        this.log.warn(`Rehost failed for ${uri}: ${message}`);
+      }
+    }
+    return out;
   }
 }
