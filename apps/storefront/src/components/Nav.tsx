@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
+import { useCurrency } from '../hooks/useCurrency';
 
-type MenuKey = 'shop' | 'news' | null;
+type MenuKey = 'shop' | 'formats' | 'style' | 'news' | null;
 
 interface MegaLink {
   label: string;
@@ -12,9 +13,9 @@ interface MegaLink {
 interface MegaConfig {
   key: Exclude<MenuKey, null>;
   triggerLabel: string;
-  /** The trigger link itself points here if the user clicks the label. */
   triggerTo: string;
   links: MegaLink[];
+  gridLinks?: boolean;
   hero: {
     eyebrow: string;
     title: string;
@@ -28,18 +29,60 @@ const SHOP_MENU: MegaConfig = {
   triggerLabel: 'Shop',
   triggerTo: '/catalog',
   links: [
-    { label: 'All records', to: '/catalog' },
-    { label: 'LPs — landing', to: '/pages/lps' },
-    { label: 'Cassettes — landing', to: '/pages/cassettes' },
-    { label: '7" singles', to: '/catalog?format=SEVEN_INCH' },
-    { label: '12" singles', to: '/catalog?format=TWELVE_INCH' },
-    { label: 'CDs', to: '/catalog?format=CD' },
-    { label: 'Merch', to: '/catalog?format=MERCH' },
+    { label: 'New Releases', to: '/catalog?sort=new' },
+    { label: 'Best Selling', to: '/catalog?sort=best' },
+    { label: 'Pre-Orders', to: '/preorders' },
+    { label: 'On-Sale', to: '/catalog?sale=1' },
   ],
   hero: {
     eyebrow: 'New this week',
     title: 'Fresh arrivals just landed',
     ctaLabel: 'Shop new arrivals',
+    ctaTo: '/catalog?sort=new',
+  },
+};
+
+const FORMATS_MENU: MegaConfig = {
+  key: 'formats',
+  triggerLabel: 'Formats',
+  triggerTo: '/catalog',
+  gridLinks: true,
+  links: [
+    { label: 'Vinyls', to: '/catalog?format=LP' },
+    { label: 'Cassettes', to: '/catalog?format=CASSETTE' },
+    { label: 'CD', to: '/catalog?format=CD' },
+    { label: '7" Singles', to: '/catalog?format=SEVEN_INCH' },
+    { label: '12" Singles', to: '/catalog?format=TWELVE_INCH' },
+    { label: 'Merchandise', to: '/catalog?format=MERCH' },
+  ],
+  hero: {
+    eyebrow: 'All formats',
+    title: 'Vinyl, CD, cassette & more',
+    ctaLabel: 'Browse all formats',
+    ctaTo: '/catalog',
+  },
+};
+
+const STYLE_MENU: MegaConfig = {
+  key: 'style',
+  triggerLabel: 'Style',
+  triggerTo: '/catalog',
+  gridLinks: true,
+  links: [
+    { label: 'Electronic', to: '/catalog?genre=electronic' },
+    { label: 'Jazz', to: '/catalog?genre=jazz' },
+    { label: 'Soul', to: '/catalog?genre=soul' },
+    { label: 'Hip-Hop', to: '/catalog?genre=hiphop' },
+    { label: 'Rock', to: '/catalog?genre=rock' },
+    { label: 'Ambient', to: '/catalog?genre=ambient' },
+    { label: 'Funk', to: '/catalog?genre=funk' },
+    { label: 'World', to: '/catalog?genre=world' },
+    { label: 'Indie', to: '/catalog?genre=indie' },
+  ],
+  hero: {
+    eyebrow: 'Curated by genre',
+    title: 'From jazz to ambient',
+    ctaLabel: 'Explore genres',
     ctaTo: '/catalog',
   },
 };
@@ -49,11 +92,11 @@ const NEWS_MENU: MegaConfig = {
   triggerLabel: 'News',
   triggerTo: '/news',
   links: [
-    { label: 'All posts', to: '/news' },
+    { label: 'Review', to: '/news?category=review' },
     { label: 'Staff Picks', to: '/news?category=staff%20picks' },
-    { label: 'Highlights', to: '/news?category=highlights' },
-    { label: 'News', to: '/news?category=news' },
-    { label: 'Interviews', to: '/news?category=interview' },
+    { label: 'New Arrivals', to: '/news?category=new%20arrivals' },
+    { label: 'Feature', to: '/news?category=feature' },
+    { label: 'Selector', to: '/news?category=selector' },
   ],
   hero: {
     eyebrow: 'Latest story',
@@ -63,8 +106,11 @@ const NEWS_MENU: MegaConfig = {
   },
 };
 
+const MENUS: MegaConfig[] = [SHOP_MENU, FORMATS_MENU, STYLE_MENU, NEWS_MENU];
+
 export function Nav() {
   const { theme, toggle } = useTheme();
+  const { currency, setCurrency } = useCurrency();
   const [openMenu, setOpenMenu] = useState<MenuKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -73,24 +119,29 @@ export function Nav() {
   const navigate = useNavigate();
   const closeTimer = useRef<number | null>(null);
 
-  // Close all menus on route change.
+  // Close menus + search on route change.
   useEffect(() => {
     setOpenMenu(null);
     setMobileOpen(false);
     setSearchOpen(false);
   }, [location.pathname, location.search]);
 
-  // Close search overlay on Escape.
+  // Global shortcuts.
   useEffect(() => {
-    if (!searchOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSearchOpen(false);
+      if (e.key === 'Escape') {
+        setSearchOpen(false);
+        setMobileOpen(false);
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [searchOpen]);
+  }, []);
 
-  // Delay mega-menu close so users can slide the pointer down onto the panel.
   const scheduleClose = useCallback(() => {
     if (closeTimer.current) window.clearTimeout(closeTimer.current);
     closeTimer.current = window.setTimeout(() => setOpenMenu(null), 120);
@@ -118,7 +169,7 @@ export function Nav() {
   return (
     <>
       <nav className="mf-nav" aria-label="Primary">
-        {/* Left: logo */}
+        {/* Left: hamburger (mobile) + logo */}
         <div className="mf-nav-left">
           <button
             type="button"
@@ -148,22 +199,17 @@ export function Nav() {
           </Link>
         </div>
 
-        {/* Center: menu */}
+        {/* Center: mega menu */}
         <div className="mf-nav-menu">
-          <MegaMenuItem
-            cfg={SHOP_MENU}
-            openMenu={openMenu}
-            onEnter={openViaEnter('shop')}
-            onLeave={scheduleClose}
-          />
-          <NavItem to="/preorders">Preorders</NavItem>
-          <MegaMenuItem
-            cfg={NEWS_MENU}
-            openMenu={openMenu}
-            onEnter={openViaEnter('news')}
-            onLeave={scheduleClose}
-          />
-          <NavItem to="/about">About</NavItem>
+          {MENUS.map((cfg) => (
+            <MegaMenuItem
+              key={cfg.key}
+              cfg={cfg}
+              openMenu={openMenu}
+              onEnter={openViaEnter(cfg.key)}
+              onLeave={scheduleClose}
+            />
+          ))}
         </div>
 
         {/* Right: actions */}
@@ -171,12 +217,22 @@ export function Nav() {
           <button
             type="button"
             className="mf-icon-btn"
-            aria-label="Search"
+            aria-label="Search (Cmd/Ctrl-K)"
             onClick={() => setSearchOpen(true)}
           >
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            className="mf-icon-btn"
+            aria-label="Wishlist"
+            title="Wishlist"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
             </svg>
           </button>
           <button
@@ -186,49 +242,65 @@ export function Nav() {
             className="mf-icon-btn"
           >
             {theme === 'dark' ? (
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <circle cx="12" cy="12" r="4" />
                 <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
               </svg>
             )}
           </button>
-          <button
-            type="button"
-            className="mf-icon-btn relative"
-            aria-label="Cart (0 items) — checkout coming soon"
-            title="Checkout coming soon"
-            disabled
-          >
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M6 6h15l-1.5 9h-13z" />
-              <circle cx="9" cy="20" r="1.5" />
-              <circle cx="18" cy="20" r="1.5" />
-              <path d="M6 6L4 2H1" />
-            </svg>
+          <div className="mf-cart-wrap">
+            <button
+              type="button"
+              className="mf-icon-btn"
+              aria-label="Cart — checkout coming soon"
+              title="Checkout coming soon"
+              disabled
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+            </button>
             <span className="mf-cart-badge mono" aria-hidden>0</span>
-          </button>
+          </div>
+          <div className="mf-cur-switch" role="group" aria-label="Currency">
+            <button
+              type="button"
+              className={currency === 'IDR' ? 'mf-cur-btn on' : 'mf-cur-btn'}
+              aria-pressed={currency === 'IDR'}
+              onClick={() => setCurrency('IDR')}
+            >
+              IDR
+            </button>
+            <button
+              type="button"
+              className={currency === 'USD' ? 'mf-cur-btn on' : 'mf-cur-btn'}
+              aria-pressed={currency === 'USD'}
+              onClick={() => setCurrency('USD')}
+            >
+              USD
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Mobile drawer */}
       {mobileOpen && (
         <div className="mf-mobile-drawer" role="dialog" aria-label="Mobile menu">
-          <MobileGroup label="Shop">
-            {SHOP_MENU.links.map((l) => (
-              <Link key={l.to} to={l.to} className="mf-mobile-link">{l.label}</Link>
-            ))}
-          </MobileGroup>
-          <Link to="/preorders" className="mf-mobile-link mf-mobile-solo">Preorders</Link>
-          <MobileGroup label="News">
-            {NEWS_MENU.links.map((l) => (
-              <Link key={l.to} to={l.to} className="mf-mobile-link">{l.label}</Link>
-            ))}
-          </MobileGroup>
-          <Link to="/about" className="mf-mobile-link mf-mobile-solo">About</Link>
+          {MENUS.map((menu) => (
+            <MobileGroup key={menu.key} label={menu.triggerLabel}>
+              {menu.links.map((l) => (
+                <Link key={l.to + l.label} to={l.to} className="mf-mobile-link">
+                  {l.label}
+                </Link>
+              ))}
+            </MobileGroup>
+          ))}
         </div>
       )}
 
@@ -245,7 +317,7 @@ export function Nav() {
         >
           <form className="mf-sbox" onSubmit={submitSearch}>
             <div className="mf-srow">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.35-4.35" />
               </svg>
@@ -253,7 +325,7 @@ export function Nav() {
                 autoFocus
                 type="search"
                 className="mf-sinput"
-                placeholder="Search artists, titles, catalog numbers…"
+                placeholder="Search artist, title, label, catalogue…"
                 value={searchQ}
                 onChange={(e) => setSearchQ(e.target.value)}
               />
@@ -263,14 +335,15 @@ export function Nav() {
                 aria-label="Close search"
                 onClick={() => setSearchOpen(false)}
               >
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden>
                   <path d="M6 6l12 12" />
                   <path d="M18 6l-12 12" />
                 </svg>
               </button>
             </div>
             <div className="mf-shint">
-              Press <span className="mf-kbd">Enter</span> to search, <span className="mf-kbd">Esc</span> to close
+              Try &ldquo;Floating Points&rdquo;, &ldquo;Blue Note&rdquo;, &ldquo;jazz LP&rdquo; — press{' '}
+              <span className="mf-kbd">Esc</span> to close
             </div>
           </form>
         </div>
@@ -337,26 +410,22 @@ export function Nav() {
         }
         .mf-hamburger:hover { background: var(--raised); color: var(--ink); }
 
-        /* Menu items */
-        .mf-menu-item {
-          position: relative;
-        }
-        /* Bridge the small gap between trigger and mega panel so hover doesn't drop. */
+        .mf-menu-item { position: relative; }
         .mf-menu-item::after {
           content: "";
           position: absolute;
           left: 0; right: 0;
           top: 100%;
-          height: 12px;
+          height: 14px;
         }
         .mf-nav-link {
           display: inline-flex;
           align-items: center;
           gap: 4px;
-          font: 500 13px/1 "Noto Sans", sans-serif;
+          font: 500 13px/1 var(--ui);
           color: var(--body);
           text-decoration: none;
-          padding: 8px 12px;
+          padding: 7px 11px;
           border-radius: var(--r-md);
           background: transparent;
           border: none;
@@ -399,13 +468,14 @@ export function Nav() {
           flex: 1;
           padding: 10px;
           min-width: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
+        }
+        .mf-mega-links.grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
         }
         .mf-mega-link {
           display: block;
-          padding: 8px 12px;
+          padding: 6px 12px;
           border-radius: var(--r-pill);
           font-size: 13px;
           line-height: 1.3;
@@ -445,6 +515,7 @@ export function Nav() {
           background: repeating-radial-gradient(circle at 50% 50%, #00000022 0 3px, transparent 3px 6px);
         }
         .mf-mega-hero .mh-eyebrow {
+          font-family: var(--ui);
           font-size: 10px;
           letter-spacing: 0.08em;
           text-transform: uppercase;
@@ -488,6 +559,7 @@ export function Nav() {
         }
         .mf-icon-btn:hover { background: var(--raised); color: var(--ink); }
         .mf-icon-btn:disabled { cursor: not-allowed; }
+        .mf-cart-wrap { position: relative; }
         .mf-cart-badge {
           position: absolute;
           top: 4px; right: 4px;
@@ -501,6 +573,31 @@ export function Nav() {
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        /* Currency switcher */
+        .mf-cur-switch {
+          display: flex;
+          border: 1px solid var(--hairline);
+          border-radius: var(--r-pill);
+          padding: 2px;
+          margin-left: 4px;
+        }
+        .mf-cur-btn {
+          font-family: var(--ui);
+          font-size: 11px;
+          font-weight: 500;
+          color: var(--mute);
+          background: transparent;
+          border: none;
+          border-radius: var(--r-pill);
+          padding: 5px 10px;
+          cursor: pointer;
+          transition: background .15s, color .15s;
+        }
+        .mf-cur-btn.on {
+          background: var(--accent);
+          color: var(--accent-text);
         }
 
         /* Mobile drawer */
@@ -535,14 +632,6 @@ export function Nav() {
         .mf-mobile-link:hover, .mf-mobile-link:focus-visible {
           background: var(--raised);
           color: var(--ink);
-        }
-        .mf-mobile-solo {
-          padding-top: 12px;
-          padding-bottom: 12px;
-          font-weight: 500;
-          color: var(--ink);
-          border-top: 1px solid var(--hairline);
-          margin-top: 6px;
         }
 
         /* Search overlay */
@@ -585,7 +674,7 @@ export function Nav() {
           border: none;
           outline: none;
           font-size: 16px;
-          font-family: "Noto Sans", sans-serif;
+          font-family: var(--ui);
           color: var(--ink);
         }
         .mf-sinput::placeholder { color: var(--mute); }
@@ -595,7 +684,7 @@ export function Nav() {
           padding: 12px 16px;
         }
         .mf-kbd {
-          font-family: "Noto Sans Mono", ui-monospace, monospace;
+          font-family: var(--ui);
           font-size: 10px;
           color: var(--mute);
           border: 1px solid var(--hairline);
@@ -610,6 +699,7 @@ export function Nav() {
           .mf-hamburger { display: inline-flex; }
           .mf-nav { grid-template-columns: auto 1fr auto; padding: 0 12px; }
           .mf-nav-actions { justify-self: end; }
+          .mf-cur-switch { display: none; }
         }
       `}</style>
     </>
@@ -617,18 +707,6 @@ export function Nav() {
 }
 
 // ─── Sub-components ────────────────────────────────────────────────────
-
-function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
-  const { pathname } = useLocation();
-  const active = pathname === to || pathname.startsWith(`${to}/`);
-  return (
-    <div className="mf-menu-item">
-      <Link to={to} className={active ? 'mf-nav-link on' : 'mf-nav-link'}>
-        {children}
-      </Link>
-    </div>
-  );
-}
 
 function MegaMenuItem({
   cfg,
@@ -642,8 +720,6 @@ function MegaMenuItem({
   onLeave: () => void;
 }) {
   const open = openMenu === cfg.key;
-  const { pathname } = useLocation();
-  const active = pathname.startsWith(cfg.triggerTo);
   return (
     <div
       className="mf-menu-item"
@@ -654,7 +730,7 @@ function MegaMenuItem({
     >
       <Link
         to={cfg.triggerTo}
-        className={active ? 'mf-nav-link on' : 'mf-nav-link'}
+        className="mf-nav-link"
         aria-haspopup="true"
         aria-expanded={open}
       >
@@ -666,9 +742,14 @@ function MegaMenuItem({
         role="menu"
         aria-label={`${cfg.triggerLabel} submenu`}
       >
-        <div className="mf-mega-links">
+        <div className={cfg.gridLinks ? 'mf-mega-links grid' : 'mf-mega-links'}>
           {cfg.links.map((l) => (
-            <Link key={l.to} to={l.to} className="mf-mega-link" role="menuitem">
+            <Link
+              key={l.to + l.label}
+              to={l.to}
+              className="mf-mega-link"
+              role="menuitem"
+            >
               {l.label}
             </Link>
           ))}
@@ -689,7 +770,13 @@ function MegaMenuItem({
   );
 }
 
-function MobileGroup({ label, children }: { label: string; children: React.ReactNode }) {
+function MobileGroup({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <div className="mf-mobile-group-label">{label}</div>
