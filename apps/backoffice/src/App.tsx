@@ -19,6 +19,8 @@ import { Inventory } from './pages/inventory/Inventory';
 import { ReleaseForm } from './pages/inventory/ReleaseForm';
 import { BlogList } from './pages/blog/BlogList';
 import { PostForm } from './pages/blog/PostForm';
+import { CategoryPagesList } from './pages/category-pages/CategoryPagesList';
+import { CategoryPageForm } from './pages/category-pages/CategoryPageForm';
 
 function ProtectedRoutes() {
   const { user, loading } = useAuth();
@@ -59,9 +61,12 @@ export default function App() {
           <Route path="/inventory"          element={<Inventory />} />
           <Route path="/inventory/new"      element={<ReleaseForm />} />
           <Route path="/inventory/:id/edit" element={<ReleaseForm />} />
-          <Route path="/blog"               element={<BlogList />} />
-          <Route path="/blog/new"           element={<PostForm />} />
-          <Route path="/blog/:id/edit"      element={<PostForm />} />
+          <Route path="/blog"                        element={<BlogList />} />
+          <Route path="/blog/new"                    element={<PostForm />} />
+          <Route path="/blog/:id/edit"               element={<PostForm />} />
+          <Route path="/category-pages"              element={<CategoryPagesList />} />
+          <Route path="/category-pages/new"          element={<CategoryPageForm />} />
+          <Route path="/category-pages/:id/edit"     element={<CategoryPageForm />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
