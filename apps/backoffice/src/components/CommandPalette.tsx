@@ -16,6 +16,8 @@ const PAGES: PageEntry[] = [
   { label: 'Channels', to: '/channels', hint: 'Selling' },
   { label: 'Categories & Tags', to: '/inventory?tab=categories', hint: 'Inventory' },
   { label: 'Purchase orders', to: '/purchase-orders', hint: 'Shop' },
+  { label: 'Imports', to: '/imports', hint: 'Selling' },
+  { label: 'New import', to: '/imports/new', hint: 'Action' },
   { label: 'Settlements', to: '/sales?tab=settlements', hint: 'Sales' },
   { label: 'Preorders', to: '/preorders', hint: 'Shop' },
   { label: 'Vouchers', to: '/vouchers', hint: 'Shop' },
