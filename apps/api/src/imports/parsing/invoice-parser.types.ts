@@ -17,6 +17,8 @@ export interface RawInvoice {
   orderDate?: string;   // ISO 8601 if the model can infer it
   currency: string;     // ISO 4217
   vendorShipping?: number;
+  tax?: number;
+  otherFees?: number;
   invoiceTotal?: number;
   lines: RawInvoiceLine[];
 }
@@ -34,6 +36,8 @@ export interface ParsedInvoice {
   orderDate?: string;
   currency: string;
   vendorShippingNative: number;
+  taxNative: number;
+  otherFeesNative: number;
   invoiceTotalNative?: number;
   lines: ParsedInvoiceLine[];
   totalsReconcile: boolean;
