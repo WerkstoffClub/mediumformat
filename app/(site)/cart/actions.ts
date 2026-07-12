@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { CART_COOKIE, readCartLines, getCartView, type CartLine } from "@/lib/cart";
 import { xendit } from "@/lib/integrations/xendit/client";
+import { sendOrderConfirmationEmail } from "@/lib/email";
 import type { Prisma } from "@prisma/client";
 
 async function writeCart(lines: CartLine[]) {
@@ -116,6 +117,10 @@ export async function placeOrder(formData: FormData) {
     shippingAddressId = created.id;
   }
 
+  const shippingFee = Math.max(0, Number(formData.get("shippingFee") ?? 0) || 0);
+  const shippingLabel = String(formData.get("shippingLabel") ?? "").trim();
+  const grandTotal = cart.total + shippingFee;
+
   const number = `WEB-${Date.now().toString(36).toUpperCase()}`;
   const order = await prisma.order.create({
     data: {
@@ -127,13 +132,16 @@ export async function placeOrder(formData: FormData) {
       currency: "IDR",
       subtotal: cart.subtotal,
       tax: cart.tax,
-      total: cart.total,
+      shippingFee,
+      total: grandTotal,
       notes: [
         `Web checkout`,
+        cart.wholesale && `Wholesale pricing`,
         name && `Name: ${name}`,
         email && `Email: ${email}`,
         phone && `Phone: ${phone}`,
         address && `Address: ${address}${city ? `, ${city}` : ""}`,
+        shippingLabel && `Courier: ${shippingLabel}`,
       ]
         .filter(Boolean)
         .join("\n"),
@@ -149,6 +157,25 @@ export async function placeOrder(formData: FormData) {
     },
   });
 
+  // Order-confirmation email (best-effort).
+  const recipient = email || session?.user?.email || "";
+  if (recipient) {
+    try {
+      await sendOrderConfirmationEmail(recipient, {
+        number: order.number,
+        items: cart.items.map((i) => ({
+          qty: i.qty,
+          name: `${i.artist ? `${i.artist} — ` : ""}${i.title}`,
+          lineTotal: i.lineTotal,
+        })),
+        shippingFee,
+        total: grandTotal,
+      });
+    } catch {
+      // best-effort — don't block checkout on email failures
+    }
+  }
+
   // Try Xendit unified checkout; fall back to a pending order if unconfigured.
   let redirectTo = `/checkout/success?order=${order.number}`;
   if (process.env.XENDIT_SECRET_KEY) {
@@ -156,7 +183,7 @@ export async function placeOrder(formData: FormData) {
     try {
       const invoice = (await xendit.createInvoice({
         externalId: order.number,
-        amountIdr: Math.round(cart.total),
+        amountIdr: Math.round(grandTotal),
         description: `Medium Format order ${order.number}`,
         customer: {
           email: email || undefined,
@@ -173,7 +200,7 @@ export async function placeOrder(formData: FormData) {
           gateway: "XENDIT",
           gatewayRef: invoice.id ?? null,
           status: "PENDING",
-          amount: cart.total,
+          amount: grandTotal,
           rawJson: invoice as unknown as Prisma.InputJsonValue,
         },
       });

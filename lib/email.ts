@@ -28,6 +28,35 @@ export async function sendMail(to: string, subject: string, html: string) {
   return true;
 }
 
+const idr = (n: number) => `IDR ${Math.round(n).toLocaleString("en-US")}`;
+
+export async function sendOrderConfirmationEmail(
+  to: string,
+  order: {
+    number: string;
+    items: { qty: number; name: string; lineTotal: number }[];
+    shippingFee: number;
+    total: number;
+  },
+) {
+  const rows = order.items
+    .map(
+      (i) =>
+        `<tr><td style="padding:4px 0">${i.qty}× ${i.name}</td><td align="right">${idr(i.lineTotal)}</td></tr>`,
+    )
+    .join("");
+  const html = `
+    <h2>Thanks for your order</h2>
+    <p>Order <strong>${order.number}</strong> is confirmed. Here's your summary:</p>
+    <table style="width:100%;max-width:480px;border-collapse:collapse;font-size:14px">
+      ${rows}
+      ${order.shippingFee ? `<tr><td style="padding:4px 0">Shipping</td><td align="right">${idr(order.shippingFee)}</td></tr>` : ""}
+      <tr><td style="padding:8px 0;border-top:1px solid #ddd"><strong>Total</strong></td><td align="right" style="border-top:1px solid #ddd"><strong>${idr(order.total)}</strong></td></tr>
+    </table>
+    <p>We'll email shipping updates as your order moves. — Medium Format, Jakarta</p>`;
+  return sendMail(to, `Your Medium Format order ${order.number}`, html);
+}
+
 export async function sendPasswordResetEmail(to: string, link: string) {
   const html = `
     <p>Someone requested a password reset for your Medium Format account.</p>

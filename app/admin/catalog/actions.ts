@@ -186,6 +186,7 @@ export async function addVariant(formData: FormData) {
   const productId = str(formData.get("productId"));
   const sku = str(formData.get("sku"));
   const price = numOrNull(formData.get("priceIdr"));
+  const wholesale = numOrNull(formData.get("wholesalePriceIdr"));
   if (productId && sku && price) {
     await prisma.variant.create({
       data: {
@@ -194,6 +195,7 @@ export async function addVariant(formData: FormData) {
         conditionMedia: (str(formData.get("conditionMedia")) || null) as MediaCondition | null,
         conditionSleeve: (str(formData.get("conditionSleeve")) || null) as SleeveCondition | null,
         priceIdr: price,
+        wholesalePriceIdr: wholesale,
       },
     });
     revalidatePath(`/admin/catalog/${productId}`);

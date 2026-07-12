@@ -4,6 +4,7 @@ import { getCartView } from "@/lib/cart";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { formatIdr } from "@/lib/format";
+import { ShippingRates } from "@/components/site/ShippingRates";
 import { placeOrder } from "../cart/actions";
 
 export const dynamic = "force-dynamic";
@@ -75,10 +76,7 @@ export default async function CheckoutPage() {
               <input className="input" id="province" name="province" autoComplete="address-level1" />
             </div>
           </div>
-          <div className="field">
-            <label htmlFor="postal">Postal code</label>
-            <input className="input" id="postal" name="postal" autoComplete="postal-code" />
-          </div>
+          <ShippingRates weightGrams={cart.weightGrams} cartTotal={cart.total} />
           {session?.user?.id && (
             <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--body)", margin: "4px 0 8px" }}>
               <input type="checkbox" name="saveAddress" /> Save this address to my account

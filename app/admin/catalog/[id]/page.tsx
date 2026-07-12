@@ -219,6 +219,11 @@ export default async function EditReleasePage({
                   </span>
                   <span className="v" style={{ display: "flex", gap: 12, alignItems: "center" }}>
                     <span className="mono">{formatIdr(v.priceIdr.toString())}</span>
+                    {v.wholesalePriceIdr != null && (
+                      <span className="mono" style={{ color: "var(--mute)" }}>
+                        WS {formatIdr(v.wholesalePriceIdr.toString())}
+                      </span>
+                    )}
                     <form action={deleteVariant}>
                       <input type="hidden" name="id" value={v.id} />
                       <input type="hidden" name="productId" value={product.id} />
@@ -230,7 +235,7 @@ export default async function EditReleasePage({
 
               <form action={addVariant} style={{ marginTop: 14 }}>
                 <input type="hidden" name="productId" value={product.id} />
-                <div className="vrow">
+                <div className="vrow" style={{ gridTemplateColumns: "1fr 1fr 1fr" }}>
                   <div className="field-mini">
                     <label>SKU</label>
                     <input className="input" name="sku" required />
@@ -239,9 +244,12 @@ export default async function EditReleasePage({
                     <label>Price (IDR)</label>
                     <input className="input" name="priceIdr" inputMode="numeric" required />
                   </div>
-                  <button type="submit" className="btn-sec">Add</button>
+                  <div className="field-mini">
+                    <label>Wholesale (IDR)</label>
+                    <input className="input" name="wholesalePriceIdr" inputMode="numeric" />
+                  </div>
                 </div>
-                <div className="vrow" style={{ borderBottom: "none" }}>
+                <div className="vrow" style={{ borderBottom: "none", gridTemplateColumns: "1fr 1fr auto" }}>
                   <div className="field-mini">
                     <label>Media</label>
                     <select className="select" name="conditionMedia" defaultValue="">
@@ -258,7 +266,7 @@ export default async function EditReleasePage({
                       ))}
                     </select>
                   </div>
-                  <span />
+                  <button type="submit" className="btn-sec">Add copy</button>
                 </div>
               </form>
             </div>

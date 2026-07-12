@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/db";
 import { artistsLabel, conditionLabel } from "@/lib/catalog";
+import { isWholesaleCustomer, effectivePrice } from "@/lib/pricing";
 
 // Guest cart stored in an httpOnly cookie (customer accounts aren't built yet).
 // Shape: [{ variantId, qty }]. Prices/titles are always re-read from the DB so
@@ -58,14 +59,17 @@ export type CartView = {
   tax: number;
   total: number;
   count: number;
+  weightGrams: number;
+  wholesale: boolean;
 };
 
 export async function getCartView(): Promise<CartView> {
   const lines = await readCartLines();
   if (lines.length === 0) {
-    return { items: [], subtotal: 0, tax: 0, total: 0, count: 0 };
+    return { items: [], subtotal: 0, tax: 0, total: 0, count: 0, weightGrams: 0, wholesale: false };
   }
 
+  const wholesale = await isWholesaleCustomer();
   const variants = await prisma.variant.findMany({
     where: { id: { in: lines.map((l) => l.variantId) } },
     include: { product: { include: { release: true } } },
@@ -75,14 +79,16 @@ export async function getCartView(): Promise<CartView> {
   const items: CartItem[] = [];
   let subtotal = 0;
   let tax = 0;
+  let weightGrams = 0;
 
   for (const line of lines) {
     const v = byId.get(line.variantId);
     if (!v || v.product.status !== "ACTIVE") continue;
-    const unit = Number(v.priceIdr.toString());
+    const unit = effectivePrice(v, wholesale);
     const lineTotal = unit * line.qty;
     subtotal += lineTotal;
     tax += lineTotal * Number(v.taxRate.toString());
+    weightGrams += v.weightG * line.qty;
     items.push({
       variantId: v.id,
       qty: line.qty,
@@ -102,5 +108,7 @@ export async function getCartView(): Promise<CartView> {
     tax: Math.round(tax),
     total: Math.round(subtotal + tax),
     count: items.reduce((n, i) => n + i.qty, 0),
+    weightGrams,
+    wholesale,
   };
 }
