@@ -43,7 +43,12 @@ export function ChannelPill({ tag }: { tag: string | null }) {
 const STATUS_COLORS: Record<string, string> = {
   Paid: 'var(--success)', Sent: 'var(--success)', Received: 'var(--success)',
   Partial: 'var(--warning)', Unpaid: 'var(--danger)', Unsent: 'var(--warning)',
-  Returned: 'var(--danger)', Draft: 'var(--text-muted)',
+  Returned: 'var(--danger)', Draft: 'var(--text-muted)', Cancelled: 'var(--danger)',
+  // Imports (ImportStatus) — Received/Draft/Cancelled reuse the entries above.
+  Submitted: 'var(--info)', Consolidated: 'var(--info)', Priced: 'var(--info)',
+  'Inventory updated': 'var(--success)',
+  // Imports (ImportLineMatchStatus) — per-line match result from POST /imports/:id/match.
+  Matched: 'var(--success)', New: 'var(--info)', Ambiguous: 'var(--warning)',
 };
 
 export function StatusPill({ value }: { value: string | null }) {

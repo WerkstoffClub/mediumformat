@@ -7,6 +7,9 @@ import { OrdersList } from './pages/orders/OrdersList';
 import { OrderDetail } from './pages/orders/OrderDetail';
 import { CustomersList } from './pages/customers/CustomersList';
 import { PurchaseOrdersList } from './pages/purchase-orders/PurchaseOrdersList';
+import { ImportsList } from './pages/imports/ImportsList';
+import { NewImport } from './pages/imports/NewImport';
+import { ImportDetail } from './pages/imports/ImportDetail';
 import { Channels } from './pages/channels/Channels';
 import { Vouchers } from './pages/vouchers/Vouchers';
 import { Newsletter } from './pages/newsletter/Newsletter';
@@ -58,6 +61,9 @@ export default function App() {
           <Route path="/orders/:id"         element={<OrderDetail />} />
           <Route path="/customers"          element={<CustomersList />} />
           <Route path="/purchase-orders"    element={<PurchaseOrdersList />} />
+          <Route path="/imports"            element={<ImportsList />} />
+          <Route path="/imports/new"        element={<NewImport />} />
+          <Route path="/imports/:id"        element={<ImportDetail />} />
           <Route path="/channels"           element={<Channels />} />
           <Route path="/vouchers"           element={<Vouchers />} />
           <Route path="/newsletter"         element={<Newsletter />} />
