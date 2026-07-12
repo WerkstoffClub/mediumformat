@@ -29,6 +29,9 @@ export const createSubscriber = (body: Pick<Subscriber, 'email' | 'name' | 'sour
 export const updateSubscriber = (id: string, body: Partial<Subscriber>) =>
   api.patch<Subscriber>(`/newsletter/subscribers/${id}`, body).then(r => r.data);
 
+export const unsubscribeSubscriber = (id: string) =>
+  api.post<Subscriber>(`/newsletter/subscribers/${id}/unsubscribe`).then(r => r.data);
+
 export const deleteSubscriber = (id: string) =>
   api.delete(`/newsletter/subscribers/${id}`).then(r => r.data);
 
@@ -68,6 +71,9 @@ interface CampaignList {
 
 export const listCampaigns = (p: { page?: number; limit?: number; q?: string; status?: CampaignStatus } = {}) =>
   api.get<CampaignList>('/newsletter/campaigns', { params: p }).then(r => r.data);
+
+export const getCampaign = (id: string) =>
+  api.get<Campaign>(`/newsletter/campaigns/${id}`).then(r => r.data);
 
 export const createCampaign = (body: Pick<Campaign, 'subject' | 'previewText' | 'body' | 'scheduledAt'>) =>
   api.post<Campaign>('/newsletter/campaigns', body).then(r => r.data);
