@@ -2,11 +2,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { fmtDate, fmtIdr } from '../../api/ops';
 import {
-  getImport, IMPORT_STATUS_STEPS, uploadAttachment,
-  type ImportAttachmentKind, type ImportOrderDetail,
+  getImport, IMPORT_STATUS_STEPS, priceImport, uploadAttachment,
+  type ImportAttachmentKind, type ImportChannelPrice, type ImportOrderDetail, type ImportOrderLine,
 } from '../../api/imports';
 import { Panel, StatusPill, tdCls, thCls } from '../../components/ui/Page';
-import { fmtFormat, fmtNative, IMPORT_STATUS_LABEL, ORIGIN_LABEL, PAYMENT_METHOD_LABEL } from './shared';
+import {
+  CHANNEL_LABEL, CHANNEL_ORDER, fmtFormat, fmtNative,
+  IMPORT_STATUS_LABEL, ORIGIN_LABEL, PAYMENT_METHOD_LABEL,
+} from './shared';
 
 const REIMBURSEMENT_LABEL: Record<string, string> = {
   NOT_REQUIRED: 'Not required', PENDING: 'Pending', REIMBURSED: 'Reimbursed',
@@ -146,10 +149,70 @@ function AttachmentsPanel({ order, onUploaded }: { order: ImportOrderDetail; onU
   );
 }
 
+/** IDR figures use the shared `fmtIdr` (Rp, no decimals); everything else
+ *  (USD list prices) renders with 2 decimals — matches the two currencies
+ *  ChannelPricingConfig actually issues (see ImportChannelPrice['currency']). */
+const fmtChannelPrice = (currency: string, value: string | number): string =>
+  currency === 'IDR' ? fmtIdr(value) : `$${Number(value).toFixed(2)}`;
+
+function ChannelPricingPanel({ lines }: { lines: ImportOrderLine[] }) {
+  const hasPrices = lines.some(l => l.channelPrices.length > 0);
+
+  return (
+    <Panel title="Channel pricing">
+      {!hasPrices ? (
+        <p className="px-3.5 py-4 text-[11px] text-[var(--text-faint)]">
+          No prices yet — click Calculate pricing.
+        </p>
+      ) : (
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-[var(--bg-overlay)]">
+              {['Item', 'Landed (IDR)', ...CHANNEL_ORDER.map(c => CHANNEL_LABEL[c])].map(h => (
+                <th key={h} className={thCls}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {lines.map(line => {
+              const byChannel = new Map<string, ImportChannelPrice>(line.channelPrices.map(p => [p.channel, p]));
+              return (
+                <tr key={line.id} className="border-b border-[var(--border-sub)]">
+                  <td className={tdCls}>
+                    <span className="block text-[var(--text-primary)] truncate max-w-[220px]">{line.artist} — {line.title}</span>
+                  </td>
+                  <td className={`${tdCls} font-mono text-right whitespace-nowrap`}>
+                    {Number(line.landedCostIdr) > 0 ? fmtIdr(line.landedCostIdr) : '—'}
+                  </td>
+                  {CHANNEL_ORDER.map(channel => {
+                    const p = byChannel.get(channel);
+                    return (
+                      <td key={channel} className={`${tdCls} font-mono text-right whitespace-nowrap`}>
+                        {p ? (
+                          <>
+                            {fmtChannelPrice(p.currency, p.price)}
+                            {p.overridden && <span className="text-[var(--text-muted)]" title="Manually edited"> (edited)</span>}
+                          </>
+                        ) : '—'}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+    </Panel>
+  );
+}
+
 export function ImportDetail() {
   const { id } = useParams<{ id: string }>();
   const [order, setOrder] = useState<ImportOrderDetail | null>(null);
   const [error, setError] = useState(false);
+  const [pricing, setPricing] = useState(false);
+  const [pricingError, setPricingError] = useState<string | null>(null);
 
   const load = useCallback(() => {
     if (!id) return;
@@ -157,6 +220,20 @@ export function ImportDetail() {
   }, [id]);
 
   useEffect(load, [load]);
+
+  const onCalculatePricing = async () => {
+    if (!id) return;
+    setPricing(true);
+    setPricingError(null);
+    try {
+      await priceImport(id);
+      load();
+    } catch {
+      setPricingError('Could not calculate pricing. Check FX rate and try again.');
+    } finally {
+      setPricing(false);
+    }
+  };
 
   if (error) return <p className="text-[12px] text-[var(--danger)]">Import not found.</p>;
   if (!order) return <p className="text-[12px] text-[var(--text-faint)]">Loading…</p>;
@@ -184,11 +261,22 @@ export function ImportDetail() {
             {order.vendorName} · {fmtDate(order.orderDate)} · {order.currency} · fx {Number(order.fxRate).toLocaleString('en-US', { maximumFractionDigits: 4 })}
           </p>
         </div>
-        <div className="text-right">
-          <p className="text-[10px] uppercase tracking-[0.08em] text-[var(--text-muted)]">Order total</p>
-          <p className="font-mono text-[24px] font-semibold tracking-[-0.02em] text-[var(--text-primary)] leading-none mt-1.5">
-            {fmtNative(totalNative, order.currency)}
-          </p>
+        <div className="flex flex-col items-end gap-2.5">
+          <div className="text-right">
+            <p className="text-[10px] uppercase tracking-[0.08em] text-[var(--text-muted)]">Order total</p>
+            <p className="font-mono text-[24px] font-semibold tracking-[-0.02em] text-[var(--text-primary)] leading-none mt-1.5">
+              {fmtNative(totalNative, order.currency)}
+            </p>
+          </div>
+          <button
+            onClick={onCalculatePricing}
+            disabled={pricing}
+            className="flex items-center gap-1.5 px-3 py-[7px] rounded-[6px] border border-[var(--border)] text-[12px] font-medium text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+            {pricing ? 'Calculating…' : 'Calculate pricing'}
+          </button>
+          {pricingError && <p className="text-[11px] text-[var(--danger)] max-w-[220px] text-right">{pricingError}</p>}
         </div>
       </div>
 
@@ -241,6 +329,8 @@ export function ImportDetail() {
               </div>
             </div>
           </Panel>
+
+          <ChannelPricingPanel lines={order.lines} />
         </div>
 
         <div className="space-y-4">

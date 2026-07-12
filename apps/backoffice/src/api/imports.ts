@@ -115,6 +115,18 @@ export interface ImportOrderRow extends ImportOrderBase {
   _count: { lines: number };
 }
 
+/** Per-channel list price computed by POST /imports/:id/price — mirrors
+ *  Prisma's ImportLineChannelPrice model. `overridden` marks a price a user
+ *  manually edited, which the recompute preserves rather than overwrites. */
+export interface ImportChannelPrice {
+  id: string;
+  channel: string;
+  currency: string;
+  price: string | number;
+  feePctApplied: string | number;
+  overridden: boolean;
+}
+
 export interface ImportOrderLine {
   id: string;
   importOrderId: string;
@@ -141,6 +153,7 @@ export interface ImportOrderLine {
   createdRelease: boolean;
   storeLocation: string | null;
   shelfLocation: string | null;
+  channelPrices: ImportChannelPrice[];
 }
 
 export interface ImportAttachment {
@@ -213,6 +226,11 @@ export const getImports = (p: ImportFilter = {}) =>
 
 export const getImport = (id: string) =>
   api.get<ImportOrderDetail>(`/imports/${id}`).then(r => r.data);
+
+/** Recomputes landed cost + per-channel list prices and sets status PRICED.
+ *  Preserves any manually overridden channel prices. Returns the full detail. */
+export const priceImport = (id: string) =>
+  api.post<ImportOrderDetail>(`/imports/${id}/price`, {}).then(r => r.data);
 
 export const uploadAttachment = (id: string, file: File, kind: ImportAttachmentKind) => {
   const form = new FormData();

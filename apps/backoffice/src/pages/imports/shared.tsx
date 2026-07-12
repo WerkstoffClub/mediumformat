@@ -27,6 +27,18 @@ export const PAYMENT_METHOD_LABEL: Record<PaymentMethod, string> = {
   OTHER: 'Other',
 };
 
+/** Stable display order for the Channel pricing table — mirrors
+ *  packages/shared/src/constants/imports.ts SalesChannel enum. */
+export const CHANNEL_ORDER = ['POS', 'WEBSITE', 'TOKOPEDIA', 'SHOPEE', 'DISCOGS'] as const;
+
+export const CHANNEL_LABEL: Record<(typeof CHANNEL_ORDER)[number], string> = {
+  POS: 'POS',
+  WEBSITE: 'Website',
+  TOKOPEDIA: 'Tokopedia',
+  SHOPEE: 'Shopee',
+  DISCOGS: 'Discogs',
+};
+
 export const IMPORT_STATUS_LABEL: Record<ImportStatus, string> = {
   DRAFT: 'Draft',
   SUBMITTED: 'Submitted',
