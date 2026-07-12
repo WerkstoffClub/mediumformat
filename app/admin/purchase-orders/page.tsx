@@ -15,13 +15,14 @@ function statusPill(status: string): string {
 }
 
 export default async function PurchaseOrdersPage() {
-  const [orders, locations] = await Promise.all([
+  const [orders, locations, suppliers] = await Promise.all([
     prisma.purchaseOrder.findMany({
       orderBy: { createdAt: "desc" },
       take: 100,
       include: { _count: { select: { lines: true } }, location: true },
     }),
     prisma.location.findMany({ orderBy: { isDefault: "desc" }, select: { id: true, name: true } }),
+    prisma.supplier.findMany({ orderBy: { name: "asc" }, select: { id: true, name: true } }),
   ]);
 
   return (
@@ -29,7 +30,7 @@ export default async function PurchaseOrdersPage() {
       title="Purchase Order"
       description="Import a supplier invoice, then receive it to bump stock."
     >
-      <POCreateForm locations={locations} />
+      <POCreateForm locations={locations} suppliers={suppliers} />
 
       {orders.length === 0 ? (
         <div className="coming">No purchase orders yet.</div>

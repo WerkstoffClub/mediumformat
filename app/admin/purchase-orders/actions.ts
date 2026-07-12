@@ -45,11 +45,18 @@ function parseInvoice(text: string): ParsedLine[] {
 export async function createPurchaseOrder(formData: FormData) {
   const user = await requireStock();
   const invoice = String(formData.get("invoice") ?? "");
-  const supplierName = String(formData.get("supplierName") ?? "").trim();
+  const supplierId = String(formData.get("supplierId") ?? "").trim() || null;
   let locationId = String(formData.get("locationId") ?? "").trim();
 
   const lines = parseInvoice(invoice);
   if (lines.length === 0) redirect("/admin/purchase-orders?error=empty");
+
+  // Snapshot the supplier name so a later rename/delete doesn't rewrite history.
+  let supplierName: string | null = null;
+  if (supplierId) {
+    const supplier = await prisma.supplier.findUnique({ where: { id: supplierId } });
+    supplierName = supplier?.name ?? null;
+  }
 
   if (!locationId) {
     const loc =
@@ -65,7 +72,8 @@ export async function createPurchaseOrder(formData: FormData) {
   const po = await prisma.purchaseOrder.create({
     data: {
       number,
-      supplierName: supplierName || null,
+      supplierId,
+      supplierName,
       status: "DRAFT",
       locationId,
       subtotalIdr: subtotal,

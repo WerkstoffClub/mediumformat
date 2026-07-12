@@ -32,8 +32,10 @@ function parse(text: string): Line[] {
 
 export function POCreateForm({
   locations,
+  suppliers,
 }: {
   locations: { id: string; name: string }[];
+  suppliers: { id: string; name: string }[];
 }) {
   const [text, setText] = useState("");
   const lines = useMemo(() => parse(text), [text]);
@@ -48,8 +50,20 @@ export function POCreateForm({
       <div className="panel-body">
         <div className="form-row">
           <div className="field">
-            <label htmlFor="supplierName">Supplier</label>
-            <input className="input" id="supplierName" name="supplierName" placeholder="Distributor, Discogs seller…" />
+            <label htmlFor="supplierId">Supplier</label>
+            <select className="select" id="supplierId" name="supplierId" defaultValue="">
+              <option value="">— none —</option>
+              {suppliers.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+            <div className="field-hint">
+              <a href="/admin/suppliers" className="link" style={{ textDecoration: "underline" }}>
+                Manage suppliers
+              </a>
+            </div>
           </div>
           <div className="field">
             <label htmlFor="locationId">Receive into</label>
