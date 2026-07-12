@@ -10,6 +10,8 @@ import { PurchaseOrdersList } from './pages/purchase-orders/PurchaseOrdersList';
 import { ImportsList } from './pages/imports/ImportsList';
 import { NewImport } from './pages/imports/NewImport';
 import { ImportDetail } from './pages/imports/ImportDetail';
+import { ConsolidationsList } from './pages/consolidations/ConsolidationsList';
+import { ConsolidationDetail } from './pages/consolidations/ConsolidationDetail';
 import { Channels } from './pages/channels/Channels';
 import { Vouchers } from './pages/vouchers/Vouchers';
 import { Newsletter } from './pages/newsletter/Newsletter';
@@ -64,6 +66,8 @@ export default function App() {
           <Route path="/imports"            element={<ImportsList />} />
           <Route path="/imports/new"        element={<NewImport />} />
           <Route path="/imports/:id"        element={<ImportDetail />} />
+          <Route path="/consolidations"     element={<ConsolidationsList />} />
+          <Route path="/consolidations/:id" element={<ConsolidationDetail />} />
           <Route path="/channels"           element={<Channels />} />
           <Route path="/vouchers"           element={<Vouchers />} />
           <Route path="/newsletter"         element={<Newsletter />} />
