@@ -1,5 +1,5 @@
 import {
-  Controller, Post, Get, Body, Param, Query, Res, UseGuards, UseInterceptors, UploadedFile, BadRequestException,
+  Controller, Post, Get, Put, Body, Param, Query, Res, UseGuards, UseInterceptors, UploadedFile, BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import pdfParse from 'pdf-parse';
@@ -8,10 +8,12 @@ import { ImportsService } from './imports.service';
 import { CreateImportDto } from './dto/create-import.dto';
 import { ImportFilterDto } from './dto/import-filter.dto';
 import { CreateAttachmentDto } from './dto/create-attachment.dto';
+import { UpdateChannelPricingDto } from './dto/update-channel-pricing.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role, STAFF_ROLES } from '@mf/shared';
+import { SalesChannel } from '@prisma/client';
 
 // Invoices/attachments are small PDFs and images; bound in-memory buffering.
 const MAX_UPLOAD_BYTES = 15 * 1024 * 1024; // 15 MB
@@ -49,6 +51,18 @@ export class ImportsController {
   }
 
   @Roles(...STAFF_ROLES)
+  @Get('channel-pricing')
+  listChannelPricing() {
+    return this.imports.listChannelPricing();
+  }
+
+  @Roles(Role.ADMIN, Role.MANAGER)
+  @Put('channel-pricing/:channel')
+  updateChannelPricing(@Param('channel') channel: SalesChannel, @Body() body: UpdateChannelPricingDto) {
+    return this.imports.updateChannelPricing(channel, body);
+  }
+
+  @Roles(...STAFF_ROLES)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.imports.findOne(id);
@@ -58,6 +72,12 @@ export class ImportsController {
   @Post()
   create(@Body() body: CreateImportDto) {
     return this.imports.create(body);
+  }
+
+  @Roles(Role.ADMIN, Role.MANAGER)
+  @Post(':id/price')
+  price(@Param('id') id: string) {
+    return this.imports.price(id);
   }
 
   @Roles(Role.ADMIN, Role.MANAGER)
