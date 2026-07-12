@@ -117,9 +117,13 @@ records each transition (who, when).
 
 ## 5. Invoice parsing
 
-**Provider:** Google **Gemini Flash** via AI Studio free tier — native PDF/image input +
-structured JSON output. Wrapped behind an `InvoiceParserProvider` interface so it is pluggable
-(alternatives: Mistral OCR, Claude). Provider + API key configured via env.
+**Provider:** reuse the codebase's existing **OpenRouter** integration (as in
+`inventory/ai-assist.service.ts`) with a **free model** — default
+`google/gemini-2.0-flash-exp:free` (strong at document extraction + structured JSON), configurable
+via `OPENROUTER_MODEL`. Wrapped behind an `InvoiceParserProvider` interface so the model/provider
+is pluggable (swap to Mistral OCR, Claude, or a paid model in one file). No new API key — reuses
+`OPENROUTER_API_KEY`. Text-based invoices are extracted to text first (`pdf-parse`); vision/image
+input is a later enhancement for scanned PDFs.
 
 **Flow:**
 1. Upload one or more vendor-invoice PDFs on the New PO page (stored as `PoAttachment`
@@ -233,9 +237,11 @@ All pages reuse the design-system v2.1 chrome + the 11-module sidebar; mono font
 
 ## 14. Secrets / dependencies
 
-- **Gemini API key** (`GEMINI_API_KEY`) in `api.env` — invoice parsing.
+- **OpenRouter** — reuse existing `OPENROUTER_API_KEY`; set `OPENROUTER_MODEL` (default
+  `google/gemini-2.0-flash-exp:free`) for invoice parsing. No new key.
 - **Discogs token** (reuse from `import_output`) in `api.env` — enrichment.
-- API deps: multipart upload (Multer), a PDF→image step if needed, an FX fetch, provider SDK/HTTP.
+- API deps: `pdf-parse` (text extraction), Multer (multipart upload, via `@nestjs/platform-express`
+  already present), an FX fetch (native `fetch`).
 - New Docker volume `mf_uploads`.
 
 ## 15. Implementation phases (each independently testable)
