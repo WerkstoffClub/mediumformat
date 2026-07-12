@@ -91,6 +91,16 @@ enum CampaignStatus {
   SENT
 }
 
+enum CategoryPageTemplate {
+  FULL_HERO
+  HALF_HERO
+}
+
+enum CategoryPageStatus {
+  DRAFT
+  PUBLISHED
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -423,4 +433,29 @@ model NewsletterCampaign {
   updatedAt      DateTime       @updatedAt
 
   @@index([status, scheduledAt])
+}
+
+/// Editable category / landing page: powers /pages/:slug on the storefront.
+/// Two templates (FULL_HERO, HALF_HERO) render the same content in different
+/// visual shapes; formatFilter drives the product grid below the hero.
+model CategoryPage {
+  id             String               @id @default(cuid())
+  slug           String               @unique
+  title          String
+  formatFilter   RecordFormat?
+  template       CategoryPageTemplate @default(FULL_HERO)
+  kicker         String?
+  headline       String?
+  salesCopy      String?
+  heroImageUrl   String?
+  ctaLabel       String?
+  ctaHref        String?
+  seoTitle       String?
+  seoDescription String?
+  status         CategoryPageStatus   @default(DRAFT)
+  publishedAt    DateTime?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+
+  @@index([status, publishedAt])
 }
