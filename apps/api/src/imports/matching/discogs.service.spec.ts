@@ -8,17 +8,17 @@ const baseQuery = {
 };
 
 describe('DiscogsService.lookup', () => {
-  const originalToken = process.env.DISCOGS_TOKEN;
+  const CREDS = ['DISCOGS_TOKEN', 'DISCOGS_KEY', 'DISCOGS_SECRET'] as const;
+  const orig = Object.fromEntries(CREDS.map(k => [k, process.env[k]])) as Record<string, string | undefined>;
   const originalFetch = global.fetch;
 
+  beforeEach(() => { CREDS.forEach(k => delete process.env[k]); });
   afterEach(() => {
-    if (originalToken === undefined) delete process.env.DISCOGS_TOKEN;
-    else process.env.DISCOGS_TOKEN = originalToken;
+    CREDS.forEach(k => { if (orig[k] === undefined) delete process.env[k]; else process.env[k] = orig[k]; });
     global.fetch = originalFetch;
   });
 
-  test('returns null when DISCOGS_TOKEN is unset (never calls fetch)', async () => {
-    delete process.env.DISCOGS_TOKEN;
+  test('returns null when no credentials are configured (never calls fetch)', async () => {
     const fetchMock = jest.fn();
     global.fetch = fetchMock as never;
     const svc = new DiscogsService();
@@ -80,5 +80,19 @@ describe('DiscogsService.lookup', () => {
     const result = await svc.lookup(baseQuery);
 
     expect(result).toBeNull();
+  });
+
+  test('uses consumer key+secret auth header when configured', async () => {
+    process.env.DISCOGS_KEY = 'ckey';
+    process.env.DISCOGS_SECRET = 'csecret';
+    const fetchMock = jest.fn((..._args: unknown[]) => Promise.resolve({ ok: true, json: async () => ({ results: [{ id: 42 }] }) }));
+    global.fetch = fetchMock as never;
+    const svc = new DiscogsService();
+
+    const result = await svc.lookup({ ...baseQuery, barcode: '724382664211' });
+
+    expect(result).toEqual({ discogsId: '42' });
+    const opts = fetchMock.mock.calls[0]?.[1] as { headers: Record<string, string> };
+    expect(opts.headers.Authorization).toBe('Discogs key=ckey, secret=csecret');
   });
 });

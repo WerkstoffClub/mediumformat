@@ -41,37 +41,48 @@ const DISCOGS_FORMAT: Partial<Record<RecordFormat, string>> = {
   [RecordFormat.CASSETTE]: 'Cassette',
 };
 
+/** Discogs auth header for database/search. Prefers the consumer key+secret
+ *  app-auth form; falls back to a personal access token. Returns null when
+ *  neither is configured (enrichment then no-ops). */
+function discogsAuthHeader(): string | null {
+  const key = process.env.DISCOGS_KEY;
+  const secret = process.env.DISCOGS_SECRET;
+  if (key && secret) return `Discogs key=${key}, secret=${secret}`;
+  const token = process.env.DISCOGS_TOKEN;
+  return token ? `Discogs token=${token}` : null;
+}
+
 /** Optional enrichment for newly-discovered (unmatched) import lines: looks
  *  up Discogs' database search to backfill discogsId/barcode/cover/genre/year
- *  on drafted Releases. Entirely optional — with no DISCOGS_TOKEN configured,
- *  or on any request failure, lookup() resolves to null rather than throwing,
- *  so a missing/misbehaving Discogs API never blocks an import commit. */
+ *  on drafted Releases. Entirely optional — with no Discogs credentials
+ *  configured, or on any request failure, lookup() resolves to null rather
+ *  than throwing, so a missing/misbehaving Discogs API never blocks a commit. */
 @Injectable()
 export class DiscogsService {
   private readonly logger = new Logger(DiscogsService.name);
   private readonly baseUrl = 'https://api.discogs.com/database/search';
 
   async lookup(q: DiscogsLookupQuery): Promise<DiscogsEnrichment | null> {
-    const token = process.env.DISCOGS_TOKEN;
-    if (!token) return null;
+    const auth = discogsAuthHeader();
+    if (!auth) return null;
 
     try {
       const digitsOnly = (q.barcode ?? '').replace(/\D/g, '');
       let result: DiscogsSearchResponse | null = null;
 
       if (digitsOnly.length >= 8) {
-        result = await this.search({ barcode: digitsOnly }, token);
+        result = await this.search({ barcode: digitsOnly }, auth);
       }
 
       if (!result?.results?.length && q.catNumber?.trim() && /[a-z0-9]/i.test(q.catNumber)) {
-        result = await this.search({ catno: q.catNumber.trim(), type: 'release' }, token);
+        result = await this.search({ catno: q.catNumber.trim(), type: 'release' }, auth);
       }
 
       if (!result?.results?.length) {
         const params: Record<string, string> = { q: `${q.artist} ${q.title}`, type: 'release' };
         const fmt = DISCOGS_FORMAT[q.format];
         if (fmt) params.format = fmt;
-        result = await this.search(params, token);
+        result = await this.search(params, auth);
       }
 
       const top = result?.results?.[0];
@@ -93,12 +104,12 @@ export class DiscogsService {
     }
   }
 
-  private async search(params: Record<string, string>, token: string): Promise<DiscogsSearchResponse | null> {
-    const query = new URLSearchParams({ ...params, per_page: '5', token });
+  private async search(params: Record<string, string>, auth: string): Promise<DiscogsSearchResponse | null> {
+    const query = new URLSearchParams({ ...params, per_page: '5' });
     const res = await fetch(`${this.baseUrl}?${query.toString()}`, {
       headers: {
-        Authorization: `Discogs token=${token}`,
-        'User-Agent': 'MediumFormat/1.0',
+        Authorization: auth,
+        'User-Agent': 'MediumFormat/1.0 +https://mediumformat.info',
       },
     });
     if (!res.ok) return null;
