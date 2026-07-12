@@ -40,3 +40,15 @@ export const updateVoucher = (id: string, body: Partial<Voucher>) =>
 
 export const deleteVoucher = (id: string) =>
   api.delete(`/vouchers/${id}`).then(r => r.data);
+
+export type ValidateVoucherResp =
+  | { valid: true; discountIdr: number }
+  | { valid: false; discountIdr: 0; reason: string };
+
+/** Validate a voucher against the current cart subtotal.
+ *  Uses the public storefront endpoint so the same logic runs on the
+ *  storefront and in the register — no separate rules to keep in sync. */
+export const validateVoucher = (code: string, subtotalIdr: number) =>
+  api
+    .post<ValidateVoucherResp>('/storefront/vouchers/validate', { code, subtotalIdr })
+    .then(r => r.data);

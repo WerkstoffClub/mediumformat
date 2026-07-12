@@ -1,233 +1,247 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { listReleases, listPreorders, listPosts } from '../api/storefront';
+import { listReleases, listPosts } from '../api/storefront';
 import type { Release, Post } from '../api/storefront';
-import { ReleaseCard } from '../components/ReleaseCard';
+import { ReleaseCard, Cover } from '../components/ReleaseCard';
 import { LoadingSkeleton } from '../components/LoadingSkeleton';
-import { NewsletterSignup } from '../components/NewsletterSignup';
+import { useCurrency } from '../hooks/useCurrency';
 
 type LoadState<T> = { data: T; loading: boolean; error: string | null };
 
 const initialList = <T,>(): LoadState<T[]> => ({ data: [], loading: true, error: null });
 
+const FEATURED_LIMIT = 12;
+
+const FORMAT_LABEL: Record<string, string> = {
+  LP: 'LP',
+  TWO_LP: '2×LP',
+  THREE_LP: '3×LP',
+  TWELVE_INCH: '12"',
+  SEVEN_INCH: '7"',
+  CD: 'CD',
+  TWO_CD: '2×CD',
+  CASSETTE: 'Cassette',
+  MERCH: 'Merch',
+};
+const CONDITION_SHORT: Record<string, string> = {
+  M: 'M',
+  NM: 'NM',
+  VG_PLUS: 'VG+',
+  VG: 'VG',
+  G_PLUS: 'G+',
+  G: 'G',
+  F: 'F',
+  P: 'P',
+};
+
 export default function Home() {
-  const [latest, setLatest] = useState<LoadState<Release[]>>(initialList);
-  const [preorders, setPreorders] = useState<LoadState<Release[]>>(initialList);
+  const [featured, setFeatured] = useState<LoadState<Release[]>>(initialList);
   const [posts, setPosts] = useState<LoadState<Post[]>>(initialList);
 
   useEffect(() => {
     let cancelled = false;
 
-    listReleases({ limit: 8 })
-      .then((data) => !cancelled && setLatest({ data, loading: false, error: null }))
-      .catch((e) => !cancelled && setLatest({ data: [], loading: false, error: e?.message ?? 'Error' }));
-
-    listPreorders()
-      .then((data) =>
-        !cancelled && setPreorders({ data: data.slice(0, 8), loading: false, error: null }),
-      )
-      .catch((e) => !cancelled && setPreorders({ data: [], loading: false, error: e?.message ?? 'Error' }));
+    listReleases({ limit: FEATURED_LIMIT })
+      .then((data) => !cancelled && setFeatured({ data, loading: false, error: null }))
+      .catch(
+        (e) =>
+          !cancelled &&
+          setFeatured({ data: [], loading: false, error: e?.message ?? 'Error' }),
+      );
 
     listPosts(3)
       .then((data) => !cancelled && setPosts({ data, loading: false, error: null }))
-      .catch((e) => !cancelled && setPosts({ data: [], loading: false, error: e?.message ?? 'Error' }));
+      .catch(
+        (e) =>
+          !cancelled && setPosts({ data: [], loading: false, error: e?.message ?? 'Error' }),
+      );
 
     return () => {
       cancelled = true;
     };
   }, []);
 
+  const heroPicks: Release[] = featured.data.slice(0, 2);
+  const gridReleases: Release[] = featured.data;
+
   return (
     <>
-      <Hero latestCount={latest.data.length} />
-      <StripSection
-        eyebrow="Latest"
-        title="New arrivals"
-        seeAll="/catalog"
-      >
-        {latest.loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <LoadingSkeleton count={4} height={280} />
-          </div>
-        ) : latest.error ? (
-          <ErrorNote message={latest.error} />
-        ) : latest.data.length === 0 ? (
-          <EmptyNote>No releases yet — check back soon.</EmptyNote>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {latest.data.slice(0, 8).map((r) => (
-              <ReleaseCard key={r.id} release={r} />
-            ))}
-          </div>
-        )}
-      </StripSection>
+      <Hero total={featured.data.length} picks={heroPicks} loading={featured.loading} />
 
-      <StripSection eyebrow="Coming soon" title="Preorders" seeAll="/preorders">
-        {preorders.loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <LoadingSkeleton count={4} height={280} />
+      <section aria-label="Featured releases">
+        {featured.loading ? (
+          <div className="grid-releases">
+            <LoadingSkeleton count={8} height={320} />
           </div>
-        ) : preorders.error ? (
-          <ErrorNote message={preorders.error} />
-        ) : preorders.data.length === 0 ? (
-          <EmptyNote>No preorders open at the moment.</EmptyNote>
+        ) : featured.error ? (
+          <div style={{ padding: 20 }}>
+            <ErrorNote message={featured.error} />
+          </div>
+        ) : gridReleases.length === 0 ? (
+          <div style={{ padding: 20 }}>
+            <EmptyNote>No releases yet — check back soon.</EmptyNote>
+          </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {preorders.data.map((r) => (
-              <ReleaseCard key={r.id} release={r} />
-            ))}
-          </div>
+          <>
+            <div className="grid-releases">
+              {gridReleases.map((r) => (
+                <ReleaseCard key={r.id} release={r} />
+              ))}
+            </div>
+            <div style={{ padding: '4px 20px 24px', textAlign: 'center' }}>
+              <Link to="/catalog" className="btn-secondary" style={{ display: 'inline-flex' }}>
+                Browse all records →
+              </Link>
+            </div>
+          </>
         )}
-      </StripSection>
+      </section>
 
-      <StripSection eyebrow="Journal" title="From the news" seeAll="/news">
+      <section className="journal" aria-labelledby="journal-heading">
+        <div className="sec-hdr">
+          <h2 className="sec-h2" id="journal-heading">Latest from the News</h2>
+          <Link to="/news" className="sec-link">
+            View all{' '}
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
         {posts.loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <LoadingSkeleton count={3} height={200} />
+          <div className="jgrid">
+            <LoadingSkeleton count={3} height={280} />
           </div>
         ) : posts.error ? (
           <ErrorNote message={posts.error} />
         ) : posts.data.length === 0 ? (
           <EmptyNote>No posts yet.</EmptyNote>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="jgrid">
             {posts.data.map((p) => (
               <PostTile key={p.id} post={p} />
             ))}
           </div>
         )}
-      </StripSection>
-
-      <section className="max-w-[1200px] mx-auto px-6 py-16">
-        <div
-          className="rcard p-8 md:p-12"
-          style={{ background: 'var(--surface)' }}
-        >
-          <NewsletterSignup />
-        </div>
       </section>
     </>
   );
 }
 
-// ------------ Local sub-components ------------
+// ---------- Hero ----------
 
-function Hero({ latestCount }: { latestCount: number }) {
+function Hero({
+  total,
+  picks,
+  loading,
+}: {
+  total: number;
+  picks: Release[];
+  loading: boolean;
+}) {
   return (
-    <section
-      className="px-6 py-14 md:py-20"
-      style={{ background: 'var(--surface)', borderBottom: '1px solid var(--hairline)' }}
-    >
-      <div className="max-w-[1200px] mx-auto">
-        <div
-          className="text-[12px] font-medium uppercase tracking-wider mb-4"
-          style={{ color: 'var(--mute)' }}
-        >
-          Independent record shop · Jakarta
-        </div>
-        <h1
-          className="text-[40px] md:text-[56px] font-semibold leading-[1.05] max-w-4xl"
-          style={{ color: 'var(--ink)', letterSpacing: '-0.06em' }}
-        >
-          The record <em style={{ fontStyle: 'normal', color: 'var(--mute)' }}>you've been chasing</em>.
+    <section className="hero" aria-labelledby="hero-heading">
+      <div className="hero-text">
+        <p className="hero-eyebrow">Curated · Jakarta</p>
+        <h1 className="hero-h1" id="hero-heading">
+          The record<br />
+          <em>you&rsquo;ve been chasing</em>
         </h1>
-        <div className="flex items-center gap-4 mt-6">
-          <div className="text-[14px]" style={{ color: 'var(--body)' }}>
-            {latestCount > 0 ? (
-              <>
-                <strong style={{ color: 'var(--ink)' }} className="mono">{latestCount}</strong> new releases
-              </>
-            ) : (
-              <>Curated in-store, shipped nationwide.</>
-            )}
-          </div>
-          <div style={{ width: 1, height: 14, background: 'var(--hairline)' }} />
-          <Link
-            to="/catalog"
-            className="text-[13px] font-medium inline-flex items-center gap-1"
-            style={{ color: 'var(--ink)' }}
-          >
-            Browse catalog →
+        <div className="hero-meta">
+          <span className="hero-count">
+            <strong>{loading ? '—' : total || 'Fresh'}</strong>{' '}
+            {loading ? 'loading' : total ? 'titles in shop' : 'from the crates'}
+          </span>
+          <span className="hero-sep" />
+          <Link to="/catalog" className="hero-cta">
+            Browse the catalog{' '}
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </Link>
         </div>
       </div>
+      <div className="hero-releases">
+        {picks[0] && <HeroCard eyebrow="Featured arrival" release={picks[0]} />}
+        {picks[1] && <HeroCard eyebrow="Also new" release={picks[1]} />}
+      </div>
     </section>
   );
 }
 
-function StripSection({
-  eyebrow,
-  title,
-  seeAll,
-  children,
-}: {
-  eyebrow: string;
-  title: string;
-  seeAll: string;
-  children: React.ReactNode;
-}) {
+function HeroCard({ eyebrow, release }: { eyebrow: string; release: Release }) {
+  const to = release.slug ? `/releases/${encodeURIComponent(release.slug)}` : '#';
+  const { formatPrice } = useCurrency();
+  const labelBits: string[] = [];
+  if (release.label) labelBits.push(release.label);
+  if (release.catNumber) labelBits.push(release.catNumber);
+  if (release.year !== null && release.year !== undefined) labelBits.push(String(release.year));
+
   return (
-    <section className="max-w-[1200px] mx-auto px-6 py-10 md:py-14">
-      <div className="flex items-end justify-between mb-6">
-        <div>
-          <div
-            className="text-[12px] font-medium uppercase tracking-wider mb-1"
-            style={{ color: 'var(--mute)' }}
-          >
-            {eyebrow}
-          </div>
-          <h2
-            className="text-[24px] md:text-[28px] font-semibold"
-            style={{ color: 'var(--ink)', letterSpacing: '-0.03em' }}
-          >
-            {title}
-          </h2>
+    <div>
+      <div className="hero-card-eyebrow">{eyebrow}</div>
+      <Link to={to} className="hero-card" aria-label={`${release.artist} — ${release.title}`}>
+        <div className="hero-thumb">
+          <Cover imageUrl={release.imageUrl} alt={`${release.artist} — ${release.title}`} small />
         </div>
-        <Link
-          to={seeAll}
-          className="text-[13px] font-medium"
-          style={{ color: 'var(--ink)' }}
-        >
-          See all →
-        </Link>
-      </div>
-      {children}
-    </section>
+        <div>
+          <div className="hci-artist">{release.artist}</div>
+          <div className="hci-title">{release.title}</div>
+          {labelBits.length > 0 && <div className="hci-label">{labelBits.join(' · ')}</div>}
+          <div className="hci-chips">
+            <span className="chip fmt">{FORMAT_LABEL[release.format] ?? release.format}</span>
+            <span className="chip cond">{CONDITION_SHORT[release.condition] ?? release.condition}</span>
+            {release.genre && <span className="chip">{release.genre}</span>}
+          </div>
+          <div className="hci-price">{formatPrice(release.priceIdr)}</div>
+        </div>
+      </Link>
+    </div>
   );
 }
+
+// ---------- News tiles ----------
 
 function PostTile({ post }: { post: Post }) {
+  const category = (post.category || '').toLowerCase();
+  let badgeClass = 'jbadge';
+  if (category.includes('staff')) badgeClass += ' jb-picks';
+  else if (category.includes('review')) badgeClass += ' jb-review';
+  else badgeClass += ' jb-new';
+
+  const dateStr = post.publishedAt
+    ? new Date(post.publishedAt).toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      })
+    : '';
+
   return (
-    <Link
-      to={`/news/${encodeURIComponent(post.slug)}`}
-      className="rcard block p-5"
-    >
-      <div
-        className="text-[11px] font-medium uppercase tracking-wider mb-3"
-        style={{ color: 'var(--mute)' }}
-      >
-        {post.category}
+    <Link to={`/news/${encodeURIComponent(post.slug)}`} className="jcard">
+      <div className="jcover">
+        <div className="cover-art" aria-hidden>
+          <div className="grooves" />
+        </div>
       </div>
-      <h3
-        className="text-[18px] font-semibold mb-2"
-        style={{ color: 'var(--ink)', letterSpacing: '-0.02em' }}
-      >
-        {post.title}
-      </h3>
-      {post.excerpt && (
-        <p className="text-[13px] leading-relaxed line-clamp-3" style={{ color: 'var(--body)' }}>
-          {post.excerpt}
-        </p>
-      )}
+      <div className="jbody">
+        <span className={badgeClass}>
+          <span className="dot" />
+          {post.category || 'News'}
+        </span>
+        <div className="jtitle">{post.title}</div>
+        {dateStr && <div className="jmeta">{dateStr}</div>}
+      </div>
     </Link>
   );
 }
+
+// ---------- Notes ----------
 
 function EmptyNote({ children }: { children: React.ReactNode }) {
   return (
     <div
       className="text-center text-[13px] py-12 rcard"
-      style={{ color: 'var(--mute)' }}
+      style={{ color: 'var(--mute)', cursor: 'default' }}
     >
       {children}
     </div>
@@ -238,7 +252,7 @@ function ErrorNote({ message }: { message: string }) {
   return (
     <div
       className="text-[13px] py-6 px-4 rcard"
-      style={{ color: 'var(--danger)', background: 'var(--danger-t)' }}
+      style={{ color: 'var(--danger)', background: 'var(--danger-t)', cursor: 'default' }}
     >
       Could not load: {message}
     </div>

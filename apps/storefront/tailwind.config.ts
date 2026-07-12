@@ -6,8 +6,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Noto Sans"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
-        mono: ['"Noto Sans Mono"', 'ui-monospace', 'monospace'],
+        sans: ['"Geist"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        mono: ['"Geist"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
       },
     },
   },

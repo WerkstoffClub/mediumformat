@@ -24,3 +24,13 @@ export enum CampaignStatus {
   SCHEDULED = 'SCHEDULED',
   SENT      = 'SENT',
 }
+
+export enum CategoryPageTemplate {
+  FULL_HERO = 'FULL_HERO',
+  HALF_HERO = 'HALF_HERO',
+}
+
+export enum CategoryPageStatus {
+  DRAFT     = 'DRAFT',
+  PUBLISHED = 'PUBLISHED',
+}

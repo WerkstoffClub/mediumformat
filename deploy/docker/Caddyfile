@@ -6,6 +6,12 @@
 # reached over the internal `proxy_public` network. Mounted read-only at
 # /etc/caddy/Caddyfile, serving /srv (the bind-mounted site).
 #
+# Routing (2026-07 layout):
+#     /api/*         → NestJS API
+#     /backoffice/*  → back-office SPA (dist under /srv/backoffice/)
+#     /prototype/*   → static design prototype (under /srv/prototype/)
+#     /*             → storefront SPA (dist at /srv/, with SPA fallback)
+#
 # (For a bare VPS with no proxy, use Caddyfile.selfhosted — it does its own
 # automatic HTTPS. See README.md.)
 # ==========================================================================
@@ -30,18 +36,18 @@
 		file_server
 	}
 
-	# ── Real app: storefront SPA (built with --base=/shop/) ──
-	handle /shop* {
-		root * /srv
-		try_files {path} /shop/index.html
+	# ── Static design prototype (design reference — full mockups) ──
+	# Serves index.html + mockup-*.html + design-system/ + assets/ under /prototype/*
+	handle_path /prototype/* {
+		root * /srv/prototype
+		try_files {path} {path}.html {path}/ =404
 		file_server
 	}
 
-	# ── Static prototype (everything else) ──
+	# ── Storefront SPA (built with --base=/) — everything else falls through ──
 	handle {
 		root * /srv
-		# Pretty URLs: /mockup-cart → mockup-cart.html
-		try_files {path} {path}.html {path}/ =404
+		try_files {path} /index.html
 		file_server
 	}
 
@@ -61,7 +67,7 @@
 		X-Frame-Options "SAMEORIGIN"
 		Referrer-Policy "strict-origin-when-cross-origin"
 		Permissions-Policy "camera=(), microphone=(), geolocation=()"
-		Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'"
+		Content-Security-Policy "default-src 'self'; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; media-src 'self' https:; connect-src 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'"
 		-Server
 	}
 

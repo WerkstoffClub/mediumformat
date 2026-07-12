@@ -180,7 +180,7 @@ export default function NewsList() {
           margin-bottom: 14px;
         }
         .mf-news-h1 {
-          font: 700 clamp(30px, 4.4vw, 48px)/1.08 "Noto Sans", sans-serif;
+          font: 700 clamp(30px, 4.4vw, 48px)/1.08 "Geist", "Helvetica Neue", Arial, sans-serif;
           letter-spacing: -0.05em;
           color: var(--ink);
           margin: 0;
@@ -206,7 +206,7 @@ export default function NewsList() {
           padding-bottom: 4px;
         }
         .mf-cat-chip {
-          font: 500 13px/1 "Noto Sans", sans-serif;
+          font: 500 13px/1 "Geist", "Helvetica Neue", Arial, sans-serif;
           color: var(--body);
           background: transparent;
           border: 1px solid var(--hairline);

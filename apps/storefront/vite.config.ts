@@ -1,15 +1,15 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// `base` only applies for production builds (mediumformat.info/shop/).
-// Dev server boots at `/` so pnpm dev feels normal.
-export default defineConfig(({ mode }) => ({
+// Storefront is served at the root of mediumformat.info (both dev and prod).
+// The static prototype now lives under /prototype/*.
+export default defineConfig({
   plugins: [react()],
-  base: mode === 'production' ? '/shop/' : '/',
+  base: '/',
   server: {
     port: 5174,
     proxy: {
-      '/api': { target: 'http://localhost:3001', changeOrigin: true },
+      '/api': { target: process.env.VITE_API_TARGET || 'http://localhost:3001', changeOrigin: true, secure: true },
     },
   },
-}));
+});

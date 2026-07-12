@@ -3,20 +3,22 @@
 # Medium Format — deploy the REAL app (NestJS API + back-office SPA + storefront
 # SPA) to the VPS stack, alongside the static prototype.
 #
-#   mediumformat.info/            → static prototype   (sync.sh)
+#   mediumformat.info/            → React storefront   (this script)
 #   mediumformat.info/backoffice/ → React back-office  (this script)
-#   mediumformat.info/shop/       → React storefront   (this script)
+#   mediumformat.info/prototype/  → static prototype   (sync.sh)
 #   mediumformat.info/api/v1/…    → NestJS API         (this script)
 #
 # What it does:
 #   1. Builds the back-office locally with --base=/backoffice/
-#      and the storefront locally with --base=/shop/
+#      and the storefront locally with --base=/ (root)
 #   2. Rsyncs the API build context (workspace subset) to ${STACK_DIR}/app-src
-#   3. Rsyncs the back-office + storefront dists into ${STACK_DIR}/site/{backoffice,shop}
-#   4. Ships docker-compose.yml + Caddyfile
-#   5. Creates ${STACK_DIR}/api.env on first run (generated secrets; DealPOS
+#   3. Rsyncs the back-office dist into ${STACK_DIR}/site/backoffice/
+#   4. Rsyncs the storefront dist into ${STACK_DIR}/site/ (root) — preserves
+#      backoffice/ and prototype/ subdirs.
+#   5. Ships docker-compose.yml + Caddyfile
+#   6. Creates ${STACK_DIR}/api.env on first run (generated secrets; DealPOS
 #      creds + feed token copied from the local root .env)
-#   6. docker compose up -d --build, then seeds the admin user
+#   7. docker compose up -d --build, then seeds the admin user
 #
 # Usage:  ./deploy/docker/deploy-app.sh
 # ==========================================================================
@@ -33,12 +35,12 @@ fi
 : "${SSH_HOST:?}"; : "${SSH_USER:?}"; : "${SSH_PORT:=22}"; : "${STACK_DIR:=/opt/stacks/mediumformat}"
 SSH=(ssh -p "$SSH_PORT" "${SSH_USER}@${SSH_HOST}")
 
-echo ">> [1/6] Building back-office (base=/backoffice/) and storefront (base=/shop/)"
+echo ">> [1/6] Building back-office (base=/backoffice/) and storefront (base=/)"
 pnpm --filter @mf/backoffice exec vite build --base=/backoffice/ >/dev/null
-pnpm --filter @mf/storefront exec vite build --base=/shop/ >/dev/null
+pnpm --filter @mf/storefront exec vite build >/dev/null
 
 echo ">> [2/6] Syncing API build context -> ${STACK_DIR}/app-src"
-"${SSH[@]}" "mkdir -p '${STACK_DIR}/app-src/packages' '${STACK_DIR}/app-src/apps' '${STACK_DIR}/site/backoffice' '${STACK_DIR}/site/shop'"
+"${SSH[@]}" "mkdir -p '${STACK_DIR}/app-src/packages' '${STACK_DIR}/app-src/apps' '${STACK_DIR}/site/backoffice' '${STACK_DIR}/site/prototype'"
 RS=(rsync -az --delete -e "ssh -p ${SSH_PORT}")
 "${RS[@]}" package.json pnpm-lock.yaml pnpm-workspace.yaml deploy/docker/Dockerfile.api \
   "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/app-src/"
@@ -47,9 +49,17 @@ RS=(rsync -az --delete -e "ssh -p ${SSH_PORT}")
 "${RS[@]}" --exclude node_modules --exclude dist --exclude .env apps/api \
   "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/app-src/apps/"
 
-echo ">> [3/6] Syncing back-office + storefront dists -> ${STACK_DIR}/site/{backoffice,shop}"
+echo ">> [3/6] Syncing back-office dist -> ${STACK_DIR}/site/backoffice"
 "${RS[@]}" apps/backoffice/dist/ "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/site/backoffice/"
-"${RS[@]}" apps/storefront/dist/ "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/site/shop/"
+
+echo ">> [3b/6] Syncing storefront dist -> ${STACK_DIR}/site/ (root) — preserving backoffice/ + prototype/"
+# --delete would otherwise wipe backoffice/ and prototype/ subdirs, so we
+# protect them from the rsync tree walk. Storefront owns everything else at /srv.
+rsync -az --delete \
+  --filter="protect backoffice/" \
+  --filter="protect prototype/" \
+  -e "ssh -p ${SSH_PORT}" \
+  apps/storefront/dist/ "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/site/"
 
 echo ">> [4/6] Shipping compose + Caddyfile"
 "${RS[@]}" deploy/docker/docker-compose.yml deploy/docker/Caddyfile \
@@ -113,6 +123,7 @@ echo ">> Seeding admin user (idempotent)"
 "${SSH[@]}" "docker exec mediumformat-api npx prisma db seed" || echo "   (seed skipped/failed — check manually)"
 
 echo ">> Done. Verify:"
+echo "   - https://mediumformat.info/            (storefront)"
 echo "   - https://mediumformat.info/backoffice/"
-echo "   - https://mediumformat.info/shop/"
+echo "   - https://mediumformat.info/prototype/  (design reference)"
 echo "   - https://mediumformat.info/api/v1/auth/login"
