@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { useTheme } from '../hooks/useTheme';
 import { getOrders } from '../api/ops';
 
 interface NavItem {
@@ -32,14 +31,12 @@ const icons = {
   vouchers:   ic(<><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/></>),
   newsletter: ic(<><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></>),
   social:     ic(<><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></>),
-  blog:       ic(<><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></>),
-  pages:      ic(<><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></>),
+  cms:        ic(<><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></>),
   settings:   ic(<><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></>),
 };
 
 export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; onClose?: () => void }) {
   const { user, logout } = useAuth();
-  const { theme, toggle } = useTheme();
   const [pendingOrders, setPendingOrders] = useState<number | null>(null);
 
   useEffect(() => {
@@ -77,8 +74,7 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
       items: [
         { label: 'Newsletter',     to: '/newsletter',      icon: icons.newsletter },
         { label: 'Social Media',   to: '/social',          icon: icons.social },
-        { label: 'Blog',           to: '/blog',            icon: icons.blog },
-        { label: 'Category pages', to: '/category-pages',  icon: icons.pages },
+        { label: 'CMS',            to: '/cms',             icon: icons.cms },
       ],
     },
     {
@@ -88,7 +84,6 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
   ];
 
   const initials = user?.name?.split(' ').map(p => p[0]).join('').toUpperCase().slice(0, 2) ?? 'MF';
-  const isDark = theme === 'dark';
 
   return (
     <aside
@@ -97,8 +92,8 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
         ${open ? 'max-md:translate-x-0 max-md:shadow-[0_8px_24px_rgba(0,0,0,.7)]' : 'max-md:-translate-x-full'}`}
     >
       <NavLink to="/dashboard" onClick={onClose} className="flex items-center px-[18px] py-[18px]" aria-label="Medium Format — dashboard">
-        <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="h-[17px] w-auto dark:hidden" />
-        <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[17px] w-auto hidden dark:block" />
+        <img src={`${import.meta.env.BASE_URL}MF_Lockup_Black.svg`} alt="Medium Format" className="h-[17px] w-auto dark:hidden" />
+        <img src={`${import.meta.env.BASE_URL}MF_Lockup_White.svg`} alt="Medium Format" className="h-[17px] w-auto hidden dark:block" />
       </NavLink>
 
       <nav className="flex-1 overflow-y-auto px-3 py-2 flex flex-col gap-[2px]">
@@ -152,18 +147,6 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
             <svg viewBox="0 0 24 24" className="w-[15px] h-[15px]" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           </button>
         </div>
-        <button
-          onClick={toggle}
-          aria-label="Toggle theme"
-          className="flex items-center gap-2 w-full mt-2 px-2.5 py-2 bg-[var(--bg-overlay)] border border-[var(--border)] rounded-[6px] text-[12px] font-medium text-[var(--text-primary)]"
-        >
-          {isDark ? (
-            <svg viewBox="0 0 24 24" className="w-[15px] h-[15px]" fill="none" stroke="currentColor" strokeWidth={1.6}><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-          ) : (
-            <svg viewBox="0 0 24 24" className="w-[15px] h-[15px]" fill="none" stroke="currentColor" strokeWidth={1.6}><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          )}
-          <span className="capitalize">{theme}</span>
-        </button>
       </div>
     </aside>
   );

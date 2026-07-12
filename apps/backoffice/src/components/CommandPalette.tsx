@@ -24,7 +24,9 @@ const PAGES: PageEntry[] = [
   { label: 'Vouchers', to: '/vouchers', hint: 'Shop' },
   { label: 'Newsletter', to: '/newsletter', hint: 'Marketing' },
   { label: 'Social Media', to: '/social', hint: 'Marketing' },
-  { label: 'Blog', to: '/blog', hint: 'Marketing' },
+  { label: 'CMS', to: '/cms', hint: 'Marketing' },
+  { label: 'CMS · Pages', to: '/cms?tab=pages', hint: 'CMS' },
+  { label: 'CMS · Archives', to: '/cms?tab=archives', hint: 'CMS' },
   { label: 'Preferences', to: '/preferences', hint: 'Config' },
   { label: 'Add release', to: '/inventory/new', hint: 'Action' },
 ];

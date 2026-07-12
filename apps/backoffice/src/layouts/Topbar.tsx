@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getReleases } from '../api/inventory';
 import { getSyncStatus } from '../api/finance';
+import { useTheme } from '../hooks/useTheme';
 
 const CRUMBS: Array<[RegExp, string]> = [
   [/^\/dashboard/, 'Dashboard'],
@@ -18,12 +19,13 @@ const CRUMBS: Array<[RegExp, string]> = [
   [/^\/vouchers/, 'Vouchers'],
   [/^\/newsletter/, 'Newsletter'],
   [/^\/social/, 'Social Media'],
-  [/^\/blog/, 'Blog'],
+  [/^\/cms/, 'CMS'],
   [/^\/preferences/, 'Preferences'],
 ];
 
 export function Topbar({ onOpenPalette, onOpenNav }: { onOpenPalette: () => void; onOpenNav: () => void }) {
   const { pathname } = useLocation();
+  const { theme, toggle } = useTheme();
   const [hasAlerts, setHasAlerts] = useState(false);
 
   useEffect(() => {
@@ -45,8 +47,8 @@ export function Topbar({ onOpenPalette, onOpenNav }: { onOpenPalette: () => void
         <svg viewBox="0 0 24 24" className="w-[19px] h-[19px]" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <span className="hidden max-md:flex items-center flex-1 min-w-0">
-        <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="h-[15px] w-auto dark:hidden" />
-        <img src="/MF_Lockup_White.svg" alt="Medium Format" className="h-[15px] w-auto hidden dark:block" />
+        <img src={`${import.meta.env.BASE_URL}MF_Lockup_Black.svg`} alt="Medium Format" className="h-[15px] w-auto dark:hidden" />
+        <img src={`${import.meta.env.BASE_URL}MF_Lockup_White.svg`} alt="Medium Format" className="h-[15px] w-auto hidden dark:block" />
       </span>
       <nav className="flex max-md:hidden items-center gap-[7px] text-[12px] whitespace-nowrap" aria-label="Breadcrumb">
         <span className="text-[var(--text-muted)]">Medium Format</span>
@@ -81,13 +83,18 @@ export function Topbar({ onOpenPalette, onOpenNav }: { onOpenPalette: () => void
           <svg viewBox="0 0 24 24" className="w-[17px] h-[17px]" fill="none" stroke="currentColor" strokeWidth={1.6}><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
           {hasAlerts && <span className="absolute top-2 right-2 w-[6px] h-[6px] rounded-full bg-[var(--danger)] border-[1.5px] border-[var(--bg-surface)]" />}
         </Link>
-        <Link
-          to="/inventory/new"
-          className="max-md:hidden flex items-center gap-1.5 px-3.5 py-[9px] rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[13px] font-semibold hover:opacity-[.88] transition-opacity whitespace-nowrap"
+        <button
+          onClick={toggle}
+          aria-label="Toggle theme"
+          title="Toggle theme"
+          className="w-9 h-9 rounded-[6px] flex items-center justify-center text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)] hover:text-[var(--text-primary)] transition-colors"
         >
-          <svg viewBox="0 0 24 24" className="w-[15px] h-[15px]" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add release
-        </Link>
+          {theme === 'dark' ? (
+            <svg viewBox="0 0 24 24" className="w-[17px] h-[17px]" fill="none" stroke="currentColor" strokeWidth={1.6}><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          ) : (
+            <svg viewBox="0 0 24 24" className="w-[17px] h-[17px]" fill="none" stroke="currentColor" strokeWidth={1.6}><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          )}
+        </button>
       </div>
     </header>
   );
