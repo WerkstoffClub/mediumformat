@@ -29,6 +29,9 @@ export const listVouchers = (
   p: { page?: number; limit?: number; q?: string; status?: 'active' | 'scheduled' | 'expired' | 'disabled' } = {},
 ) => api.get<VoucherList>('/vouchers', { params: p }).then(r => r.data);
 
+export const getVoucher = (id: string) =>
+  api.get<Voucher>(`/vouchers/${id}`).then(r => r.data);
+
 export const createVoucher = (body: Omit<Voucher, 'id' | 'usageCount' | 'createdAt' | 'updatedAt'>) =>
   api.post<Voucher>('/vouchers', body).then(r => r.data);
 
