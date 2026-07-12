@@ -78,6 +78,16 @@ export class StorefrontService {
   async categoryPage(slug: string) {
     const p = await this.prisma.categoryPage.findUnique({ where: { slug } });
     if (!p || p.status !== 'PUBLISHED') throw new NotFoundException();
+
+    if (p.kind === 'NEWS_CATEGORY' && p.newsCategoryKey) {
+      const posts = await this.prisma.post.findMany({
+        where: { status: 'PUBLISHED', category: p.newsCategoryKey },
+        orderBy: { publishedAt: 'desc' },
+        take: 50,
+      });
+      return { ...p, posts };
+    }
+
     return p;
   }
 
