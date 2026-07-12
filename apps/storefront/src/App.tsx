@@ -6,6 +6,7 @@ import ReleaseDetail from './pages/ReleaseDetail';
 import Preorders from './pages/Preorders';
 import NewsList from './pages/NewsList';
 import NewsDetail from './pages/NewsDetail';
+import CategoryPage from './pages/CategoryPage';
 import NotFound from './pages/NotFound';
 
 // Storefront is served at the site root in both dev and prod. The static
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/preorders" element={<Preorders />} />
           <Route path="/news" element={<NewsList />} />
           <Route path="/news/:slug" element={<NewsDetail />} />
+          <Route path="/pages/:slug" element={<CategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

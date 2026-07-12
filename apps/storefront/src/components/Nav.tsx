@@ -29,11 +29,11 @@ const SHOP_MENU: MegaConfig = {
   triggerTo: '/catalog',
   links: [
     { label: 'All records', to: '/catalog' },
-    { label: 'LPs', to: '/catalog?format=LP' },
+    { label: 'LPs — landing', to: '/pages/lps' },
+    { label: 'Cassettes — landing', to: '/pages/cassettes' },
     { label: '7" singles', to: '/catalog?format=SEVEN_INCH' },
     { label: '12" singles', to: '/catalog?format=TWELVE_INCH' },
     { label: 'CDs', to: '/catalog?format=CD' },
-    { label: 'Cassettes', to: '/catalog?format=CASSETTE' },
     { label: 'Merch', to: '/catalog?format=MERCH' },
   ],
   hero: {

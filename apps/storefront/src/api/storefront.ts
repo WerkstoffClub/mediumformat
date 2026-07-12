@@ -189,6 +189,45 @@ export async function getPost(slug: string): Promise<Post | null> {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Category pages (public, published only)
+// ---------------------------------------------------------------------------
+
+export type CategoryPageTemplate = 'FULL_HERO' | 'HALF_HERO';
+export type CategoryPageStatus   = 'DRAFT' | 'PUBLISHED';
+
+export interface CategoryPage {
+  id: string;
+  slug: string;
+  title: string;
+  formatFilter: RecordFormat | null;
+  template: CategoryPageTemplate;
+  kicker: string | null;
+  headline: string | null;
+  salesCopy: string | null;
+  heroImageUrl: string | null;
+  ctaLabel: string | null;
+  ctaHref: string | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
+  status: CategoryPageStatus;
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export async function getCategoryPage(slug: string): Promise<CategoryPage | null> {
+  try {
+    const res = await api.get<CategoryPage>(
+      `/storefront/category-pages/${encodeURIComponent(slug)}`,
+    );
+    return res.data;
+  } catch (err) {
+    if (err instanceof AxiosError && err.response?.status === 404) return null;
+    return unwrap(err, 'Failed to load page');
+  }
+}
+
 export async function subscribeNewsletter(email: string): Promise<NewsletterResult> {
   try {
     const res = await api.post<NewsletterResult>('/storefront/newsletter/subscribe', {
