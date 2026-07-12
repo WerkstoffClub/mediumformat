@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { PageHeader, Panel, Tabs, thCls, tdCls, StatusPill, EmptyRow, type TabDef } from '../../components/ui/Page';
 import { Badge } from '../../components/ui/Badge';
 import { BlogList } from '../blog/BlogList';
@@ -90,9 +90,10 @@ function CategoryCountsPanel() {
 }
 
 /** Read-only union of every archive/category page — product category
- *  pages (from the category-pages API) plus the fixed news categories —
- *  so slug + template assignment can be audited from one screen. */
+ *  pages and news categories both come from the category-pages API now,
+ *  distinguished by `kind`. Rows link to the real editor. */
 function ArchivesPanel() {
+  const navigate = useNavigate();
   const [pages, setPages] = useState<CategoryPage[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -100,10 +101,16 @@ function ArchivesPanel() {
     listCategoryPages({ limit: 100 }).then(r => setPages(r.data)).finally(() => setLoading(false));
   }, []);
 
-  const totalRows = pages.length + NEWS_CATEGORIES.length;
+  const kindBadge = (k: CategoryPage['kind']) =>
+    k === 'NEWS_CATEGORY'
+      ? <Badge variant="neutral">News category</Badge>
+      : <Badge variant="brand">Product page</Badge>;
+
+  const slugHref = (p: CategoryPage) =>
+    p.kind === 'NEWS_CATEGORY' ? `/journal?category=${p.slug}` : `/pages/${p.slug}`;
 
   return (
-    <Panel title="All archive pages" note={loading ? undefined : `${totalRows} total`}>
+    <Panel title="All archive pages" note={loading ? undefined : `${pages.length} total`}>
       <table className="w-full border-collapse text-[11px]">
         <thead>
           <tr className="bg-[#0d0d0d]">
@@ -115,27 +122,21 @@ function ArchivesPanel() {
         <tbody>
           {loading && <EmptyRow cols={5}>Loading…</EmptyRow>}
           {!loading && pages.map(p => (
-            <tr key={p.id} className="border-b border-[var(--border-sub)] hover:bg-[var(--bg-hover)]">
+            <tr
+              key={p.id}
+              onClick={() => navigate(`/category-pages/${p.id}/edit`)}
+              className="border-b border-[var(--border-sub)] hover:bg-[var(--bg-hover)] cursor-pointer"
+            >
               <td className={tdCls}>
                 <span className="font-semibold text-[var(--text-primary)]">{p.title}</span>
               </td>
-              <td className={tdCls}><Badge variant="brand">Product page</Badge></td>
-              <td className={`${tdCls} font-mono text-[var(--text-muted)]`}>/pages/{p.slug}</td>
+              <td className={tdCls}>{kindBadge(p.kind)}</td>
+              <td className={`${tdCls} font-mono text-[var(--text-muted)]`}>{slugHref(p)}</td>
               <td className={tdCls}>{TEMPLATE_LABELS[p.template] ?? p.template}</td>
               <td className={tdCls}><StatusPill value={STATUS_LABELS[p.status] ?? p.status} /></td>
             </tr>
           ))}
-          {!loading && NEWS_CATEGORIES.map(c => (
-            <tr key={c.value} className="border-b border-[var(--border-sub)] hover:bg-[var(--bg-hover)]">
-              <td className={tdCls}>
-                <span className="font-semibold text-[var(--text-primary)]">{c.label}</span>
-              </td>
-              <td className={tdCls}><Badge variant="neutral">News category</Badge></td>
-              <td className={`${tdCls} font-mono text-[var(--text-muted)]`}>/journal?category={c.slug}</td>
-              <td className={`${tdCls} text-[var(--text-faint)]`}>—</td>
-              <td className={tdCls}><StatusPill value={null} /></td>
-            </tr>
-          ))}
+          {!loading && pages.length === 0 && <EmptyRow cols={5}>No archive pages yet.</EmptyRow>}
         </tbody>
       </table>
     </Panel>

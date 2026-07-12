@@ -2,6 +2,8 @@ import { api } from './client';
 
 export type CategoryPageTemplate = 'FULL_HERO' | 'HALF_HERO';
 export type CategoryPageStatus   = 'DRAFT' | 'PUBLISHED';
+export type CategoryPageKind = 'PRODUCT_PAGE' | 'NEWS_CATEGORY';
+export type NewsCategoryKey = 'STAFF_PICKS' | 'HIGHLIGHTS' | 'NEWS' | 'INTERVIEW';
 
 export type RecordFormat =
   | 'LP' | 'TWO_LP' | 'THREE_LP' | 'TWELVE_INCH' | 'SEVEN_INCH'
@@ -13,6 +15,8 @@ export interface CategoryPage {
   title: string;
   formatFilter?: RecordFormat | null;
   template: CategoryPageTemplate;
+  kind: CategoryPageKind;
+  newsCategoryKey?: NewsCategoryKey | null;
   kicker?: string | null;
   headline?: string | null;
   salesCopy?: string | null;
@@ -37,6 +41,7 @@ export interface CategoryPageListResponse {
 export interface CategoryPageFilter {
   status?: CategoryPageStatus;
   template?: CategoryPageTemplate;
+  kind?: CategoryPageKind;
   search?: string;
   page?: number;
   limit?: number;
