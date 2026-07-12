@@ -1,14 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getReleases } from '../../api/inventory';
 import { getChannels } from '../../api/ops';
 import {
-  DEMO_PRODUCTS, TAX_RATE, releaseToProduct,
-  type CartLine, type PosCategory, type PosProduct,
+  DEMO_PRODUCTS, releaseToProduct,
+  type PosCategory, type PosProduct,
 } from '../../api/pos';
 import { ProductGrid } from './ProductGrid';
 import { Cart, type CartTotals } from './Cart';
 import { PaymentPanel, type EdcBank, type ImportedMethod, type PaymentSelection } from './PaymentPanel';
 import { EdcOverlay, SuccessModal, type EdcResult, type SaleSummary } from './Overlays';
+import { usePosStore } from './PosContext';
 
 function newOrderNumber(): string {
   const now = new Date();
@@ -17,14 +18,23 @@ function newOrderNumber(): string {
   return `MF-${stamp}-${seq}`;
 }
 
+/**
+ * POS register. Cart, discount and customer live in the shared PosContext so
+ * they survive navigation between /pos and /pos/checkout; UI state (search,
+ * catalogue filters, payment method) stays local to this page.
+ */
 export function Pos() {
+  const {
+    cart, addToCart, updateQty, removeLine, clearCart,
+    discount, setDiscount,
+    subtotalIdr, discountIdr, taxIdr, totalIdr,
+  } = usePosStore();
+
   const [products, setProducts] = useState<PosProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<PosCategory | 'all'>('all');
 
-  const [cart, setCart] = useState<CartLine[]>([]);
-  const [discountInput, setDiscountInput] = useState('');
   const [selection, setSelection] = useState<PaymentSelection | null>(null);
   const [cashTender, setCashTender] = useState('');
   const [imported, setImported] = useState<ImportedMethod[]>([]);
@@ -49,40 +59,34 @@ export function Pos() {
       .catch(() => setImported([]));
   }, []);
 
-  const totals: CartTotals = useMemo(() => {
-    const subtotal = cart.reduce((sum, l) => sum + l.product.priceIdr * l.qty, 0);
-    const discount = Math.min(Number(discountInput || 0), subtotal);
-    const taxable = subtotal - discount;
-    const tax = Math.round(taxable * TAX_RATE);
-    return { subtotal, discount, tax, total: taxable + tax };
-  }, [cart, discountInput]);
-
-  const inCart = useMemo(() => new Set(cart.map(l => l.product.id)), [cart]);
-
-  const addToCart = (product: PosProduct) => {
-    setCart(prev => {
-      const existing = prev.find(l => l.product.id === product.id);
-      if (existing) {
-        if (existing.qty >= product.stock) return prev;
-        return prev.map(l => (l.product.id === product.id ? { ...l, qty: l.qty + 1 } : l));
-      }
-      return [...prev, { product, qty: 1 }];
-    });
+  const totals: CartTotals = {
+    subtotal: subtotalIdr,
+    discount: discountIdr,
+    tax: taxIdr,
+    total: totalIdr,
   };
 
-  const changeQty = (productId: string, delta: number) => {
-    setCart(prev => prev.flatMap(l => {
-      if (l.product.id !== productId) return [l];
-      const qty = Math.min(l.product.stock, l.qty + delta);
-      return qty <= 0 ? [] : [{ ...l, qty }];
-    }));
+  const inCart = new Set(cart.map(l => l.product.id));
+
+  // Cart.tsx uses a delta-based updater; adapt to the store's absolute update.
+  const handleQty = (productId: string, delta: number) => {
+    const line = cart.find(l => l.product.id === productId);
+    if (!line) return;
+    updateQty(productId, line.qty + delta);
   };
 
-  const removeLine = (productId: string) => setCart(prev => prev.filter(l => l.product.id !== productId));
+  // Cart.tsx exposes a fixed-IDR discount input. Persist it as { kind, value }
+  // in the shared store so the checkout page can promote it to a percent.
+  const discountInput = discount?.kind === 'FIXED_IDR' && discount.value > 0
+    ? String(discount.value) : '';
+  const handleDiscountInput = (raw: string) => {
+    const digits = raw.replace(/[^0-9]/g, '');
+    const value = Number(digits || 0);
+    setDiscount(value > 0 ? { kind: 'FIXED_IDR', value } : null);
+  };
 
   const resetSale = () => {
-    setCart([]);
-    setDiscountInput('');
+    clearCart();
     setSelection(null);
     setCashTender('');
     setSale(null);
@@ -162,10 +166,10 @@ export function Pos() {
               lines={cart}
               totals={totals}
               discountInput={discountInput}
-              onDiscountInput={setDiscountInput}
-              onQty={changeQty}
+              onDiscountInput={handleDiscountInput}
+              onQty={handleQty}
               onRemove={removeLine}
-              onClear={() => { setCart([]); setDiscountInput(''); }}
+              onClear={clearCart}
             />
           </div>
           <div className="flex-1 min-h-0 flex flex-col max-md:flex-none">

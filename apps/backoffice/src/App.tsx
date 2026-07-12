@@ -14,6 +14,7 @@ import { Preferences } from './pages/preferences/Preferences';
 import { Preorders } from './pages/preorders/Preorders';
 import { Sales } from './pages/sales/Sales';
 import { Pos } from './pages/pos/Pos';
+import { PosLayout } from './pages/pos/PosLayout';
 import { SocialMedia } from './pages/social/SocialMedia';
 import { Inventory } from './pages/inventory/Inventory';
 import { ReleaseForm } from './pages/inventory/ReleaseForm';
@@ -48,7 +49,9 @@ export default function App() {
           <Route path="/settlements"        element={<Navigate to="/sales?tab=settlements" replace />} />
           <Route path="/preorders"          element={<Preorders />} />
           <Route path="/categories"         element={<Navigate to="/inventory?tab=categories" replace />} />
-          <Route path="/pos"                element={<Pos />} />
+          <Route element={<PosLayout />}>
+            <Route path="/pos"                element={<Pos />} />
+          </Route>
           <Route path="/orders"             element={<OrdersList />} />
           <Route path="/orders/:id"         element={<OrderDetail />} />
           <Route path="/customers"          element={<CustomersList />} />
