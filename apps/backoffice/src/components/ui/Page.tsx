@@ -49,6 +49,8 @@ const STATUS_COLORS: Record<string, string> = {
   'Inventory updated': 'var(--success)',
   // Imports (ImportLineMatchStatus) — per-line match result from POST /imports/:id/match.
   Matched: 'var(--success)', New: 'var(--info)', Ambiguous: 'var(--warning)',
+  // Forwarder consolidations (ConsolidationStatus) — open until freight is allocated.
+  Open: 'var(--info)', Allocated: 'var(--success)',
 };
 
 export function StatusPill({ value }: { value: string | null }) {

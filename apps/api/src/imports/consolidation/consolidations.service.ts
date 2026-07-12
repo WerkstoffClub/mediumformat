@@ -72,6 +72,8 @@ export class ConsolidationsService {
             lines: {
               select: {
                 id: true,
+                title: true,
+                artist: true,
                 weightKg: true,
                 qty: true,
                 allocatedForwarderIdr: true,
