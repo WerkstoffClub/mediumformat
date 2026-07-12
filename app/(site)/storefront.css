@@ -1176,3 +1176,260 @@
   margin-top: 24px;
   white-space: pre-wrap;
 }
+
+/* ─── Cart ─── */
+.mf .cart-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 44px 24px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+  align-items: start;
+}
+.mf .cart-lines {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.mf .cart-line {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--hairline);
+}
+.mf .cart-line:last-child {
+  border-bottom: none;
+}
+.mf .cl-cover {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--surface);
+}
+.mf .cl-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.mf .cl-artist {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.mf .cl-title {
+  font-size: 13px;
+  color: var(--mute);
+}
+.mf .cl-meta {
+  font-size: 12px;
+  color: var(--mute);
+  margin-top: 4px;
+}
+.mf .cl-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.mf .cl-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.mf .cl-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mf .qty-btn {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mf .qty-btn:hover {
+  background: var(--raised);
+}
+.mf .qty-val {
+  font-size: 13px;
+  min-width: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.mf .link-btn {
+  background: none;
+  border: none;
+  color: var(--mute);
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+.mf .link-btn:hover {
+  color: var(--ink);
+}
+.mf .summary {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+.mf .summary h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.mf .sum-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--body);
+  padding: 6px 0;
+}
+.mf .sum-row span:last-child {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.mf .sum-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  border-top: 1px solid var(--hairline);
+  margin-top: 10px;
+  padding-top: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.mf .summary .btn-primary,
+.mf .summary .btn-secondary {
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* Add-to-cart on a variant row */
+.mf .vadd {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-md);
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.mf .vadd:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+.mf .vadd svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ─── Forms ─── */
+.mf .field {
+  margin-bottom: 14px;
+}
+.mf .field label {
+  display: block;
+  font-size: 12px;
+  color: var(--mute);
+  margin-bottom: 6px;
+}
+.mf .input {
+  width: 100%;
+  background: var(--raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  color: var(--ink);
+  font-size: 14px;
+  font-family: var(--ui);
+  padding: 10px 12px;
+}
+.mf .input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.mf .field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ─── Order confirmation ─── */
+.mf .confirm {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  text-align: center;
+}
+.mf .confirm-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--success-t);
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.mf .confirm-badge svg {
+  width: 28px;
+  height: 28px;
+}
+.mf .confirm h1 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.mf .confirm-num {
+  font-size: 14px;
+  color: var(--mute);
+  margin-top: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.mf .confirm-card {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  margin-top: 28px;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .mf .cart-layout {
+    grid-template-columns: 1fr;
+  }
+  .mf .summary {
+    position: static;
+  }
+}
+@media (max-width: 480px) {
+  .mf .field-row {
+    grid-template-columns: 1fr;
+  }
+}

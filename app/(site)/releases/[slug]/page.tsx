@@ -9,6 +9,7 @@ import {
   getCatalogProducts,
 } from "@/lib/catalog";
 import { ReleaseCard } from "@/components/site/ReleaseCard";
+import { addToCart } from "../../cart/actions";
 
 export const dynamic = "force-dynamic";
 
@@ -145,21 +146,36 @@ export default async function ReleasePage({
                     </span>
                     {v.color && <span>{v.color}</span>}
                   </div>
-                  <span className="rd-variant-price">
-                    {formatIdr(v.priceIdr.toString())}
-                  </span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <span className="rd-variant-price">
+                      {formatIdr(v.priceIdr.toString())}
+                    </span>
+                    <form action={addToCart}>
+                      <input type="hidden" name="variantId" value={v.id} />
+                      <button className="vadd" aria-label="Add this copy to cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M12 5v14M5 12h14" />
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
                 </div>
               ))}
             </div>
           )}
 
           <div className="rd-actions">
-            <button type="button" className="btn-primary">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0" />
-              </svg>
-              Add to cart
-            </button>
+            {cheapest && (
+              <form action={addToCart} style={{ flex: 1, display: "flex" }}>
+                <input type="hidden" name="variantId" value={cheapest.id} />
+                <button className="btn-primary" style={{ width: "100%" }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0" />
+                  </svg>
+                  Add to cart
+                </button>
+              </form>
+            )}
             <button type="button" className="btn-secondary" aria-label="Add to wishlist">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
