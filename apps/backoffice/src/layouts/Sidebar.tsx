@@ -56,19 +56,19 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
     {
       label: 'Selling',
       items: [
-        { label: 'POS',       to: '/pos',       icon: icons.pos },
-        { label: 'Orders',    to: '/orders',    icon: icons.orders, count: pendingOrders },
-        { label: 'Inventory', to: '/inventory', icon: icons.inventory },
-        { label: 'Customers', to: '/customers', icon: icons.customers },
-        { label: 'Channels',  to: '/channels',  icon: icons.channels, statusDot: true },
+        { label: 'POS',             to: '/pos',             icon: icons.pos },
+        { label: 'Orders',          to: '/orders',          icon: icons.orders, count: pendingOrders },
+        { label: 'Purchase orders', to: '/purchase-orders', icon: icons.po },
+        { label: 'Inventory',       to: '/inventory',       icon: icons.inventory },
+        { label: 'Customers',       to: '/customers',       icon: icons.customers },
+        { label: 'Channels',        to: '/channels',        icon: icons.channels, statusDot: true },
       ],
     },
     {
       label: 'Shop',
       items: [
-        { label: 'Purchase orders', to: '/purchase-orders', icon: icons.po },
-        { label: 'Preorders',       to: '/preorders',       icon: icons.preorders },
-        { label: 'Vouchers',        to: '/vouchers',        icon: icons.vouchers },
+        { label: 'Preorders', to: '/preorders', icon: icons.preorders },
+        { label: 'Vouchers',  to: '/vouchers',  icon: icons.vouchers },
       ],
     },
     {
