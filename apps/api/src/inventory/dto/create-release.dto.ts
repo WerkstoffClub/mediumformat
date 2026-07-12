@@ -30,6 +30,8 @@ export class CreateReleaseDto {
   @IsOptional() @IsArray() tracks?: Array<Record<string, unknown>>;
   @IsOptional() @IsArray() sizing?: Array<Record<string, unknown>>;
   @IsOptional() @IsArray() channelListings?: string[];
+  /** Extra images beyond `imageUrl`; populated by the Discogs Get media flow. */
+  @IsOptional() @IsArray() gallery?: string[];
   @IsOptional() @IsString() slug?: string;
   @IsOptional() @IsString() seoTitle?: string;
   @IsOptional() @IsString() seoDescription?: string;

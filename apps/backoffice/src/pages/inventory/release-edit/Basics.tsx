@@ -1,13 +1,17 @@
-import type { ReactNode } from 'react';
+import { GetDetailsButton } from './GetDetailsButton';
 import { PanelHeader } from './PanelHeader';
 import { Field, inputCls } from './shared';
 import type { SectionProps } from './types';
 
-interface Props extends SectionProps {
-  actions?: ReactNode;
-}
-
-export function Basics({ value, onChange, actions }: Props) {
+export function Basics({ value, onChange }: SectionProps) {
+  const actions = (
+    <GetDetailsButton
+      discogsId={value.discogsId}
+      artist={value.artist}
+      title={value.title}
+      onApply={onChange}
+    />
+  );
   return (
     <PanelHeader number={1} title="Basics" actions={actions}>
       <div className="grid grid-cols-2 gap-3.5 max-md:grid-cols-1">

@@ -1,18 +1,12 @@
-import type { ReactNode } from 'react';
 import { ReleaseCover } from '../../../components/ui/Cover';
+import { BatchFetchMenu } from './BatchFetchMenu';
+import { GetMediaButton } from './GetMediaButton';
 import { PanelHeader } from './PanelHeader';
 import { inputCls } from './shared';
+import { TrackRow } from './TrackRow';
 import type { SectionProps, Track } from './types';
 
-interface Props extends SectionProps {
-  actions?: ReactNode;
-  /** Optional slot rendered above the tracklist (batch-fetch menu, etc.). */
-  aboveTracks?: ReactNode;
-  /** Rendered per track; when omitted, a simple built-in row is used. */
-  renderTrack?: (track: Track, index: number, patch: (p: Partial<Track>) => void, remove: () => void) => ReactNode;
-}
-
-export function Media({ value, onChange, actions, aboveTracks, renderTrack }: Props) {
+export function Media({ value, onChange }: SectionProps) {
   const tracks: Track[] = value.tracks ?? [];
   const gallery: string[] = value.gallery ?? [];
 
@@ -27,6 +21,16 @@ export function Media({ value, onChange, actions, aboveTracks, renderTrack }: Pr
 
   const removeGalleryItem = (i: number) =>
     onChange({ gallery: gallery.filter((_, j) => j !== i) });
+
+  const actions = (
+    <GetMediaButton
+      discogsId={value.discogsId}
+      artist={value.artist}
+      title={value.title}
+      onApply={(patch) => onChange(patch)}
+      onDiscogsResolved={(p) => onChange({ discogsId: p.discogsId })}
+    />
+  );
 
   return (
     <PanelHeader number={6} title="Media" actions={actions}>
@@ -77,27 +81,28 @@ export function Media({ value, onChange, actions, aboveTracks, renderTrack }: Pr
         </div>
 
         <div>
-          <p className="text-[12px] font-medium text-[var(--text-muted)] uppercase tracking-[0.04em] mb-1.5">
-            Tracklist
-          </p>
-          {aboveTracks && <div className="mb-2">{aboveTracks}</div>}
+          <div className="flex items-center justify-between mb-1.5">
+            <p className="text-[12px] font-medium text-[var(--text-muted)] uppercase tracking-[0.04em]">
+              Tracklist
+            </p>
+            <BatchFetchMenu
+              tracks={tracks}
+              artist={value.artist ?? ''}
+              onChange={(nextTracks) => onChange({ tracks: nextTracks })}
+            />
+          </div>
 
           <div className="space-y-1.5">
-            {tracks.map((track, i) =>
-              renderTrack ? (
-                <div key={i}>
-                  {renderTrack(track, i, (p) => patchTrack(i, p), () => removeTrack(i))}
-                </div>
-              ) : (
-                <SimpleTrackEditor
-                  key={i}
-                  track={track}
-                  index={i}
-                  onChange={(p) => patchTrack(i, p)}
-                  onRemove={() => removeTrack(i)}
-                />
-              ),
-            )}
+            {tracks.map((track, i) => (
+              <TrackRow
+                key={i}
+                index={i}
+                track={track}
+                artist={value.artist ?? ''}
+                onChange={(patch) => patchTrack(i, patch)}
+                onRemove={() => removeTrack(i)}
+              />
+            ))}
           </div>
 
           <button
@@ -121,61 +126,5 @@ export function Media({ value, onChange, actions, aboveTracks, renderTrack }: Pr
         </div>
       </div>
     </PanelHeader>
-  );
-}
-
-/** Minimal inline track row used when the parent doesn't inject the full TrackRow. */
-function SimpleTrackEditor({
-  track,
-  index,
-  onChange,
-  onRemove,
-}: {
-  track: Track;
-  index: number;
-  onChange: (patch: Partial<Track>) => void;
-  onRemove: () => void;
-}) {
-  return (
-    <div className="border border-[var(--border)] rounded-[6px] flex items-center gap-2 p-1.5">
-      <input
-        className="w-11 bg-[var(--bg-overlay)] border border-[var(--border)] rounded-[5px] px-1.5 py-[7px] text-[11px] font-mono text-center text-[var(--text-secondary)] outline-none focus:border-[var(--accent)]"
-        value={track.position ?? ''}
-        onChange={(e) => onChange({ position: e.target.value })}
-        placeholder={`${index + 1}`}
-        aria-label="Track number"
-      />
-      <input
-        className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border)] rounded-[5px] px-2.5 py-[7px] text-[12.5px] text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
-        value={track.title}
-        onChange={(e) => onChange({ title: e.target.value })}
-        placeholder="Track title"
-        aria-label="Track title"
-      />
-      <input
-        className="w-[64px] bg-[var(--bg-overlay)] border border-[var(--border)] rounded-[5px] px-1.5 py-[7px] text-[11px] font-mono text-center text-[var(--text-secondary)] outline-none focus:border-[var(--accent)]"
-        value={track.duration ?? ''}
-        onChange={(e) => onChange({ duration: e.target.value })}
-        placeholder="0:00"
-        aria-label="Duration"
-      />
-      <button
-        type="button"
-        onClick={onRemove}
-        aria-label="Remove track"
-        className="w-8 h-8 rounded-[5px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--danger)] flex-shrink-0"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          className="w-3.5 h-3.5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={1.8}
-          strokeLinecap="round"
-        >
-          <line x1="5" y1="12" x2="19" y2="12" />
-        </svg>
-      </button>
-    </div>
   );
 }
