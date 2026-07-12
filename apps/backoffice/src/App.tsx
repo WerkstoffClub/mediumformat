@@ -6,11 +6,9 @@ import Dashboard from './pages/Dashboard';
 import { OrdersList } from './pages/orders/OrdersList';
 import { OrderDetail } from './pages/orders/OrderDetail';
 import { CustomersList } from './pages/customers/CustomersList';
-import { PurchaseOrdersList } from './pages/purchase-orders/PurchaseOrdersList';
-import { ImportsList } from './pages/imports/ImportsList';
+import { PurchaseOrdersHub } from './pages/purchase-orders/PurchaseOrdersHub';
 import { NewImport } from './pages/imports/NewImport';
 import { ImportDetail } from './pages/imports/ImportDetail';
-import { ConsolidationsList } from './pages/consolidations/ConsolidationsList';
 import { ConsolidationDetail } from './pages/consolidations/ConsolidationDetail';
 import { Channels } from './pages/channels/Channels';
 import { Vouchers } from './pages/vouchers/Vouchers';
@@ -62,11 +60,11 @@ export default function App() {
           <Route path="/orders"             element={<OrdersList />} />
           <Route path="/orders/:id"         element={<OrderDetail />} />
           <Route path="/customers"          element={<CustomersList />} />
-          <Route path="/purchase-orders"    element={<PurchaseOrdersList />} />
-          <Route path="/imports"            element={<ImportsList />} />
+          <Route path="/purchase-orders"    element={<PurchaseOrdersHub />} />
+          <Route path="/imports"            element={<Navigate to="/purchase-orders?tab=imports" replace />} />
           <Route path="/imports/new"        element={<NewImport />} />
           <Route path="/imports/:id"        element={<ImportDetail />} />
-          <Route path="/consolidations"     element={<ConsolidationsList />} />
+          <Route path="/consolidations"     element={<Navigate to="/purchase-orders?tab=consolidations" replace />} />
           <Route path="/consolidations/:id" element={<ConsolidationDetail />} />
           <Route path="/channels"           element={<Channels />} />
           <Route path="/vouchers"           element={<Vouchers />} />

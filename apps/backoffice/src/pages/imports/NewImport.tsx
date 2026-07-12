@@ -141,7 +141,7 @@ export function NewImport() {
   return (
     <div className="mx-auto w-full max-w-[940px] px-6 py-8 max-md:px-4 max-md:py-6 pb-24">
       <div className="flex items-center gap-2 text-[11px] text-[var(--text-muted)] mb-3">
-        <Link to="/imports" className="hover:text-[var(--text-primary)]">Imports</Link>
+        <Link to="/purchase-orders?tab=imports" className="hover:text-[var(--text-primary)]">Imports</Link>
         <span className="text-[var(--text-faint)]">/</span>
         <span className="text-[var(--text-secondary)]">New import</span>
       </div>
@@ -273,7 +273,7 @@ export function NewImport() {
               Start over
             </button>
             <span className="flex-1" />
-            <Link to="/imports" className="px-3.5 py-[9px] rounded-[6px] text-[13px] font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)] hover:text-[var(--text-primary)] transition-colors">
+            <Link to="/purchase-orders?tab=imports" className="px-3.5 py-[9px] rounded-[6px] text-[13px] font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)] hover:text-[var(--text-primary)] transition-colors">
               Cancel
             </Link>
             <button

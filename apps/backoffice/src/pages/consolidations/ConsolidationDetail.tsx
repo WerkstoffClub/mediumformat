@@ -300,7 +300,7 @@ export function ConsolidationDetail() {
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div className="min-w-0">
           <div className="flex items-center gap-2 text-[11px] text-[var(--text-muted)] mb-1.5">
-            <Link to="/consolidations" className="hover:text-[var(--text-primary)]">Consolidations</Link>
+            <Link to="/purchase-orders?tab=consolidations" className="hover:text-[var(--text-primary)]">Consolidations</Link>
             <span className="text-[var(--text-faint)]">/</span>
             <span className="font-mono text-[var(--text-secondary)]">{detail.number}</span>
           </div>

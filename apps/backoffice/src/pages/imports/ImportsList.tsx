@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getImports, IMPORT_STATUSES, type ImportOrderRow, type ImportStatus } from '../../api/imports';
 import { fmtDate } from '../../api/ops';
-import { EmptyRow, PageHeader, Paginator, SearchBox, StatusPill, tdCls, thCls } from '../../components/ui/Page';
+import { EmptyRow, Paginator, SearchBox, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 import { fmtNative, IMPORT_STATUS_LABEL, ORIGIN_LABEL } from './shared';
 
 const TABS: Array<{ key: 'all' | ImportStatus; label: string }> = [
@@ -75,19 +75,6 @@ export function ImportsList() {
 
   return (
     <div>
-      <PageHeader
-        title="Imports"
-        sub="Vendor invoices — from parsed PDF to landed inventory."
-        actions={(
-          <button
-            onClick={() => navigate('/imports/new')}
-            className="text-[12px] px-3 py-2 rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] font-semibold hover:opacity-90 transition-opacity"
-          >
-            + New Import
-          </button>
-        )}
-      />
-
       <div className="flex items-center gap-2 mb-3 flex-wrap">
         <div className="flex gap-[2px] bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] p-[3px] flex-wrap" role="tablist">
           {TABS.map(t => {
@@ -109,6 +96,12 @@ export function ImportsList() {
         </div>
         <div className="flex-1" />
         <SearchBox value={qInput} onChange={v => { setQInput(v); setPage(1); }} placeholder="Search import # or vendor…" />
+        <button
+          onClick={() => navigate('/imports/new')}
+          className="text-[12px] px-3 py-2 rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] font-semibold hover:opacity-90 transition-opacity"
+        >
+          + New Import
+        </button>
       </div>
 
       <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg overflow-x-auto">
