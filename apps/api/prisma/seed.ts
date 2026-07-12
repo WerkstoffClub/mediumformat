@@ -96,7 +96,6 @@ async function seedCategoryPages() {
 }
 
 async function seedNewsCategories() {
-  const now = new Date();
   const cats: Array<{
     slug: string;
     title: string;
@@ -141,8 +140,11 @@ async function seedNewsCategories() {
   ];
 
   for (const c of cats) {
+    // Seeded DRAFT: the storefront resolver only serves PUBLISHED pages, and
+    // storefront rendering for news-category pages isn't implemented yet —
+    // publish these once that lands.
     await prisma.categoryPage.upsert({
-      where: { slug: c.slug },
+      where: { newsCategoryKey: c.newsCategoryKey },
       update: {}, // never clobber edits made in the CMS
       create: {
         slug: c.slug,
@@ -153,13 +155,13 @@ async function seedNewsCategories() {
         kicker: c.kicker,
         headline: c.headline,
         salesCopy: c.salesCopy,
-        status: 'PUBLISHED',
-        publishedAt: now,
+        status: 'DRAFT',
+        publishedAt: null,
       },
     });
   }
 
-  console.log('✓ Seeded/verified 4 news categories (staff-picks, highlights, news, interview)');
+  console.log('✓ Seeded/verified 4 news categories (staff-picks, highlights, news, interview) (DRAFT — publish when storefront rendering lands)');
 }
 
 async function main() {

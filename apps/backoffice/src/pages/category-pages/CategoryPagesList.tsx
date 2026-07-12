@@ -41,7 +41,7 @@ export function CategoryPagesList() {
   const load = useCallback(async (f: CategoryPageFilter) => {
     setLoading(true);
     try {
-      const res = await listCategoryPages({ ...f, limit: 50 });
+      const res = await listCategoryPages({ ...f, kind: 'PRODUCT_PAGE', limit: 50 });
       setPages(res.data);
       setTotal(res.total);
     } finally {
