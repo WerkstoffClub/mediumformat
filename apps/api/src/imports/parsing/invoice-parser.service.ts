@@ -41,6 +41,8 @@ export class InvoiceParserService {
       orderDate: raw.orderDate,
       currency: raw.currency,
       vendorShippingNative,
+      taxNative: raw.tax ?? 0,
+      otherFeesNative: raw.otherFees ?? 0,
       invoiceTotalNative: raw.invoiceTotal,
       lines,
       totalsReconcile,
