@@ -2,16 +2,13 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "api",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "@mf/api", "dev"],
-      "port": 3001
-    },
-    {
-      "name": "backoffice",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "@mf/backoffice", "dev"],
-      "port": 5173
+      "name": "storefront",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "VITE_API_TARGET=https://mediumformat.info pnpm --filter @mf/storefront exec vite dev --port 5175 --strictPort"
+      ],
+      "port": 5175
     }
   ]
 }
