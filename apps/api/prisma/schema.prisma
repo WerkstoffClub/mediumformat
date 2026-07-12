@@ -101,7 +101,7 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  posts        Post[]
+  posts Post[]
 }
 
 model Post {
@@ -124,7 +124,7 @@ model Post {
 }
 
 model Release {
-  id                String          @id @default(cuid())
+  id                String           @id @default(cuid())
   artist            String
   title             String
   label             String?
@@ -134,15 +134,15 @@ model Release {
   genre             String?
   condition         RecordCondition
   priceIdr          Int
-  stock             Int             @default(0)
+  stock             Int              @default(0)
   notes             String?
   imageUrl          String?
   gallery           Json?
-  barcode           String?         @unique
-  storeLocation     StoreLocation   @default(MAIN_STORE)
+  barcode           String?          @unique
+  storeLocation     StoreLocation    @default(MAIN_STORE)
   shelfLocation     String?
-  lowStockThreshold Int             @default(2)
-  discogsId         String?         @unique
+  lowStockThreshold Int              @default(2)
+  discogsId         String?          @unique
   country           String?
   compareAtIdr      Int?
   mediaGrade        RecordCondition?
@@ -150,21 +150,23 @@ model Release {
   tracks            Json?
   sizing            Json?
   channelListings   Json?
-  slug              String?         @unique
+  slug              String?          @unique
   seoTitle          String?
   seoDescription    String?
-  featured          Boolean         @default(false)
-  preorder          Boolean         @default(false)
+  featured          Boolean          @default(false)
+  preorder          Boolean          @default(false)
   preorderEta       DateTime?
-  onSale            Boolean         @default(false)
+  onSale            Boolean          @default(false)
   dealposProductId  String?
-  dealposVariantId  String?         @unique
+  dealposVariantId  String?          @unique
   costIdr           Int?
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  purchaseOrderLines PurchaseOrderLine[]
+  // barcode and discogsId already have implicit indexes via @unique
 
   @@index([artist, title])
-  // barcode and discogsId already have implicit indexes via @unique
 }
 
 // ---------------------------------------------------------------------------
@@ -341,55 +343,57 @@ model Location {
 }
 
 model PurchaseOrder {
-  id           String   @id @default(cuid())
-  poNumber     String   @unique
+  id           String              @id @default(cuid())
+  poNumber     String              @unique
   supplierId   String?
   supplierName String
-  status       PoStatus @default(DRAFT)
-  currency     String   @default("IDR")
-  subtotalIdr  Int      @default(0)
-  taxIdr       Int      @default(0)
-  totalIdr     Int      @default(0)
+  status       PoStatus            @default(DRAFT)
+  currency     String              @default("IDR")
+  subtotalIdr  Int                 @default(0)
+  taxIdr       Int                 @default(0)
+  totalIdr     Int                 @default(0)
   orderedAt    DateTime?
   etaAt        DateTime?
   receivedAt   DateTime?
   notes        String?
-  sourceBillId String?  @unique
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  sourceBillId String?             @unique
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
   lines        PurchaseOrderLine[]
 
   @@index([status, etaAt])
 }
 
 model PurchaseOrderLine {
-  id             String  @id @default(cuid())
-  purchaseOrder  PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  id              String        @id @default(cuid())
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
   purchaseOrderId String
-  releaseId      String?
-  description    String
-  qtyOrdered     Int     @default(0)
-  qtyReceived    Int     @default(0)
-  unitCostIdr    Int     @default(0)
-  totalIdr       Int     @default(0)
+  release         Release?      @relation(fields: [releaseId], references: [id], onDelete: SetNull)
+  releaseId       String?
+  description     String
+  qtyOrdered      Int           @default(0)
+  qtyReceived     Int           @default(0)
+  unitCostIdr     Int           @default(0)
+  totalIdr        Int           @default(0)
 
   @@index([purchaseOrderId])
+  @@index([releaseId])
 }
 
 model Voucher {
-  id           String      @id @default(cuid())
-  code         String      @unique
-  kind         VoucherKind
-  value        Int
-  minOrderIdr  Int         @default(0)
-  startsAt     DateTime?
-  expiresAt    DateTime?
-  usageLimit   Int?
-  usageCount   Int         @default(0)
-  active       Boolean     @default(true)
-  notes        String?
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id          String      @id @default(cuid())
+  code        String      @unique
+  kind        VoucherKind
+  value       Int
+  minOrderIdr Int         @default(0)
+  startsAt    DateTime?
+  expiresAt   DateTime?
+  usageLimit  Int?
+  usageCount  Int         @default(0)
+  active      Boolean     @default(true)
+  notes       String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 
   @@index([active, expiresAt])
 }
@@ -412,11 +416,11 @@ model NewsletterCampaign {
   previewText    String?
   body           String
   status         CampaignStatus @default(DRAFT)
-  scheduledFor   DateTime?
+  scheduledAt    DateTime?
   sentAt         DateTime?
   recipientCount Int            @default(0)
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
-  @@index([status, scheduledFor])
+  @@index([status, scheduledAt])
 }
