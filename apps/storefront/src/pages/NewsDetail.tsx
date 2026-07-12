@@ -257,7 +257,7 @@ export default function NewsDetail() {
         }
         .mf-kicker {
           display: inline-block;
-          font: 500 12px/1 "Noto Sans", sans-serif;
+          font: 500 12px/1 "Geist", "Helvetica Neue", Arial, sans-serif;
           text-transform: uppercase;
           letter-spacing: 0.08em;
           color: var(--accent-text);
@@ -268,7 +268,7 @@ export default function NewsDetail() {
           margin-bottom: 18px;
         }
         .mf-art-h1 {
-          font: 700 clamp(28px, 4.6vw, 48px) / 1.08 "Noto Sans", sans-serif;
+          font: 700 clamp(28px, 4.6vw, 48px) / 1.08 "Geist", "Helvetica Neue", Arial, sans-serif;
           letter-spacing: -0.055em;
           color: var(--ink);
           max-width: 15ch;
@@ -382,7 +382,7 @@ export default function NewsDetail() {
           margin: 2em 0;
         }
         .prose-mf code {
-          font-family: "Noto Sans Mono", ui-monospace, monospace;
+          font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
           font-size: 0.9em;
           background: var(--raised);
           border: 1px solid var(--hairline);

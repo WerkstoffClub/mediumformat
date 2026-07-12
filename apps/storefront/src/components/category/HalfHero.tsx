@@ -129,7 +129,7 @@ export function HalfHero({ page }: HalfHeroProps) {
           color: var(--mute);
         }
         .mf-cat-half-hero-h1 {
-          font: 600 clamp(34px, 4.6vw, 56px)/1.05 "Noto Sans", sans-serif;
+          font: 600 clamp(34px, 4.6vw, 56px)/1.05 "Geist", "Helvetica Neue", Arial, sans-serif;
           letter-spacing: -0.05em;
           color: var(--ink);
           margin: 0;

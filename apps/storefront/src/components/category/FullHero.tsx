@@ -142,7 +142,7 @@ export function FullHero({ page }: FullHeroProps) {
           width: fit-content;
         }
         .mf-cat-full-hero-h1 {
-          font: 600 clamp(36px, 5.5vw, 60px)/1.05 "Noto Sans", sans-serif;
+          font: 600 clamp(36px, 5.5vw, 60px)/1.05 "Geist", "Helvetica Neue", Arial, sans-serif;
           letter-spacing: -0.05em;
           color: #fff;
           margin: 0;
