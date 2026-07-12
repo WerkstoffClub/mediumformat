@@ -1433,3 +1433,294 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ─── Exact chrome: logo, currency, wishlist, mega hero, payment ─── */
+.mf .brand-wordmark {
+  display: block;
+  height: 22px;
+  width: auto;
+}
+.mf .cur-switch {
+  display: flex;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-pill);
+  padding: 2px;
+  margin-left: 4px;
+}
+.mf .cur-btn {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mute);
+  background: transparent;
+  border: none;
+  border-radius: var(--r-pill);
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.mf .cur-btn.on {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+.mf .mega-hero {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+.mf .mega-hero .mh-art {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    var(--hairline) 0 3px,
+    transparent 3px 6px
+  );
+  opacity: 0.6;
+}
+.mf .mega-hero .mh-cta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+.mf .mega-hero .mh-cta svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.15s;
+}
+.mf .mega-hero:hover .mh-cta svg {
+  transform: translateX(3px);
+}
+.mf .kbd {
+  font-size: 10px;
+  color: var(--mute);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  padding: 2px 5px;
+  margin-left: 6px;
+}
+
+/* Footer brand + payment logos */
+.mf .fbrand-name .brand-wordmark {
+  height: 22px;
+}
+.mf .pay-logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.mf .pay-logos svg {
+  height: 18px;
+  width: auto;
+  color: var(--mute);
+}
+
+/* Search overlay */
+.mf-search-ov {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 88px;
+}
+.mf-search-ov.open {
+  display: flex;
+}
+.mf-search-ov .sbox {
+  width: 100%;
+  max-width: 580px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--e3);
+  font-family: var(--ui);
+  color: var(--ink);
+}
+.mf-search-ov .srow {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 11px;
+  border-bottom: 1px solid var(--hairline);
+}
+.mf-search-ov .srow svg {
+  width: 18px;
+  height: 18px;
+  color: var(--mute);
+  flex-shrink: 0;
+}
+.mf-search-ov .sinput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-family: var(--ui);
+  color: var(--ink);
+}
+.mf-search-ov .sinput::placeholder {
+  color: var(--mute);
+}
+.mf-search-ov .shint {
+  font-size: 12px;
+  color: var(--mute);
+  padding: 12px 16px;
+}
+
+/* ─── Filter sidebar (category browse) ─── */
+.mf .layout {
+  display: flex;
+}
+.mf .sidebar {
+  width: 236px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--hairline);
+  background: var(--surface);
+  align-self: stretch;
+}
+.mf .fsec {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--hairline);
+}
+.mf .flabel {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.mf .fselect {
+  width: 100%;
+  background: var(--raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  color: var(--body);
+  font-size: 13px;
+  font-family: var(--ui);
+  padding: 8px 11px;
+  cursor: pointer;
+}
+.mf .fselect:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+.mf .fopt {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 0;
+  cursor: pointer;
+}
+.mf .fopt input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.mf .fcheck {
+  width: 15px;
+  height: 15px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: var(--raised);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+.mf .fcheck svg {
+  display: none;
+  width: 10px;
+  height: 10px;
+  color: var(--accent-text);
+}
+.mf .fopt input:checked + .fcheck {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.mf .fopt input:checked + .fcheck svg {
+  display: block;
+}
+.mf .fopt-label {
+  font-size: 13px;
+  color: var(--body);
+  flex: 1;
+}
+.mf .fopt:hover .fopt-label {
+  color: var(--ink);
+}
+.mf .fopt-count {
+  font-size: 12px;
+  color: var(--mute);
+}
+.mf .cond-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mf .cchip {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  border: 1px solid var(--hairline);
+  color: var(--mute);
+  background: transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+.mf .cchip input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.mf .cchip:has(input:checked) {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.mf .fbtns {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mf .filter-trigger {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.mf .filter-trigger svg {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 900px) {
+  .mf .sidebar {
+    display: none;
+  }
+}

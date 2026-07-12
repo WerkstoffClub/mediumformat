@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { cartCount } from "@/lib/cart";
+import { CurrencySwitch } from "@/components/site/CurrencySwitch";
+import { SearchOverlay } from "@/components/site/SearchOverlay";
 import "./storefront.css";
+
+const Arrow = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M5 12h14M12 5l7 7-7 7" />
+  </svg>
+);
 
 export default async function SiteLayout({
   children,
@@ -19,9 +27,15 @@ export default async function SiteLayout({
 
       {/* Nav */}
       <nav className="nav">
-        <Link href="/" className="nav-logo">
-          MEDIUM·FORMAT
+        <Link href="/" className="nav-logo" aria-label="Medium Format — home">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/MF_Logo/SVG/MF_Lockup_White.svg"
+            alt="Medium Format"
+            className="brand-wordmark"
+          />
         </Link>
+
         <div className="nav-menu">
           <div className="menu-item">
             <Link className="nav-link" href="/shop">
@@ -29,14 +43,18 @@ export default async function SiteLayout({
             </Link>
             <div className="mega">
               <div className="mega-links">
-                <Link href="/shop">New Releases</Link>
+                <Link href="/shop?sort=new">New Releases</Link>
                 <Link href="/shop">Best Selling</Link>
                 <Link href="/shop">Pre-Orders</Link>
                 <Link href="/shop">On Sale</Link>
               </div>
               <Link className="mega-hero" href="/shop">
+                <span className="mh-art" />
                 <span className="mh-eyebrow">New this week</span>
                 <span className="mh-title">Fresh titles just landed</span>
+                <span className="mh-cta">
+                  Shop new arrivals <Arrow />
+                </span>
               </Link>
             </div>
           </div>
@@ -54,8 +72,12 @@ export default async function SiteLayout({
                 <Link href="/shop">Merch</Link>
               </div>
               <Link className="mega-hero" href="/shop">
+                <span className="mh-art" />
                 <span className="mh-eyebrow">All formats</span>
                 <span className="mh-title">Vinyl, CD, cassette &amp; more</span>
+                <span className="mh-cta">
+                  Browse all formats <Arrow />
+                </span>
               </Link>
             </div>
           </div>
@@ -71,8 +93,12 @@ export default async function SiteLayout({
                 <Link href="/news">Features</Link>
               </div>
               <Link className="mega-hero" href="/news">
+                <span className="mh-art" />
                 <span className="mh-eyebrow">Latest story</span>
                 <span className="mh-title">From the Medium Format desk</span>
+                <span className="mh-cta">
+                  Read the news <Arrow />
+                </span>
               </Link>
             </div>
           </div>
@@ -82,17 +108,12 @@ export default async function SiteLayout({
             </Link>
           </div>
         </div>
+
         <div className="nav-actions">
-          <Link href="/shop" className="nav-btn" aria-label="Search">
+          <SearchOverlay />
+          <Link href="/account" className="nav-btn" aria-label="Wishlist">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.35-4.35" />
-            </svg>
-          </Link>
-          <Link href="/account" className="nav-btn" aria-label="Account">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
             </svg>
           </Link>
           <div className="cart-wrap">
@@ -103,6 +124,7 @@ export default async function SiteLayout({
             </Link>
             {count > 0 && <span className="cart-badge">{count}</span>}
           </div>
+          <CurrencySwitch />
         </div>
       </nav>
 
@@ -112,17 +134,24 @@ export default async function SiteLayout({
       <footer>
         <div className="fgrid">
           <div>
-            <div className="fbrand-name">MEDIUM·FORMAT</div>
+            <div className="fbrand-name">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/MF_Logo/SVG/MF_Lockup_White.svg"
+                alt="Medium Format"
+                className="brand-wordmark"
+              />
+            </div>
             <div className="ftagline">
               Independent record shop based in Jakarta, Indonesia. Curating the finest
-              in vinyl, CD, and music culture.
+              in vinyl, CD, and music culture since 2019.
             </div>
             <div className="floc">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              Jakarta, Indonesia
+              Jl. Kemang Raya No. 15, Jakarta Selatan
             </div>
           </div>
           <div>
@@ -131,6 +160,7 @@ export default async function SiteLayout({
               <Link href="/shop" className="flink">New Arrivals</Link>
               <Link href="/shop" className="flink">Vinyl</Link>
               <Link href="/shop" className="flink">CDs</Link>
+              <Link href="/shop" className="flink">Merch</Link>
               <Link href="/wholesale" className="flink">Wholesale</Link>
             </div>
           </div>
@@ -140,6 +170,7 @@ export default async function SiteLayout({
               <Link href="/news" className="flink">Staff Picks</Link>
               <Link href="/news" className="flink">Reviews</Link>
               <Link href="/news" className="flink">Features</Link>
+              <Link href="/news" className="flink">Events</Link>
             </div>
           </div>
           <div>
@@ -147,13 +178,41 @@ export default async function SiteLayout({
             <div className="flinks">
               <Link href="/about" className="flink">About Us</Link>
               <Link href="/shipping" className="flink">Shipping &amp; Returns</Link>
-              <Link href="/account" className="flink">Account</Link>
+              <Link href="/account" className="flink">Sell Your Records</Link>
               <Link href="/contact" className="flink">Contact</Link>
+              <Link href="/account" className="flink">Account</Link>
             </div>
           </div>
         </div>
         <div className="fbot">
-          <div className="flegal">© 2026 Medium Format · Jakarta, Indonesia</div>
+          <div className="flegal">© 2026 Medium Format</div>
+          <div className="pay-logos">
+            <svg viewBox="0 0 44 18" role="img" aria-label="Visa">
+              <text x="0" y="14" fontFamily="var(--ui)" fontWeight="700" fontSize="15" fill="currentColor" letterSpacing="-.5" fontStyle="italic">VISA</text>
+            </svg>
+            <svg viewBox="0 0 30 18" role="img" aria-label="Mastercard">
+              <circle cx="11" cy="9" r="6.5" fill="currentColor" opacity=".55" />
+              <circle cx="19" cy="9" r="6.5" fill="currentColor" />
+            </svg>
+            <svg viewBox="0 0 40 18" role="img" aria-label="QRIS">
+              <text x="0" y="14" fontFamily="var(--ui)" fontWeight="700" fontSize="13" fill="currentColor">QRIS</text>
+            </svg>
+            <svg viewBox="0 0 48 18" role="img" aria-label="GoPay">
+              <text x="0" y="14" fontFamily="var(--ui)" fontWeight="700" fontSize="13" fill="currentColor" letterSpacing="-.3">GoPay</text>
+            </svg>
+            <svg viewBox="0 0 34 18" role="img" aria-label="OVO">
+              <text x="0" y="14" fontFamily="var(--ui)" fontWeight="700" fontSize="13" fill="currentColor">OVO</text>
+            </svg>
+            <svg viewBox="0 0 42 18" role="img" aria-label="DANA">
+              <text x="0" y="14" fontFamily="var(--ui)" fontWeight="700" fontSize="13" fill="currentColor" letterSpacing="-.2">DANA</text>
+            </svg>
+            <svg viewBox="0 0 74 18" role="img" aria-label="ShopeePay">
+              <text x="0" y="14" fontFamily="var(--ui)" fontWeight="700" fontSize="13" fill="currentColor" letterSpacing="-.3">ShopeePay</text>
+            </svg>
+            <svg viewBox="0 0 34 18" role="img" aria-label="BCA">
+              <text x="0" y="14" fontFamily="var(--ui)" fontWeight="700" fontSize="13" fill="currentColor" letterSpacing="-.2">BCA</text>
+            </svg>
+          </div>
         </div>
       </footer>
     </div>
