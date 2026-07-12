@@ -96,6 +96,12 @@ if [ -n "$OPENROUTER_API_KEY" ] && [ "$OPENROUTER_API_KEY" != "sk-or-..." ]; the
   "${SSH[@]}" "grep -q OPENROUTER_API_KEY '${STACK_DIR}/api.env' || printf 'OPENROUTER_API_KEY=%s\nOPENROUTER_BASE_URL=%s\n' '$OPENROUTER_API_KEY' '$OPENROUTER_BASE_URL' >> '${STACK_DIR}/api.env'"
 fi
 
+# Discogs personal access token (release editor's Get details / Get media)
+DISCOGS_TOKEN=$(grep -o 'DISCOGS_TOKEN="[^"]*"' .env | cut -d'"' -f2)
+if [ -n "$DISCOGS_TOKEN" ]; then
+  "${SSH[@]}" "grep -q '^DISCOGS_TOKEN=' '${STACK_DIR}/api.env' || printf 'DISCOGS_TOKEN=%s\n' '$DISCOGS_TOKEN' >> '${STACK_DIR}/api.env'"
+fi
+
 echo ">> [6/6] docker compose up -d --build (first build takes a few minutes)"
 "${SSH[@]}" "cd '${STACK_DIR}' && docker compose up -d --build && docker compose ps --format 'table {{.Name}}\t{{.Status}}'"
 
