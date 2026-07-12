@@ -5,6 +5,7 @@ import { can } from "@/lib/permissions";
 import { formatIdr } from "@/lib/format";
 import { artistsLabel, conditionLabel } from "@/lib/catalog";
 import { PageShell } from "@/components/admin/PageShell";
+import { CoverImg } from "@/components/site/CoverImg";
 
 export const dynamic = "force-dynamic";
 
@@ -123,10 +124,7 @@ export default async function InventoryPage({
                       <td>
                         <div className="cell-item">
                           <div className="cell-cover">
-                            {cover ? (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img src={cover} alt={v.product.title} />
-                            ) : null}
+                            <CoverImg src={cover} alt={v.product.title} />
                           </div>
                           <div>
                             {artist && <div className="cell-sub">{artist}</div>}

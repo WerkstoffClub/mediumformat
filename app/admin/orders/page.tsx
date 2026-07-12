@@ -1,53 +1,82 @@
 import { PageShell } from "@/components/admin/PageShell";
 import { prisma } from "@/lib/db";
 import { formatIdr } from "@/lib/format";
+import type { OrderStatus } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
+function statusPill(status: OrderStatus): string {
+  switch (status) {
+    case "PAID":
+    case "COMPLETED":
+      return "pill pill-ok";
+    case "PACKED":
+    case "SHIPPED":
+      return "pill pill-info";
+    case "PENDING_PAYMENT":
+      return "pill pill-warn";
+    case "CANCELLED":
+    case "REFUNDED":
+      return "pill pill-danger";
+    default:
+      return "pill";
+  }
+}
+
 export default async function OrdersPage() {
   const orders = await prisma.order.findMany({
-    include: { channel: true },
+    include: { channel: true, _count: { select: { items: true } } },
     orderBy: { createdAt: "desc" },
-    take: 50,
+    take: 100,
   });
 
   return (
-    <PageShell title="Orders" description="Unified across all sales channels.">
-      <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800">
-        <table className="w-full text-sm">
-          <thead className="bg-zinc-50 text-left font-mono text-[10px] uppercase tracking-widest text-zinc-500 dark:bg-zinc-900">
-            <tr>
-              <th className="px-4 py-3">Order #</th>
-              <th className="px-4 py-3">Channel</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3 text-right">Total</th>
-              <th className="px-4 py-3">Created</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-            {orders.length === 0 && (
-              <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-zinc-500">
-                  No orders yet.
-                </td>
-              </tr>
-            )}
-            {orders.map((o) => (
-              <tr key={o.id}>
-                <td className="px-4 py-3 font-mono">{o.number}</td>
-                <td className="px-4 py-3">{o.channel.name}</td>
-                <td className="px-4 py-3">{o.status}</td>
-                <td className="px-4 py-3 text-right font-mono">
-                  {formatIdr(o.total.toString())}
-                </td>
-                <td className="px-4 py-3 text-zinc-500">
-                  {o.createdAt.toLocaleString("en-US")}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <PageShell title="Orders" description="Unified across every sales channel.">
+      {orders.length === 0 ? (
+        <div className="coming">No orders yet.</div>
+      ) : (
+        <div className="panel">
+          <div className="panel-hdr">
+            <span className="panel-title">All orders</span>
+          </div>
+          <div className="atable-wrap">
+            <table className="atable">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Channel</th>
+                  <th>Status</th>
+                  <th className="t-right">Items</th>
+                  <th className="t-right">Total</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((o) => (
+                  <tr key={o.id}>
+                    <td className="mono t-ink">{o.number}</td>
+                    <td>{o.channel.name}</td>
+                    <td>
+                      <span className={statusPill(o.status)}>
+                        {o.status.replace(/_/g, " ").toLowerCase()}
+                      </span>
+                    </td>
+                    <td className="t-right mono">{o._count.items}</td>
+                    <td className="t-right mono t-ink">{formatIdr(o.total.toString())}</td>
+                    <td className="cell-sub">
+                      {o.createdAt.toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </PageShell>
   );
 }

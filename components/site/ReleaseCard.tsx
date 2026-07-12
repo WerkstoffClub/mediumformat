@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatIdr } from "@/lib/format";
+import { CoverImg } from "@/components/site/CoverImg";
 import {
   artistsLabel,
   formatLabel,
@@ -28,14 +29,7 @@ export function ReleaseCard({ product }: { product: CatalogProduct }) {
   return (
     <Link href={`/releases/${product.slug}`} className="rcard">
       <div className="cover">
-        {cover ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={cover} alt={`${artist} — ${product.title}`} loading="lazy" />
-        ) : (
-          <div className="cover-art">
-            <div className="grooves" />
-          </div>
-        )}
+        <CoverImg src={cover} alt={`${artist} — ${product.title}`} />
         <div className="cover-overlay">
           <span className="playbtn">
             <svg viewBox="0 0 24 24" fill="currentColor">

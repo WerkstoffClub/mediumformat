@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCartView } from "@/lib/cart";
 import { formatIdr } from "@/lib/format";
+import { CoverImg } from "@/components/site/CoverImg";
 import { setQty, removeFromCart } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -30,14 +31,7 @@ export default async function CartPage() {
           {cart.items.map((item) => (
             <div key={item.variantId} className="cart-line">
               <Link href={`/releases/${item.slug}`} className="cl-cover">
-                {item.cover ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={item.cover} alt={item.title} />
-                ) : (
-                  <div className="cover-art">
-                    <div className="grooves" />
-                  </div>
-                )}
+                <CoverImg src={item.cover} alt={item.title} />
               </Link>
               <div>
                 {item.artist && <div className="cl-artist">{item.artist}</div>}

@@ -579,3 +579,189 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ─── Pills (more variants) ─── */
+.mfa .pill-info {
+  color: var(--info);
+  background: var(--info-t);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+.mfa .pill-danger {
+  color: var(--danger);
+  background: var(--danger-t);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* ─── Cover placeholder (fixes missing/broken images) ─── */
+.mfa .cover-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.mfa .cover-art .grooves {
+  width: 78%;
+  height: 78%;
+  border-radius: 50%;
+  position: relative;
+  background: repeating-radial-gradient(circle at 50% 50%, #000 0 2px, #1f1f1f 2px 4px);
+}
+.mfa .cover-art .grooves::after {
+  content: "";
+  position: absolute;
+  inset: 42%;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ─── Forms ─── */
+.mfa .field {
+  margin-bottom: 16px;
+}
+.mfa .field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--mute);
+  margin-bottom: 6px;
+}
+.mfa .input,
+.mfa .textarea,
+.mfa .select {
+  width: 100%;
+  background: var(--raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  color: var(--ink);
+  font-size: 14px;
+  font-family: var(--ui);
+  padding: 10px 12px;
+}
+.mfa .textarea {
+  min-height: 240px;
+  resize: vertical;
+  line-height: 1.6;
+}
+.mfa .input:focus,
+.mfa .textarea:focus,
+.mfa .select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.mfa .field-hint {
+  font-size: 12px;
+  color: var(--mute);
+  margin-top: 6px;
+}
+.mfa .form-row {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 16px;
+}
+.mfa .editor {
+  max-width: 760px;
+}
+.mfa .form-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.mfa .btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: var(--r-md);
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.mfa .btn-danger:hover {
+  background: var(--danger-t);
+}
+.mfa .spacer {
+  flex: 1;
+}
+
+/* Row action links */
+.mfa .row-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-end;
+}
+.mfa .link {
+  font-size: 13px;
+  color: var(--body);
+  transition: color 0.15s;
+}
+.mfa .link:hover {
+  color: var(--ink);
+}
+.mfa .link-danger {
+  color: var(--danger);
+  background: none;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+@media (max-width: 620px) {
+  .mfa .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Login ─── */
+.mfa .login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--canvas);
+  padding: 24px;
+}
+.mfa .login-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  box-shadow: var(--e3);
+}
+.mfa .login-card .login-logo {
+  height: 22px;
+  width: auto;
+  margin-bottom: 22px;
+}
+.mfa .login-card h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.mfa .login-card .login-sub {
+  font-size: 13px;
+  color: var(--mute);
+  margin-top: 4px;
+  margin-bottom: 22px;
+}
+.mfa .login-card .btn-primary {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
+.mfa .login-error {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--danger);
+}

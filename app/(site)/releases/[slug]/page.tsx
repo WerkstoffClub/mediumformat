@@ -9,6 +9,7 @@ import {
   getCatalogProducts,
 } from "@/lib/catalog";
 import { ReleaseCard } from "@/components/site/ReleaseCard";
+import { CoverImg } from "@/components/site/CoverImg";
 import { addToCart } from "../../cart/actions";
 
 export const dynamic = "force-dynamic";
@@ -75,14 +76,7 @@ export default async function ReleasePage({
       <div className="rd">
         <div className="rd-media">
           <div className="rd-cover">
-            {cover ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={cover} alt={`${artist} — ${product.title}`} />
-            ) : (
-              <div className="cover-art">
-                <div className="grooves" />
-              </div>
-            )}
+            <CoverImg src={cover} alt={`${artist} — ${product.title}`} />
           </div>
         </div>
 
