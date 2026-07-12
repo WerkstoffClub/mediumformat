@@ -31,6 +31,11 @@ export class StorefrontController {
     return this.svc.postBySlug(s);
   }
 
+  @Get('category-pages/:slug')
+  categoryPage(@Param('slug') s: string) {
+    return this.svc.categoryPage(s);
+  }
+
   @Throttle({ default: { limit: 5, ttl: 60_000 } })
   @Post('newsletter/subscribe')
   subscribe(@Body() b: { email: string; name?: string; source?: string }) {

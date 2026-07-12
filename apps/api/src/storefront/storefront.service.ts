@@ -75,6 +75,12 @@ export class StorefrontService {
     return p;
   }
 
+  async categoryPage(slug: string) {
+    const p = await this.prisma.categoryPage.findUnique({ where: { slug } });
+    if (!p || p.status !== 'PUBLISHED') throw new NotFoundException();
+    return p;
+  }
+
   async subscribe(body: { email: string; name?: string; source?: string }) {
     const email = body.email?.trim().toLowerCase();
     if (!email || !email.includes('@')) throw new BadRequestException('Invalid email');
