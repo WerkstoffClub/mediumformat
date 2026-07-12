@@ -10,14 +10,12 @@ interface Props {
   index: number;
 }
 
-type SourceKey = 'apple' | 'spotify' | 'youtube' | 'bandcamp' | 'soundcloud' | 'upload';
+type SourceKey = 'apple' | 'bandcamp' | 'soundcloud' | 'upload';
 
-const SOURCE_ORDER: SourceKey[] = ['apple', 'spotify', 'youtube', 'bandcamp', 'soundcloud', 'upload'];
+const SOURCE_ORDER: SourceKey[] = ['apple', 'upload', 'bandcamp', 'soundcloud'];
 
 const SOURCE_TITLE: Record<SourceKey, string> = {
   apple: 'Apple Music',
-  spotify: 'Spotify',
-  youtube: 'YouTube',
   bandcamp: 'Bandcamp',
   soundcloud: 'SoundCloud',
   upload: 'Uploaded audio',
@@ -27,8 +25,6 @@ function hasSource(previews: Track['previews'] | undefined, key: SourceKey): boo
   if (!previews) return false;
   switch (key) {
     case 'apple': return !!previews.apple;
-    case 'spotify': return !!previews.spotify;
-    case 'youtube': return !!previews.youtube;
     case 'bandcamp': return !!previews.bandcamp;
     case 'soundcloud': return !!previews.soundcloud;
     case 'upload': return !!previews.upload;
@@ -36,9 +32,9 @@ function hasSource(previews: Track['previews'] | undefined, key: SourceKey): boo
 }
 
 /**
- * Pick the best playable preview. Direct-audio URLs (apple/spotify preview/upload)
- * play inline via an <audio> element; embed-based sources (youtube/bandcamp/…) get
- * opened in a new tab so the operator can preview off-page.
+ * Pick the best playable preview. Direct-audio URLs (apple/upload) play inline
+ * via an <audio> element; embed-based sources (bandcamp/soundcloud) get opened
+ * in a new tab so the operator can preview off-page.
  */
 function pickPlayable(previews: Track['previews'] | undefined):
   | { kind: 'audio'; url: string; label: string }
@@ -46,9 +42,7 @@ function pickPlayable(previews: Track['previews'] | undefined):
   | null {
   if (!previews) return null;
   if (previews.apple) return { kind: 'audio', url: previews.apple, label: 'Apple Music' };
-  if (previews.spotify?.previewUrl) return { kind: 'audio', url: previews.spotify.previewUrl, label: 'Spotify preview' };
   if (previews.upload) return { kind: 'audio', url: previews.upload, label: 'Uploaded' };
-  if (previews.youtube?.id) return { kind: 'embed', url: `https://youtu.be/${previews.youtube.id}`, label: 'YouTube' };
   if (previews.bandcamp) return { kind: 'embed', url: previews.bandcamp, label: 'Bandcamp' };
   if (previews.soundcloud) return { kind: 'embed', url: previews.soundcloud, label: 'SoundCloud' };
   return null;

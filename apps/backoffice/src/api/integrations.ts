@@ -44,27 +44,6 @@ export interface AppleTrack {
 export const appleSearch = (body: { artist: string; title: string }) =>
   api.post<{ results: AppleTrack[] }>('/integrations/apple/search', body).then(r => r.data);
 
-export interface SpotifyTrack {
-  id: string;
-  name: string;
-  artist: string;
-  previewUrl: string | null;
-  externalUrl: string;
-}
-
-export const spotifySearch = (body: { artist: string; title: string }) =>
-  api.post<{ results: SpotifyTrack[] }>('/integrations/spotify/search', body).then(r => r.data);
-
-export interface YoutubeVideo {
-  id: string;
-  title: string;
-  channel: string;
-  thumbnail: string;
-}
-
-export const youtubeSearch = (body: { artist: string; title: string }) =>
-  api.post<{ results: YoutubeVideo[] }>('/integrations/youtube/search', body).then(r => r.data);
-
 export const bandcampSearch = (body: { artist: string; title: string }) =>
   api
     .post<{ searchUrl: string; guessedTrackUrl?: string }>('/integrations/bandcamp/search', body)

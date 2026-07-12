@@ -1,16 +1,10 @@
 import { useState } from 'react';
-import {
-  appleSearch,
-  spotifySearch,
-  youtubeSearch,
-} from '../../../api/integrations';
+import { appleSearch } from '../../../api/integrations';
 import type { Track } from './types';
 
-type SourceKey = 'apple' | 'spotify' | 'youtube';
+type SourceKey = 'apple';
 const SOURCE_LABEL: Record<SourceKey, string> = {
   apple: 'Apple Music',
-  spotify: 'Spotify',
-  youtube: 'YouTube',
 };
 
 interface Props {
@@ -108,18 +102,6 @@ async function fetchOne(source: SourceKey, artist: string, title: string): Promi
     const first = res.results.find((r) => !!r.previewUrl) ?? res.results[0];
     if (!first?.previewUrl) return null;
     return { apple: first.previewUrl };
-  }
-  if (source === 'spotify') {
-    const res = await spotifySearch({ artist, title });
-    const first = res.results[0];
-    if (!first) return null;
-    return { spotify: { id: first.id, previewUrl: first.previewUrl ?? undefined } };
-  }
-  if (source === 'youtube') {
-    const res = await youtubeSearch({ artist, title });
-    const first = res.results[0];
-    if (!first) return null;
-    return { youtube: { id: first.id, title: first.title } };
   }
   return null;
 }

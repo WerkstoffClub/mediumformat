@@ -40,13 +40,11 @@ function normaliseTrack(row: unknown): Track {
     previews?: Track['previews'];
   };
   const previews: Track['previews'] = { ...(r.previews ?? {}) };
-  if (!previews.apple && !previews.spotify && !previews.youtube &&
-      !previews.bandcamp && !previews.soundcloud && !previews.upload && r.previewUrl) {
+  if (!previews.apple && !previews.bandcamp && !previews.soundcloud &&
+      !previews.upload && r.previewUrl) {
     // Best-effort mapping of legacy single-URL previews into the new shape.
     const src = (r.previewSource ?? '').toLowerCase();
     if (src.includes('apple')) previews.apple = r.previewUrl;
-    else if (src.includes('spotify')) previews.spotify = { id: r.previewUrl };
-    else if (src.includes('youtube')) previews.youtube = { id: r.previewUrl };
     else if (src.includes('bandcamp')) previews.bandcamp = r.previewUrl;
     else if (src.includes('soundcloud')) previews.soundcloud = r.previewUrl;
     else previews.upload = r.previewUrl;
@@ -65,8 +63,8 @@ function normaliseTrack(row: unknown): Track {
 function serialiseTrack(t: Track): Record<string, unknown> {
   const previews = t.previews ?? {};
   const hasAnyPreview =
-    !!(previews.apple || previews.spotify || previews.youtube ||
-       previews.bandcamp || previews.soundcloud || previews.upload);
+    !!(previews.apple || previews.bandcamp || previews.soundcloud ||
+       previews.upload);
   const out: Record<string, unknown> = {
     position: t.position,
     no: t.position, // legacy compat

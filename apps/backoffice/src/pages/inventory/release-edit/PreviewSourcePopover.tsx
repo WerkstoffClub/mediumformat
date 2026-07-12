@@ -2,24 +2,18 @@ import { type ReactNode, useState } from 'react';
 import {
   appleSearch,
   bandcampSearch,
-  spotifySearch,
   uploadAudio,
-  youtubeSearch,
   type AppleTrack,
-  type SpotifyTrack,
-  type YoutubeVideo,
 } from '../../../api/integrations';
 import { ModalShell } from './ModalShell';
 import { inputCls } from './shared';
 import type { Track } from './types';
 
-type SourceKey = 'apple' | 'spotify' | 'youtube' | 'bandcamp' | 'soundcloud' | 'upload';
+type SourceKey = 'apple' | 'bandcamp' | 'soundcloud' | 'upload';
 type SubMode = 'fetch' | 'paste';
 
 const SOURCE_LABEL: Record<SourceKey, string> = {
   apple: 'Apple',
-  spotify: 'Spotify',
-  youtube: 'YouTube',
   bandcamp: 'Bandcamp',
   soundcloud: 'SoundCloud',
   upload: 'Upload',
@@ -34,16 +28,6 @@ interface Props {
 
 const NOT_CONFIGURED_MSG =
   'Not configured on the server — set the env variable and restart.';
-
-function extractSpotifyId(url: string): string | null {
-  const m = url.match(/(?:open\.spotify\.com\/track\/|spotify:track:)([A-Za-z0-9]+)/);
-  return m?.[1] ?? null;
-}
-
-function extractYoutubeId(url: string): string | null {
-  const m = url.match(/(?:youtu\.be\/|v=|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/);
-  return m?.[1] ?? null;
-}
 
 function withPreview(track: Track, patch: Partial<Track['previews']>): Partial<Track> {
   return { previews: { ...(track.previews ?? {}), ...patch } };
@@ -106,28 +90,6 @@ export function PreviewSourcePopover({ track, artist, onChange, onClose }: Props
           title={track.title}
           onPick={(url) => {
             onChange(withPreview(track, { apple: url }));
-            onClose();
-          }}
-        />
-      )}
-      {tab === 'spotify' && (
-        <SpotifyTab
-          mode={mode}
-          artist={artist}
-          title={track.title}
-          onPick={(id, previewUrl) => {
-            onChange(withPreview(track, { spotify: { id, previewUrl } }));
-            onClose();
-          }}
-        />
-      )}
-      {tab === 'youtube' && (
-        <YoutubeTab
-          mode={mode}
-          artist={artist}
-          title={track.title}
-          onPick={(id, title) => {
-            onChange(withPreview(track, { youtube: { id, title } }));
             onClose();
           }}
         />
@@ -293,186 +255,6 @@ function AppleTab({
                 primary={r.trackName}
                 secondary={`${r.artistName}${r.collectionName ? ` · ${r.collectionName}` : ''}`}
                 tail={r.previewUrl ? '30s' : 'no preview'}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-function SpotifyTab({
-  mode,
-  artist,
-  title,
-  onPick,
-}: {
-  mode: SubMode;
-  artist: string;
-  title: string;
-  onPick: (id: string, previewUrl?: string) => void;
-}) {
-  const [results, setResults] = useState<SpotifyTrack[] | null>(null);
-  const [busy, setBusy] = useState(false);
-  const [notConfigured, setNotConfigured] = useState(false);
-  const [pasted, setPasted] = useState('');
-  const [pasteError, setPasteError] = useState<string | null>(null);
-
-  const fetch = async () => {
-    setBusy(true);
-    setNotConfigured(false);
-    try {
-      const res = await spotifySearch({ artist, title });
-      setResults(res.results);
-    } catch (err: unknown) {
-      const status = (err as { response?: { status?: number } })?.response?.status;
-      if (status === 501) setNotConfigured(true);
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  if (mode === 'paste') {
-    return (
-      <div>
-        <input
-          className={inputCls}
-          value={pasted}
-          onChange={(e) => setPasted(e.target.value)}
-          placeholder="https://open.spotify.com/track/…"
-        />
-        {pasteError && <TabError>{pasteError}</TabError>}
-        <button
-          type="button"
-          onClick={() => {
-            const id = extractSpotifyId(pasted);
-            if (!id) {
-              setPasteError('Could not find a track id in that URL.');
-              return;
-            }
-            onPick(id);
-          }}
-          disabled={!pasted.trim()}
-          className="mt-2 px-3.5 py-[9px] rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[12.5px] font-semibold hover:opacity-[.88] disabled:opacity-50"
-        >
-          Save link
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <button
-        type="button"
-        onClick={fetch}
-        disabled={busy || !title.trim()}
-        className="px-3.5 py-[9px] rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[12.5px] font-semibold hover:opacity-[.88] disabled:opacity-50"
-      >
-        {busy ? 'Searching…' : 'Search Spotify'}
-      </button>
-      {notConfigured && <TabError>{NOT_CONFIGURED_MSG}</TabError>}
-      {results && results.length === 0 && <TabError>No matches.</TabError>}
-      {results && results.length > 0 && (
-        <ul className="mt-3 space-y-1">
-          {results.slice(0, 8).map((r) => (
-            <li key={r.id}>
-              <ResultRow
-                onClick={() => onPick(r.id, r.previewUrl ?? undefined)}
-                primary={r.name}
-                secondary={r.artist}
-                tail={r.previewUrl ? '30s' : 'link only'}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-function YoutubeTab({
-  mode,
-  artist,
-  title,
-  onPick,
-}: {
-  mode: SubMode;
-  artist: string;
-  title: string;
-  onPick: (id: string, title?: string) => void;
-}) {
-  const [results, setResults] = useState<YoutubeVideo[] | null>(null);
-  const [busy, setBusy] = useState(false);
-  const [notConfigured, setNotConfigured] = useState(false);
-  const [pasted, setPasted] = useState('');
-  const [pasteError, setPasteError] = useState<string | null>(null);
-
-  const fetch = async () => {
-    setBusy(true);
-    setNotConfigured(false);
-    try {
-      const res = await youtubeSearch({ artist, title });
-      setResults(res.results);
-    } catch (err: unknown) {
-      const status = (err as { response?: { status?: number } })?.response?.status;
-      if (status === 501) setNotConfigured(true);
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  if (mode === 'paste') {
-    return (
-      <div>
-        <input
-          className={inputCls}
-          value={pasted}
-          onChange={(e) => setPasted(e.target.value)}
-          placeholder="https://youtu.be/… or ?v=…"
-        />
-        {pasteError && <TabError>{pasteError}</TabError>}
-        <button
-          type="button"
-          onClick={() => {
-            const id = extractYoutubeId(pasted);
-            if (!id) {
-              setPasteError('Could not find a video id in that URL.');
-              return;
-            }
-            onPick(id);
-          }}
-          disabled={!pasted.trim()}
-          className="mt-2 px-3.5 py-[9px] rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[12.5px] font-semibold hover:opacity-[.88] disabled:opacity-50"
-        >
-          Save link
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <button
-        type="button"
-        onClick={fetch}
-        disabled={busy || !title.trim()}
-        className="px-3.5 py-[9px] rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[12.5px] font-semibold hover:opacity-[.88] disabled:opacity-50"
-      >
-        {busy ? 'Searching…' : 'Search YouTube'}
-      </button>
-      {notConfigured && <TabError>{NOT_CONFIGURED_MSG}</TabError>}
-      {results && results.length === 0 && <TabError>No matches.</TabError>}
-      {results && results.length > 0 && (
-        <ul className="mt-3 space-y-1">
-          {results.slice(0, 8).map((r) => (
-            <li key={r.id}>
-              <ResultRow
-                onClick={() => onPick(r.id, r.title)}
-                thumb={r.thumbnail}
-                primary={r.title}
-                secondary={r.channel}
               />
             </li>
           ))}

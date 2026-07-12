@@ -6,8 +6,6 @@ import type { Release } from '@mf/shared';
  */
 export interface TrackPreviews {
   apple?: string; // 30s preview URL
-  spotify?: { id: string; previewUrl?: string };
-  youtube?: { id: string; title?: string };
   bandcamp?: string; // track URL
   soundcloud?: string; // track URL
   upload?: string; // our storage URL
