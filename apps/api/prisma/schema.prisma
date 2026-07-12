@@ -164,6 +164,8 @@ model Release {
   updatedAt         DateTime         @updatedAt
 
   purchaseOrderLines PurchaseOrderLine[]
+  importLines        ImportOrderLine[]
+  channelPrices      ReleaseChannelPrice[]
   // barcode and discogsId already have implicit indexes via @unique
 
   @@index([artist, title])
@@ -423,4 +425,182 @@ model NewsletterCampaign {
   updatedAt      DateTime       @updatedAt
 
   @@index([status, scheduledAt])
+}
+
+// ---------------------------------------------------------------------------
+// Import-order pipeline (invoice-parsed procurement → inventory)
+// ---------------------------------------------------------------------------
+
+enum ImportOrigin {
+  INTERNATIONAL
+  DOMESTIC
+}
+
+enum ImportStatus {
+  DRAFT
+  SUBMITTED
+  CONSOLIDATED
+  PRICED
+  RECEIVED
+  INVENTORY_UPDATED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  BANK_TRANSFER
+  PAYPAL
+  CASH
+  OTHER
+}
+
+enum ReimbursementStatus {
+  NOT_REQUIRED
+  PENDING
+  REIMBURSED
+}
+
+enum SalesChannel {
+  SHOPEE
+  TOKOPEDIA
+  WEBSITE
+  POS
+  DISCOGS
+}
+
+enum ImportLineMatchStatus {
+  MATCHED
+  NEW
+  AMBIGUOUS
+}
+
+enum ImportAttachmentKind {
+  VENDOR_INVOICE
+  FORWARDER_INVOICE
+  PAYMENT_PROOF
+  REIMBURSEMENT_PROOF
+}
+
+model ImportOrder {
+  id                  String              @id @default(cuid())
+  number              String              @unique
+  vendorName          String
+  origin              ImportOrigin        @default(INTERNATIONAL)
+  currency            String              // ISO 4217: USD, EUR, IDR
+  orderDate           DateTime
+  fxRate              Decimal             @default(1) @db.Decimal(18, 6) // native -> IDR
+  fxRateSource        String?
+  fxRateManual        Boolean             @default(false)
+  vendorShippingNative Decimal            @default(0) @db.Decimal(18, 2)
+  paymentMethod       PaymentMethod       @default(BANK_TRANSFER)
+  paidBy              String?
+  reimbursementStatus ReimbursementStatus @default(NOT_REQUIRED)
+  status              ImportStatus        @default(DRAFT)
+  subtotalNative      Decimal             @default(0) @db.Decimal(18, 2)
+  notes               String?
+  consolidation       ImportConsolidation? @relation(fields: [consolidationId], references: [id])
+  consolidationId     String?
+  lines               ImportOrderLine[]
+  attachments         ImportAttachment[]
+  createdById         String?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+
+  @@index([status])
+  @@index([orderDate])
+}
+
+model ImportOrderLine {
+  id                   String                 @id @default(cuid())
+  importOrder          ImportOrder            @relation(fields: [importOrderId], references: [id], onDelete: Cascade)
+  importOrderId        String
+  lineNo               Int
+  artist               String
+  title                String
+  label                String?
+  catNumber            String?
+  barcode              String?
+  formatRaw            String
+  format               RecordFormat
+  edition              String?
+  qty                  Int
+  qtyBackorder         Int                    @default(0)
+  unitPriceNative      Decimal                @db.Decimal(18, 2)
+  extendedNative       Decimal                @db.Decimal(18, 2)
+  weightKg             Decimal                @default(0) @db.Decimal(10, 4)
+  allocatedVendorShipIdr Decimal              @default(0) @db.Decimal(18, 2)
+  allocatedForwarderIdr  Decimal              @default(0) @db.Decimal(18, 2)
+  landedCostIdr        Decimal                @default(0) @db.Decimal(18, 2)
+  discogsId            String?
+  discogsRaw           Json?
+  release              Release?               @relation(fields: [releaseId], references: [id])
+  releaseId            String?
+  matchStatus          ImportLineMatchStatus  @default(NEW)
+  createdRelease       Boolean                @default(false)
+  storeLocation        StoreLocation?
+  shelfLocation        String?
+  channelPrices        ImportLineChannelPrice[]
+
+  @@index([importOrderId])
+  @@index([barcode])
+  @@index([releaseId])
+}
+
+model ImportConsolidation {
+  id                 String          @id @default(cuid())
+  number             String          @unique
+  forwarderName      String
+  forwarderInvoiceIdr Decimal        @default(0) @db.Decimal(18, 2)
+  weightKgTotal      Decimal?        @db.Decimal(10, 4)
+  trackingRaw        String?
+  status             String          @default("open")
+  orders             ImportOrder[]
+  createdAt          DateTime        @default(now())
+}
+
+model ImportLineChannelPrice {
+  id            String          @id @default(cuid())
+  lineItem      ImportOrderLine @relation(fields: [lineItemId], references: [id], onDelete: Cascade)
+  lineItemId    String
+  channel       SalesChannel
+  currency      String          @default("IDR")
+  price         Decimal         @db.Decimal(18, 2)
+  feePctApplied Decimal         @db.Decimal(6, 4)
+  overridden    Boolean         @default(false)
+
+  @@unique([lineItemId, channel])
+}
+
+model ChannelPricingConfig {
+  channel  SalesChannel @id
+  feePct   Decimal      @db.Decimal(6, 4) // 0.10 = 10%
+  rounding String       @default("NEAREST_1000") // NEAREST_1000 | X900
+  currency String       @default("IDR")
+  active   Boolean      @default(true)
+}
+
+model ImportAttachment {
+  id           String               @id @default(cuid())
+  importOrder  ImportOrder          @relation(fields: [importOrderId], references: [id], onDelete: Cascade)
+  importOrderId String
+  kind         ImportAttachmentKind
+  fileUrl      String
+  mimeType     String?
+  sizeBytes    Int?
+  uploadedById String?
+  uploadedAt   DateTime             @default(now())
+
+  @@index([importOrderId])
+}
+
+model ReleaseChannelPrice {
+  id        String       @id @default(cuid())
+  release   Release      @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+  releaseId String
+  channel   SalesChannel
+  currency  String       @default("IDR")
+  price     Decimal      @db.Decimal(18, 2)
+  updatedAt DateTime     @updatedAt
+
+  @@unique([releaseId, channel])
 }
