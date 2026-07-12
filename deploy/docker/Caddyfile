@@ -30,6 +30,13 @@
 		file_server
 	}
 
+	# ── Real app: storefront SPA (built with --base=/shop/) ──
+	handle /shop* {
+		root * /srv
+		try_files {path} /shop/index.html
+		file_server
+	}
+
 	# ── Static prototype (everything else) ──
 	handle {
 		root * /srv

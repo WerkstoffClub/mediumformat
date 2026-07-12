@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 # ==========================================================================
-# Medium Format — deploy the REAL app (NestJS API + back-office SPA) to the
-# VPS stack, alongside the static prototype.
+# Medium Format — deploy the REAL app (NestJS API + back-office SPA + storefront
+# SPA) to the VPS stack, alongside the static prototype.
 #
 #   mediumformat.info/            → static prototype   (sync.sh)
 #   mediumformat.info/backoffice/ → React back-office  (this script)
+#   mediumformat.info/shop/       → React storefront   (this script)
 #   mediumformat.info/api/v1/…    → NestJS API         (this script)
 #
 # What it does:
 #   1. Builds the back-office locally with --base=/backoffice/
+#      and the storefront locally with --base=/shop/
 #   2. Rsyncs the API build context (workspace subset) to ${STACK_DIR}/app-src
-#   3. Rsyncs the back-office dist to ${STACK_DIR}/site/backoffice
+#   3. Rsyncs the back-office + storefront dists into ${STACK_DIR}/site/{backoffice,shop}
 #   4. Ships docker-compose.yml + Caddyfile
 #   5. Creates ${STACK_DIR}/api.env on first run (generated secrets; DealPOS
 #      creds + feed token copied from the local root .env)
@@ -31,11 +33,12 @@ fi
 : "${SSH_HOST:?}"; : "${SSH_USER:?}"; : "${SSH_PORT:=22}"; : "${STACK_DIR:=/opt/stacks/mediumformat}"
 SSH=(ssh -p "$SSH_PORT" "${SSH_USER}@${SSH_HOST}")
 
-echo ">> [1/6] Building back-office (base=/backoffice/)"
+echo ">> [1/6] Building back-office (base=/backoffice/) and storefront (base=/shop/)"
 pnpm --filter @mf/backoffice exec vite build --base=/backoffice/ >/dev/null
+pnpm --filter @mf/storefront exec vite build --base=/shop/ >/dev/null
 
 echo ">> [2/6] Syncing API build context -> ${STACK_DIR}/app-src"
-"${SSH[@]}" "mkdir -p '${STACK_DIR}/app-src/packages' '${STACK_DIR}/app-src/apps' '${STACK_DIR}/site/backoffice'"
+"${SSH[@]}" "mkdir -p '${STACK_DIR}/app-src/packages' '${STACK_DIR}/app-src/apps' '${STACK_DIR}/site/backoffice' '${STACK_DIR}/site/shop'"
 RS=(rsync -az --delete -e "ssh -p ${SSH_PORT}")
 "${RS[@]}" package.json pnpm-lock.yaml pnpm-workspace.yaml deploy/docker/Dockerfile.api \
   "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/app-src/"
@@ -44,8 +47,9 @@ RS=(rsync -az --delete -e "ssh -p ${SSH_PORT}")
 "${RS[@]}" --exclude node_modules --exclude dist --exclude .env apps/api \
   "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/app-src/apps/"
 
-echo ">> [3/6] Syncing back-office dist -> ${STACK_DIR}/site/backoffice"
+echo ">> [3/6] Syncing back-office + storefront dists -> ${STACK_DIR}/site/{backoffice,shop}"
 "${RS[@]}" apps/backoffice/dist/ "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/site/backoffice/"
+"${RS[@]}" apps/storefront/dist/ "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/site/shop/"
 
 echo ">> [4/6] Shipping compose + Caddyfile"
 "${RS[@]}" deploy/docker/docker-compose.yml deploy/docker/Caddyfile \
@@ -108,4 +112,7 @@ echo ">> [6/6] docker compose up -d --build (first build takes a few minutes)"
 echo ">> Seeding admin user (idempotent)"
 "${SSH[@]}" "docker exec mediumformat-api npx prisma db seed" || echo "   (seed skipped/failed — check manually)"
 
-echo ">> Done. Verify: https://mediumformat.info/backoffice/  and  https://mediumformat.info/api/v1/auth/login"
+echo ">> Done. Verify:"
+echo "   - https://mediumformat.info/backoffice/"
+echo "   - https://mediumformat.info/shop/"
+echo "   - https://mediumformat.info/api/v1/auth/login"

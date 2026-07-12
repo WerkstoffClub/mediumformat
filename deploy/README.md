@@ -83,5 +83,9 @@ Re-run `./deploy/deploy.sh` any time to publish updates.
 - **Self-host fonts** to drop the Google Fonts dependency and tighten CSP + perf.
 - **Pretty URLs** are enabled (`/mockup-cart` → `mockup-cart.html`); internal links use the
   `.html` form and also work.
-- This kit deploys the **prototype**. Standing up the real API + admin app (Docker/Postgres,
-  reverse-proxy `/api`) is a separate step — happy to scaffold that next.
+- **Real apps** live alongside the prototype under the same domain:
+  - `mediumformat.info/backoffice/` — React back-office SPA
+  - `mediumformat.info/shop/` — React storefront SPA (read-only MVP, `apps/storefront`)
+  - `mediumformat.info/api/v1/…` — NestJS API
+  All three are built + shipped by `deploy/docker/deploy-app.sh`. The static prototype is
+  shipped by `deploy/docker/sync.sh` and protects the `backoffice/` and `shop/` dirs.
