@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatIdr } from "@/lib/format";
+import { effectivePrice } from "@/lib/pricing";
 import { CoverImg } from "@/components/site/CoverImg";
 import {
   artistsLabel,
@@ -11,11 +12,20 @@ import {
 // Storefront release card (monochrome v2.0). Cover art with a hover play
 // affordance, artist/title, label · catno · year, format/condition/genre
 // chips, and the cheapest variant price. Whole card links to the release.
-export function ReleaseCard({ product }: { product: CatalogProduct }) {
+export function ReleaseCard({
+  product,
+  wholesale = false,
+}: {
+  product: CatalogProduct;
+  wholesale?: boolean;
+}) {
   const release = product.release;
   const cover = product.heroImage ?? release?.coverUrl ?? null;
   const artist = release ? artistsLabel(release.artistsJson) : product.title;
   const cheapest = product.variants[0];
+  const price = cheapest ? effectivePrice(cheapest, wholesale) : null;
+  const retail = cheapest ? Number(cheapest.priceIdr.toString()) : null;
+  const showRetail = wholesale && cheapest?.wholesalePriceIdr != null && retail != null;
   const hasPreview = false; // wired when track previews resolve
 
   const fmt = release ? formatLabel(release.formatsJson) : null;
@@ -59,7 +69,19 @@ export function ReleaseCard({ product }: { product: CatalogProduct }) {
         </div>
         <div className="price-row-card">
           <span className="rprice">
-            {cheapest ? formatIdr(cheapest.priceIdr.toString()) : "—"}
+            {price != null ? formatIdr(price) : "—"}
+            {showRetail && (
+              <span
+                style={{
+                  color: "var(--mute)",
+                  textDecoration: "line-through",
+                  marginLeft: 6,
+                  fontSize: 12,
+                }}
+              >
+                {formatIdr(retail!)}
+              </span>
+            )}
           </span>
         </div>
       </div>

@@ -4,6 +4,7 @@ import {
   countActiveProducts,
   getLatestNews,
 } from "@/lib/catalog";
+import { isWholesaleCustomer } from "@/lib/pricing";
 import { ReleaseCard } from "@/components/site/ReleaseCard";
 
 export const dynamic = "force-dynamic";
@@ -15,10 +16,11 @@ const ArrowRight = () => (
 );
 
 export default async function HomePage() {
-  const [products, activeCount, news] = await Promise.all([
+  const [products, activeCount, news, wholesale] = await Promise.all([
     getCatalogProducts(20),
     countActiveProducts(),
     getLatestNews(3),
+    isWholesaleCustomer(),
   ]);
 
   return (
@@ -60,7 +62,7 @@ export default async function HomePage() {
         ) : (
           <div className="grid">
             {products.map((product) => (
-              <ReleaseCard key={product.id} product={product} />
+              <ReleaseCard key={product.id} product={product} wholesale={wholesale} />
             ))}
           </div>
         )}

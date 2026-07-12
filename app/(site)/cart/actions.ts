@@ -119,6 +119,7 @@ export async function placeOrder(formData: FormData) {
 
   const shippingFee = Math.max(0, Number(formData.get("shippingFee") ?? 0) || 0);
   const shippingLabel = String(formData.get("shippingLabel") ?? "").trim();
+  const shippingRateId = String(formData.get("shippingRateId") ?? "").trim();
   const grandTotal = cart.total + shippingFee;
 
   const number = `WEB-${Date.now().toString(36).toUpperCase()}`;
@@ -142,6 +143,7 @@ export async function placeOrder(formData: FormData) {
         phone && `Phone: ${phone}`,
         address && `Address: ${address}${city ? `, ${city}` : ""}`,
         shippingLabel && `Courier: ${shippingLabel}`,
+        shippingRateId && `RateId: ${shippingRateId}`,
       ]
         .filter(Boolean)
         .join("\n"),

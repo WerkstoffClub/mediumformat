@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Prisma, MediaCondition } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { artistsLabel, formatLabel } from "@/lib/catalog";
+import { isWholesaleCustomer } from "@/lib/pricing";
 import { ReleaseCard } from "@/components/site/ReleaseCard";
 
 export const dynamic = "force-dynamic";
@@ -56,7 +57,7 @@ export default async function ShopPage({
   if (maxPrice) variantSome.priceIdr = { lte: maxPrice };
   if (Object.keys(variantSome).length) where.variants = { some: variantSome };
 
-  const [rows, facetRows] = await Promise.all([
+  const [rows, facetRows, wholesale] = await Promise.all([
     prisma.product.findMany({
       where,
       take: 200,
@@ -68,6 +69,7 @@ export default async function ShopPage({
       select: { release: { select: { genres: true, formatsJson: true } } },
       take: 1000,
     }),
+    isWholesaleCustomer(),
   ]);
 
   // Facet counts.
@@ -246,7 +248,7 @@ export default async function ShopPage({
         ) : (
           <div className="grid">
             {products.map((product) => (
-              <ReleaseCard key={product.id} product={product} />
+              <ReleaseCard key={product.id} product={product} wholesale={wholesale} />
             ))}
           </div>
         )}

@@ -10,6 +10,7 @@ import {
 } from "@/lib/catalog";
 import { ReleaseCard } from "@/components/site/ReleaseCard";
 import { CoverImg } from "@/components/site/CoverImg";
+import { isWholesaleCustomer, effectivePrice } from "@/lib/pricing";
 import { addToCart } from "../../cart/actions";
 
 export const dynamic = "force-dynamic";
@@ -47,6 +48,8 @@ export default async function ReleasePage({
   const cheapest = product.variants[0];
   const fmt = release ? formatLabel(release.formatsJson) : null;
   const tracks = release?.tracks ?? [];
+
+  const wholesale = await isWholesaleCustomer();
 
   const related = (await getCatalogProducts(5))
     .filter((p) => p.id !== product.id)
@@ -120,8 +123,13 @@ export default async function ReleasePage({
 
           <div className="rd-price-block">
             <span className="rd-price">
-              {cheapest ? formatIdr(cheapest.priceIdr.toString()) : "—"}
+              {cheapest ? formatIdr(effectivePrice(cheapest, wholesale)) : "—"}
             </span>
+            {wholesale && cheapest?.wholesalePriceIdr != null && (
+              <span className="rd-price-note" style={{ textDecoration: "line-through" }}>
+                {formatIdr(cheapest.priceIdr.toString())}
+              </span>
+            )}
             {product.variants.length > 1 && (
               <span className="rd-price-note">from · {product.variants.length} copies</span>
             )}
@@ -139,7 +147,7 @@ export default async function ReleasePage({
                     {v.color && <span>{v.color}</span>}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <span className="rd-variant-price">{formatIdr(v.priceIdr.toString())}</span>
+                    <span className="rd-variant-price">{formatIdr(effectivePrice(v, wholesale))}</span>
                     <form action={addToCart}>
                       <input type="hidden" name="variantId" value={v.id} />
                       <button className="vadd" aria-label="Add this copy to cart">

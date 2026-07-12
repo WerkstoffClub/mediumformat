@@ -1164,3 +1164,86 @@
     break-inside: avoid;
   }
 }
+
+/* ─── Shipping / AWB label ─── */
+.mfa .awb-label {
+  max-width: 420px;
+  margin: 0 auto;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+}
+.mfa .awb-label .awb-hd {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid #000;
+}
+.mfa .awb-label .awb-hd .awb-brand {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.mfa .awb-label .awb-hd .awb-courier {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.mfa .awb-label .awb-code {
+  text-align: center;
+  padding: 14px 12px 8px;
+  border-bottom: 1px solid #000;
+}
+.mfa .awb-label .awb-code img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.mfa .awb-label .awb-code .awb-no {
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+  letter-spacing: 0.06em;
+}
+.mfa .awb-label .awb-party {
+  padding: 10px 14px;
+  border-bottom: 1px solid #000;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.mfa .awb-label .awb-party:last-child {
+  border-bottom: 0;
+}
+.mfa .awb-label .awb-party .awb-role {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #444;
+  margin-bottom: 2px;
+}
+.mfa .awb-label .awb-party .awb-name {
+  font-weight: 700;
+}
+.mfa .awb-label .awb-items {
+  padding: 10px 14px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.mfa .awb-label .awb-items .awb-il {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+@media print {
+  .mfa .awb-label {
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
+  }
+}

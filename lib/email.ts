@@ -57,6 +57,28 @@ export async function sendOrderConfirmationEmail(
   return sendMail(to, `Your Medium Format order ${order.number}`, html);
 }
 
+export async function sendOrderStatusEmail(
+  to: string,
+  o: { number: string; status: string; courier?: string | null; awb?: string | null },
+) {
+  const nice = o.status.replace(/_/g, " ").toLowerCase();
+  const tracking =
+    o.awb
+      ? `<p>Tracking: <strong>${o.courier ?? ""} ${o.awb}</strong></p>`
+      : "";
+  const subject =
+    o.status === "SHIPPED"
+      ? `Your Medium Format order ${o.number} has shipped`
+      : o.status === "COMPLETED"
+        ? `Your Medium Format order ${o.number} is complete`
+        : `Order ${o.number} update`;
+  const html = `
+    <h2>Order ${o.number} — ${nice}</h2>
+    ${tracking}
+    <p>Thanks for shopping with Medium Format, Jakarta.</p>`;
+  return sendMail(to, subject, html);
+}
+
 export async function sendPasswordResetEmail(to: string, link: string) {
   const html = `
     <p>Someone requested a password reset for your Medium Format account.</p>
