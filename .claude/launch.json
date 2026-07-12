@@ -9,6 +9,15 @@
         "VITE_API_TARGET=https://mediumformat.info pnpm --filter @mf/storefront exec vite dev --port 5175 --strictPort"
       ],
       "port": 5175
+    },
+    {
+      "name": "backoffice",
+      "autoPort": true,
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "pnpm --filter @mf/backoffice exec vite dev --host 127.0.0.1 --port $PORT"
+      ]
     }
   ]
 }
