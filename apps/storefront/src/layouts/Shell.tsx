@@ -4,6 +4,8 @@ import { AnnouncementBar } from '../components/AnnouncementBar';
 import { Nav } from '../components/Nav';
 import { Footer } from '../components/Footer';
 import { NowPlayingBar } from '../components/NowPlayingBar';
+import { AdminBar } from '../admin/AdminBar';
+import { AdminLoginPopover } from '../admin/AdminLoginPopover';
 
 /**
  * The chrome shared by every page: announcement bar, sticky nav, footer,
@@ -24,6 +26,8 @@ export function Shell() {
       </main>
       <Footer />
       <NowPlayingBar />
+      <AdminBar />
+      <AdminLoginPopover />
     </div>
   );
 }

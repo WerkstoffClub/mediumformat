@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Shell } from './layouts/Shell';
 import { CurrencyProvider } from './hooks/useCurrency';
+import { AdminEditProvider } from './admin/AdminEditContext';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import ReleaseDetail from './pages/ReleaseDetail';
@@ -14,21 +15,23 @@ import NotFound from './pages/NotFound';
 // prototype has moved to /prototype/* on the VPS (see deploy/docker/Caddyfile).
 export default function App() {
   return (
-    <CurrencyProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Shell />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalog" element={<Catalog />} />
-            <Route path="/releases/:slug" element={<ReleaseDetail />} />
-            <Route path="/preorders" element={<Preorders />} />
-            <Route path="/news" element={<NewsList />} />
-            <Route path="/news/:slug" element={<NewsDetail />} />
-            <Route path="/pages/:slug" element={<CategoryPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </CurrencyProvider>
+    <AdminEditProvider>
+      <CurrencyProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Shell />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/catalog" element={<Catalog />} />
+              <Route path="/releases/:slug" element={<ReleaseDetail />} />
+              <Route path="/preorders" element={<Preorders />} />
+              <Route path="/news" element={<NewsList />} />
+              <Route path="/news/:slug" element={<NewsDetail />} />
+              <Route path="/pages/:slug" element={<CategoryPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </CurrencyProvider>
+    </AdminEditProvider>
   );
 }
