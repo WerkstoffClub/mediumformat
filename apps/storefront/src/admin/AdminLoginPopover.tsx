@@ -29,6 +29,7 @@ export function AdminLoginPopover() {
       role="dialog"
       aria-modal="true"
       aria-label="Staff sign in"
+      onClick={e => { if (e.target === e.currentTarget) closeLogin(); }}
       onKeyDown={e => { if (e.key === 'Escape') closeLogin(); }}
     >
       <form

@@ -1,6 +1,7 @@
 import {
   createContext, useContext, useEffect, useState, useCallback, type ReactNode,
 } from 'react';
+import axios from 'axios';
 import {
   type AdminUser, isEditor, getToken, clearToken, login as apiLogin, fetchMe,
 } from './adminAuth';
@@ -38,7 +39,15 @@ export function AdminEditProvider({ children }: { children: ReactNode }) {
     let cancelled = false;
     fetchMe()
       .then(me => { if (!cancelled) setUser(isEditor(me.role) ? me : null); })
-      .catch(() => { if (!cancelled) { clearToken(); setUser(null); } })
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        setUser(null);
+        // Only a genuine 401 means the shared token is invalid. A transient
+        // failure (offline, 5xx, CORS) must NOT wipe mf-access-token — the
+        // back-office shares that key, so clearing it would sign the admin out
+        // of the back-office too.
+        if (axios.isAxiosError(err) && err.response?.status === 401) clearToken();
+      })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
   }, []);
@@ -59,8 +68,12 @@ export function AdminEditProvider({ children }: { children: ReactNode }) {
       }
       setUser(me);
       setLoginOpen(false);
-    } catch {
-      setLoginError('Incorrect email or password.');
+    } catch (err: unknown) {
+      setLoginError(
+        axios.isAxiosError(err) && err.response?.status === 401
+          ? 'Incorrect email or password.'
+          : 'Sign-in failed — please try again.',
+      );
     }
   }, []);
 
