@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { CategoryPage } from '../../api/storefront';
+import { Editable } from '../../admin/Editable';
 
 interface FullHeroProps {
   page: CategoryPage;
@@ -20,7 +21,7 @@ export function FullHero({ page }: FullHeroProps) {
     <section
       className="mf-cat-full-hero"
       data-template="FULL_HERO"
-      aria-labelledby="mf-cat-full-hero-title"
+      aria-label={title || 'Category'}
     >
       <div className="mf-cat-full-hero-art">
         {heroImageUrl ? (
@@ -33,11 +34,12 @@ export function FullHero({ page }: FullHeroProps) {
       </div>
       <div className="mf-cat-full-hero-veil" aria-hidden />
       <div className="mf-cat-full-hero-content">
-        {kicker && <span className="mf-cat-full-hero-kicker">{kicker}</span>}
-        <h1 id="mf-cat-full-hero-title" className="mf-cat-full-hero-h1">
-          {headline || title}
-        </h1>
-        {salesCopy && <p className="mf-cat-full-hero-copy">{salesCopy}</p>}
+        <Editable entity="categoryPage" id={page.id} field="kicker" value={kicker}
+          as="span" className="mf-cat-full-hero-kicker" placeholder="Kicker" />
+        <Editable entity="categoryPage" id={page.id} field="headline" value={headline} fallback={title}
+          as="h1" className="mf-cat-full-hero-h1" placeholder="Headline" />
+        <Editable entity="categoryPage" id={page.id} field="salesCopy" value={salesCopy} multiline
+          as="p" className="mf-cat-full-hero-copy" placeholder="Sales copy" />
         {ctaLabel && ctaHref && (
           <Link to={ctaHref} className="mf-cat-full-hero-cta">
             {ctaLabel}
