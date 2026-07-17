@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { CategoryPage } from '../../api/storefront';
+import { Editable } from '../../admin/Editable';
 
 interface HalfHeroProps {
   page: CategoryPage;
@@ -20,7 +21,7 @@ export function HalfHero({ page }: HalfHeroProps) {
     <section
       className="mf-cat-half-hero"
       data-template="HALF_HERO"
-      aria-labelledby="mf-cat-half-hero-title"
+      aria-label={title || 'Category'}
     >
       <div className="mf-cat-half-hero-art">
         {heroImageUrl ? (
@@ -33,11 +34,12 @@ export function HalfHero({ page }: HalfHeroProps) {
       </div>
       <div className="mf-cat-half-hero-copy">
         <div className="mf-cat-half-hero-copy-inner">
-          {kicker && <div className="mf-cat-half-hero-kicker">{kicker}</div>}
-          <h1 id="mf-cat-half-hero-title" className="mf-cat-half-hero-h1">
-            {headline || title}
-          </h1>
-          {salesCopy && <p className="mf-cat-half-hero-lede">{salesCopy}</p>}
+          <Editable entity="categoryPage" id={page.id} field="kicker" value={kicker}
+            as="span" className="mf-cat-half-hero-kicker" placeholder="Kicker" />
+          <Editable entity="categoryPage" id={page.id} field="headline" value={headline} fallback={title}
+            as="h1" className="mf-cat-half-hero-h1" placeholder="Headline" />
+          <Editable entity="categoryPage" id={page.id} field="salesCopy" value={salesCopy} multiline
+            as="p" className="mf-cat-half-hero-lede" placeholder="Sales copy" />
           <div className="mf-cat-half-hero-actions">
             {ctaLabel && ctaHref && (
               <Link to={ctaHref} className="mf-cat-half-hero-cta">

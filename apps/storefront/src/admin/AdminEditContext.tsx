@@ -3,8 +3,12 @@ import {
 } from 'react';
 import axios from 'axios';
 import {
-  type AdminUser, isEditor, getToken, clearToken, login as apiLogin, fetchMe,
+  type AdminUser, isEditor, getToken, clearToken, login as apiLogin, fetchMe, adminApi,
 } from './adminAuth';
+
+export type EditEntity = 'categoryPage';
+interface StagedEdit { entity: EditEntity; id: string; field: string; value: string; }
+const keyOf = (entity: EditEntity, id: string, field: string) => `${entity}:${id}:${field}`;
 
 interface AdminEditValue {
   user: AdminUser | null;
@@ -19,6 +23,15 @@ interface AdminEditValue {
   closeLogin: () => void;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => void;
+  dirtyCount: number;
+  saving: boolean;
+  saveError: string | null;
+  rev: number;                       // bumps on discard/save — Editable resets its DOM on change
+  stage: (entity: EditEntity, id: string, field: string, value: string) => void;
+  /** Display value: staged edit ?? just-saved value ?? the server value passed in. */
+  getValue: (entity: EditEntity, id: string, field: string, serverValue: string) => string;
+  discardAll: () => void;
+  save: () => Promise<void>;
 }
 
 const AdminEditContext = createContext<AdminEditValue | null>(null);
@@ -29,6 +42,11 @@ export function AdminEditProvider({ children }: { children: ReactNode }) {
   const [editMode, setEditModeState] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [dirty, setDirty] = useState<Record<string, StagedEdit>>({});
+  const [saved, setSaved] = useState<Record<string, string>>({});
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [rev, setRev] = useState(0);
 
   const isAdmin = isEditor(user?.role);
 
@@ -81,7 +99,70 @@ export function AdminEditProvider({ children }: { children: ReactNode }) {
     clearToken();
     setUser(null);
     setEditModeState(false);
+    setDirty({});
+    setSaved({});
   }, []);
+
+  const stage = useCallback((entity: EditEntity, id: string, field: string, value: string) => {
+    setDirty(d => ({ ...d, [keyOf(entity, id, field)]: { entity, id, field, value } }));
+  }, []);
+
+  const getValue = useCallback(
+    (entity: EditEntity, id: string, field: string, serverValue: string): string => {
+      const k = keyOf(entity, id, field);
+      if (k in dirty) return dirty[k].value;
+      if (k in saved) return saved[k];
+      return serverValue;
+    },
+    [dirty, saved],
+  );
+
+  const discardAll = useCallback(() => {
+    setDirty({});
+    setSaveError(null);
+    setRev(r => r + 1);   // force Editable elements to reset their contentEditable DOM
+  }, []);
+
+  const save = useCallback(async () => {
+    const edits = Object.values(dirty);
+    if (edits.length === 0) return;
+    setSaving(true);
+    setSaveError(null);
+
+    // Group by entity:id, then PATCH each entity once with its changed fields.
+    const groups = new Map<string, { entity: EditEntity; id: string; fields: Record<string, string> }>();
+    for (const e of edits) {
+      const gk = `${e.entity}:${e.id}`;
+      const g = groups.get(gk) ?? { entity: e.entity, id: e.id, fields: {} };
+      g.fields[e.field] = e.value;
+      groups.set(gk, g);
+    }
+
+    try {
+      for (const g of groups.values()) {
+        if (g.entity === 'categoryPage') {
+          await adminApi.patch(`/category-pages/${g.id}`, g.fields);
+        }
+      }
+      // Promote saved edits into the client overlay so they stay on screen,
+      // then clear the dirty set. No reload / refetch needed.
+      setSaved(s => {
+        const next = { ...s };
+        for (const e of edits) next[keyOf(e.entity, e.id, e.field)] = e.value;
+        return next;
+      });
+      setDirty({});
+      setRev(r => r + 1);
+    } catch (err) {
+      setSaveError(
+        axios.isAxiosError(err) && err.response?.status === 401
+          ? 'Your session expired — sign in again.'
+          : 'Save failed — please try again.',
+      );
+    } finally {
+      setSaving(false);
+    }
+  }, [dirty]);
 
   // Discreet entry point for admins with no active session: Ctrl/Cmd+Shift+E.
   // When already an editor it toggles edit mode; otherwise it opens the login popover.
@@ -101,6 +182,8 @@ export function AdminEditProvider({ children }: { children: ReactNode }) {
     <AdminEditContext.Provider value={{
       user, isAdmin, loading, editMode, loginOpen, loginError,
       toggleEdit, setEditMode, openLogin, closeLogin, signIn, signOut,
+      dirtyCount: Object.keys(dirty).length, saving, saveError, rev,
+      stage, getValue, discardAll, save,
     }}>
       {children}
     </AdminEditContext.Provider>
