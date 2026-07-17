@@ -28,11 +28,15 @@ export function Editable({
 
   // In edit mode, set the DOM text imperatively and DON'T pass children —
   // this stops React from resetting the caret on each keystroke/re-render.
+  // Deps are the field *identity* (entity/id/field) + editing/rev — NOT `current`:
+  // identity changes on client-side navigation between pages (so the field
+  // re-syncs to the new page's value) but stays stable while typing (so the
+  // caret never jumps). Depending on `current` would reintroduce caret resets.
   useEffect(() => {
     if (editing && ref.current && ref.current.textContent !== current) {
       ref.current.textContent = current;
     }
-  }, [editing, rev]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [editing, rev, entity, id, field]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!editing) {
     if (!display) return null;   // hide empty fields for visitors (matches current behaviour)
@@ -46,6 +50,7 @@ export function Editable({
       contentEditable
       suppressContentEditableWarning
       role="textbox"
+      aria-multiline={multiline ? true : undefined}
       aria-label={placeholder ?? field}
       data-editable={field}
       data-empty={current ? undefined : ''}
@@ -56,8 +61,12 @@ export function Editable({
         cursor: 'text',
         minWidth: '1ch',
       }}
-      onInput={(e: React.FormEvent<HTMLElement>) =>
-        stage(entity, id, field, (e.currentTarget.textContent ?? '').replace(/\n{2,}/g, multiline ? '\n' : ' '))}
+      onInput={(e: React.FormEvent<HTMLElement>) => {
+        const raw = e.currentTarget.textContent ?? '';
+        // Single-line fields collapse every newline to a space; multiline
+        // fields keep single breaks but collapse runs of blank lines.
+        stage(entity, id, field, multiline ? raw.replace(/\n{2,}/g, '\n') : raw.replace(/\n+/g, ' '));
+      }}
       onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => { if (!multiline && e.key === 'Enter') e.preventDefault(); }}
     />
   );
