@@ -195,6 +195,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 
 export type CategoryPageTemplate = 'FULL_HERO' | 'HALF_HERO';
 export type CategoryPageStatus   = 'DRAFT' | 'PUBLISHED';
+export type CategoryPageKind = 'PRODUCT_PAGE' | 'NEWS_CATEGORY';
 
 export interface CategoryPage {
   id: string;
@@ -202,6 +203,9 @@ export interface CategoryPage {
   title: string;
   formatFilter: RecordFormat | null;
   template: CategoryPageTemplate;
+  kind: CategoryPageKind;
+  newsCategoryKey: string | null;
+  posts?: Post[];          // present only for NEWS_CATEGORY pages (embedded by the resolver)
   kicker: string | null;
   headline: string | null;
   salesCopy: string | null;
