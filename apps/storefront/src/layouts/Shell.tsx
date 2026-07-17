@@ -5,6 +5,7 @@ import { Nav } from '../components/Nav';
 import { Footer } from '../components/Footer';
 import { NowPlayingBar } from '../components/NowPlayingBar';
 import { AdminBar } from '../admin/AdminBar';
+import { SaveBar } from '../admin/SaveBar';
 import { AdminLoginPopover } from '../admin/AdminLoginPopover';
 
 /**
@@ -27,6 +28,7 @@ export function Shell() {
       <Footer />
       <NowPlayingBar />
       <AdminBar />
+      <SaveBar />
       <AdminLoginPopover />
     </div>
   );
