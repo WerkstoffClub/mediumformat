@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { getReleases, deleteRelease, type ReleaseFilter } from '../../api/inventory';
 import { getCatalogSummary } from '../../api/ops';
-import { Paginator, SearchBox } from '../../components/ui/Page';
+import { Paginator } from '../../components/ui/Page';
 import { ReleaseCover } from '../../components/ui/Cover';
 import type { Release } from '@mf/shared';
 
@@ -25,7 +25,12 @@ function StockPill({ release }: { release: Release }) {
     out: ['Out', 'text-[var(--danger)] bg-[var(--danger-t)]'],
   } as const;
   const [label, cls] = map[state];
-  return <span className={`text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap ${cls}`}>{label}</span>;
+  return (
+    <span className={`inline-flex items-center gap-[5px] text-[11px] font-medium px-[9px] py-0.5 rounded-full whitespace-nowrap ${cls}`}>
+      <span className="w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
+      {label}
+    </span>
+  );
 }
 
 /** Prototype's barcode-label print: black-on-white label in a print window. */
@@ -59,7 +64,8 @@ function Chip({ on, children, onClick }: { on: boolean; children: React.ReactNod
   return (
     <button
       onClick={onClick}
-      className={`text-[11px] px-3 py-1 rounded-full border transition-colors ${
+      type="button"
+      className={`text-[13px] font-medium px-3 py-1 min-h-[28px] rounded-full border transition-colors ${
         on ? 'border-[var(--accent)] text-[var(--text-primary)]' : 'border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--text-muted)]'
       }`}
     >
@@ -68,7 +74,7 @@ function Chip({ on, children, onClick }: { on: boolean; children: React.ReactNod
   );
 }
 
-export function InventoryList({ onTotal }: { onTotal?: (n: number) => void } = {}) {
+export function InventoryList({ onLoad }: { onLoad?: (rows: Release[], total: number) => void } = {}) {
   const navigate = useNavigate();
   const [releases, setReleases] = useState<Release[]>([]);
   const [total, setTotal] = useState(0);
@@ -83,6 +89,15 @@ export function InventoryList({ onTotal }: { onTotal?: (n: number) => void } = {
   const [genres, setGenres] = useState<string[]>([]);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const filterWrap = useRef<HTMLDivElement>(null);
+
+  // Close the Filters popover on any click outside it.
+  useEffect(() => {
+    if (!filtersOpen) return;
+    const close = (e: MouseEvent) => { if (!filterWrap.current?.contains(e.target as Node)) setFiltersOpen(false); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, [filtersOpen]);
 
   useEffect(() => {
     getCatalogSummary().then(c => setGenres(c.genres.map(g => g.name).filter(g => g !== 'Uncategorised').slice(0, 24))).catch(() => {});
@@ -101,86 +116,106 @@ export function InventoryList({ onTotal }: { onTotal?: (n: number) => void } = {
   useEffect(() => {
     setLoading(true);
     getReleases(filter)
-      .then(r => { setReleases(r.data); setTotal(r.total); onTotal?.(r.total); })
+      .then(r => { setReleases(r.data); setTotal(r.total); onLoad?.(r.data, r.total); })
       .finally(() => setLoading(false));
-  }, [filter, onTotal]);
+  }, [filter, onLoad]);
 
   const activeFilters = [format, condition, stock, genre].filter(Boolean).length;
 
   const handleDelete = async (id: string) => {
     if (!confirm('Remove this release?')) return;
     await deleteRelease(id);
-    getReleases(filter).then(r => { setReleases(r.data); setTotal(r.total); });
+    getReleases(filter).then(r => { setReleases(r.data); setTotal(r.total); onLoad?.(r.data, r.total); });
   };
 
-  const th = 'text-left px-3.5 py-2 text-[9px] uppercase tracking-[0.07em] text-[var(--text-faint)] font-semibold border-b border-[var(--border-sub)] whitespace-nowrap';
-  const td = 'px-3.5 py-2.5 text-[11.5px]';
+
+  const clearFilters = () => { setFormat(''); setCondition(''); setStock(''); setGenre(''); setPage(1); };
+
+  const th = 'text-left px-3.5 pt-3 pb-2.5 text-[11px] uppercase tracking-[0.04em] text-[var(--text-muted)] font-semibold whitespace-nowrap';
+  const td = 'px-3.5 py-[11px] border-t border-[var(--border)] text-[13px] text-[var(--text-secondary)] align-middle';
+  const btnSec = 'inline-flex items-center gap-1.5 px-[13px] py-2 rounded-[6px] border text-[13px] font-medium text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors';
 
   return (
     <div>
-      {/* toolbar — mockup pattern: search · Filters panel · Sort */}
-      <div className="flex items-center gap-2 mb-3 flex-wrap">
-        <SearchBox value={search} onChange={v => { setSearchParams(v ? { q: v } : {}, { replace: true }); setPage(1); }} placeholder="Search artist, title, label, cat# or barcode…" />
-        <button
-          onClick={() => setFiltersOpen(o => !o)}
-          className={`text-[11px] px-3 py-1.5 rounded-md border transition-colors flex items-center gap-1.5 ${
-            filtersOpen || activeFilters > 0 ? 'border-[var(--accent)] text-[var(--text-primary)]' : 'border-[var(--border)] text-[var(--text-secondary)]'
-          }`}
-        >
-          Filters
-          {activeFilters > 0 && <span className="font-mono text-[10px] bg-[var(--bg-overlay)] border border-[var(--border)] rounded-full px-1.5">{activeFilters}</span>}
-        </button>
-        <div className="flex-1" />
-        <label className="flex items-center gap-2 text-[11px] text-[var(--text-muted)]">
-          Sort
-          <select
-            value={sort}
-            onChange={e => { setSort(e.target.value); setPage(1); }}
-            className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-md px-2 py-1.5 text-[11px] text-[var(--text-primary)]"
-          >
-            {SORTS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-          </select>
-        </label>
+      {/* toolbar — mockup pattern: search · Filters popover · Sort */}
+      <div className="flex items-center gap-2.5 mb-3.5 flex-wrap">
+        <div className="flex items-center gap-[9px] bg-[var(--bg-overlay)] border border-[var(--border)] rounded-[6px] px-3 py-[9px] flex-1 min-w-[220px] max-w-[340px] focus-within:border-[var(--text-muted)] transition-colors">
+          <svg viewBox="0 0 24 24" className="w-[15px] h-[15px] text-[var(--text-muted)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            aria-label="Search releases"
+            className="bg-transparent text-[13px] outline-none text-[var(--text-primary)] placeholder:text-[var(--text-muted)] w-full"
+            placeholder="Search artist, title, label, cat# or barcode…"
+            value={search}
+            onChange={e => { const v = e.target.value; setSearchParams(v ? { q: v } : {}, { replace: true }); setPage(1); }}
+          />
+        </div>
+        <div className="flex items-center gap-2.5 ml-auto flex-wrap">
+          <div ref={filterWrap} className="relative">
+            <button
+              type="button"
+              aria-expanded={filtersOpen}
+              onClick={() => setFiltersOpen(o => !o)}
+              className={`${btnSec} ${filtersOpen ? 'border-[var(--accent)]' : 'border-[var(--border)]'}`}
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+              Filters
+              {activeFilters > 0 && <span className="font-mono text-[10px] bg-[var(--accent)] text-[var(--accent-text)] rounded-full px-1.5 ml-0.5">{activeFilters}</span>}
+            </button>
+            {filtersOpen && (
+              <div className="absolute top-[calc(100%+6px)] right-0 z-30 w-[340px] max-w-[calc(100vw-32px)] max-h-[70vh] overflow-y-auto bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] shadow-[0_4px_12px_rgba(0,0,0,.6)] p-3.5">
+                {[
+                  ['Format', FORMATS.map(f => [f, fmtLabel(f)]), format, setFormat],
+                  ['Condition', CONDITIONS.map(c => [c, c === 'VGP' ? 'VG+' : c === 'GP' ? 'G+' : c]), condition, setCondition],
+                  ['Stock', STOCK_STATES.slice(1), stock, setStock],
+                  ['Genre', genres.map(g => [g, g]), genre, setGenre],
+                ].map(([label, opts, value, setter]) => (
+                  <div key={label as string} className="mb-[13px]">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-muted)] mb-2">{label as string}</p>
+                    <div className="flex gap-1.5 flex-wrap">
+                      <Chip on={!value} onClick={() => { (setter as (v: string) => void)(''); setPage(1); }}>All</Chip>
+                      {(opts as string[][]).map(([v, l]) => (
+                        <Chip key={v} on={value === v} onClick={() => { (setter as (v: string) => void)(value === v ? '' : v); setPage(1); }}>{l}</Chip>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <div className="flex justify-between items-center border-t border-[var(--border)] pt-3 mt-0.5">
+                  <button type="button" onClick={clearFilters} className="text-[13px] text-[var(--text-muted)] hover:text-[var(--text-primary)]">Clear all</button>
+                  <button type="button" onClick={() => setFiltersOpen(false)} className="bg-[var(--accent)] text-[var(--accent-text)] rounded-[6px] px-[15px] py-[7px] text-[13px] font-medium">Done</button>
+                </div>
+              </div>
+            )}
+          </div>
+          <label className="flex items-center gap-[7px] bg-[var(--bg-overlay)] border border-[var(--border)] rounded-[6px] pl-3 pr-2">
+            <span className="text-[12px] text-[var(--text-muted)]">Sort</span>
+            <select
+              value={sort}
+              onChange={e => { setSort(e.target.value); setPage(1); }}
+              className="bg-transparent outline-none text-[13px] text-[var(--text-primary)] py-[9px] px-1 cursor-pointer"
+            >
+              {SORTS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+            </select>
+          </label>
+        </div>
       </div>
 
-      {filtersOpen && (
-        <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg p-4 mb-3 space-y-3">
-          {[
-            ['Format', FORMATS.map(f => [f, fmtLabel(f)]), format, setFormat],
-            ['Condition', CONDITIONS.map(c => [c, c === 'VGP' ? 'VG+' : c === 'GP' ? 'G+' : c]), condition, setCondition],
-            ['Stock', STOCK_STATES.slice(1), stock, setStock],
-            ['Genre', genres.map(g => [g, g]), genre, setGenre],
-          ].map(([label, opts, value, setter]) => (
-            <div key={label as string} className="flex items-start gap-3 flex-wrap">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--text-muted)] w-[72px] pt-1.5">{label as string}</span>
-              <div className="flex gap-1.5 flex-wrap flex-1">
-                <Chip on={!value} onClick={() => { (setter as (v: string) => void)(''); setPage(1); }}>All</Chip>
-                {(opts as string[][]).map(([v, l]) => (
-                  <Chip key={v} on={value === v} onClick={() => { (setter as (v: string) => void)(value === v ? '' : v); setPage(1); }}>{l}</Chip>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg overflow-x-auto">
-        <table className="w-full border-collapse min-w-[860px]">
+      <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] overflow-x-auto">
+        <table className="w-full border-collapse min-w-[900px]">
           <thead>
-            <tr className="bg-[var(--bg-overlay)]">
+            <tr>
               <th className={th}>Release</th>
-              <th className={th}>Cat# / SKU</th>
+              <th className={th}>Cat#</th>
               <th className={th}>Format</th>
               <th className={th}>Condition</th>
               <th className={`${th} text-right`}>Stock</th>
               <th className={`${th} text-right`}>Price</th>
               <th className={th}>Location</th>
-              <th className={th} />
+              <th className={th}><span className="sr-only">Actions</span></th>
             </tr>
           </thead>
           <tbody>
-            {loading && <tr><td colSpan={8} className="px-3.5 py-8 text-center text-[11px] text-[var(--text-faint)]">Loading…</td></tr>}
-            {!loading && releases.length === 0 && <tr><td colSpan={8} className="px-3.5 py-8 text-center text-[11px] text-[var(--text-faint)]">No releases match.</td></tr>}
+            {loading && <tr><td colSpan={8} className={`${td} py-8 text-center text-[var(--text-muted)]`}>Loading…</td></tr>}
+            {!loading && releases.length === 0 && <tr><td colSpan={8} className={`${td} py-8 text-center text-[var(--text-muted)]`}>No releases match.</td></tr>}
             {releases.map(r => (
               <tr
                 key={r.id}
@@ -189,63 +224,63 @@ export function InventoryList({ onTotal }: { onTotal?: (n: number) => void } = {
                   if ((e.target as HTMLElement).closest('a,button')) return;
                   navigate(`/inventory/${r.id}/edit`);
                 }}
-                className="group cursor-pointer border-b border-[var(--border-sub)] hover:bg-[var(--bg-hover)]"
+                className="group cursor-pointer transition-colors hover:bg-[var(--bg-hover)]"
               >
                 <td className={td}>
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="w-9 h-9 rounded-[6px] flex-shrink-0 overflow-hidden border border-[var(--border-sub)]">
+                  <div className="flex items-center gap-[11px] min-w-0">
+                    <span className="w-[38px] h-[38px] rounded-[4px] flex-shrink-0 overflow-hidden border border-[var(--border)]">
                       <ReleaseCover imageUrl={r.imageUrl} format={r.format} />
                     </span>
-                    <span className="min-w-0">
+                    <span className="min-w-0 flex flex-col">
                       <Link
                         to={`/inventory/${r.id}/edit`}
-                        className="block font-medium text-[var(--text-primary)] truncate max-w-[240px] rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] group-hover:underline decoration-[var(--border)] underline-offset-2"
+                        className="text-[13px] font-semibold text-[var(--text-primary)] truncate max-w-[280px] rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                       >
                         {r.artist}
                       </Link>
-                      <span className="block text-[10.5px] text-[var(--text-muted)] truncate max-w-[240px]">{r.title}{r.genre ? ` · ${r.genre}` : ''}</span>
+                      <span className="text-[12px] text-[var(--text-muted)] truncate max-w-[280px]">{r.title}{r.genre ? ` · ${r.genre}` : ''}</span>
                     </span>
                   </div>
                 </td>
-                <td className={`${td} font-mono text-[10.5px] text-[var(--text-muted)]`}>{r.catNumber ?? '—'}</td>
-                <td className={td}><span className="text-[10.5px] text-[var(--text-secondary)]">{fmtLabel(r.format)}</span></td>
+                <td className={`${td} text-[12px] text-[var(--text-muted)] whitespace-nowrap`}>{r.catNumber ?? '—'}</td>
+                <td className={`${td} text-[12px]`}>{fmtLabel(r.format)}</td>
                 <td className={td}>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full border border-[var(--border)] text-[var(--text-secondary)] font-mono">
+                  <span className="inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-full border border-[var(--border)] text-[var(--text-secondary)]">
                     {r.condition === 'VGP' ? 'VG+' : r.condition === 'GP' ? 'G+' : r.condition}
                   </span>
                 </td>
                 <td className={`${td} text-right`}>
-                  <span className="inline-flex items-center gap-2">
-                    <span className="font-mono font-semibold text-[var(--text-primary)]">{r.stock}</span>
+                  <span className="inline-flex items-center gap-2 justify-end">
+                    <span className="font-mono font-medium text-[var(--text-primary)]">{r.stock}</span>
                     <StockPill release={r} />
                   </span>
                 </td>
                 <td className={`${td} text-right whitespace-nowrap`}>
-                  <span className="font-mono text-[var(--text-primary)]">{idr.format(r.priceIdr)}</span>
-                  <span className="block text-[9.5px] text-[var(--text-faint)]">≈ ${Math.round(r.priceIdr / USD_RATE)}</span>
+                  <span className="block font-mono font-medium text-[var(--text-primary)]">{idr.format(r.priceIdr)}</span>
+                  <span className="block font-mono text-[10px] text-[var(--text-muted)]">≈ ${Math.round(r.priceIdr / USD_RATE)}</span>
                 </td>
-                <td className={`${td} text-[10.5px] text-[var(--text-muted)] whitespace-nowrap`}>
+                <td className={`${td} text-[12px] text-[var(--text-muted)] whitespace-nowrap`}>
                   {r.storeLocation.replace('_', ' ')}{r.shelfLocation ? ` · ${r.shelfLocation}` : ''}
                 </td>
                 <td className={`${td} whitespace-nowrap`}>
-                  <div className="flex items-center gap-1 justify-end">
+                  <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                     <button
+                      type="button"
                       onClick={e => { e.stopPropagation(); printBarcode(r); }}
                       title="Print barcode label"
                       aria-label="Print barcode label"
-                      className="w-7 h-7 rounded-[5px] flex items-center justify-center text-[var(--text-muted)] opacity-0 group-hover:opacity-100 focus:opacity-100 hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-opacity"
+                      className="text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                     >
-                      <svg viewBox="0 0 24 24" className="w-[14px] h-[14px]" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>
+                      <svg viewBox="0 0 24 24" className="w-[15px] h-[15px]" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>
                     </button>
+                    <Link to={`/inventory/${r.id}/edit`} className="text-[12px] font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)]">Edit</Link>
                     <button
+                      type="button"
                       onClick={e => { e.stopPropagation(); handleDelete(r.id); }}
-                      title="Remove release"
-                      aria-label="Remove release"
-                      className="w-7 h-7 rounded-[5px] flex items-center justify-center text-[var(--text-muted)] opacity-0 group-hover:opacity-100 focus:opacity-100 hover:text-[var(--danger)] hover:bg-[var(--danger-t)] transition-opacity"
+                      className="text-[12px] font-medium text-[var(--text-muted)] hover:text-[var(--danger)]"
                     >
-                      <svg viewBox="0 0 24 24" className="w-[13px] h-[13px]" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                      Delete
                     </button>
-                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-[var(--text-faint)] flex-shrink-0 group-hover:text-[var(--text-muted)]" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
                   </div>
                 </td>
               </tr>

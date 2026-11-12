@@ -64,3 +64,17 @@ export const cancelPo = (id: string) =>
 
 export const syncPosFromDealpos = () =>
   api.post<{ created: number }>('/purchase-orders/sync-from-dealpos').then(r => r.data);
+
+export interface PoSummary {
+  openCount: number;      // SENT + PARTIAL
+  partialCount: number;
+  onOrderIdr: number;     // sum totalIdr of open POs
+  unitsOrdered: number;   // open POs' lines
+  unitsReceived: number;
+  dueThisWeek: number;    // open POs with ETA in the next 7 days
+  overdueCount: number;
+  weekEnd: string;
+}
+
+export const getPoSummary = () =>
+  api.get<PoSummary>('/purchase-orders/summary').then(r => r.data);

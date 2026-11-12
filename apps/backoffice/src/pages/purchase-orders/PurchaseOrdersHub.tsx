@@ -12,8 +12,7 @@ const TABS: TabDef[] = [
   { key: 'consolidations', label: 'Consolidations' },
 ];
 
-const SUBS: Record<PoTab, string> = {
-  orders: 'Buying stock — track POs from draft to fully received.',
+const SUBS: Record<Exclude<PoTab, 'orders'>, string> = {
   imports: 'Vendor invoices — from parsed PDF to landed inventory.',
   consolidations: 'Group international orders by freight forwarder, then split the forwarder invoice across lines by weight.',
 };
@@ -36,11 +35,16 @@ export function PurchaseOrdersHub() {
     setParams(next, { replace: true });
   };
 
+  const tabBar = <Tabs tabs={TABS} active={tab} onChange={setTab} />;
+
+  // The orders tab owns its header (Export / Sync / Create PO need its state).
+  if (tab === 'orders') return <PurchaseOrdersList tabs={tabBar} />;
+
   return (
     <div>
       <PageHeader title="Purchase Orders" sub={SUBS[tab]} />
-      <Tabs tabs={TABS} active={tab} onChange={setTab} />
-      {tab === 'imports' ? <ImportsList /> : tab === 'consolidations' ? <ConsolidationsList /> : <PurchaseOrdersList />}
+      {tabBar}
+      {tab === 'imports' ? <ImportsList /> : <ConsolidationsList />}
     </div>
   );
 }

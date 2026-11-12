@@ -19,6 +19,7 @@ const ic = (paths: React.ReactNode) => (
 const icons = {
   dashboard:  ic(<><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>),
   sales:      ic(<><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></>),
+  visitors:   ic(<><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></>),
   pos:        ic(<><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><path d="M8 14h4"/><circle cx="15.5" cy="16.5" r="1.5" fill="currentColor" stroke="none"/></>),
   settlements: ic(<><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>),
   preorders:  ic(<><path d="M20 12v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8"/><rect x="2" y="7" width="20" height="5" rx="1"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></>),
@@ -49,6 +50,7 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
       items: [
         { label: 'Dashboard', to: '/dashboard', icon: icons.dashboard },
         { label: 'Sales',     to: '/sales',     icon: icons.sales },
+        { label: 'Visitors',  to: '/visitors',  icon: icons.visitors },
       ],
     },
     {

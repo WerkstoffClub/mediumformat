@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { ChannelsQueryDto, CustomersQueryDto, OrdersQueryDto } from './dto/ops-query.dto';
+import { fillMonths } from './customer-analytics';
 
 const num = (v: unknown): number => (v == null ? 0 : Number(v));
 
@@ -255,6 +256,76 @@ export class OpsService {
       vipRevenueShare: totalRevenue > 0 ? Math.round((num(agg?.vipRevenue) / totalRevenue) * 100) : 0,
       topCustomers: topRows.map(r => this.shapeCustomer(r)),
       acquisition: acquisition.map(a => ({ channel: a.channel ?? 'Direct', count: Number(a.count) })),
+    };
+  }
+
+  /** Customer analytics: 12-month new/active/returning trend plus order-frequency
+   *  and recency distributions. Same name-match join as the rest of this view. */
+  async customersAnalytics(months = 12) {
+    const now = new Date();
+    const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - (months - 1), 1));
+    const inv = Prisma.sql`
+      SELECT c."id" AS cid, i."date", i."amount"
+      FROM "DpCustomer" c
+      JOIN "DpInvoice" i
+        ON i."isVoid" = false
+       AND lower(btrim(i."customerName")) = lower(btrim(c."name"))`;
+
+    const trend = await this.prisma.$queryRaw<
+      Array<{ month: string; active: bigint; fresh: bigint; returning: bigint; revenue: unknown }>
+    >`
+      WITH inv AS (${inv}),
+           firsts AS (SELECT cid, MIN("date") AS f FROM inv GROUP BY cid)
+      SELECT to_char(date_trunc('month', inv."date"), 'YYYY-MM')                    AS month,
+             COUNT(DISTINCT inv.cid)                                               AS active,
+             COUNT(DISTINCT inv.cid) FILTER (WHERE date_trunc('month', f.f) =  date_trunc('month', inv."date")) AS fresh,
+             COUNT(DISTINCT inv.cid) FILTER (WHERE date_trunc('month', f.f) <  date_trunc('month', inv."date")) AS returning,
+             COALESCE(SUM(inv."amount"), 0)                                        AS revenue
+      FROM inv JOIN firsts f USING (cid)
+      WHERE inv."date" >= ${start}
+      GROUP BY 1`;
+
+    const [dist] = await this.prisma.$queryRaw<
+      Array<Record<'o1' | 'o2_3' | 'o4_9' | 'o10' | 'r30' | 'r90' | 'r180' | 'lapsed', bigint>>
+    >`
+      WITH per AS (
+        SELECT cid, COUNT(*) AS orders, MAX("date") AS last FROM (${inv}) x GROUP BY cid
+      )
+      SELECT COUNT(*) FILTER (WHERE orders = 1)                            AS o1,
+             COUNT(*) FILTER (WHERE orders BETWEEN 2 AND 3)                AS o2_3,
+             COUNT(*) FILTER (WHERE orders BETWEEN 4 AND 9)                AS o4_9,
+             COUNT(*) FILTER (WHERE orders >= 10)                          AS o10,
+             COUNT(*) FILTER (WHERE last >= now() - interval '30 days')    AS r30,
+             COUNT(*) FILTER (WHERE last <  now() - interval '30 days'  AND last >= now() - interval '90 days')  AS r90,
+             COUNT(*) FILTER (WHERE last <  now() - interval '90 days'  AND last >= now() - interval '180 days') AS r180,
+             COUNT(*) FILTER (WHERE last <  now() - interval '180 days')   AS lapsed
+      FROM per`;
+
+    const n = (k: keyof NonNullable<typeof dist>) => Number(dist?.[k] ?? 0);
+    return {
+      months: fillMonths(
+        trend.map(t => ({
+          month: t.month,
+          activeCustomers: Number(t.active),
+          newCustomers: Number(t.fresh),
+          returningCustomers: Number(t.returning),
+          revenue: num(t.revenue),
+        })),
+        months,
+        now,
+      ),
+      frequency: [
+        { label: '1 order', count: n('o1') },
+        { label: '2–3 orders', count: n('o2_3') },
+        { label: '4–9 orders', count: n('o4_9') },
+        { label: '10+ orders', count: n('o10') },
+      ],
+      recency: [
+        { label: 'Active · ≤30 days', count: n('r30') },
+        { label: 'Cooling · 31–90 days', count: n('r90') },
+        { label: 'At risk · 91–180 days', count: n('r180') },
+        { label: 'Lapsed · 180+ days', count: n('lapsed') },
+      ],
     };
   }
 

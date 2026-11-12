@@ -4,11 +4,14 @@ import {
   customerLabel,
   fmtIdrCompact,
   getCustomers,
+  getCustomersAnalytics,
   getCustomersSummary,
+  type CustomersAnalytics,
   type CustomerRow,
   type CustomersSummary,
 } from '../../api/ops';
-import { PageHeader } from '../../components/ui/Page';
+import { PageHeader, Stat, Widget } from '../../components/ui/Page';
+import { BarChart, ShareList } from '../../components/ui/BarChart';
 import { CustomerDrawer } from './CustomerDrawer';
 
 const LIMIT = 50;
@@ -25,6 +28,41 @@ const initials = (name: string) =>
 
 const memberSince = (iso: string | null) =>
   iso ? `Member since ${new Date(iso).getFullYear()}` : 'No join date';
+
+const monthLabel = (ym: string) =>
+  new Date(`${ym}-01T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' });
+
+/** Analytics row: 12-month new vs returning buyers, order frequency, recency. */
+function CustomerAnalytics({ data }: { data: CustomersAnalytics | null }) {
+  const months = data?.months ?? [];
+  const active = months.reduce((s, m) => s + m.activeCustomers, 0);
+  const returning = months.reduce((s, m) => s + m.returningCustomers, 0);
+  return (
+    <div className="grid grid-cols-[2fr_1fr_1fr] gap-3.5 mb-3.5 max-[1200px]:grid-cols-1">
+      <Widget title="Customer growth" note={active > 0 ? `12 months · ${Math.round((returning / active) * 100)}% returning` : '12 months'}>
+        <div className="px-4 pt-4 pb-3.5">
+          {months.length === 0 ? (
+            <p className="py-10 text-center text-[11px] text-[var(--text-faint)]">{data ? 'Analytics unavailable.' : 'Loading…'}</p>
+          ) : (
+            <BarChart
+              labels={months.map(m => monthLabel(m.month))}
+              series={[
+                { label: 'Returning buyers', values: months.map(m => m.returningCustomers) },
+                { label: 'New buyers', values: months.map(m => m.newCustomers) },
+              ]}
+            />
+          )}
+        </div>
+      </Widget>
+      <Widget title="Order frequency" note="buyers">
+        <ShareList rows={data?.frequency ?? []} empty="No sales yet." />
+      </Widget>
+      <Widget title="Recency" note="last order">
+        <ShareList rows={data?.recency ?? []} empty="No sales yet." />
+      </Widget>
+    </div>
+  );
+}
 
 const shortDate = (iso: string | null) =>
   iso ? new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '—';
@@ -64,28 +102,6 @@ function ChannelTag({ channel }: { channel: string | null }) {
   );
 }
 
-function Stat({ label, value, children }: { label: string; value: string; children?: React.ReactNode }) {
-  return (
-    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] px-[18px] py-4">
-      <p className="text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--text-muted)]">{label}</p>
-      <p className="font-mono text-[24px] font-medium tracking-[-0.02em] text-[var(--text-primary)] leading-none mt-2.5">{value}</p>
-      {children && <p className="text-[12px] text-[var(--text-secondary)] mt-2.5 flex items-center gap-1.5">{children}</p>}
-    </div>
-  );
-}
-
-function Widget({ title, note, children }: { title: string; note?: string; children: React.ReactNode }) {
-  return (
-    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] overflow-hidden">
-      <div className="flex items-center justify-between gap-2.5 px-4 py-3 border-b border-[var(--border)] bg-[var(--bg-overlay)]">
-        <span className="text-[12px] font-semibold uppercase tracking-[0.04em] text-[var(--text-primary)]">{title}</span>
-        {note && <span className="text-[11px] font-mono text-[var(--text-muted)]">{note}</span>}
-      </div>
-      {children}
-    </div>
-  );
-}
-
 function toCsv(rows: CustomerRow[]): string {
   const head = ['Name', 'Code', 'Email', 'Phone', 'Orders', 'Lifetime (IDR)', 'Last order', 'Acquired via', 'Segment'];
   const esc = (v: string | number | null) => `"${String(v ?? '').replace(/"/g, '""')}"`;
@@ -106,9 +122,11 @@ export function CustomersList() {
   const [loading, setLoading] = useState(false);
   const [summary, setSummary] = useState<CustomersSummary | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
+  const [analytics, setAnalytics] = useState<CustomersAnalytics | null>(null);
 
   useEffect(() => {
     getCustomersSummary().then(setSummary).catch(() => setSummary(null));
+    getCustomersAnalytics().then(setAnalytics).catch(() => setAnalytics({ months: [], frequency: [], recency: [] }));
   }, []);
 
   useEffect(() => {
@@ -179,6 +197,8 @@ export function CustomersList() {
           <span className="text-[var(--text-muted)]">bought more than once</span>
         </Stat>
       </div>
+
+      <CustomerAnalytics data={analytics} />
 
       {/* Toolbar */}
       <div className="flex items-center gap-3 mb-3.5 flex-wrap">

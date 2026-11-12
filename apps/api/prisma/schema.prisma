@@ -647,3 +647,18 @@ model CategoryPage {
   @@index([status, publishedAt])
   @@index([kind, status])
 }
+
+/// First-party storefront page view (no IP or personal data stored).
+/// visitorId is a random id kept in the browser's localStorage; sessionId lives
+/// in sessionStorage. referrer is a bare hostname, only on a session's first view.
+model PageView {
+  id        String   @id @default(cuid())
+  at        DateTime @default(now()) @db.Timestamptz(3)
+  path      String
+  referrer  String?
+  visitorId String
+  sessionId String
+  device    String
+
+  @@index([at])
+}
