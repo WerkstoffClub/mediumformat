@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <title>Medium Format® — Shop by Category (Mobile)</title>
@@ -801,6 +801,7 @@
   const tabs = document.querySelectorAll('.cat-tab');
   const catRows = document.querySelectorAll('.cat-row');
   const panels = document.querySelectorAll('.cat-panel');
+  const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   function selectCat(cat){
     tabs.forEach(t => {
       const on = t.dataset.cat === cat;
@@ -814,13 +815,13 @@
       p.hidden = !on;
     });
     const label = CAT_LABELS[cat] || cat;
-    document.getElementById('cat-name').textContent = label;
-    document.getElementById('cat-name-2').textContent = label;
-    document.getElementById('crumb-cat').textContent = label;
-    document.getElementById('cat-count').textContent = CAT_COUNTS[cat];
-    document.getElementById('tb-count').textContent = CAT_COUNTS[cat];
+    setTxt('cat-name', label);
+    setTxt('cat-name-2', label);
+    setTxt('crumb-cat', label);
+    setTxt('cat-count', CAT_COUNTS[cat]);
+    setTxt('tb-count', CAT_COUNTS[cat]);
     document.getElementById('apply-count').textContent = CAT_COUNTS[cat];
-    document.getElementById('page-last').textContent = CAT_PAGES[cat];
+    setTxt('page-last', CAT_PAGES[cat]);
     screen.scrollTo({top:0, behavior:'smooth'});
   }
   tabs.forEach(t => t.addEventListener('click', () => selectCat(t.dataset.cat)));
@@ -866,8 +867,8 @@
   function openSheet(){ sheet.classList.add('open'); sheetScrim.classList.add('open'); }
   function closeSheet(){ sheet.classList.remove('open'); sheetScrim.classList.remove('open'); }
   document.getElementById('menu-btn').addEventListener('click', openSheet);
-  document.getElementById('filter-btn').addEventListener('click', openSheet);
-  document.getElementById('sort-btn').addEventListener('click', openSheet);
+  document.getElementById('filter-btn')?.addEventListener('click', openSheet);
+  document.getElementById('sort-btn')?.addEventListener('click', openSheet);
   document.getElementById('tab-cats').addEventListener('click', openSheet);
   document.getElementById('sheet-close').addEventListener('click', closeSheet);
   document.getElementById('sheet-apply').addEventListener('click', closeSheet);
