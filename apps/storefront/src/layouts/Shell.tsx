@@ -7,6 +7,7 @@ import { NowPlayingBar } from '../components/NowPlayingBar';
 import { AdminBar } from '../admin/AdminBar';
 import { SaveBar } from '../admin/SaveBar';
 import { AdminLoginPopover } from '../admin/AdminLoginPopover';
+import { trackPageView } from '../lib/track';
 
 /**
  * The chrome shared by every page: announcement bar, sticky nav, footer,
@@ -16,6 +17,7 @@ export function Shell() {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
+    trackPageView(pathname);
   }, [pathname]);
 
   return (

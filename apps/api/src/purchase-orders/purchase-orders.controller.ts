@@ -23,6 +23,12 @@ export class PurchaseOrdersController {
   }
 
   @Roles(...STAFF_ROLES)
+  @Get('summary')
+  summary() {
+    return this.svc.summary();
+  }
+
+  @Roles(...STAFF_ROLES)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.svc.findOne(id);

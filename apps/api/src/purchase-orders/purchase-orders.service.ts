@@ -79,6 +79,30 @@ export class PurchaseOrdersService {
     return { items, total, page, limit };
   }
 
+  /** KPI strip for the PO list: open = SENT + PARTIAL (DRAFT not yet ordered,
+   *  RECEIVED/CANCELLED closed). Units come from the open POs' lines. */
+  async summary(now = new Date()) {
+    const open: Prisma.PurchaseOrderWhereInput = { status: { in: [PoStatus.SENT, PoStatus.PARTIAL] } };
+    const weekEnd = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const [orders, units, partialCount, dueThisWeek, overdue] = await this.prisma.$transaction([
+      this.prisma.purchaseOrder.aggregate({ where: open, _count: { _all: true }, _sum: { totalIdr: true } }),
+      this.prisma.purchaseOrderLine.aggregate({ where: { purchaseOrder: open }, _sum: { qtyOrdered: true, qtyReceived: true } }),
+      this.prisma.purchaseOrder.count({ where: { status: PoStatus.PARTIAL } }),
+      this.prisma.purchaseOrder.count({ where: { ...open, etaAt: { gte: now, lte: weekEnd } } }),
+      this.prisma.purchaseOrder.count({ where: { ...open, etaAt: { lt: now } } }),
+    ]);
+    return {
+      openCount: orders._count._all,
+      partialCount,
+      onOrderIdr: orders._sum.totalIdr ?? 0,
+      unitsOrdered: units._sum.qtyOrdered ?? 0,
+      unitsReceived: units._sum.qtyReceived ?? 0,
+      dueThisWeek,
+      overdueCount: overdue,
+      weekEnd: weekEnd.toISOString(),
+    };
+  }
+
   async findOne(id: string) {
     const po = await this.prisma.purchaseOrder.findUnique({
       where: { id },

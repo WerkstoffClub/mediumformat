@@ -45,6 +45,21 @@ export const importSubscribersCsv = (file: File) => {
     .then(r => r.data);
 };
 
+export interface SubscriberSummary {
+  total: number;
+  active: number;
+  unsubscribed: number;
+  newThisMonth: number;
+  new30d: number;
+  unsub30d: number;
+  net30d: number;
+  growth30dPct: number | null;
+  bySource: Array<{ source: NewsletterSource; count: number }>;
+}
+
+export const getSubscriberSummary = () =>
+  api.get<SubscriberSummary>('/newsletter/subscribers/summary').then(r => r.data);
+
 export const exportSubscribersCsvUrl = () => '/api/v1/newsletter/subscribers/export.csv';
 
 export type CampaignStatus = 'DRAFT' | 'SCHEDULED' | 'SENT';

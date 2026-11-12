@@ -35,6 +35,12 @@ export class SubscribersController {
   }
 
   @Roles(...STAFF_ROLES)
+  @Get('summary')
+  summary() {
+    return this.svc.summary();
+  }
+
+  @Roles(...STAFF_ROLES)
   @Get('export.csv')
   @Header('Content-Type', 'text/csv')
   @Header('Content-Disposition', 'attachment; filename="subscribers.csv"')

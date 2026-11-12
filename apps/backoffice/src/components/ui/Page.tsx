@@ -51,6 +51,8 @@ const STATUS_COLORS: Record<string, string> = {
   Matched: 'var(--success)', New: 'var(--info)', Ambiguous: 'var(--warning)',
   // Forwarder consolidations (ConsolidationStatus) — open until freight is allocated.
   Open: 'var(--info)', Allocated: 'var(--success)',
+  // Newsletter
+  Scheduled: 'var(--warning)', Active: 'var(--success)', Unsubscribed: 'var(--text-muted)',
 };
 
 export function StatusPill({ value }: { value: string | null }) {
@@ -130,5 +132,32 @@ export function Paginator({ page, limit, total, shown, onPage }: {
 export function EmptyRow({ cols, children }: { cols: number; children: React.ReactNode }) {
   return (
     <tr><td colSpan={cols} className="px-3.5 py-8 text-center text-[11px] text-[var(--text-faint)]">{children}</td></tr>
+  );
+}
+
+/** KPI card — mockup summary strip (label · big mono figure · delta line). */
+export function Stat({ label, value, children }: { label: string; value: string; children?: React.ReactNode }) {
+  return (
+    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] px-[18px] py-4">
+      <p className="text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--text-muted)]">{label}</p>
+      <p className="font-mono text-[24px] font-medium tracking-[-0.02em] text-[var(--text-primary)] leading-none mt-2.5">{value}</p>
+      {children && <p className="text-[12px] text-[var(--text-secondary)] mt-2.5 flex items-center gap-1.5">{children}</p>}
+    </div>
+  );
+}
+
+/** Panel with a labelled header bar — mockup "CUSTOMER LIST" style. */
+export function Widget({ title, note, actions, children }: { title: string; note?: string; actions?: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] overflow-hidden">
+      <div className="flex items-center justify-between gap-2.5 px-4 py-3 border-b border-[var(--border)] bg-[var(--bg-overlay)]">
+        <span className="text-[12px] font-semibold uppercase tracking-[0.04em] text-[var(--text-primary)]">{title}</span>
+        <div className="flex items-center gap-2">
+          {note && <span className="text-[11px] font-mono text-[var(--text-muted)]">{note}</span>}
+          {actions}
+        </div>
+      </div>
+      {children}
+    </div>
   );
 }

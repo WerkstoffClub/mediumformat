@@ -25,6 +25,7 @@ import { ReleaseForm } from './pages/inventory/ReleaseForm';
 import { PostForm } from './pages/blog/PostForm';
 import { CategoryPageForm } from './pages/category-pages/CategoryPageForm';
 import { CmsHub } from './pages/cms/CmsHub';
+import { Visitors } from './pages/visitors/Visitors';
 
 function ProtectedRoutes() {
   const { user, loading } = useAuth();
@@ -47,6 +48,7 @@ export default function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard"          element={<Dashboard />} />
           <Route path="/sales"              element={<Sales />} />
+          <Route path="/visitors"           element={<Visitors />} />
           <Route path="/analytics"          element={<Navigate to="/sales" replace />} />
           <Route path="/finance"            element={<Navigate to="/sales" replace />} />
           <Route path="/settlements"        element={<Navigate to="/sales?tab=settlements" replace />} />

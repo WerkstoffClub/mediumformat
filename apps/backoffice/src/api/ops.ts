@@ -128,6 +128,24 @@ export async function getCustomersSummary(): Promise<CustomersSummary> {
   return res.data;
 }
 
+export interface CustomerMonthPoint {
+  month: string; // YYYY-MM
+  newCustomers: number;
+  activeCustomers: number;
+  returningCustomers: number;
+  revenue: number;
+}
+export interface CustomersAnalytics {
+  months: CustomerMonthPoint[];
+  frequency: Array<{ label: string; count: number }>;
+  recency: Array<{ label: string; count: number }>;
+}
+
+export async function getCustomersAnalytics(): Promise<CustomersAnalytics> {
+  const res = await api.get<CustomersAnalytics>('/customers-analytics');
+  return res.data;
+}
+
 export interface CustomerChannelStat { tag: string; orders: number; revenue: number; }
 
 export interface CustomerOrderRow {

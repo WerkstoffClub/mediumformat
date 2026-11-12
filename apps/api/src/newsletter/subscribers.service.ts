@@ -6,6 +6,8 @@ import { UpdateSubscriberDto } from './dto/update-subscriber.dto';
 import { SubscriberFilterDto } from './dto/filter.dto';
 
 const CSV_HEADER = 'email,name,source,tags,subscribedAt';
+const DAY_MS = 86_400_000;
+const GROWTH_WINDOW_DAYS = 30;
 
 @Injectable()
 export class SubscribersService {
@@ -27,6 +29,37 @@ export class SubscribersService {
       this.prisma.newsletterSubscriber.count({ where }),
     ]);
     return { items, total, page, limit };
+  }
+
+  /** Dashboard KPIs: list size, monthly/30-day growth and per-source counts. */
+  async summary() {
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    const windowStart = new Date(now.getTime() - GROWTH_WINDOW_DAYS * DAY_MS);
+    const sub = this.prisma.newsletterSubscriber;
+    const [total, active, newThisMonth, new30d, unsub30d, groups] = await Promise.all([
+      sub.count(),
+      sub.count({ where: { unsubscribedAt: null } }),
+      sub.count({ where: { subscribedAt: { gte: monthStart } } }),
+      sub.count({ where: { subscribedAt: { gte: windowStart } } }),
+      sub.count({ where: { unsubscribedAt: { gte: windowStart } } }),
+      sub.groupBy({ by: ['source'], _count: { _all: true } }),
+    ]);
+    const net30d = new30d - unsub30d;
+    const activeBefore = active - net30d;
+    return {
+      total,
+      active,
+      unsubscribed: total - active,
+      newThisMonth,
+      new30d,
+      unsub30d,
+      net30d,
+      growth30dPct: activeBefore > 0 ? (net30d / activeBefore) * 100 : null,
+      bySource: groups
+        .map(g => ({ source: g.source, count: g._count._all }))
+        .sort((a, b) => b.count - a.count),
+    };
   }
 
   async findOne(id: string) {

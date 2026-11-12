@@ -120,3 +120,27 @@ describe('PurchaseOrdersService.receive', () => {
       .rejects.toThrow(/does not belong/i);
   });
 });
+
+describe('PurchaseOrdersService.summary', () => {
+  test('maps aggregates to KPI shape and nulls to 0', async () => {
+    const prisma = {
+      purchaseOrder: {
+        aggregate: jest.fn(() => ({ _count: { _all: 3 }, _sum: { totalIdr: null } })),
+        count: jest.fn().mockReturnValueOnce(1).mockReturnValueOnce(2).mockReturnValueOnce(0),
+      },
+      purchaseOrderLine: {
+        aggregate: jest.fn(() => ({ _sum: { qtyOrdered: 40, qtyReceived: null } })),
+      },
+      $transaction: jest.fn(async (ops: unknown[]) => Promise.all(ops)),
+    };
+    const svc = new PurchaseOrdersService(prisma as never);
+    const now = new Date('2026-05-01T00:00:00Z');
+    const r = await svc.summary(now);
+    expect(r).toEqual({
+      openCount: 3, partialCount: 1, onOrderIdr: 0,
+      unitsOrdered: 40, unitsReceived: 0,
+      dueThisWeek: 2, overdueCount: 0,
+      weekEnd: '2026-05-08T00:00:00.000Z',
+    });
+  });
+});

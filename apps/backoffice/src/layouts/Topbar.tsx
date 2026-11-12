@@ -7,6 +7,7 @@ import { useTheme } from '../hooks/useTheme';
 const CRUMBS: Array<[RegExp, string]> = [
   [/^\/dashboard/, 'Dashboard'],
   [/^\/sales/, 'Sales'],
+  [/^\/visitors/, 'Visitors'],
   [/^\/pos/, 'POS'],
   [/^\/orders\/.+/, 'Order detail'],
   [/^\/orders/, 'Orders'],

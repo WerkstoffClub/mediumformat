@@ -32,6 +32,11 @@ export class OpsController {
     return this.ops.customersSummary();
   }
 
+  @Get('customers-analytics')
+  customersAnalytics() {
+    return this.ops.customersAnalytics();
+  }
+
   @Get('customers/:id')
   customerDetail(@Param('id') id: string) {
     return this.ops.customerDetail(id);

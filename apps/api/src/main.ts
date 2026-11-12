@@ -6,6 +6,8 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  // Behind Caddy: trust one proxy hop so req.ip (throttling) is the real client.
+  app.set('trust proxy', 1);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }));
   app.enableCors({ origin: process.env.CORS_ORIGIN ?? 'http://localhost:5173' });
   app.setGlobalPrefix('api/v1');
