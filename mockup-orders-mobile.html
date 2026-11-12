@@ -220,6 +220,8 @@
     :root{--announce-h:0px;}
     .announce{display:none!important;}
     .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
+    /* audit:ui-extras */
+    .channel-tag::before{border-radius:1.5px!important;}
   </style>
 </head>
 <body>
@@ -354,7 +356,7 @@
     <div class="sum-grid">
       <button class="sum-card active" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Paid · 7D</span></div><div class="sum-val">2.958</div><div class="sum-meta"><span class="mono">Rp 7,42 jt</span></div></button>
       <button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Awaiting pay</span></div><div class="sum-val">64</div><div class="sum-meta">expire ≤ 2h</div></button>
-      <button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">On sale</span></div><div class="sum-val">10</div><div class="sum-meta"><span class="mono">1</span> live today</div></button>
+      <button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-lbl">On sale</span></div><div class="sum-val">10</div><div class="sum-meta"><span class="mono">1</span> live today</div></button>
       <button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--danger)"></span><span class="sum-lbl">Refunds</span></div><div class="sum-val">5</div><div class="sum-meta"><span class="mono">Rp 4,2 jt</span></div></button>
     </div>
     <div class="stabs">
@@ -409,7 +411,7 @@
     </div>
     <!-- Dealers POS tab -->
     <div class="ord-view" id="view-dealers" hidden>
-    <div class="sum-grid"><button class="sum-card active" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">POS sales · 30D</span></div><div class="sum-val">Rp 317,5 jt</div><div class="sum-meta"><span class="mono">2.024</span> transactions</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">Live dealers</span></div><div class="sum-val">4</div><div class="sum-meta"><a href="mockup-dealers-mobile.html" style="text-decoration:underline">all dealers</a></div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Refunds · 7D</span></div><div class="sum-val">6</div><div class="sum-meta"><span class="mono">Rp 1,9 jt</span> · dealer-initiated</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">MF fee · 30D</span></div><div class="sum-val">Rp 7,9 jt</div><div class="sum-meta">2,5% · settles Mon</div></button></div>
+    <div class="sum-grid"><button class="sum-card active" onclick="setSummary(this)"><div class="sum-top"><span class="sum-lbl">POS sales · 30D</span></div><div class="sum-val">Rp 317,5 jt</div><div class="sum-meta"><span class="mono">2.024</span> transactions</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-lbl">Live dealers</span></div><div class="sum-val">4</div><div class="sum-meta"><a href="mockup-dealers-mobile.html" style="text-decoration:underline">all dealers</a></div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Refunds · 7D</span></div><div class="sum-val">6</div><div class="sum-meta"><span class="mono">Rp 1,9 jt</span> · dealer-initiated</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-lbl">MF fee · 30D</span></div><div class="sum-val">Rp 7,9 jt</div><div class="sum-meta">2,5% · settles Mon</div></button></div>
     <div class="chips">
       <button class="chan-chip on" onclick="toggleChan(this)">All dealers</button>
       <button class="chan-chip" onclick="toggleChan(this)">Sudut Piringan</button><button class="chan-chip" onclick="toggleChan(this)">Kaset Kita</button><button class="chan-chip" onclick="toggleChan(this)">Rekaman Selatan</button><button class="chan-chip" onclick="toggleChan(this)">Toko Pita</button>

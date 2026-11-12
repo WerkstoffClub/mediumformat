@@ -262,6 +262,8 @@
     :root{--announce-h:0px;}
     .announce{display:none!important;}
     .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
+    /* audit:ui-extras */
+    .channel-tag::before{border-radius:1.5px!important;}
   </style>
 </head>
 <body>
@@ -300,17 +302,17 @@
 
     <div class="sum-grid">
       <button class="sum-card active" onclick="setSummary(this)">
-        <div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">Upcoming</span></div>
+        <div class="sum-top"><span class="sum-lbl">Upcoming</span></div>
         <div class="sum-val">13</div>
         <div class="sum-meta"><span class="mono">3</span> this week</div>
       </button>
       <button class="sum-card" onclick="setSummary(this)">
-        <div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Sold · 30D</span></div>
+        <div class="sum-top"><span class="sum-lbl">Sold · 30D</span></div>
         <div class="sum-val">18.426</div>
         <div class="sum-meta"><span class="mono">Rp 21,38 jt</span></div>
       </button>
       <button class="sum-card" onclick="setSummary(this)">
-        <div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Check-in rate</span></div>
+        <div class="sum-top"><span class="sum-lbl">Check-in rate</span></div>
         <div class="sum-val">92,6%</div>
         <div class="sum-meta">last <span class="mono">10</span> events</div>
       </button>
