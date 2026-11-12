@@ -131,10 +131,12 @@ const SCREENS=[
    ["storefront","Catalogue"],["category","Category"],["cassettes","Cassettes (hero)"],["release","Release detail"],["cart","Cart"],["checkout","Checkout"],
    ["confirmation","Confirmation"],["account","Account"],["journal","News article"]]},
  {g:"Back-office",items:[
-   ["dashboard","Dashboard"],["inventory","Inventory"],["locations","Locations"],["release-edit","Add / edit release"],
+   ["dashboard","Dashboard"],["analytics","Analytics"],["inventory","Inventory"],["locations","Locations"],["release-edit","Add / edit release"],
    ["orders","Orders"],["order-detail","Order detail"],["customers","Customers"],["vouchers","Vouchers"],
    ["newsletter","Newsletter"],["purchase-orders","Purchase orders"],["news","News updates"],
    ["channels","Channels"],["preferences","Preferences"]]},
+ {g:"Peers · Venues",items:[["peers","Venues"],["peer-detail","Venue schedule"],["peer-tickets","Venue ticket page"],["events","Shows & tickets"],["event-detail","Show detail"],["checkin","Door check-in"]]},
+ {g:"Dealers · Record shops",items:[["dealers","Dealers"],["dealer-detail","Dealer detail"]]},
  {g:"Point of sale",items:[["pos","POS sale"],["pos-checkout","POS checkout"]]},
 ];
 const FLAT=[]; SCREENS.forEach(s=>s.items.forEach(it=>FLAT.push({f:it[0],t:it[1],g:s.g})));

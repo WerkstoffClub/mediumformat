@@ -78,7 +78,6 @@
     .textarea{resize:vertical;min-height:84px;}
     .select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236E6E6E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
     .input-prefix{display:flex;align-items:stretch;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden;min-height:44px;transition:border-color .15s;}
-    .input-prefix
     .input-prefix .pfx{display:flex;align-items:center;padding:0 12px;font-family:var(--ui);font-size:13px;color:var(--mute);border-right:1px solid var(--hairline);background:var(--surface);}
     .input-prefix input{flex:1;background:transparent;border:none;outline:none;padding:11px 12px;color:var(--ink);font-family:var(--ui);font-size:14px;font-variant-numeric:tabular-nums;}
 
@@ -199,6 +198,17 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+      /* audit B28: grid children must be allowed to shrink */
+    .row2>*{min-width:0;}
+    .input-prefix input,.input-suffix input{min-width:0;width:100%;}
+    /* audit:ui-extras */
+    .channel-tag::before{border-radius:1.5px!important;}
   </style>
 </head>
 <body>
@@ -283,7 +293,7 @@
             <div><label class="field-label">Compare-at</label><div class="input-prefix"><span class="pfx">Rp</span><input inputmode="numeric" value="540.000"></div></div>
             <div><label class="field-label">Cost</label><div class="input-prefix"><span class="pfx">Rp</span><input inputmode="numeric" value="310.000"></div></div>
           </div>
-          <div class="field-hint">Margin <span class="mono">36.1%</span> · <span class="mono">Rp 175.000</span> profit</div>
+          <div class="field-hint">Margin <span class="mono">36,1%</span> · <span class="mono">Rp 175.000</span> profit</div>
         </div>
       </div>
 
@@ -520,5 +530,6 @@
     document.getElementById('preorder-fields').classList.toggle('show',on);
   }
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

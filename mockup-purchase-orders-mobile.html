@@ -272,6 +272,17 @@
     .proto-link:active{opacity:1;color:var(--ink);}
   
     .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
+    /* audit:ui-extras */
+    .channel-tag::before{border-radius:1.5px!important;}
   </style>
 </head>
 <body>
@@ -314,10 +325,10 @@
     </button>
 
     <div class="stat-grid">
-      <div class="stat"><div class="stat-lbl">Open POs</div><div class="stat-val">7</div><div class="stat-sub trend-neu"><span class="mono">3</span> awaiting</div></div>
-      <div class="stat"><div class="stat-lbl">On order</div><div class="stat-val">Rp 58.4M</div><div class="stat-sub trend-neu">all suppliers</div></div>
-      <div class="stat"><div class="stat-lbl">Units in</div><div class="stat-val">642</div><div class="stat-sub trend-neu"><span class="mono">418</span> received</div></div>
-      <div class="stat"><div class="stat-lbl">Due · week</div><div class="stat-val">2</div><div class="stat-sub trend-neu">by 8 May</div></div>
+      <div class="stat"><div class="stat-lbl">Open POs</div><div class="stat-val">3</div><div class="stat-sub trend-neu">excl. <span class="mono">1</span> draft</div></div>
+      <div class="stat"><div class="stat-lbl">On order</div><div class="stat-val">Rp 55,3 jt</div><div class="stat-sub trend-neu">3 open POs</div></div>
+      <div class="stat"><div class="stat-lbl">Units in</div><div class="stat-val">344</div><div class="stat-sub trend-neu"><span class="mono">86</span> received</div></div>
+      <div class="stat"><div class="stat-lbl">Due · week</div><div class="stat-val">2</div><div class="stat-sub trend-neu">by 19 Nov</div></div>
     </div>
 
     <div class="filters">
@@ -337,7 +348,7 @@
       </div>
       <div class="po-figs">
         <div class="fig"><span class="k">Items</span><span class="v">128</span></div>
-        <div class="fig"><span class="k">Expected</span><span class="v">6 May</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">17 Nov</span></div>
         <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 18.400.000</span></div>
       </div>
       <div class="po-detail">
@@ -350,7 +361,7 @@
         <div class="line"><div class="line-l"><div class="line-title">Floating Points — Cascade</div><div class="line-cat">NINJA-LP · 40 × Rp 165.000</div></div><div class="line-r"><span class="line-cost">Rp 6.600.000</span><span class="recv-tag done">40 / 40</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Khruangbin — A LA SALA</div><div class="line-cat">DEAD-092 · 48 × Rp 145.000</div></div><div class="line-r"><span class="line-cost">Rp 6.960.000</span><span class="recv-tag part">30 / 48</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Bonobo — Fragments</div><div class="line-cat">NINJA-441 · 40 × Rp 121.000</div></div><div class="line-r"><span class="line-cost">Rp 4.840.000</span><span class="recv-tag part">16 / 40</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton 30 Apr, remainder in transit. Ordered 22 Apr by Andra.</div>
+        <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton 11 Nov, remainder in transit. Ordered 3 Nov by Andra.</div>
         <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
       </div>
     </div>
@@ -363,7 +374,7 @@
       </div>
       <div class="po-figs">
         <div class="fig"><span class="k">Items</span><span class="v">96</span></div>
-        <div class="fig"><span class="k">Expected</span><span class="v">8 May</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">19 Nov</span></div>
         <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 14.100.000</span></div>
       </div>
       <div class="po-detail">
@@ -375,7 +386,7 @@
         </div>
         <div class="line"><div class="line-l"><div class="line-title">Sade — Diamond Life</div><div class="line-cat">SONY-88 · 50 × Rp 158.000</div></div><div class="line-r"><span class="line-cost">Rp 7.900.000</span><span class="recv-tag">0 / 50</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Daft Punk — Random Access Memories</div><div class="line-cat">COL-889 · 46 × Rp 135.000</div></div><div class="line-r"><span class="line-cost">Rp 6.200.000</span><span class="recv-tag">0 / 46</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Dispatch 5 May via JNE. Ordered 29 Apr by Rara.</div>
+        <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Dispatch 16 Nov via JNE. Ordered 10 Nov by Rara.</div>
         <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
       </div>
     </div>
@@ -388,7 +399,7 @@
       </div>
       <div class="po-figs">
         <div class="fig"><span class="k">Items</span><span class="v">74</span></div>
-        <div class="fig"><span class="k">Expected</span><span class="v">28 Apr</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">9 Nov</span></div>
         <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 9.250.000</span></div>
       </div>
       <div class="po-detail">
@@ -400,7 +411,7 @@
         </div>
         <div class="line"><div class="line-l"><div class="line-title">Erykah Badu — Mama's Gun</div><div class="line-cat">MOT-014 · 38 × Rp 142.000</div></div><div class="line-r"><span class="line-cost">Rp 5.396.000</span><span class="recv-tag done">38 / 38</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Madlib — Sound Ancestors</div><div class="line-cat">MADLIB-01 · 36 × Rp 107.000</div></div><div class="line-r"><span class="line-cost">Rp 3.854.000</span><span class="recv-tag done">36 / 36</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> All units received and shelved 28 Apr. No damage. Ordered 15 Apr by Andra.</div>
+        <div class="pd-note"><strong>Notes:</strong> All units received and shelved 9 Nov. No damage. Ordered 27 Oct by Andra.</div>
         <div class="pd-actions"><button class="btn-mini">View receipt</button><button class="btn-mini">Print PO</button></div>
       </div>
     </div>
@@ -413,7 +424,7 @@
       </div>
       <div class="po-figs">
         <div class="fig"><span class="k">Items</span><span class="v">120</span></div>
-        <div class="fig"><span class="k">Expected</span><span class="v">15 May</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">26 Nov</span></div>
         <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 22.800.000</span></div>
       </div>
       <div class="po-detail">
@@ -426,7 +437,7 @@
         <div class="line"><div class="line-l"><div class="line-title">Björk — Homogenic</div><div class="line-cat">ONELP-30 · 40 × Rp 205.000</div></div><div class="line-r"><span class="line-cost">Rp 8.200.000</span><span class="recv-tag">0 / 40</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Aphex Twin — Selected Ambient Works</div><div class="line-cat">APHEX-85 · 44 × Rp 190.000</div></div><div class="line-r"><span class="line-cost">Rp 8.360.000</span><span class="recv-tag">0 / 44</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Massive Attack — Mezzanine</div><div class="line-cat">VIRGIN-98 · 36 × Rp 172.000</div></div><div class="line-r"><span class="line-cost">Rp 6.192.000</span><span class="recv-tag">0 / 36</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> International import — customs ~7 days. Paid by bank transfer (EUR). Ordered 25 Apr by Rara.</div>
+        <div class="pd-note"><strong>Notes:</strong> International import — customs ~7 days. Paid by bank transfer (EUR). Ordered 6 Nov by Rara.</div>
         <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
       </div>
     </div>
@@ -476,14 +487,13 @@
         </div>
         <div class="line"><div class="line-l"><div class="line-title">Aphex Twin — Syro</div><div class="line-cat">WARP-247 · 24 × Rp 285.000</div></div><div class="line-r"><span class="line-cost">Rp 6.840.000</span><span class="recv-tag">0 / 24</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Björk — Vespertine</div><div class="line-cat">ONELP-24 · 20 × Rp 218.000</div></div><div class="line-r"><span class="line-cost">Rp 4.360.000</span><span class="recv-tag">0 / 20</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> Cancelled 24 Apr — supplier out of stock, personal card charge reversed.</div>
+        <div class="pd-note"><strong>Notes:</strong> Cancelled 5 Nov — supplier out of stock, personal card charge reversed.</div>
         <div class="pd-actions"><button class="btn-mini">Duplicate as new</button></div>
       </div>
     </div>
-  </div>
 
   <!-- Consolidated Invoices -->
-  <div class="widget">
+  <div class="widget" style="margin-top:8px">
     <div class="widget-hdr">
       <span class="widget-title">Consolidated invoices</span>
       <span class="widget-note">Freight shipments bundling multiple POs · shipping apportioned into landed cost</span>
@@ -505,7 +515,7 @@
         <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 25.940.000</div></div>
         <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 830.000</div></div>
         <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 26.770.000</div></div>
-        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3.2% landed cost</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3,2% landed cost</div></div>
       </div>
       <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0091')">Edit shipper &amp; cost</button></div>
       <div class="ship-edit-form" id="ship-edit-SHP-0091" data-goods="25940000">
@@ -531,7 +541,7 @@
         <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 23.000.000</div></div>
         <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 410.000</div></div>
         <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 23.410.000</div></div>
-        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1.8% landed cost</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1,8% landed cost</div></div>
       </div>
       <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0089')">Edit shipper &amp; cost</button></div>
       <div class="ship-edit-form" id="ship-edit-SHP-0089" data-goods="23000000">
@@ -557,7 +567,7 @@
         <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 22.800.000</div></div>
         <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 2.050.000</div></div>
         <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 24.850.000</div></div>
-        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9.0% landed cost</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9,0% landed cost</div></div>
       </div>
       <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0087')">Edit shipper &amp; cost</button></div>
       <div class="ship-edit-form" id="ship-edit-SHP-0087" data-goods="22800000">
@@ -568,6 +578,7 @@
     </div>
   </div>
 
+  </div><!-- /screen -->
   <!-- Drawer -->
   <div class="drawer-overlay" id="drawer-overlay"></div>
   <aside class="drawer" id="drawer">
@@ -577,6 +588,7 @@
     <nav class="drawer-nav">
       <div class="dn-group">Overview</div>
       <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+      <a href="mockup-analytics-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Analytics</a>
 
       <div class="dn-group">Selling</div>
       <a href="mockup-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-dot"></span></a>
@@ -585,6 +597,14 @@
       <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 012-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 010 4v4a2 2 0 002 2h16a2 2 0 002-2v-4a2 2 0 01-2-2z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="2 3"/></svg>Vouchers</a>
       <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
       <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
+
+      <div class="dn-group">Peers · Venues</div>
+      <a href="mockup-peers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Venues</a>
+      <a href="mockup-events-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Shows &amp; tickets</a>
+      <a href="mockup-checkin-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/><line x1="13" y1="8" x2="17" y2="8"/><line x1="8" y1="14" x2="8" y2="17"/></svg>Door check-in</a>
+
+      <div class="dn-group">Dealers · Record shops</div>
+      <a href="mockup-dealers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0z"/><path d="M5 13v8h14v-8"/><rect x="10" y="15" width="4" height="6"/></svg>Dealers</a>
 
       <div class="dn-group">Content</div>
       <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
@@ -623,7 +643,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>
@@ -803,5 +823,6 @@
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

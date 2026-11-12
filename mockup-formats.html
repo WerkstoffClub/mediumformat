@@ -123,7 +123,6 @@
       border-radius:var(--r-lg);padding:9px 12px;flex:1;max-width:480px;margin:0 auto;
       transition:border-color .15s;
     }
-    .topbar-search
     .topbar-search svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
     .topbar-search input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
     .topbar-search input::placeholder{color:var(--mute);}
@@ -246,6 +245,14 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    /* audit:ui-extras */
+    .channel-tag::before{border-radius:1.5px!important;}
   </style>
 </head>
 <body>
@@ -263,12 +270,16 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         <span class="sb-txt">Dashboard</span>
       </a>
+      <a href="mockup-analytics.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span class="sb-txt">Analytics</span>
+      </a>
 
       <div class="sb-group">Selling</div>
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -290,6 +301,26 @@
       <a href="mockup-pos-checkout.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         <span class="sb-txt">POS Checkout</span>
+      </a>
+
+      <div class="sb-group">Peers · Venues</div>
+      <a href="mockup-peers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="sb-txt">Venues</span>
+      </a>
+      <a href="mockup-events.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="sb-txt">Shows &amp; tickets</span>
+      </a>
+      <a href="mockup-checkin.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/><line x1="13" y1="8" x2="17" y2="8"/><line x1="8" y1="14" x2="8" y2="17"/></svg>
+        <span class="sb-txt">Door check-in</span>
+      </a>
+
+      <div class="sb-group">Dealers · Record shops</div>
+      <a href="mockup-dealers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0z"/><path d="M5 13v8h14v-8"/><rect x="10" y="15" width="4" height="6"/></svg>
+        <span class="sb-txt">Dealers</span>
       </a>
 
       <div class="sb-group">Content</div>
@@ -399,7 +430,7 @@
           </div>
           <div class="fmt-figs">
             <div class="fmt-fig"><span class="k">SKUs</span><span class="v">612</span></div>
-            <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">4,180</span></div>
+            <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">4.180</span></div>
           </div>
         </div>
 
@@ -471,7 +502,7 @@
           </div>
           <div class="fmt-figs">
             <div class="fmt-fig"><span class="k">SKUs</span><span class="v">240</span></div>
-            <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">1,340</span></div>
+            <div class="fmt-fig"><span class="k">Units in stock</span><span class="v">1.340</span></div>
           </div>
         </div>
 
@@ -620,5 +651,6 @@
     applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

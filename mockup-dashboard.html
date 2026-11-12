@@ -128,7 +128,6 @@
       border-radius:var(--r-lg);padding:9px 12px;flex:1;max-width:480px;margin:0 auto;
       transition:border-color .15s;
     }
-    .topbar-search
     .topbar-search svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
     .topbar-search input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
     .topbar-search input::placeholder{color:var(--mute);}
@@ -273,6 +272,78 @@
       .content{padding:18px 16px;}
       .greet-h1{font-size:26px;}
     }
+
+    /* ─── Ticketing block ───────────────────────────────────────── */
+    .sec-lbl{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:28px 0 12px;}
+    .sec-lbl h2{font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .sec-lbl a{font-size:12px;font-weight:500;color:var(--body);}
+    .sec-lbl a:hover{color:var(--ink);}
+    .tk-table{width:100%;border-collapse:collapse;}
+    .tk-table th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);text-align:left;padding:10px 16px 8px;font-weight:600;}
+    .tk-table td{padding:11px 16px;border-top:1px solid var(--hairline);font-size:13px;color:var(--body);}
+    .tk-table .num{text-align:right;}
+    .tk-table .ink{color:var(--ink);}
+    .tk-table .sub{display:block;font-size:11px;color:var(--mute);margin-top:2px;}
+    .tk-fig{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500;white-space:nowrap;}
+    .tk-bar{height:6px;width:90px;background:var(--raised);border-radius:999px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:8px;}
+    .tk-bar i{display:block;height:100%;background:var(--ink);}
+    .tk-sample{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;padding:0 5px;border-radius:4px;border:1px dashed var(--mute);color:var(--mute);margin-left:6px;}
+    .status-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:2px 9px;border-radius:999px;white-space:nowrap;}
+    .status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;}
+    .st-onsale{background:var(--success-t);color:var(--success);}
+    .st-live{background:var(--info-t);color:var(--info);}
+    .st-low{background:var(--warning-t);color:var(--warning);}
+    .st-soldout{background:var(--danger-t);color:var(--danger);}
+    .up-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px;border-top:1px solid var(--hairline);}
+    .up-row:first-child{border-top:none;}
+    .up-row .t1{font-size:13px;color:var(--ink);}
+    .up-row .t2{font-size:11px;color:var(--mute);margin-top:2px;font-variant-numeric:tabular-nums;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+      /* audit B10/B11: dots not stripes; money in ink; y-axis values */
+    .alert-bar{width:8px!important;height:8px;min-height:0!important;align-self:flex-start!important;border-radius:50%!important;margin-top:6px;}
+    .af-warn,.af-info{color:var(--ink)!important;}
+    .y-lbl{font-family:var(--ui);font-size:11px;fill:var(--mute);font-variant-numeric:tabular-nums;}
+      .tk-pct{font-size:12px;color:var(--body);font-variant-numeric:tabular-nums;margin-left:6px;}
+    /* audit:ui-extras */
+    th[data-sort]{cursor:pointer;user-select:none;white-space:nowrap;}
+    th[data-sort]:hover{color:var(--ink);}
+    th[data-sort]::after{content:"";display:inline-block;width:0;height:0;margin-left:6px;vertical-align:2px;border:3.5px solid transparent;border-top-color:currentColor;opacity:.35;}
+    th[data-sort][aria-sort="ascending"]::after{border-top-color:transparent;border-bottom-color:currentColor;vertical-align:5px;opacity:1;}
+    th[data-sort][aria-sort="descending"]::after{opacity:1;}
+    th[data-sort][aria-sort]{color:var(--ink);}
+    th[data-sort]:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--accent);}
+    .mf-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--hairline);}
+    .mf-foot .meta{font-size:12px;color:var(--body);font-variant-numeric:tabular-nums;}
+    .mf-pager{display:flex;gap:4px;}
+    .mf-pager button{min-width:30px;height:30px;padding:0 8px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--body);font-size:12px;font-variant-numeric:tabular-nums;}
+    .mf-pager button:hover:not([disabled]){background:var(--raised);color:var(--ink);}
+    .mf-pager button[aria-current="page"]{border-color:var(--accent);color:var(--ink);background:var(--raised);}
+    .mf-pager button[disabled]{opacity:.4;cursor:not-allowed;}
+    .channel-tag::before{border-radius:1.5px!important;}
+    /* mfchart */
+    .mfc{position:relative;width:100%;}
+    .mfc svg{display:block;width:100%;overflow:visible;}
+    .mfc .ax{font-family:var(--ui);font-size:11px;fill:var(--mute);font-variant-numeric:tabular-nums;}
+    .mfc .end{font-family:var(--ui);font-size:12px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums;}
+    .mfc .grid{stroke:var(--hairline);stroke-width:1;}
+    .mfc .xh{stroke:var(--mute);stroke-width:1;opacity:0;}
+    .mfc.hov .xh{opacity:.6;}
+    .mfc .tip{position:absolute;pointer-events:none;z-index:5;min-width:120px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md,6px);box-shadow:0 4px 12px rgba(0,0,0,.35);padding:8px 10px;font-size:12px;line-height:17px;color:var(--body);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;white-space:nowrap;}
+    .mfc.hov .tip{opacity:1;transform:none;}
+    .mfc .tip b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px;}
+    .mfc .tip .r{display:flex;align-items:center;justify-content:space-between;gap:14px;font-variant-numeric:tabular-nums;}
+    .mfc .tip .r span:last-child{color:var(--ink);font-weight:500;}
+    .mfc .key{display:inline-block;width:14px;height:0;border-top:2px solid var(--ink);vertical-align:3px;margin-right:6px;}
+    .mfc .key.cmp{border-top:2px dashed var(--mute);}
+    .mfc-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--body);margin:0 0 10px;}
+    .mfc-legend span{display:inline-flex;align-items:center;}
+    .mfc:focus-visible{outline:none;box-shadow:0 0 0 2px var(--accent);border-radius:4px;}
+      .kpi-spark polyline{stroke:var(--mute)!important;}
   </style>
 </head>
 <body>
@@ -290,7 +361,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         <span class="sb-txt">Dashboard</span>
       </a>
-      <a href="mockup-dashboard.html" class="sb-item">
+      <a href="mockup-analytics.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         <span class="sb-txt">Analytics</span>
       </a>
@@ -299,7 +370,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">28</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -317,6 +388,26 @@
       <a href="mockup-pos-checkout.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         <span class="sb-txt">POS Checkout</span>
+      </a>
+
+      <div class="sb-group">Peers · Venues</div>
+      <a href="mockup-peers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="sb-txt">Venues</span>
+      </a>
+      <a href="mockup-events.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="sb-txt">Shows &amp; tickets</span>
+      </a>
+      <a href="mockup-checkin.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/><line x1="13" y1="8" x2="17" y2="8"/><line x1="8" y1="14" x2="8" y2="17"/></svg>
+        <span class="sb-txt">Door check-in</span>
+      </a>
+
+      <div class="sb-group">Dealers · Record shops</div>
+      <a href="mockup-dealers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0z"/><path d="M5 13v8h14v-8"/><rect x="10" y="15" width="4" height="6"/></svg>
+        <span class="sb-txt">Dealers</span>
       </a>
       <a href="mockup-news-categories.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>
@@ -399,7 +490,7 @@
       <!-- Greeting header -->
       <div class="greet">
         <div>
-          <div class="greet-eyebrow">Saturday · 18 January 2025</div>
+          <div class="greet-eyebrow">Friday · 13 November 2026</div>
           <h1 class="greet-h1">Good morning, Raka</h1>
           <div class="greet-sub">Store opens 11:00 · Bima &amp; Ayu on shift · 3 items need your attention</div>
         </div>
@@ -422,11 +513,11 @@
       <div class="kpis">
         <div class="kpi">
           <div class="kpi-lbl">Gross revenue</div>
-          <div class="kpi-val">Rp 58.42M</div>
+          <div class="kpi-val">Rp 58,42 jt</div>
           <div class="kpi-foot">
             <div class="kpi-delta up">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
-              <span class="mono">+18.4%</span>
+              <span class="mono">+18,4%</span>
             </div>
             <div class="kpi-spark">
               <svg viewBox="0 0 70 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,20 12,18 23,19 35,13 47,14 58,7 70,4" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -448,11 +539,11 @@
         </div>
         <div class="kpi">
           <div class="kpi-lbl">Avg ticket</div>
-          <div class="kpi-val">Rp 236K</div>
+          <div class="kpi-val">Rp 236 rb</div>
           <div class="kpi-foot">
             <div class="kpi-delta up">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
-              <span class="mono">+Rp 14K</span>
+              <span class="mono">+Rp 14 rb</span>
             </div>
             <div class="kpi-spark">
               <svg viewBox="0 0 70 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,15 12,17 23,12 35,14 47,9 58,11 70,6" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -461,9 +552,9 @@
         </div>
         <div class="kpi">
           <div class="kpi-lbl">Gross margin</div>
-          <div class="kpi-val">42.8%</div>
+          <div class="kpi-val">42,8%</div>
           <div class="kpi-foot">
-            <div class="kpi-delta neu"><span class="mono">Rp 25.0M</span></div>
+            <div class="kpi-delta neu"><span class="mono">Rp 25,0 jt</span></div>
             <div class="kpi-spark">
               <svg viewBox="0 0 70 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,12 12,13 23,11 35,12 47,10 58,11 70,9" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
@@ -478,50 +569,24 @@
         <section class="panel">
           <div class="panel-hdr">
             <span class="panel-title">Revenue</span>
-            <div class="p-right">
-              <span class="legend-item"><span class="lg-swatch" style="background:var(--ink)"></span>This period</span>
-              <span class="legend-item"><span class="lg-dash"></span>Previous</span>
-              <span class="legend-item"><span class="lg-dot"></span>Today</span>
-            </div>
+            <div class="p-right">Fri 7 – Fri 13 Nov · Rp</div>
           </div>
           <div class="panel-body">
             <div class="rev-stats">
               <div class="rev-stat">
                 <div class="rs-lbl">This period</div>
-                <div class="rs-val">Rp 58.42M</div>
+                <div class="rs-val">Rp 58,42 jt</div>
               </div>
               <div class="rev-stat">
                 <div class="rs-lbl">Previous</div>
-                <div class="rs-val">Rp 49.34M</div>
+                <div class="rs-val">Rp 49,34 jt</div>
               </div>
               <div class="rev-stat">
                 <div class="rs-lbl">Delta</div>
-                <div class="rs-val up">+18.4%</div>
+                <div class="rs-val up">+18,4%</div>
               </div>
             </div>
-            <svg class="chart-svg" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Revenue this period versus previous, Sunday 12 to Saturday 18">
-              <defs>
-                <linearGradient id="revarea" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="var(--area-top)"/>
-                  <stop offset="100%" stop-color="var(--area-top)" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <!-- gridlines -->
-              <line x1="0" y1="20"  x2="560" y2="20"  stroke="var(--grid)" stroke-width="1"/>
-              <line x1="0" y1="80"  x2="560" y2="80"  stroke="var(--grid)" stroke-width="1"/>
-              <line x1="0" y1="140" x2="560" y2="140" stroke="var(--grid)" stroke-width="1"/>
-              <line x1="0" y1="200" x2="560" y2="200" stroke="var(--grid)" stroke-width="1"/>
-              <!-- previous period (dashed, mute) -->
-              <polyline points="0,150 93,146 187,138 280,142 373,128 467,120 560,112" fill="none" stroke="var(--mute)" stroke-width="1.5" stroke-dasharray="5 4" stroke-linejoin="round" stroke-linecap="round"/>
-              <!-- this period area + line -->
-              <polygon points="0,132 93,118 187,120 280,96 373,88 467,66 560,44 560,200 0,200" fill="url(#revarea)"/>
-              <polyline points="0,132 93,118 187,120 280,96 373,88 467,66 560,44" fill="none" stroke="var(--ink)" stroke-width="2.25" stroke-linejoin="round" stroke-linecap="round"/>
-              <!-- today dot (last point) -->
-              <circle cx="560" cy="44" r="4.5" fill="var(--success)" stroke="var(--surface)" stroke-width="2"/>
-            </svg>
-            <div class="x-axis">
-              <span>Sun 12</span><span>Mon 13</span><span>Tue 14</span><span>Wed 15</span><span>Thu 16</span><span>Fri 17</span><span>Sat 18</span>
-            </div>
+            <div class="mfc-legend"><span><i class="key" style="display:inline-block;width:14px;height:0;border-top:2px solid var(--ink);margin-right:6px"></i>This period</span><span><i class="key cmp" style="display:inline-block;width:14px;height:0;border-top:2px dashed var(--mute);margin-right:6px"></i>Previous 7D</span></div><div class="mfc" data-chart='{"type": "line", "unit": "jt", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "Gross revenue per day, this 7D vs previous 7D", "series": [{"name": "This period", "values": [7.1, 9.8, 6.2, 7.4, 8.0, 8.6, 11.3], "style": "main"}, {"name": "Previous 7D", "values": [6.0, 8.1, 5.9, 6.5, 7.0, 7.3, 8.5], "style": "cmp"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"], "h": 220}' aria-label="Gross revenue per day, this 7D vs previous 7D"></div>
           </div>
         </section>
 
@@ -540,7 +605,7 @@
                 <div class="alert-title">Low stock — Sinestesia</div>
                 <div class="alert-meta">MF-024 · Efek Rumah Kaca · 2 left · reorder at 4</div>
               </div>
-              <div class="alert-fig af-warn">Rp 485K</div>
+              <div class="alert-fig af-warn">Rp 485 rb</div>
             </div>
 
             <div class="alert">
@@ -557,7 +622,7 @@
                 <div class="alert-title">Tokopedia payout arrives Monday</div>
                 <div class="alert-meta">Covers orders 0812–0847 · settles to BCA</div>
               </div>
-              <div class="alert-fig af-info">Rp 8.4M</div>
+              <div class="alert-fig af-info">Rp 8,4 jt</div>
             </div>
 
             <div class="alert">
@@ -571,6 +636,55 @@
         </section>
 
       </div><!-- /g-main -->
+
+      <!-- Ticketing (Events & Tickets) -->
+      <div class="sec-lbl"><h2>Peers · venue ticketing</h2><a href="mockup-peers.html">Peers venues →</a></div>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi-lbl">Tickets sold</div>
+          <div class="kpi-val">6.214</div>
+          <div class="kpi-foot"><div class="kpi-delta up"><span class="mono">+12,8%</span></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Ticket revenue</div>
+          <div class="kpi-val">Rp 7,42 jt</div>
+          <div class="kpi-foot"><div class="kpi-delta neu"><span class="mono">fee Rp 222,6 jt</span></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Upcoming events</div>
+          <div class="kpi-val">13</div>
+          <div class="kpi-foot"><div class="kpi-delta neu"><span class="mono">3 this week</span></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Check-in rate</div>
+          <div class="kpi-val">92,6%</div>
+          <div class="kpi-foot"><div class="kpi-delta up"><span class="mono">+1,9 pp</span></div></div>
+        </div>
+      </div>
+      <div class="g-main">
+        <section class="panel">
+          <div class="panel-hdr"><span class="panel-title">Top events</span><span class="p-right">by ticket revenue · all-time</span></div>
+          <table class="tk-table">
+            <thead><tr><th>Event</th><th class="num">Sold · sell-through</th><th class="num">Revenue</th></tr></thead>
+            <tbody>
+              <tr><td><span class="ink">BIGBANG <XX : COSMOS></span><span class="sub">JIS · 16–17 Jan</span></td><td class="num"><span class="tk-fig">71.220</span><span class="tk-bar"><i style="width:59.4%"></i></span><span class="tk-pct"> 59,4%</span></td><td class="num"><span class="tk-fig">Rp 110,39 jt</span></td></tr>
+              <tr><td><span class="ink">Maroon 5 Asia Tour 2027</span><span class="tk-sample">Sample</span><span class="sub">JIS · 5 Feb</span></td><td class="num"><span class="tk-fig">45.590</span><span class="tk-bar"><i style="width:76.0%"></i></span><span class="tk-pct"> 76,0%</span></td><td class="num"><span class="tk-fig">Rp 97,84 jt</span></td></tr>
+              <tr><td><span class="ink">My Chemical Romance</span><span class="sub">JIS · 22 Nov</span></td><td class="num"><span class="tk-fig">60.000</span><span class="tk-bar"><i style="width:100.0%"></i></span><span class="tk-pct"> 100,0%</span></td><td class="num"><span class="tk-fig">Rp 63,54 jt</span></td></tr>
+              <tr><td><span class="ink">Joyland Sessions 2026</span><span class="tk-sample">Sample</span><span class="sub">GBK Field · 28–29 Nov</span></td><td class="num"><span class="tk-fig">13.940</span><span class="tk-bar"><i style="width:77.4%"></i></span><span class="tk-pct"> 77,4%</span></td><td class="num"><span class="tk-fig">Rp 16,73 jt</span></td></tr>
+              <tr><td><span class="ink">Guns N' Roses</span><span class="sub">Madya GBK · 21 Nov</span></td><td class="num"><span class="tk-fig">8.412</span><span class="tk-bar"><i style="width:93.5%"></i></span><span class="tk-pct"> 93,5%</span></td><td class="num"><span class="tk-fig">Rp 14,72 jt</span></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="panel">
+          <div class="panel-hdr"><span class="panel-title">Next up</span><a href="mockup-checkin.html" class="p-link">Door check-in →</a></div>
+          <div>
+            <a class="up-row" href="mockup-checkin.html"><div><div class="t1">A Special Session with Xu Kai</div><div class="t2">Fri 13 Nov · 18:00 · Kempinski Grand Ballroom · 1.164/1.200</div></div><span class="status-pill st-live">Live today</span></a>
+            <a class="up-row" href="mockup-events.html"><div><div class="t1">Indisphere Qualification Live</div><div class="t2">Sat 14 Nov · 19:00 · M Bloc Live House · 212/300</div></div><span class="status-pill st-onsale">On sale</span></a>
+            <a class="up-row" href="mockup-checkin.html"><div><div class="t1">Takase Toya — Live in Jakarta</div><div class="t2">Sun 15 Nov · 18:00 · M Bloc Live House · 348/350</div></div><span class="status-pill st-low">Almost gone</span></a>
+            <a class="up-row" href="mockup-events.html"><div><div class="t1">Guns N' Roses Live in Jakarta</div><div class="t2">Sat 21 Nov · 17:00 · Stadion Madya GBK · 8.412/9.000</div></div><span class="status-pill st-onsale">On sale</span></a>
+          </div>
+        </section>
+      </div>
     </main>
   </div><!-- /main -->
 </div><!-- /shell -->
@@ -616,6 +730,103 @@
     localStorage.setItem('mf-theme',next);
     applyTheme(next);
   });
+</script>
+
+<script>/* audit:ui-extras — sortable data tables */
+(function(){
+  const MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  const U={jt:1e6,M:1e9,rb:1e3};
+  function val(cell){
+    const t=(cell.innerText||'').trim();
+    if(!t||t==='—')return null;
+    const d=t.match(/(\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(?: (\d{4}))?(?:[^\d]*?(\d{1,2}):(\d{2}))?/);
+    if(d)return new Date(+(d[3]||2026),MON[d[2]],+d[1],+(d[4]||0),+(d[5]||0)).getTime();
+    const n=t.replace(/\s+/g,'').match(/^[+−-]?(?:Rp)?(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?(jt|M|rb)?/);
+    if(n){const v=parseFloat(n[1].replace(/\./g,'')+(n[2]?'.'+n[2]:''));return (t.trim()[0]==='−'||t.trim()[0]==='-'?-v:v)*(U[n[3]]||1);}
+    return t.toLowerCase();
+  }
+  document.querySelectorAll('table').forEach(tb=>{
+    const head=tb.tHead, body=tb.tBodies[0];
+    if(!head||!body||body.rows.length<3||tb.querySelector('[colspan]'))return;
+    const ths=[...head.rows[0].cells];
+    ths.forEach((th,i)=>{
+      if(!th.textContent.trim())return;
+      th.dataset.sort='';th.tabIndex=0;th.setAttribute('role','columnheader');
+      const go=()=>{
+        const dir=th.getAttribute('aria-sort')==='ascending'?'descending':'ascending';
+        ths.forEach(h=>h.removeAttribute('aria-sort'));th.setAttribute('aria-sort',dir);
+        const rows=[...body.rows];
+        rows.sort((a,b)=>{const x=val(a.cells[i]||a),y=val(b.cells[i]||b);
+          if(x===null&&y===null)return 0;if(x===null)return 1;if(y===null)return -1;
+          const r=(typeof x==='number'&&typeof y==='number')?x-y:String(x).localeCompare(String(y),'id');
+          return dir==='ascending'?r:-r;});
+        rows.forEach(r=>body.appendChild(r));
+      };
+      th.addEventListener('click',go);
+      th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+    });
+  });
+})();
+</script>
+
+<script>/* mfchart — shared chart renderer */
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const UNIT={jt:[1,' jt','Rp '],M:[1,' M','Rp '],n:[1,'',''],pct:[1,'%','']};
+  function fmt(v,u,dp){const [_,suf,pre]=UNIT[u]||UNIT.n;const d=dp!=null?dp:(u==='n'?0:(Math.abs(v)<10?1:(u==='M'?2:1)));
+    return pre+v.toLocaleString('id-ID',{minimumFractionDigits:u==='n'?0:Math.min(d,1),maximumFractionDigits:d})+suf;}
+  function nice(max){if(max<=0)return 4;const raw=max/4,e=Math.pow(10,Math.floor(Math.log10(raw)));
+    const step=[1,1.5,2,2.5,3,4,5,6,8,10].map(k=>k*e).find(s=>s*4>=max);return step*4;}
+  function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function render(box){
+    const c=JSON.parse(box.dataset.chart);const spark=c.type==='spark';
+    box.querySelector('svg')?.remove();box.querySelector('.tip')?.remove();
+    const W=Math.max(200,box.clientWidth),H=c.h||(spark?56:200);
+    const L=spark?0:44,R=spark?4:(c.endLabel===false?8:64),T=spark?6:10,B=spark?4:24;
+    const iw=W-L-R,ih=H-T-B,n=c.labels.length;
+    const all=c.series.flatMap(s=>s.values);
+    const lo=spark?Math.min(...all)*0.9:0, top=spark?Math.max(...all)*1.05:nice(Math.max(...all)*1.04);
+    const y=v=>T+ih-(v-lo)/(top-lo)*ih;
+    const bw=c.type==='bar'?Math.min(24,iw/n*0.6):0;
+    const x=i=>c.type==='bar'?L+iw/n*(i+.5):L+(n===1?iw/2:iw*i/(n-1));
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:W,height:H,role:'img','aria-label':c.title||''});
+    if(!spark){for(let k=0;k<=4;k++){const v=top*k/4,yy=y(v);el('line',{x1:L,x2:W-R+4,y1:yy,y2:yy,class:'grid'},svg);
+        const t=el('text',{x:L-8,y:yy+4,'text-anchor':'end',class:'ax'},svg);t.textContent=k===0?'0':fmt(v,c.unit,v<10&&v%1?1:0);}
+      c.labels.forEach((lb,i)=>{if(n>8&&i%2&&i!==n-1)return;const t=el('text',{x:x(i),y:H-6,'text-anchor':c.type==='bar'?'middle':(i===0?'start':i===n-1?'end':'middle'),class:'ax'},svg);t.textContent=lb;});}
+    c.series.forEach((s,si)=>{
+      const cmp=s.style==='cmp';
+      if(c.type==='bar'){s.values.forEach((v,i)=>{const h=Math.max(1,ih*(v-lo)/(top-lo)),x0=x(i)-bw/2,y0=T+ih-h,r=Math.min(4,h);
+          el('path',{d:`M${x0},${T+ih}V${y0+r}Q${x0},${y0} ${x0+r},${y0}H${x0+bw-r}Q${x0+bw},${y0} ${x0+bw},${y0+r}V${T+ih}Z`,fill:'var(--ink)',opacity:i===n-1?1:.55,'data-i':i},svg);});return;}
+      const pts=s.values.map((v,i)=>[x(i),y(v)]);
+      if(!cmp&&!spark){el('path',{d:'M'+pts.map(p=>p.join(',')).join('L')+`L${pts[n-1][0]},${T+ih}L${pts[0][0]},${T+ih}Z`,fill:'var(--ink)',opacity:.07},svg);}
+      el('path',{d:'M'+pts.map(p=>p.join(',')).join('L'),fill:'none',stroke:cmp?'var(--mute)':'var(--ink)','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round','stroke-dasharray':cmp?'5 4':''},svg);
+      if(!cmp){const [ex,ey]=pts[n-1];el('circle',{cx:ex,cy:ey,r:4,fill:'var(--ink)',stroke:'var(--surface)','stroke-width':2},svg);
+        if(!spark&&c.endLabel!==false){const t=el('text',{x:ex+8,y:ey+4,class:'end'},svg);t.textContent=fmt(s.values[n-1],c.unit);}}
+    });
+    if(c.type==='bar'&&c.endLabel!==false){const v=c.series[0].values[n-1];const t=el('text',{x:x(n-1),y:y(v)-6,'text-anchor':'middle',class:'end'},svg);t.textContent=fmt(v,c.unit);}
+    const xh=el('line',{y1:T,y2:T+ih,class:'xh'},svg);
+    const dots=c.type==='bar'?[]:c.series.map(s=>el('circle',{r:4,fill:s.style==='cmp'?'var(--mute)':'var(--ink)',stroke:'var(--surface)','stroke-width':2,opacity:0},svg));
+    box.prepend(svg);
+    const tip=document.createElement('div');tip.className='tip';box.appendChild(tip);
+    let cur=n-1;
+    function show(i){cur=i;const cx=x(i);xh.setAttribute('x1',cx);xh.setAttribute('x2',cx);
+      dots.forEach((d,si)=>{d.setAttribute('cx',cx);d.setAttribute('cy',y(c.series[si].values[i]));d.setAttribute('opacity',1);});
+      svg.querySelectorAll('path[data-i]').forEach(p=>p.setAttribute('opacity',+p.dataset.i===i?1:.4));
+      tip.innerHTML=`<b>${c.full?c.full[i]:c.labels[i]}</b>`+c.series.map(s=>`<div class="r"><span>${c.series.length>1?`<i class="key${s.style==='cmp'?' cmp':''}"></i>`:''}${s.name}</span><span>${fmt(s.values[i],c.unit)}</span></div>`).join('');
+      box.classList.add('hov');const tw=tip.offsetWidth;let tx=cx+12;if(tx+tw>W)tx=cx-12-tw;tip.style.left=Math.max(0,tx)+'px';tip.style.top=(spark?-8:T)+'px';}
+    function hide(){box.classList.remove('hov');dots.forEach(d=>d.setAttribute('opacity',0));svg.querySelectorAll('path[data-i]').forEach(p=>p.setAttribute('opacity',+p.dataset.i===n-1?1:.55));}
+    svg.addEventListener('pointermove',e=>{const r=svg.getBoundingClientRect();const px=(e.clientX-r.left)*W/r.width;
+      let best=0,bd=1e9;for(let i=0;i<n;i++){const d=Math.abs(x(i)-px);if(d<bd){bd=d;best=i;}}show(best);});
+    svg.addEventListener('pointerleave',hide);
+    box.tabIndex=0;box.onkeydown=e=>{if(e.key==='ArrowRight'){show(Math.min(n-1,cur+1));e.preventDefault();}if(e.key==='ArrowLeft'){show(Math.max(0,cur-1));e.preventDefault();}if(e.key==='Escape')hide();};
+    box.onblur=hide;
+  }
+  function all(){document.querySelectorAll('.mfc[data-chart]').forEach(b=>{if(b.offsetParent!==null)render(b);});}
+  window.MFChart={render,all};
+  let t;window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(all,120);});
+  new MutationObserver(()=>{clearTimeout(t);t=setTimeout(all,30);}).observe(document.body,{attributes:true,subtree:true,attributeFilter:['hidden']});
+  if(document.readyState!=='loading')all();else document.addEventListener('DOMContentLoaded',all);
+})();
 </script>
 </body>
 </html>

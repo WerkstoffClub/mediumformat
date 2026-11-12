@@ -123,7 +123,6 @@
       border-radius:var(--r-lg);padding:9px 12px;flex:1;max-width:480px;margin:0 auto;
       transition:border-color .15s;
     }
-    .topbar-search
     .topbar-search svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
     .topbar-search input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
     .topbar-search input::placeholder{color:var(--mute);}
@@ -357,6 +356,39 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+      /* audit B1/B2: header and body are separate tables — share column widths */
+    .tbl,.po-main{table-layout:fixed;width:100%;}
+    .tbl th:nth-child(1),.po-main tr.trigger>td:nth-child(1){width:17%;}
+    .tbl th:nth-child(2),.po-main tr.trigger>td:nth-child(2){width:29%;}
+    .tbl th:nth-child(3),.po-main tr.trigger>td:nth-child(3){width:10%;}
+    .tbl th:nth-child(4),.po-main tr.trigger>td:nth-child(4){width:16%;}
+    .tbl th:nth-child(5),.po-main tr.trigger>td:nth-child(5){width:12%;}
+    .tbl th:nth-child(6),.po-main tr.trigger>td:nth-child(6){width:16%;}
+    .po-main td.num{text-align:right;font-variant-numeric:tabular-nums;}
+    .po-main td{overflow:hidden;text-overflow:ellipsis;}
+    .ship-edit-toggle{background:none;border:0;border-bottom:1px dashed var(--hairline);padding:0 0 1px;cursor:pointer;}
+    /* audit:ui-extras */
+    th[data-sort]{cursor:pointer;user-select:none;white-space:nowrap;}
+    th[data-sort]:hover{color:var(--ink);}
+    th[data-sort]::after{content:"";display:inline-block;width:0;height:0;margin-left:6px;vertical-align:2px;border:3.5px solid transparent;border-top-color:currentColor;opacity:.35;}
+    th[data-sort][aria-sort="ascending"]::after{border-top-color:transparent;border-bottom-color:currentColor;vertical-align:5px;opacity:1;}
+    th[data-sort][aria-sort="descending"]::after{opacity:1;}
+    th[data-sort][aria-sort]{color:var(--ink);}
+    th[data-sort]:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--accent);}
+    .mf-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--hairline);}
+    .mf-foot .meta{font-size:12px;color:var(--body);font-variant-numeric:tabular-nums;}
+    .mf-pager{display:flex;gap:4px;}
+    .mf-pager button{min-width:30px;height:30px;padding:0 8px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--body);font-size:12px;font-variant-numeric:tabular-nums;}
+    .mf-pager button:hover:not([disabled]){background:var(--raised);color:var(--ink);}
+    .mf-pager button[aria-current="page"]{border-color:var(--accent);color:var(--ink);background:var(--raised);}
+    .mf-pager button[disabled]{opacity:.4;cursor:not-allowed;}
+    .channel-tag::before{border-radius:1.5px!important;}
   </style>
 </head>
 <body>
@@ -374,12 +406,16 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         <span class="sb-txt">Dashboard</span>
       </a>
+      <a href="mockup-analytics.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span class="sb-txt">Analytics</span>
+      </a>
 
       <div class="sb-group">Selling</div>
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -401,6 +437,26 @@
       <a href="mockup-pos-checkout.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         <span class="sb-txt">POS Checkout</span>
+      </a>
+
+      <div class="sb-group">Peers · Venues</div>
+      <a href="mockup-peers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="sb-txt">Venues</span>
+      </a>
+      <a href="mockup-events.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="sb-txt">Shows &amp; tickets</span>
+      </a>
+      <a href="mockup-checkin.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/><line x1="13" y1="8" x2="17" y2="8"/><line x1="8" y1="14" x2="8" y2="17"/></svg>
+        <span class="sb-txt">Door check-in</span>
+      </a>
+
+      <div class="sb-group">Dealers · Record shops</div>
+      <a href="mockup-dealers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0z"/><path d="M5 13v8h14v-8"/><rect x="10" y="15" width="4" height="6"/></svg>
+        <span class="sb-txt">Dealers</span>
       </a>
 
       <div class="sb-group">Content</div>
@@ -496,23 +552,23 @@
       <div class="stats">
         <div class="stat">
           <div class="stat-lbl">Open POs</div>
-          <div class="stat-val">7</div>
-          <div class="stat-sub trend-neu"><span class="mono">3</span> awaiting delivery</div>
+          <div class="stat-val">3</div>
+          <div class="stat-sub trend-neu">ordered or partially received · <span class="mono">1</span> draft</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">On order · cost</div>
-          <div class="stat-val">Rp 58.4M</div>
-          <div class="stat-sub trend-neu">across all suppliers</div>
+          <div class="stat-val">Rp 55,3 jt</div>
+          <div class="stat-sub trend-neu">cost of the <span class="mono">3</span> open POs</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">Units inbound</div>
-          <div class="stat-val">642</div>
-          <div class="stat-sub trend-neu"><span class="mono">418</span> received so far</div>
+          <div class="stat-val">344</div>
+          <div class="stat-sub trend-neu"><span class="mono">86</span> received so far</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">Due this week</div>
           <div class="stat-val">2</div>
-          <div class="stat-sub trend-neu">POs expected by 8 May</div>
+          <div class="stat-sub trend-neu">POs expected by 19 Nov</div>
         </div>
       </div>
 
@@ -553,7 +609,7 @@
                 <td><div class="supplier">Aksara Distribusi</div><div class="supplier-meta">Distributor · Jakarta</div></td>
                 <td class="num hide-sm num-ink">128</td>
                 <td class="num num-ink">Rp 18.400.000</td>
-                <td class="hide-sm cell-date">6 May</td>
+                <td class="hide-sm cell-date">17 Nov</td>
                 <td><span class="status-pill st-partial">Partially received</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -577,7 +633,7 @@
                       <tr><td><div class="li-title">Bonobo — Fragments</div><div class="li-cat">NINJA-441 · 2xLP</div></td><td class="num">40</td><td class="num">Rp 121.000</td><td class="num">Rp 4.840.000</td><td class="num"><span class="recv-tag part">16 / 40</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton received 30 Apr, remainder in transit. Ordered 22 Apr by Andra.</div>
+                  <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton received 11 Nov, remainder in transit. Ordered 3 Nov by Andra.</div>
                 </div>
               </td></tr>
 
@@ -587,7 +643,7 @@
                 <td><div class="supplier">Warner Music Indonesia</div><div class="supplier-meta">Label · Jakarta</div></td>
                 <td class="num hide-sm num-ink">96</td>
                 <td class="num num-ink">Rp 14.100.000</td>
-                <td class="hide-sm cell-date">8 May</td>
+                <td class="hide-sm cell-date">19 Nov</td>
                 <td><span class="status-pill st-ordered">Ordered</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -610,7 +666,7 @@
                       <tr><td><div class="li-title">Daft Punk — Random Access Memories</div><div class="li-cat">COL-889 · 2xLP</div></td><td class="num">46</td><td class="num">Rp 135.000</td><td class="num">Rp 6.200.000</td><td class="num"><span class="recv-tag">0 / 46</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Expected dispatch 5 May via JNE. Ordered 29 Apr by Rara.</div>
+                  <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Expected dispatch 16 Nov via JNE. Ordered 10 Nov by Rara.</div>
                 </div>
               </td></tr>
 
@@ -620,7 +676,7 @@
                 <td><div class="supplier">Demajors</div><div class="supplier-meta">Distributor · Jakarta</div></td>
                 <td class="num hide-sm num-ink">74</td>
                 <td class="num num-ink">Rp 9.250.000</td>
-                <td class="hide-sm cell-date">28 Apr</td>
+                <td class="hide-sm cell-date">9 Nov</td>
                 <td><span class="status-pill st-received">Received</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -643,7 +699,7 @@
                       <tr><td><div class="li-title">Madlib — Sound Ancestors</div><div class="li-cat">MADLIB-01 · LP</div></td><td class="num">36</td><td class="num">Rp 107.000</td><td class="num">Rp 3.854.000</td><td class="num"><span class="recv-tag done">36 / 36</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> All units received and shelved 28 Apr. No damage. Ordered 15 Apr by Andra.</div>
+                  <div class="pd-note"><strong>Notes:</strong> All units received and shelved 9 Nov. No damage. Ordered 27 Oct by Andra.</div>
                 </div>
               </td></tr>
 
@@ -653,7 +709,7 @@
                 <td><div class="supplier">Rush Hour (NL)</div><div class="supplier-meta">Distributor · Amsterdam · import</div></td>
                 <td class="num hide-sm num-ink">120</td>
                 <td class="num num-ink">Rp 22.800.000</td>
-                <td class="hide-sm cell-date">15 May</td>
+                <td class="hide-sm cell-date">26 Nov</td>
                 <td><span class="status-pill st-ordered">Ordered</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -677,7 +733,7 @@
                       <tr><td><div class="li-title">Massive Attack — Mezzanine</div><div class="li-cat">VIRGIN-98 · 2xLP</div></td><td class="num">36</td><td class="num">Rp 172.000</td><td class="num">Rp 6.192.000</td><td class="num"><span class="recv-tag">0 / 36</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> International import — customs clearance ~7 days. Paid by bank transfer (EUR). Ordered 25 Apr by Rara.</div>
+                  <div class="pd-note"><strong>Notes:</strong> International import — customs clearance ~7 days. Paid by bank transfer (EUR). Ordered 6 Nov by Rara.</div>
                 </div>
               </td></tr>
 
@@ -720,7 +776,7 @@
                 <td><div class="supplier">Aksara Distribusi</div><div class="supplier-meta">Distributor · Jakarta</div></td>
                 <td class="num hide-sm num-ink">58</td>
                 <td class="num num-ink">Rp 7.540.000</td>
-                <td class="hide-sm cell-date">21 Apr</td>
+                <td class="hide-sm cell-date">2 Nov</td>
                 <td><span class="status-pill st-received">Received</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -743,7 +799,7 @@
                       <tr><td><div class="li-title">Khruangbin — Con Todo El Mundo</div><div class="li-cat">DEAD-051 · LP</div></td><td class="num">26</td><td class="num">Rp 120.000</td><td class="num">Rp 3.120.000</td><td class="num"><span class="recv-tag done">26 / 26</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> Received 21 Apr. 1 unit returned (seam split) — credited. Ordered 10 Apr by Rara.</div>
+                  <div class="pd-note"><strong>Notes:</strong> Received 2 Nov. 1 unit returned (seam split) — credited. Ordered 22 Oct by Rara.</div>
                 </div>
               </td></tr>
 
@@ -776,7 +832,7 @@
                       <tr><td><div class="li-title">Björk — Vespertine</div><div class="li-cat">ONELP-24 · 2xLP</div></td><td class="num">20</td><td class="num">Rp 218.000</td><td class="num">Rp 4.360.000</td><td class="num"><span class="recv-tag">0 / 20</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> Cancelled 24 Apr — supplier out of stock, personal card charge reversed. See finance reimbursement note.</div>
+                  <div class="pd-note"><strong>Notes:</strong> Cancelled 5 Nov — supplier out of stock, personal card charge reversed. See finance reimbursement note.</div>
                 </div>
               </td></tr>
             </tbody>
@@ -814,7 +870,7 @@
               <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 25.940.000</div></div>
               <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 830.000</div></div>
               <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 26.770.000</div></div>
-              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3.2% landed cost</div></div>
+              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3,2% landed cost</div></div>
             </div>
             <div class="ship-edit-row">
               <button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0091')">Edit shipper &amp; cost</button>
@@ -848,7 +904,7 @@
               <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 23.000.000</div></div>
               <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 410.000</div></div>
               <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 23.410.000</div></div>
-              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1.8% landed cost</div></div>
+              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1,8% landed cost</div></div>
             </div>
             <div class="ship-edit-row">
               <button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0089')">Edit shipper &amp; cost</button>
@@ -882,7 +938,7 @@
               <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 22.800.000</div></div>
               <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 2.050.000</div></div>
               <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 24.850.000</div></div>
-              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9.0% landed cost</div></div>
+              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9,0% landed cost</div></div>
             </div>
             <div class="ship-edit-row">
               <button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0087')">Edit shipper &amp; cost</button>
@@ -1085,6 +1141,44 @@
     localStorage.setItem('mf-theme',next);
     applyTheme(next);
   });
+</script>
+<!-- demo-clock:2026-11-13 -->
+
+<script>/* audit:ui-extras — sortable data tables */
+(function(){
+  const MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  const U={jt:1e6,M:1e9,rb:1e3};
+  function val(cell){
+    const t=(cell.innerText||'').trim();
+    if(!t||t==='—')return null;
+    const d=t.match(/(\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(?: (\d{4}))?(?:[^\d]*?(\d{1,2}):(\d{2}))?/);
+    if(d)return new Date(+(d[3]||2026),MON[d[2]],+d[1],+(d[4]||0),+(d[5]||0)).getTime();
+    const n=t.replace(/\s+/g,'').match(/^[+−-]?(?:Rp)?(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?(jt|M|rb)?/);
+    if(n){const v=parseFloat(n[1].replace(/\./g,'')+(n[2]?'.'+n[2]:''));return (t.trim()[0]==='−'||t.trim()[0]==='-'?-v:v)*(U[n[3]]||1);}
+    return t.toLowerCase();
+  }
+  document.querySelectorAll('table').forEach(tb=>{
+    const head=tb.tHead, body=tb.tBodies[0];
+    if(!head||!body||body.rows.length<3||tb.querySelector('[colspan]'))return;
+    const ths=[...head.rows[0].cells];
+    ths.forEach((th,i)=>{
+      if(!th.textContent.trim())return;
+      th.dataset.sort='';th.tabIndex=0;th.setAttribute('role','columnheader');
+      const go=()=>{
+        const dir=th.getAttribute('aria-sort')==='ascending'?'descending':'ascending';
+        ths.forEach(h=>h.removeAttribute('aria-sort'));th.setAttribute('aria-sort',dir);
+        const rows=[...body.rows];
+        rows.sort((a,b)=>{const x=val(a.cells[i]||a),y=val(b.cells[i]||b);
+          if(x===null&&y===null)return 0;if(x===null)return 1;if(y===null)return -1;
+          const r=(typeof x==='number'&&typeof y==='number')?x-y:String(x).localeCompare(String(y),'id');
+          return dir==='ascending'?r:-r;});
+        rows.forEach(r=>body.appendChild(r));
+      };
+      th.addEventListener('click',go);
+      th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+    });
+  });
+})();
 </script>
 </body>
 </html>

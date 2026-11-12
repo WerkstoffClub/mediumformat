@@ -122,7 +122,6 @@
       border-radius:var(--r-lg);padding:9px 12px;flex:1;max-width:480px;margin:0 auto;
       transition:border-color .15s;
     }
-    .topbar-search
     .topbar-search svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
     .topbar-search input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
     .topbar-search input::placeholder{color:var(--mute);}
@@ -193,7 +192,6 @@
       background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:9px 12px;
       transition:border-color .15s;
     }
-    .search-box
     .search-box svg{width:15px;height:15px;color:var(--mute);flex-shrink:0;}
     .search-box input{background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit;}
     .search-box input::placeholder{color:var(--mute);}
@@ -320,6 +318,32 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+      /* audit B5: keep phone, lifetime and dates on one line */
+    td[data-k="Phone"],td[data-k="Lifetime"],td[data-k="Last order"],td[data-k="Orders"],.tbl th,table th{white-space:nowrap;}
+    .phone{color:var(--body);}
+    /* audit:ui-extras */
+    th[data-sort]{cursor:pointer;user-select:none;white-space:nowrap;}
+    th[data-sort]:hover{color:var(--ink);}
+    th[data-sort]::after{content:"";display:inline-block;width:0;height:0;margin-left:6px;vertical-align:2px;border:3.5px solid transparent;border-top-color:currentColor;opacity:.35;}
+    th[data-sort][aria-sort="ascending"]::after{border-top-color:transparent;border-bottom-color:currentColor;vertical-align:5px;opacity:1;}
+    th[data-sort][aria-sort="descending"]::after{opacity:1;}
+    th[data-sort][aria-sort]{color:var(--ink);}
+    th[data-sort]:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--accent);}
+    .mf-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--hairline);}
+    .mf-foot .meta{font-size:12px;color:var(--body);font-variant-numeric:tabular-nums;}
+    .mf-pager{display:flex;gap:4px;}
+    .mf-pager button{min-width:30px;height:30px;padding:0 8px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--body);font-size:12px;font-variant-numeric:tabular-nums;}
+    .mf-pager button:hover:not([disabled]){background:var(--raised);color:var(--ink);}
+    .mf-pager button[aria-current="page"]{border-color:var(--accent);color:var(--ink);background:var(--raised);}
+    .mf-pager button[disabled]{opacity:.4;cursor:not-allowed;}
+    .channel-tag::before{border-radius:1.5px!important;}
+      @media (max-width:1600px){thead th:nth-child(3),td[data-k="Phone"]{display:none;}}
   </style>
 </head>
 <body>
@@ -337,12 +361,16 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         <span class="sb-txt">Dashboard</span>
       </a>
+      <a href="mockup-analytics.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span class="sb-txt">Analytics</span>
+      </a>
 
       <div class="sb-group">Selling</div>
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -364,6 +392,26 @@
       <a href="mockup-pos-checkout.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         <span class="sb-txt">POS Checkout</span>
+      </a>
+
+      <div class="sb-group">Peers · Venues</div>
+      <a href="mockup-peers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="sb-txt">Venues</span>
+      </a>
+      <a href="mockup-events.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="sb-txt">Shows &amp; tickets</span>
+      </a>
+      <a href="mockup-checkin.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/><line x1="13" y1="8" x2="17" y2="8"/><line x1="8" y1="14" x2="8" y2="17"/></svg>
+        <span class="sb-txt">Door check-in</span>
+      </a>
+
+      <div class="sb-group">Dealers · Record shops</div>
+      <a href="mockup-dealers.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0z"/><path d="M5 13v8h14v-8"/><rect x="10" y="15" width="4" height="6"/></svg>
+        <span class="sb-txt">Dealers</span>
       </a>
 
       <div class="sb-group">Content</div>
@@ -441,7 +489,7 @@
       <div class="page-hdr">
         <div>
           <h1 class="page-title">Customers</h1>
-          <div class="page-sub">1,284 people across every channel · Jakarta record shop</div>
+          <div class="page-sub">1.284 people across every channel · Jakarta record shop</div>
         </div>
         <div class="page-hdr-right">
           <button class="btn-sec">
@@ -459,13 +507,13 @@
       <div class="strip">
         <div class="stat">
           <div class="stat-lbl">Total Customers</div>
-          <div class="stat-val">1,284</div>
+          <div class="stat-val">1.284</div>
           <div class="stat-sub"><span class="trend-up"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 15l-6-6-6 6"/></svg><span class="mono">48</span></span><span class="trend-neu">new this month</span></div>
         </div>
         <div class="stat">
           <div class="stat-lbl">Lifetime Value · avg</div>
-          <div class="stat-val">Rp 1.8M</div>
-          <div class="stat-sub trend-neu"><span class="mono">3.4</span> orders per customer</div>
+          <div class="stat-val">Rp 1,8 jt</div>
+          <div class="stat-sub trend-neu"><span class="mono">3,4</span> orders per customer</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">VIP Members</div>
@@ -486,7 +534,7 @@
           <input placeholder="Search name, email or phone…">
         </div>
         <div class="chips">
-          <button class="chip on" onclick="setChip(this)">All <span class="cnt">1,284</span></button>
+          <button class="chip on" onclick="setChip(this)">All <span class="cnt">1.284</span></button>
           <button class="chip" onclick="setChip(this)">VIP <span class="cnt">86</span></button>
           <button class="chip" onclick="setChip(this)">Wholesale <span class="cnt">24</span></button>
           <button class="chip" onclick="setChip(this)">New <span class="cnt">48</span></button>
@@ -500,7 +548,7 @@
         <div class="widget">
           <div class="widget-hdr">
             <span class="widget-title">Customer List</span>
-            <span class="widget-note">1,284 total · sorted by lifetime value</span>
+            <span class="widget-note">1.284 total · sorted by lifetime value</span>
           </div>
           <div class="widget-body no-pad">
             <table class="cust-table">
@@ -521,8 +569,8 @@
                   <td data-k="Email"><span class="email">rani.wijaya@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 812-9043-118</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">41</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 18.4M</span></td>
-                  <td data-k="Last order"><span class="last-order">28 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 18,4 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">9 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-website">Website</span></td>
                 </tr>
                 <tr>
@@ -530,8 +578,8 @@
                   <td data-k="Email"><span class="email">bagus.s@mail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 813-2201-556</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">37</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 15.9M</span></td>
-                  <td data-k="Last order"><span class="last-order">1 May</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 15,9 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">12 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-pos">POS</span></td>
                 </tr>
                 <tr>
@@ -539,8 +587,8 @@
                   <td data-k="Email"><span class="email">buy@demajors.co.id</span></td>
                   <td data-k="Phone"><span class="phone">+62 21-5140-882</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">29</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 14.2M</span></td>
-                  <td data-k="Last order"><span class="last-order">30 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 14,2 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">11 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-event">Event</span></td>
                 </tr>
                 <tr>
@@ -548,8 +596,8 @@
                   <td data-k="Email"><span class="email">siti.pratiwi@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 856-7788-013</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">24</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 11.6M</span></td>
-                  <td data-k="Last order"><span class="last-order">2 May</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 11,6 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">13 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-website">Website</span></td>
                 </tr>
                 <tr>
@@ -557,8 +605,8 @@
                   <td data-k="Email"><span class="email">andra.n@outlook.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 878-4412-909</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">18</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 8.9M</span></td>
-                  <td data-k="Last order"><span class="last-order">27 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 8,9 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">8 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-tokopedia">Tokopedia</span></td>
                 </tr>
                 <tr>
@@ -566,8 +614,8 @@
                   <td data-k="Email"><span class="email">linda.kusuma@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 811-3390-274</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">14</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 6.7M</span></td>
-                  <td data-k="Last order"><span class="last-order">25 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 6,7 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">6 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-shopee">Shopee</span></td>
                 </tr>
                 <tr>
@@ -575,8 +623,8 @@
                   <td data-k="Email"><span class="email">farhan.hakim@mail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 852-6610-448</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">11</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 5.2M</span></td>
-                  <td data-k="Last order"><span class="last-order">22 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 5,2 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">3 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-discogs">Discogs</span></td>
                 </tr>
                 <tr>
@@ -584,8 +632,8 @@
                   <td data-k="Email"><span class="email">maya.puspita@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 838-1129-762</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">7</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 3.4M</span></td>
-                  <td data-k="Last order"><span class="last-order">3 May</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 3,4 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">14 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-bandcamp">Bandcamp</span></td>
                 </tr>
                 <tr>
@@ -593,8 +641,8 @@
                   <td data-k="Email"><span class="email">gita.permata@mail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 819-5583-201</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">2</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 0.97M</span></td>
-                  <td data-k="Last order"><span class="last-order">1 May</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 970 rb</span></td>
+                  <td data-k="Last order"><span class="last-order">12 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-website">Website</span></td>
                 </tr>
                 <tr>
@@ -602,14 +650,14 @@
                   <td data-k="Email"><span class="email">reza.aditya@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 877-9024-635</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">1</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 0.45M</span></td>
-                  <td data-k="Last order"><span class="last-order">29 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 450 rb</span></td>
+                  <td data-k="Last order"><span class="last-order">10 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-pos">POS</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="foot-note">Showing 10 of 1,284 customers</div>
+          <div class="mf-foot"><span class="meta">1–10 of 1.284 customers · sorted by lifetime value</span><div class="mf-pager" role="navigation" aria-label="Pagination"><button type="button" aria-label="Previous page" disabled>‹</button><button type="button" aria-current="page">1</button><button type="button">2</button><button type="button">3</button><button type="button" disabled>…</button><button type="button">129</button><button type="button" aria-label="Next page">›</button></div></div>
         </div>
 
         <!-- Side panel: top customers -->
@@ -620,11 +668,11 @@
               <span class="widget-note">by lifetime</span>
             </div>
             <div class="top-list">
-              <div class="top-row"><span class="top-rank">1</span><span class="top-av">RW</span><div class="top-body"><div class="top-name">Rani Wijaya</div><div class="top-meta">41 orders · Website</div></div><span class="top-lv">Rp 18.4M</span></div>
-              <div class="top-row"><span class="top-rank">2</span><span class="top-av">BS</span><div class="top-body"><div class="top-name">Bagus Santoso</div><div class="top-meta">37 orders · POS</div></div><span class="top-lv">Rp 15.9M</span></div>
-              <div class="top-row"><span class="top-rank">3</span><span class="top-av">DL</span><div class="top-body"><div class="top-name">Demajors Store</div><div class="top-meta">29 orders · Wholesale</div></div><span class="top-lv">Rp 14.2M</span></div>
-              <div class="top-row"><span class="top-rank">4</span><span class="top-av">SP</span><div class="top-body"><div class="top-name">Siti Pratiwi</div><div class="top-meta">24 orders · Website</div></div><span class="top-lv">Rp 11.6M</span></div>
-              <div class="top-row"><span class="top-rank">5</span><span class="top-av">AN</span><div class="top-body"><div class="top-name">Andra Nugraha</div><div class="top-meta">18 orders · Tokopedia</div></div><span class="top-lv">Rp 8.9M</span></div>
+              <div class="top-row"><span class="top-rank">1</span><span class="top-av">RW</span><div class="top-body"><div class="top-name">Rani Wijaya</div><div class="top-meta">41 orders · Website</div></div><span class="top-lv">Rp 18,4 jt</span></div>
+              <div class="top-row"><span class="top-rank">2</span><span class="top-av">BS</span><div class="top-body"><div class="top-name">Bagus Santoso</div><div class="top-meta">37 orders · POS</div></div><span class="top-lv">Rp 15,9 jt</span></div>
+              <div class="top-row"><span class="top-rank">3</span><span class="top-av">DL</span><div class="top-body"><div class="top-name">Demajors Store</div><div class="top-meta">29 orders · Wholesale</div></div><span class="top-lv">Rp 14,2 jt</span></div>
+              <div class="top-row"><span class="top-rank">4</span><span class="top-av">SP</span><div class="top-body"><div class="top-name">Siti Pratiwi</div><div class="top-meta">24 orders · Website</div></div><span class="top-lv">Rp 11,6 jt</span></div>
+              <div class="top-row"><span class="top-rank">5</span><span class="top-av">AN</span><div class="top-body"><div class="top-name">Andra Nugraha</div><div class="top-meta">18 orders · Tokopedia</div></div><span class="top-lv">Rp 8,9 jt</span></div>
             </div>
           </div>
 
@@ -685,6 +733,44 @@
     localStorage.setItem('mf-theme',next);
     applyTheme(next);
   });
+</script>
+<!-- demo-clock:2026-11-13 -->
+
+<script>/* audit:ui-extras — sortable data tables */
+(function(){
+  const MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  const U={jt:1e6,M:1e9,rb:1e3};
+  function val(cell){
+    const t=(cell.innerText||'').trim();
+    if(!t||t==='—')return null;
+    const d=t.match(/(\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(?: (\d{4}))?(?:[^\d]*?(\d{1,2}):(\d{2}))?/);
+    if(d)return new Date(+(d[3]||2026),MON[d[2]],+d[1],+(d[4]||0),+(d[5]||0)).getTime();
+    const n=t.replace(/\s+/g,'').match(/^[+−-]?(?:Rp)?(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?(jt|M|rb)?/);
+    if(n){const v=parseFloat(n[1].replace(/\./g,'')+(n[2]?'.'+n[2]:''));return (t.trim()[0]==='−'||t.trim()[0]==='-'?-v:v)*(U[n[3]]||1);}
+    return t.toLowerCase();
+  }
+  document.querySelectorAll('table').forEach(tb=>{
+    const head=tb.tHead, body=tb.tBodies[0];
+    if(!head||!body||body.rows.length<3||tb.querySelector('[colspan]'))return;
+    const ths=[...head.rows[0].cells];
+    ths.forEach((th,i)=>{
+      if(!th.textContent.trim())return;
+      th.dataset.sort='';th.tabIndex=0;th.setAttribute('role','columnheader');
+      const go=()=>{
+        const dir=th.getAttribute('aria-sort')==='ascending'?'descending':'ascending';
+        ths.forEach(h=>h.removeAttribute('aria-sort'));th.setAttribute('aria-sort',dir);
+        const rows=[...body.rows];
+        rows.sort((a,b)=>{const x=val(a.cells[i]||a),y=val(b.cells[i]||b);
+          if(x===null&&y===null)return 0;if(x===null)return 1;if(y===null)return -1;
+          const r=(typeof x==='number'&&typeof y==='number')?x-y:String(x).localeCompare(String(y),'id');
+          return dir==='ascending'?r:-r;});
+        rows.forEach(r=>body.appendChild(r));
+      };
+      th.addEventListener('click',go);
+      th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+    });
+  });
+})();
 </script>
 </body>
 </html>

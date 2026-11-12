@@ -213,6 +213,17 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
+    /* audit:ui-extras */
+    .channel-tag::before{border-radius:1.5px!important;}
   </style>
 </head>
 <body>
@@ -245,7 +256,7 @@
 
     <div class="kpi-grid">
       <div class="kpi"><div class="kpi-lbl">Active</div><div class="kpi-val">5 / 7</div></div>
-      <div class="kpi"><div class="kpi-lbl">Listings</div><div class="kpi-val">3,914</div></div>
+      <div class="kpi"><div class="kpi-lbl">Listings</div><div class="kpi-val">3.914</div></div>
       <div class="kpi"><div class="kpi-lbl">Last sync</div><div class="kpi-val">4m ago</div></div>
       <div class="kpi"><div class="kpi-lbl">Errors 24h</div><div class="kpi-val">2</div></div>
     </div>
@@ -257,7 +268,7 @@
         <div class="ch-id"><div class="ch-icon chi-website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div><div class="ch-name">Website</div><div class="ch-kind">storefront</div></div></div>
         <span class="status-pill st-connected">Connected</span>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">2m ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1,482</div></div></div>
+      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">2m ago</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1.482</div></div></div>
       <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="Website"><span class="track"></span><span class="knob"></span></label></div>
     </div>
 
@@ -266,7 +277,7 @@
         <div class="ch-id"><div class="ch-icon chi-pos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="8" y1="9" x2="16" y2="9"/></svg></div><div><div class="ch-name">POS</div><div class="ch-kind">in-store · Jakarta</div></div></div>
         <span class="status-pill st-connected">Connected</span>
       </div>
-      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">Live</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1,482</div></div></div>
+      <div class="ch-metrics"><div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">Live</div></div><div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1.482</div></div></div>
       <div class="ch-actions"><button class="btn-sec">Sync now</button><button class="btn-ghost">Configure</button><label class="toggle"><input type="checkbox" checked aria-label="POS"><span class="track"></span><span class="knob"></span></label></div>
     </div>
 
@@ -311,7 +322,7 @@
       <div class="widget-hdr"><span class="widget-title">Sync Activity</span><span class="widget-note">24h</span></div>
       <div class="log-item"><div class="log-icon li-danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Discogs</span> — sync failed: OAuth expired</div><div class="log-meta">reauthorise to resume</div></div><span class="log-time">14:52</span></div>
       <div class="log-item"><div class="log-icon li-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Tokopedia</span> — incremental sync</div><div class="log-meta">418 / 612 listings</div></div><span class="log-time">14:48</span></div>
-      <div class="log-item"><div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Website</span> — full sync completed</div><div class="log-meta">1,482 listings · 3 adjustments</div></div><span class="log-time">14:50</span></div>
+      <div class="log-item"><div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Website</span> — full sync completed</div><div class="log-meta">1.482 listings · 3 adjustments</div></div><span class="log-time">14:50</span></div>
       <div class="log-item"><div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Shopee</span> — 4 orders imported</div><div class="log-meta">MF-0844 … MF-0847</div></div><span class="log-time">14:39</span></div>
       <div class="log-item"><div class="log-icon li-warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="log-body"><div class="log-title"><span class="ch">Bandcamp</span> — 2 SKUs skipped</div><div class="log-meta">missing barcode · 182 / 184</div></div><span class="log-time">14:25</span></div>
     </div>
@@ -326,6 +337,7 @@
     <nav class="drawer-nav">
       <div class="dn-group">Overview</div>
       <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+      <a href="mockup-analytics-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Analytics</a>
 
       <div class="dn-group">Selling</div>
       <a href="mockup-orders-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-count mono">12</span></a>
@@ -334,6 +346,14 @@
       <a href="mockup-vouchers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a2 2 0 000-4z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="1 3"/></svg>Vouchers</a>
       <a href="mockup-channels-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
       <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
+
+      <div class="dn-group">Peers · Venues</div>
+      <a href="mockup-peers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Venues</a>
+      <a href="mockup-events-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Shows &amp; tickets</a>
+      <a href="mockup-checkin-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/><line x1="13" y1="8" x2="17" y2="8"/><line x1="8" y1="14" x2="8" y2="17"/></svg>Door check-in</a>
+
+      <div class="dn-group">Dealers · Record shops</div>
+      <a href="mockup-dealers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0z"/><path d="M5 13v8h14v-8"/><rect x="10" y="15" width="4" height="6"/></svg>Dealers</a>
 
       <div class="dn-group">Content</div>
       <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
@@ -372,7 +392,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>
@@ -432,5 +452,6 @@
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

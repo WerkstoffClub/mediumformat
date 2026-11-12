@@ -123,7 +123,7 @@ footer code{font-family:var(--mono);font-size:.92em;color:var(--body)}
   <h1>Every screen, before development.</h1>
   <p>The Medium Format platform — <b>storefront</b>, <b>back-office</b> and <b>POS</b> — rebuilt in the monochrome v2.0 system. Click any screen to open it. Flip <b>Desktop / Mobile</b> to preview either form. Pages link to each other, so you can walk the real flows.</p>
   <div class="stats">
-    <div class="s"><span class="n" id="stat-screens">22</span><span class="l">Screens</span></div>
+    <div class="s"><span class="n" id="stat-screens">34</span><span class="l">Screens</span></div>
     <div class="s"><span class="n">3</span><span class="l">Surfaces</span></div>
     <div class="s"><span class="n">×2</span><span class="l">Desktop + mobile</span></div>
     <div class="s"><span class="n">2</span><span class="l">Themes</span></div>
@@ -140,6 +140,10 @@ footer code{font-family:var(--mono);font-size:.92em;color:var(--body)}
       <a href="mockup-storefront.html">Catalogue</a><span class="sep">→</span><a href="mockup-release.html">Release</a><span class="sep">→</span><a href="mockup-cart.html">Cart</a><span class="sep">→</span><a href="mockup-checkout.html">Checkout</a><span class="sep">→</span><a href="mockup-confirmation.html">Confirmation</a></div></div>
     <div class="flow"><div class="fh">POS sale + payment</div><div class="chain">
       <a href="mockup-pos.html">POS sale</a><span class="sep">→</span><a href="mockup-pos-checkout.html">Charge · EDC / Xendit</a><span class="sep">→</span><a href="mockup-pos.html">Receipt</a></div></div>
+    <div class="flow"><div class="fh">Peers ticketing</div><div class="chain">
+      <a href="mockup-peers.html">Venues</a><span class="sep">→</span><a href="mockup-peer-tickets.html?v=krapela">Buy tickets</a><span class="sep">→</span><a href="mockup-events.html">Shows</a><span class="sep">→</span><a href="mockup-event-detail.html">Event detail</a><span class="sep">→</span><a href="mockup-checkin.html">Door check-in</a><span class="sep">→</span><a href="mockup-dashboard.html">Dashboard KPIs</a></div></div>
+    <div class="flow"><div class="fh">Dealer POS</div><div class="chain">
+      <a href="mockup-dealers.html">Dealers</a><span class="sep">→</span><a href="mockup-dealer-detail.html">POS transactions</a><span class="sep">→</span><a href="mockup-orders.html#dealers">Orders · Dealers</a></div></div>
     <div class="flow"><div class="fh">Back-office fulfilment</div><div class="chain">
       <a href="mockup-orders.html">Orders inbox</a><span class="sep">→</span><a href="mockup-order-detail.html">Order detail</a><span class="sep">→</span><a href="mockup-inventory.html">Inventory</a><span class="sep">→</span><a href="mockup-release-edit.html">Edit release</a></div></div>
   </div>
@@ -161,12 +165,13 @@ const GROUPS=[
    {f:"account",t:"Customer account",d:"Orders, wishlist, addresses",tags:["Account"]},
    {f:"journal",t:"News article",d:"Editorial long-form",tags:["News"]},
  ]},
- {no:"02 / BACK-OFFICE",title:"Back-office",desc:"11-module operational console",items:[
+ {no:"02 / BACK-OFFICE",title:"Back-office",desc:"Operational console",items:[
    {f:"dashboard",t:"Finance dashboard",d:"KPIs, revenue, settlements",tags:["Dashboard"]},
+   {f:"analytics",t:"Analytics",d:"Overview or MF retail · Web · Peers · Dealers",tags:["Analytics"]},
    {f:"inventory",t:"Inventory",d:"Stock list, filters, add release",tags:["Catalogue"]},
    {f:"locations",t:"Locations",d:"Multi-location & shelf stock, barcodes",tags:["Stock"]},
    {f:"release-edit",t:"Add / edit release",d:"Full release form",tags:["Form"]},
-   {f:"orders",t:"Orders inbox",d:"Unified multi-channel orders",tags:["Orders"]},
+   {f:"orders",t:"Orders inbox",d:"MF retail · Peers tickets · Dealer POS tabs",tags:["Orders"]},
    {f:"order-detail",t:"Order detail",d:"Lifecycle, items, fulfilment",tags:["Orders"]},
    {f:"customers",t:"Customers",d:"CRM list & lifetime value",tags:["CRM"]},
    {f:"vouchers",t:"Vouchers",d:"Discount codes & rules",tags:["Promo"]},
@@ -176,7 +181,19 @@ const GROUPS=[
    {f:"channels",t:"Channels",d:"Marketplace connections & sync",tags:["Integrations"]},
    {f:"preferences",t:"Preferences",d:"Store, tax, payments, team",tags:["Settings"]},
  ]},
- {no:"03 / POS",title:"Point of sale",desc:"In-store touch terminal",items:[
+ {no:"03 / PEERS",title:"Peers · Venues",desc:"Venues hosting shows & selling tickets (TMS)",items:[
+   {f:"peers",t:"Venues",d:"Peers venues, upcoming shows, ticket sales",tags:["Peers"]},
+   {f:"peer-detail",t:"Venue schedule",d:"Krapela: shows, box-office sale, capacity, payouts",tags:["Peers"]},
+   {f:"peer-tickets",t:"Venue ticket page (public)",d:"Buy tickets per venue: show → tier → Xendit → QR (?v=krapela)",tags:["Buy tickets","b"]},
+   {f:"events",t:"Shows & tickets",d:"All shows, sold vs quota",tags:["TMS"]},
+   {f:"event-detail",t:"Show detail",d:"Tiers, ticket orders, revenue, sale phases",tags:["TMS"]},
+   {f:"checkin",t:"Door check-in",d:"QR scanner, manual entry, live count",tags:["Check-in","b"]},
+ ]},
+ {no:"04 / DEALERS",title:"Dealers · Record shops",desc:"Third-party shops on MF POS & catalog",items:[
+   {f:"dealers",t:"Dealers",d:"Shops, stock, POS sales, sync status",tags:["Dealers"]},
+   {f:"dealer-detail",t:"Dealer detail",d:"POS transactions, catalog & stock",tags:["POS","b"]},
+ ]},
+ {no:"05 / POS",title:"Point of sale",desc:"In-store touch terminal",items:[
    {f:"pos",t:"POS sale",d:"Product browser & cart",tags:["Register"]},
    {f:"pos-checkout",t:"POS checkout",d:"EDC terminal + Xendit + cash",tags:["EDC","b"],tags2:["Xendit","i"]},
  ]},
