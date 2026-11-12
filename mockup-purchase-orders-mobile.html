@@ -272,6 +272,15 @@
     .proto-link:active{opacity:1;color:var(--ink);}
   
     .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -314,10 +323,10 @@
     </button>
 
     <div class="stat-grid">
-      <div class="stat"><div class="stat-lbl">Open POs</div><div class="stat-val">7</div><div class="stat-sub trend-neu"><span class="mono">3</span> awaiting</div></div>
-      <div class="stat"><div class="stat-lbl">On order</div><div class="stat-val">Rp 58.4M</div><div class="stat-sub trend-neu">all suppliers</div></div>
-      <div class="stat"><div class="stat-lbl">Units in</div><div class="stat-val">642</div><div class="stat-sub trend-neu"><span class="mono">418</span> received</div></div>
-      <div class="stat"><div class="stat-lbl">Due · week</div><div class="stat-val">2</div><div class="stat-sub trend-neu">by 8 May</div></div>
+      <div class="stat"><div class="stat-lbl">Open POs</div><div class="stat-val">3</div><div class="stat-sub trend-neu">excl. <span class="mono">1</span> draft</div></div>
+      <div class="stat"><div class="stat-lbl">On order</div><div class="stat-val">Rp 55,3 jt</div><div class="stat-sub trend-neu">3 open POs</div></div>
+      <div class="stat"><div class="stat-lbl">Units in</div><div class="stat-val">344</div><div class="stat-sub trend-neu"><span class="mono">86</span> received</div></div>
+      <div class="stat"><div class="stat-lbl">Due · week</div><div class="stat-val">2</div><div class="stat-sub trend-neu">by 19 Nov</div></div>
     </div>
 
     <div class="filters">
@@ -337,7 +346,7 @@
       </div>
       <div class="po-figs">
         <div class="fig"><span class="k">Items</span><span class="v">128</span></div>
-        <div class="fig"><span class="k">Expected</span><span class="v">6 May</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">17 Nov</span></div>
         <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 18.400.000</span></div>
       </div>
       <div class="po-detail">
@@ -350,7 +359,7 @@
         <div class="line"><div class="line-l"><div class="line-title">Floating Points — Cascade</div><div class="line-cat">NINJA-LP · 40 × Rp 165.000</div></div><div class="line-r"><span class="line-cost">Rp 6.600.000</span><span class="recv-tag done">40 / 40</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Khruangbin — A LA SALA</div><div class="line-cat">DEAD-092 · 48 × Rp 145.000</div></div><div class="line-r"><span class="line-cost">Rp 6.960.000</span><span class="recv-tag part">30 / 48</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Bonobo — Fragments</div><div class="line-cat">NINJA-441 · 40 × Rp 121.000</div></div><div class="line-r"><span class="line-cost">Rp 4.840.000</span><span class="recv-tag part">16 / 40</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton 30 Apr, remainder in transit. Ordered 22 Apr by Andra.</div>
+        <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton 11 Nov, remainder in transit. Ordered 3 Nov by Andra.</div>
         <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
       </div>
     </div>
@@ -363,7 +372,7 @@
       </div>
       <div class="po-figs">
         <div class="fig"><span class="k">Items</span><span class="v">96</span></div>
-        <div class="fig"><span class="k">Expected</span><span class="v">8 May</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">19 Nov</span></div>
         <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 14.100.000</span></div>
       </div>
       <div class="po-detail">
@@ -375,7 +384,7 @@
         </div>
         <div class="line"><div class="line-l"><div class="line-title">Sade — Diamond Life</div><div class="line-cat">SONY-88 · 50 × Rp 158.000</div></div><div class="line-r"><span class="line-cost">Rp 7.900.000</span><span class="recv-tag">0 / 50</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Daft Punk — Random Access Memories</div><div class="line-cat">COL-889 · 46 × Rp 135.000</div></div><div class="line-r"><span class="line-cost">Rp 6.200.000</span><span class="recv-tag">0 / 46</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Dispatch 5 May via JNE. Ordered 29 Apr by Rara.</div>
+        <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Dispatch 16 Nov via JNE. Ordered 10 Nov by Rara.</div>
         <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
       </div>
     </div>
@@ -388,7 +397,7 @@
       </div>
       <div class="po-figs">
         <div class="fig"><span class="k">Items</span><span class="v">74</span></div>
-        <div class="fig"><span class="k">Expected</span><span class="v">28 Apr</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">9 Nov</span></div>
         <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 9.250.000</span></div>
       </div>
       <div class="po-detail">
@@ -400,7 +409,7 @@
         </div>
         <div class="line"><div class="line-l"><div class="line-title">Erykah Badu — Mama's Gun</div><div class="line-cat">MOT-014 · 38 × Rp 142.000</div></div><div class="line-r"><span class="line-cost">Rp 5.396.000</span><span class="recv-tag done">38 / 38</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Madlib — Sound Ancestors</div><div class="line-cat">MADLIB-01 · 36 × Rp 107.000</div></div><div class="line-r"><span class="line-cost">Rp 3.854.000</span><span class="recv-tag done">36 / 36</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> All units received and shelved 28 Apr. No damage. Ordered 15 Apr by Andra.</div>
+        <div class="pd-note"><strong>Notes:</strong> All units received and shelved 9 Nov. No damage. Ordered 27 Oct by Andra.</div>
         <div class="pd-actions"><button class="btn-mini">View receipt</button><button class="btn-mini">Print PO</button></div>
       </div>
     </div>
@@ -413,7 +422,7 @@
       </div>
       <div class="po-figs">
         <div class="fig"><span class="k">Items</span><span class="v">120</span></div>
-        <div class="fig"><span class="k">Expected</span><span class="v">15 May</span></div>
+        <div class="fig"><span class="k">Expected</span><span class="v">26 Nov</span></div>
         <div class="fig right"><span class="k">Total cost</span><span class="v">Rp 22.800.000</span></div>
       </div>
       <div class="po-detail">
@@ -426,7 +435,7 @@
         <div class="line"><div class="line-l"><div class="line-title">Björk — Homogenic</div><div class="line-cat">ONELP-30 · 40 × Rp 205.000</div></div><div class="line-r"><span class="line-cost">Rp 8.200.000</span><span class="recv-tag">0 / 40</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Aphex Twin — Selected Ambient Works</div><div class="line-cat">APHEX-85 · 44 × Rp 190.000</div></div><div class="line-r"><span class="line-cost">Rp 8.360.000</span><span class="recv-tag">0 / 44</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Massive Attack — Mezzanine</div><div class="line-cat">VIRGIN-98 · 36 × Rp 172.000</div></div><div class="line-r"><span class="line-cost">Rp 6.192.000</span><span class="recv-tag">0 / 36</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> International import — customs ~7 days. Paid by bank transfer (EUR). Ordered 25 Apr by Rara.</div>
+        <div class="pd-note"><strong>Notes:</strong> International import — customs ~7 days. Paid by bank transfer (EUR). Ordered 6 Nov by Rara.</div>
         <div class="pd-actions"><button class="btn-mini">Receive stock</button><button class="btn-mini">Print PO</button></div>
       </div>
     </div>
@@ -476,14 +485,13 @@
         </div>
         <div class="line"><div class="line-l"><div class="line-title">Aphex Twin — Syro</div><div class="line-cat">WARP-247 · 24 × Rp 285.000</div></div><div class="line-r"><span class="line-cost">Rp 6.840.000</span><span class="recv-tag">0 / 24</span></div></div>
         <div class="line"><div class="line-l"><div class="line-title">Björk — Vespertine</div><div class="line-cat">ONELP-24 · 20 × Rp 218.000</div></div><div class="line-r"><span class="line-cost">Rp 4.360.000</span><span class="recv-tag">0 / 20</span></div></div>
-        <div class="pd-note"><strong>Notes:</strong> Cancelled 24 Apr — supplier out of stock, personal card charge reversed.</div>
+        <div class="pd-note"><strong>Notes:</strong> Cancelled 5 Nov — supplier out of stock, personal card charge reversed.</div>
         <div class="pd-actions"><button class="btn-mini">Duplicate as new</button></div>
       </div>
     </div>
-  </div>
 
   <!-- Consolidated Invoices -->
-  <div class="widget">
+  <div class="widget" style="margin-top:8px">
     <div class="widget-hdr">
       <span class="widget-title">Consolidated invoices</span>
       <span class="widget-note">Freight shipments bundling multiple POs · shipping apportioned into landed cost</span>
@@ -505,7 +513,7 @@
         <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 25.940.000</div></div>
         <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 830.000</div></div>
         <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 26.770.000</div></div>
-        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3.2% landed cost</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3,2% landed cost</div></div>
       </div>
       <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0091')">Edit shipper &amp; cost</button></div>
       <div class="ship-edit-form" id="ship-edit-SHP-0091" data-goods="25940000">
@@ -531,7 +539,7 @@
         <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 23.000.000</div></div>
         <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 410.000</div></div>
         <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 23.410.000</div></div>
-        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1.8% landed cost</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1,8% landed cost</div></div>
       </div>
       <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0089')">Edit shipper &amp; cost</button></div>
       <div class="ship-edit-form" id="ship-edit-SHP-0089" data-goods="23000000">
@@ -557,7 +565,7 @@
         <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 22.800.000</div></div>
         <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 2.050.000</div></div>
         <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 24.850.000</div></div>
-        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9.0% landed cost</div></div>
+        <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9,0% landed cost</div></div>
       </div>
       <div class="ship-edit-row"><button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0087')">Edit shipper &amp; cost</button></div>
       <div class="ship-edit-form" id="ship-edit-SHP-0087" data-goods="22800000">
@@ -568,6 +576,7 @@
     </div>
   </div>
 
+  </div><!-- /screen -->
   <!-- Drawer -->
   <div class="drawer-overlay" id="drawer-overlay"></div>
   <aside class="drawer" id="drawer">
@@ -632,7 +641,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>
@@ -812,5 +821,6 @@
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

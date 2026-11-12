@@ -298,6 +298,12 @@
     .ev-name{font-size:13px;color:var(--ink);}
     .ev-tier{display:block;font-size:11px;color:var(--mute);margin-top:2px;}
     .tk-sample{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;padding:0 5px;border-radius:4px;border:1px dashed var(--mute);color:var(--mute);margin-left:6px;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -324,7 +330,7 @@
       <a href="mockup-orders.html" class="sb-item active" aria-current="page">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -467,13 +473,13 @@
         <div class="summary">
           <button class="sum-card active" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Pending</span></div>
-            <div class="sum-val">12</div>
-            <div class="sum-meta"><span class="mono">Rp 6.4M</span> awaiting action</div>
+            <div class="sum-val">11</div>
+            <div class="sum-meta"><span class="mono">Rp 5,4 jt</span> awaiting action</div>
           </button>
           <button class="sum-card" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">To ship</span></div>
-            <div class="sum-val">28</div>
-            <div class="sum-meta"><span class="mono">18</span> packed · <span class="mono">10</span> processing</div>
+            <div class="sum-val">29</div>
+            <div class="sum-meta"><span class="mono">18</span> packed · <span class="mono">11</span> processing</div>
           </button>
           <button class="sum-card" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">In transit</span></div>
@@ -493,8 +499,8 @@
           <div class="toolbar">
             <div class="status-tabs" role="tablist" aria-label="Filter by status">
               <button class="stab on" role="tab" aria-selected="true" onclick="setStab(this)">All <span class="cnt">148</span></button>
-              <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--warning)"></span>Pending <span class="cnt">12</span></button>
-              <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--info)"></span>Processing <span class="cnt">10</span></button>
+              <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--warning)"></span>Pending <span class="cnt">11</span></button>
+              <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--info)"></span>Processing <span class="cnt">11</span></button>
               <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--info)"></span>Packed <span class="cnt">18</span></button>
               <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--info)"></span>Shipped <span class="cnt">41</span></button>
               <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--success)"></span>Delivered <span class="cnt">33</span></button>
@@ -537,9 +543,9 @@
                     <td><div class="cust"><span class="cust-name">Rizky Pratama</span><span class="cust-email">rizky.p@gmail.com</span></div></td>
                     <td><span class="channel-tag ch-website">Website</span></td>
                     <td class="num"><span class="ord-items-count">2</span></td>
-                    <td class="num"><span class="ord-total">Rp 970.000<small>≈ $60</small></span></td>
-                    <td><span class="ord-date">2 May · 14:20</span></td>
-                    <td><span class="status-pill st-pending">Pending</span></td>
+                    <td class="num"><span class="ord-total">Rp 970.000</span></td>
+                    <td><span class="ord-date">13 Nov · 14:20</span></td>
+                    <td><span class="status-pill st-processing">Processing</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
                   <tr onclick="location.href='mockup-order-detail.html'">
@@ -547,8 +553,8 @@
                     <td><div class="cust"><span class="cust-name">Linda Kusuma</span><span class="cust-email">linda.k@gmail.com</span></div></td>
                     <td><span class="channel-tag ch-tokopedia">Tokopedia</span></td>
                     <td class="num"><span class="ord-items-count">1</span></td>
-                    <td class="num"><span class="ord-total">Rp 485.000<small>≈ $30</small></span></td>
-                    <td><span class="ord-date">2 May · 11:05</span></td>
+                    <td class="num"><span class="ord-total">Rp 485.000</span></td>
+                    <td><span class="ord-date">13 Nov · 11:05</span></td>
                     <td><span class="status-pill st-processing">Processing</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -557,8 +563,8 @@
                     <td><div class="cust"><span class="cust-name">Bagus Wicaksono</span><span class="cust-email">bagus.w@outlook.com</span></div></td>
                     <td><span class="channel-tag ch-website">Website</span></td>
                     <td class="num"><span class="ord-items-count">3</span></td>
-                    <td class="num"><span class="ord-total">Rp 1.425.000<small>≈ $88</small></span></td>
-                    <td><span class="ord-date">1 May · 19:42</span></td>
+                    <td class="num"><span class="ord-total">Rp 1.425.000</span></td>
+                    <td><span class="ord-date">12 Nov · 19:42</span></td>
                     <td><span class="status-pill st-packed">Packed</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -567,8 +573,8 @@
                     <td><div class="cust"><span class="cust-name">Sarah Tanuwijaya</span><span class="cust-email">sarah.t@gmail.com</span></div></td>
                     <td><span class="channel-tag ch-shopee">Shopee</span></td>
                     <td class="num"><span class="ord-items-count">1</span></td>
-                    <td class="num"><span class="ord-total">Rp 520.000<small>≈ $32</small></span></td>
-                    <td><span class="ord-date">1 May · 16:18</span></td>
+                    <td class="num"><span class="ord-total">Rp 520.000</span></td>
+                    <td><span class="ord-date">12 Nov · 16:18</span></td>
                     <td><span class="status-pill st-shipped">Shipped</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -577,8 +583,8 @@
                     <td><div class="cust"><span class="cust-name">Andra Halim</span><span class="cust-email">walk-in · POS</span></div></td>
                     <td><span class="channel-tag ch-pos">POS</span></td>
                     <td class="num"><span class="ord-items-count">2</span></td>
-                    <td class="num"><span class="ord-total">Rp 690.000<small>≈ $43</small></span></td>
-                    <td><span class="ord-date">1 May · 15:02</span></td>
+                    <td class="num"><span class="ord-total">Rp 690.000</span></td>
+                    <td><span class="ord-date">12 Nov · 15:02</span></td>
                     <td><span class="status-pill st-completed">Completed</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -587,8 +593,8 @@
                     <td><div class="cust"><span class="cust-name">Marcus Delgado</span><span class="cust-email">m.delgado@proton.me</span></div></td>
                     <td><span class="channel-tag ch-discogs">Discogs</span></td>
                     <td class="num"><span class="ord-items-count">1</span></td>
-                    <td class="num"><span class="ord-total">Rp 560.000<small>≈ $35</small></span></td>
-                    <td><span class="ord-date">30 Apr · 22:11</span></td>
+                    <td class="num"><span class="ord-total">Rp 560.000</span></td>
+                    <td><span class="ord-date">11 Nov · 22:11</span></td>
                     <td><span class="status-pill st-delivered">Delivered</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -597,8 +603,8 @@
                     <td><div class="cust"><span class="cust-name">Yuki Tanaka</span><span class="cust-email">yuki.t@gmail.com</span></div></td>
                     <td><span class="channel-tag ch-bandcamp">Bandcamp</span></td>
                     <td class="num"><span class="ord-items-count">2</span></td>
-                    <td class="num"><span class="ord-total">Rp 840.000<small>≈ $52</small></span></td>
-                    <td><span class="ord-date">30 Apr · 18:40</span></td>
+                    <td class="num"><span class="ord-total">Rp 840.000</span></td>
+                    <td><span class="ord-date">11 Nov · 18:40</span></td>
                     <td><span class="status-pill st-shipped">Shipped</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -607,8 +613,8 @@
                     <td><div class="cust"><span class="cust-name">Dewi Anggraini</span><span class="cust-email">dewi.a@gmail.com</span></div></td>
                     <td><span class="channel-tag ch-website">Website</span></td>
                     <td class="num"><span class="ord-items-count">4</span></td>
-                    <td class="num"><span class="ord-total">Rp 1.960.000<small>≈ $121</small></span></td>
-                    <td><span class="ord-date">30 Apr · 12:33</span></td>
+                    <td class="num"><span class="ord-total">Rp 1.960.000</span></td>
+                    <td><span class="ord-date">11 Nov · 12:33</span></td>
                     <td><span class="status-pill st-cancelled">Cancelled</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -617,8 +623,8 @@
                     <td><div class="cust"><span class="cust-name">Priya Sharma</span><span class="cust-email">priya.s@ebay.com</span></div></td>
                     <td><span class="channel-tag ch-ebay">eBay</span></td>
                     <td class="num"><span class="ord-items-count">1</span></td>
-                    <td class="num"><span class="ord-total">Rp 725.000<small>≈ $45</small></span></td>
-                    <td><span class="ord-date">29 Apr · 20:55</span></td>
+                    <td class="num"><span class="ord-total">Rp 725.000</span></td>
+                    <td><span class="ord-date">10 Nov · 20:55</span></td>
                     <td><span class="status-pill st-refunded">Refunded</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -627,8 +633,8 @@
                     <td><div class="cust"><span class="cust-name">Fajar Nugroho</span><span class="cust-email">fajar.n@gmail.com</span></div></td>
                     <td><span class="channel-tag ch-website">Website</span></td>
                     <td class="num"><span class="ord-items-count">2</span></td>
-                    <td class="num"><span class="ord-total">Rp 1.050.000<small>≈ $65</small></span></td>
-                    <td><span class="ord-date">29 Apr · 09:17</span></td>
+                    <td class="num"><span class="ord-total">Rp 1.050.000</span></td>
+                    <td><span class="ord-date">10 Nov · 09:17</span></td>
                     <td><span class="status-pill st-completed">Completed</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -652,29 +658,29 @@
           <!-- Cards (mobile only) -->
           <div class="ord-cards">
             <a class="ord-card" href="mockup-order-detail.html">
-              <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0842</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-pending">Pending</span></div>
+              <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0842</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-processing">Processing</span></div>
               <div class="oc-mid"><span class="oc-cust">Rizky Pratama<small>rizky.p@gmail.com</small></span></div>
-              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">2</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">2 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 970.000</span></div></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">2</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 970.000</span></div></div>
             </a>
             <a class="ord-card" href="mockup-order-detail.html">
               <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0841</span><span class="channel-tag ch-tokopedia">Tokopedia</span></div><span class="status-pill st-processing">Processing</span></div>
               <div class="oc-mid"><span class="oc-cust">Linda Kusuma<small>linda.k@gmail.com</small></span></div>
-              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">2 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 485.000</span></div></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 485.000</span></div></div>
             </a>
             <a class="ord-card" href="mockup-order-detail.html">
               <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0840</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-packed">Packed</span></div>
               <div class="oc-mid"><span class="oc-cust">Bagus Wicaksono<small>bagus.w@outlook.com</small></span></div>
-              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">3</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">1 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 1.425.000</span></div></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">3</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">12 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 1.425.000</span></div></div>
             </a>
             <a class="ord-card" href="mockup-order-detail.html">
               <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0839</span><span class="channel-tag ch-shopee">Shopee</span></div><span class="status-pill st-shipped">Shipped</span></div>
               <div class="oc-mid"><span class="oc-cust">Sarah Tanuwijaya<small>sarah.t@gmail.com</small></span></div>
-              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">1 May</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 520.000</span></div></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">12 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 520.000</span></div></div>
             </a>
             <a class="ord-card" href="mockup-order-detail.html">
               <div class="oc-top"><div class="oc-id"><span class="ord-no">MF-0834</span><span class="channel-tag ch-ebay">eBay</span></div><span class="status-pill st-refunded">Refunded</span></div>
               <div class="oc-mid"><span class="oc-cust">Priya Sharma<small>priya.s@ebay.com</small></span></div>
-              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">29 Apr</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 725.000</span></div></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">10 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 725.000</span></div></div>
             </a>
           </div>
         </div>
@@ -687,7 +693,7 @@
           <button class="sum-card active" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Paid · 7D</span></div>
             <div class="sum-val">2.958</div>
-            <div class="sum-meta"><span class="mono">6.214</span> tickets · <span class="mono">Rp 7.42B</span></div>
+            <div class="sum-meta"><span class="mono">6.214</span> tickets · <span class="mono">Rp 7,42 jt</span></div>
           </button>
           <button class="sum-card" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Awaiting payment</span></div>
@@ -702,7 +708,7 @@
           <button class="sum-card" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--danger)"></span><span class="sum-lbl">Refund requests</span></div>
             <div class="sum-val">5</div>
-            <div class="sum-meta"><span class="mono">Rp 4.2M</span> · <span class="mono">2</span> past cutoff</div>
+            <div class="sum-meta"><span class="mono">Rp 4,2 jt</span> · <span class="mono">2</span> past cutoff</div>
           </button>
         </div>
         <div>
@@ -799,6 +805,17 @@
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
                   <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-M5-48806</span></td>
+                    <td><div class="cust"><span class="cust-name">Fikri Ramadhan</span><span class="cust-email">fikri.r@gmail.com</span></div></td>
+                    <td><span class="ev-name">Maroon 5 — JIS</span><span class="tk-sample">Sample</span><span class="ev-tier">CAT 5 · ×2</span></td>
+                    <td><span class="channel-tag ch-website">Website</span></td>
+                    <td><span class="ord-items-count">Virtual account</span></td>
+                    <td class="num"><span class="ord-total">Rp 3.000.000</span></td>
+                    <td><span class="ord-date">12 Nov · 21:49</span></td>
+                    <td><span class="status-pill st-cancelled">Expired</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
                     <td><span class="ord-no">TK-GN-08390</span></td>
                     <td><div class="cust"><span class="cust-name">Hendra Gunawan</span><span class="cust-email">hendra.g@outlook.com</span></div></td>
                     <td><span class="ev-name">Guns N' Roses — Madya GBK</span><span class="ev-tier">Festival · ×1</span></td>
@@ -829,17 +846,6 @@
                     <td class="num"><span class="ord-total">Rp 100.000</span></td>
                     <td><span class="ord-date">12 Nov · 18:02</span></td>
                     <td><span class="status-pill st-refunded">Refunded</span></td>
-                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
-                  </tr>
-                  <tr onclick="location.href='mockup-event-detail.html'">
-                    <td><span class="ord-no">TK-M5-48806</span></td>
-                    <td><div class="cust"><span class="cust-name">Fikri Ramadhan</span><span class="cust-email">fikri.r@gmail.com</span></div></td>
-                    <td><span class="ev-name">Maroon 5 — JIS</span><span class="tk-sample">Sample</span><span class="ev-tier">CAT 5 · ×2</span></td>
-                    <td><span class="channel-tag ch-website">Website</span></td>
-                    <td><span class="ord-items-count">Virtual account</span></td>
-                    <td class="num"><span class="ord-total">Rp 3.000.000</span></td>
-                    <td><span class="ord-date">12 Nov · 21:49</span></td>
-                    <td><span class="status-pill st-cancelled">Expired</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
                 </tbody>
@@ -888,7 +894,7 @@
       <!-- Dealers POS tab -->
       <div class="ord-view" id="view-dealers" hidden>
       <div class="orders-layout">
-        <div class="summary"><button class="sum-card active" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">POS sales · 30D</span></div><div class="sum-val">Rp 317.5M</div><div class="sum-meta"><span class="mono">2.024</span> transactions</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">Live dealers</span></div><div class="sum-val">4</div><div class="sum-meta"><a href="mockup-dealers.html" style="text-decoration:underline">all dealers</a></div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Refunds · 7D</span></div><div class="sum-val">6</div><div class="sum-meta"><span class="mono">Rp 1.9M</span> · dealer-initiated</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">MF fee · 30D</span></div><div class="sum-val">Rp 7.9M</div><div class="sum-meta">2.5% · settles Mon</div></button></div>
+        <div class="summary"><button class="sum-card active" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">POS sales · 30D</span></div><div class="sum-val">Rp 317,5 jt</div><div class="sum-meta"><span class="mono">2.024</span> transactions</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">Live dealers</span></div><div class="sum-val">4</div><div class="sum-meta"><a href="mockup-dealers.html" style="text-decoration:underline">all dealers</a></div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Refunds · 7D</span></div><div class="sum-val">6</div><div class="sum-meta"><span class="mono">Rp 1,9 jt</span> · dealer-initiated</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">MF fee · 30D</span></div><div class="sum-val">Rp 7,9 jt</div><div class="sum-meta">2,5% · settles Mon</div></button></div>
         <div>
           <div class="toolbar">
             <div class="status-tabs" role="tablist" aria-label="Filter POS sales">
@@ -905,7 +911,7 @@
           <div class="table-wrap">
             <div class="table-scroll">
               <table class="ord-table">
-                <thead><tr><th>Txn</th><th>Dealer</th><th>Items</th><th>Payment</th><th class="num">Amount</th><th>Time</th><th>Status</th><th></th></tr></thead>
+                <thead><tr><th>Txn</th><th>Dealer</th><th>Items</th><th>Payment</th><th class="num">Amount</th><th>Date</th><th>Status</th><th></th></tr></thead>
                 <tbody>
                   <tr onclick="location.href='mockup-dealer-detail.html'">
                     <td><span class="ord-no">SP-POS-0412</span></td>
@@ -914,6 +920,16 @@
                     <td><span class="ord-items-count">QRIS</span></td>
                     <td class="num"><span class="ord-total">Rp 485.000</span></td>
                     <td><span class="ord-date">13 Nov · 14:52</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-dealer-detail.html'">
+                    <td><span class="ord-no">KK-POS-0219</span></td>
+                    <td><div class="cust"><span class="cust-name">Kaset Kita</span><span class="cust-email">cashier Rani</span></div></td>
+                    <td>Dewa 19 — Bintang Lima (Cassette) + 2 more<span class="ev-tier">3 items</span></td>
+                    <td><span class="ord-items-count">QRIS</span></td>
+                    <td class="num"><span class="ord-total">Rp 255.000</span></td>
+                    <td><span class="ord-date">13 Nov · 14:40</span></td>
                     <td><span class="status-pill st-paid">Paid</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -938,32 +954,22 @@
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
                   <tr onclick="location.href='mockup-dealer-detail.html'">
-                    <td><span class="ord-no">SP-POS-0409</span></td>
-                    <td><div class="cust"><span class="cust-name">Sudut Piringan</span><span class="cust-email">cashier Ayu</span></div></td>
-                    <td>Floating Points — Crush (LP)<span class="ev-tier">1 item</span></td>
-                    <td><span class="ord-items-count">E-wallet · GoPay</span></td>
-                    <td class="num"><span class="ord-total">Rp 485.000</span></td>
-                    <td><span class="ord-date">13 Nov · 13:20</span></td>
-                    <td><span class="status-pill st-paid">Paid</span></td>
-                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
-                  </tr>
-                  <tr onclick="location.href='mockup-dealer-detail.html'">
-                    <td><span class="ord-no">KK-POS-0219</span></td>
-                    <td><div class="cust"><span class="cust-name">Kaset Kita</span><span class="cust-email">cashier Rani</span></div></td>
-                    <td>Dewa 19 — Bintang Lima (Cassette) + 2 more<span class="ev-tier">3 items</span></td>
-                    <td><span class="ord-items-count">QRIS</span></td>
-                    <td class="num"><span class="ord-total">Rp 255.000</span></td>
-                    <td><span class="ord-date">13 Nov · 14:40</span></td>
-                    <td><span class="status-pill st-paid">Paid</span></td>
-                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
-                  </tr>
-                  <tr onclick="location.href='mockup-dealer-detail.html'">
                     <td><span class="ord-no">RS-POS-0133</span></td>
                     <td><div class="cust"><span class="cust-name">Rekaman Selatan</span><span class="cust-email">cashier Teguh</span></div></td>
                     <td>Floating Points — Crush (LP)<span class="ev-tier">1 item</span></td>
                     <td><span class="ord-items-count">EDC · BCA</span></td>
                     <td class="num"><span class="ord-total">Rp 485.000</span></td>
                     <td><span class="ord-date">13 Nov · 13:44</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-dealer-detail.html'">
+                    <td><span class="ord-no">SP-POS-0409</span></td>
+                    <td><div class="cust"><span class="cust-name">Sudut Piringan</span><span class="cust-email">cashier Ayu</span></div></td>
+                    <td>Floating Points — Crush (LP)<span class="ev-tier">1 item</span></td>
+                    <td><span class="ord-items-count">E-wallet · GoPay</span></td>
+                    <td class="num"><span class="ord-total">Rp 485.000</span></td>
+                    <td><span class="ord-date">13 Nov · 13:20</span></td>
                     <td><span class="status-pill st-paid">Paid</span></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
                   </tr>
@@ -1052,5 +1058,6 @@
   }
   {const h=location.hash.slice(1);document.querySelector('.view-tabs [data-view="'+h+'"]')?.click();}
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

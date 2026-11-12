@@ -298,6 +298,17 @@
     .up-row:first-child{border-top:none;}
     .up-row .t1{font-size:13px;color:var(--ink);}
     .up-row .t2{font-size:11px;color:var(--mute);margin-top:2px;font-variant-numeric:tabular-nums;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+      /* audit B10/B11: dots not stripes; money in ink; y-axis values */
+    .alert-bar{width:8px!important;height:8px;min-height:0!important;align-self:flex-start!important;border-radius:50%!important;margin-top:6px;}
+    .af-warn,.af-info{color:var(--ink)!important;}
+    .y-lbl{font-family:var(--ui);font-size:11px;fill:var(--mute);font-variant-numeric:tabular-nums;}
+      .tk-pct{font-size:12px;color:var(--body);font-variant-numeric:tabular-nums;margin-left:6px;}
   </style>
 </head>
 <body>
@@ -324,7 +335,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">28</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -444,7 +455,7 @@
       <!-- Greeting header -->
       <div class="greet">
         <div>
-          <div class="greet-eyebrow">Saturday · 18 January 2025</div>
+          <div class="greet-eyebrow">Friday · 13 November 2026</div>
           <h1 class="greet-h1">Good morning, Raka</h1>
           <div class="greet-sub">Store opens 11:00 · Bima &amp; Ayu on shift · 3 items need your attention</div>
         </div>
@@ -467,11 +478,11 @@
       <div class="kpis">
         <div class="kpi">
           <div class="kpi-lbl">Gross revenue</div>
-          <div class="kpi-val">Rp 58.42M</div>
+          <div class="kpi-val">Rp 58,42 jt</div>
           <div class="kpi-foot">
             <div class="kpi-delta up">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
-              <span class="mono">+18.4%</span>
+              <span class="mono">+18,4%</span>
             </div>
             <div class="kpi-spark">
               <svg viewBox="0 0 70 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,20 12,18 23,19 35,13 47,14 58,7 70,4" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -493,11 +504,11 @@
         </div>
         <div class="kpi">
           <div class="kpi-lbl">Avg ticket</div>
-          <div class="kpi-val">Rp 236K</div>
+          <div class="kpi-val">Rp 236 rb</div>
           <div class="kpi-foot">
             <div class="kpi-delta up">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
-              <span class="mono">+Rp 14K</span>
+              <span class="mono">+Rp 14 rb</span>
             </div>
             <div class="kpi-spark">
               <svg viewBox="0 0 70 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,15 12,17 23,12 35,14 47,9 58,11 70,6" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -506,9 +517,9 @@
         </div>
         <div class="kpi">
           <div class="kpi-lbl">Gross margin</div>
-          <div class="kpi-val">42.8%</div>
+          <div class="kpi-val">42,8%</div>
           <div class="kpi-foot">
-            <div class="kpi-delta neu"><span class="mono">Rp 25.0M</span></div>
+            <div class="kpi-delta neu"><span class="mono">Rp 25,0 jt</span></div>
             <div class="kpi-spark">
               <svg viewBox="0 0 70 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,12 12,13 23,11 35,12 47,10 58,11 70,9" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
@@ -533,18 +544,18 @@
             <div class="rev-stats">
               <div class="rev-stat">
                 <div class="rs-lbl">This period</div>
-                <div class="rs-val">Rp 58.42M</div>
+                <div class="rs-val">Rp 58,42 jt</div>
               </div>
               <div class="rev-stat">
                 <div class="rs-lbl">Previous</div>
-                <div class="rs-val">Rp 49.34M</div>
+                <div class="rs-val">Rp 49,34 jt</div>
               </div>
               <div class="rev-stat">
                 <div class="rs-lbl">Delta</div>
-                <div class="rs-val up">+18.4%</div>
+                <div class="rs-val up">+18,4%</div>
               </div>
             </div>
-            <svg class="chart-svg" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Revenue this period versus previous, Sunday 12 to Saturday 18">
+            <svg class="chart-svg" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Revenue this period versus previous, Saturday 7 to Friday 13">
               <defs>
                 <linearGradient id="revarea" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stop-color="var(--area-top)"/>
@@ -555,7 +566,7 @@
               <line x1="0" y1="20"  x2="560" y2="20"  stroke="var(--grid)" stroke-width="1"/>
               <line x1="0" y1="80"  x2="560" y2="80"  stroke="var(--grid)" stroke-width="1"/>
               <line x1="0" y1="140" x2="560" y2="140" stroke="var(--grid)" stroke-width="1"/>
-              <line x1="0" y1="200" x2="560" y2="200" stroke="var(--grid)" stroke-width="1"/>
+              <line x1="0" y1="200" x2="560" y2="200" stroke="var(--grid)" stroke-width="1"/><text class="y-lbl" x="2" y="15">12 jt</text><text class="y-lbl" x="2" y="75">8 jt</text><text class="y-lbl" x="2" y="135">4 jt</text><text class="y-lbl" x="2" y="195">0</text>
               <!-- previous period (dashed, mute) -->
               <polyline points="0,150 93,146 187,138 280,142 373,128 467,120 560,112" fill="none" stroke="var(--mute)" stroke-width="1.5" stroke-dasharray="5 4" stroke-linejoin="round" stroke-linecap="round"/>
               <!-- this period area + line -->
@@ -565,7 +576,7 @@
               <circle cx="560" cy="44" r="4.5" fill="var(--success)" stroke="var(--surface)" stroke-width="2"/>
             </svg>
             <div class="x-axis">
-              <span>Sun 12</span><span>Mon 13</span><span>Tue 14</span><span>Wed 15</span><span>Thu 16</span><span>Fri 17</span><span>Sat 18</span>
+              <span>Sat 7</span><span>Sun 8</span><span>Mon 9</span><span>Tue 10</span><span>Wed 11</span><span>Thu 12</span><span>Fri 13</span>
             </div>
           </div>
         </section>
@@ -585,7 +596,7 @@
                 <div class="alert-title">Low stock — Sinestesia</div>
                 <div class="alert-meta">MF-024 · Efek Rumah Kaca · 2 left · reorder at 4</div>
               </div>
-              <div class="alert-fig af-warn">Rp 485K</div>
+              <div class="alert-fig af-warn">Rp 485 rb</div>
             </div>
 
             <div class="alert">
@@ -602,7 +613,7 @@
                 <div class="alert-title">Tokopedia payout arrives Monday</div>
                 <div class="alert-meta">Covers orders 0812–0847 · settles to BCA</div>
               </div>
-              <div class="alert-fig af-info">Rp 8.4M</div>
+              <div class="alert-fig af-info">Rp 8,4 jt</div>
             </div>
 
             <div class="alert">
@@ -623,12 +634,12 @@
         <div class="kpi">
           <div class="kpi-lbl">Tickets sold</div>
           <div class="kpi-val">6.214</div>
-          <div class="kpi-foot"><div class="kpi-delta up"><span class="mono">+12.8%</span></div></div>
+          <div class="kpi-foot"><div class="kpi-delta up"><span class="mono">+12,8%</span></div></div>
         </div>
         <div class="kpi">
           <div class="kpi-lbl">Ticket revenue</div>
-          <div class="kpi-val">Rp 7.42B</div>
-          <div class="kpi-foot"><div class="kpi-delta neu"><span class="mono">fee Rp 222.6M</span></div></div>
+          <div class="kpi-val">Rp 7,42 jt</div>
+          <div class="kpi-foot"><div class="kpi-delta neu"><span class="mono">fee Rp 222,6 jt</span></div></div>
         </div>
         <div class="kpi">
           <div class="kpi-lbl">Upcoming events</div>
@@ -637,21 +648,21 @@
         </div>
         <div class="kpi">
           <div class="kpi-lbl">Check-in rate</div>
-          <div class="kpi-val">92.6%</div>
-          <div class="kpi-foot"><div class="kpi-delta up"><span class="mono">+1.9 pts</span></div></div>
+          <div class="kpi-val">92,6%</div>
+          <div class="kpi-foot"><div class="kpi-delta up"><span class="mono">+1,9 pp</span></div></div>
         </div>
       </div>
       <div class="g-main">
         <section class="panel">
           <div class="panel-hdr"><span class="panel-title">Top events</span><span class="p-right">by ticket revenue · all-time</span></div>
           <table class="tk-table">
-            <thead><tr><th>Event</th><th class="num">Sold / quota</th><th class="num">Revenue</th></tr></thead>
+            <thead><tr><th>Event</th><th class="num">Sold · sell-through</th><th class="num">Revenue</th></tr></thead>
             <tbody>
-              <tr><td><span class="ink">BIGBANG <XX : COSMOS></span><span class="sub">JIS · 16–17 Jan</span></td><td class="num"><span class="tk-fig">71.220</span><span class="tk-bar"><i style="width:59.4%"></i></span></td><td class="num"><span class="tk-fig">Rp 110.39B</span></td></tr>
-              <tr><td><span class="ink">Maroon 5 Asia Tour 2027</span><span class="tk-sample">Sample</span><span class="sub">JIS · 5 Feb</span></td><td class="num"><span class="tk-fig">45.590</span><span class="tk-bar"><i style="width:76.0%"></i></span></td><td class="num"><span class="tk-fig">Rp 97.84B</span></td></tr>
-              <tr><td><span class="ink">My Chemical Romance</span><span class="sub">JIS · 22 Nov</span></td><td class="num"><span class="tk-fig">60.000</span><span class="tk-bar"><i style="width:100.0%"></i></span></td><td class="num"><span class="tk-fig">Rp 63.54B</span></td></tr>
-              <tr><td><span class="ink">Joyland Sessions 2026</span><span class="tk-sample">Sample</span><span class="sub">GBK Field · 28–29 Nov</span></td><td class="num"><span class="tk-fig">13.940</span><span class="tk-bar"><i style="width:77.4%"></i></span></td><td class="num"><span class="tk-fig">Rp 16.73B</span></td></tr>
-              <tr><td><span class="ink">Guns N' Roses</span><span class="sub">Madya GBK · 21 Nov</span></td><td class="num"><span class="tk-fig">8.412</span><span class="tk-bar"><i style="width:93.5%"></i></span></td><td class="num"><span class="tk-fig">Rp 14.72B</span></td></tr>
+              <tr><td><span class="ink">BIGBANG <XX : COSMOS></span><span class="sub">JIS · 16–17 Jan</span></td><td class="num"><span class="tk-fig">71.220</span><span class="tk-bar"><i style="width:59.4%"></i></span><span class="tk-pct"> 59,4%</span></td><td class="num"><span class="tk-fig">Rp 110,39 jt</span></td></tr>
+              <tr><td><span class="ink">Maroon 5 Asia Tour 2027</span><span class="tk-sample">Sample</span><span class="sub">JIS · 5 Feb</span></td><td class="num"><span class="tk-fig">45.590</span><span class="tk-bar"><i style="width:76.0%"></i></span><span class="tk-pct"> 76,0%</span></td><td class="num"><span class="tk-fig">Rp 97,84 jt</span></td></tr>
+              <tr><td><span class="ink">My Chemical Romance</span><span class="sub">JIS · 22 Nov</span></td><td class="num"><span class="tk-fig">60.000</span><span class="tk-bar"><i style="width:100.0%"></i></span><span class="tk-pct"> 100,0%</span></td><td class="num"><span class="tk-fig">Rp 63,54 jt</span></td></tr>
+              <tr><td><span class="ink">Joyland Sessions 2026</span><span class="tk-sample">Sample</span><span class="sub">GBK Field · 28–29 Nov</span></td><td class="num"><span class="tk-fig">13.940</span><span class="tk-bar"><i style="width:77.4%"></i></span><span class="tk-pct"> 77,4%</span></td><td class="num"><span class="tk-fig">Rp 16,73 jt</span></td></tr>
+              <tr><td><span class="ink">Guns N' Roses</span><span class="sub">Madya GBK · 21 Nov</span></td><td class="num"><span class="tk-fig">8.412</span><span class="tk-bar"><i style="width:93.5%"></i></span><span class="tk-pct"> 93,5%</span></td><td class="num"><span class="tk-fig">Rp 14,72 jt</span></td></tr>
             </tbody>
           </table>
         </section>

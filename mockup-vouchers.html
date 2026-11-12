@@ -337,6 +337,14 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+      .used.over{color:var(--danger);}
+    .use-fill.over{background:var(--danger)!important;}
   </style>
 </head>
 <body>
@@ -363,7 +371,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -510,12 +518,12 @@
         </div>
         <div class="stat">
           <div class="stat-lbl">Discount Given · MTD</div>
-          <div class="stat-val">Rp 5.9M</div>
-          <div class="stat-sub trend-neu"><span class="mono">2.4%</span> of gross sales</div>
+          <div class="stat-val">Rp 5,9 jt</div>
+          <div class="stat-sub trend-neu"><span class="mono">2,4%</span> of gross sales</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">Avg Order w/ Code</div>
-          <div class="stat-val">Rp 612k</div>
+          <div class="stat-val">Rp 612 rb</div>
           <div class="stat-sub trend-neu"><span class="mono">+18%</span> vs no code</div>
         </div>
       </div>
@@ -555,7 +563,7 @@
           </thead>
           <tbody>
             <tr>
-              <td class="code-cell"><span class="code">CRATE10</span><div class="vc-desc">10% off · min Rp 300k</div></td>
+              <td class="code-cell"><span class="code">CRATE10</span><div class="vc-desc">10% off · min Rp 300 rb</div></td>
               <td data-k="Type"><span class="vtype">Percentage</span></td>
               <td class="num" data-k="Value"><span class="vval">10%</span></td>
               <td class="num" data-k="Used"><span class="used">184<span class="lim">/500</span></span><div class="use-bar"><div class="use-fill" style="width:37%"></div></div></td>
@@ -564,9 +572,9 @@
               <td class="ctr" data-k="On"><label class="switch"><input type="checkbox" checked aria-label="Toggle CRATE10"><span class="track"></span></label></td>
             </tr>
             <tr>
-              <td class="code-cell"><span class="code">WELCOME50K</span><div class="vc-desc">Rp 50k off first order</div></td>
+              <td class="code-cell"><span class="code">WELCOME50K</span><div class="vc-desc">Rp 50 rb off first order</div></td>
               <td data-k="Type"><span class="vtype">Fixed amount</span></td>
-              <td class="num" data-k="Value"><span class="vval">Rp 50k</span></td>
+              <td class="num" data-k="Value"><span class="vval">Rp 50 rb</span></td>
               <td class="num" data-k="Used"><span class="used">129<span class="lim">/∞</span></span><div class="use-bar"><div class="use-fill" style="width:26%"></div></div></td>
               <td data-k="Expiry"><span class="expiry">No expiry</span></td>
               <td data-k="Status"><span class="status-pill st-active">Active</span></td>
@@ -582,9 +590,9 @@
               <td class="ctr" data-k="On"><label class="switch"><input type="checkbox" checked aria-label="Toggle VINYLDAY"><span class="track"></span></label></td>
             </tr>
             <tr>
-              <td class="code-cell"><span class="code">RSD2026</span><div class="vc-desc">Rp 100k off · min Rp 750k</div></td>
+              <td class="code-cell"><span class="code">RSD2026</span><div class="vc-desc">Rp 100 rb off · min Rp 750 rb</div></td>
               <td data-k="Type"><span class="vtype">Fixed amount</span></td>
-              <td class="num" data-k="Value"><span class="vval">Rp 100k</span></td>
+              <td class="num" data-k="Value"><span class="vval">Rp 100 rb</span></td>
               <td class="num" data-k="Used"><span class="used">0<span class="lim">/300</span></span><div class="use-bar"><div class="use-fill" style="width:0%"></div></div></td>
               <td data-k="Expiry"><span class="expiry">18 Apr 2026</span></td>
               <td data-k="Status"><span class="status-pill st-scheduled">Scheduled</span></td>
@@ -609,10 +617,10 @@
               <td class="ctr" data-k="On"><label class="switch"><input type="checkbox" aria-label="Toggle WHOLESALE15"><span class="track"></span></label></td>
             </tr>
             <tr>
-              <td class="code-cell"><span class="code">NEWYEAR25</span><div class="vc-desc">Rp 25k off · min Rp 200k</div></td>
+              <td class="code-cell"><span class="code">NEWYEAR25</span><div class="vc-desc">Rp 25 rb off · min Rp 200 rb</div></td>
               <td data-k="Type"><span class="vtype">Fixed amount</span></td>
-              <td class="num" data-k="Value"><span class="vval">Rp 25k</span></td>
-              <td class="num" data-k="Used"><span class="used">312<span class="lim">/300</span></span><div class="use-bar"><div class="use-fill" style="width:100%"></div></div></td>
+              <td class="num" data-k="Value"><span class="vval">Rp 25 rb</span></td>
+              <td class="num" data-k="Used"><span class="used over">312<span class="lim">/300</span></span> <span class="status-pill st-cancelled" style="margin-left:4px">Over limit</span><div class="use-bar"><div class="use-fill over" style="width:100%"></div></div></td>
               <td data-k="Expiry"><span class="expiry past">2 Jan 2026</span></td>
               <td data-k="Status"><span class="status-pill st-expired">Expired</span></td>
               <td class="ctr" data-k="On"><label class="switch"><input type="checkbox" aria-label="Toggle NEWYEAR25"><span class="track"></span></label></td>
@@ -763,5 +771,6 @@
     applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

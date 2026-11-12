@@ -332,6 +332,12 @@
       .table-card{display:none;}
       .inv-cards{display:flex;}
     }
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -358,7 +364,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item active" aria-current="page">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -476,7 +482,7 @@
       <div class="page-hdr">
         <div>
           <h1 class="page-title">Inventory</h1>
-          <div class="page-sub">1,284 releases across all channels · 46 low, 8 out of stock</div>
+          <div class="page-sub">1.284 releases across all channels · 46 low, 8 out of stock</div>
         </div>
         <div class="page-hdr-right">
           <a href="mockup-locations.html" class="btn-sec">
@@ -550,7 +556,7 @@
               <td><span class="fmt">LP</span></td>
               <td class="hide-md"><span class="pill-neutral">M</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">14</span><span class="status-pill st-in">In stock</span></span></td>
-              <td class="num"><span class="price">Rp 485.000<small>≈ $30</small></span></td>
+              <td class="num"><span class="price">Rp 485.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-pos">POS</span><span class="channel-more">+2</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -560,7 +566,7 @@
               <td><span class="fmt">LP</span></td>
               <td class="hide-md"><span class="pill-neutral">VG+</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">3</span><span class="status-pill st-low">Low</span></span></td>
-              <td class="num"><span class="price">Rp 525.000<small>≈ $33</small></span></td>
+              <td class="num"><span class="price">Rp 525.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-tokopedia">Tokopedia</span><span class="channel-more">+1</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -570,7 +576,7 @@
               <td><span class="fmt">LP</span></td>
               <td class="hide-md"><span class="pill-neutral">M</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">9</span><span class="status-pill st-in">In stock</span></span></td>
-              <td class="num"><span class="price">Rp 620.000<small>≈ $38</small></span></td>
+              <td class="num"><span class="price">Rp 620.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-discogs">Discogs</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -580,7 +586,7 @@
               <td><span class="fmt">2xLP</span></td>
               <td class="hide-md"><span class="pill-neutral">M</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">0</span><span class="status-pill st-out">Out</span></span></td>
-              <td class="num"><span class="price">Rp 750.000<small>≈ $47</small></span></td>
+              <td class="num"><span class="price">Rp 750.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-shopee">Shopee</span><span class="channel-more">+1</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -590,7 +596,7 @@
               <td><span class="fmt">LP</span></td>
               <td class="hide-md"><span class="pill-neutral">VG+</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">6</span><span class="status-pill st-in">In stock</span></span></td>
-              <td class="num"><span class="price">Rp 560.000<small>≈ $35</small></span></td>
+              <td class="num"><span class="price">Rp 560.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-pos">POS</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -600,7 +606,7 @@
               <td><span class="fmt">2xLP</span></td>
               <td class="hide-md"><span class="pill-neutral">VG</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">2</span><span class="status-pill st-low">Low</span></span></td>
-              <td class="num"><span class="price">Rp 680.000<small>≈ $42</small></span></td>
+              <td class="num"><span class="price">Rp 680.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-discogs">Discogs</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -610,7 +616,7 @@
               <td><span class="fmt">LP</span></td>
               <td class="hide-md"><span class="pill-neutral">M</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">11</span><span class="status-pill st-in">In stock</span></span></td>
-              <td class="num"><span class="price">Rp 595.000<small>≈ $37</small></span></td>
+              <td class="num"><span class="price">Rp 595.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-pos">POS</span><span class="channel-more">+1</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -620,7 +626,7 @@
               <td><span class="fmt">LP</span></td>
               <td class="hide-md"><span class="pill-neutral">VG+</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">18</span><span class="status-pill st-in">In stock</span></span></td>
-              <td class="num"><span class="price">Rp 510.000<small>≈ $32</small></span></td>
+              <td class="num"><span class="price">Rp 510.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-tokopedia">Tokopedia</span><span class="channel-more">+2</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -630,7 +636,7 @@
               <td><span class="fmt">2xLP</span></td>
               <td class="hide-md"><span class="pill-neutral">M</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">5</span><span class="status-pill st-in">In stock</span></span></td>
-              <td class="num"><span class="price">Rp 720.000<small>≈ $45</small></span></td>
+              <td class="num"><span class="price">Rp 720.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-discogs">Discogs</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -640,7 +646,7 @@
               <td><span class="fmt">LP</span></td>
               <td class="hide-md"><span class="pill-neutral">M</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">1</span><span class="status-pill st-low">Low</span></span></td>
-              <td class="num"><span class="price">Rp 645.000<small>≈ $40</small></span></td>
+              <td class="num"><span class="price">Rp 645.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-pos">POS</span><span class="channel-more">+2</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -650,7 +656,7 @@
               <td><span class="fmt">2xLP</span></td>
               <td class="hide-md"><span class="pill-neutral">VG+</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">7</span><span class="status-pill st-in">In stock</span></span></td>
-              <td class="num"><span class="price">Rp 590.000<small>≈ $37</small></span></td>
+              <td class="num"><span class="price">Rp 590.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-shopee">Shopee</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -660,7 +666,7 @@
               <td><span class="fmt">CD</span></td>
               <td class="hide-md"><span class="pill-neutral">M</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">0</span><span class="status-pill st-out">Out</span></span></td>
-              <td class="num"><span class="price">Rp 285.000<small>≈ $18</small></span></td>
+              <td class="num"><span class="price">Rp 285.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-tokopedia">Tokopedia</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
@@ -670,14 +676,14 @@
               <td><span class="fmt">LP</span></td>
               <td class="hide-md"><span class="pill-neutral">M</span></td>
               <td class="num"><span class="stock-cell"><span class="stock-qty">12</span><span class="status-pill st-in">In stock</span></span></td>
-              <td class="num"><span class="price">Rp 615.000<small>≈ $38</small></span></td>
+              <td class="num"><span class="price">Rp 615.000</span></td>
               <td class="hide-md"><span class="channels"><span class="channel-tag ch-website">Website</span><span class="channel-tag ch-pos">POS</span><span class="channel-more">+1</span></span></td>
               <td class="num"><span class="row-actions"><button class="act act-ico" title="Print barcode" aria-label="Print barcode" onclick="event.stopPropagation();openBarcode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg></button><a class="act" href="mockup-release-edit.html" onclick="event.stopPropagation()">Edit</a><span class="act del">Delete</span></span></td>
             </tr>
           </tbody>
         </table>
         <div class="pagination">
-          <span class="pg-count">Showing 1–13 of 1,284</span>
+          <span class="pg-count">Showing 1–13 of 1.284</span>
           <div class="pg-spacer"></div>
           <button class="pg-btn" disabled aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
           <button class="pg-num on">1</button>
@@ -724,7 +730,7 @@
           </div>
         </a>
         <div class="pagination" style="border:1px solid var(--hairline);border-radius:var(--r-lg);margin-top:4px;">
-          <span class="pg-count">Showing 1–13 of 1,284</span>
+          <span class="pg-count">Showing 1–13 of 1.284</span>
           <div class="pg-spacer"></div>
           <button class="pg-btn" disabled aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
           <button class="pg-num on">1</button>
@@ -830,5 +836,6 @@
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBarcode();});
 })();
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

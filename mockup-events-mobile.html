@@ -253,6 +253,15 @@
     .hb .bar{margin-top:0;height:6px;}
     .hb .val{text-align:right;}
     .split-hdr{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:600;margin:6px 0 4px;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -298,17 +307,17 @@
       <button class="sum-card" onclick="setSummary(this)">
         <div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Sold · 30D</span></div>
         <div class="sum-val">18.426</div>
-        <div class="sum-meta"><span class="mono">Rp 21.38B</span></div>
+        <div class="sum-meta"><span class="mono">Rp 21,38 jt</span></div>
       </button>
       <button class="sum-card" onclick="setSummary(this)">
         <div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Check-in rate</span></div>
-        <div class="sum-val">92.6%</div>
+        <div class="sum-val">92,6%</div>
         <div class="sum-meta">last <span class="mono">10</span> events</div>
       </button>
       <button class="sum-card" onclick="setSummary(this)">
         <div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Payouts due</span></div>
         <div class="sum-val">3</div>
-        <div class="sum-meta"><span class="mono">Rp 1.28B</span> · Mon</div>
+        <div class="sum-meta"><span class="mono">Rp 1,28 jt</span> · Mon</div>
       </button>
     </div>
 
@@ -491,7 +500,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>

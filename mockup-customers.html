@@ -318,6 +318,15 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+      /* audit B5: keep phone, lifetime and dates on one line */
+    td[data-k="Phone"],td[data-k="Lifetime"],td[data-k="Last order"],td[data-k="Orders"],.tbl th,table th{white-space:nowrap;}
+    .phone{color:var(--body);}
   </style>
 </head>
 <body>
@@ -344,7 +353,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -463,7 +472,7 @@
       <div class="page-hdr">
         <div>
           <h1 class="page-title">Customers</h1>
-          <div class="page-sub">1,284 people across every channel · Jakarta record shop</div>
+          <div class="page-sub">1.284 people across every channel · Jakarta record shop</div>
         </div>
         <div class="page-hdr-right">
           <button class="btn-sec">
@@ -481,13 +490,13 @@
       <div class="strip">
         <div class="stat">
           <div class="stat-lbl">Total Customers</div>
-          <div class="stat-val">1,284</div>
+          <div class="stat-val">1.284</div>
           <div class="stat-sub"><span class="trend-up"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 15l-6-6-6 6"/></svg><span class="mono">48</span></span><span class="trend-neu">new this month</span></div>
         </div>
         <div class="stat">
           <div class="stat-lbl">Lifetime Value · avg</div>
-          <div class="stat-val">Rp 1.8M</div>
-          <div class="stat-sub trend-neu"><span class="mono">3.4</span> orders per customer</div>
+          <div class="stat-val">Rp 1,8 jt</div>
+          <div class="stat-sub trend-neu"><span class="mono">3,4</span> orders per customer</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">VIP Members</div>
@@ -508,7 +517,7 @@
           <input placeholder="Search name, email or phone…">
         </div>
         <div class="chips">
-          <button class="chip on" onclick="setChip(this)">All <span class="cnt">1,284</span></button>
+          <button class="chip on" onclick="setChip(this)">All <span class="cnt">1.284</span></button>
           <button class="chip" onclick="setChip(this)">VIP <span class="cnt">86</span></button>
           <button class="chip" onclick="setChip(this)">Wholesale <span class="cnt">24</span></button>
           <button class="chip" onclick="setChip(this)">New <span class="cnt">48</span></button>
@@ -522,7 +531,7 @@
         <div class="widget">
           <div class="widget-hdr">
             <span class="widget-title">Customer List</span>
-            <span class="widget-note">1,284 total · sorted by lifetime value</span>
+            <span class="widget-note">1.284 total · sorted by lifetime value</span>
           </div>
           <div class="widget-body no-pad">
             <table class="cust-table">
@@ -543,8 +552,8 @@
                   <td data-k="Email"><span class="email">rani.wijaya@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 812-9043-118</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">41</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 18.4M</span></td>
-                  <td data-k="Last order"><span class="last-order">28 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 18,4 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">9 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-website">Website</span></td>
                 </tr>
                 <tr>
@@ -552,8 +561,8 @@
                   <td data-k="Email"><span class="email">bagus.s@mail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 813-2201-556</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">37</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 15.9M</span></td>
-                  <td data-k="Last order"><span class="last-order">1 May</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 15,9 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">12 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-pos">POS</span></td>
                 </tr>
                 <tr>
@@ -561,8 +570,8 @@
                   <td data-k="Email"><span class="email">buy@demajors.co.id</span></td>
                   <td data-k="Phone"><span class="phone">+62 21-5140-882</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">29</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 14.2M</span></td>
-                  <td data-k="Last order"><span class="last-order">30 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 14,2 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">11 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-event">Event</span></td>
                 </tr>
                 <tr>
@@ -570,8 +579,8 @@
                   <td data-k="Email"><span class="email">siti.pratiwi@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 856-7788-013</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">24</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 11.6M</span></td>
-                  <td data-k="Last order"><span class="last-order">2 May</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 11,6 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">13 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-website">Website</span></td>
                 </tr>
                 <tr>
@@ -579,8 +588,8 @@
                   <td data-k="Email"><span class="email">andra.n@outlook.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 878-4412-909</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">18</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 8.9M</span></td>
-                  <td data-k="Last order"><span class="last-order">27 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 8,9 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">8 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-tokopedia">Tokopedia</span></td>
                 </tr>
                 <tr>
@@ -588,8 +597,8 @@
                   <td data-k="Email"><span class="email">linda.kusuma@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 811-3390-274</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">14</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 6.7M</span></td>
-                  <td data-k="Last order"><span class="last-order">25 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 6,7 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">6 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-shopee">Shopee</span></td>
                 </tr>
                 <tr>
@@ -597,8 +606,8 @@
                   <td data-k="Email"><span class="email">farhan.hakim@mail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 852-6610-448</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">11</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 5.2M</span></td>
-                  <td data-k="Last order"><span class="last-order">22 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 5,2 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">3 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-discogs">Discogs</span></td>
                 </tr>
                 <tr>
@@ -606,8 +615,8 @@
                   <td data-k="Email"><span class="email">maya.puspita@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 838-1129-762</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">7</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 3.4M</span></td>
-                  <td data-k="Last order"><span class="last-order">3 May</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 3,4 jt</span></td>
+                  <td data-k="Last order"><span class="last-order">14 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-bandcamp">Bandcamp</span></td>
                 </tr>
                 <tr>
@@ -615,8 +624,8 @@
                   <td data-k="Email"><span class="email">gita.permata@mail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 819-5583-201</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">2</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 0.97M</span></td>
-                  <td data-k="Last order"><span class="last-order">1 May</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 970 rb</span></td>
+                  <td data-k="Last order"><span class="last-order">12 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-website">Website</span></td>
                 </tr>
                 <tr>
@@ -624,14 +633,14 @@
                   <td data-k="Email"><span class="email">reza.aditya@gmail.com</span></td>
                   <td data-k="Phone"><span class="phone">+62 877-9024-635</span></td>
                   <td class="num" data-k="Orders"><span class="mono-cell">1</span></td>
-                  <td class="num" data-k="Lifetime"><span class="lv">Rp 0.45M</span></td>
-                  <td data-k="Last order"><span class="last-order">29 Apr</span></td>
+                  <td class="num" data-k="Lifetime"><span class="lv">Rp 450 rb</span></td>
+                  <td data-k="Last order"><span class="last-order">10 Nov</span></td>
                   <td data-k="Acquired via"><span class="channel-tag ch-pos">POS</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="foot-note">Showing 10 of 1,284 customers</div>
+          <div class="foot-note">Showing 10 of 1.284 customers</div>
         </div>
 
         <!-- Side panel: top customers -->
@@ -642,11 +651,11 @@
               <span class="widget-note">by lifetime</span>
             </div>
             <div class="top-list">
-              <div class="top-row"><span class="top-rank">1</span><span class="top-av">RW</span><div class="top-body"><div class="top-name">Rani Wijaya</div><div class="top-meta">41 orders · Website</div></div><span class="top-lv">Rp 18.4M</span></div>
-              <div class="top-row"><span class="top-rank">2</span><span class="top-av">BS</span><div class="top-body"><div class="top-name">Bagus Santoso</div><div class="top-meta">37 orders · POS</div></div><span class="top-lv">Rp 15.9M</span></div>
-              <div class="top-row"><span class="top-rank">3</span><span class="top-av">DL</span><div class="top-body"><div class="top-name">Demajors Store</div><div class="top-meta">29 orders · Wholesale</div></div><span class="top-lv">Rp 14.2M</span></div>
-              <div class="top-row"><span class="top-rank">4</span><span class="top-av">SP</span><div class="top-body"><div class="top-name">Siti Pratiwi</div><div class="top-meta">24 orders · Website</div></div><span class="top-lv">Rp 11.6M</span></div>
-              <div class="top-row"><span class="top-rank">5</span><span class="top-av">AN</span><div class="top-body"><div class="top-name">Andra Nugraha</div><div class="top-meta">18 orders · Tokopedia</div></div><span class="top-lv">Rp 8.9M</span></div>
+              <div class="top-row"><span class="top-rank">1</span><span class="top-av">RW</span><div class="top-body"><div class="top-name">Rani Wijaya</div><div class="top-meta">41 orders · Website</div></div><span class="top-lv">Rp 18,4 jt</span></div>
+              <div class="top-row"><span class="top-rank">2</span><span class="top-av">BS</span><div class="top-body"><div class="top-name">Bagus Santoso</div><div class="top-meta">37 orders · POS</div></div><span class="top-lv">Rp 15,9 jt</span></div>
+              <div class="top-row"><span class="top-rank">3</span><span class="top-av">DL</span><div class="top-body"><div class="top-name">Demajors Store</div><div class="top-meta">29 orders · Wholesale</div></div><span class="top-lv">Rp 14,2 jt</span></div>
+              <div class="top-row"><span class="top-rank">4</span><span class="top-av">SP</span><div class="top-body"><div class="top-name">Siti Pratiwi</div><div class="top-meta">24 orders · Website</div></div><span class="top-lv">Rp 11,6 jt</span></div>
+              <div class="top-row"><span class="top-rank">5</span><span class="top-av">AN</span><div class="top-body"><div class="top-name">Andra Nugraha</div><div class="top-meta">18 orders · Tokopedia</div></div><span class="top-lv">Rp 8,9 jt</span></div>
             </div>
           </div>
 
@@ -708,5 +717,6 @@
     applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

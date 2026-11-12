@@ -266,6 +266,15 @@
     .proto-link:hover{color:var(--ink);background:var(--raised);}
   
     .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -329,7 +338,7 @@
     <!-- stats -->
     <div class="stat-grid">
       <div class="stat"><div class="stat-lbl">Active</div><div class="stat-val">7</div><div class="stat-sub">2 scheduled</div></div>
-      <div class="stat"><div class="stat-lbl">Discount MTD</div><div class="stat-val">Rp 5.9M</div><div class="stat-sub">418 redemptions</div></div>
+      <div class="stat"><div class="stat-lbl">Discount MTD</div><div class="stat-val">Rp 5,9 jt</div><div class="stat-sub">418 redemptions</div></div>
     </div>
 
     <div class="sec-lbl">All Vouchers · 12</div>
@@ -337,7 +346,7 @@
     <!-- voucher cards -->
     <div class="vc-card">
       <div class="vc-top">
-        <div class="vc-code-wrap"><div class="vc-code">CRATE10</div><div class="vc-desc">10% off · min Rp 300k</div></div>
+        <div class="vc-code-wrap"><div class="vc-code">CRATE10</div><div class="vc-desc">10% off · min Rp 300 rb</div></div>
         <span class="status-pill st-active">Active</span>
       </div>
       <div class="use-line">
@@ -347,14 +356,14 @@
       <div class="vc-figs">
         <div class="fig"><span class="k">Type</span><span class="v">Percentage</span></div>
         <div class="fig"><span class="k">Value</span><span class="v">10%</span></div>
-        <div class="fig"><span class="k">Expiry</span><span class="v">31 Jul 26</span></div>
+        <div class="fig"><span class="k">Expiry</span><span class="v">11 Feb 26</span></div>
         <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" checked aria-label="Toggle CRATE10"><span class="track"></span></label></div>
       </div>
     </div>
 
     <div class="vc-card">
       <div class="vc-top">
-        <div class="vc-code-wrap"><div class="vc-code">WELCOME50K</div><div class="vc-desc">Rp 50k off first order</div></div>
+        <div class="vc-code-wrap"><div class="vc-code">WELCOME50K</div><div class="vc-desc">Rp 50 rb off first order</div></div>
         <span class="status-pill st-active">Active</span>
       </div>
       <div class="use-line">
@@ -363,7 +372,7 @@
       </div>
       <div class="vc-figs">
         <div class="fig"><span class="k">Type</span><span class="v">Fixed</span></div>
-        <div class="fig"><span class="k">Value</span><span class="v">Rp 50k</span></div>
+        <div class="fig"><span class="k">Value</span><span class="v">Rp 50 rb</span></div>
         <div class="fig"><span class="k">Expiry</span><span class="v">None</span></div>
         <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" checked aria-label="Toggle WELCOME50K"><span class="track"></span></label></div>
       </div>
@@ -371,7 +380,7 @@
 
     <div class="vc-card">
       <div class="vc-top">
-        <div class="vc-code-wrap"><div class="vc-code">RSD2026</div><div class="vc-desc">Rp 100k off · min Rp 750k</div></div>
+        <div class="vc-code-wrap"><div class="vc-code">RSD2026</div><div class="vc-desc">Rp 100 rb off · min Rp 750 rb</div></div>
         <span class="status-pill st-scheduled">Scheduled</span>
       </div>
       <div class="use-line">
@@ -380,8 +389,8 @@
       </div>
       <div class="vc-figs">
         <div class="fig"><span class="k">Type</span><span class="v">Fixed</span></div>
-        <div class="fig"><span class="k">Value</span><span class="v">Rp 100k</span></div>
-        <div class="fig"><span class="k">Starts</span><span class="v">18 Apr 26</span></div>
+        <div class="fig"><span class="k">Value</span><span class="v">Rp 100 rb</span></div>
+        <div class="fig"><span class="k">Starts</span><span class="v">30 Oct 26</span></div>
         <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" checked aria-label="Toggle RSD2026"><span class="track"></span></label></div>
       </div>
     </div>
@@ -405,16 +414,16 @@
 
     <div class="vc-card" style="margin-bottom:4px;">
       <div class="vc-top">
-        <div class="vc-code-wrap"><div class="vc-code">NEWYEAR25</div><div class="vc-desc">Rp 25k off · min Rp 200k</div></div>
+        <div class="vc-code-wrap"><div class="vc-code">NEWYEAR25</div><div class="vc-desc">Rp 25 rb off · min Rp 200 rb</div></div>
         <span class="status-pill st-expired">Expired</span>
       </div>
       <div class="use-line">
-        <div class="use-lbl"><span>Used</span><span class="u">312 / 300</span></div>
+        <div class="use-lbl"><span>Used</span><span class="u" style="color:var(--danger)">312 / 300 · over limit</span></div>
         <div class="use-bar"><div class="use-fill" style="width:100%"></div></div>
       </div>
       <div class="vc-figs">
         <div class="fig"><span class="k">Type</span><span class="v">Fixed</span></div>
-        <div class="fig"><span class="k">Value</span><span class="v">Rp 25k</span></div>
+        <div class="fig"><span class="k">Value</span><span class="v">Rp 25 rb</span></div>
         <div class="fig"><span class="k">Expired</span><span class="v past">2 Jan 26</span></div>
         <div class="vc-toggle"><span class="tg-k">On</span><label class="switch"><input type="checkbox" aria-label="Toggle NEWYEAR25"><span class="track"></span></label></div>
       </div>
@@ -538,7 +547,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>
@@ -623,5 +632,6 @@
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

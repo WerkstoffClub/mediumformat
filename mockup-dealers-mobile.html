@@ -253,6 +253,15 @@
     .hb .bar{margin-top:0;height:6px;}
     .hb .val{text-align:right;}
     .split-hdr{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:600;margin:6px 0 4px;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -270,7 +279,7 @@
   </div>
 
   <!-- Announce bar -->
-  <div class="announce"><div class="announce-track"><span><strong>4 dealers live</strong> · Sudut Piringan Rp 184M POS sales this month · Gelombang catalog import 78%</span><span><strong>4 dealers live</strong> · Sudut Piringan Rp 184M POS sales this month · Gelombang catalog import 78%</span></div></div>
+  <div class="announce"><div class="announce-track"><span><strong>4 dealers live</strong> · Sudut Piringan Rp 184 jt POS sales this month · Gelombang catalog import 78%</span><span><strong>4 dealers live</strong> · Sudut Piringan Rp 184 jt POS sales this month · Gelombang catalog import 78%</span></div></div>
 
   <div class="app-hdr">
     <button class="ham" id="ham-btn" aria-label="Open menu">
@@ -290,15 +299,15 @@
     <div class="page-sub">Shops on the MF POS &amp; catalog</div>
     <div class="sum-grid">
       <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Live dealers</span></div><div class="sum-val">4</div><div class="sum-meta"><span class="mono">2</span> pipeline</div></div>
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">POS · 30D</span></div><div class="sum-val">Rp 317.5M</div><div class="sum-meta">fee 2.5%</div></div>
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Txns · 30D</span></div><div class="sum-val">2.024</div><div class="sum-meta">avg Rp 156K</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">POS · 30D</span></div><div class="sum-val">Rp 317,5 jt</div><div class="sum-meta">fee 2,5%</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Txns · 30D</span></div><div class="sum-val">2.024</div><div class="sum-meta">avg Rp 156 rb</div></div>
       <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Stock</span></div><div class="sum-val">10.410</div><div class="sum-meta">units</div></div>
     </div>
     <div class="card"><div class="card-hdr"><span class="card-title">Dealers</span><span class="card-note">fictional demo</span></div>
-        <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Sudut Piringan</div><div class="t2">Blok M, Jakarta Selatan · Record shop</div><div class="t2">1.240 SKUs · 3.880 units · sync 2 min ago</div></div><div class="r"><span class="status-pill st-tenant">Live</span><div class="fig" style="margin-top:5px">Rp 184.6M</div></div></a>
-        <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Kaset Kita</div><div class="t2">Cikini, Jakarta Pusat · Cassette & CD shop</div><div class="t2">860 SKUs · 2.140 units · sync 5 min ago</div></div><div class="r"><span class="status-pill st-tenant">Live</span><div class="fig" style="margin-top:5px">Rp 62.3M</div></div></a>
-        <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Rekaman Selatan</div><div class="t2">Kemang, Jakarta Selatan · Record bar</div><div class="t2">410 SKUs · 1.020 units · sync 12 min ago</div></div><div class="r"><span class="status-pill st-tenant">Live</span><div class="fig" style="margin-top:5px">Rp 48.9M</div></div></a>
-        <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Toko Pita</div><div class="t2">Pasar Santa, Jakarta Selatan · Market stall</div><div class="t2">320 SKUs · 610 units · sync 1 h ago</div></div><div class="r"><span class="status-pill st-tenant">Live</span><div class="fig" style="margin-top:5px">Rp 21.7M</div></div></a>
+        <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Sudut Piringan</div><div class="t2">Blok M, Jakarta Selatan · Record shop</div><div class="t2">1.240 SKUs · 3.880 units · sync 2 min ago</div></div><div class="r"><span class="status-pill st-tenant">Live</span><div class="fig" style="margin-top:5px">Rp 184,6 jt</div></div></a>
+        <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Kaset Kita</div><div class="t2">Cikini, Jakarta Pusat · Cassette & CD shop</div><div class="t2">860 SKUs · 2.140 units · sync 5 min ago</div></div><div class="r"><span class="status-pill st-tenant">Live</span><div class="fig" style="margin-top:5px">Rp 62,3 jt</div></div></a>
+        <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Rekaman Selatan</div><div class="t2">Kemang, Jakarta Selatan · Record bar</div><div class="t2">410 SKUs · 1.020 units · sync 12 min ago</div></div><div class="r"><span class="status-pill st-tenant">Live</span><div class="fig" style="margin-top:5px">Rp 48,9 jt</div></div></a>
+        <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Toko Pita</div><div class="t2">Pasar Santa, Jakarta Selatan · Market stall</div><div class="t2">320 SKUs · 610 units · sync 1 h ago</div></div><div class="r"><span class="status-pill st-tenant">Live</span><div class="fig" style="margin-top:5px">Rp 21,7 jt</div></div></a>
         <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Gelombang Records</div><div class="t2">Bandung · Record shop</div><div class="t2">980 SKUs · 2.760 units · sync Catalog import 78%</div></div><div class="r"><span class="status-pill st-onboarding">Onboarding</span><div class="fig" style="margin-top:5px">—</div></div></a>
         <a class="row" href="mockup-dealer-detail-mobile.html"><div class="l"><div class="t1">Arsip Bunyi</div><div class="t2">Yogyakarta · Record shop</div><div class="t2">0 SKUs · 0 units · sync —</div></div><div class="r"><span class="status-pill st-prospect">Prospect</span><div class="fig" style="margin-top:5px">—</div></div></a>
     </div>
@@ -368,7 +377,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>

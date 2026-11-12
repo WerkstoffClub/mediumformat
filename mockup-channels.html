@@ -249,6 +249,12 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -273,7 +279,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -397,7 +403,7 @@
       <!-- Summary strip -->
       <div class="kpi-strip">
         <div class="kpi"><div class="kpi-lbl">Active channels</div><div class="kpi-val">5 / 7</div></div>
-        <div class="kpi"><div class="kpi-lbl">Total listings</div><div class="kpi-val">3,914</div></div>
+        <div class="kpi"><div class="kpi-lbl">Unique SKUs listed</div><div class="kpi-val">3.914</div></div>
         <div class="kpi"><div class="kpi-lbl">Last full sync</div><div class="kpi-val">4m ago</div></div>
         <div class="kpi"><div class="kpi-lbl">Sync errors · 24h</div><div class="kpi-val">2</div></div>
       </div>
@@ -416,7 +422,7 @@
           </div>
           <div class="ch-metrics">
             <div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">2m ago</div></div>
-            <div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1,482</div></div>
+            <div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1.482</div></div>
           </div>
           <div class="ch-actions">
             <button class="btn-sec">Sync now</button>
@@ -436,7 +442,7 @@
           </div>
           <div class="ch-metrics">
             <div class="metric"><div class="m-lbl">Last sync</div><div class="m-val">Live</div></div>
-            <div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1,482</div></div>
+            <div class="metric"><div class="m-lbl">Listings</div><div class="m-val">1.482</div></div>
           </div>
           <div class="ch-actions">
             <button class="btn-sec">Sync now</button>
@@ -553,7 +559,7 @@
           <div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
           <div class="log-body">
             <div class="log-title"><span class="ch">Website</span> — full sync completed</div>
-            <div class="log-meta">1,482 listings · 3 stock adjustments applied</div>
+            <div class="log-meta">1.482 listings · 3 stock adjustments applied</div>
           </div>
           <span class="log-time">14:50</span>
         </div>
@@ -577,7 +583,7 @@
           <div class="log-icon li-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
           <div class="log-body">
             <div class="log-title"><span class="ch">POS</span> — 11 sales pushed to ledger</div>
-            <div class="log-meta">Rp 4.9M · reconciled with inventory</div>
+            <div class="log-meta">Rp 4,9 jt · reconciled with inventory</div>
           </div>
           <span class="log-time">13:58</span>
         </div>
@@ -606,5 +612,6 @@
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

@@ -358,6 +358,12 @@
     .divider{border-top:1px solid var(--hairline);margin:12px 0;}
     @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr);}.g2{grid-template-columns:1fr;}}
     @media (max-width:720px){.kpis{grid-template-columns:1fr 1fr;}.hbar{grid-template-columns:90px 1fr 96px;}}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -384,7 +390,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -510,8 +516,8 @@
       </div>
       <div class="kpis">
         <div class="kpi"><div class="kpi-lbl">Live dealers</div><div class="kpi-val">4</div><div class="kpi-meta"><span class="mono">2</span> onboarding / prospect</div></div>
-        <div class="kpi"><div class="kpi-lbl">POS sales · 30D</div><div class="kpi-val">Rp 317.5M</div><div class="kpi-meta">MF fee <span class="mono">Rp 7.9M</span> (2.5%)</div></div>
-        <div class="kpi"><div class="kpi-lbl">Transactions · 30D</div><div class="kpi-val">2.024</div><div class="kpi-meta">avg basket <span class="mono">Rp 156K</span></div></div>
+        <div class="kpi"><div class="kpi-lbl">POS sales · 30D</div><div class="kpi-val">Rp 317,5 jt</div><div class="kpi-meta">MF fee <span class="mono">Rp 7,9 jt</span> (2,5%)</div></div>
+        <div class="kpi"><div class="kpi-lbl">Transactions · 30D</div><div class="kpi-val">2.024</div><div class="kpi-meta">avg basket <span class="mono">Rp 156 rb</span></div></div>
         <div class="kpi"><div class="kpi-lbl">Stock on dealer shelves</div><div class="kpi-val">10.410</div><div class="kpi-meta">units · <span class="mono">3.810</span> SKUs</div></div>
       </div>
       <section class="panel">
@@ -525,7 +531,7 @@
                     <td><span class="neutral-pill">Record shop</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">1.240</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">3.880</span></td>
-                    <td class="num"><span class="fig">Rp 184.6M</span></td>
+                    <td class="num"><span class="fig">Rp 184,6 jt</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">1.022</span></td>
                     <td><span class="fig-mute">2 min ago</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live</span></td>
@@ -536,7 +542,7 @@
                     <td><span class="neutral-pill">Cassette & CD shop</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">860</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">2.140</span></td>
-                    <td class="num"><span class="fig">Rp 62.3M</span></td>
+                    <td class="num"><span class="fig">Rp 62,3 jt</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">498</span></td>
                     <td><span class="fig-mute">5 min ago</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live</span></td>
@@ -547,7 +553,7 @@
                     <td><span class="neutral-pill">Record bar</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">410</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">1.020</span></td>
-                    <td class="num"><span class="fig">Rp 48.9M</span></td>
+                    <td class="num"><span class="fig">Rp 48,9 jt</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">271</span></td>
                     <td><span class="fig-mute">12 min ago</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live</span></td>
@@ -558,7 +564,7 @@
                     <td><span class="neutral-pill">Market stall</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">320</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">610</span></td>
-                    <td class="num"><span class="fig">Rp 21.7M</span></td>
+                    <td class="num"><span class="fig">Rp 21,7 jt</span></td>
                     <td class="num"><span class="fig" style="font-weight:400">233</span></td>
                     <td><span class="fig-mute">1 h ago</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live</span></td>

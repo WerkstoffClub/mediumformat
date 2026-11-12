@@ -333,6 +333,12 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -359,7 +365,7 @@
       <a href="mockup-orders.html" class="sb-item active" aria-current="page">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -486,9 +492,9 @@
           <div class="oh-title-row">
             <span class="oh-no">MF-0842</span>
             <span class="channel-tag ch-website">Website</span>
-            <span class="status-pill st-pending">Pending</span>
+            <span class="status-pill st-processing">Processing</span>
           </div>
-          <div class="oh-meta">Placed <span class="mono">2 May 2025 · 14:20 WIB</span> · Paid <span class="mono">14:21</span></div>
+          <div class="oh-meta">Placed <span class="mono">13 Nov 2026 · 14:20 WIB</span> · Paid <span class="mono">14:21</span></div>
         </div>
         <div class="oh-right">
           <button class="btn-sec">
@@ -510,7 +516,7 @@
           <div class="step done">
             <div class="step-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             <span class="step-lbl">Pending</span>
-            <span class="step-time">2 May 14:20</span>
+            <span class="step-time">13 Nov 14:20</span>
           </div>
           <div class="step current">
             <div class="step-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div>
@@ -580,7 +586,7 @@
                 <div class="tot-row"><span class="lbl">Shipping · JNE REG</span><span class="val">Rp 22.000</span></div>
                 <div class="tot-row"><span class="lbl">Voucher · WELCOME10</span><span class="val mut">−Rp 145.500</span></div>
                 <div class="tot-row"><span class="lbl">PPN 11% (incl.)</span><span class="val mut">Rp 130.545</span></div>
-                <div class="tot-row grand"><span class="lbl">Total</span><span class="val">Rp 1.331.500<small>≈ $82</small></span></div>
+                <div class="tot-row grand"><span class="lbl">Total</span><span class="val">Rp 1.331.500</span></div>
               </div>
 
               <!-- Payment -->
@@ -609,35 +615,35 @@
                   <div class="tl-rail"><span class="tl-node info"></span><span class="tl-line"></span></div>
                   <div class="tl-body">
                     <div class="tl-title"><b>Order moved to Processing</b></div>
-                    <div class="tl-meta">by Andra (ops) · <span class="tl-time">2 May 14:35</span></div>
+                    <div class="tl-meta">by Andra (ops) · <span class="tl-time">13 Nov 14:35</span></div>
                   </div>
                 </div>
                 <div class="tl-item">
                   <div class="tl-rail"><span class="tl-node ok"></span><span class="tl-line"></span></div>
                   <div class="tl-body">
                     <div class="tl-title">Payment confirmed — <b>QRIS · Xendit</b></div>
-                    <div class="tl-meta">Rp 1.331.500 · <span class="tl-time">2 May 14:21</span></div>
+                    <div class="tl-meta">Rp 1.331.500 · <span class="tl-time">13 Nov 14:21</span></div>
                   </div>
                 </div>
                 <div class="tl-item">
                   <div class="tl-rail"><span class="tl-node"></span><span class="tl-line"></span></div>
                   <div class="tl-body">
                     <div class="tl-title">Voucher <b>WELCOME10</b> applied</div>
-                    <div class="tl-meta">−Rp 145.500 · <span class="tl-time">2 May 14:20</span></div>
+                    <div class="tl-meta">−Rp 145.500 · <span class="tl-time">13 Nov 14:20</span></div>
                   </div>
                 </div>
                 <div class="tl-item">
                   <div class="tl-rail"><span class="tl-node warn"></span><span class="tl-line"></span></div>
                   <div class="tl-body">
                     <div class="tl-title"><b>Order placed</b> via Website</div>
-                    <div class="tl-meta">by Rizky Pratama · <span class="tl-time">2 May 14:20</span></div>
+                    <div class="tl-meta">by Rizky Pratama · <span class="tl-time">13 Nov 14:20</span></div>
                   </div>
                 </div>
                 <div class="tl-item">
                   <div class="tl-rail"><span class="tl-node mut"></span></div>
                   <div class="tl-body">
                     <div class="tl-title">Stock reserved — 3 units held</div>
-                    <div class="tl-meta">auto · <span class="tl-time">2 May 14:20</span></div>
+                    <div class="tl-meta">auto · <span class="tl-time">13 Nov 14:20</span></div>
                   </div>
                 </div>
               </div>
@@ -664,7 +670,7 @@
             </div>
             <div class="kv">
               <div class="kv-lbl">History</div>
-              <div class="kv-val"><span class="mono">7</span> orders · <span class="mono">Rp 5.2M</span> lifetime · member since 2023</div>
+              <div class="kv-val"><span class="mono">7</span> orders · <span class="mono">Rp 5,2 jt</span> lifetime · member since 2023</div>
             </div>
           </div>
 
@@ -763,5 +769,6 @@
     applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

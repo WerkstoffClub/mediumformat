@@ -408,6 +408,12 @@
     .sheet.ok .bo-done{display:block;}
 
     .up{color:var(--success);}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -434,7 +440,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -563,15 +569,15 @@
       <div class="kpis">
         <div class="kpi"><div class="kpi-lbl">Upcoming shows</div><div class="kpi-val">5</div><div class="kpi-meta"><span class="mono">1</span> running now · <span class="mono">1</span> not on sale</div></div>
         <div class="kpi"><div class="kpi-lbl">Tickets sold · 30D</div><div class="kpi-val">418</div><div class="kpi-meta"><span class="up mono">+64</span> vs previous 30D</div></div>
-        <div class="kpi"><div class="kpi-lbl">Ticket revenue · 30D</div><div class="kpi-val">Rp 31.4M</div><div class="kpi-meta">net to venue <span class="mono">Rp 30.4M</span> after 3% fee</div></div>
-        <div class="kpi"><div class="kpi-lbl">Check-in rate</div><div class="kpi-val">91.2%</div><div class="kpi-meta">last <span class="mono">8</span> nights · no-show <span class="mono">8.8%</span></div></div>
+        <div class="kpi"><div class="kpi-lbl">Ticket revenue · 30D</div><div class="kpi-val">Rp 31,4 jt</div><div class="kpi-meta">net to venue <span class="mono">Rp 30,4 jt</span> after 3% fee</div></div>
+        <div class="kpi"><div class="kpi-lbl">Check-in rate</div><div class="kpi-val">91,2%</div><div class="kpi-meta">last <span class="mono">8</span> nights · no-show <span class="mono">8,8%</span></div></div>
       </div>
       <div class="g3" style="margin-bottom:14px">
         <section class="panel">
           <div class="panel-hdr"><span class="panel-title">Public ticket page</span><span class="status-pill st-onsale">Live</span></div>
           <div class="panel-body">
             <div class="url"><span>tickets.mediumformat.info/krapela</span><button class="btn-xs" type="button" id="copy-url">Copy link</button></div>
-            <div class="capline"><span>Page views · 7D <b>1.284</b></span><span>Conversion <b>6.2%</b></span></div>
+            <div class="capline"><span>Page views · 7D <b>1.284</b></span><span>Conversion <b>6,2%</b></span></div>
             <div style="margin-top:12px"><a class="tlink" href="mockup-peer-tickets.html?v=krapela">Open as a buyer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a></div>
           </div>
         </section>

@@ -356,6 +356,23 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+      /* audit B1/B2: header and body are separate tables — share column widths */
+    .tbl,.po-main{table-layout:fixed;width:100%;}
+    .tbl th:nth-child(1),.po-main tr.trigger>td:nth-child(1){width:17%;}
+    .tbl th:nth-child(2),.po-main tr.trigger>td:nth-child(2){width:29%;}
+    .tbl th:nth-child(3),.po-main tr.trigger>td:nth-child(3){width:10%;}
+    .tbl th:nth-child(4),.po-main tr.trigger>td:nth-child(4){width:16%;}
+    .tbl th:nth-child(5),.po-main tr.trigger>td:nth-child(5){width:12%;}
+    .tbl th:nth-child(6),.po-main tr.trigger>td:nth-child(6){width:16%;}
+    .po-main td.num{text-align:right;font-variant-numeric:tabular-nums;}
+    .po-main td{overflow:hidden;text-overflow:ellipsis;}
+    .ship-edit-toggle{background:none;border:0;border-bottom:1px dashed var(--hairline);padding:0 0 1px;cursor:pointer;}
   </style>
 </head>
 <body>
@@ -382,7 +399,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -519,23 +536,23 @@
       <div class="stats">
         <div class="stat">
           <div class="stat-lbl">Open POs</div>
-          <div class="stat-val">7</div>
-          <div class="stat-sub trend-neu"><span class="mono">3</span> awaiting delivery</div>
+          <div class="stat-val">3</div>
+          <div class="stat-sub trend-neu">ordered or partially received · <span class="mono">1</span> draft</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">On order · cost</div>
-          <div class="stat-val">Rp 58.4M</div>
-          <div class="stat-sub trend-neu">across all suppliers</div>
+          <div class="stat-val">Rp 55,3 jt</div>
+          <div class="stat-sub trend-neu">cost of the <span class="mono">3</span> open POs</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">Units inbound</div>
-          <div class="stat-val">642</div>
-          <div class="stat-sub trend-neu"><span class="mono">418</span> received so far</div>
+          <div class="stat-val">344</div>
+          <div class="stat-sub trend-neu"><span class="mono">86</span> received so far</div>
         </div>
         <div class="stat">
           <div class="stat-lbl">Due this week</div>
           <div class="stat-val">2</div>
-          <div class="stat-sub trend-neu">POs expected by 8 May</div>
+          <div class="stat-sub trend-neu">POs expected by 19 Nov</div>
         </div>
       </div>
 
@@ -576,7 +593,7 @@
                 <td><div class="supplier">Aksara Distribusi</div><div class="supplier-meta">Distributor · Jakarta</div></td>
                 <td class="num hide-sm num-ink">128</td>
                 <td class="num num-ink">Rp 18.400.000</td>
-                <td class="hide-sm cell-date">6 May</td>
+                <td class="hide-sm cell-date">17 Nov</td>
                 <td><span class="status-pill st-partial">Partially received</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -600,7 +617,7 @@
                       <tr><td><div class="li-title">Bonobo — Fragments</div><div class="li-cat">NINJA-441 · 2xLP</div></td><td class="num">40</td><td class="num">Rp 121.000</td><td class="num">Rp 4.840.000</td><td class="num"><span class="recv-tag part">16 / 40</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton received 30 Apr, remainder in transit. Ordered 22 Apr by Andra.</div>
+                  <div class="pd-note"><strong>Notes:</strong> Split shipment — first carton received 11 Nov, remainder in transit. Ordered 3 Nov by Andra.</div>
                 </div>
               </td></tr>
 
@@ -610,7 +627,7 @@
                 <td><div class="supplier">Warner Music Indonesia</div><div class="supplier-meta">Label · Jakarta</div></td>
                 <td class="num hide-sm num-ink">96</td>
                 <td class="num num-ink">Rp 14.100.000</td>
-                <td class="hide-sm cell-date">8 May</td>
+                <td class="hide-sm cell-date">19 Nov</td>
                 <td><span class="status-pill st-ordered">Ordered</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -633,7 +650,7 @@
                       <tr><td><div class="li-title">Daft Punk — Random Access Memories</div><div class="li-cat">COL-889 · 2xLP</div></td><td class="num">46</td><td class="num">Rp 135.000</td><td class="num">Rp 6.200.000</td><td class="num"><span class="recv-tag">0 / 46</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Expected dispatch 5 May via JNE. Ordered 29 Apr by Rara.</div>
+                  <div class="pd-note"><strong>Notes:</strong> Confirmed by label rep. Expected dispatch 16 Nov via JNE. Ordered 10 Nov by Rara.</div>
                 </div>
               </td></tr>
 
@@ -643,7 +660,7 @@
                 <td><div class="supplier">Demajors</div><div class="supplier-meta">Distributor · Jakarta</div></td>
                 <td class="num hide-sm num-ink">74</td>
                 <td class="num num-ink">Rp 9.250.000</td>
-                <td class="hide-sm cell-date">28 Apr</td>
+                <td class="hide-sm cell-date">9 Nov</td>
                 <td><span class="status-pill st-received">Received</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -666,7 +683,7 @@
                       <tr><td><div class="li-title">Madlib — Sound Ancestors</div><div class="li-cat">MADLIB-01 · LP</div></td><td class="num">36</td><td class="num">Rp 107.000</td><td class="num">Rp 3.854.000</td><td class="num"><span class="recv-tag done">36 / 36</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> All units received and shelved 28 Apr. No damage. Ordered 15 Apr by Andra.</div>
+                  <div class="pd-note"><strong>Notes:</strong> All units received and shelved 9 Nov. No damage. Ordered 27 Oct by Andra.</div>
                 </div>
               </td></tr>
 
@@ -676,7 +693,7 @@
                 <td><div class="supplier">Rush Hour (NL)</div><div class="supplier-meta">Distributor · Amsterdam · import</div></td>
                 <td class="num hide-sm num-ink">120</td>
                 <td class="num num-ink">Rp 22.800.000</td>
-                <td class="hide-sm cell-date">15 May</td>
+                <td class="hide-sm cell-date">26 Nov</td>
                 <td><span class="status-pill st-ordered">Ordered</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -700,7 +717,7 @@
                       <tr><td><div class="li-title">Massive Attack — Mezzanine</div><div class="li-cat">VIRGIN-98 · 2xLP</div></td><td class="num">36</td><td class="num">Rp 172.000</td><td class="num">Rp 6.192.000</td><td class="num"><span class="recv-tag">0 / 36</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> International import — customs clearance ~7 days. Paid by bank transfer (EUR). Ordered 25 Apr by Rara.</div>
+                  <div class="pd-note"><strong>Notes:</strong> International import — customs clearance ~7 days. Paid by bank transfer (EUR). Ordered 6 Nov by Rara.</div>
                 </div>
               </td></tr>
 
@@ -743,7 +760,7 @@
                 <td><div class="supplier">Aksara Distribusi</div><div class="supplier-meta">Distributor · Jakarta</div></td>
                 <td class="num hide-sm num-ink">58</td>
                 <td class="num num-ink">Rp 7.540.000</td>
-                <td class="hide-sm cell-date">21 Apr</td>
+                <td class="hide-sm cell-date">2 Nov</td>
                 <td><span class="status-pill st-received">Received</span></td>
               </tr>
               <tr class="po-detail-row"><td colspan="6">
@@ -766,7 +783,7 @@
                       <tr><td><div class="li-title">Khruangbin — Con Todo El Mundo</div><div class="li-cat">DEAD-051 · LP</div></td><td class="num">26</td><td class="num">Rp 120.000</td><td class="num">Rp 3.120.000</td><td class="num"><span class="recv-tag done">26 / 26</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> Received 21 Apr. 1 unit returned (seam split) — credited. Ordered 10 Apr by Rara.</div>
+                  <div class="pd-note"><strong>Notes:</strong> Received 2 Nov. 1 unit returned (seam split) — credited. Ordered 22 Oct by Rara.</div>
                 </div>
               </td></tr>
 
@@ -799,7 +816,7 @@
                       <tr><td><div class="li-title">Björk — Vespertine</div><div class="li-cat">ONELP-24 · 2xLP</div></td><td class="num">20</td><td class="num">Rp 218.000</td><td class="num">Rp 4.360.000</td><td class="num"><span class="recv-tag">0 / 20</span></td></tr>
                     </tbody>
                   </table>
-                  <div class="pd-note"><strong>Notes:</strong> Cancelled 24 Apr — supplier out of stock, personal card charge reversed. See finance reimbursement note.</div>
+                  <div class="pd-note"><strong>Notes:</strong> Cancelled 5 Nov — supplier out of stock, personal card charge reversed. See finance reimbursement note.</div>
                 </div>
               </td></tr>
             </tbody>
@@ -837,7 +854,7 @@
               <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 25.940.000</div></div>
               <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 830.000</div></div>
               <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 26.770.000</div></div>
-              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3.2% landed cost</div></div>
+              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+3,2% landed cost</div></div>
             </div>
             <div class="ship-edit-row">
               <button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0091')">Edit shipper &amp; cost</button>
@@ -871,7 +888,7 @@
               <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 23.000.000</div></div>
               <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 410.000</div></div>
               <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 23.410.000</div></div>
-              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1.8% landed cost</div></div>
+              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+1,8% landed cost</div></div>
             </div>
             <div class="ship-edit-row">
               <button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0089')">Edit shipper &amp; cost</button>
@@ -905,7 +922,7 @@
               <div><div class="ship-fig-lbl">Goods subtotal</div><div class="ship-fig-val mono">Rp 22.800.000</div></div>
               <div><div class="ship-fig-lbl">Shipping cost</div><div class="ship-fig-val mono js-shipper-cost">Rp 2.050.000</div></div>
               <div><div class="ship-fig-lbl">Total</div><div class="ship-fig-val mono js-ship-total">Rp 24.850.000</div></div>
-              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9.0% landed cost</div></div>
+              <div><div class="ship-fig-lbl">Landed cost uplift</div><div class="ship-fig-val mono ship-uplift js-ship-uplift">+9,0% landed cost</div></div>
             </div>
             <div class="ship-edit-row">
               <button class="ship-edit-toggle" onclick="toggleShipEdit('SHP-0087')">Edit shipper &amp; cost</button>
@@ -1109,5 +1126,6 @@
     applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

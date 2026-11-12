@@ -358,6 +358,12 @@
     .divider{border-top:1px solid var(--hairline);margin:12px 0;}
     @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr);}.g2{grid-template-columns:1fr;}}
     @media (max-width:720px){.kpis{grid-template-columns:1fr 1fr;}.hbar{grid-template-columns:90px 1fr 96px;}}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -384,7 +390,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -510,10 +516,10 @@
         </div>
       </div>
       <div class="kpis">
-        <div class="kpi"><div class="kpi-lbl">POS sales · 30D</div><div class="kpi-val">Rp 184.6M</div><div class="kpi-meta">today <span class="mono">Rp 5.2M</span> · 8 txns</div></div>
-        <div class="kpi"><div class="kpi-lbl">Transactions · 30D</div><div class="kpi-val">1.022</div><div class="kpi-meta">avg basket <span class="mono">Rp 180K</span></div></div>
+        <div class="kpi"><div class="kpi-lbl">POS sales · 30D</div><div class="kpi-val">Rp 184,6 jt</div><div class="kpi-meta">today <span class="mono">Rp 5,2 jt</span> · 8 txns</div></div>
+        <div class="kpi"><div class="kpi-lbl">Transactions · 30D</div><div class="kpi-val">1.022</div><div class="kpi-meta">avg basket <span class="mono">Rp 180 rb</span></div></div>
         <div class="kpi"><div class="kpi-lbl">Stock on shelf</div><div class="kpi-val">3.880</div><div class="kpi-meta"><span class="mono">1.240</span> SKUs · <span class="mono">71%</span> from MF catalog</div></div>
-        <div class="kpi"><div class="kpi-lbl">MF fee · 30D</div><div class="kpi-val">Rp 4.6M</div><div class="kpi-meta">2.5% · settles Mon</div></div>
+        <div class="kpi"><div class="kpi-lbl">MF fee · 30D</div><div class="kpi-val">Rp 4,6 jt</div><div class="kpi-meta">2,5% · settles Mon</div></div>
       </div>
       <div class="stack">
         <section class="panel">

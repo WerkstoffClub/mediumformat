@@ -262,6 +262,12 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -288,7 +294,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -451,7 +457,7 @@
                 <td><span class="cat-tag">Feature</span></td>
                 <td><span class="status-pill st-published">Published</span></td>
                 <td class="date-cell">12 Apr 2026</td>
-                <td class="num views-cell">4,218</td>
+                <td class="num views-cell">4.218</td>
                 <td class="row-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></td>
               </tr>
               <tr onclick="loadPost(this)" data-title="Staff picks — record of the week: Floating Points" data-slug="staff-pick-floating-points" data-cat="Reviews">
@@ -465,7 +471,7 @@
                 <td><span class="cat-tag">Reviews</span></td>
                 <td><span class="status-pill st-published">Published</span></td>
                 <td class="date-cell">8 Apr 2026</td>
-                <td class="num views-cell">2,946</td>
+                <td class="num views-cell">2.946</td>
                 <td class="row-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></td>
               </tr>
               <tr onclick="loadPost(this)" data-title="A beginner's guide to grading vinyl condition" data-slug="guide-grading-vinyl" data-cat="Guides">
@@ -507,7 +513,7 @@
                 <td><span class="cat-tag">Store News</span></td>
                 <td><span class="status-pill st-published">Published</span></td>
                 <td class="date-cell">30 Mar 2026</td>
-                <td class="num views-cell">3,571</td>
+                <td class="num views-cell">3.571</td>
                 <td class="row-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></td>
               </tr>
               <tr onclick="loadPost(this)" data-title="In conversation: Bonobo on textures and tape" data-slug="interview-bonobo-tape" data-cat="Interviews">
@@ -521,7 +527,7 @@
                 <td><span class="cat-tag">Interviews</span></td>
                 <td><span class="status-pill st-published">Published</span></td>
                 <td class="date-cell">24 Mar 2026</td>
-                <td class="num views-cell">5,102</td>
+                <td class="num views-cell">5.102</td>
                 <td class="row-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></td>
               </tr>
               <tr onclick="loadPost(this)" data-title="Turntable setup 101 for the Jakarta apartment" data-slug="turntable-setup-101" data-cat="Guides">
@@ -549,7 +555,7 @@
                 <td><span class="cat-tag">Events</span></td>
                 <td><span class="status-pill st-published">Published</span></td>
                 <td class="date-cell">18 Mar 2026</td>
-                <td class="num views-cell">1,884</td>
+                <td class="num views-cell">1.884</td>
                 <td class="row-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></td>
               </tr>
             </tbody>
@@ -660,5 +666,6 @@ Their catalogue lands in-store this Friday. Grading M / VG+ throughout.</textare
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

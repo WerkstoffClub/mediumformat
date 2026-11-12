@@ -178,6 +178,15 @@
 
     .proto-link{position:fixed;left:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--hairline);color:var(--body);font-size:12px;font-weight:500;box-shadow:0 4px 12px rgba(0,0,0,.4);}
     .proto-link:active{color:var(--ink);background:var(--raised);}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -229,7 +238,7 @@
         <div class="pc-main"><div class="pc-title">Khruangbin and the art of the slow build</div><div class="pc-slug">/journal/khruangbin-slow-build</div></div>
         <span class="status-pill st-published">Published</span>
       </div>
-      <div class="pc-meta"><span class="cat-tag">Feature</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">4,218 views</span><span class="pc-date">12 Apr</span></div>
+      <div class="pc-meta"><span class="cat-tag">Feature</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">4.218 views</span><span class="pc-date">24 Oct</span></div>
     </div>
 
     <div class="post-card">
@@ -238,7 +247,7 @@
         <div class="pc-main"><div class="pc-title">Staff picks — record of the week: Floating Points</div><div class="pc-slug">/journal/staff-pick-floating-points</div></div>
         <span class="status-pill st-published">Published</span>
       </div>
-      <div class="pc-meta"><span class="cat-tag">Reviews</span><span class="pc-author">Andra P.</span><span class="pc-dot">·</span><span class="pc-views">2,946 views</span><span class="pc-date">8 Apr</span></div>
+      <div class="pc-meta"><span class="cat-tag">Reviews</span><span class="pc-author">Andra P.</span><span class="pc-dot">·</span><span class="pc-views">2.946 views</span><span class="pc-date">20 Oct</span></div>
     </div>
 
     <div class="post-card">
@@ -247,7 +256,7 @@
         <div class="pc-main"><div class="pc-title">A beginner's guide to grading vinyl condition</div><div class="pc-slug">/journal/guide-grading-vinyl</div></div>
         <span class="status-pill st-scheduled">Scheduled</span>
       </div>
-      <div class="pc-meta"><span class="cat-tag">Guides</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">—</span><span class="pc-date">2 May</span></div>
+      <div class="pc-meta"><span class="cat-tag">Guides</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">—</span><span class="pc-date">13 Nov</span></div>
     </div>
 
     <div class="post-card">
@@ -265,7 +274,7 @@
         <div class="pc-main"><div class="pc-title">New arrivals: the Japanese city-pop batch has landed</div><div class="pc-slug">/journal/new-arrivals-city-pop</div></div>
         <span class="status-pill st-published">Published</span>
       </div>
-      <div class="pc-meta"><span class="cat-tag">Store News</span><span class="pc-author">Andra P.</span><span class="pc-dot">·</span><span class="pc-views">3,571 views</span><span class="pc-date">30 Mar</span></div>
+      <div class="pc-meta"><span class="cat-tag">Store News</span><span class="pc-author">Andra P.</span><span class="pc-dot">·</span><span class="pc-views">3.571 views</span><span class="pc-date">11 Oct</span></div>
     </div>
 
     <div class="post-card">
@@ -274,7 +283,7 @@
         <div class="pc-main"><div class="pc-title">In conversation: Bonobo on textures and tape</div><div class="pc-slug">/journal/interview-bonobo-tape</div></div>
         <span class="status-pill st-published">Published</span>
       </div>
-      <div class="pc-meta"><span class="cat-tag">Interviews</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">5,102 views</span><span class="pc-date">24 Mar</span></div>
+      <div class="pc-meta"><span class="cat-tag">Interviews</span><span class="pc-author">Rani S.</span><span class="pc-dot">·</span><span class="pc-views">5.102 views</span><span class="pc-date">5 Oct</span></div>
     </div>
   </div>
 
@@ -342,7 +351,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>
@@ -404,5 +413,6 @@
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

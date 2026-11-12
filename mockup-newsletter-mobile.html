@@ -236,6 +236,15 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
   
     .dn-status-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -279,9 +288,9 @@
 
     <div class="stat-grid">
       <div class="stat"><div class="stat-lbl">Subscribers</div><div class="stat-val">8.412</div><div class="stat-sub"><span class="trend-up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 15l-6-6-6 6"/></svg><span class="mono">214</span></span><span class="trend-neu">/mo</span></div></div>
-      <div class="stat"><div class="stat-lbl">Open rate</div><div class="stat-val">42.6%</div><div class="stat-sub"><span class="mono">avg</span> <span class="trend-up mono">+3.1pt</span></div></div>
-      <div class="stat"><div class="stat-lbl">Click rate</div><div class="stat-val">7.8%</div><div class="stat-sub trend-neu"><span class="mono">CTR</span> avg</div></div>
-      <div class="stat"><div class="stat-lbl">Growth · 30d</div><div class="stat-val">+2.6%</div><div class="stat-sub trend-neu">−18 unsub</div></div>
+      <div class="stat"><div class="stat-lbl">Open rate</div><div class="stat-val">42,6%</div><div class="stat-sub"><span class="mono">avg</span> <span class="trend-up mono">+3,1 pp</span></div></div>
+      <div class="stat"><div class="stat-lbl">Click rate</div><div class="stat-val">7,8%</div><div class="stat-sub trend-neu"><span class="mono">CTR</span> avg</div></div>
+      <div class="stat"><div class="stat-lbl">Growth · 30d</div><div class="stat-val">+2,6%</div><div class="stat-sub trend-neu">−18 unsub</div></div>
     </div>
 
     <div class="card">
@@ -296,23 +305,23 @@
       </div>
       <div>
         <div class="cmp-row">
-          <div class="cmp-top"><div><div class="cmp-subj">New arrivals — Floating Points &amp; Khruangbin restock</div><div class="cmp-meta">Broadcast · 28 Apr</div></div><span class="status-pill st-sent">Sent</span></div>
+          <div class="cmp-top"><div><div class="cmp-subj">New arrivals — Floating Points &amp; Khruangbin restock</div><div class="cmp-meta">Broadcast · 9 Nov</div></div><span class="status-pill st-sent">Sent</span></div>
           <div class="cmp-figs">
             <div class="fig"><span class="k">Recipients</span><span class="v">8.198</span></div>
-            <div class="fig"><span class="k">Open %</span><span class="v">46.2%</span></div>
-            <div class="fig right"><span class="k">Click %</span><span class="v">9.1%</span></div>
+            <div class="fig"><span class="k">Open %</span><span class="v">46,2%</span></div>
+            <div class="fig right"><span class="k">Click %</span><span class="v">9,1%</span></div>
           </div>
         </div>
         <div class="cmp-row">
-          <div class="cmp-top"><div><div class="cmp-subj">Record Store Day 2024 — the full drop list</div><div class="cmp-meta">Broadcast · 18 Apr</div></div><span class="status-pill st-sent">Sent</span></div>
+          <div class="cmp-top"><div><div class="cmp-subj">Record Store Day 2024 — the full drop list</div><div class="cmp-meta">Broadcast · 30 Oct</div></div><span class="status-pill st-sent">Sent</span></div>
           <div class="cmp-figs">
             <div class="fig"><span class="k">Recipients</span><span class="v">8.104</span></div>
-            <div class="fig"><span class="k">Open %</span><span class="v">51.7%</span></div>
-            <div class="fig right"><span class="k">Click %</span><span class="v">14.3%</span></div>
+            <div class="fig"><span class="k">Open %</span><span class="v">51,7%</span></div>
+            <div class="fig right"><span class="k">Click %</span><span class="v">14,3%</span></div>
           </div>
         </div>
         <div class="cmp-row">
-          <div class="cmp-top"><div><div class="cmp-subj">May new arrivals — Björk, Massive Attack &amp; more</div><div class="cmp-meta">Broadcast · 3 May · 09:00</div></div><span class="status-pill st-scheduled">Scheduled</span></div>
+          <div class="cmp-top"><div><div class="cmp-subj">May new arrivals — Björk, Massive Attack &amp; more</div><div class="cmp-meta">Broadcast · 14 Nov · 09:00</div></div><span class="status-pill st-scheduled">Scheduled</span></div>
           <div class="cmp-figs">
             <div class="fig"><span class="k">Recipients</span><span class="v">8.412</span></div>
             <div class="fig"><span class="k">Open %</span><span class="v">—</span></div>
@@ -320,7 +329,7 @@
           </div>
         </div>
         <div class="cmp-row">
-          <div class="cmp-top"><div><div class="cmp-subj">Coltrane &amp; Miles — the jazz corner refill</div><div class="cmp-meta">Segment · 6 May · 10:00</div></div><span class="status-pill st-scheduled">Scheduled</span></div>
+          <div class="cmp-top"><div><div class="cmp-subj">Coltrane &amp; Miles — the jazz corner refill</div><div class="cmp-meta">Segment · 17 Nov · 10:00</div></div><span class="status-pill st-scheduled">Scheduled</span></div>
           <div class="cmp-figs">
             <div class="fig"><span class="k">Recipients</span><span class="v">1.920</span></div>
             <div class="fig"><span class="k">Open %</span><span class="v">—</span></div>
@@ -423,7 +432,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>
@@ -540,5 +549,6 @@
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

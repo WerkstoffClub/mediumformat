@@ -253,6 +253,15 @@
     .hb .bar{margin-top:0;height:6px;}
     .hb .val{text-align:right;}
     .split-hdr{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:600;margin:6px 0 4px;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -291,33 +300,33 @@
     <div class="page-sub">Fri 5 Feb 2027 · JIS, Tanjung Priok · <span class="status-pill st-onsale">On sale</span></div>
 
     <div class="sum-grid">
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Sold</span></div><div class="sum-val">45.590</div><div class="sum-meta"><span class="mono">76.0%</span> of 60.000</div></div>
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Revenue</span></div><div class="sum-val">Rp 97.84B</div><div class="sum-meta"><span class="sample">Sample prices</span></div></div>
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Avg ticket</span></div><div class="sum-val">Rp 2.1M</div><div class="sum-meta"><span class="mono">2.1</span> per order</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Sold</span></div><div class="sum-val">45.590</div><div class="sum-meta"><span class="mono">76,0%</span> of 60.000</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Revenue</span></div><div class="sum-val">Rp 97,84 jt</div><div class="sum-meta"><span class="sample">Sample prices</span></div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Avg ticket</span></div><div class="sum-val">Rp 2,1 jt</div><div class="sum-meta"><span class="mono">2,1</span> per order</div></div>
       <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Days to show</span></div><div class="sum-val">84</div><div class="sum-meta">gates <span class="mono">14:00</span></div></div>
     </div>
 
     <div class="card">
       <div class="card-hdr"><span class="card-title">Ticket tiers</span><span class="card-note">prices = sample</span></div>
-        <div class="row"><div class="l"><div class="t1">Early Entry Package</div><div class="t2">Standing · Rp 4.500.000 · 1.000/1.000</div><div class="bar"><i style="width:100.0%"></i></div></div><div class="r"><span class="status-pill st-soldout">Sold out</span><div class="fig" style="margin-top:5px">Rp 4.50B</div></div></div>
-        <div class="row"><div class="l"><div class="t1">Festival (Free Standing)</div><div class="t2">Standing · Rp 2.500.000 · 7.420/8.000</div><div class="bar"><i style="width:92.8%"></i></div></div><div class="r"><span class="status-pill st-low">Almost gone</span><div class="fig" style="margin-top:5px">Rp 18.55B</div></div></div>
-        <div class="row"><div class="l"><div class="t1">CAT 1</div><div class="t2">Numbered · Rp 3.500.000 · 4.000/4.000</div><div class="bar"><i style="width:100.0%"></i></div></div><div class="r"><span class="status-pill st-soldout">Sold out</span><div class="fig" style="margin-top:5px">Rp 14.00B</div></div></div>
-        <div class="row"><div class="l"><div class="t1">CAT 2</div><div class="t2">Numbered · Rp 2.900.000 · 5.610/6.000</div><div class="bar"><i style="width:93.5%"></i></div></div><div class="r"><span class="status-pill st-low">Almost gone</span><div class="fig" style="margin-top:5px">Rp 16.27B</div></div></div>
-        <div class="row"><div class="l"><div class="t1">CAT 3</div><div class="t2">Numbered · Rp 2.400.000 · 5.880/7.000</div><div class="bar"><i style="width:84.0%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 14.11B</div></div></div>
-        <div class="row"><div class="l"><div class="t1">CAT 4</div><div class="t2">Numbered · Rp 1.900.000 · 6.210/8.000</div><div class="bar"><i style="width:77.6%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 11.80B</div></div></div>
-        <div class="row"><div class="l"><div class="t1">CAT 5</div><div class="t2">Numbered · Rp 1.500.000 · 6.030/9.000</div><div class="bar"><i style="width:67.0%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 9.04B</div></div></div>
-        <div class="row"><div class="l"><div class="t1">CAT 6</div><div class="t2">Numbered · Rp 1.150.000 · 5.140/9.000</div><div class="bar"><i style="width:57.1%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 5.91B</div></div></div>
-        <div class="row"><div class="l"><div class="t1">CAT 7</div><div class="t2">Numbered · Rp 850.000 · 4.300/8.000</div><div class="bar"><i style="width:53.8%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 3.65B</div></div></div>
+        <div class="row"><div class="l"><div class="t1">Early Entry Package</div><div class="t2">Standing · Rp 4.500.000 · 1.000/1.000</div><div class="bar"><i style="width:100.0%"></i></div></div><div class="r"><span class="status-pill st-soldout">Sold out</span><div class="fig" style="margin-top:5px">Rp 4,50 jt</div></div></div>
+        <div class="row"><div class="l"><div class="t1">Festival (Free Standing)</div><div class="t2">Standing · Rp 2.500.000 · 7.420/8.000</div><div class="bar"><i style="width:92.8%"></i></div></div><div class="r"><span class="status-pill st-low">Almost gone</span><div class="fig" style="margin-top:5px">Rp 18,55 jt</div></div></div>
+        <div class="row"><div class="l"><div class="t1">CAT 1</div><div class="t2">Numbered · Rp 3.500.000 · 4.000/4.000</div><div class="bar"><i style="width:100.0%"></i></div></div><div class="r"><span class="status-pill st-soldout">Sold out</span><div class="fig" style="margin-top:5px">Rp 14,00 jt</div></div></div>
+        <div class="row"><div class="l"><div class="t1">CAT 2</div><div class="t2">Numbered · Rp 2.900.000 · 5.610/6.000</div><div class="bar"><i style="width:93.5%"></i></div></div><div class="r"><span class="status-pill st-low">Almost gone</span><div class="fig" style="margin-top:5px">Rp 16,27 jt</div></div></div>
+        <div class="row"><div class="l"><div class="t1">CAT 3</div><div class="t2">Numbered · Rp 2.400.000 · 5.880/7.000</div><div class="bar"><i style="width:84.0%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 14,11 jt</div></div></div>
+        <div class="row"><div class="l"><div class="t1">CAT 4</div><div class="t2">Numbered · Rp 1.900.000 · 6.210/8.000</div><div class="bar"><i style="width:77.6%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 11,80 jt</div></div></div>
+        <div class="row"><div class="l"><div class="t1">CAT 5</div><div class="t2">Numbered · Rp 1.500.000 · 6.030/9.000</div><div class="bar"><i style="width:67.0%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 9,04 jt</div></div></div>
+        <div class="row"><div class="l"><div class="t1">CAT 6</div><div class="t2">Numbered · Rp 1.150.000 · 5.140/9.000</div><div class="bar"><i style="width:57.1%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 5,91 jt</div></div></div>
+        <div class="row"><div class="l"><div class="t1">CAT 7</div><div class="t2">Numbered · Rp 850.000 · 4.300/8.000</div><div class="bar"><i style="width:53.8%"></i></div></div><div class="r"><span class="status-pill st-onsale">On sale</span><div class="fig" style="margin-top:5px">Rp 3,65 jt</div></div></div>
     </div>
 
     <div class="card">
-      <div class="card-hdr"><span class="card-title">Revenue by channel</span><span class="card-note">Rp 97.84B</span></div>
+      <div class="card-hdr"><span class="card-title">Revenue by channel</span><span class="card-note">Rp 97,84 jt</span></div>
       <div class="card-body">
         <div class="split-hdr">Sales channel</div>
-          <div class="hb"><span class="lbl"><span class="channel-tag ch-website">Website</span></span><div class="bar"><i style="width:100.0%"></i></div><span class="val fig">Rp 76.71B</span></div>
-          <div class="hb"><span class="lbl"><span class="channel-tag ch-tokopedia">Tokopedia</span></span><div class="bar"><i style="width:10.3%"></i></div><span class="val fig">Rp 7.93B</span></div>
-          <div class="hb"><span class="lbl"><span class="channel-tag ch-pos">POS</span></span><div class="bar"><i style="width:9.2%"></i></div><span class="val fig">Rp 7.04B</span></div>
-          <div class="hb"><span class="lbl"><span class="channel-tag ch-shopee">Shopee</span></span><div class="bar"><i style="width:8.0%"></i></div><span class="val fig">Rp 6.16B</span></div>
+          <div class="hb"><span class="lbl"><span class="channel-tag ch-website">Website</span></span><div class="bar"><i style="width:100.0%"></i></div><span class="val fig">Rp 76,71 jt</span></div>
+          <div class="hb"><span class="lbl"><span class="channel-tag ch-tokopedia">Tokopedia</span></span><div class="bar"><i style="width:10.3%"></i></div><span class="val fig">Rp 7,93 jt</span></div>
+          <div class="hb"><span class="lbl"><span class="channel-tag ch-pos">POS</span></span><div class="bar"><i style="width:9.2%"></i></div><span class="val fig">Rp 7,04 jt</span></div>
+          <div class="hb"><span class="lbl"><span class="channel-tag ch-shopee">Shopee</span></span><div class="bar"><i style="width:8.0%"></i></div><span class="val fig">Rp 6,16 jt</span></div>
           <div class="hb"><span class="lbl"><span class="channel-tag ch-event">Event</span></span><div class="bar"><i style="width:0.0%"></i></div><span class="val fig">Show day</span></div>
         <div class="split-hdr" style="margin-top:12px">Payment method</div>
           <div class="hb"><span class="lbl">QRIS</span><div class="bar"><i style="width:100.0%"></i></div><span class="val fig">31%</span></div>
@@ -430,7 +439,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>

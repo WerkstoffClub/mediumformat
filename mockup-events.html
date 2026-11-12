@@ -364,6 +364,12 @@
     @media (max-width:820px){.summary{grid-template-columns:repeat(2,1fr);}}
     .table-wrap[hidden]{display:none!important;}
     @media (max-width:720px){.table-wrap{display:block;}}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -390,7 +396,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -535,17 +541,17 @@
           <button class="sum-card" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Tickets sold · 30D</span></div>
             <div class="sum-val">18.426</div>
-            <div class="sum-meta"><span class="mono">Rp 21.38B</span> ticket revenue</div>
+            <div class="sum-meta"><span class="mono">Rp 21,38 jt</span> ticket revenue</div>
           </button>
           <button class="sum-card" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Check-in rate</span></div>
-            <div class="sum-val">92.6%</div>
-            <div class="sum-meta">last <span class="mono">10</span> events · no-show <span class="mono">7.4%</span></div>
+            <div class="sum-val">92,6%</div>
+            <div class="sum-meta">last <span class="mono">10</span> events · no-show <span class="mono">7,4%</span></div>
           </button>
           <button class="sum-card" onclick="setSummary(this)">
             <div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Payouts due</span></div>
             <div class="sum-val">3</div>
-            <div class="sum-meta"><span class="mono">Rp 1.28B</span> to promoters · Mon</div>
+            <div class="sum-meta"><span class="mono">Rp 1,28 jt</span> to promoters · Mon</div>
           </button>
         </div>
 

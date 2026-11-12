@@ -253,6 +253,15 @@
     .hb .bar{margin-top:0;height:6px;}
     .hb .val{text-align:right;}
     .split-hdr{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:600;margin:6px 0 4px;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -290,10 +299,10 @@
     <h1 class="page-title">Sudut Piringan</h1>
     <div class="page-sub">Dealer · Blok M, Jakarta Selatan · <span class="status-pill st-tenant">Live</span></div>
     <div class="sum-grid">
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">POS · 30D</span></div><div class="sum-val">Rp 184.6M</div><div class="sum-meta">today Rp 5.2M</div></div>
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Txns · 30D</span></div><div class="sum-val">1.022</div><div class="sum-meta">avg Rp 180K</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">POS · 30D</span></div><div class="sum-val">Rp 184,6 jt</div><div class="sum-meta">today Rp 5,2 jt</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Txns · 30D</span></div><div class="sum-val">1.022</div><div class="sum-meta">avg Rp 180 rb</div></div>
       <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Stock</span></div><div class="sum-val">3.880</div><div class="sum-meta">1.240 SKUs</div></div>
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">MF fee</span></div><div class="sum-val">Rp 4.6M</div><div class="sum-meta">2.5% · Mon</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">MF fee</span></div><div class="sum-val">Rp 4,6 jt</div><div class="sum-meta">2,5% · Mon</div></div>
     </div>
     <div class="page-sub" style="margin:4px 0 10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">POS transactions · today</div>
     <div class="ord-card">
@@ -327,12 +336,12 @@
       <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">10</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">12:05</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 50.000</span></div></div>
     </div>
     <div class="card" style="margin-top:6px"><div class="card-hdr"><span class="card-title">Catalog &amp; stock</span><span class="card-note">MF + own</span></div>
-        <div class="row"><div class="l"><div class="t1">Efek Rumah Kaca — Sinestesia</div><div class="t2">LP · MF catalog</div></div><div class="r"><span class="status-pill st-onsale">In stock</span><div class="fig" style="margin-top:4px">6 · Rp 485K</div></div></div>
-        <div class="row"><div class="l"><div class="t1">Floating Points — Crush</div><div class="t2">LP · MF catalog</div></div><div class="r"><span class="status-pill st-onsale">In stock</span><div class="fig" style="margin-top:4px">4 · Rp 485K</div></div></div>
-        <div class="row"><div class="l"><div class="t1">Khruangbin — Mordechai</div><div class="t2">LP · MF catalog</div></div><div class="r"><span class="status-pill st-low">Low</span><div class="fig" style="margin-top:4px">2 · Rp 525K</div></div></div>
-        <div class="row"><div class="l"><div class="t1">Daft Punk — Discovery</div><div class="t2">2xLP · MF catalog</div></div><div class="r"><span class="status-pill st-soldout">Out</span><div class="fig" style="margin-top:4px">0 · Rp 750K</div></div></div>
-        <div class="row"><div class="l"><div class="t1">Miles Davis — Kind of Blue</div><div class="t2">LP · Dealer own · used VG+</div></div><div class="r"><span class="status-pill st-low">Low</span><div class="fig" style="margin-top:4px">1 · Rp 470K</div></div></div>
-        <div class="row"><div class="l"><div class="t1">Various — Pop Kreatif 80s</div><div class="t2">Cassette · Dealer own · used</div></div><div class="r"><span class="status-pill st-onsale">In stock</span><div class="fig" style="margin-top:4px">3 · Rp 85K</div></div></div>
+        <div class="row"><div class="l"><div class="t1">Efek Rumah Kaca — Sinestesia</div><div class="t2">LP · MF catalog</div></div><div class="r"><span class="status-pill st-onsale">In stock</span><div class="fig" style="margin-top:4px">6 · Rp 485 rb</div></div></div>
+        <div class="row"><div class="l"><div class="t1">Floating Points — Crush</div><div class="t2">LP · MF catalog</div></div><div class="r"><span class="status-pill st-onsale">In stock</span><div class="fig" style="margin-top:4px">4 · Rp 485 rb</div></div></div>
+        <div class="row"><div class="l"><div class="t1">Khruangbin — Mordechai</div><div class="t2">LP · MF catalog</div></div><div class="r"><span class="status-pill st-low">Low</span><div class="fig" style="margin-top:4px">2 · Rp 525 rb</div></div></div>
+        <div class="row"><div class="l"><div class="t1">Daft Punk — Discovery</div><div class="t2">2xLP · MF catalog</div></div><div class="r"><span class="status-pill st-soldout">Out</span><div class="fig" style="margin-top:4px">0 · Rp 750 rb</div></div></div>
+        <div class="row"><div class="l"><div class="t1">Miles Davis — Kind of Blue</div><div class="t2">LP · Dealer own · used VG+</div></div><div class="r"><span class="status-pill st-low">Low</span><div class="fig" style="margin-top:4px">1 · Rp 470 rb</div></div></div>
+        <div class="row"><div class="l"><div class="t1">Various — Pop Kreatif 80s</div><div class="t2">Cassette · Dealer own · used</div></div><div class="r"><span class="status-pill st-onsale">In stock</span><div class="fig" style="margin-top:4px">3 · Rp 85 rb</div></div></div>
     </div>
   </div>
 
@@ -400,7 +409,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>

@@ -211,6 +211,15 @@
     .ev-name{font-size:13px;color:var(--ink);}
     .ev-tier{display:block;font-size:11px;color:var(--mute);margin-top:2px;}
     .tk-sample{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;padding:0 5px;border-radius:4px;border:1px dashed var(--mute);color:var(--mute);margin-left:6px;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
 
     /* ─── Events & Tickets (TMS) — mobile ────────────────────────── */
     .card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;margin-bottom:14px;}
@@ -332,7 +341,7 @@
       <div class="card-body">
         <div class="big"><span class="n" id="ci-in">214</span><span class="d">/ 348 sold</span></div>
         <div class="bar big-bar"><i id="ci-bar" style="width:61.5%"></i></div>
-        <div class="ci-sub"><span><span class="mono" id="ci-rate">61.5%</span> in</span><span><span class="mono" id="ci-left">134</span> to arrive · <span id="last-sync">19:12:44</span></span></div>
+        <div class="ci-sub"><span><span class="mono" id="ci-rate">61,5%</span> in</span><span><span class="mono" id="ci-left">134</span> to arrive · <span id="last-sync">19:12:44</span></span></div>
       </div>
     </div>
 
@@ -352,8 +361,8 @@
 
     <div class="card">
       <div class="card-hdr"><span class="card-title">By tier</span><span class="card-note">2 gates online</span></div>
-        <div class="row"><div class="l"><div class="t1">Presale</div><div class="t2">101 of 150 in</div><div class="bar"><i style="width:67.3%"></i></div></div><div class="r"><span class="fig">67.3%</span></div></div>
-        <div class="row"><div class="l"><div class="t1">Regular</div><div class="t2">113 of 198 in</div><div class="bar"><i style="width:57.1%"></i></div></div><div class="r"><span class="fig">57.1%</span></div></div>
+        <div class="row"><div class="l"><div class="t1">Presale</div><div class="t2">101 of 150 in</div><div class="bar"><i style="width:67.3%"></i></div></div><div class="r"><span class="fig">67,3%</span></div></div>
+        <div class="row"><div class="l"><div class="t1">Regular</div><div class="t2">113 of 198 in</div><div class="bar"><i style="width:57.1%"></i></div></div><div class="r"><span class="fig">57,1%</span></div></div>
     </div>
 
     <div class="card">
@@ -433,7 +442,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>
@@ -528,7 +537,7 @@
     const rate=(checkedIn*100/SOLD).toFixed(1);
     document.getElementById('ci-in').textContent=checkedIn;
     document.getElementById('ci-bar').style.width=rate+'%';
-    document.getElementById('ci-rate').textContent=rate+'%';
+    document.getElementById('ci-rate').textContent=rate.replace('.',',')+'%';
     document.getElementById('ci-left').textContent=SOLD-checkedIn;
     document.getElementById('last-sync').textContent='synced '+t;
     document.getElementById('scans-m').insertAdjacentHTML('afterbegin',ROW(t,esc(code),tier,gate,note,PILL[st]));
@@ -536,5 +545,6 @@
   document.getElementById('manual').addEventListener('submit',e=>{e.preventDefault();const i=document.getElementById('code');checkIn(i.value);i.value='';i.focus();});
   function ROW(t,c,tier,g,n,p){return `<div class="row"><div class="l"><div class="t1"><span class="fig">${c}</span></div><div class="t2">${tier} · ${g} · ${n}</div></div><div class="r">${p}<div class="fig-mute" style="margin-top:4px">${t}</div></div></div>`;}
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

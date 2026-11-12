@@ -406,6 +406,12 @@
     .bo-done{display:none;text-align:center;padding:30px 18px;}
     .sheet.ok .bo-form{display:none;}
     .sheet.ok .bo-done{display:block;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
   </style>
 </head>
 <body>
@@ -432,7 +438,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -557,7 +563,7 @@
         </div>
       </div>
       <div class="kpis">
-        <div class="kpi"><div class="kpi-lbl">Live venues</div><div class="kpi-val">6</div><div class="kpi-meta"><span class="mono">8</span> in pipeline</div></div><div class="kpi"><div class="kpi-lbl">Upcoming shows</div><div class="kpi-val">12</div><div class="kpi-meta">across live venues</div></div><div class="kpi"><div class="kpi-lbl">Tickets sold · 30D</div><div class="kpi-val">3.383</div><div class="kpi-meta">venue-hosted shows</div></div><div class="kpi"><div class="kpi-lbl">Ticket revenue · 30D</div><div class="kpi-val">Rp 1.32B</div><div class="kpi-meta">before MF fee <span class="mono">3%</span></div></div>
+        <div class="kpi"><div class="kpi-lbl">Live venues</div><div class="kpi-val">6</div><div class="kpi-meta"><span class="mono">8</span> in pipeline</div></div><div class="kpi"><div class="kpi-lbl">Upcoming shows</div><div class="kpi-val">12</div><div class="kpi-meta">across live venues</div></div><div class="kpi"><div class="kpi-lbl">Tickets sold · 30D</div><div class="kpi-val">3.383</div><div class="kpi-meta">venue-hosted shows</div></div><div class="kpi"><div class="kpi-lbl">Ticket revenue · 30D</div><div class="kpi-val">Rp 1,32 jt</div><div class="kpi-meta">before MF fee <span class="mono">3%</span></div></div>
       </div>
       <section class="panel">
         <div class="panel-hdr"><span class="panel-title">Venues</span><span class="panel-note">Jakarta · names, areas and next shows from public listings · sales are demo</span></div>
@@ -571,7 +577,7 @@
                     <td class="num"><span class="fig" style="font-weight:400">2</span></td>
                     <td>Sat 14 Nov · Indisphere Qualification Live</td>
                     <td class="num"><span class="fig">560</span></td>
-                    <td class="num"><span class="fig">Rp 251.4M</span></td>
+                    <td class="num"><span class="fig">Rp 251,4 jt</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live on Peers</span></td>
                     <td class="nw"><a class="tlink" href="mockup-peer-tickets.html?v=m-bloc" onclick="event.stopPropagation()">Ticket page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
@@ -582,7 +588,7 @@
                     <td class="num"><span class="fig" style="font-weight:400">5</span></td>
                     <td>Until 18 Nov · EKSKUL</td>
                     <td class="num"><span class="fig">418</span></td>
-                    <td class="num"><span class="fig">Rp 31.4M</span></td>
+                    <td class="num"><span class="fig">Rp 31,4 jt</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live on Peers</span></td>
                     <td class="nw"><a class="tlink" href="mockup-peer-tickets.html?v=krapela" onclick="event.stopPropagation()">Ticket page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
@@ -593,7 +599,7 @@
                     <td class="num"><span class="fig" style="font-weight:400">2</span></td>
                     <td>Tue 24 Nov · Rony Parulian Showcase</td>
                     <td class="num"><span class="fig">1.106</span></td>
-                    <td class="num"><span class="fig">Rp 319.6M</span></td>
+                    <td class="num"><span class="fig">Rp 319,6 jt</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live on Peers</span></td>
                     <td class="nw"><a class="tlink" href="mockup-peer-tickets.html?v=bengkel" onclick="event.stopPropagation()">Ticket page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
@@ -604,7 +610,7 @@
                     <td class="num"><span class="fig" style="font-weight:400">1</span></td>
                     <td>Fri 13 Nov · Xu Kai fanmeet</td>
                     <td class="num"><span class="fig">1.164</span></td>
-                    <td class="num"><span class="fig">Rp 697.2M</span></td>
+                    <td class="num"><span class="fig">Rp 697,2 jt</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live on Peers</span></td>
                     <td class="nw"><a class="tlink" href="mockup-peer-tickets.html?v=kempinski" onclick="event.stopPropagation()">Ticket page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
@@ -615,7 +621,7 @@
                     <td class="num"><span class="fig" style="font-weight:400">1</span></td>
                     <td>Wed 25 Nov · Museum Siluet</td>
                     <td class="num"><span class="fig">74</span></td>
-                    <td class="num"><span class="fig">Rp 7.4M</span></td>
+                    <td class="num"><span class="fig">Rp 7,4 jt</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live on Peers</span></td>
                     <td class="nw"><a class="tlink" href="mockup-peer-tickets.html?v=dekhad" onclick="event.stopPropagation()">Ticket page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
@@ -626,7 +632,7 @@
                     <td class="num"><span class="fig" style="font-weight:400">1</span></td>
                     <td>Sat 12 Dec · Membiru Special Showcase</td>
                     <td class="num"><span class="fig">61</span></td>
-                    <td class="num"><span class="fig">Rp 12.2M</span></td>
+                    <td class="num"><span class="fig">Rp 12,2 jt</span></td>
                     <td class="nw"><span class="status-pill st-tenant">Live on Peers</span></td>
                     <td class="nw"><a class="tlink" href="mockup-peer-tickets.html?v=suatu-tempat" onclick="event.stopPropagation()">Ticket page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a></td>
                     <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>

@@ -253,6 +253,15 @@
     .hb .bar{margin-top:0;height:6px;}
     .hb .val{text-align:right;}
     .split-hdr{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:600;margin:6px 0 4px;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -292,8 +301,8 @@
     <div class="sum-grid">
       <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Upcoming</span></div><div class="sum-val">5</div><div class="sum-meta">1 running</div></div>
       <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Sold · 30D</span></div><div class="sum-val">418</div><div class="sum-meta">tickets</div></div>
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Revenue</span></div><div class="sum-val">Rp 31.4M</div><div class="sum-meta">30D</div></div>
-      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Check-in</span></div><div class="sum-val">91.2%</div><div class="sum-meta">last 8 nights</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Revenue</span></div><div class="sum-val">Rp 31,4 jt</div><div class="sum-meta">30D</div></div>
+      <div class="sum-card"><div class="sum-top"><span class="sum-lbl">Check-in</span></div><div class="sum-val">91,2%</div><div class="sum-meta">last 8 nights</div></div>
     </div>
     <div class="card"><div class="card-hdr"><span class="card-title">Public ticket page</span><span class="card-note">1.284 views · 7D</span></div>
       <div class="card-body"><div class="fig" style="font-weight:400">tickets.mediumformat.info/krapela</div>
@@ -307,8 +316,8 @@
         <a class="row" href="mockup-event-detail-mobile.html"><div class="l"><div class="t1">Krapela 3rd Anniversary: Exit to Exist — Day 3</div><div class="t2">Sun 6 Dec · Rp 150.000 <span class="sample">Sample</span></div><div class="bar"><i style="width:15.0%"></i></div></div><div class="r"><span class="status-pill st-presale">Presale</span><div class="fig" style="margin-top:5px">27/180</div></div></a>
     </div>
     <div class="card"><div class="card-hdr"><span class="card-title">Venue payouts</span><span class="card-note">weekly · BCA</span></div>
-        <div class="row"><div class="l"><div class="t1"><span class="fig">PO-KRP-0011</span></div><div class="t2">1–7 Nov · Mon 10 Nov</div></div><div class="r"><div class="fig">Rp 9.6M</div><span class="status-pill st-paid">Paid out</span></div></div>
-        <div class="row"><div class="l"><div class="t1"><span class="fig">PO-KRP-0012</span></div><div class="t2">8–14 Nov · Mon 17 Nov</div></div><div class="r"><div class="fig">Rp 7.2M</div><span class="status-pill st-pending">Scheduled</span></div></div>
+        <div class="row"><div class="l"><div class="t1"><span class="fig">PO-KRP-0011</span></div><div class="t2">1–7 Nov · Mon 10 Nov</div></div><div class="r"><div class="fig">Rp 9,6 jt</div><span class="status-pill st-paid">Paid out</span></div></div>
+        <div class="row"><div class="l"><div class="t1"><span class="fig">PO-KRP-0012</span></div><div class="t2">8–14 Nov · Mon 17 Nov</div></div><div class="r"><div class="fig">Rp 7,2 jt</div><span class="status-pill st-pending">Scheduled</span></div></div>
     </div>
   </div>
 
@@ -376,7 +385,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>

@@ -290,14 +290,20 @@
     .view-tabs button .cnt{font-size:11px;font-variant-numeric:tabular-nums;opacity:.75;}
     .view-tabs button.on{background:var(--accent);color:var(--accent-text);}
     .ord-view[hidden]{display:none!important;}
-    #view-tickets .orders-layout{grid-template-columns:1fr;}
-    #view-tickets .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-    #view-tickets .ord-no,#view-tickets .ord-total{white-space:nowrap;}
-    @media (max-width:820px){#view-tickets .summary{grid-template-columns:repeat(2,1fr);}}
+    #view-tickets .orders-layout,#view-dealers .orders-layout{grid-template-columns:1fr;}
+    #view-tickets .summary,#view-dealers .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+    #view-tickets .ord-no,#view-tickets .ord-total,#view-dealers .ord-no,#view-dealers .ord-total{white-space:nowrap;}
+    @media (max-width:820px){#view-tickets .summary,#view-dealers .summary{grid-template-columns:repeat(2,1fr);}}
     .st-paid{background:var(--success-t);color:var(--success);}
     .ev-name{font-size:13px;color:var(--ink);}
     .ev-tier{display:block;font-size:11px;color:var(--mute);margin-top:2px;}
     .tk-sample{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;padding:0 5px;border-radius:4px;border:1px dashed var(--mute);color:var(--mute);margin-left:6px;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
 
     /* ─── Events & Tickets (TMS) ─────────────────────────────────── */
     .panel{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;}
@@ -416,7 +422,7 @@
       <a href="mockup-orders.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="sb-txt">Orders</span>
-        <span class="sb-count mono">12</span>
+        <span class="sb-count mono">11</span>
       </a>
       <a href="mockup-inventory.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
@@ -578,7 +584,7 @@
             <div class="panel-body">
               <div class="big"><span class="n" id="ci-in">214</span><span class="d">/ 348 sold</span></div>
               <div class="bar big-bar"><i id="ci-bar" style="width:61.5%"></i></div>
-              <div class="ci-sub"><span><span class="mono" id="ci-rate">61.5%</span> checked in</span><span><span class="mono" id="ci-left">134</span> still to arrive</span></div>
+              <div class="ci-sub"><span><span class="mono" id="ci-rate">61,5%</span> checked in</span><span><span class="mono" id="ci-left">134</span> still to arrive</span></div>
             </div>
             <table class="t">
               <thead><tr><th>Tier</th><th class="num">Sold</th><th class="num">Checked in</th></tr></thead>
@@ -673,7 +679,7 @@
     el.parentNode.querySelectorAll('button').forEach(b=>{const on=b===el;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});
     document.querySelectorAll('.ord-view').forEach(v=>v.hidden=v.id!=='view-'+el.dataset.view);
   }
-  if(location.hash==='#tickets'){document.querySelector('.view-tabs [data-view="tickets"]')?.click();}
+  {const h=location.hash.slice(1);document.querySelector('.view-tabs [data-view="'+h+'"]')?.click();}
 
   // Check-in demo: TK-TT-##### = valid (once), repeat = already checked in, anything else = invalid
   const PILL={"valid": "<span class=\"status-pill st-valid\">Valid</span>", "dupe": "<span class=\"status-pill st-dupe\">Already checked in</span>", "invalid": "<span class=\"status-pill st-invalid\">Invalid</span>"};
@@ -697,7 +703,7 @@
     const rate=(checkedIn*100/SOLD).toFixed(1);
     document.getElementById('ci-in').textContent=checkedIn;
     document.getElementById('ci-bar').style.width=rate+'%';
-    document.getElementById('ci-rate').textContent=rate+'%';
+    document.getElementById('ci-rate').textContent=rate.replace('.',',')+'%';
     document.getElementById('ci-left').textContent=SOLD-checkedIn;
     document.getElementById('last-sync').textContent='synced '+t;
     const tb=document.getElementById('scans');
@@ -706,5 +712,6 @@
   document.getElementById('manual').addEventListener('submit',e=>{e.preventDefault();const i=document.getElementById('code');checkIn(i.value);i.value='';i.focus();});
   function ROW(t,c,tier,g,n,p){return `<tr><td><span class="fig-mute">${t}</span></td><td><span class="id">${c}</span></td><td>${tier}</td><td>${g}</td><td>${n}</td><td>${p}</td></tr>`;}
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>

@@ -247,6 +247,15 @@
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) *:not(:where(.status-pill,[class*="st-"],.channel-tag,[class*="ch-"],.dot)){color:var(--ink)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on){background:var(--accent)!important;color:var(--accent-text)!important;}
     :is(.widget-hdr,.panel-hdr,.card-hdr,.section-hdr,.pref-hdr,.family-head,.order-head,.osum-head,.form-hdr,.loc-section-hdr,.cart-head,.sum-hdr,.cs-hdr,.cf-card-hdr) :is(.tab.on,.chip.on,.on) *{color:var(--accent-text)!important;}
+    /* audit:data-display */
+    :root{--mute:#8A8A8A;}
+    html[data-theme="light"]{--mute:#6B6B6B;}
+    body{font-variant-numeric:tabular-nums;}
+    .channel-tag[class*="ch-"]{color:var(--body)!important;}
+    .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    :root{--announce-h:0px;}
+    .announce{display:none!important;}
+    .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
   </style>
 </head>
 <body>
@@ -284,7 +293,7 @@
   <!-- Scroll content -->
   <div class="screen">
     <h1 class="page-title">Customers</h1>
-    <div class="page-sub">1,284 people across every channel</div>
+    <div class="page-sub">1.284 people across every channel</div>
 
     <!-- search -->
     <div class="search-box">
@@ -294,7 +303,7 @@
 
     <!-- segment chips -->
     <div class="chips">
-      <button class="chip on" onclick="setChip(this)">All <span class="cnt">1,284</span></button>
+      <button class="chip on" onclick="setChip(this)">All <span class="cnt">1.284</span></button>
       <button class="chip" onclick="setChip(this)">VIP <span class="cnt">86</span></button>
       <button class="chip" onclick="setChip(this)">Wholesale <span class="cnt">24</span></button>
       <button class="chip" onclick="setChip(this)">New <span class="cnt">48</span></button>
@@ -302,20 +311,20 @@
 
     <!-- stats -->
     <div class="stat-grid">
-      <div class="stat"><div class="stat-lbl">Total</div><div class="stat-val">1,284</div><div class="stat-sub">48 new this month</div></div>
-      <div class="stat"><div class="stat-lbl">Avg LTV</div><div class="stat-val">Rp 1.8M</div><div class="stat-sub">3.4 orders each</div></div>
+      <div class="stat"><div class="stat-lbl">Total</div><div class="stat-val">1.284</div><div class="stat-sub">48 new this month</div></div>
+      <div class="stat"><div class="stat-lbl">Avg LTV</div><div class="stat-val">Rp 1,8 jt</div><div class="stat-sub">3,4 orders each</div></div>
     </div>
 
     <!-- top customers -->
     <div class="card">
       <div class="card-hdr"><span class="card-title">Top Customers</span><span class="card-note">by lifetime</span></div>
-      <div class="top-row"><span class="top-rank">1</span><span class="top-av">RW</span><div class="top-body"><div class="top-name">Rani Wijaya</div><div class="top-meta">41 orders · Website</div></div><span class="top-lv">Rp 18.4M</span></div>
-      <div class="top-row"><span class="top-rank">2</span><span class="top-av">BS</span><div class="top-body"><div class="top-name">Bagus Santoso</div><div class="top-meta">37 orders · POS</div></div><span class="top-lv">Rp 15.9M</span></div>
-      <div class="top-row"><span class="top-rank">3</span><span class="top-av">DL</span><div class="top-body"><div class="top-name">Demajors Store</div><div class="top-meta">29 orders · Wholesale</div></div><span class="top-lv">Rp 14.2M</span></div>
+      <div class="top-row"><span class="top-rank">1</span><span class="top-av">RW</span><div class="top-body"><div class="top-name">Rani Wijaya</div><div class="top-meta">41 orders · Website</div></div><span class="top-lv">Rp 18,4 jt</span></div>
+      <div class="top-row"><span class="top-rank">2</span><span class="top-av">BS</span><div class="top-body"><div class="top-name">Bagus Santoso</div><div class="top-meta">37 orders · POS</div></div><span class="top-lv">Rp 15,9 jt</span></div>
+      <div class="top-row"><span class="top-rank">3</span><span class="top-av">DL</span><div class="top-body"><div class="top-name">Demajors Store</div><div class="top-meta">29 orders · Wholesale</div></div><span class="top-lv">Rp 14,2 jt</span></div>
     </div>
 
     <!-- customer cards -->
-    <div class="sec-lbl">Customer List · 1,284</div>
+    <div class="sec-lbl">Customer List · 1.284</div>
 
     <div class="cust-card">
       <div class="cc-top">
@@ -328,8 +337,8 @@
       </div>
       <div class="cc-figs">
         <div class="fig"><span class="k">Orders</span><span class="v">41</span></div>
-        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 18.4M</span></div>
-        <div class="fig"><span class="k">Last order</span><span class="v">28 Apr</span></div>
+        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 18,4 jt</span></div>
+        <div class="fig"><span class="k">Last order</span><span class="v">9 Nov</span></div>
         <div class="fig right"><span class="k">Acquired</span><span class="channel-tag ch-website">Website</span></div>
       </div>
     </div>
@@ -345,8 +354,8 @@
       </div>
       <div class="cc-figs">
         <div class="fig"><span class="k">Orders</span><span class="v">37</span></div>
-        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 15.9M</span></div>
-        <div class="fig"><span class="k">Last order</span><span class="v">1 May</span></div>
+        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 15,9 jt</span></div>
+        <div class="fig"><span class="k">Last order</span><span class="v">12 Nov</span></div>
         <div class="fig right"><span class="k">Acquired</span><span class="channel-tag ch-pos">POS</span></div>
       </div>
     </div>
@@ -362,8 +371,8 @@
       </div>
       <div class="cc-figs">
         <div class="fig"><span class="k">Orders</span><span class="v">29</span></div>
-        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 14.2M</span></div>
-        <div class="fig"><span class="k">Last order</span><span class="v">30 Apr</span></div>
+        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 14,2 jt</span></div>
+        <div class="fig"><span class="k">Last order</span><span class="v">11 Nov</span></div>
         <div class="fig right"><span class="k">Acquired</span><span class="channel-tag ch-event">Event</span></div>
       </div>
     </div>
@@ -379,8 +388,8 @@
       </div>
       <div class="cc-figs">
         <div class="fig"><span class="k">Orders</span><span class="v">14</span></div>
-        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 6.7M</span></div>
-        <div class="fig"><span class="k">Last order</span><span class="v">25 Apr</span></div>
+        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 6,7 jt</span></div>
+        <div class="fig"><span class="k">Last order</span><span class="v">6 Nov</span></div>
         <div class="fig right"><span class="k">Acquired</span><span class="channel-tag ch-shopee">Shopee</span></div>
       </div>
     </div>
@@ -396,8 +405,8 @@
       </div>
       <div class="cc-figs">
         <div class="fig"><span class="k">Orders</span><span class="v">2</span></div>
-        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 0.97M</span></div>
-        <div class="fig"><span class="k">Last order</span><span class="v">1 May</span></div>
+        <div class="fig"><span class="k">Lifetime</span><span class="v">Rp 970 rb</span></div>
+        <div class="fig"><span class="k">Last order</span><span class="v">12 Nov</span></div>
         <div class="fig right"><span class="k">Acquired</span><span class="channel-tag ch-website">Website</span></div>
       </div>
     </div>
@@ -467,7 +476,7 @@
       <div class="notif-item">
         <div class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="notif-body">
-          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480,000</div>
+          <div class="notif-text">New order <strong>#MF-1044</strong> from Dian S. — Rp 480.000</div>
           <div class="notif-meta">2 minutes ago</div>
         </div>
         <span class="notif-unread"></span>
@@ -531,5 +540,6 @@
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
 </script>
+<!-- demo-clock:2026-11-13 -->
 </body>
 </html>
