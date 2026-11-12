@@ -304,6 +304,22 @@
     body{font-variant-numeric:tabular-nums;}
     .channel-tag[class*="ch-"]{color:var(--body)!important;}
     .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
+    /* audit:ui-extras */
+    th[data-sort]{cursor:pointer;user-select:none;white-space:nowrap;}
+    th[data-sort]:hover{color:var(--ink);}
+    th[data-sort]::after{content:"";display:inline-block;width:0;height:0;margin-left:6px;vertical-align:2px;border:3.5px solid transparent;border-top-color:currentColor;opacity:.35;}
+    th[data-sort][aria-sort="ascending"]::after{border-top-color:transparent;border-bottom-color:currentColor;vertical-align:5px;opacity:1;}
+    th[data-sort][aria-sort="descending"]::after{opacity:1;}
+    th[data-sort][aria-sort]{color:var(--ink);}
+    th[data-sort]:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--accent);}
+    .mf-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--hairline);}
+    .mf-foot .meta{font-size:12px;color:var(--body);font-variant-numeric:tabular-nums;}
+    .mf-pager{display:flex;gap:4px;}
+    .mf-pager button{min-width:30px;height:30px;padding:0 8px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--body);font-size:12px;font-variant-numeric:tabular-nums;}
+    .mf-pager button:hover:not([disabled]){background:var(--raised);color:var(--ink);}
+    .mf-pager button[aria-current="page"]{border-color:var(--accent);color:var(--ink);background:var(--raised);}
+    .mf-pager button[disabled]{opacity:.4;cursor:not-allowed;}
+    .channel-tag::before{border-radius:1.5px!important;}
 
     /* ─── Events & Tickets (TMS) ─────────────────────────────────── */
     .panel{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;}
@@ -355,7 +371,7 @@
     .st-prospect{background:var(--neutral-t);color:var(--body);}
     .st-dupe{background:var(--warning-t);color:var(--warning);}
     .st-invalid{background:var(--danger-t);color:var(--danger);}
-    .hbar{display:grid;grid-template-columns:120px 1fr 120px;align-items:center;gap:12px;padding:7px 0;}
+    .hbar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 110px;align-items:center;gap:12px;padding:7px 0;}
     .hbar .lbl{font-size:12px;color:var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .hbar .val{font-size:12px;text-align:right;}
     .hbar .bar{height:8px;}
@@ -381,22 +397,24 @@
     .stream .chart{height:56px;}
     .up{color:var(--success);}
     .st-mm{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);margin-top:4px;font-variant-numeric:tabular-nums;}
-    /* audit:ui-extras */
-    th[data-sort]{cursor:pointer;user-select:none;white-space:nowrap;}
-    th[data-sort]:hover{color:var(--ink);}
-    th[data-sort]::after{content:"";display:inline-block;width:0;height:0;margin-left:6px;vertical-align:2px;border:3.5px solid transparent;border-top-color:currentColor;opacity:.35;}
-    th[data-sort][aria-sort="ascending"]::after{border-top-color:transparent;border-bottom-color:currentColor;vertical-align:5px;opacity:1;}
-    th[data-sort][aria-sort="descending"]::after{opacity:1;}
-    th[data-sort][aria-sort]{color:var(--ink);}
-    th[data-sort]:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--accent);}
-    .mf-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--hairline);}
-    .mf-foot .meta{font-size:12px;color:var(--body);font-variant-numeric:tabular-nums;}
-    .mf-pager{display:flex;gap:4px;}
-    .mf-pager button{min-width:30px;height:30px;padding:0 8px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--body);font-size:12px;font-variant-numeric:tabular-nums;}
-    .mf-pager button:hover:not([disabled]){background:var(--raised);color:var(--ink);}
-    .mf-pager button[aria-current="page"]{border-color:var(--accent);color:var(--ink);background:var(--raised);}
-    .mf-pager button[disabled]{opacity:.4;cursor:not-allowed;}
-    .channel-tag::before{border-radius:1.5px!important;}
+    /* mfchart */
+    .mfc{position:relative;width:100%;}
+    .mfc svg{display:block;width:100%;overflow:visible;}
+    .mfc .ax{font-family:var(--ui);font-size:11px;fill:var(--mute);font-variant-numeric:tabular-nums;}
+    .mfc .end{font-family:var(--ui);font-size:12px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums;}
+    .mfc .grid{stroke:var(--hairline);stroke-width:1;}
+    .mfc .xh{stroke:var(--mute);stroke-width:1;opacity:0;}
+    .mfc.hov .xh{opacity:.6;}
+    .mfc .tip{position:absolute;pointer-events:none;z-index:5;min-width:120px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md,6px);box-shadow:0 4px 12px rgba(0,0,0,.35);padding:8px 10px;font-size:12px;line-height:17px;color:var(--body);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;white-space:nowrap;}
+    .mfc.hov .tip{opacity:1;transform:none;}
+    .mfc .tip b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px;}
+    .mfc .tip .r{display:flex;align-items:center;justify-content:space-between;gap:14px;font-variant-numeric:tabular-nums;}
+    .mfc .tip .r span:last-child{color:var(--ink);font-weight:500;}
+    .mfc .key{display:inline-block;width:14px;height:0;border-top:2px solid var(--ink);vertical-align:3px;margin-right:6px;}
+    .mfc .key.cmp{border-top:2px dashed var(--mute);}
+    .mfc-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--body);margin:0 0 10px;}
+    .mfc-legend span{display:inline-flex;align-items:center;}
+    .mfc:focus-visible{outline:none;box-shadow:0 0 0 2px var(--accent);border-radius:4px;}
   </style>
 </head>
 <body>
@@ -563,7 +581,7 @@
           <div class="kpi"><div class="kpi-lbl">Dealer POS sales</div><div class="kpi-val">Rp 74,0 jt</div><div class="kpi-meta"><span class="up mono">+9,6%</span> · 4 dealers</div></div>
         </div>
         <div class="g2">
-          <section class="panel"><div class="panel-hdr"><span class="panel-title">Streams · last 7 days</span><span class="panel-note">MF retail · web · Peers · Dealers</span></div><div class="panel-body"><div class="stream"><div class="st-l"><div class="kpi-lbl" style="margin-bottom:6px">MF retail revenue</div><div class="kpi-val" style="font-size:20px">Rp 58,42 jt</div><div class="kpi-meta"><span class="up">+18,4%</span> vs prev 7D · <a class="p-link" href="#retail">MF retail →</a></div></div><div class="st-r"><svg class="chart" viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,40 67,18 133,48 200,38 267,33 333,28 400,5" fill="none" stroke="var(--ink)" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="400" cy="5" r="3.5" fill="var(--ink)"/></svg><div class="st-mm"><span>Low Rp 6,2 jt · Mon 9</span><span>High Rp 11,3 jt · Fri 13</span></div></div></div><div class="stream"><div class="st-l"><div class="kpi-lbl" style="margin-bottom:6px">Web visitors</div><div class="kpi-val" style="font-size:20px">84.320</div><div class="kpi-meta"><span class="up">+21,7%</span> vs prev 7D · <a class="p-link" href="#web">Web visitors →</a></div></div><div class="st-r"><svg class="chart" viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,46 67,44 133,38 200,28 267,32 333,25 400,5" fill="none" stroke="var(--ink)" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="400" cy="5" r="3.5" fill="var(--ink)"/></svg><div class="st-mm"><span>Low 9.840 · Sat 7</span><span>High 15.880 · Fri 13</span></div></div></div><div class="stream"><div class="st-l"><div class="kpi-lbl" style="margin-bottom:6px">Peers ticket revenue</div><div class="kpi-val" style="font-size:20px">Rp 7,42 M</div><div class="kpi-meta"><span class="up">+12,8%</span> vs prev 7D · <a class="p-link" href="#events">Peers →</a></div></div><div class="st-r"><svg class="chart" viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,44 67,50 133,38 200,28 267,32 333,23 400,4" fill="none" stroke="var(--ink)" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="400" cy="4" r="3.5" fill="var(--ink)"/></svg><div class="st-mm"><span>Low Rp 0,71 M · Sun 8</span><span>High Rp 1,57 M · Fri 13</span></div></div></div><div class="stream"><div class="st-l"><div class="kpi-lbl" style="margin-bottom:6px">Dealer POS sales</div><div class="kpi-val" style="font-size:20px">Rp 74,0 jt</div><div class="kpi-meta"><span class="up">+9,6%</span> vs prev 7D · <a class="p-link" href="#dealers">Dealers →</a></div></div><div class="st-r"><svg class="chart" viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,12 67,4 133,50 200,44 267,40 333,37 400,21" fill="none" stroke="var(--ink)" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="400" cy="21" r="3.5" fill="var(--ink)"/></svg><div class="st-mm"><span>Low Rp 7,2 jt · Mon 9</span><span>High Rp 14,9 jt · Sun 8</span></div></div></div><div class="xaxis"><span>Sat 7</span><span>Sun 8</span><span>Mon 9</span><span>Tue 10</span><span>Wed 11</span><span>Thu 12</span><span>Fri 13</span></div></div></section>
+          <section class="panel"><div class="panel-hdr"><span class="panel-title">Streams · last 7 days</span><span class="panel-note">MF retail · web · Peers · Dealers</span></div><div class="panel-body"><div class="stream"><div class="st-l"><div class="kpi-lbl" style="margin-bottom:6px">MF retail revenue</div><div class="kpi-val" style="font-size:20px">Rp 58,42 jt</div><div class="kpi-meta"><span class="up">+18,4%</span> vs prev 7D · <a class="p-link" href="#retail">MF retail →</a></div></div><div class="st-r"><div class="mfc" data-chart='{"type": "spark", "unit": "jt", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "", "series": [{"name": "MF retail revenue", "values": [7.1, 9.8, 6.2, 7.4, 8.0, 8.6, 11.3], "style": "main"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"], "h": 56}' aria-label=""></div><div class="st-mm"><span>Low Rp 6,2 jt · Mon 9</span><span>High Rp 11,3 jt · Fri 13</span></div></div></div><div class="stream"><div class="st-l"><div class="kpi-lbl" style="margin-bottom:6px">Web visitors</div><div class="kpi-val" style="font-size:20px">84.320</div><div class="kpi-meta"><span class="up">+21,7%</span> vs prev 7D · <a class="p-link" href="#web">Web visitors →</a></div></div><div class="st-r"><div class="mfc" data-chart='{"type": "spark", "unit": "n", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "", "series": [{"name": "Web visitors", "values": [9840, 10210, 11030, 12480, 11920, 12960, 15880], "style": "main"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"], "h": 56}' aria-label=""></div><div class="st-mm"><span>Low 9.840 · Sat 7</span><span>High 15.880 · Fri 13</span></div></div></div><div class="stream"><div class="st-l"><div class="kpi-lbl" style="margin-bottom:6px">Peers ticket revenue</div><div class="kpi-val" style="font-size:20px">Rp 7,42 M</div><div class="kpi-meta"><span class="up">+12,8%</span> vs prev 7D · <a class="p-link" href="#events">Peers →</a></div></div><div class="st-r"><div class="mfc" data-chart='{"type": "spark", "unit": "M", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "", "series": [{"name": "Peers ticket revenue", "values": [0.82, 0.71, 0.94, 1.12, 1.05, 1.21, 1.57], "style": "main"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"], "h": 56}' aria-label=""></div><div class="st-mm"><span>Low Rp 0,71 M · Sun 8</span><span>High Rp 1,57 M · Fri 13</span></div></div></div><div class="stream"><div class="st-l"><div class="kpi-lbl" style="margin-bottom:6px">Dealer POS sales</div><div class="kpi-val" style="font-size:20px">Rp 74,0 jt</div><div class="kpi-meta"><span class="up">+9,6%</span> vs prev 7D · <a class="p-link" href="#dealers">Dealers →</a></div></div><div class="st-r"><div class="mfc" data-chart='{"type": "spark", "unit": "jt", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "", "series": [{"name": "Dealer POS sales", "values": [13.6, 14.9, 7.2, 8.1, 8.8, 9.4, 12.0], "style": "main"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"], "h": 56}' aria-label=""></div><div class="st-mm"><span>Low Rp 7,2 jt · Mon 9</span><span>High Rp 14,9 jt · Sun 8</span></div></div></div><div class="xaxis"><span>Sat 7</span><span>Sun 8</span><span>Mon 9</span><span>Tue 10</span><span>Wed 11</span><span>Thu 12</span><span>Fri 13</span></div></div></section>
           <section class="panel"><div class="panel-hdr"><span class="panel-title">Funnel</span><span class="panel-note">web → paid orders</span></div><div class="panel-body"><div class="hbar"><span class="lbl">Web visitors</span><div class="bar"><i style="width:100.0%"></i></div><span class="val fig">84.320 <span class="fig-mute">· 100,0%</span></span></div><div class="hbar"><span class="lbl">Product / event views</span><div class="bar"><i style="width:48.9%"></i></div><span class="val fig">41.260 <span class="fig-mute">· 48,9%</span></span></div><div class="hbar"><span class="lbl">Checkouts</span><div class="bar"><i style="width:6.5%"></i></div><span class="val fig">5.480 <span class="fig-mute">· 6,5%</span></span></div><div class="hbar"><span class="lbl">Paid orders</span><div class="bar"><i style="width:3.8%"></i></div><span class="val fig">3.206 <span class="fig-mute">· 3,8%</span></span></div></div></section>
         </div>
         <div class="g2" style="margin-top:14px">
@@ -583,7 +601,7 @@
           <div class="kpi"><div class="kpi-lbl">Gross margin</div><div class="kpi-val">42,8%</div><div class="kpi-meta"><span class="mono">Rp 25,0 jt</span></div></div>
         </div>
         <div class="g2">
-          <section class="panel"><div class="panel-hdr"><span class="panel-title">Retail revenue · daily</span><span class="panel-note">Rp M</span></div><div class="panel-body"><svg class="chart" viewBox="0 0 560 120" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,87 93,38 187,103 280,81 373,70 467,59 560,10 560,120 0,120" fill="var(--neutral-t)"/><polyline points="0,87 93,38 187,103 280,81 373,70 467,59 560,10" fill="none" stroke="var(--ink)" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="560" cy="10" r="3.5" fill="var(--ink)"/></svg><div class="xaxis"><span>Sat 7</span><span>Sun 8</span><span>Mon 9</span><span>Tue 10</span><span>Wed 11</span><span>Thu 12</span><span>Fri 13</span></div></div></section>
+          <section class="panel"><div class="panel-hdr"><span class="panel-title">MF retail revenue · daily</span><span class="panel-note">this 7D vs previous 7D</span></div><div class="panel-body"><div class="mfc-legend"><span><i class="key" style="display:inline-block;width:14px;height:0;border-top:2px solid var(--ink);margin-right:6px"></i>This period</span><span><i class="key cmp" style="display:inline-block;width:14px;height:0;border-top:2px dashed var(--mute);margin-right:6px"></i>Previous 7D</span></div><div class="mfc" data-chart='{"type": "line", "unit": "jt", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "MF retail revenue per day", "series": [{"name": "This period", "values": [7.1, 9.8, 6.2, 7.4, 8.0, 8.6, 11.3], "style": "main"}, {"name": "Previous 7D", "values": [6.0, 8.1, 5.9, 6.5, 7.0, 7.3, 8.5], "style": "cmp"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"]}' aria-label="MF retail revenue per day"></div></div></section>
           <section class="panel"><div class="panel-hdr"><span class="panel-title">Revenue by channel</span><span class="panel-note">Rp 58,42 jt</span></div><div class="panel-body"><div class="hbar"><span class="lbl"><span class="channel-tag ch-website">Website</span></span><div class="bar"><i style="width:100.0%"></i></div><span class="val fig">Rp 21,4 jt</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-pos">POS</span></span><div class="bar"><i style="width:83.6%"></i></div><span class="val fig">Rp 17,9 jt</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-tokopedia">Tokopedia</span></span><div class="bar"><i style="width:34.1%"></i></div><span class="val fig">Rp 7,3 jt</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-shopee">Shopee</span></span><div class="bar"><i style="width:21.5%"></i></div><span class="val fig">Rp 4,6 jt</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-discogs">Discogs</span></span><div class="bar"><i style="width:17.8%"></i></div><span class="val fig">Rp 3,8 jt</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-bandcamp">Bandcamp</span></span><div class="bar"><i style="width:9.8%"></i></div><span class="val fig">Rp 2,1 jt</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-ebay">eBay</span></span><div class="bar"><i style="width:6.1%"></i></div><span class="val fig">Rp 1,3 jt</span></div></div></section>
         </div>
         <div class="g2" style="margin-top:14px">
@@ -598,7 +616,7 @@
           <div class="kpi"><div class="kpi-lbl">Conversion</div><div class="kpi-val">3,8%</div><div class="kpi-meta">visitors → paid orders</div></div>
         </div>
         <div class="g2">
-          <section class="panel"><div class="panel-hdr"><span class="panel-title">Visitors · daily</span><span class="panel-note">unique</span></div><div class="panel-body"><svg class="chart" viewBox="0 0 560 140" preserveAspectRatio="none" aria-hidden="true"><rect x="16" y="53" width="48" height="87" rx="3" fill="var(--ink)" opacity="0.55"/><rect x="96" y="50" width="48" height="90" rx="3" fill="var(--ink)" opacity="0.55"/><rect x="176" y="43" width="48" height="97" rx="3" fill="var(--ink)" opacity="0.55"/><rect x="256" y="30" width="48" height="110" rx="3" fill="var(--ink)" opacity="0.55"/><rect x="336" y="35" width="48" height="105" rx="3" fill="var(--ink)" opacity="0.55"/><rect x="416" y="26" width="48" height="114" rx="3" fill="var(--ink)" opacity="0.55"/><rect x="496" y="0" width="48" height="140" rx="3" fill="var(--ink)" opacity="1"/></svg><div class="xaxis"><span>Sat 7</span><span>Sun 8</span><span>Mon 9</span><span>Tue 10</span><span>Wed 11</span><span>Thu 12</span><span>Fri 13</span></div></div></section>
+          <section class="panel"><div class="panel-hdr"><span class="panel-title">Web visitors · daily</span><span class="panel-note">unique visitors</span></div><div class="panel-body"><div class="mfc" data-chart='{"type": "bar", "unit": "n", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "Unique web visitors per day", "series": [{"name": "Unique visitors", "values": [9840, 10210, 11030, 12480, 11920, 12960, 15880], "style": "main"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"]}' aria-label="Unique web visitors per day"></div></div></section>
           <section class="panel"><div class="panel-hdr"><span class="panel-title">Sources</span><span class="panel-note">% of visits</span></div><div class="panel-body"><div class="hbar"><span class="lbl">Instagram</span><div class="bar"><i style="width:100.0%"></i></div><span class="val fig">31%</span></div><div class="hbar"><span class="lbl">Google search</span><div class="bar"><i style="width:77.4%"></i></div><span class="val fig">24%</span></div><div class="hbar"><span class="lbl">Direct</span><div class="bar"><i style="width:61.3%"></i></div><span class="val fig">19%</span></div><div class="hbar"><span class="lbl">TikTok</span><div class="bar"><i style="width:38.7%"></i></div><span class="val fig">12%</span></div><div class="hbar"><span class="lbl">Marketplaces</span><div class="bar"><i style="width:29.0%"></i></div><span class="val fig">9%</span></div><div class="hbar"><span class="lbl">Referral / partners</span><div class="bar"><i style="width:16.1%"></i></div><span class="val fig">5%</span></div></div></section>
         </div>
         <div class="g2" style="margin-top:14px">
@@ -613,7 +631,7 @@
           <div class="kpi"><div class="kpi-lbl">Check-in rate</div><div class="kpi-val">92,6%</div><div class="kpi-meta">last <span class="mono">10</span> events</div></div>
         </div>
         <div class="g2">
-          <section class="panel"><div class="panel-hdr"><span class="panel-title">Ticket revenue · daily</span><span class="panel-note">Rp B</span></div><div class="panel-body"><svg class="chart" viewBox="0 0 560 120" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,95 93,108 187,81 280,61 373,69 467,50 560,9 560,120 0,120" fill="var(--neutral-t)"/><polyline points="0,95 93,108 187,81 280,61 373,69 467,50 560,9" fill="none" stroke="var(--ink)" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="560" cy="9" r="3.5" fill="var(--ink)"/></svg><div class="xaxis"><span>Sat 7</span><span>Sun 8</span><span>Mon 9</span><span>Tue 10</span><span>Wed 11</span><span>Thu 12</span><span>Fri 13</span></div></div></section>
+          <section class="panel"><div class="panel-hdr"><span class="panel-title">Peers ticket revenue · daily</span><span class="panel-note">Rp</span></div><div class="panel-body"><div class="mfc" data-chart='{"type": "line", "unit": "M", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "Peers ticket revenue per day", "series": [{"name": "Ticket revenue", "values": [0.82, 0.71, 0.94, 1.12, 1.05, 1.21, 1.57], "style": "main"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"]}' aria-label="Peers ticket revenue per day"></div></div></section>
           <section class="panel"><div class="panel-hdr"><span class="panel-title">Sales channel</span><span class="panel-note">Rp 7,42 M</span></div><div class="panel-body"><div class="hbar"><span class="lbl"><span class="channel-tag ch-website">Website</span></span><div class="bar"><i style="width:100.0%"></i></div><span class="val fig">Rp 5,81 M</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-tokopedia">Tokopedia</span></span><div class="bar"><i style="width:10.5%"></i></div><span class="val fig">Rp 0,61 M</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-pos">POS</span></span><div class="bar"><i style="width:9.1%"></i></div><span class="val fig">Rp 0,53 M</span></div><div class="hbar"><span class="lbl"><span class="channel-tag ch-shopee">Shopee</span></span><div class="bar"><i style="width:8.1%"></i></div><span class="val fig">Rp 0,47 M</span></div></div></section>
         </div>
         <div style="margin-top:14px">
@@ -627,7 +645,7 @@
           <div class="kpi"><div class="kpi-lbl">MF fee</div><div class="kpi-val">Rp 1,85 jt</div><div class="kpi-meta">2,5% of dealer POS sales</div></div>
         </div>
         <div class="g2">
-          <section class="panel"><div class="panel-hdr"><span class="panel-title">Dealer POS sales · daily</span><span class="panel-note">Rp M</span></div><div class="panel-body"><svg class="chart" viewBox="0 0 560 120" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,26 93,9 187,106 280,95 373,86 467,79 560,46 560,120 0,120" fill="var(--neutral-t)"/><polyline points="0,26 93,9 187,106 280,95 373,86 467,79 560,46" fill="none" stroke="var(--ink)" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="560" cy="46" r="3.5" fill="var(--ink)"/></svg><div class="xaxis"><span>Sat 7</span><span>Sun 8</span><span>Mon 9</span><span>Tue 10</span><span>Wed 11</span><span>Thu 12</span><span>Fri 13</span></div></div></section>
+          <section class="panel"><div class="panel-hdr"><span class="panel-title">Dealer POS sales · daily</span><span class="panel-note">Rp</span></div><div class="panel-body"><div class="mfc" data-chart='{"type": "line", "unit": "jt", "labels": ["Sat 7", "Sun 8", "Mon 9", "Tue 10", "Wed 11", "Thu 12", "Fri 13"], "title": "Dealer POS sales per day", "series": [{"name": "Dealer POS sales", "values": [13.6, 14.9, 7.2, 8.1, 8.8, 9.4, 12.0], "style": "main"}], "full": ["Sat 7 Nov", "Sun 8 Nov", "Mon 9 Nov", "Tue 10 Nov", "Wed 11 Nov", "Thu 12 Nov", "Fri 13 Nov"]}' aria-label="Dealer POS sales per day"></div></div></section>
           <section class="panel"><div class="panel-hdr"><span class="panel-title">Sales by dealer</span><span class="panel-note">Rp 74,0 jt</span></div><div class="panel-body"><div class="hbar"><span class="lbl">Sudut Piringan</span><div class="bar"><i style="width:100.0%"></i></div><span class="val fig">Rp 43,8 jt</span></div><div class="hbar"><span class="lbl">Kaset Kita</span><div class="bar"><i style="width:32.4%"></i></div><span class="val fig">Rp 14,2 jt</span></div><div class="hbar"><span class="lbl">Rekaman Selatan</span><div class="bar"><i style="width:25.3%"></i></div><span class="val fig">Rp 11,1 jt</span></div><div class="hbar"><span class="lbl">Toko Pita</span><div class="bar"><i style="width:11.2%"></i></div><span class="val fig">Rp 4,9 jt</span></div></div></section>
         </div>
         <div class="g2" style="margin-top:14px">
@@ -736,6 +754,66 @@
       th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
     });
   });
+})();
+</script>
+
+<script>/* mfchart — shared chart renderer */
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const UNIT={jt:[1,' jt','Rp '],M:[1,' M','Rp '],n:[1,'',''],pct:[1,'%','']};
+  function fmt(v,u,dp){const [_,suf,pre]=UNIT[u]||UNIT.n;const d=dp!=null?dp:(u==='n'?0:(Math.abs(v)<10?1:(u==='M'?2:1)));
+    return pre+v.toLocaleString('id-ID',{minimumFractionDigits:u==='n'?0:Math.min(d,1),maximumFractionDigits:d})+suf;}
+  function nice(max){if(max<=0)return 4;const raw=max/4,e=Math.pow(10,Math.floor(Math.log10(raw)));
+    const step=[1,1.5,2,2.5,3,4,5,6,8,10].map(k=>k*e).find(s=>s*4>=max);return step*4;}
+  function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function render(box){
+    const c=JSON.parse(box.dataset.chart);const spark=c.type==='spark';
+    box.querySelector('svg')?.remove();box.querySelector('.tip')?.remove();
+    const W=Math.max(200,box.clientWidth),H=c.h||(spark?56:200);
+    const L=spark?0:44,R=spark?4:(c.endLabel===false?8:64),T=spark?6:10,B=spark?4:24;
+    const iw=W-L-R,ih=H-T-B,n=c.labels.length;
+    const all=c.series.flatMap(s=>s.values);
+    const lo=spark?Math.min(...all)*0.9:0, top=spark?Math.max(...all)*1.05:nice(Math.max(...all)*1.04);
+    const y=v=>T+ih-(v-lo)/(top-lo)*ih;
+    const bw=c.type==='bar'?Math.min(24,iw/n*0.6):0;
+    const x=i=>c.type==='bar'?L+iw/n*(i+.5):L+(n===1?iw/2:iw*i/(n-1));
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:W,height:H,role:'img','aria-label':c.title||''});
+    if(!spark){for(let k=0;k<=4;k++){const v=top*k/4,yy=y(v);el('line',{x1:L,x2:W-R+4,y1:yy,y2:yy,class:'grid'},svg);
+        const t=el('text',{x:L-8,y:yy+4,'text-anchor':'end',class:'ax'},svg);t.textContent=k===0?'0':fmt(v,c.unit,v<10&&v%1?1:0);}
+      c.labels.forEach((lb,i)=>{if(n>8&&i%2&&i!==n-1)return;const t=el('text',{x:x(i),y:H-6,'text-anchor':c.type==='bar'?'middle':(i===0?'start':i===n-1?'end':'middle'),class:'ax'},svg);t.textContent=lb;});}
+    c.series.forEach((s,si)=>{
+      const cmp=s.style==='cmp';
+      if(c.type==='bar'){s.values.forEach((v,i)=>{const h=Math.max(1,ih*(v-lo)/(top-lo)),x0=x(i)-bw/2,y0=T+ih-h,r=Math.min(4,h);
+          el('path',{d:`M${x0},${T+ih}V${y0+r}Q${x0},${y0} ${x0+r},${y0}H${x0+bw-r}Q${x0+bw},${y0} ${x0+bw},${y0+r}V${T+ih}Z`,fill:'var(--ink)',opacity:i===n-1?1:.55,'data-i':i},svg);});return;}
+      const pts=s.values.map((v,i)=>[x(i),y(v)]);
+      if(!cmp&&!spark){el('path',{d:'M'+pts.map(p=>p.join(',')).join('L')+`L${pts[n-1][0]},${T+ih}L${pts[0][0]},${T+ih}Z`,fill:'var(--ink)',opacity:.07},svg);}
+      el('path',{d:'M'+pts.map(p=>p.join(',')).join('L'),fill:'none',stroke:cmp?'var(--mute)':'var(--ink)','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round','stroke-dasharray':cmp?'5 4':''},svg);
+      if(!cmp){const [ex,ey]=pts[n-1];el('circle',{cx:ex,cy:ey,r:4,fill:'var(--ink)',stroke:'var(--surface)','stroke-width':2},svg);
+        if(!spark&&c.endLabel!==false){const t=el('text',{x:ex+8,y:ey+4,class:'end'},svg);t.textContent=fmt(s.values[n-1],c.unit);}}
+    });
+    if(c.type==='bar'&&c.endLabel!==false){const v=c.series[0].values[n-1];const t=el('text',{x:x(n-1),y:y(v)-6,'text-anchor':'middle',class:'end'},svg);t.textContent=fmt(v,c.unit);}
+    const xh=el('line',{y1:T,y2:T+ih,class:'xh'},svg);
+    const dots=c.type==='bar'?[]:c.series.map(s=>el('circle',{r:4,fill:s.style==='cmp'?'var(--mute)':'var(--ink)',stroke:'var(--surface)','stroke-width':2,opacity:0},svg));
+    box.prepend(svg);
+    const tip=document.createElement('div');tip.className='tip';box.appendChild(tip);
+    let cur=n-1;
+    function show(i){cur=i;const cx=x(i);xh.setAttribute('x1',cx);xh.setAttribute('x2',cx);
+      dots.forEach((d,si)=>{d.setAttribute('cx',cx);d.setAttribute('cy',y(c.series[si].values[i]));d.setAttribute('opacity',1);});
+      svg.querySelectorAll('path[data-i]').forEach(p=>p.setAttribute('opacity',+p.dataset.i===i?1:.4));
+      tip.innerHTML=`<b>${c.full?c.full[i]:c.labels[i]}</b>`+c.series.map(s=>`<div class="r"><span>${c.series.length>1?`<i class="key${s.style==='cmp'?' cmp':''}"></i>`:''}${s.name}</span><span>${fmt(s.values[i],c.unit)}</span></div>`).join('');
+      box.classList.add('hov');const tw=tip.offsetWidth;let tx=cx+12;if(tx+tw>W)tx=cx-12-tw;tip.style.left=Math.max(0,tx)+'px';tip.style.top=(spark?-8:T)+'px';}
+    function hide(){box.classList.remove('hov');dots.forEach(d=>d.setAttribute('opacity',0));svg.querySelectorAll('path[data-i]').forEach(p=>p.setAttribute('opacity',+p.dataset.i===n-1?1:.55));}
+    svg.addEventListener('pointermove',e=>{const r=svg.getBoundingClientRect();const px=(e.clientX-r.left)*W/r.width;
+      let best=0,bd=1e9;for(let i=0;i<n;i++){const d=Math.abs(x(i)-px);if(d<bd){bd=d;best=i;}}show(best);});
+    svg.addEventListener('pointerleave',hide);
+    box.tabIndex=0;box.onkeydown=e=>{if(e.key==='ArrowRight'){show(Math.min(n-1,cur+1));e.preventDefault();}if(e.key==='ArrowLeft'){show(Math.max(0,cur-1));e.preventDefault();}if(e.key==='Escape')hide();};
+    box.onblur=hide;
+  }
+  function all(){document.querySelectorAll('.mfc[data-chart]').forEach(b=>{if(b.offsetParent!==null)render(b);});}
+  window.MFChart={render,all};
+  let t;window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(all,120);});
+  new MutationObserver(()=>{clearTimeout(t);t=setTimeout(all,30);}).observe(document.body,{attributes:true,subtree:true,attributeFilter:['hidden']});
+  if(document.readyState!=='loading')all();else document.addEventListener('DOMContentLoaded',all);
 })();
 </script>
 </body>

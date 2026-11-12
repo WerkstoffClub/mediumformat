@@ -220,6 +220,8 @@
     :root{--announce-h:0px;}
     .announce{display:none!important;}
     .status-pill,.channel-tag,.sum-lbl,.sum-meta,.stab .cnt,.oc-fig .k,.card-note,.widget-note,.kpi-lbl,.dn-group{font-size:11px!important;}
+    /* audit:ui-extras */
+    .channel-tag::before{border-radius:1.5px!important;}
 
     /* ─── Events & Tickets (TMS) — mobile ────────────────────────── */
     .card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;margin-bottom:14px;}
@@ -301,8 +303,6 @@
     .manual input{min-height:44px;}
     .chan-chip{flex-shrink:0;font-size:11px;padding:5px 12px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--body);min-height:30px;}
     .chan-chip.on{border-color:var(--accent);color:var(--ink);background:var(--raised);}
-    /* audit:ui-extras */
-    .channel-tag::before{border-radius:1.5px!important;}
   </style>
 </head>
 <body>
