@@ -245,12 +245,13 @@
 
   <div class="screen">
     <h1 class="page-title">Orders</h1>
-    <div class="page-sub">Unified inbox — every channel</div>
+    <div class="page-sub">MF retail · Peers tickets · Dealer POS</div>
 
     <!-- Orders view tabs -->
     <div class="view-tabs" role="tablist" style="display:flex">
-      <button class="on" style="flex:1;justify-content:center" data-view="retail" onclick="setOrdView(this)">Retail <span class="cnt">148</span></button>
-      <button style="flex:1;justify-content:center" data-view="tickets" onclick="setOrdView(this)">Event tickets <span class="cnt">3.031</span></button>
+      <button class="on" style="flex:1;justify-content:center" data-view="retail" onclick="setOrdView(this)">MF retail</button>
+      <button style="flex:1;justify-content:center" data-view="tickets" onclick="setOrdView(this)">Tickets</button>
+      <button style="flex:1;justify-content:center" data-view="dealers" onclick="setOrdView(this)">Dealer POS</button>
     </div>
     <div class="ord-view" id="view-retail">
     <!-- summary 2x2 -->
@@ -397,6 +398,54 @@
     </a>
     <button class="load-more">Load more · 3.024 remaining</button>
     </div>
+    <!-- Dealers POS tab -->
+    <div class="ord-view" id="view-dealers" hidden>
+    <div class="sum-grid"><button class="sum-card active" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">POS sales · 30D</span></div><div class="sum-val">Rp 317.5M</div><div class="sum-meta"><span class="mono">2.024</span> transactions</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">Live dealers</span></div><div class="sum-val">4</div><div class="sum-meta"><a href="mockup-dealers-mobile.html" style="text-decoration:underline">all dealers</a></div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Refunds · 7D</span></div><div class="sum-val">6</div><div class="sum-meta"><span class="mono">Rp 1.9M</span> · dealer-initiated</div></button><button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">MF fee · 30D</span></div><div class="sum-val">Rp 7.9M</div><div class="sum-meta">2.5% · settles Mon</div></button></div>
+    <div class="chips">
+      <button class="chan-chip on" onclick="toggleChan(this)">All dealers</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Sudut Piringan</button><button class="chan-chip" onclick="toggleChan(this)">Kaset Kita</button><button class="chan-chip" onclick="toggleChan(this)">Rekaman Selatan</button><button class="chan-chip" onclick="toggleChan(this)">Toko Pita</button>
+    </div>
+    <a class="ord-card" href="mockup-dealer-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">SP-POS-0412</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Efek Rumah Kaca — Sinestesia (LP)<small>Sudut Piringan · QRIS · Dimas</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">14:52</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 485.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-dealer-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">SP-POS-0411</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Khruangbin — Mordechai (LP) + 1 more<small>Sudut Piringan · EDC · BCA · Dimas</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">2</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">14:31</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 1.010.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-dealer-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">SP-POS-0410</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Miles Davis — Kind of Blue (LP)<small>Sudut Piringan · Cash · Ayu</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">13:58</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 470.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-dealer-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">SP-POS-0409</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Floating Points — Crush (LP)<small>Sudut Piringan · E-wallet · GoPay · Ayu</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">13:20</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 485.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-dealer-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">KK-POS-0219</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Dewa 19 — Bintang Lima (Cassette) + 2 more<small>Kaset Kita · QRIS · Rani</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">3</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">14:40</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 255.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-dealer-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">RS-POS-0133</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Floating Points — Crush (LP)<small>Rekaman Selatan · EDC · BCA · Teguh</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">13:44</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 485.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-dealer-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">TP-POS-0088</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Various — Pop Kreatif 80s (Cassette)<small>Toko Pita · Cash · Wulan</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">12:30</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 85.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-dealer-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">KK-POS-0218</span></div><span class="status-pill st-refunded">Refunded</span></div>
+      <div class="oc-cust">Sore — Centralismo (CD)<small>Kaset Kita · E-wallet · OVO · Rani</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Time</span><span class="v">11:58</span></div><div class="oc-fig right"><span class="k">Amount</span><span class="v">Rp 150.000</span></div></div>
+    </a>
+    </div>
   </div>
 
   <!-- drawer -->
@@ -418,9 +467,13 @@
       <a href="mockup-channels-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Channels<span class="dn-status-dot" title="All channels online"></span></a>
       <a href="mockup-pos-checkout-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>POS Checkout</a>
 
-      <div class="dn-group">Events &amp; Tickets</div>
-      <a href="mockup-events-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Events</a>
+      <div class="dn-group">Peers · Venues</div>
+      <a href="mockup-peers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Venues</a>
+      <a href="mockup-events-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Shows &amp; tickets</a>
       <a href="mockup-checkin-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/><line x1="13" y1="8" x2="17" y2="8"/><line x1="8" y1="14" x2="8" y2="17"/></svg>Door check-in</a>
+
+      <div class="dn-group">Dealers · Record shops</div>
+      <a href="mockup-dealers-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0z"/><path d="M5 13v8h14v-8"/><rect x="10" y="15" width="4" height="6"/></svg>Dealers</a>
 
       <div class="dn-group">Content</div>
       <a href="mockup-newsletter-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg>Newsletter</a>
