@@ -283,6 +283,21 @@
     .channel-tag::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
     .ch-website{color:#6366F1;}.ch-pos{color:#0EA5E9;}.ch-tokopedia{color:#22C55E;}.ch-shopee{color:#F97316;}
     .ch-discogs{color:#9CA3AF;}.ch-bandcamp{color:#14B8A6;}.ch-ebay{color:#EAB308;}.ch-event{color:#EC4899;}
+
+    /* ─── Orders view tabs (Retail | Event tickets) ─────────────── */
+    .view-tabs{display:inline-flex;gap:2px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:3px;margin-bottom:16px;}
+    .view-tabs button{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;padding:6px 14px;border-radius:var(--r-md);color:var(--mute);background:transparent;border:none;}
+    .view-tabs button .cnt{font-size:11px;font-variant-numeric:tabular-nums;opacity:.75;}
+    .view-tabs button.on{background:var(--accent);color:var(--accent-text);}
+    .ord-view[hidden]{display:none!important;}
+    #view-tickets .orders-layout{grid-template-columns:1fr;}
+    #view-tickets .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+    #view-tickets .ord-no,#view-tickets .ord-total{white-space:nowrap;}
+    @media (max-width:820px){#view-tickets .summary{grid-template-columns:repeat(2,1fr);}}
+    .st-paid{background:var(--success-t);color:var(--success);}
+    .ev-name{font-size:13px;color:var(--ink);}
+    .ev-tier{display:block;font-size:11px;color:var(--mute);margin-top:2px;}
+    .tk-sample{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;padding:0 5px;border-radius:4px;border:1px dashed var(--mute);color:var(--mute);margin-left:6px;}
   </style>
 </head>
 <body>
@@ -299,6 +314,10 @@
       <a href="mockup-dashboard.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         <span class="sb-txt">Dashboard</span>
+      </a>
+      <a href="mockup-analytics.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span class="sb-txt">Analytics</span>
       </a>
 
       <div class="sb-group">Selling</div>
@@ -411,7 +430,7 @@
       <div class="page-hdr">
         <div>
           <h1 class="page-title">Orders</h1>
-          <div class="page-sub">Unified inbox — every channel, one queue</div>
+          <div class="page-sub">Unified inbox — retail orders and event tickets, every channel</div>
         </div>
         <div class="page-hdr-right">
           <button class="btn-sec">
@@ -425,6 +444,12 @@
         </div>
       </div>
 
+      <!-- Orders view tabs -->
+      <div class="view-tabs" role="tablist" aria-label="Order type">
+        <button class="on" role="tab" aria-selected="true" data-view="retail" onclick="setOrdView(this)">Retail orders <span class="cnt">148</span></button>
+        <button role="tab" aria-selected="false" data-view="tickets" onclick="setOrdView(this)">Event tickets <span class="cnt">3.031</span></button>
+      </div>
+      <div class="ord-view" id="view-retail">
       <div class="orders-layout">
 
         <!-- Summary counters -->
@@ -643,6 +668,212 @@
           </div>
         </div>
       </div>
+      </div>
+
+      <div class="ord-view" id="view-tickets" hidden>
+      <div class="orders-layout">
+        <div class="summary">
+          <button class="sum-card active" onclick="setSummary(this)">
+            <div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Paid · 7D</span></div>
+            <div class="sum-val">2.958</div>
+            <div class="sum-meta"><span class="mono">6.214</span> tickets · <span class="mono">Rp 7.42B</span></div>
+          </button>
+          <button class="sum-card" onclick="setSummary(this)">
+            <div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Awaiting payment</span></div>
+            <div class="sum-val">64</div>
+            <div class="sum-meta">VA / QRIS expire in <span class="mono">≤ 2h</span></div>
+          </button>
+          <button class="sum-card" onclick="setSummary(this)">
+            <div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">Events on sale</span></div>
+            <div class="sum-val">10</div>
+            <div class="sum-meta"><span class="mono">1</span> live today · <a href="mockup-events.html" style="text-decoration:underline">all events</a></div>
+          </button>
+          <button class="sum-card" onclick="setSummary(this)">
+            <div class="sum-top"><span class="sum-dot" style="background:var(--danger)"></span><span class="sum-lbl">Refund requests</span></div>
+            <div class="sum-val">5</div>
+            <div class="sum-meta"><span class="mono">Rp 4.2M</span> · <span class="mono">2</span> past cutoff</div>
+          </button>
+        </div>
+        <div>
+          <div class="toolbar">
+            <div class="status-tabs" role="tablist" aria-label="Filter tickets by status">
+              <button class="stab on" role="tab" aria-selected="true" onclick="setStab(this)">All <span class="cnt">3.031</span></button>
+              <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--success)"></span>Paid <span class="cnt">2.958</span></button>
+              <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--warning)"></span>Pending <span class="cnt">64</span></button>
+              <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--danger)"></span>Refunded <span class="cnt">5</span></button>
+              <button class="stab" role="tab" onclick="setStab(this)"><span class="st-dot" style="background:var(--danger)"></span>Expired <span class="cnt">4</span></button>
+            </div>
+            <div class="chip-row">
+              <span class="chip-lbl">Event</span>
+              <button class="chan-chip on" onclick="toggleChan(this)">All</button>
+              <button class="chan-chip" onclick="toggleChan(this)">Maroon 5</button>
+              <button class="chan-chip" onclick="toggleChan(this)">BIGBANG</button>
+              <button class="chan-chip" onclick="toggleChan(this)">Joyland</button>
+              <button class="chan-chip" onclick="toggleChan(this)">Takase Toya</button>
+              <button class="chan-chip" onclick="toggleChan(this)">Krapela</button>
+              <button class="chan-chip" onclick="toggleChan(this)">More…</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="ord-table">
+                <thead>
+                  <tr><th>Order no.</th><th>Buyer</th><th>Event · tier</th><th>Channel</th><th>Payment</th><th class="num">Total</th><th>Date</th><th>Status</th><th></th></tr>
+                </thead>
+                <tbody>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-M5-48812</span></td>
+                    <td><div class="cust"><span class="cust-name">Nadia Putri</span><span class="cust-email">nadia.p@gmail.com</span></div></td>
+                    <td><span class="ev-name">Maroon 5 — JIS</span><span class="tk-sample">Sample</span><span class="ev-tier">CAT 3 · ×2</span></td>
+                    <td><span class="channel-tag ch-website">Website</span></td>
+                    <td><span class="ord-items-count">QRIS</span></td>
+                    <td class="num"><span class="ord-total">Rp 4.800.000</span></td>
+                    <td><span class="ord-date">13 Nov · 10:42</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-XK-01165</span></td>
+                    <td><div class="cust"><span class="cust-name">Laras Wibowo</span><span class="cust-email">laras.w@gmail.com</span></div></td>
+                    <td><span class="ev-name">Xu Kai fanmeet — Kempinski</span><span class="ev-tier">VIP · ×1</span></td>
+                    <td><span class="channel-tag ch-website">Website</span></td>
+                    <td><span class="ord-items-count">Card</span></td>
+                    <td class="num"><span class="ord-total">Rp 599.000</span></td>
+                    <td><span class="ord-date">13 Nov · 10:20</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-TT-00412</span></td>
+                    <td><div class="cust"><span class="cust-name">Gilang Ramadhan</span><span class="cust-email">walk-in · POS</span></div></td>
+                    <td><span class="ev-name">Takase Toya — M Bloc</span><span class="tk-sample">Sample</span><span class="ev-tier">Regular · ×1</span></td>
+                    <td><span class="channel-tag ch-pos">POS</span></td>
+                    <td><span class="ord-items-count">EDC · BCA</span></td>
+                    <td class="num"><span class="ord-total">Rp 680.000</span></td>
+                    <td><span class="ord-date">13 Nov · 09:58</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-BB-30211</span></td>
+                    <td><div class="cust"><span class="cust-name">Melati Sari</span><span class="cust-email">melati.s@yahoo.com</span></div></td>
+                    <td><span class="ev-name">BIGBANG — JIS</span><span class="ev-tier">CAT 5 · ×2</span></td>
+                    <td><span class="channel-tag ch-tokopedia">Tokopedia</span></td>
+                    <td><span class="ord-items-count">E-wallet</span></td>
+                    <td class="num"><span class="ord-total">Rp 3.100.000</span></td>
+                    <td><span class="ord-date">13 Nov · 09:31</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-KR-00131</span></td>
+                    <td><div class="cust"><span class="cust-name">Aldo Firmansyah</span><span class="cust-email">aldo.f@gmail.com</span></div></td>
+                    <td><span class="ev-name">Krapela 3rd Anniversary — Day 1</span><span class="tk-sample">Sample</span><span class="ev-tier">Presale · ×2</span></td>
+                    <td><span class="channel-tag ch-website">Website</span></td>
+                    <td><span class="ord-items-count">Virtual account</span></td>
+                    <td class="num"><span class="ord-total">Rp 300.000</span></td>
+                    <td><span class="ord-date">13 Nov · 09:12</span></td>
+                    <td><span class="status-pill st-pending">Pending</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-JS-01422</span></td>
+                    <td><div class="cust"><span class="cust-name">Putri Anjani</span><span class="cust-email">putri.a@gmail.com</span></div></td>
+                    <td><span class="ev-name">Joyland Sessions 2026</span><span class="tk-sample">Sample</span><span class="ev-tier">2-day pass · ×2</span></td>
+                    <td><span class="channel-tag ch-shopee">Shopee</span></td>
+                    <td><span class="ord-items-count">E-wallet</span></td>
+                    <td class="num"><span class="ord-total">Rp 2.400.000</span></td>
+                    <td><span class="ord-date">12 Nov · 22:47</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-GN-08390</span></td>
+                    <td><div class="cust"><span class="cust-name">Hendra Gunawan</span><span class="cust-email">hendra.g@outlook.com</span></div></td>
+                    <td><span class="ev-name">Guns N' Roses — Madya GBK</span><span class="ev-tier">Festival · ×1</span></td>
+                    <td><span class="channel-tag ch-website">Website</span></td>
+                    <td><span class="ord-items-count">Card</span></td>
+                    <td class="num"><span class="ord-total">Rp 1.750.000</span></td>
+                    <td><span class="ord-date">12 Nov · 21:05</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-RP-01107</span></td>
+                    <td><div class="cust"><span class="cust-name">Siska Amelia</span><span class="cust-email">siska.a@gmail.com</span></div></td>
+                    <td><span class="ev-name">Rony Parulian Showcase — Bengkel</span><span class="ev-tier">Regular · ×2</span></td>
+                    <td><span class="channel-tag ch-website">Website</span></td>
+                    <td><span class="ord-items-count">QRIS</span></td>
+                    <td class="num"><span class="ord-total">Rp 578.000</span></td>
+                    <td><span class="ord-date">12 Nov · 19:40</span></td>
+                    <td><span class="status-pill st-paid">Paid</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-MS-00075</span></td>
+                    <td><div class="cust"><span class="cust-name">Bayu Saputra</span><span class="cust-email">bayu.s@gmail.com</span></div></td>
+                    <td><span class="ev-name">Museum Siluet — Dekhad</span><span class="ev-tier">Regular · ×1</span></td>
+                    <td><span class="channel-tag ch-website">Website</span></td>
+                    <td><span class="ord-items-count">QRIS</span></td>
+                    <td class="num"><span class="ord-total">Rp 100.000</span></td>
+                    <td><span class="ord-date">12 Nov · 18:02</span></td>
+                    <td><span class="status-pill st-refunded">Refunded</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                  <tr onclick="location.href='mockup-event-detail.html'">
+                    <td><span class="ord-no">TK-M5-48806</span></td>
+                    <td><div class="cust"><span class="cust-name">Fikri Ramadhan</span><span class="cust-email">fikri.r@gmail.com</span></div></td>
+                    <td><span class="ev-name">Maroon 5 — JIS</span><span class="tk-sample">Sample</span><span class="ev-tier">CAT 5 · ×2</span></td>
+                    <td><span class="channel-tag ch-website">Website</span></td>
+                    <td><span class="ord-items-count">Virtual account</span></td>
+                    <td class="num"><span class="ord-total">Rp 3.000.000</span></td>
+                    <td><span class="ord-date">12 Nov · 21:49</span></td>
+                    <td><span class="status-pill st-cancelled">Expired</span></td>
+                    <td class="num"><svg class="row-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-foot">
+              <span class="foot-meta">Showing 1–10 of 3.031 ticket orders · “Sample” = promoter price not published</span>
+              <div class="pager"><button class="pg-btn">‹</button><button class="pg-btn on">1</button><button class="pg-btn">2</button><button class="pg-btn">3</button><button class="pg-btn">…</button><button class="pg-btn">304</button><button class="pg-btn">›</button></div>
+            </div>
+          </div>
+          <div class="ord-cards">
+            <a class="ord-card" href="mockup-event-detail.html">
+              <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-M5-48812</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-paid">Paid</span></div>
+              <div class="oc-mid"><span class="oc-cust">Maroon 5 — JIS<small>Nadia Putri · CAT 3 ×2</small></span></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">QRIS</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 4.800.000</span></div></div>
+            </a>
+            <a class="ord-card" href="mockup-event-detail.html">
+              <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-XK-01165</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-paid">Paid</span></div>
+              <div class="oc-mid"><span class="oc-cust">Xu Kai fanmeet — Kempinski<small>Laras Wibowo · VIP ×1</small></span></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">Card</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 599.000</span></div></div>
+            </a>
+            <a class="ord-card" href="mockup-event-detail.html">
+              <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-TT-00412</span><span class="channel-tag ch-pos">POS</span></div><span class="status-pill st-paid">Paid</span></div>
+              <div class="oc-mid"><span class="oc-cust">Takase Toya — M Bloc<small>Gilang Ramadhan · Regular ×1</small></span></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">EDC · BCA</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 680.000</span></div></div>
+            </a>
+            <a class="ord-card" href="mockup-event-detail.html">
+              <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-BB-30211</span><span class="channel-tag ch-tokopedia">Tokopedia</span></div><span class="status-pill st-paid">Paid</span></div>
+              <div class="oc-mid"><span class="oc-cust">BIGBANG — JIS<small>Melati Sari · CAT 5 ×2</small></span></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">E-wallet</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 3.100.000</span></div></div>
+            </a>
+            <a class="ord-card" href="mockup-event-detail.html">
+              <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-KR-00131</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-pending">Pending</span></div>
+              <div class="oc-mid"><span class="oc-cust">Krapela 3rd Anniversary — Day 1<small>Aldo Firmansyah · Presale ×2</small></span></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">Virtual account</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 300.000</span></div></div>
+            </a>
+            <a class="ord-card" href="mockup-event-detail.html">
+              <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-JS-01422</span><span class="channel-tag ch-shopee">Shopee</span></div><span class="status-pill st-paid">Paid</span></div>
+              <div class="oc-mid"><span class="oc-cust">Joyland Sessions 2026<small>Putri Anjani · 2-day pass ×2</small></span></div>
+              <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">E-wallet</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">12 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 2.400.000</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+      </div>
     </main>
   </div>
 </div>
@@ -694,6 +925,11 @@
     localStorage.setItem('mf-theme',next);
     applyTheme(next);
   });
+  function setOrdView(el){
+    el.parentNode.querySelectorAll('button').forEach(b=>{const on=b===el;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});
+    document.querySelectorAll('.ord-view').forEach(v=>v.hidden=v.id!=='view-'+el.dataset.view);
+  }
+  if(location.hash==='#tickets'){document.querySelector('.view-tabs [data-view="tickets"]')?.click();}
 </script>
 </body>
 </html>

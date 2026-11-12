@@ -30,10 +30,10 @@ Canonical spec: **`DESIGN.md`**. Tokens: **`design-system/tokens.json`** (W3C DT
 ## File layout
 
 - `index.html` — prototype **hub** (all screens, Desktop/Mobile toggle, wired flows).
-- `preview.html` — **single-file preview** of all 25 screens (Stage + Gallery views).
-- `mockup-<screen>.html` + `mockup-<screen>-mobile.html` — the **50 screen mockups**.
+- `preview.html` — **single-file preview** of all 26 screens (Stage + Gallery views).
+- `mockup-<screen>.html` + `mockup-<screen>-mobile.html` — the **52 screen mockups**.
   Screens: storefront · release · cart · checkout · confirmation · account · journal;
-  dashboard · inventory · locations · release-edit · orders · order-detail · customers ·
+  dashboard · analytics · inventory · locations · release-edit · orders · order-detail · customers ·
   vouchers · newsletter · purchase-orders · news · channels · preferences;
   events · event-detail · checkin (Events & Tickets / TMS); pos · pos-checkout.
 - `design-system/` — tokens, IMPORT.md, handoff, preview.
@@ -47,8 +47,8 @@ Canonical spec: **`DESIGN.md`**. Tokens: **`design-system/tokens.json`** (W3C DT
 - Each mockup is **self-contained HTML5** (inline `<style>`/`<script>`); only external dep
   is the Google Fonts link. Keep it that way.
 - **Reuse chrome** — copy the nav/sidebar/topbar/now-playing from the matching existing
-  mockup rather than reinventing it. Back-office sidebar = the **12-module** set
-  (Dashboard, Inventory, Orders[pending dot], Customers, Vouchers, Newsletter,
+  mockup rather than reinventing it. Back-office sidebar = the **13-module** set
+  (Dashboard, Analytics, Inventory, Orders[pending dot], Customers, Vouchers, Newsletter,
   Purchase Orders, News, **Events & Tickets** (Events, Door check-in); Config: Channels,
   Preferences). Locations is reached from Inventory; Event detail from Events.
 - Cross-link with the exact filenames above; every page has a `◹ Prototype` link to `index.html`.
@@ -59,6 +59,9 @@ Canonical spec: **`DESIGN.md`**. Tokens: **`design-system/tokens.json`** (W3C DT
 
 - **Locations & shelves** — `mockup-locations.html`; per-location allocation in
   `mockup-release-edit.html`.
+- **Analytics** — `mockup-analytics.html`: Overview tab (retail + web visitors + events
+  combined) or one tab per stream (Retail · Web visitors · Events); `#retail` etc. deep-link.
+- **Orders** — `mockup-orders.html` has tabs Retail orders | Event tickets (`#tickets`).
 - **Events & Tickets (TMS)** — `mockup-events.html` (events + Peers venues tab),
   `mockup-event-detail.html` (tiers, orders, revenue by tier/channel, sale phases),
   `mockup-checkin.html` (QR scan, manual entry, live count); ticketing KPIs on the dashboard.

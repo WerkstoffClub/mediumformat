@@ -51,4 +51,6 @@
   <url><loc>https://mediumformat.info/mockup-event-detail.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mediumformat.info/mockup-events-mobile.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mediumformat.info/mockup-events.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mediumformat.info/mockup-analytics-mobile.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mediumformat.info/mockup-analytics.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 </urlset>

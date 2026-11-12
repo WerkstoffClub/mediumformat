@@ -200,6 +200,17 @@
     .channel-tag::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
     .ch-website{color:#6366F1;}.ch-pos{color:#0EA5E9;}.ch-tokopedia{color:#22C55E;}.ch-shopee{color:#F97316;}
     .ch-discogs{color:#9CA3AF;}.ch-bandcamp{color:#14B8A6;}.ch-ebay{color:#EAB308;}.ch-event{color:#EC4899;}
+
+    /* ─── Orders view tabs (Retail | Event tickets) ─────────────── */
+    .view-tabs{display:inline-flex;gap:2px;background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:3px;margin-bottom:16px;}
+    .view-tabs button{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;padding:6px 14px;border-radius:var(--r-md);color:var(--mute);background:transparent;border:none;}
+    .view-tabs button .cnt{font-size:11px;font-variant-numeric:tabular-nums;opacity:.75;}
+    .view-tabs button.on{background:var(--accent);color:var(--accent-text);}
+    .ord-view[hidden]{display:none!important;}
+    .st-paid{background:var(--success-t);color:var(--success);}
+    .ev-name{font-size:13px;color:var(--ink);}
+    .ev-tier{display:block;font-size:11px;color:var(--mute);margin-top:2px;}
+    .tk-sample{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;padding:0 5px;border-radius:4px;border:1px dashed var(--mute);color:var(--mute);margin-left:6px;}
   </style>
 </head>
 <body>
@@ -236,6 +247,12 @@
     <h1 class="page-title">Orders</h1>
     <div class="page-sub">Unified inbox — every channel</div>
 
+    <!-- Orders view tabs -->
+    <div class="view-tabs" role="tablist" style="display:flex">
+      <button class="on" style="flex:1;justify-content:center" data-view="retail" onclick="setOrdView(this)">Retail <span class="cnt">148</span></button>
+      <button style="flex:1;justify-content:center" data-view="tickets" onclick="setOrdView(this)">Event tickets <span class="cnt">3.031</span></button>
+    </div>
+    <div class="ord-view" id="view-retail">
     <!-- summary 2x2 -->
     <div class="sum-grid">
       <button class="sum-card active" onclick="setSummary(this)">
@@ -322,6 +339,64 @@
       <div class="oc-figs"><div class="oc-fig"><span class="k">Items</span><span class="v">1</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">29 Apr</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 725.000</span></div></div>
     </a>
     <button class="load-more">Load more · 141 remaining</button>
+    </div>
+    <div class="ord-view" id="view-tickets" hidden>
+    <div class="sum-grid">
+      <button class="sum-card active" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--success)"></span><span class="sum-lbl">Paid · 7D</span></div><div class="sum-val">2.958</div><div class="sum-meta"><span class="mono">Rp 7.42B</span></div></button>
+      <button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--warning)"></span><span class="sum-lbl">Awaiting pay</span></div><div class="sum-val">64</div><div class="sum-meta">expire ≤ 2h</div></button>
+      <button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--info)"></span><span class="sum-lbl">On sale</span></div><div class="sum-val">10</div><div class="sum-meta"><span class="mono">1</span> live today</div></button>
+      <button class="sum-card" onclick="setSummary(this)"><div class="sum-top"><span class="sum-dot" style="background:var(--danger)"></span><span class="sum-lbl">Refunds</span></div><div class="sum-val">5</div><div class="sum-meta"><span class="mono">Rp 4.2M</span></div></button>
+    </div>
+    <div class="stabs">
+      <button class="stab on" onclick="setStab(this)">All <span class="cnt">3.031</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--success)"></span>Paid <span class="cnt">2.958</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--warning)"></span>Pending <span class="cnt">64</span></button>
+      <button class="stab" onclick="setStab(this)"><span class="st-dot" style="background:var(--danger)"></span>Refunded <span class="cnt">5</span></button>
+    </div>
+    <div class="chips">
+      <button class="chan-chip on" onclick="toggleChan(this)">All events</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Maroon 5</button>
+      <button class="chan-chip" onclick="toggleChan(this)">BIGBANG</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Joyland</button>
+      <button class="chan-chip" onclick="toggleChan(this)">Takase Toya</button>
+    </div>
+    <a class="ord-card" href="mockup-event-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-M5-48812</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Maroon 5 — JIS<span class="tk-sample">Sample</span><small>Nadia Putri · CAT 3 ×2</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">QRIS</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 4.800.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-event-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-XK-01165</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Xu Kai fanmeet — Kempinski<small>Laras Wibowo · VIP ×1</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">Card</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 599.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-event-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-TT-00412</span><span class="channel-tag ch-pos">POS</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Takase Toya — M Bloc<span class="tk-sample">Sample</span><small>Gilang Ramadhan · Regular ×1</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">EDC · BCA</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 680.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-event-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-BB-30211</span><span class="channel-tag ch-tokopedia">Tokopedia</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">BIGBANG — JIS<small>Melati Sari · CAT 5 ×2</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">E-wallet</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 3.100.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-event-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-KR-00131</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-pending">Pending</span></div>
+      <div class="oc-cust">Krapela 3rd Anniversary — Day 1<span class="tk-sample">Sample</span><small>Aldo Firmansyah · Presale ×2</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">Virtual account</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">13 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 300.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-event-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-JS-01422</span><span class="channel-tag ch-shopee">Shopee</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Joyland Sessions 2026<span class="tk-sample">Sample</span><small>Putri Anjani · 2-day pass ×2</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">E-wallet</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">12 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 2.400.000</span></div></div>
+    </a>
+    <a class="ord-card" href="mockup-event-detail-mobile.html">
+      <div class="oc-top"><div class="oc-id"><span class="ord-no">TK-GN-08390</span><span class="channel-tag ch-website">Website</span></div><span class="status-pill st-paid">Paid</span></div>
+      <div class="oc-cust">Guns N' Roses — Madya GBK<small>Hendra Gunawan · Festival ×1</small></div>
+      <div class="oc-figs"><div class="oc-fig"><span class="k">Payment</span><span class="v">Card</span></div><div class="oc-fig"><span class="k">Date</span><span class="v">12 Nov</span></div><div class="oc-fig right"><span class="k">Total</span><span class="v">Rp 1.750.000</span></div></div>
+    </a>
+    <button class="load-more">Load more · 3.024 remaining</button>
+    </div>
   </div>
 
   <!-- drawer -->
@@ -333,6 +408,7 @@
     <nav class="drawer-nav">
       <div class="dn-group">Overview</div>
       <a href="mockup-dashboard-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
+      <a href="mockup-analytics-mobile.html" class="dn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Analytics</a>
 
       <div class="dn-group">Selling</div>
       <a href="mockup-orders-mobile.html" class="dn-item active" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Orders<span class="dn-dot"></span></a>
@@ -451,6 +527,10 @@
     const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
     localStorage.setItem('mf-theme',next);applyTheme(next);
   });
+  function setOrdView(el){
+    el.parentNode.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===el));
+    document.querySelectorAll('.ord-view').forEach(v=>v.hidden=v.id!=='view-'+el.dataset.view);
+  }
 </script>
 </body>
 </html>
