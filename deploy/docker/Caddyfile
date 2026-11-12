@@ -19,6 +19,11 @@
 {
 	admin off
 	auto_https off
+	# Traefik sits in front on the private Docker network: keep its
+	# X-Forwarded-For (real client IP) instead of overwriting it.
+	servers {
+		trusted_proxies static private_ranges
+	}
 }
 
 :80 {
