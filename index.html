@@ -123,7 +123,7 @@ footer code{font-family:var(--mono);font-size:.92em;color:var(--body)}
   <h1>Every screen, before development.</h1>
   <p>The Medium Format platform — <b>storefront</b>, <b>back-office</b> and <b>POS</b> — rebuilt in the monochrome v2.0 system. Click any screen to open it. Flip <b>Desktop / Mobile</b> to preview either form. Pages link to each other, so you can walk the real flows.</p>
   <div class="stats">
-    <div class="s"><span class="n" id="stat-screens">33</span><span class="l">Screens</span></div>
+    <div class="s"><span class="n" id="stat-screens">34</span><span class="l">Screens</span></div>
     <div class="s"><span class="n">3</span><span class="l">Surfaces</span></div>
     <div class="s"><span class="n">×2</span><span class="l">Desktop + mobile</span></div>
     <div class="s"><span class="n">2</span><span class="l">Themes</span></div>
@@ -141,7 +141,7 @@ footer code{font-family:var(--mono);font-size:.92em;color:var(--body)}
     <div class="flow"><div class="fh">POS sale + payment</div><div class="chain">
       <a href="mockup-pos.html">POS sale</a><span class="sep">→</span><a href="mockup-pos-checkout.html">Charge · EDC / Xendit</a><span class="sep">→</span><a href="mockup-pos.html">Receipt</a></div></div>
     <div class="flow"><div class="fh">Peers ticketing</div><div class="chain">
-      <a href="mockup-peers.html">Venues</a><span class="sep">→</span><a href="mockup-events.html">Shows</a><span class="sep">→</span><a href="mockup-event-detail.html">Event detail</a><span class="sep">→</span><a href="mockup-checkin.html">Door check-in</a><span class="sep">→</span><a href="mockup-dashboard.html">Dashboard KPIs</a></div></div>
+      <a href="mockup-peers.html">Venues</a><span class="sep">→</span><a href="mockup-peer-tickets.html?v=krapela">Buy tickets</a><span class="sep">→</span><a href="mockup-events.html">Shows</a><span class="sep">→</span><a href="mockup-event-detail.html">Event detail</a><span class="sep">→</span><a href="mockup-checkin.html">Door check-in</a><span class="sep">→</span><a href="mockup-dashboard.html">Dashboard KPIs</a></div></div>
     <div class="flow"><div class="fh">Dealer POS</div><div class="chain">
       <a href="mockup-dealers.html">Dealers</a><span class="sep">→</span><a href="mockup-dealer-detail.html">POS transactions</a><span class="sep">→</span><a href="mockup-orders.html#dealers">Orders · Dealers</a></div></div>
     <div class="flow"><div class="fh">Back-office fulfilment</div><div class="chain">
@@ -183,7 +183,8 @@ const GROUPS=[
  ]},
  {no:"03 / PEERS",title:"Peers · Venues",desc:"Venues hosting shows & selling tickets (TMS)",items:[
    {f:"peers",t:"Venues",d:"Peers venues, upcoming shows, ticket sales",tags:["Peers"]},
-   {f:"peer-detail",t:"Venue schedule",d:"Krapela: shows, tiers, payouts",tags:["Peers"]},
+   {f:"peer-detail",t:"Venue schedule",d:"Krapela: shows, box-office sale, capacity, payouts",tags:["Peers"]},
+   {f:"peer-tickets",t:"Venue ticket page (public)",d:"Buy tickets per venue: show → tier → Xendit → QR (?v=krapela)",tags:["Buy tickets","b"]},
    {f:"events",t:"Shows & tickets",d:"All shows, sold vs quota",tags:["TMS"]},
    {f:"event-detail",t:"Show detail",d:"Tiers, ticket orders, revenue, sale phases",tags:["TMS"]},
    {f:"checkin",t:"Door check-in",d:"QR scanner, manual entry, live count",tags:["Check-in","b"]},

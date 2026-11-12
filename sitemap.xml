@@ -61,4 +61,6 @@
   <url><loc>https://mediumformat.info/mockup-dealers-mobile.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mediumformat.info/mockup-dealer-detail.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mediumformat.info/mockup-dealer-detail-mobile.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mediumformat.info/mockup-peer-tickets.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mediumformat.info/mockup-peer-tickets-mobile.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 </urlset>

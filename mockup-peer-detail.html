@@ -290,10 +290,10 @@
     .view-tabs button .cnt{font-size:11px;font-variant-numeric:tabular-nums;opacity:.75;}
     .view-tabs button.on{background:var(--accent);color:var(--accent-text);}
     .ord-view[hidden]{display:none!important;}
-    #view-tickets .orders-layout{grid-template-columns:1fr;}
-    #view-tickets .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-    #view-tickets .ord-no,#view-tickets .ord-total{white-space:nowrap;}
-    @media (max-width:820px){#view-tickets .summary{grid-template-columns:repeat(2,1fr);}}
+    #view-tickets .orders-layout,#view-dealers .orders-layout{grid-template-columns:1fr;}
+    #view-tickets .summary,#view-dealers .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+    #view-tickets .ord-no,#view-tickets .ord-total,#view-dealers .ord-no,#view-dealers .ord-total{white-space:nowrap;}
+    @media (max-width:820px){#view-tickets .summary,#view-dealers .summary{grid-template-columns:repeat(2,1fr);}}
     .st-paid{background:var(--success-t);color:var(--success);}
     .ev-name{font-size:13px;color:var(--ink);}
     .ev-tier{display:block;font-size:11px;color:var(--mute);margin-top:2px;}
@@ -358,6 +358,56 @@
     .divider{border-top:1px solid var(--hairline);margin:12px 0;}
     @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr);}.g2{grid-template-columns:1fr;}}
     @media (max-width:720px){.kpis{grid-template-columns:1fr 1fr;}.hbar{grid-template-columns:90px 1fr 96px;}}
+
+    .dtile{display:inline-flex;flex-direction:column;align-items:center;width:46px;border:1px solid var(--hairline);border-radius:var(--r-md);padding:3px 0 4px;background:var(--canvas);}
+    .dtile .m{font-size:9px;font-weight:600;letter-spacing:.08em;color:var(--mute);}
+    .dtile .d{font-size:16px;line-height:18px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);}
+    .dcell{display:flex;align-items:center;gap:12px;}
+    .dcell .w{font-size:12px;color:var(--body);white-space:nowrap;}
+    .tlink{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--hairline);}
+    .tlink:hover{border-color:var(--ink);}
+    .btn-xs{font-size:12px;font-weight:500;padding:5px 11px;border-radius:var(--r-md);border:1px solid var(--hairline);color:var(--ink);background:transparent;}
+    .btn-xs:hover:not([disabled]){background:var(--raised);}
+    .btn-xs[disabled]{opacity:.4;cursor:not-allowed;}
+    .url{display:flex;align-items:center;gap:8px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:8px 10px;font-size:13px;font-variant-numeric:tabular-nums;}
+    .url span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .capline{display:flex;justify-content:space-between;font-size:12px;color:var(--body);margin-top:8px;font-variant-numeric:tabular-nums;}
+    .capline b{color:var(--ink);font-weight:500;}
+    .bigbar{height:8px;border-radius:var(--r-pill);background:var(--raised);overflow:hidden;margin-top:10px;display:flex;}
+    .bigbar i{display:block;height:100%;background:var(--ink);}
+    .bigbar i+i{background:var(--mute);}
+    .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+    @media (max-width:1100px){.g3{grid-template-columns:1fr;}}
+    /* box-office sheet */
+    dialog.sheet{margin:0 0 0 auto;height:100vh;max-height:100vh;width:420px;max-width:100vw;border:none;border-left:1px solid var(--hairline);background:var(--surface);color:var(--ink);padding:0;box-shadow:0 8px 24px rgba(0,0,0,.7);}
+    dialog.sheet::backdrop{background:rgba(0,0,0,.55);}
+    .sh-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:16px 18px;border-bottom:1px solid var(--hairline);}
+    .sh-h .k{font-size:16px;font-weight:600;}
+    .sh-h .s{font-size:12px;color:var(--mute);margin-top:2px;}
+    .sh-b{padding:16px 18px;display:flex;flex-direction:column;gap:10px;}
+    .bo-tier{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--hairline);border-radius:var(--r-lg);padding:11px 12px;}
+    .bo-tier .n{font-size:14px;font-weight:500;}
+    .bo-tier .p{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums;}
+    .qs{display:flex;align-items:center;gap:2px;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:2px;}
+    .qs button{width:30px;height:30px;border-radius:50%;font-size:16px;line-height:1;background:transparent;border:none;color:var(--ink);}
+    .qs button:hover:not([disabled]){background:var(--raised);}
+    .qs button[disabled]{opacity:.35;cursor:not-allowed;}
+    .qs output{min-width:20px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums;}
+    .bo-pay{display:flex;gap:6px;flex-wrap:wrap;}
+    .bo-pay label{display:flex;align-items:center;gap:6px;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:6px 12px;font-size:12px;cursor:pointer;}
+    .bo-pay label:has(input:checked){border-color:var(--accent);background:var(--raised);}
+    .bo-pay input{accent-color:var(--accent);}
+    .sh-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-top:6px;}
+    .sh-in{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:9px 11px;font:inherit;color:var(--ink);}
+    .sh-f{margin-top:auto;padding:14px 18px;border-top:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .sh-f .tv{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;}
+    .sh-f .tl{font-size:11px;color:var(--mute);}
+    .sheet-wrap{display:flex;flex-direction:column;height:100%;}
+    .bo-done{display:none;text-align:center;padding:30px 18px;}
+    .sheet.ok .bo-form{display:none;}
+    .sheet.ok .bo-done{display:block;}
+
+    .up{color:var(--success);}
   </style>
 </head>
 <body>
@@ -505,67 +555,95 @@
           <div class="page-sub">Peers venue · bar / live venue · Jakarta Selatan · capacity ~180 · <span class="status-pill st-tenant">Live on Peers</span></div>
         </div>
         <div class="page-hdr-right">
+          <a class="btn-sec" href="mockup-peer-tickets.html?v=krapela">Ticket page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>
           <a class="btn-sec" href="mockup-checkin.html">Door check-in</a>
           <button class="btn-pri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add show</button>
         </div>
       </div>
       <div class="kpis">
-        <div class="kpi"><div class="kpi-lbl">Upcoming shows</div><div class="kpi-val">5</div><div class="kpi-meta"><span class="mono">1</span> running now</div></div>
-        <div class="kpi"><div class="kpi-lbl">Tickets sold · 30D</div><div class="kpi-val">418</div><div class="kpi-meta">venue capacity <span class="mono">~180</span> / night</div></div>
-        <div class="kpi"><div class="kpi-lbl">Ticket revenue · 30D</div><div class="kpi-val">Rp 31.4M</div><div class="kpi-meta">net to venue after <span class="mono">3%</span> fee</div></div>
-        <div class="kpi"><div class="kpi-lbl">Check-in rate</div><div class="kpi-val">91.2%</div><div class="kpi-meta">last <span class="mono">8</span> nights</div></div>
+        <div class="kpi"><div class="kpi-lbl">Upcoming shows</div><div class="kpi-val">5</div><div class="kpi-meta"><span class="mono">1</span> running now · <span class="mono">1</span> not on sale</div></div>
+        <div class="kpi"><div class="kpi-lbl">Tickets sold · 30D</div><div class="kpi-val">418</div><div class="kpi-meta"><span class="up mono">+64</span> vs previous 30D</div></div>
+        <div class="kpi"><div class="kpi-lbl">Ticket revenue · 30D</div><div class="kpi-val">Rp 31.4M</div><div class="kpi-meta">net to venue <span class="mono">Rp 30.4M</span> after 3% fee</div></div>
+        <div class="kpi"><div class="kpi-lbl">Check-in rate</div><div class="kpi-val">91.2%</div><div class="kpi-meta">last <span class="mono">8</span> nights · no-show <span class="mono">8.8%</span></div></div>
+      </div>
+      <div class="g3" style="margin-bottom:14px">
+        <section class="panel">
+          <div class="panel-hdr"><span class="panel-title">Public ticket page</span><span class="status-pill st-onsale">Live</span></div>
+          <div class="panel-body">
+            <div class="url"><span>tickets.mediumformat.info/krapela</span><button class="btn-xs" type="button" id="copy-url">Copy link</button></div>
+            <div class="capline"><span>Page views · 7D <b>1.284</b></span><span>Conversion <b>6.2%</b></span></div>
+            <div style="margin-top:12px"><a class="tlink" href="mockup-peer-tickets.html?v=krapela">Open as a buyer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-1px"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a></div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel-hdr"><span class="panel-title">Next show · capacity</span><span class="panel-note">Fri 4 Dec · 21:30</span></div>
+          <div class="panel-body">
+            <div style="font-size:13px;color:var(--ink)">Krapela 3rd Anniversary: Exit to Exist — Day 1</div>
+            <div class="bigbar"><i style="width:35.6%"></i></div>
+            <div class="capline"><span><b>64</b> sold</span><span><b>116</b> remaining of 180</span></div>
+            <div class="capline"><span>Presale</span><span><b>64 / 80</b> · 16 left</span></div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel-hdr"><span class="panel-title">Last night · check-in</span><span class="panel-note">EKSKUL · Thu 12 Nov</span></div>
+          <div class="panel-body">
+            <div class="bigbar"><i style="width:88%"></i></div>
+            <div class="capline"><span><b>37</b> checked in</span><span><b>5</b> no-show of 42</span></div>
+            <div class="capline"><span>Peak entry</span><span><b>21:10–21:40</b></span></div>
+          </div>
+        </section>
       </div>
       <div class="stack">
         <section class="panel">
           <div class="panel-hdr"><span class="panel-title">Schedule</span><span class="panel-note">shows &amp; dates from @krapela.live / Songkick / tiketmart · anniversary prices not published — sample</span></div>
           <div class="table-scroll">
-            <table class="t" style="min-width:860px">
-              <thead><tr><th>Date</th><th>Show</th><th class="num">Tiers</th><th class="num">Price</th><th class="num">Quota</th><th class="num">Sold</th><th>Status</th></tr></thead>
+            <table class="t" style="min-width:900px">
+              <thead><tr><th>Date</th><th>Show</th><th class="num">From</th><th class="num">Sold / quota</th><th class="num">Left</th><th>Status</th><th class="num">Box office</th></tr></thead>
               <tbody>
                 <tr class="link" onclick="location.href='mockup-checkin.html'">
-                  <td class="nw"><span class="fig" style="font-weight:400">Sat 7 – Wed 18 Nov</span></td>
+                  <td class="nw"><div class="dcell"><span class="dtile"><span class="m">NOV</span><span class="d">7</span></span><span class="w">Until 18 Nov</span></div></td>
                   <td class="ev"><span class="ink">EKSKUL</span><span class="sub">Exhibition + nightly sets</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">1</span></td>
                   <td class="num"><span class="fig">Rp 50.000</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">600</span></td>
-                  <td class="num"><div class="sold-cell"><span class="fig">286</span><div class="bar"><i style="width:47.7%"></i></div></div></td>
+                  <td class="num"><div class="sold-cell"><span class="fig">286<span class="fig-mute" style="font-weight:400"> / 600</span></span><div class="bar"><i style="width:47.7%"></i></div></div></td>
+                  <td class="num"><span class="fig">314</span></td>
                   <td class="nw"><span class="status-pill st-live">Running</span></td>
+                  <td class="num"><button class="btn-xs" type="button" data-sell="0" onclick="event.stopPropagation();openSell(0)">Sell</button></td>
                 </tr>
                 <tr class="link" onclick="location.href='mockup-event-detail.html'">
-                  <td class="nw"><span class="fig" style="font-weight:400">Fri 4 Dec · 21:30</span></td>
+                  <td class="nw"><div class="dcell"><span class="dtile"><span class="m">DEC</span><span class="d">4</span></span><span class="w">21:30</span></div></td>
                   <td class="ev"><span class="ink">Krapela 3rd Anniversary: Exit to Exist — Day 1</span><span class="sub">Ticket incl. first drink</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">2</span></td>
                   <td class="num"><span class="fig">Rp 150.000</span> <span class="sample">Sample</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">180</span></td>
-                  <td class="num"><div class="sold-cell"><span class="fig">64</span><div class="bar"><i style="width:35.6%"></i></div></div></td>
+                  <td class="num"><div class="sold-cell"><span class="fig">64<span class="fig-mute" style="font-weight:400"> / 180</span></span><div class="bar"><i style="width:35.6%"></i></div></div></td>
+                  <td class="num"><span class="fig">116</span></td>
                   <td class="nw"><span class="status-pill st-presale">Presale</span></td>
+                  <td class="num"><button class="btn-xs" type="button" data-sell="1" onclick="event.stopPropagation();openSell(1)">Sell</button></td>
                 </tr>
                 <tr class="link" onclick="location.href='mockup-event-detail.html'">
-                  <td class="nw"><span class="fig" style="font-weight:400">Sat 5 Dec</span></td>
+                  <td class="nw"><div class="dcell"><span class="dtile"><span class="m">DEC</span><span class="d">5</span></span><span class="w">Sat</span></div></td>
                   <td class="ev"><span class="ink">Krapela 3rd Anniversary: Exit to Exist — Day 2</span><span class="sub">Ticket incl. first drink</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">2</span></td>
                   <td class="num"><span class="fig">Rp 150.000</span> <span class="sample">Sample</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">180</span></td>
-                  <td class="num"><div class="sold-cell"><span class="fig">41</span><div class="bar"><i style="width:22.8%"></i></div></div></td>
+                  <td class="num"><div class="sold-cell"><span class="fig">41<span class="fig-mute" style="font-weight:400"> / 180</span></span><div class="bar"><i style="width:22.8%"></i></div></div></td>
+                  <td class="num"><span class="fig">139</span></td>
                   <td class="nw"><span class="status-pill st-presale">Presale</span></td>
+                  <td class="num"><button class="btn-xs" type="button" data-sell="2" onclick="event.stopPropagation();openSell(2)">Sell</button></td>
                 </tr>
                 <tr class="link" onclick="location.href='mockup-event-detail.html'">
-                  <td class="nw"><span class="fig" style="font-weight:400">Sat 5 Dec</span></td>
+                  <td class="nw"><div class="dcell"><span class="dtile"><span class="m">DEC</span><span class="d">5</span></span><span class="w">Sat</span></div></td>
                   <td class="ev"><span class="ink">Love as Punishment</span><span class="sub">Songkick listing · late set</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">1</span></td>
                   <td class="num"><span class="fig-mute">—</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">120</span></td>
-                  <td class="num"><div class="sold-cell"><span class="fig">0</span><div class="bar"><i style="width:0.0%"></i></div></div></td>
+                  <td class="num"><div class="sold-cell"><span class="fig">0<span class="fig-mute" style="font-weight:400"> / 120</span></span><div class="bar"><i style="width:0.0%"></i></div></div></td>
+                  <td class="num"><span class="fig-mute">—</span></td>
                   <td class="nw"><span class="status-pill st-draft">Scheduled</span></td>
+                  <td class="num"><button class="btn-xs" type="button" disabled title="Not on sale yet">Sell</button></td>
                 </tr>
                 <tr class="link" onclick="location.href='mockup-event-detail.html'">
-                  <td class="nw"><span class="fig" style="font-weight:400">Sun 6 Dec</span></td>
+                  <td class="nw"><div class="dcell"><span class="dtile"><span class="m">DEC</span><span class="d">6</span></span><span class="w">Sun</span></div></td>
                   <td class="ev"><span class="ink">Krapela 3rd Anniversary: Exit to Exist — Day 3</span><span class="sub">Ticket incl. first drink</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">2</span></td>
                   <td class="num"><span class="fig">Rp 150.000</span> <span class="sample">Sample</span></td>
-                  <td class="num"><span class="fig" style="font-weight:400">180</span></td>
-                  <td class="num"><div class="sold-cell"><span class="fig">27</span><div class="bar"><i style="width:15.0%"></i></div></div></td>
+                  <td class="num"><div class="sold-cell"><span class="fig">27<span class="fig-mute" style="font-weight:400"> / 180</span></span><div class="bar"><i style="width:15.0%"></i></div></div></td>
+                  <td class="num"><span class="fig">153</span></td>
                   <td class="nw"><span class="status-pill st-presale">Presale</span></td>
+                  <td class="num"><button class="btn-xs" type="button" data-sell="4" onclick="event.stopPropagation();openSell(4)">Sell</button></td>
                 </tr>
               </tbody>
             </table>
@@ -593,6 +671,24 @@
           </section>
         </div>
       </div>
+      <dialog class="sheet" id="sell" aria-labelledby="bo-title">
+        <div class="sheet-wrap">
+          <div class="sh-h"><div><div class="k" id="bo-title">Sell at the door</div><div class="s" id="bo-show"></div></div><button class="btn-xs" type="button" onclick="document.getElementById('sell').close()">Close</button></div>
+          <div class="sh-b bo-form">
+            <div id="bo-tiers" style="display:flex;flex-direction:column;gap:8px"></div>
+            <div class="sh-lbl">Payment</div>
+            <div class="bo-pay">
+              <label><input type="radio" name="bopay" value="EDC · BCA" checked>EDC · BCA</label>
+              <label><input type="radio" name="bopay" value="QRIS">QRIS</label>
+              <label><input type="radio" name="bopay" value="Cash">Cash</label>
+            </div>
+            <div class="sh-lbl">Buyer (optional)</div>
+            <input class="sh-in" placeholder="Name or WhatsApp for the e-ticket">
+          </div>
+          <div class="bo-done"><span class="status-pill st-paid">Paid</span><div style="font-size:16px;font-weight:600;margin-top:12px">Tickets issued</div><div class="fig-mute" id="bo-msg" style="margin-top:6px"></div><div style="display:flex;gap:8px;justify-content:center;margin-top:16px"><button class="btn-xs" type="button">Print wristband</button><button class="btn-xs" type="button">Send via WhatsApp</button></div></div>
+          <div class="sh-f bo-form"><div><div class="tv" id="bo-total">Rp 0</div><div class="tl" id="bo-n"></div></div><button class="btn-pri" id="bo-go" type="button" disabled>Add tickets</button></div>
+        </div>
+      </dialog>
     </main>
   </div>
 </div>
@@ -648,7 +744,24 @@
     el.parentNode.querySelectorAll('button').forEach(b=>{const on=b===el;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});
     document.querySelectorAll('.ord-view').forEach(v=>v.hidden=v.id!=='view-'+el.dataset.view);
   }
-  if(location.hash==='#tickets'){document.querySelector('.view-tabs [data-view="tickets"]')?.click();}
+  {const h=location.hash.slice(1);document.querySelector('.view-tabs [data-view="'+h+'"]')?.click();}
+
+  const BO=[["EKSKUL", [["Night pass", 50000, 314]]], ["Krapela 3rd Anniversary: Exit to Exist — Day 1", [["Presale", 150000, 16], ["Regular", 200000, 100]]], ["Krapela 3rd Anniversary: Exit to Exist — Day 2", [["Presale", 150000, 39], ["Regular", 200000, 100]]], ["Krapela 3rd Anniversary: Exit to Exist — Day 3", [["Presale", 150000, 53], ["Regular", 200000, 100]]]];
+  const SHOWS=["EKSKUL", "Krapela 3rd Anniversary: Exit to Exist — Day 1", "Krapela 3rd Anniversary: Exit to Exist — Day 2", "Love as Punishment", "Krapela 3rd Anniversary: Exit to Exist — Day 3"];
+  const rp=n=>'Rp '+n.toLocaleString('id-ID');
+  const sheet=document.getElementById('sell');let cur=null,q=[];
+  function openSell(i){const t=SHOWS[i];const e=BO.find(x=>x[0]===t);if(!e)return;cur=e;q=e[1].map(()=>0);
+    sheet.classList.remove('ok');document.getElementById('bo-show').textContent=t;
+    document.getElementById('bo-tiers').innerHTML=e[1].map((r,j)=>`<div class="bo-tier"><div><div class="n">${r[0]}</div><div class="p">${rp(r[1])} · ${r[2]} left</div></div><div class="qs"><button type="button" aria-label="Remove one" onclick="bq(${j},-1)">−</button><output id="bq${j}">0</output><button type="button" aria-label="Add one" onclick="bq(${j},1)">+</button></div></div>`).join('');
+    bupd();sheet.showModal();}
+  function bq(j,d){q[j]=Math.max(0,Math.min(cur[1][j][2],q[j]+d));bupd();}
+  function bupd(){let n=0,t=0;q.forEach((v,j)=>{n+=v;t+=v*cur[1][j][1];const o=document.getElementById('bq'+j);if(o)o.textContent=v;});
+    document.getElementById('bo-total').textContent=rp(t);document.getElementById('bo-n').textContent=n+' ticket'+(n===1?'':'s')+' · no service fee at the door';
+    const b=document.getElementById('bo-go');b.disabled=n===0;b.textContent=n?'Charge '+rp(t):'Add tickets';}
+  document.getElementById('bo-go').addEventListener('click',()=>{const id='TK-KRP-'+String(Math.floor(1000+Math.random()*8999));
+    const pay=document.querySelector('input[name=bopay]:checked').value;const n=q.reduce((a,b)=>a+b,0);
+    document.getElementById('bo-msg').textContent=`${id} · ${n} ticket${n>1?'s':''} · paid by ${pay}`;sheet.classList.add('ok');});
+  document.getElementById('copy-url').addEventListener('click',e=>{const b=e.currentTarget;navigator.clipboard?.writeText('https://tickets.mediumformat.info/krapela').catch(()=>{});b.textContent='Copied';setTimeout(()=>b.textContent='Copy link',1600);});
 
 </script>
 </body>

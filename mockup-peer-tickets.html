@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Tickets — Peers by Medium Format</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--canvas:#0F0F0F;--surface:#0E0E0E;--raised:#1A1A1A;--hairline:#2A2A2A;--ink:#FFFFFF;--body:#B4B4B4;--mute:#8A8A8A;
+  --accent:#FFFFFF;--accent-text:#000000;--success:#22C55E;--info:#3B82F6;--warning:#F59E0B;--danger:#EF4444;
+  --success-t:rgba(34,197,94,.12);--info-t:rgba(59,130,246,.12);--warning-t:rgba(245,158,11,.14);--danger-t:rgba(239,68,68,.12);
+  --neutral-t:rgba(255,255,255,.06);--ui:"Geist","Helvetica Neue",Arial,sans-serif;--r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-pill:999px;
+  --focus:0 0 0 2px rgba(255,255,255,.6);--elev:0 8px 24px rgba(0,0,0,.6);}
+html[data-theme="light"]{--canvas:#F0F0F0;--surface:#FFFFFF;--raised:#F5F5F5;--hairline:#E4E4E4;--ink:#000;--body:#525252;--mute:#6E6E6E;
+  --accent:#000;--accent-text:#FFF;--neutral-t:rgba(0,0,0,.05);--focus:0 0 0 2px rgba(0,0,0,.5);--elev:0 8px 24px rgba(0,0,0,.12);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--ui);font-size:14px;line-height:20px;background:var(--canvas);color:var(--ink);-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent);color:var(--accent-text);}
+button,input{font:inherit;color:inherit;}
+button{cursor:pointer;background:none;border:none;}
+a{color:inherit;text-decoration:none;}
+:focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm);}
+.num{font-variant-numeric:tabular-nums;}
+svg{display:block;}
+/* top bar */
+.tb{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:14px;padding:12px 24px;background:var(--surface);border-bottom:1px solid var(--hairline);}
+.tb .vn{font-size:15px;font-weight:600;letter-spacing:-.02em;}
+.tb .by{font-size:12px;color:var(--mute);}
+.tb .sp{flex:1;}
+.icon-btn{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--body);}
+.icon-btn:hover{background:var(--raised);color:var(--ink);}
+.icon-btn svg{width:17px;height:17px;}
+.wrap{max-width:1160px;margin:0 auto;padding:28px 24px 64px;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.95fr);gap:28px;align-items:start;}
+h1{font-size:28px;line-height:34px;font-weight:600;letter-spacing:-.03em;}
+.meta{font-size:13px;color:var(--body);margin-top:6px;}
+.meta b{font-weight:500;color:var(--ink);}
+.sec-h{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:26px 0 10px;display:flex;justify-content:space-between;}
+/* show list */
+.shows{display:flex;flex-direction:column;border:1px solid var(--hairline);border-radius:var(--r-lg);overflow:hidden;background:var(--surface);}
+.show{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;padding:12px 14px;text-align:left;border-top:1px solid var(--hairline);transition:background .15s;}
+.show:first-child{border-top:none;}
+.show:hover{background:var(--raised);}
+.show[aria-pressed="true"]{background:var(--raised);box-shadow:inset 0 0 0 1px var(--accent);}
+.show[disabled]{cursor:default;}
+.dt{width:56px;border:1px solid var(--hairline);border-radius:var(--r-md);text-align:center;padding:5px 0 6px;background:var(--canvas);}
+.dt .m{font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--mute);text-transform:uppercase;}
+.dt .d{font-size:20px;line-height:22px;font-weight:600;font-variant-numeric:tabular-nums;}
+.dt .w{font-size:10px;color:var(--mute);}
+.show .t1{font-size:14px;font-weight:500;line-height:19px;}
+.show .t2{font-size:12px;color:var(--mute);margin-top:2px;}
+.show .r{text-align:right;}
+.show .from{font-size:13px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);white-space:nowrap;margin-top:4px;}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;}
+.p-ok{background:var(--success-t);color:var(--success);} .p-few{background:var(--warning-t);color:var(--warning);}
+.p-out{background:var(--danger-t);color:var(--danger);} .p-soon{background:var(--neutral-t);color:var(--body);}
+.sample{font-size:9px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;border:1px dashed var(--mute);color:var(--mute);border-radius:var(--r-sm);padding:0 4px;margin-left:6px;vertical-align:1px;}
+/* tiers */
+.tiers{display:flex;flex-direction:column;gap:10px;}
+.tier{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 16px;border:1px solid var(--hairline);border-radius:var(--r-lg);background:var(--surface);transition:border-color .15s;}
+.tier.on{border-color:var(--accent);}
+.tier.off{opacity:.55;}
+.tier .tn{font-size:15px;font-weight:500;}
+.tier .td{font-size:12px;color:var(--mute);margin-top:2px;}
+.tier .tp{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:8px;}
+.cap{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:11px;color:var(--mute);font-variant-numeric:tabular-nums;}
+.cap .bar{width:120px;height:4px;border-radius:var(--r-pill);background:var(--raised);overflow:hidden;}
+.cap .bar i{display:block;height:100%;background:var(--ink);}
+.step{display:flex;align-items:center;gap:4px;border:1px solid var(--hairline);border-radius:var(--r-pill);padding:3px;}
+.step button{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink);}
+.step button:hover:not([disabled]){background:var(--raised);}
+.step button[disabled]{color:var(--mute);opacity:.4;cursor:not-allowed;}
+.step button svg{width:14px;height:14px;}
+.step output{min-width:22px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums;}
+.empty{padding:28px 18px;border:1px dashed var(--hairline);border-radius:var(--r-lg);color:var(--body);font-size:13px;text-align:center;}
+.empty b{display:block;color:var(--ink);font-size:14px;font-weight:500;margin-bottom:4px;}
+/* summary */
+.sum{position:sticky;top:76px;border:1px solid var(--hairline);border-radius:var(--r-xl);background:var(--surface);overflow:hidden;}
+.sum-h{padding:14px 16px;background:var(--raised);border-bottom:1px solid var(--hairline);}
+.sum-h .k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.sum-h .s{font-size:12px;color:var(--mute);margin-top:3px;}
+.sum-b{padding:14px 16px;}
+.line{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--body);padding:4px 0;}
+.line .v{font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap;}
+.line.total{border-top:1px solid var(--hairline);margin-top:8px;padding-top:12px;font-size:15px;font-weight:600;color:var(--ink);}
+.hold{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--warning);background:var(--warning-t);border-radius:var(--r-md);padding:8px 10px;margin:12px 0 2px;}
+.hold[hidden]{display:none;}
+.hold svg{width:14px;height:14px;flex-shrink:0;}
+.hint{font-size:12px;color:var(--mute);padding:6px 0;}
+.lbl{display:block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin:14px 0 6px;}
+.in{width:100%;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:10px 12px;font-size:14px;}
+.in::placeholder{color:var(--mute);}
+.in:focus-visible{border-color:var(--accent);box-shadow:none;outline:none;}
+.in[aria-invalid="true"]{border-color:var(--danger);}
+.err{font-size:12px;color:var(--danger);margin-top:4px;display:none;}
+.err.show{display:block;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.pay label{display:flex;align-items:center;gap:8px;border:1px solid var(--hairline);border-radius:var(--r-md);padding:9px 10px;font-size:13px;cursor:pointer;}
+.pay label:has(input:checked){border-color:var(--accent);background:var(--raised);}
+.pay input{accent-color:var(--accent);}
+.pay small{display:block;font-size:11px;color:var(--mute);}
+.cta{width:100%;margin-top:16px;padding:13px 16px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-text);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;transition:opacity .15s;}
+.cta:hover:not([disabled]){opacity:.88;}
+.cta[disabled]{opacity:.35;cursor:not-allowed;}
+.cta.loading{opacity:.7;cursor:progress;}
+.fine{font-size:11px;color:var(--mute);margin-top:10px;line-height:16px;}
+/* confirmation */
+.done{display:none;padding:18px 16px 20px;text-align:center;}
+.sum.paid .sum-b{display:none;}
+.sum.paid .done{display:block;}
+.qr{width:184px;height:184px;margin:14px auto 10px;padding:10px;background:#fff;border-radius:var(--r-lg);}
+.done .oid{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;}
+.done p{font-size:12px;color:var(--body);margin-top:4px;}
+.done .acts{display:flex;gap:8px;margin-top:14px;}
+.btn2{flex:1;padding:10px;border:1px solid var(--hairline);border-radius:var(--r-md);font-size:13px;font-weight:500;}
+.btn2:hover{background:var(--raised);}
+.mbar{display:none;}
+.foot{max-width:1160px;margin:0 auto;padding:0 24px 40px;font-size:12px;color:var(--mute);}
+.proto-link{position:fixed;right:14px;bottom:16px;z-index:60;font-size:12px;color:var(--body);background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-pill);padding:6px 12px;box-shadow:0 4px 12px rgba(0,0,0,.4);}
+.vsw{font-size:12px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--r-md);padding:6px 8px;color:var(--ink);}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;}.sum{position:static;}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="tb">
+  <div><div class="vn" id="v-name">Krapela</div><div class="by">Tickets · Peers by Medium Format</div></div>
+  <div class="sp"></div>
+  <label class="by" for="vsw">Prototype venue</label>
+  <select class="vsw" id="vsw" aria-label="Prototype venue switch"></select>
+  <button class="icon-btn" id="theme-btn" aria-label="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+</header>
+<main class="wrap">
+  <section>
+    <h1 id="v-title">Krapela</h1>
+    <div class="meta" id="v-meta"></div>
+    <div class="sec-h"><span>Upcoming shows</span><span id="v-count"></span></div>
+    <div class="shows" id="shows" role="group" aria-label="Upcoming shows"></div>
+    <div class="sec-h"><span id="t-head">Tickets</span><span id="t-sub"></span></div>
+    <div class="tiers" id="tiers"></div>
+  </section>
+  <aside class="sum" id="sum" aria-live="polite">
+    <div class="sum-h"><div class="k">Your order</div><div class="s" id="s-show">Pick a show and tickets</div></div>
+    <div class="sum-b">
+      <div id="lines"><div class="hint">No tickets selected yet.</div></div>
+      <div class="line"><span>Service fee</span><span class="v" id="fee">Rp 0</span></div>
+      <div class="line total"><span>Total</span><span class="v" id="total">Rp 0</span></div>
+      <div class="hold" id="hold" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Tickets held for <b class="num" id="timer">10:00</b></span></div>
+      <form id="buy" novalidate>
+        <label class="lbl" for="f-name">Full name</label>
+        <input class="in" id="f-name" autocomplete="name" placeholder="As on your ID">
+        <div class="err" id="e-name">Enter the name on your ID — it's checked at the door.</div>
+        <div class="row2">
+          <div><label class="lbl" for="f-mail">Email</label><input class="in" id="f-mail" type="email" autocomplete="email" placeholder="you@email.com"><div class="err" id="e-mail">Enter a valid email for your e-ticket.</div></div>
+          <div><label class="lbl" for="f-wa">WhatsApp</label><input class="in num" id="f-wa" type="tel" autocomplete="tel" placeholder="+62 8…"></div>
+        </div>
+        <span class="lbl">Payment · Xendit</span>
+        <div class="pay" role="radiogroup" aria-label="Payment method">
+          <label><input type="radio" name="pay" value="QRIS" checked><span>QRIS<small>Any bank or e-wallet app</small></span></label>
+          <label><input type="radio" name="pay" value="Virtual account"><span>Virtual account<small>BCA · Mandiri · BNI · BRI</small></span></label>
+          <label><input type="radio" name="pay" value="E-wallet"><span>E-wallet<small>GoPay · OVO · DANA · ShopeePay</small></span></label>
+          <label><input type="radio" name="pay" value="Card"><span>Card<small>Visa · Mastercard · JCB</small></span></label>
+        </div>
+        <button class="cta" id="pay-btn" type="submit" disabled><span id="cta-l">Select tickets</span><span class="num" id="cta-v"></span></button>
+        <div class="fine">Tickets are non-refundable unless the show is cancelled. Your QR e-ticket is sent by email and WhatsApp right after payment.</div>
+      </form>
+    </div>
+    <div class="done" id="done">
+      <span class="pill p-ok">Paid</span>
+      <svg class="qr" id="qr" viewBox="0 0 29 29" shape-rendering="crispEdges" aria-label="Ticket QR code"></svg>
+      <div class="oid" id="d-oid"></div>
+      <p id="d-show"></p>
+      <p id="d-sent"></p>
+      <div class="acts"><button class="btn2" type="button">Add to wallet</button><button class="btn2" type="button" id="again">Buy more</button></div>
+    </div>
+  </aside>
+</main>
+<div class="mbar" id="mbar" hidden><div><div class="mt" id="mb-n"></div><div class="mv" id="mb-v"></div></div><button type="button" id="mb-go">Review &amp; pay</button></div>
+<div class="foot">Ticketing by Medium Format Peers · secure payment by Xendit · show names, dates and venues from public listings; prices marked <span class="sample">Sample</span> are not yet published and remaining counts are demo data.</div>
+<a class="proto-link" href="index.html">◹ Prototype</a>
+<script>
+const VENUES={"krapela": {"name": "Krapela", "area": "Jakarta Selatan", "type": "Bar / live venue", "policy": "18+ · ID at the door · ticket incl. first drink", "handle": "@krapela.live", "shows": [{"id": "KR-EKS", "d": "2026-11-18", "dl": "Until Wed 18 Nov", "time": "Nightly · 20:00", "title": "EKSKUL", "sub": "Exhibition + nightly sets", "tiers": [{"n": "Night pass", "desc": "Entry for one night of your choice", "p": 50000, "left": 314, "cap": 600}]}, {"id": "KR-AN1", "d": "2026-12-04", "dl": "Fri 4 Dec", "time": "Doors 21:30", "title": "Krapela 3rd Anniversary: Exit to Exist — Day 1", "sub": "Anniversary weekend · night 1", "tiers": [{"n": "Presale", "desc": "Incl. first drink", "p": 150000, "left": 16, "cap": 80, "sample": true}, {"n": "Regular", "desc": "Incl. first drink", "p": 200000, "left": 100, "cap": 100, "sample": true}]}, {"id": "KR-AN2", "d": "2026-12-05", "dl": "Sat 5 Dec", "time": "Doors 21:30", "title": "Krapela 3rd Anniversary: Exit to Exist — Day 2", "sub": "Anniversary weekend · night 2", "tiers": [{"n": "Presale", "desc": "Incl. first drink", "p": 150000, "left": 39, "cap": 80, "sample": true}, {"n": "Regular", "desc": "Incl. first drink", "p": 200000, "left": 100, "cap": 100, "sample": true}]}, {"id": "KR-LAP", "d": "2026-12-05", "dl": "Sat 5 Dec", "time": "Late set", "title": "Love as Punishment", "sub": "Tickets not on sale yet", "soon": true, "tiers": []}, {"id": "KR-AN3", "d": "2026-12-06", "dl": "Sun 6 Dec", "time": "Doors 21:30", "title": "Krapela 3rd Anniversary: Exit to Exist — Day 3", "sub": "Anniversary weekend · closing night", "tiers": [{"n": "Presale", "desc": "Incl. first drink", "p": 150000, "left": 53, "cap": 80, "sample": true}, {"n": "Regular", "desc": "Incl. first drink", "p": 200000, "left": 100, "cap": 100, "sample": true}]}]}, "m-bloc": {"name": "M Bloc Live House", "area": "Kebayoran Baru, Jakarta Selatan", "type": "Live house", "policy": "All ages · standing", "handle": "M Bloc Space", "shows": [{"id": "MB-IND", "d": "2026-11-14", "dl": "Sat 14 Nov", "time": "19:00", "title": "Indisphere Qualification Live", "sub": "By Alkateri · The Cottons · Magnolia Celebration", "tiers": [{"n": "General admission", "desc": "Standing", "p": 120000, "left": 88, "cap": 300, "sample": true}]}, {"id": "MB-TT", "d": "2026-11-15", "dl": "Sun 15 Nov", "time": "Doors 17:00 · show 18:00", "title": "Takase Toya — Live in Jakarta", "sub": "", "tiers": [{"n": "Presale", "desc": "Standing", "p": 580000, "left": 0, "cap": 150}, {"n": "Regular", "desc": "Standing", "p": 680000, "left": 2, "cap": 200, "sample": true}]}]}, "bengkel": {"name": "Bengkel Space SCBD", "area": "SCBD, Jakarta Selatan", "type": "Live venue", "policy": "All ages · seated + standing", "handle": "Bengkel Space", "shows": [{"id": "BK-RP", "d": "2026-11-24", "dl": "Tue 24 Nov", "time": "18:00", "title": "Rony Parulian Showcase: Dunia dan Seisinya", "sub": "", "tiers": [{"n": "Festival", "desc": "Standing", "p": 289000, "left": 294, "cap": 1200}, {"n": "VIP", "desc": "Front seated rows · meet & greet", "p": 489000, "left": 100, "cap": 300, "sample": true}]}, {"id": "BK-SS", "d": "2027-01-12", "dl": "Tue 12 Jan 2027", "time": "—", "title": "Sienna Spiro", "sub": "Tickets not on sale yet", "soon": true, "tiers": []}]}, "kempinski": {"name": "Kempinski Grand Ballroom", "area": "Thamrin, Jakarta Pusat", "type": "Ballroom", "policy": "Seated · e-ticket + ID", "handle": "Hotel Indonesia Kempinski", "shows": [{"id": "KP-XK", "d": "2026-11-13", "dl": "Fri 13 Nov", "time": "18:00", "title": "A Special Session with Xu Kai", "sub": "Fanmeet", "tiers": [{"n": "VIP", "desc": "Rows A–F · hi-touch", "p": 1499000, "left": 0, "cap": 200, "sample": true}, {"n": "Regular", "desc": "Seated", "p": 599000, "left": 0, "cap": 1000}]}]}, "dekhad": {"name": "Dekhad Gandaria", "area": "Gandaria, Jakarta Selatan", "type": "Small venue", "policy": "All ages", "handle": "Dekhad", "shows": [{"id": "DK-MS", "d": "2026-11-25", "dl": "Wed 25 Nov", "time": "19:30", "title": "Museum Siluet", "sub": "", "tiers": [{"n": "Regular", "desc": "Standing", "p": 100000, "left": 46, "cap": 120}]}]}, "suatu-tempat": {"name": "Suatu Tempat di Kebon Jeruk", "area": "Kebon Jeruk, Jakarta Barat", "type": "Small venue", "policy": "All ages", "handle": "Suatu Tempat", "shows": [{"id": "ST-MB", "d": "2026-12-12", "dl": "Sat 12 Dec", "time": "19:00", "title": "Membiru Special Showcase: Belum Selesai, Baru Dimulai", "sub": "", "tiers": [{"n": "Regular", "desc": "Standing", "p": 200000, "left": 89, "cap": 150}]}]}};
+const FEE_PER=5000, HOLD=600;
+const fmt=n=>'Rp '+n.toLocaleString('id-ID');
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+let vkey=VENUES[params.get('v')]?params.get('v'):'krapela';
+let show=null, qty={}, left=HOLD, tick=null;
+const MON=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function from(s){const p=s.tiers.filter(t=>t.left>0).map(t=>t.p);return p.length?Math.min(...p):null;}
+function avail(s){if(s.soon)return['p-soon','Not on sale yet'];const l=s.tiers.reduce((a,t)=>a+t.left,0);const c=s.tiers.reduce((a,t)=>a+t.cap,0);
+  if(l===0)return['p-out','Sold out'];if(l/c<0.12)return['p-few','Few left'];return['p-ok','On sale'];}
+function tierState(t){if(t.left===0)return['p-out','Sold out'];if(t.left<=Math.max(5,t.cap*0.12))return['p-few',t.left+' left'];return null;}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);}
+function renderVenue(){
+  const v=VENUES[vkey];
+  document.title=v.name+' — Tickets';
+  $('v-name').textContent=v.name;$('v-title').textContent=v.name;
+  $('v-meta').innerHTML=`<b>${esc(v.type)}</b> · ${esc(v.area)} · ${esc(v.policy)}`;
+  $('v-count').textContent=v.shows.length+(v.shows.length===1?' show':' shows');
+  $('shows').innerHTML=v.shows.map((s,i)=>{const d=new Date(s.d+'T12:00:00');const a=avail(s);const f=from(s);
+    const smp=s.tiers.some(t=>t.sample)?'<span class="sample">Sample</span>':'';
+    return `<button class="show" type="button" data-i="${i}" aria-pressed="false">
+      <div class="dt"><div class="m">${MON[d.getMonth()]}</div><div class="d">${d.getDate()}</div><div class="w">${WD[d.getDay()]}</div></div>
+      <div><div class="t1">${esc(s.title)}</div><div class="t2">${esc(s.dl)} · ${esc(s.time)}${s.sub?' · '+esc(s.sub):''}</div></div>
+      <div class="r">${f?`<div class="from">from ${fmt(f)}${smp}</div>`:''}<span class="pill ${a[0]}">${a[1]}</span></div></button>`;}).join('');
+  $('shows').querySelectorAll('.show').forEach(b=>b.addEventListener('click',()=>pick(+b.dataset.i)));
+  const first=v.shows.findIndex(s=>!s.soon&&s.tiers.some(t=>t.left>0));
+  pick(first<0?0:first);
+}
+function pick(i){
+  const v=VENUES[vkey];show=v.shows[i];qty={};
+  $('shows').querySelectorAll('.show').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.i===i));
+  $('t-head').textContent='Tickets · '+show.title;
+  $('t-sub').textContent=show.dl;
+  if(show.soon||!show.tiers.length){$('tiers').innerHTML=`<div class="empty"><b>Tickets aren't on sale yet</b>${esc(v.name)} will announce the on-sale date on ${esc(v.handle)}. Follow the venue to get notified.</div>`;}
+  else $('tiers').innerHTML=show.tiers.map((t,j)=>{const st=tierState(t);const sold=t.cap-t.left;const off=t.left===0;
+    return `<div class="tier${off?' off':''}" data-j="${j}">
+      <div><div class="tn">${esc(t.n)}</div><div class="td">${esc(t.desc)}</div>
+        <div class="tp">${fmt(t.p)}${t.sample?'<span class="sample">Sample</span>':''}</div>
+        <div class="cap"><span class="bar"><i style="width:${Math.round(sold*100/t.cap)}%"></i></span><span>${sold.toLocaleString('id-ID')} / ${t.cap.toLocaleString('id-ID')} sold</span>${st?`<span class="pill ${st[0]}" style="margin:0">${st[1]}</span>`:''}</div></div>
+      <div class="step" role="group" aria-label="${esc(t.n)} quantity">
+        <button type="button" data-d="-1" aria-label="Remove one ${esc(t.n)}" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <output>0</output>
+        <button type="button" data-d="1" aria-label="Add one ${esc(t.n)}" ${off?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      </div></div>`;}).join('');
+  $('tiers').querySelectorAll('.tier').forEach(el=>el.querySelectorAll('.step button').forEach(b=>b.addEventListener('click',()=>bump(+el.dataset.j,+b.dataset.d))));
+  update();
+}
+const MAX=6;
+function bump(j,d){const t=show.tiers[j];const total=Object.values(qty).reduce((a,b)=>a+b,0);
+  let q=(qty[j]||0)+d;q=Math.max(0,Math.min(q,t.left,(qty[j]||0)+(MAX-total)));qty[j]=q;update();}
+function update(){
+  const items=show.tiers.map((t,j)=>[t,qty[j]||0]).filter(x=>x[1]>0);
+  const n=items.reduce((a,x)=>a+x[1],0), sub=items.reduce((a,x)=>a+x[0].p*x[1],0), fee=n*FEE_PER, tot=sub+fee;
+  $('tiers').querySelectorAll('.tier').forEach(el=>{const j=+el.dataset.j,t=show.tiers[j],q=qty[j]||0;
+    el.classList.toggle('on',q>0);el.querySelector('output').textContent=q;
+    const [m,p]=el.querySelectorAll('.step button');m.disabled=q===0;p.disabled=t.left===0||q>=t.left||n>=MAX;});
+  $('s-show').textContent=show.title+' · '+show.dl;
+  $('lines').innerHTML=items.length?items.map(([t,q])=>`<div class="line"><span>${q} × ${esc(t.n)}</span><span class="v">${fmt(t.p*q)}</span></div>`).join('')+(n>=MAX?'<div class="hint">Max '+MAX+' tickets per order.</div>':''):'<div class="hint">No tickets selected yet.</div>';
+  $('fee').textContent=fmt(fee);$('total').textContent=fmt(tot);
+  $('pay-btn').disabled=n===0;$('cta-l').textContent=n?`Pay ${n} ticket${n>1?'s':''}`:'Select tickets';$('cta-v').textContent=n?fmt(tot):'';
+  $('hold').hidden=n===0;
+  $('mbar').hidden=n===0||$('sum').classList.contains('paid');$('mb-n').textContent=n+' ticket'+(n>1?'s':'')+' · held';$('mb-v').textContent=fmt(tot);
+  if(n&&!tick){left=HOLD;tick=setInterval(()=>{left--;$('timer').textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');
+    if(left<=0){clearInterval(tick);tick=null;qty={};update();$('lines').innerHTML='<div class="hint" style="color:var(--danger)">Your hold expired and the tickets were released. Pick them again to continue.</div>';}},1000);}
+  if(!n&&tick){clearInterval(tick);tick=null;$('timer').textContent='10:00';}
+}
+function valid(){let ok=true;const nm=$('f-name'),ml=$('f-mail');
+  const a=nm.value.trim().length>=2;nm.setAttribute('aria-invalid',!a);$('e-name').classList.toggle('show',!a);
+  const b=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ml.value.trim());ml.setAttribute('aria-invalid',!b);$('e-mail').classList.toggle('show',!b);
+  return a&&b;}
+function qr(seed){let s=0;for(const c of seed)s=(s*31+c.charCodeAt(0))>>>0;const r=()=>(s=(s*1103515245+12345)>>>0)/4294967296;
+  let out='<rect width="29" height="29" fill="#fff"/>';const fin=(x,y)=>`<rect x="${x}" y="${y}" width="7" height="7" fill="#000"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#000"/>`;
+  for(let y=0;y<29;y++)for(let x=0;x<29;x++){const inF=(x<8&&y<8)||(x>20&&y<8)||(x<8&&y>20);if(!inF&&r()>0.52)out+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#000"/>`;}
+  return out+fin(0,0)+fin(22,0)+fin(0,22);}
+$('buy').addEventListener('submit',e=>{e.preventDefault();if($('pay-btn').disabled||!valid())return;
+  const btn=$('pay-btn');btn.classList.add('loading');$('cta-l').textContent='Waiting for payment…';
+  setTimeout(()=>{btn.classList.remove('loading');clearInterval(tick);tick=null;
+    const n=Object.values(qty).reduce((a,b)=>a+b,0);const oid='TK-'+show.id+'-'+String(Math.floor(10000+Math.random()*89999));
+    $('qr').innerHTML=qr(oid);$('d-oid').textContent=oid;$('d-show').textContent=`${n} ticket${n>1?'s':''} · ${show.title} · ${show.dl}`;
+    $('d-sent').textContent='Sent to '+$('f-mail').value.trim()+($('f-wa').value.trim()?' and WhatsApp':'')+' · paid by '+document.querySelector('input[name=pay]:checked').value;
+    $('sum').classList.add('paid');$('mbar').hidden=true;$('sum').scrollIntoView({block:'start'});},900);});
+$('mb-go').addEventListener('click',()=>{$('sum').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>$('f-name').focus({preventScroll:true}),350);});
+$('again').addEventListener('click',()=>{$('sum').classList.remove('paid');pick(VENUES[vkey].shows.indexOf(show));});
+const sw=$('vsw');sw.innerHTML=Object.entries(VENUES).map(([k,v])=>`<option value="${k}"${k===vkey?' selected':''}>${esc(v.name)}</option>`).join('');
+sw.addEventListener('change',()=>{vkey=sw.value;const u=new URL(location);u.searchParams.set('v',vkey);history.replaceState(null,'',u);$('sum').classList.remove('paid');renderVenue();});
+const root=document.documentElement;
+function applyTheme(t){root.setAttribute('data-theme',t);}
+applyTheme(localStorage.getItem('mf-theme')||'dark');
+$('theme-btn').addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='dark'?'light':'dark';localStorage.setItem('mf-theme',n);applyTheme(n);});
+renderVenue();
+</script>
+</body>
+</html>
