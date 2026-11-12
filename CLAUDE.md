@@ -30,11 +30,12 @@ Canonical spec: **`DESIGN.md`**. Tokens: **`design-system/tokens.json`** (W3C DT
 ## File layout
 
 - `index.html` — prototype **hub** (all screens, Desktop/Mobile toggle, wired flows).
-- `preview.html` — **single-file preview** of all 22 screens (Stage + Gallery views).
-- `mockup-<screen>.html` + `mockup-<screen>-mobile.html` — the **44 screen mockups**.
+- `preview.html` — **single-file preview** of all 25 screens (Stage + Gallery views).
+- `mockup-<screen>.html` + `mockup-<screen>-mobile.html` — the **50 screen mockups**.
   Screens: storefront · release · cart · checkout · confirmation · account · journal;
   dashboard · inventory · locations · release-edit · orders · order-detail · customers ·
-  vouchers · newsletter · purchase-orders · news · channels · preferences; pos · pos-checkout.
+  vouchers · newsletter · purchase-orders · news · channels · preferences;
+  events · event-detail · checkin (Events & Tickets / TMS); pos · pos-checkout.
 - `design-system/` — tokens, IMPORT.md, handoff, preview.
 - `deploy/` — nginx + Caddy configs, `deploy.sh`, runbook (target: **mediumformat.info**).
 - `docs/Medium-Format-Complete-Documentation.pdf` — the complete doc (regenerate from
@@ -46,9 +47,10 @@ Canonical spec: **`DESIGN.md`**. Tokens: **`design-system/tokens.json`** (W3C DT
 - Each mockup is **self-contained HTML5** (inline `<style>`/`<script>`); only external dep
   is the Google Fonts link. Keep it that way.
 - **Reuse chrome** — copy the nav/sidebar/topbar/now-playing from the matching existing
-  mockup rather than reinventing it. Back-office sidebar = the **11-module** set
+  mockup rather than reinventing it. Back-office sidebar = the **12-module** set
   (Dashboard, Inventory, Orders[pending dot], Customers, Vouchers, Newsletter,
-  Purchase Orders, News; Config: Channels, Preferences). Locations is reached from Inventory.
+  Purchase Orders, News, **Events & Tickets** (Events, Door check-in); Config: Channels,
+  Preferences). Locations is reached from Inventory; Event detail from Events.
 - Cross-link with the exact filenames above; every page has a `◹ Prototype` link to `index.html`.
 - After edits, sanity-check: **0** occurrences of `6c63ff` / `Playfair` (legacy purple/serif);
   `Noto Sans` + `Noto Sans Mono` loaded; internal links resolve.
@@ -57,6 +59,11 @@ Canonical spec: **`DESIGN.md`**. Tokens: **`design-system/tokens.json`** (W3C DT
 
 - **Locations & shelves** — `mockup-locations.html`; per-location allocation in
   `mockup-release-edit.html`.
+- **Events & Tickets (TMS)** — `mockup-events.html` (events + Peers venues tab),
+  `mockup-event-detail.html` (tiers, orders, revenue by tier/channel, sale phases),
+  `mockup-checkin.html` (QR scan, manual entry, live count); ticketing KPIs on the dashboard.
+  Sample data = real Jakarta shows/venues (DD scrape); sold/check-in counts are demo,
+  unpublished prices show "—" or a dashed `Sample` tag.
 - **Barcode label printing** — row action + modal in `mockup-inventory.html`.
 - **POS payments** — bank **EDC** terminals (BCA/Mandiri/BNI/BRI/CIMB/Permata) + **Xendit**
   gateway (QRIS/VA/e-wallet/card) + cash in `mockup-pos-checkout.html`. Storefront checkout

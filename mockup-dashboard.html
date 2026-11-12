@@ -273,6 +273,32 @@
       .content{padding:18px 16px;}
       .greet-h1{font-size:26px;}
     }
+
+    /* ─── Ticketing block ───────────────────────────────────────── */
+    .sec-lbl{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:28px 0 12px;}
+    .sec-lbl h2{font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--ink);}
+    .sec-lbl a{font-size:12px;font-weight:500;color:var(--body);}
+    .sec-lbl a:hover{color:var(--ink);}
+    .tk-table{width:100%;border-collapse:collapse;}
+    .tk-table th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);text-align:left;padding:10px 16px 8px;font-weight:600;}
+    .tk-table td{padding:11px 16px;border-top:1px solid var(--hairline);font-size:13px;color:var(--body);}
+    .tk-table .num{text-align:right;}
+    .tk-table .ink{color:var(--ink);}
+    .tk-table .sub{display:block;font-size:11px;color:var(--mute);margin-top:2px;}
+    .tk-fig{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500;white-space:nowrap;}
+    .tk-bar{height:6px;width:90px;background:var(--raised);border-radius:999px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:8px;}
+    .tk-bar i{display:block;height:100%;background:var(--ink);}
+    .tk-sample{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;padding:0 5px;border-radius:4px;border:1px dashed var(--mute);color:var(--mute);margin-left:6px;}
+    .status-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:2px 9px;border-radius:999px;white-space:nowrap;}
+    .status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;}
+    .st-onsale{background:var(--success-t);color:var(--success);}
+    .st-live{background:var(--info-t);color:var(--info);}
+    .st-low{background:var(--warning-t);color:var(--warning);}
+    .st-soldout{background:var(--danger-t);color:var(--danger);}
+    .up-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px;border-top:1px solid var(--hairline);}
+    .up-row:first-child{border-top:none;}
+    .up-row .t1{font-size:13px;color:var(--ink);}
+    .up-row .t2{font-size:11px;color:var(--mute);margin-top:2px;font-variant-numeric:tabular-nums;}
   </style>
 </head>
 <body>
@@ -317,6 +343,16 @@
       <a href="mockup-pos-checkout.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         <span class="sb-txt">POS Checkout</span>
+      </a>
+
+      <div class="sb-group">Events &amp; Tickets</div>
+      <a href="mockup-events.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="sb-txt">Events</span>
+      </a>
+      <a href="mockup-checkin.html" class="sb-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/><line x1="13" y1="8" x2="17" y2="8"/><line x1="8" y1="14" x2="8" y2="17"/></svg>
+        <span class="sb-txt">Door check-in</span>
       </a>
       <a href="mockup-news-categories.html" class="sb-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 01-2.83 0L2.41 12.4A2 2 0 012 11V4a2 2 0 012-2h7a2 2 0 011.41.59l8.18 8.18a2 2 0 010 2.83z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>
@@ -571,6 +607,55 @@
         </section>
 
       </div><!-- /g-main -->
+
+      <!-- Ticketing (Events & Tickets) -->
+      <div class="sec-lbl"><h2>Ticketing</h2><a href="mockup-events.html">Events &amp; Tickets →</a></div>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi-lbl">Tickets sold</div>
+          <div class="kpi-val">6.214</div>
+          <div class="kpi-foot"><div class="kpi-delta up"><span class="mono">+12.8%</span></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Ticket revenue</div>
+          <div class="kpi-val">Rp 7.42B</div>
+          <div class="kpi-foot"><div class="kpi-delta neu"><span class="mono">fee Rp 222.6M</span></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Upcoming events</div>
+          <div class="kpi-val">13</div>
+          <div class="kpi-foot"><div class="kpi-delta neu"><span class="mono">3 this week</span></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Check-in rate</div>
+          <div class="kpi-val">92.6%</div>
+          <div class="kpi-foot"><div class="kpi-delta up"><span class="mono">+1.9 pts</span></div></div>
+        </div>
+      </div>
+      <div class="g-main">
+        <section class="panel">
+          <div class="panel-hdr"><span class="panel-title">Top events</span><span class="p-right">by ticket revenue · all-time</span></div>
+          <table class="tk-table">
+            <thead><tr><th>Event</th><th class="num">Sold / quota</th><th class="num">Revenue</th></tr></thead>
+            <tbody>
+              <tr><td><span class="ink">BIGBANG <XX : COSMOS></span><span class="sub">JIS · 16–17 Jan</span></td><td class="num"><span class="tk-fig">71.220</span><span class="tk-bar"><i style="width:59.4%"></i></span></td><td class="num"><span class="tk-fig">Rp 110.39B</span></td></tr>
+              <tr><td><span class="ink">Maroon 5 Asia Tour 2027</span><span class="tk-sample">Sample</span><span class="sub">JIS · 5 Feb</span></td><td class="num"><span class="tk-fig">45.590</span><span class="tk-bar"><i style="width:76.0%"></i></span></td><td class="num"><span class="tk-fig">Rp 97.84B</span></td></tr>
+              <tr><td><span class="ink">My Chemical Romance</span><span class="sub">JIS · 22 Nov</span></td><td class="num"><span class="tk-fig">60.000</span><span class="tk-bar"><i style="width:100.0%"></i></span></td><td class="num"><span class="tk-fig">Rp 63.54B</span></td></tr>
+              <tr><td><span class="ink">Joyland Sessions 2026</span><span class="tk-sample">Sample</span><span class="sub">GBK Field · 28–29 Nov</span></td><td class="num"><span class="tk-fig">13.940</span><span class="tk-bar"><i style="width:77.4%"></i></span></td><td class="num"><span class="tk-fig">Rp 16.73B</span></td></tr>
+              <tr><td><span class="ink">Guns N' Roses</span><span class="sub">Madya GBK · 21 Nov</span></td><td class="num"><span class="tk-fig">8.412</span><span class="tk-bar"><i style="width:93.5%"></i></span></td><td class="num"><span class="tk-fig">Rp 14.72B</span></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="panel">
+          <div class="panel-hdr"><span class="panel-title">Next up</span><a href="mockup-checkin.html" class="p-link">Door check-in →</a></div>
+          <div>
+            <a class="up-row" href="mockup-checkin.html"><div><div class="t1">A Special Session with Xu Kai</div><div class="t2">Fri 13 Nov · 18:00 · Kempinski Grand Ballroom · 1.164/1.200</div></div><span class="status-pill st-live">Live today</span></a>
+            <a class="up-row" href="mockup-events.html"><div><div class="t1">Indisphere Qualification Live</div><div class="t2">Sat 14 Nov · 19:00 · M Bloc Live House · 212/300</div></div><span class="status-pill st-onsale">On sale</span></a>
+            <a class="up-row" href="mockup-checkin.html"><div><div class="t1">Takase Toya — Live in Jakarta</div><div class="t2">Sun 15 Nov · 18:00 · M Bloc Live House · 348/350</div></div><span class="status-pill st-low">Almost gone</span></a>
+            <a class="up-row" href="mockup-events.html"><div><div class="t1">Guns N' Roses Live in Jakarta</div><div class="t2">Sat 21 Nov · 17:00 · Stadion Madya GBK · 8.412/9.000</div></div><span class="status-pill st-onsale">On sale</span></a>
+          </div>
+        </section>
+      </div>
     </main>
   </div><!-- /main -->
 </div><!-- /shell -->

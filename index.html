@@ -123,7 +123,7 @@ footer code{font-family:var(--mono);font-size:.92em;color:var(--body)}
   <h1>Every screen, before development.</h1>
   <p>The Medium Format platform — <b>storefront</b>, <b>back-office</b> and <b>POS</b> — rebuilt in the monochrome v2.0 system. Click any screen to open it. Flip <b>Desktop / Mobile</b> to preview either form. Pages link to each other, so you can walk the real flows.</p>
   <div class="stats">
-    <div class="s"><span class="n" id="stat-screens">22</span><span class="l">Screens</span></div>
+    <div class="s"><span class="n" id="stat-screens">28</span><span class="l">Screens</span></div>
     <div class="s"><span class="n">3</span><span class="l">Surfaces</span></div>
     <div class="s"><span class="n">×2</span><span class="l">Desktop + mobile</span></div>
     <div class="s"><span class="n">2</span><span class="l">Themes</span></div>
@@ -140,6 +140,8 @@ footer code{font-family:var(--mono);font-size:.92em;color:var(--body)}
       <a href="mockup-storefront.html">Catalogue</a><span class="sep">→</span><a href="mockup-release.html">Release</a><span class="sep">→</span><a href="mockup-cart.html">Cart</a><span class="sep">→</span><a href="mockup-checkout.html">Checkout</a><span class="sep">→</span><a href="mockup-confirmation.html">Confirmation</a></div></div>
     <div class="flow"><div class="fh">POS sale + payment</div><div class="chain">
       <a href="mockup-pos.html">POS sale</a><span class="sep">→</span><a href="mockup-pos-checkout.html">Charge · EDC / Xendit</a><span class="sep">→</span><a href="mockup-pos.html">Receipt</a></div></div>
+    <div class="flow"><div class="fh">Event ticketing</div><div class="chain">
+      <a href="mockup-events.html">Events</a><span class="sep">→</span><a href="mockup-event-detail.html">Event detail</a><span class="sep">→</span><a href="mockup-checkin.html">Door check-in</a><span class="sep">→</span><a href="mockup-dashboard.html">Dashboard KPIs</a></div></div>
     <div class="flow"><div class="fh">Back-office fulfilment</div><div class="chain">
       <a href="mockup-orders.html">Orders inbox</a><span class="sep">→</span><a href="mockup-order-detail.html">Order detail</a><span class="sep">→</span><a href="mockup-inventory.html">Inventory</a><span class="sep">→</span><a href="mockup-release-edit.html">Edit release</a></div></div>
   </div>
@@ -161,7 +163,7 @@ const GROUPS=[
    {f:"account",t:"Customer account",d:"Orders, wishlist, addresses",tags:["Account"]},
    {f:"journal",t:"News article",d:"Editorial long-form",tags:["News"]},
  ]},
- {no:"02 / BACK-OFFICE",title:"Back-office",desc:"11-module operational console",items:[
+ {no:"02 / BACK-OFFICE",title:"Back-office",desc:"Operational console",items:[
    {f:"dashboard",t:"Finance dashboard",d:"KPIs, revenue, settlements",tags:["Dashboard"]},
    {f:"inventory",t:"Inventory",d:"Stock list, filters, add release",tags:["Catalogue"]},
    {f:"locations",t:"Locations",d:"Multi-location & shelf stock, barcodes",tags:["Stock"]},
@@ -176,7 +178,12 @@ const GROUPS=[
    {f:"channels",t:"Channels",d:"Marketplace connections & sync",tags:["Integrations"]},
    {f:"preferences",t:"Preferences",d:"Store, tax, payments, team",tags:["Settings"]},
  ]},
- {no:"03 / POS",title:"Point of sale",desc:"In-store touch terminal",items:[
+ {no:"03 / EVENTS & TICKETS",title:"Events & Tickets",desc:"Ticketing (TMS) on Peers — Jakarta shows",items:[
+   {f:"events",t:"Events & venues",d:"Event list, sold vs quota, Peers venues",tags:["TMS"]},
+   {f:"event-detail",t:"Event detail",d:"Tiers, ticket orders, revenue, sale phases",tags:["TMS"]},
+   {f:"checkin",t:"Door check-in",d:"QR scanner, manual entry, live count",tags:["Check-in","b"]},
+ ]},
+ {no:"04 / POS",title:"Point of sale",desc:"In-store touch terminal",items:[
    {f:"pos",t:"POS sale",d:"Product browser & cart",tags:["Register"]},
    {f:"pos-checkout",t:"POS checkout",d:"EDC terminal + Xendit + cash",tags:["EDC","b"],tags2:["Xendit","i"]},
  ]},
