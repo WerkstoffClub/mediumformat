@@ -50,10 +50,21 @@
 	}
 
 	# ── Storefront SPA (built with --base=/) — everything else falls through ──
+	# Only extension-less routes fall back to /index.html (SPA deep links,
+	# pretty URLs like /mockup-cart). A missing file with an extension
+	# (/x.md, /x.json, /nope.html) or any dotfile path (/.git/HEAD) is a real
+	# 404 with the branded 404.html — no more "200 for everything".
 	handle {
 		root * /srv
-		try_files {path} /index.html
-		file_server
+		@file path_regexp file (\.[A-Za-z0-9]{1,8}$|/\.)
+		handle @file {
+			try_files {path} =404
+			file_server
+		}
+		handle {
+			try_files {path} {path}.html {path}/ /index.html
+			file_server
+		}
 	}
 
 	handle_errors {
