@@ -27,7 +27,7 @@ else
   echo "ERROR: deploy/docker/stack.env not found. Copy stack.env.example and fill it in." >&2
   exit 1
 fi
-: "${SSH_HOST:?}"; : "${SSH_USER:?}"; : "${SSH_PORT:=22}"; : "${STACK_DIR:=/opt/stacks/mediumformat}"
+: "${SSH_HOST:?}"; : "${SSH_USER:?}"; : "${SSH_PORT:=22}"; : "${STACK_DIR:=/opt/mediumformat}"
 
 # --- What ships as the prototype web root. Everything else stays out. ---
 INCLUDES=(

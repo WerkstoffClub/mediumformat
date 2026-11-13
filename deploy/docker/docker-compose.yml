@@ -1,18 +1,18 @@
 # ==========================================================================
-# Medium Format — static prototype, behind the shared Traefik on vps.lacak.live.
+# Medium Format — production stack on dd-vps (seedlink VPS), /opt/mediumformat.
+# Migrated 2026-11-13 from vps.lacak.live (Traefik) to dd-vps.
 #
-# This box already runs Traefik v3 (network `proxy_public`, entrypoint
-# `websecure`, cert resolver `myresolver` via Let's Encrypt TLS challenge).
-# This stack adds a small Caddy file-server container with Traefik labels —
-# NO published ports, NO own TLS. Traefik terminates HTTPS + redirects.
-# Pattern mirrors the existing /opt/stacks/lacak-web stack.
+# dd-vps has NO public 80/443: traffic arrives through a Cloudflare Tunnel
+# (`mediumformat-dd-vps`, systemd unit `cloudflared-mediumformat`) that points
+# mediumformat.info, www, dealers., peers. at http://127.0.0.1:3300. Caddy is a plain HTTP
+# server on :80; TLS lives at Cloudflare. www→apex and http→https redirects
+# are done in the Caddyfile.
 #
-# Deploy (matches how the other stacks on this box run):
-#     scp/rsync this folder to /opt/stacks/mediumformat   (sync.sh does the site)
-#     cd /opt/stacks/mediumformat && docker compose up -d
+# Deploy:
+#     rsync this folder to /opt/mediumformat   (sync.sh does the site)
+#     cd /opt/mediumformat && docker compose up -d
 #
-# For a FUTURE VPS with no reverse proxy, use docker-compose.selfhosted.yml
-# instead (self-contained Caddy that owns 80/443 + auto-HTTPS). See README.md.
+# API-written files persist under /opt/mediumformat/data (bind mounts below).
 # ==========================================================================
 
 services:
@@ -23,23 +23,12 @@ services:
     security_opt:
       - no-new-privileges=true
     networks:
-      - proxy_public
       - mf_internal
     volumes:
-      - /opt/stacks/mediumformat/Caddyfile:/etc/caddy/Caddyfile:ro
-      - /opt/stacks/mediumformat/site:/srv:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=proxy_public"
-      - "traefik.http.routers.mediumformat.rule=Host(`mediumformat.info`) || Host(`www.mediumformat.info`)"
-      - "traefik.http.routers.mediumformat.entrypoints=websecure"
-      - "traefik.http.routers.mediumformat.tls.certresolver=myresolver"
-      - "traefik.http.services.mediumformat.loadbalancer.server.port=80"
-      # www → apex redirect (mirrors lacak-web). $$ escapes $ for compose.
-      - "traefik.http.middlewares.mediumformat-www.redirectregex.regex=^https://www\\.mediumformat\\.info/(.*)"
-      - "traefik.http.middlewares.mediumformat-www.redirectregex.replacement=https://mediumformat.info/$${1}"
-      - "traefik.http.middlewares.mediumformat-www.redirectregex.permanent=true"
-      - "traefik.http.routers.mediumformat.middlewares=mediumformat-www"
+      - /opt/mediumformat/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /opt/mediumformat/site:/srv:ro
+    ports:
+      - "127.0.0.1:3300:80"   # cloudflared tunnel -> mediumformat
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/"]
       interval: 30s
@@ -53,7 +42,7 @@ services:
     container_name: mediumformat-db
     restart: unless-stopped
     env_file:
-      - /opt/stacks/mediumformat/api.env   # POSTGRES_DB/USER/PASSWORD live here
+      - /opt/mediumformat/api.env   # POSTGRES_DB/USER/PASSWORD live here
     networks:
       - mf_internal
     volumes:
@@ -67,13 +56,17 @@ services:
 
   api:
     build:
-      context: /opt/stacks/mediumformat/app-src
+      context: /opt/mediumformat/app-src
       dockerfile: Dockerfile.api
     image: mediumformat-api:latest
     container_name: mediumformat-api
+    volumes:
+      # Persist files the API writes (public /uploads/ + import attachments in .uploads).
+      - /opt/mediumformat/data/uploads:/repo/apps/api/uploads
+      - /opt/mediumformat/data/import-uploads:/repo/apps/api/.uploads
     restart: unless-stopped
     env_file:
-      - /opt/stacks/mediumformat/api.env
+      - /opt/mediumformat/api.env
     networks:
       - mf_internal
     depends_on:
@@ -84,6 +77,4 @@ volumes:
   mf_pg_data:
 
 networks:
-  proxy_public:
-    external: true
   mf_internal: {}

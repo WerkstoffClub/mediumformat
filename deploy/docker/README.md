@@ -1,8 +1,19 @@
 # Deploying Medium Format → mediumformat.info (Docker)
 
 Containerized, **portable** deployment of the static prototype. A small Caddy
-file-server container serves the 52-page site; TLS is handled by the shared
-**Traefik** reverse proxy already running on the VPS.
+file-server container serves the 52-page site.
+
+> **Host moved 2026-11-13: production now runs on dd-vps (seedlink VPS) in
+> `/opt/mediumformat`, not vps.lacak.live.** dd-vps is Tailscale-only (no
+> public 80/443/SSH); traffic arrives via the Cloudflare Tunnel
+> `mediumformat-dd-vps` (systemd `cloudflared-mediumformat`) → `127.0.0.1:3300`.
+> TLS is at Cloudflare; Caddy does www→apex + http→https. API uploads persist in
+> `/opt/mediumformat/data/`. The lacak-specific notes below are historical.
+>
+> Section subdomains: `dealers.mediumformat.info` → `mockup-dealers.html`,
+> `peers.mediumformat.info` → `mockup-peers.html` (Caddy rewrites `/` only; other
+> paths serve the same site). Adding one = Caddyfile matcher + tunnel ingress in
+> `/etc/cloudflared/mediumformat.yml` on dd-vps + proxied CNAME to the tunnel.
 
 > **The older host-nginx + rsync kit** lives in `deploy/` (`deploy/README.md`).
 > Use one or the other — this container path is the current one.
@@ -11,7 +22,7 @@ file-server container serves the 52-page site; TLS is handled by the shared
 
 | File set | When | TLS |
 |---|---|---|
-| `docker-compose.yml` + `Caddyfile` | **vps.lacak.live (now)** — box already runs Traefik | Traefik / Let's Encrypt |
+| `docker-compose.yml` + `Caddyfile` | **dd-vps (now)** — behind Cloudflare Tunnel on 127.0.0.1:3300 | Cloudflare |
 | `docker-compose.selfhosted.yml` + `Caddyfile.selfhosted` | A future **bare** VPS with nothing on 80/443 | Caddy auto-HTTPS |
 
 Both serve identical content, pretty URLs, headers and 404 handling. Migrating

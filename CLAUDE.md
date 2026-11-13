@@ -105,8 +105,8 @@ Canonical spec: **`DESIGN.md`**. Tokens: **`design-system/tokens.json`** (W3C DT
 
 ## Deploy the prototype
 
-Static site → `mediumformat.info` on the VPS `vps.lacak.live`. See `deploy/README.md`
-(DNS, certbot, `deploy.sh`). Web root = `index.html`, `preview.html`, `404.html`,
+Site + API → `mediumformat.info` on **dd-vps** (`/opt/mediumformat`, behind Cloudflare Tunnel;
+moved from `vps.lacak.live` 2026-11-13). Use `deploy/docker/` (`deploy-app.sh`, `sync.sh`); see `deploy/docker/README.md`. Web root = `index.html`, `preview.html`, `404.html`,
 `favicon.svg`, `robots.txt`, `sitemap.xml`, `site.webmanifest`, `mockup-*.html`, `design-system/`.
 
 ## Notes
