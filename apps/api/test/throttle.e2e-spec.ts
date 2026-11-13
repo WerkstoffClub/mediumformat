@@ -1,12 +1,14 @@
 import { Test } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { PrismaService } from '../src/prisma/prisma.service';
+import { TRUST_PROXY_HOPS } from '../src/config/trust-proxy';
 
 // No DB needed: Prisma is stubbed; we only assert the guard + validation wiring.
 describe('Throttling & validation (e2e, no DB)', () => {
-  let app: INestApplication;
+  let app: NestExpressApplication;
   const prismaStub = {
     user: { findUnique: jest.fn().mockResolvedValue(null) },
     voucher: { findUnique: jest.fn().mockResolvedValue(null) },
@@ -20,7 +22,8 @@ describe('Throttling & validation (e2e, no DB)', () => {
       .overrideProvider(PrismaService)
       .useValue(prismaStub)
       .compile();
-    app = module.createNestApplication();
+    app = module.createNestApplication<NestExpressApplication>();
+    app.set('trust proxy', TRUST_PROXY_HOPS);
     app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }));
     app.setGlobalPrefix('api/v1');
     await app.init();
@@ -52,5 +55,24 @@ describe('Throttling & validation (e2e, no DB)', () => {
       await hit('storefront/vouchers/validate', { code: 'X', subtotalIdr: 1000 }).expect(201);
     }
     await hit('storefront/vouchers/validate', { code: 'X', subtotalIdr: 1000 }).expect(429);
+  });
+
+  describe('per-client buckets behind the proxy (X-Forwarded-For)', () => {
+    // supertest socket = hop 1 (Caddy); last XFF entry = hop 2 (cloudflared).
+    const PROXY = '172.18.0.2';
+    const login = (xff: string) =>
+      hit('auth/login', { email: 'a@b.co', password: 'x' }).set('X-Forwarded-For', xff);
+
+    it('two different client IPs get separate login buckets', async () => {
+      for (let i = 0; i < 5; i++) await login(`203.0.113.10, ${PROXY}`).expect(401);
+      await login(`203.0.113.10, ${PROXY}`).expect(429);
+      // Another customer is unaffected by the first one being blocked.
+      await login(`203.0.113.11, ${PROXY}`).expect(401);
+    });
+
+    it('a spoofed leftmost X-Forwarded-For entry does not escape the bucket', async () => {
+      for (let i = 0; i < 5; i++) await login(`198.51.100.${i}, 203.0.113.20, ${PROXY}`).expect(401);
+      await login(`198.51.100.99, 203.0.113.20, ${PROXY}`).expect(429);
+    });
   });
 });
