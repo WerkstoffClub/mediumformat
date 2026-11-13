@@ -13,6 +13,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    .brand-wordmark{display:block;height:auto;}
+    .brand-wordmark-light{display:none;}
+    html[data-theme="light"] .brand-wordmark-dark{display:none;}
+    html[data-theme="light"] .brand-wordmark-light{display:block;}
+    .nav-logo .brand-wordmark{height:22px;width:auto;}
+    .fbrand-name .brand-wordmark{height:22px;width:auto;}
+
     /* ═══════════════════════════════════════════════════════════════
        Design tokens (monochrome v2.1) — dark default
        ═══════════════════════════════════════════════════════════════ */
@@ -361,9 +368,7 @@
 
 <!-- Nav -->
 <nav class="nav" id="site-nav">
-  <a href="mockup-storefront.html" class="nav-logo">
-    Medium Format<sup>®</sup>
-  </a>
+  <a href="mockup-storefront.html" class="nav-logo" aria-label="Medium Format home"><img src="assets/MF_Logo/SVG/MF_Lockup_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light"></a>
   <div class="nav-menu">
     <a class="nav-link" href="mockup-storefront.html">Shop <span class="chev">▾</span></a>
     <a class="nav-link active" href="mockup-category-half-hero.html">Formats <span class="chev">▾</span></a>
@@ -551,7 +556,7 @@
 <footer>
   <div class="fgrid">
     <div>
-      <div class="fbrand-name">Medium Format<sup style="font-size:9px;color:var(--mute)">®</sup></div>
+      <div class="fbrand-name"><img src="assets/MF_Logo/SVG/MF_Lockup_White.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-dark"><img src="assets/MF_Logo/SVG/MF_Lockup_Black.svg" alt="Medium Format" class="brand-wordmark brand-wordmark-light"></div>
       <div class="ftagline">
         Independent record shop based in Jakarta, Indonesia. Curating the finest in vinyl,
         CD, and music culture since 2019.

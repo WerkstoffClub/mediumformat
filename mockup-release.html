@@ -404,6 +404,12 @@
     .channel-tag.ch-website::before{background:#6366F1!important;}.channel-tag.ch-pos::before{background:#0EA5E9!important;}.channel-tag.ch-tokopedia::before{background:#22C55E!important;}.channel-tag.ch-shopee::before{background:#F97316!important;}.channel-tag.ch-discogs::before{background:#9CA3AF!important;}.channel-tag.ch-bandcamp::before{background:#14B8A6!important;}.channel-tag.ch-ebay::before{background:#EAB308!important;}.channel-tag.ch-event::before{background:#EC4899!important;}
     /* audit:ui-extras */
     .channel-tag::before{border-radius:1.5px!important;}
+    .rd-tracklist{margin-top:28px;}
+    .rd-tracklist .sec-h2{font-size:16px;}
+    .rd-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start;}
+    .rd-split .sec-h2{margin-bottom:14px;}
+    .rd-split .rd-facts{margin-top:0;}
+    @media (max-width:900px){.rd-split{grid-template-columns:1fr;gap:28px;}}
   </style>
 </head>
 <body>
@@ -522,75 +528,82 @@
       </button>
     </div>
 
-    <div class="rd-facts">
-      <div class="fact-row"><span class="fact-k">Format</span><span class="fact-v mono">Vinyl LP · 180g · 33⅓ rpm</span></div>
-      <div class="fact-row"><span class="fact-k">Label</span><span class="fact-v">Ninja Tune</span></div>
-      <div class="fact-row"><span class="fact-k">Catalogue no.</span><span class="fact-v mono">NTcd 269</span></div>
-      <div class="fact-row"><span class="fact-k">Country · Year</span><span class="fact-v">UK · 2021</span></div>
-      <div class="fact-row"><span class="fact-k">Barcode</span><span class="fact-v mono">5054429148251</span></div>
-      <div class="fact-row"><span class="fact-k">SKU</span><span class="fact-v mono">MF-VNL-0472</span></div>
-      <div class="fact-row"><span class="fact-k">Location</span><span class="fact-v">Main Store · Bin A12</span></div>
+    <!-- Tracklist (under add to cart) -->
+    <div class="rd-tracklist">
+    <h2 class="sec-h2">Tracklist</h2>
+    <p class="sec-sub">Floating Points, Pharoah Sanders &amp; The London Symphony Orchestra — one continuous nine-movement work.</p>
+    <div class="tracklist" id="tracklist">
+      <div class="track playing" data-dur="8:31">
+        <span class="tk-num">A1</span>
+        <button class="tk-play" aria-label="Play Movement 1"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+        <span class="tk-name">Movement 1 (LesAlpx)</span>
+        <span class="tk-dur">8:31</span>
+      </div>
+      <div class="track" data-dur="6:14">
+        <span class="tk-num">A2</span>
+        <button class="tk-play" aria-label="Play Movement 2"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+        <span class="tk-name">Movement 2</span>
+        <span class="tk-dur">6:14</span>
+      </div>
+      <div class="track" data-dur="5:03">
+        <span class="tk-num">A3</span>
+        <button class="tk-play" aria-label="Play Movement 3"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+        <span class="tk-name">Movement 3</span>
+        <span class="tk-dur">5:03</span>
+      </div>
+      <div class="track" data-dur="7:42">
+        <span class="tk-num">B1</span>
+        <button class="tk-play" aria-label="Play Movement 4"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+        <span class="tk-name">Movement 4</span>
+        <span class="tk-dur">7:42</span>
+      </div>
+      <div class="track" data-dur="9:07">
+        <span class="tk-num">B2</span>
+        <button class="tk-play" aria-label="Play Movement 5"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+        <span class="tk-name">Movement 5</span>
+        <span class="tk-dur">9:07</span>
+      </div>
+      <div class="track" data-dur="4:28">
+        <span class="tk-num">B3</span>
+        <button class="tk-play" aria-label="Play Movement 6"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+        <span class="tk-name">Movement 6</span>
+        <span class="tk-dur">4:28</span>
+      </div>
+      <!-- Waveform scrubber for the playing track -->
+      <div class="scrubber">
+        <span class="scrub-time" id="scrub-cur">3:15</span>
+        <div class="wave" id="wave" role="slider" aria-label="Seek" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38"></div>
+        <span class="scrub-time" id="scrub-tot">8:31</span>
+      </div>
+    </div>
     </div>
   </div>
 </main>
 
-<!-- Tracklist -->
-<section class="rd-section rd-section-full">
-  <h2 class="sec-h2">Tracklist</h2>
-  <p class="sec-sub">Floating Points, Pharoah Sanders &amp; The London Symphony Orchestra — one continuous nine-movement work.</p>
-  <div class="tracklist" id="tracklist">
-    <div class="track playing" data-dur="8:31">
-      <span class="tk-num">A1</span>
-      <button class="tk-play" aria-label="Play Movement 1"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-      <span class="tk-name">Movement 1 (LesAlpx)</span>
-      <span class="tk-dur">8:31</span>
-    </div>
-    <div class="track" data-dur="6:14">
-      <span class="tk-num">A2</span>
-      <button class="tk-play" aria-label="Play Movement 2"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-      <span class="tk-name">Movement 2</span>
-      <span class="tk-dur">6:14</span>
-    </div>
-    <div class="track" data-dur="5:03">
-      <span class="tk-num">A3</span>
-      <button class="tk-play" aria-label="Play Movement 3"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-      <span class="tk-name">Movement 3</span>
-      <span class="tk-dur">5:03</span>
-    </div>
-    <div class="track" data-dur="7:42">
-      <span class="tk-num">B1</span>
-      <button class="tk-play" aria-label="Play Movement 4"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-      <span class="tk-name">Movement 4</span>
-      <span class="tk-dur">7:42</span>
-    </div>
-    <div class="track" data-dur="9:07">
-      <span class="tk-num">B2</span>
-      <button class="tk-play" aria-label="Play Movement 5"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-      <span class="tk-name">Movement 5</span>
-      <span class="tk-dur">9:07</span>
-    </div>
-    <div class="track" data-dur="4:28">
-      <span class="tk-num">B3</span>
-      <button class="tk-play" aria-label="Play Movement 6"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-      <span class="tk-name">Movement 6</span>
-      <span class="tk-dur">4:28</span>
-    </div>
-    <!-- Waveform scrubber for the playing track -->
-    <div class="scrubber">
-      <span class="scrub-time" id="scrub-cur">3:15</span>
-      <div class="wave" id="wave" role="slider" aria-label="Seek" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38"></div>
-      <span class="scrub-time" id="scrub-tot">8:31</span>
-    </div>
-  </div>
-</section>
 
-<!-- About this pressing -->
+<!-- About the record + Format details (one row, 50:50) -->
 <section class="rd-section rd-section-full">
-  <h2 class="sec-h2">About this pressing</h2>
-  <div class="about-copy">
-    <p><strong>Promises</strong> is the 2021 collaboration between electronic producer Sam Shepherd (Floating Points), the late jazz saxophonist Pharoah Sanders, and the London Symphony Orchestra. Recorded across several sessions in London and Los Angeles, the record unfolds as a single suite in nine movements built around a recurring seven-note motif.</p>
-    <p>This is the original <strong>Ninja Tune</strong> UK pressing on 180-gram vinyl, housed in a gatefold jacket with the embossed geometric artwork. Media is graded <strong>Mint (M)</strong> — played once for grading — and the sleeve is <strong>VG+</strong> with only faint shelf wear at the corners. Includes the original printed inner sleeve and download card (unused).</p>
-    <p>A landmark late-career statement from Sanders and one of the most quietly ambitious records of the decade. Filed under Jazz, but equally at home alongside ambient and modern classical.</p>
+  <div class="rd-split">
+    <div>
+      <h2 class="sec-h2">About the record</h2>
+      <div class="about-copy">
+        <p><strong>Promises</strong> is the 2021 collaboration between electronic producer Sam Shepherd (Floating Points), the late jazz saxophonist Pharoah Sanders, and the London Symphony Orchestra. Recorded across several sessions in London and Los Angeles, the record unfolds as a single suite in nine movements built around a recurring seven-note motif.</p>
+        <p>This is the original <strong>Ninja Tune</strong> UK pressing on 180-gram vinyl, housed in a gatefold jacket with the embossed geometric artwork. Media is graded <strong>Mint (M)</strong> — played once for grading — and the sleeve is <strong>VG+</strong> with only faint shelf wear at the corners. Includes the original printed inner sleeve and download card (unused).</p>
+        <p>A landmark late-career statement from Sanders and one of the most quietly ambitious records of the decade. Filed under Jazz, but equally at home alongside ambient and modern classical.</p>
+      </div>
+    </div>
+    <div>
+      <h2 class="sec-h2">Format details</h2>
+      <div class="rd-facts">
+        <div class="fact-row"><span class="fact-k">Format</span><span class="fact-v mono">Vinyl LP · 180g · 33⅓ rpm</span></div>
+        <div class="fact-row"><span class="fact-k">Label</span><span class="fact-v">Ninja Tune</span></div>
+        <div class="fact-row"><span class="fact-k">Catalogue no.</span><span class="fact-v mono">NTcd 269</span></div>
+        <div class="fact-row"><span class="fact-k">Country · Year</span><span class="fact-v">UK · 2021</span></div>
+        <div class="fact-row"><span class="fact-k">Barcode</span><span class="fact-v mono">5054429148251</span></div>
+        <div class="fact-row"><span class="fact-k">SKU</span><span class="fact-v mono">MF-VNL-0472</span></div>
+        <div class="fact-row"><span class="fact-k">Location</span><span class="fact-v">Main Store · Bin A12</span></div>
+      </div>
+    </div>
   </div>
 </section>
 

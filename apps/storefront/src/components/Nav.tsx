@@ -196,8 +196,8 @@ export function Nav() {
             </svg>
           </button>
           <Link to="/" className="mf-nav-logo" aria-label="Medium Format — Home">
-            <span className="mf-nav-logo-word">Medium Format</span>
-            <span className="mf-nav-logo-r" aria-hidden>®</span>
+            <img src="/MF_Lockup_White.svg" alt="Medium Format" className="mf-logo mf-logo-dark" />
+            <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="mf-logo mf-logo-light" />
           </Link>
         </div>
 
@@ -371,23 +371,12 @@ export function Nav() {
         }
         .mf-nav-logo {
           display: inline-flex;
-          align-items: baseline;
+          align-items: center;
           gap: 1px;
           color: var(--ink);
           text-decoration: none;
         }
-        .mf-nav-logo-word {
-          font-size: 18px;
-          font-weight: 600;
-          letter-spacing: -0.04em;
-        }
-        .mf-nav-logo-r {
-          font-size: 8px;
-          font-weight: 500;
-          position: relative;
-          top: -0.4em;
-          margin-left: 1px;
-        }
+        .mf-nav-logo .mf-logo { height: 20px; }
         .mf-nav-menu {
           display: flex;
           align-items: center;
