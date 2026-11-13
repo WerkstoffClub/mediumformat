@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { StorefrontService } from './storefront.service';
+import { SubscribeDto, ValidateVoucherDto } from './dto/storefront.dto';
 
 @Controller('storefront')
 export class StorefrontController {
@@ -38,13 +39,13 @@ export class StorefrontController {
 
   @Throttle({ default: { limit: 5, ttl: 60_000 } })
   @Post('newsletter/subscribe')
-  subscribe(@Body() b: { email: string; name?: string; source?: string }) {
+  subscribe(@Body() b: SubscribeDto) {
     return this.svc.subscribe(b);
   }
 
   @Throttle({ default: { limit: 20, ttl: 60_000 } })
   @Post('vouchers/validate')
-  validate(@Body() b: { code: string; subtotalIdr: number }) {
+  validate(@Body() b: ValidateVoucherDto) {
     return this.svc.validateVoucher(b);
   }
 }
