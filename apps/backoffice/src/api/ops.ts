@@ -19,6 +19,25 @@ export interface OrderRow {
   paymentStatus: string | null;
   fulfillment: string | null;
   _count?: { lines: number };
+  /** Resolved channel: a DealPOS marketplace placeholder customer ("TikTok" →
+   *  Tokopedia, "Shopee") wins over the tag. Present on list rows. */
+  channel?: string;
+  /** Back-office status derived from payment + fulfilment. */
+  status?: OrderStatus;
+  /** True when DealPOS booked the order against a marketplace placeholder
+   *  customer — the buyer is unknown, customerName is null. */
+  marketplace?: boolean;
+  customerEmail?: string | null;
+  customerMobile?: string | null;
+}
+
+export type OrderStatus = 'pending' | 'processing' | 'completed' | 'returned';
+
+export interface OrdersSummary {
+  total: number;
+  byStatus: Record<OrderStatus, { orders: number; amount: number }>;
+  channels: Array<{ channel: string; orders: number }>;
+  today: { orders: number; amount: number };
 }
 
 export interface OrderLine {
@@ -100,6 +119,8 @@ export interface OrdersFilter {
   tag?: string;
   payment?: string;
   fulfillment?: string;
+  channel?: string;
+  status?: OrderStatus;
   from?: string;
   to?: string;
   page?: number;
@@ -108,6 +129,11 @@ export interface OrdersFilter {
 
 export async function getOrders(filter: OrdersFilter = {}): Promise<Paged<OrderRow>> {
   const res = await api.get<Paged<OrderRow>>('/orders', { params: filter });
+  return res.data;
+}
+
+export async function getOrdersSummary(filter: OrdersFilter = {}): Promise<OrdersSummary> {
+  const res = await api.get<OrdersSummary>('/orders-summary', { params: filter });
   return res.data;
 }
 
@@ -203,7 +229,10 @@ export function channelLabel(tag: string | null | undefined): string {
   if (!tag) return '';
   if (/tiktok/i.test(tag)) return 'Tokopedia';
   if (/shopee/i.test(tag)) return 'Shopee';
-  return tag.replace(/^Penjualan\s+/i, '');
+  const t = tag.trim().replace(/^Penjualan\s+/i, '');
+  if (/^normal$/i.test(t)) return 'POS';
+  if (/^web(site)?$/i.test(t)) return 'Website';
+  return t;
 }
 
 /** Display name for a customer. DealPOS uses a placeholder customer named
@@ -226,6 +255,10 @@ const CHANNEL_COLORS: Array<[RegExp, string]> = [
   [/whatsapp/i, '#25D366'],
   [/instagram|ig\b/i, '#E1306C'],
   [/web|online/i, '#6366F1'],
+  [/discogs/i, '#9CA3AF'],
+  [/bandcamp/i, '#14B8A6'],
+  [/ebay/i, '#EAB308'],
+  [/event/i, '#EC4899'],
   [/normal|offline|store|pos/i, '#0EA5E9'],
 ];
 
