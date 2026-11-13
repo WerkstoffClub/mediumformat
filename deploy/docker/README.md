@@ -10,10 +10,14 @@ file-server container serves the 52-page site.
 > TLS is at Cloudflare; Caddy does www→apex + http→https. API uploads persist in
 > `/opt/mediumformat/data/`. The lacak-specific notes below are historical.
 >
+> Layout since 2026-11-13: React storefront at `/` (`deploy-app.sh`), back-office
+> at `/backoffice/`, static prototype at `/prototype/` (`site/prototype/`).
+>
 > Section subdomains: `dealers.mediumformat.info` → `mockup-dealers.html`,
-> `peers.mediumformat.info` → `mockup-peers.html` (Caddy rewrites `/` only; other
-> paths serve the same site). Adding one = Caddyfile matcher + tunnel ingress in
-> `/etc/cloudflared/mediumformat.yml` on dd-vps + proxied CNAME to the tunnel.
+> `peers.mediumformat.info` → `mockup-peers.html`. Caddy rewrites `/` to the
+> mockup and serves every path on those hosts from `/srv/prototype`. Adding one =
+> Caddyfile host matcher + tunnel ingress in `/etc/cloudflared/mediumformat.yml`
+> on dd-vps + proxied CNAME to the tunnel.
 
 > **The older host-nginx + rsync kit** lives in `deploy/` (`deploy/README.md`).
 > Use one or the other — this container path is the current one.

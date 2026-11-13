@@ -36,8 +36,9 @@
 	@insecure header X-Forwarded-Proto http
 	redir @insecure https://{host}{uri} permanent
 
-	# Section subdomains: landing = existing back-office page; every other path
-	# (detail pages, assets, nav links) is served from the same site root.
+	# Section subdomains: landing = existing back-office mockup page; every other
+	# path (detail pages, assets, relative nav links) is served from the
+	# prototype root (/srv/prototype), since the storefront owns /srv.
 	@dealersHome {
 		host dealers.mediumformat.info
 		path /
@@ -48,6 +49,13 @@
 		path /
 	}
 	rewrite @peersHome /mockup-peers.html
+
+	@section host dealers.mediumformat.info peers.mediumformat.info
+	handle @section {
+		root * /srv/prototype
+		try_files {path} {path}.html {path}/index.html =404
+		file_server
+	}
 
 	# ── Real app: NestJS API (path already carries /api/v1) ──
 	handle /api/* {
@@ -65,7 +73,7 @@
 	# Serves index.html + mockup-*.html + design-system/ + assets/ under /prototype/*
 	handle_path /prototype/* {
 		root * /srv/prototype
-		try_files {path} {path}.html {path}/ =404
+		try_files {path} {path}.html {path}/index.html =404
 		file_server
 	}
 
@@ -89,7 +97,7 @@
 
 	handle_errors {
 		rewrite * /404.html
-		root * /srv
+		root * /srv/prototype
 		file_server
 	}
 
