@@ -66,10 +66,13 @@ echo ">> [4/6] Shipping compose + Caddyfile"
   "${SSH_USER}@${SSH_HOST}:${STACK_DIR}/"
 
 echo ">> [5/6] Ensuring ${STACK_DIR}/api.env"
-DEALPOS_SUBDOMAIN=$(grep -o 'DEALPOS_SUBDOMAIN="[^"]*"' .env | cut -d'"' -f2)
-DEALPOS_CLIENT_ID=$(grep -o 'DEALPOS_CLIENT_ID="[^"]*"' .env | cut -d'"' -f2)
-DEALPOS_CLIENT_SECRET=$(grep -o 'DEALPOS_CLIENT_SECRET="[^"]*"' .env | cut -d'"' -f2)
-SOCIAL_FEED_TOKEN=$(grep -o 'SOCIAL_FEED_TOKEN="[^"]*"' .env | cut -d'"' -f2)
+# Value of KEY="…" in the local root .env; empty when the file or key is missing
+# (CI runs without a .env — api.env on the VPS already holds the secrets).
+envval() { { grep -o "$1=\"[^\"]*\"" .env 2>/dev/null || true; } | cut -d'"' -f2; }
+DEALPOS_SUBDOMAIN=$(envval DEALPOS_SUBDOMAIN)
+DEALPOS_CLIENT_ID=$(envval DEALPOS_CLIENT_ID)
+DEALPOS_CLIENT_SECRET=$(envval DEALPOS_CLIENT_SECRET)
+SOCIAL_FEED_TOKEN=$(envval SOCIAL_FEED_TOKEN)
 "${SSH[@]}" "STACK_DIR='${STACK_DIR}' \
   DP_SUB='${DEALPOS_SUBDOMAIN}' DP_ID='${DEALPOS_CLIENT_ID}' DP_SECRET='${DEALPOS_CLIENT_SECRET}' FEED_TOKEN='${SOCIAL_FEED_TOKEN}' \
   bash -s" <<'REMOTE'
@@ -104,14 +107,14 @@ fi
 REMOTE
 
 # Pass OpenRouter creds through when set locally (AI assist); append once if missing
-OPENROUTER_API_KEY=$(grep -o 'OPENROUTER_API_KEY="[^"]*"' .env | cut -d'"' -f2)
-OPENROUTER_BASE_URL=$(grep -o 'OPENROUTER_BASE_URL="[^"]*"' .env | cut -d'"' -f2)
+OPENROUTER_API_KEY=$(envval OPENROUTER_API_KEY)
+OPENROUTER_BASE_URL=$(envval OPENROUTER_BASE_URL)
 if [ -n "$OPENROUTER_API_KEY" ] && [ "$OPENROUTER_API_KEY" != "sk-or-..." ]; then
   "${SSH[@]}" "grep -q OPENROUTER_API_KEY '${STACK_DIR}/api.env' || printf 'OPENROUTER_API_KEY=%s\nOPENROUTER_BASE_URL=%s\n' '$OPENROUTER_API_KEY' '$OPENROUTER_BASE_URL' >> '${STACK_DIR}/api.env'"
 fi
 
 # Discogs personal access token (release editor's Get details / Get media)
-DISCOGS_TOKEN=$(grep -o 'DISCOGS_TOKEN="[^"]*"' .env | cut -d'"' -f2)
+DISCOGS_TOKEN=$(envval DISCOGS_TOKEN)
 if [ -n "$DISCOGS_TOKEN" ]; then
   "${SSH[@]}" "grep -q '^DISCOGS_TOKEN=' '${STACK_DIR}/api.env' || printf 'DISCOGS_TOKEN=%s\n' '$DISCOGS_TOKEN' >> '${STACK_DIR}/api.env'"
 fi
