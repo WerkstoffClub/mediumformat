@@ -202,7 +202,7 @@
 
     /* sticky buy bar (above player + tab) */
     .buybar{position:absolute;left:0;right:0;bottom:calc(var(--player-h) + var(--tab-h));height:var(--buybar-h);z-index:28;
-      background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:center;gap:10px;padding:0 14px;box-shadow:var(--e2);}
+      background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:center;gap:10px;padding:0 14px;box-shadow:var(--e2);transition:bottom .2s ease;}
     .buy-wish{width:44px;height:44px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .buy-wish.on svg{fill:var(--ink);}
     .buy-wish svg{width:19px;height:19px;}
@@ -798,9 +798,12 @@
     const playing = this.classList.toggle('playing');
     this.setAttribute('aria-label', playing ? 'Pause' : 'Play');
   });
-  document.getElementById('pclose-btn').addEventListener('click', () => {
-    document.getElementById('player').style.display = 'none';
-  });
+  // Closing the player drops the buy bar to sit on the tab bar; playing a track brings it back
+  function setPlayerOpen(open){
+    document.getElementById('player').style.display = open ? '' : 'none';
+    document.documentElement.style.setProperty('--player-h', open ? '62px' : '0px');
+  }
+  document.getElementById('pclose-btn').addEventListener('click', () => setPlayerOpen(false));
 
   // Wishlist
   document.getElementById('wishlist-btn').addEventListener('click', function(){
@@ -817,6 +820,7 @@
       tr.classList.add('playing');
       scrubTot.textContent = tr.dataset.dur;
       document.querySelector('.player .ptrack').textContent = tr.querySelector('.tk-name').textContent;
+      setPlayerOpen(true);
     });
   });
 
