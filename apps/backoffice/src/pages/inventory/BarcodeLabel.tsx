@@ -4,7 +4,7 @@ import { code128Bars } from '../../lib/code128';
 import { ModalShell } from './release-edit/ModalShell';
 
 /* MF price/barcode label, 50 × 30 mm, the store's existing template (as printed
-   by the MF Label Printer): artist / title and price, format · year · genre, the
+   by the MF Label Printer): artist / title / price, format · year · genre, the
    MF mark and a Code 128 of the DealPOS variant code, then two machine-readable
    lines. Data comes from the DealPOS sync (variant Code → `barcode` for EANs,
    `catNumber` otherwise; UnitPrice → `priceIdr`).
@@ -127,7 +127,6 @@ const MF_MARK = 'M858.21,130.64c-53.14-66.98-130.64-83.97-212.83-81.02-25.27.91-
 
 /** The physical label (template layout, printer-dot coordinates). */
 function LabelPaper({ data, bars }: { data: LabelData; bars: NonNullable<ReturnType<typeof useBars>> }) {
-  const priceW = Math.min(measure(data.price, 500, 24), 150);
   const scale = bars.widthDots / (bars.width * bars.dots);
   return (
     <svg
@@ -138,9 +137,10 @@ function LabelPaper({ data, bars }: { data: LabelData; bars: NonNullable<ReturnT
       fill="#000"
     >
       <rect width={W} height={H} fill="#fff" />
-      <FitText x={LEFT} y={37} max={RIGHT - LEFT - priceW - 14} size={24} weight={500}>{data.artist}</FitText>
-      <FitText x={LEFT} y={58} max={RIGHT - LEFT - priceW - 14} size={19} weight={400}>{data.title}</FitText>
-      <FitText x={RIGHT} y={41} max={150} size={24} weight={500} anchor="end">{data.price}</FitText>
+      <FitText x={LEFT} y={37} max={RIGHT - LEFT} size={24} weight={500}>{data.artist}</FitText>
+      <FitText x={LEFT} y={58} max={RIGHT - LEFT} size={19} weight={400}>{data.title}</FitText>
+      {/* Price on its own line under the album title, so long names never run into it. */}
+      <FitText x={LEFT} y={86} max={RIGHT - LEFT} size={24} weight={500}>{data.price}</FitText>
 
       <FitText x={LEFT} y={110} max={86} size={18} weight={400}>{data.format}</FitText>
       {data.year && <text x={113} y={110} fontSize={18}>{data.year}</text>}
