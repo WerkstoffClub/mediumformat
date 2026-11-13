@@ -4,6 +4,7 @@ import { channelLabel, customerLabel, fmtDate, fmtIdr, getOrder, type OrderDetai
 import { ChannelPill, Panel, StatusPill, tdCls, thCls } from '../../components/ui/Page';
 import { ReleaseCover } from '../../components/ui/Cover';
 import { ReceiptModal, type ReceiptData } from '../../components/ui/Receipt';
+import { STORE_ADDRESS } from '../../lib/store';
 
 const fmtTime = (v: string | null | undefined) =>
   v ? new Date(v).toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
@@ -88,7 +89,7 @@ function buildReceipt(order: Order, isWalkIn: boolean): ReceiptData {
   payment.push({ label: 'Channel', value: channelLabel(order.tag) || 'POS' });
 
   return {
-    address: ['Jl. Senopati No. 42, Kebayoran Baru', `Jakarta Selatan · ${order.outlet ?? 'MF Store'}`],
+    address: [STORE_ADDRESS[0], `${STORE_ADDRESS[1]} · ${order.outlet ?? 'MF Store'}`],
     number: order.number,
     datetime: fmtStamp(order.date),
     customer: isWalkIn ? undefined : customerLabel(order.customerName) || undefined,

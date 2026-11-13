@@ -14,6 +14,8 @@ const CATEGORIES: Array<{ key: PosCategory | 'all'; label: string }> = [
 interface ProductGridProps {
   products: PosProduct[];
   loading: boolean;
+  error?: string | null;
+  onRetry?: () => void;
   search: string;
   onSearch: (v: string) => void;
   category: PosCategory | 'all';
@@ -24,7 +26,7 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({
-  products, loading, search, onSearch, category, onCategory, onAdd, inCart,
+  products, loading, error, onRetry, search, onSearch, category, onCategory, onAdd, inCart,
 }: ProductGridProps) {
   const counts = useMemo(() => {
     const map: Record<string, number> = { all: products.length };
@@ -32,14 +34,11 @@ export function ProductGrid({
     return map;
   }, [products]);
 
-  const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    return products.filter(p => {
-      if (category !== 'all' && p.category !== category) return false;
-      if (!q) return true;
-      return `${p.artist} ${p.title} ${p.formatLabel}`.toLowerCase().includes(q);
-    });
-  }, [products, search, category]);
+  // Text search runs on the server (see Pos.tsx); only the category is filtered here.
+  const filtered = useMemo(
+    () => products.filter(p => category === 'all' || p.category === category),
+    [products, category],
+  );
 
   return (
     <div className="flex flex-col h-full min-h-0 bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg overflow-hidden">
@@ -49,7 +48,7 @@ export function ProductGrid({
           <svg viewBox="0 0 24 24" className="w-4 h-4 text-[var(--text-faint)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
           <input
             className="bg-transparent text-[13px] outline-none text-[var(--text-primary)] placeholder:text-[var(--text-faint)] w-full"
-            placeholder="Search artist, title, or format…"
+            placeholder="Search or scan: artist, title, cat# or barcode…"
             value={search}
             onChange={e => onSearch(e.target.value)}
           />
@@ -78,6 +77,11 @@ export function ProductGrid({
       <div className="flex-1 min-h-0 overflow-y-auto p-3">
         {loading ? (
           <div className="h-40 flex items-center justify-center text-[12px] text-[var(--text-faint)]">Loading catalogue…</div>
+        ) : error ? (
+          <div className="h-40 flex flex-col items-center justify-center gap-2 text-[12px] text-[var(--text-muted)]">
+            <span>{error}</span>
+            {onRetry && <button type="button" onClick={onRetry} className="text-[12px] font-medium text-[var(--text-primary)] underline underline-offset-2">Retry</button>}
+          </div>
         ) : filtered.length === 0 ? (
           <div className="h-40 flex items-center justify-center text-[12px] text-[var(--text-faint)]">No products match.</div>
         ) : (

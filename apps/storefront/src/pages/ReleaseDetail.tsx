@@ -5,6 +5,7 @@ import type { Release, ReleaseTrack } from '../api/storefront';
 import { formatIDR } from '../lib/idr';
 import { Cover } from '../components/ReleaseCard';
 import { AddToCart } from '../components/AddToCart';
+import { trackPreviewUrl } from '../lib/preview';
 
 const FORMAT_LABEL: Record<string, string> = {
   LP: 'LP',
@@ -37,8 +38,7 @@ function formatDuration(sec?: number): string {
 }
 
 function firstPreview(track: ReleaseTrack): string | null {
-  const p = track.previews?.[0]?.url;
-  return typeof p === 'string' && p.length ? p : null;
+  return trackPreviewUrl(track);
 }
 
 export default function ReleaseDetail() {

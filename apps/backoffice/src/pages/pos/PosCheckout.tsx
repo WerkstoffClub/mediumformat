@@ -202,7 +202,7 @@ export function PosCheckout() {
           onApproved={(result: EdcResult) => {
             setEdcOverlay(null);
             completeSale(
-              `EDC · ${edcOverlay.bank} · ${result.scheme} ${result.entry.toLowerCase()}`,
+              ['EDC', edcOverlay.bank, result.scheme].filter(Boolean).join(' · '),
               { edc: result },
             );
           }}

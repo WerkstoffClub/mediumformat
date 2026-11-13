@@ -49,7 +49,8 @@ export interface ReleaseTrack {
   title: string;
   durationSec?: number;
   duration?: string;
-  previews?: TrackPreview[];
+  /** Array, or the back-office's `{ apple, upload, bandcamp, soundcloud }` map. Read via lib/preview. */
+  previews?: TrackPreview[] | Partial<Record<'apple' | 'upload' | 'bandcamp' | 'soundcloud', string>>;
 }
 
 export interface Release {
