@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
@@ -22,7 +24,11 @@ import { WebOrdersModule } from './web-orders/web-orders.module';
 import { PeersModule } from './peers/peers.module';
 import { DealersModule } from './dealers/dealers.module';
 
+/** Per-IP requests/min for every route; stricter limits use @Throttle on the handler. */
+const DEFAULT_THROTTLE_LIMIT = 300;
+
 @Module({
-  imports: [PrismaModule, AuthModule, UsersModule, InventoryModule, PostsModule, DealposModule, FinanceModule, SocialModule, OpsModule, LocationsModule, IntegrationsModule, PurchaseOrdersModule, PreordersModule, VouchersModule, NewsletterModule, StorefrontModule, CategoryPagesModule, ImportsModule, AnalyticsModule, WebOrdersModule, PeersModule, DealersModule],
+  imports: [ThrottlerModule.forRoot([{ ttl: 60_000, limit: DEFAULT_THROTTLE_LIMIT }]), PrismaModule, AuthModule, UsersModule, InventoryModule, PostsModule, DealposModule, FinanceModule, SocialModule, OpsModule, LocationsModule, IntegrationsModule, PurchaseOrdersModule, PreordersModule, VouchersModule, NewsletterModule, StorefrontModule, CategoryPagesModule, ImportsModule, AnalyticsModule, WebOrdersModule, PeersModule, DealersModule],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}
