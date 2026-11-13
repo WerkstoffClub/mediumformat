@@ -828,3 +828,61 @@ model DealerTransaction {
   @@index([dealerId, occurredAt])
   @@index([occurredAt])
 }
+
+// ---------------------------------------------------------------------------
+// Storefront web orders — placed at /checkout, paid manually (transfer/QRIS),
+// confirmed by staff in the back-office. Stock is reserved on placement and
+// returned on cancellation.
+// ---------------------------------------------------------------------------
+
+enum WebOrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
+enum Fulfilment {
+  PICKUP
+  DELIVERY
+}
+
+model WebOrder {
+  id           String         @id @default(cuid())
+  number       String         @unique
+  status       WebOrderStatus @default(PENDING)
+  customerName String
+  email        String
+  phone        String
+  fulfilment   Fulfilment
+  address      String?
+  city         String?
+  postalCode   String?
+  notes        String?
+  voucherCode  String?
+  subtotalIdr  Int
+  discountIdr  Int            @default(0)
+  totalIdr     Int
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  lines WebOrderLine[]
+
+  @@index([status, createdAt])
+}
+
+model WebOrderLine {
+  id           String       @id @default(cuid())
+  orderId      String
+  releaseId    String
+  artist       String
+  title        String
+  format       RecordFormat
+  unitPriceIdr Int
+  qty          Int
+
+  order WebOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}

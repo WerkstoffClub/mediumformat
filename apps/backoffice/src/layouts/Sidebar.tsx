@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { getOrders } from '../api/ops';
+import { getWebOrders } from '../api/webOrders';
 
 interface NavItem {
   label: string;
@@ -43,9 +44,11 @@ const icons = {
 export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; onClose?: () => void }) {
   const { user, logout } = useAuth();
   const [pendingOrders, setPendingOrders] = useState<number | null>(null);
+  const [pendingWeb, setPendingWeb] = useState<number | null>(null);
 
   useEffect(() => {
     getOrders({ payment: 'Unpaid', limit: 1 }).then(r => setPendingOrders(r.total)).catch(() => {});
+    getWebOrders({ limit: 1 }).then(r => setPendingWeb(r.pending || null)).catch(() => {});
   }, []);
 
   const groups: NavGroup[] = [
@@ -62,6 +65,7 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
       items: [
         { label: 'POS',             to: '/pos',             icon: icons.pos },
         { label: 'Orders',          to: '/orders',          icon: icons.orders, count: pendingOrders },
+        { label: 'Web orders',      to: '/web-orders',      icon: icons.orders, count: pendingWeb },
         { label: 'Purchase orders', to: '/purchase-orders', icon: icons.po },
         { label: 'Inventory',       to: '/inventory',       icon: icons.inventory },
         { label: 'Customers',       to: '/customers',       icon: icons.customers },
