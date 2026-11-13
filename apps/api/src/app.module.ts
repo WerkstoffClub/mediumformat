@@ -23,12 +23,13 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { WebOrdersModule } from './web-orders/web-orders.module';
 import { PeersModule } from './peers/peers.module';
 import { DealersModule } from './dealers/dealers.module';
+import { PosModule } from './pos/pos.module';
 
 /** Per-IP requests/min for every route; stricter limits use @Throttle on the handler. */
 const DEFAULT_THROTTLE_LIMIT = 300;
 
 @Module({
-  imports: [ThrottlerModule.forRoot([{ ttl: 60_000, limit: DEFAULT_THROTTLE_LIMIT }]), PrismaModule, AuthModule, UsersModule, InventoryModule, PostsModule, DealposModule, FinanceModule, SocialModule, OpsModule, LocationsModule, IntegrationsModule, PurchaseOrdersModule, PreordersModule, VouchersModule, NewsletterModule, StorefrontModule, CategoryPagesModule, ImportsModule, AnalyticsModule, WebOrdersModule, PeersModule, DealersModule],
+  imports: [ThrottlerModule.forRoot([{ ttl: 60_000, limit: DEFAULT_THROTTLE_LIMIT }]), PrismaModule, AuthModule, UsersModule, InventoryModule, PostsModule, DealposModule, FinanceModule, SocialModule, OpsModule, LocationsModule, IntegrationsModule, PurchaseOrdersModule, PreordersModule, VouchersModule, NewsletterModule, StorefrontModule, CategoryPagesModule, ImportsModule, AnalyticsModule, WebOrdersModule, PeersModule, DealersModule, PosModule],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}

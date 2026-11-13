@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import QRCode from 'qrcode';
 import { fmtIdr } from '../../api/ops';
+import { formatLabel } from '../../api/pos';
+import { getPosSale, saleErrorMessage, voidPosSale, type PosSale } from '../../api/posSales';
 import { ReceiptModal, type ReceiptData } from '../../components/ui/Receipt';
 import { STORE_ADDRESS } from '../../lib/store';
 import type { EdcBank } from './PaymentPanel';
@@ -90,6 +93,116 @@ export function EdcOverlay({
       </Sheet>
     </Overlay>
   );
+}
+
+/** Waiting for a Xendit payment: shows the payment page as a QR, polls the sale until the webhook settles it. */
+export function XenditOverlay({
+  sale, onPaid, onClosed,
+}: {
+  sale: PosSale;
+  onPaid: (sale: PosSale) => void;
+  /** The sale ended without payment (cancelled here, or the invoice expired). */
+  onClosed: (message: string) => void;
+}) {
+  const payment = sale.payments.find(p => p.method === 'XENDIT');
+  const url = payment?.xenditInvoiceUrl ?? null;
+  const [qr, setQr] = useState<string | null>(null);
+  const [cancelling, setCancelling] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    if (!url) return;
+    QRCode.toString(url, { type: 'svg', margin: 1, errorCorrectionLevel: 'M', color: { dark: '#000000', light: '#ffffff' } })
+      .then(setQr).catch(() => setQr(null));
+  }, [url]);
+
+  useEffect(() => {
+    let alive = true;
+    const tick = async () => {
+      try {
+        const s = await getPosSale(sale.id);
+        if (!alive) return;
+        if (s.status === 'PAID') onPaid(s);
+        else if (s.status === 'EXPIRED') onClosed('The Xendit payment expired. Nothing was charged; the items are back in stock.');
+        else if (s.status === 'VOIDED') onClosed('The sale was cancelled.');
+      } catch { /* keep polling; a blip should not end the sale */ }
+    };
+    const poll = setInterval(tick, 3000);
+    const clock = setInterval(() => setNow(Date.now()), 1000);
+    return () => { alive = false; clearInterval(poll); clearInterval(clock); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sale.id]);
+
+  const cancel = async () => {
+    setCancelling(true);
+    setError(null);
+    try {
+      await voidPosSale(sale.id);
+      onClosed('Payment cancelled. Nothing was charged; the items are back in stock.');
+    } catch (e) {
+      setError(saleErrorMessage(e));
+      setCancelling(false);
+    }
+  };
+
+  const left = payment?.expiresAt ? Math.max(0, Math.floor((new Date(payment.expiresAt).getTime() - now) / 1000)) : null;
+
+  return (
+    <Overlay>
+      <Sheet title="Xendit payment" tag={payment?.xenditChannel ?? 'Online gateway'}>
+        <div className="text-center">
+          <p className="font-mono text-[28px] font-medium text-[var(--text-primary)]">{fmtIdr(sale.totalIdr)}</p>
+          <p className="font-mono text-[12px] text-[var(--text-muted)] mt-1">{sale.number}</p>
+          <div className="w-52 h-52 mx-auto my-5 rounded-lg bg-white p-2.5 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+            {qr ? <span className="w-full h-full [&>svg]:w-full [&>svg]:h-full" dangerouslySetInnerHTML={{ __html: qr }} /> : <span className="text-[12px] text-[#555]">{url ? 'Preparing code…' : 'No payment link'}</span>}
+          </div>
+          <p className="text-[13px] text-[var(--text-secondary)]">Ask the customer to scan this with their phone camera and pay on Xendit&apos;s page.</p>
+          {url && (
+            <a href={url} target="_blank" rel="noreferrer" className="inline-block mt-2 text-[12px] text-[var(--text-primary)] underline underline-offset-2">Open payment page</a>
+          )}
+          <p className="flex items-center justify-center gap-2 mt-4 text-[12px] text-[var(--text-secondary)]">
+            <span className="w-2 h-2 rounded-full bg-[var(--warning)] animate-pulse" />
+            Waiting for Xendit{left != null ? ` · expires in ${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}` : ''}
+          </p>
+          {error && <p role="alert" className="mt-3 text-[12px] text-[var(--danger)]">{error}</p>}
+          <button onClick={cancel} disabled={cancelling} className="block mx-auto mt-5 text-[12px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] underline underline-offset-2 disabled:opacity-50">
+            {cancelling ? 'Cancelling…' : 'Cancel payment'}
+          </button>
+        </div>
+      </Sheet>
+    </Overlay>
+  );
+}
+
+/** Receipt data from a sale the server recorded (number, prices and totals are the server's). */
+export function summaryFromSale(sale: PosSale): SaleSummary {
+  const p = sale.payments[0];
+  const method =
+    p?.method === 'CASH' ? 'Cash'
+      : p?.method === 'EDC' ? ['EDC', p.edcBank, p.cardScheme].filter(Boolean).join(' · ')
+        : p?.method === 'XENDIT' ? ['Xendit', p.xenditPaidMethod ?? p.xenditChannel].filter(Boolean).join(' · ')
+          : p?.method === 'OTHER' ? `${p.otherMethodName ?? 'Other'} · imported from DealPOS`
+            : '—';
+  const when = new Date(sale.paidAt ?? sale.createdAt);
+  return {
+    orderNumber: sale.number,
+    datetime: when.toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', ''),
+    method,
+    lines: sale.lines.map(l => ({
+      name: `${l.artist} — ${l.title}`,
+      meta: [formatLabel(l.format), `×${l.qty}`].join(' · '),
+      amount: l.unitPriceIdr * l.qty,
+    })),
+    subtotal: sale.subtotalIdr,
+    discount: sale.discountIdr,
+    tax: sale.taxIdr,
+    amount: sale.totalIdr,
+    change: p?.changeIdr ?? undefined,
+    edc: p?.method === 'EDC' && p.edcApprovalCode
+      ? { approvalCode: p.edcApprovalCode, rrn: p.edcRrn ?? '', scheme: p.cardScheme ?? '', pan: p.cardLast4 ? `**** ${p.cardLast4}` : '' }
+      : undefined,
+  };
 }
 
 export interface SaleReceiptLine {

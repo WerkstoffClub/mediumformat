@@ -136,3 +136,23 @@ All integrations degrade gracefully if unset — the corresponding endpoint retu
 - `AWS_S3_BUCKET`, `AWS_S3_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` — S3 for uploads (falls back to `apps/api/uploads/` served at `/uploads/*`)
 
 iTunes and Bandcamp need no auth.
+
+## POS sales & payments (2026-11-13)
+
+Till sales from the back-office POS are recorded in the **MF database only** (`PosSale`, `PosSaleLine`, `PosPayment`; module `apps/api/src/pos`). Nothing is written to DealPOS.
+
+- `POST /api/v1/pos/sales` (staff): the server re-prices the cart from `Release`, applies the voucher (wins over a manual discount) or the manual discount, adds PPN 11 %, and takes the stock. Numbers look like `POS-YYMMDD-XXXXX` (WIB date).
+- **Cash / EDC / DealPOS method** → `PAID` at once. EDC has no terminal integration: the cashier copies the approval code (required), RRN, card last 4 and type from the slip.
+- **Xendit** → `PENDING`. The API creates a Xendit **Invoice** (one hosted page for QRIS, VA, e-wallet and card); the register shows it as a QR and polls `GET /pos/sales/:id`. The invoice webhook moves the sale to `PAID`, or `EXPIRED` (stock returned). `POST /pos/sales/:id/void` cancels a sale and returns stock; a sale already paid via Xendit must be refunded in Xendit first.
+- Stock caveat: the DealPOS inventory sync overwrites `Release.stock` with DealPOS OnHand, so a POS decrement only lasts until the next sync.
+
+### Xendit setup
+
+Until both keys are set, Xendit endpoints answer 501 and the register shows "Xendit is not set up yet".
+
+- `XENDIT_SECRET_KEY` — secret API key (Xendit dashboard → Settings → API keys; needs Money-in write).
+- `XENDIT_CALLBACK_TOKEN` — the callback verification token (Settings → Webhooks).
+- In Xendit → Webhooks, set **Invoices paid** to `https://mediumformat.info/api/v1/webhooks/xendit/invoice`.
+- Optional `XENDIT_API_URL` (default `https://api.xendit.co`) for tests.
+
+Put the keys in the API stack's `api.env` on the VPS, never in the repo. Test with a `xnd_development_…` key first.
