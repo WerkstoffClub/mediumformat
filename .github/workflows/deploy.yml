@@ -30,6 +30,23 @@ jobs:
       SSH_HOST: ${{ vars.DEPLOY_SSH_HOST || 'dd-vps.tail9b9f75.ts.net' }}
       SSH_USER: ${{ vars.DEPLOY_SSH_USER || 'root' }}
     steps:
+      # Fail in seconds, with a clear list, when the one-time setup is not done yet.
+      - name: Check deploy secrets
+        env:
+          TS_OAUTH_CLIENT_ID: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          TS_OAUTH_SECRET: ${{ secrets.TS_OAUTH_SECRET }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          missing=""
+          for n in TS_OAUTH_CLIENT_ID TS_OAUTH_SECRET DEPLOY_SSH_KEY; do
+            [ -n "${!n}" ] || missing="$missing $n"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error title=Deploy not set up::Missing repository secrets:$missing. Add them at https://github.com/${{ github.repository }}/settings/secrets/actions (Repository secrets). See deploy/docker/README.md → Deploy from GitHub Actions."
+            exit 1
+          fi
+          echo "All deploy secrets present."
+
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
