@@ -32,7 +32,7 @@ if [ -f deploy/docker/stack.env ]; then
 else
   echo "ERROR: deploy/docker/stack.env not found." >&2; exit 1
 fi
-: "${SSH_HOST:?}"; : "${SSH_USER:?}"; : "${SSH_PORT:=22}"; : "${STACK_DIR:=/opt/stacks/mediumformat}"
+: "${SSH_HOST:?}"; : "${SSH_USER:?}"; : "${SSH_PORT:=22}"; : "${STACK_DIR:=/opt/mediumformat}"
 SSH=(ssh -p "$SSH_PORT" "${SSH_USER}@${SSH_HOST}")
 
 echo ">> [1/6] Building back-office (base=/backoffice/) and storefront (base=/)"

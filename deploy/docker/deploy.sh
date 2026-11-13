@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==========================================================================
-# Medium Format — one-command production deploy (behind Traefik on the VPS).
+# Medium Format — one-command production deploy (dd-vps, behind Cloudflare Tunnel).
 #
 # Does the whole thing: pushes the web root + Caddyfile + compose to
 # ${STACK_DIR} on the VPS, brings the stack up, and smoke-tests HTTPS.
@@ -26,7 +26,7 @@ else
   echo "ERROR: $HERE/stack.env not found. Copy stack.env.example and fill it in." >&2
   exit 1
 fi
-: "${SSH_HOST:?}"; : "${SSH_USER:?}"; : "${SSH_PORT:=22}"; : "${STACK_DIR:=/opt/stacks/mediumformat}"
+: "${SSH_HOST:?}"; : "${SSH_USER:?}"; : "${SSH_PORT:=22}"; : "${STACK_DIR:=/opt/mediumformat}"
 DOMAIN="${DOMAIN:-mediumformat.info}"
 SSH="ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST}"
 RSH="ssh -p ${SSH_PORT}"
@@ -73,7 +73,7 @@ code="$(curl -sS -o /dev/null -w '%{http_code}' "https://${DOMAIN}/" || echo 000
 if [ "$code" = "200" ]; then
   echo ">> OK — https://${DOMAIN}/ returned 200"
 else
-  echo ">> WARN — https://${DOMAIN}/ returned ${code} (check DNS / Traefik / logs: docker logs mediumformat-web)" >&2
+  echo ">> WARN — https://${DOMAIN}/ returned ${code} (check DNS / cloudflared-mediumformat / logs: docker logs mediumformat-web)" >&2
   exit 1
 fi
 echo ">> Deployed."

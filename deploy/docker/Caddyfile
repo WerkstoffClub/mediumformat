@@ -1,9 +1,9 @@
 # ==========================================================================
-# Medium Format — container Caddyfile, running BEHIND Traefik.
+# Medium Format — container Caddyfile on dd-vps, behind a Cloudflare Tunnel.
 #
-# Traefik terminates TLS (cert resolver "myresolver") and handles HTTP→HTTPS
-# and www→apex redirects. Caddy here is just a plain HTTP file server on :80,
-# reached over the internal `proxy_public` network. Mounted read-only at
+# Cloudflare terminates TLS; cloudflared forwards to 127.0.0.1:3300 (this
+# container's :80). Caddy does the www→apex and http→https redirects itself
+# (formerly Traefik's job on vps.lacak.live). Mounted read-only at
 # /etc/caddy/Caddyfile, serving /srv (the bind-mounted site).
 #
 # Routing (2026-07 layout):
@@ -19,7 +19,7 @@
 {
 	admin off
 	auto_https off
-	# Traefik sits in front on the private Docker network: keep its
+	# cloudflared reaches us via the Docker bridge (private range): keep its
 	# X-Forwarded-For (real client IP) instead of overwriting it.
 	servers {
 		trusted_proxies static private_ranges
@@ -28,6 +28,26 @@
 
 :80 {
 	encode gzip zstd
+
+	# Redirects formerly done by Traefik on lacak: www -> apex, http -> https.
+	# Cloudflare (tunnel) sets X-Forwarded-Proto to the visitor scheme.
+	@www host www.mediumformat.info
+	redir @www https://mediumformat.info{uri} permanent
+	@insecure header X-Forwarded-Proto http
+	redir @insecure https://{host}{uri} permanent
+
+	# Section subdomains: landing = existing back-office page; every other path
+	# (detail pages, assets, nav links) is served from the same site root.
+	@dealersHome {
+		host dealers.mediumformat.info
+		path /
+	}
+	rewrite @dealersHome /mockup-dealers.html
+	@peersHome {
+		host peers.mediumformat.info
+		path /
+	}
+	rewrite @peersHome /mockup-peers.html
 
 	# ── Real app: NestJS API (path already carries /api/v1) ──
 	handle /api/* {
@@ -73,7 +93,7 @@
 		file_server
 	}
 
-	# --- Security headers. HSTS is safe here: Traefik serves the response over
+	# --- Security headers. HSTS is safe here: Cloudflare serves the response over
 	# HTTPS, so the client receives it on a secure connection. Prototype uses
 	# inline <style>/<script>, so CSP allows 'unsafe-inline' (switch to a
 	# nonce-based CSP when the real React/Nest app replaces these pages). ---
