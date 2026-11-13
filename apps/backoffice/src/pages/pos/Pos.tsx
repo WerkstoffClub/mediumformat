@@ -2,10 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getReleases } from '../../api/inventory';
 import { fmtIdr } from '../../api/ops';
-import {
-  DEMO_PRODUCTS, releaseToProduct,
-  type PosCategory, type PosProduct,
-} from '../../api/pos';
+import { releaseToProduct, type PosCategory, type PosProduct } from '../../api/pos';
 import { ProductGrid } from './ProductGrid';
 import { Cart, type CartTotals } from './Cart';
 import { usePosStore } from './PosContext';
@@ -29,18 +26,25 @@ export function Pos() {
   // Catalogue-local UI state (does not need to survive route change).
   const [products, setProducts] = useState<PosProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [reload, setReload] = useState(0);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<PosCategory | 'all'>('all');
   const [cartSheetOpen, setCartSheetOpen] = useState(false);
 
+  // The DealPOS-synced catalogue, searched on the server (artist, title, label,
+  // cat# or barcode — so a scanned barcode finds its release). Debounced.
   useEffect(() => {
     let alive = true;
-    getReleases({ limit: 60, sort: 'newest' })
-      .then(r => { if (alive) setProducts(r.data.map(releaseToProduct)); })
-      .catch(() => { if (alive) setProducts(DEMO_PRODUCTS); })
-      .finally(() => { if (alive) setLoading(false); });
-    return () => { alive = false; };
-  }, []);
+    setLoading(true);
+    const t = setTimeout(() => {
+      getReleases({ q: search.trim() || undefined, limit: 60, sort: 'newest' })
+        .then(r => { if (alive) { setProducts(r.data.map(releaseToProduct)); setError(null); } })
+        .catch(() => { if (alive) { setProducts([]); setError('Could not load the catalogue. Check the connection and try again.'); } })
+        .finally(() => { if (alive) setLoading(false); });
+    }, search ? 250 : 0);
+    return () => { alive = false; clearTimeout(t); };
+  }, [search, reload]);
 
   // Cart.tsx expects a delta-based updater; adapt to the store's absolute
   // updateQty(id, qty).
@@ -83,6 +87,8 @@ export function Pos() {
           <ProductGrid
             products={products}
             loading={loading}
+            error={error}
+            onRetry={() => setReload(n => n + 1)}
             search={search}
             onSearch={setSearch}
             category={category}

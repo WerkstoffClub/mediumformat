@@ -3,16 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { fmtIdr, getChannels } from '../../api/ops';
 import { validateVoucher } from '../../api/vouchers';
 import { PaymentPanel, type EdcBank, type ImportedMethod, type PaymentSelection } from './PaymentPanel';
-import { EdcOverlay, SuccessModal, type EdcResult, type SaleSummary } from './Overlays';
+import { EdcOverlay, SuccessModal, XenditOverlay, summaryFromSale, type EdcResult, type SaleSummary } from './Overlays';
+import { createPosSale, saleErrorMessage, type PosPaymentInput, type PosSale, type XenditChannel } from '../../api/posSales';
 import { ProductCover } from './Cover';
 import { usePosStore, type DiscountKind } from './PosContext';
-
-function newOrderNumber(): string {
-  const now = new Date();
-  const stamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
-  const seq = String(Math.floor(Math.random() * 9000) + 1000);
-  return `MF-${stamp}-${seq}`;
-}
 
 /**
  * POS Checkout — collects payment for the in-flight cart.
@@ -29,7 +23,7 @@ export function PosCheckout() {
   const navigate = useNavigate();
   const {
     cart, itemCount,
-    subtotalIdr, discountIdr, taxIdr, totalIdr,
+    subtotalIdr, discountIdr, totalIdr,
     discount, setDiscount,
     voucherCode, setVoucherCode,
     customer, setCustomer,
@@ -41,6 +35,9 @@ export function PosCheckout() {
   const [imported, setImported] = useState<ImportedMethod[]>([]);
   const [edcOverlay, setEdcOverlay] = useState<{ bank: EdcBank } | null>(null);
   const [sale, setSale] = useState<SaleSummary | null>(null);
+  const [pendingXendit, setPendingXendit] = useState<PosSale | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [chargeError, setChargeError] = useState<string | null>(null);
   const [voidConfirm, setVoidConfirm] = useState(false);
 
   // Load DealPOS-synced payment methods for the "Other" family.
@@ -56,52 +53,50 @@ export function PosCheckout() {
     if (cart.length === 0 && !sale) navigate('/pos', { replace: true });
   }, [cart.length, sale, navigate]);
 
-  const completeSale = (method: string, extra?: { change?: number; edc?: EdcResult }) => {
-    // TODO: POST /pos/sales with the cart + payment method + tender amount
-    // when the backend endpoint lands. For now we just render the receipt.
-    const stamp = new Date().toLocaleString('en-GB', {
-      day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit',
-    }).replace(',', '');
-    setSale({
-      orderNumber: newOrderNumber(),
-      datetime: stamp,
-      method,
-      lines: cart.map(l => ({
-        name: `${l.product.artist} — ${l.product.title}`,
-        meta: [l.product.formatLabel, l.product.condition, `×${l.qty}`].filter(Boolean).join(' · '),
-        amount: l.product.priceIdr * l.qty,
-      })),
-      subtotal: subtotalIdr,
-      discount: discountIdr,
-      tax: taxIdr,
-      amount: totalIdr,
-      change: extra?.change,
-      edc: extra?.edc,
-    });
+  /** Record the sale in the MF database; the server re-prices it and takes the stock. */
+  const recordSale = async (payment: PosPaymentInput) => {
+    setBusy(true);
+    setChargeError(null);
+    const c = customer ?? {};
+    const customerInput = {
+      name: c.name?.trim() || undefined,
+      phone: c.phone?.trim() || undefined,
+      email: c.email?.trim() || undefined,
+    };
+    try {
+      const recorded = await createPosSale({
+        lines: cart.map(l => ({ releaseId: l.product.id, qty: l.qty })),
+        voucherCode: voucherCode ?? undefined,
+        discount: !voucherCode && discount && discount.value > 0 ? discount : undefined,
+        customer: customerInput.name || customerInput.phone || customerInput.email ? customerInput : undefined,
+        payment,
+      });
+      if (recorded.status === 'PENDING') setPendingXendit(recorded);
+      else setSale(summaryFromSale(recorded));
+    } catch (e) {
+      setChargeError(saleErrorMessage(e));
+    } finally {
+      setBusy(false);
+    }
   };
 
+  const XENDIT_CHANNEL: Record<string, XenditChannel> = { qris: 'QRIS', va: 'VA', ewallet: 'EWALLET', card: 'CARD' };
+
   const handleCharge = () => {
-    if (!selection) return;
+    if (!selection || busy) return;
     switch (selection.family) {
       case 'edc':
+        setChargeError(null);
         setEdcOverlay({ bank: selection.bank });
         break;
-      case 'xendit': {
-        const label =
-          selection.method === 'qris' ? 'QRIS'
-            : selection.method === 'va' ? 'Virtual Account'
-              : selection.method === 'ewallet' ? `E-wallet · ${selection.ewallet}`
-                : 'Card';
-        completeSale(`Xendit · ${label}`);
+      case 'xendit':
+        void recordSale({ method: 'XENDIT', channel: XENDIT_CHANNEL[selection.method], ewallet: selection.ewallet });
         break;
-      }
-      case 'cash': {
-        const change = Number(cashTender || 0) - totalIdr;
-        completeSale('Cash', { change: change > 0 ? change : 0 });
+      case 'cash':
+        void recordSale({ method: 'CASH', tenderedIdr: Number(cashTender || 0) });
         break;
-      }
       case 'imported':
-        completeSale(`${selection.methodName} · imported from DealPOS`);
+        void recordSale({ method: 'OTHER', otherMethodName: selection.methodName });
         break;
     }
   };
@@ -113,6 +108,8 @@ export function PosCheckout() {
     setSelection(null);
     setCashTender('');
     setSale(null);
+    setPendingXendit(null);
+    setChargeError(null);
     setEdcOverlay(null);
     navigate('/pos');
   };
@@ -181,9 +178,12 @@ export function PosCheckout() {
 
         {/* Right — payment */}
         <div className="min-h-0 flex flex-col bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg overflow-hidden max-md:h-auto max-md:min-h-0">
+          {chargeError && (
+            <p role="alert" className="mx-3.5 mt-3.5 px-3 py-2.5 rounded-md border border-[var(--danger)] text-[12.5px] text-[var(--danger)]">{chargeError}</p>
+          )}
           <PaymentPanel
             total={totalIdr}
-            disabled={cart.length === 0}
+            disabled={cart.length === 0 || busy}
             selection={selection}
             onSelect={setSelection}
             imported={imported}
@@ -201,11 +201,20 @@ export function PosCheckout() {
           onCancel={() => setEdcOverlay(null)}
           onApproved={(result: EdcResult) => {
             setEdcOverlay(null);
-            completeSale(
-              `EDC · ${edcOverlay.bank} · ${result.scheme} ${result.entry.toLowerCase()}`,
-              { edc: result },
-            );
+            void recordSale({
+              method: 'EDC', edcBank: edcOverlay.bank, approvalCode: result.approvalCode,
+              rrn: result.rrn || undefined, cardLast4: result.pan ? result.pan.slice(-4) : undefined,
+              cardScheme: result.scheme || undefined,
+            });
           }}
+        />
+      )}
+
+      {pendingXendit && (
+        <XenditOverlay
+          sale={pendingXendit}
+          onPaid={paid => { setPendingXendit(null); setSale(summaryFromSale(paid)); }}
+          onClosed={message => { setPendingXendit(null); setChargeError(message); }}
         />
       )}
 

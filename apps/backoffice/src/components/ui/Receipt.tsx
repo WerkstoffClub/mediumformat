@@ -1,5 +1,6 @@
-import { useEffect, type ReactElement, type ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { fmtIdr } from '../../api/ops';
+import { code128Bars } from '../../lib/code128';
 
 /* A printed artifact, so the paper is intentionally black-on-white in both
    themes — like the barcode label. Neutrals are warmed a touch so it reads as
@@ -40,33 +41,14 @@ export interface ReceiptData {
 }
 
 /* ── Barcode ─────────────────────────────────────────────────────────
-   Deterministic Code128-ish bars seeded from the receipt number — a visual
-   stand-in for a real symbology, stable across re-renders. */
+   Real Code 128 of the receipt number, so a scanner can look the sale up. */
 function Barcode({ value }: { value: string }) {
-  let seed = 2166136261;
-  for (let i = 0; i < value.length; i++) {
-    seed ^= value.charCodeAt(i);
-    seed = Math.imul(seed, 16777619);
-  }
-  const rand = () => {
-    seed = (Math.imul(seed, 1103515245) + 12345) & 0x7fffffff;
-    return seed / 0x7fffffff;
-  };
-  const mods: number[] = [];
-  for (let i = 0; i < 58; i++) mods.push(Math.floor(rand() * 3) + 1);
-  if (mods.length % 2 === 0) mods.push(1); // end on a bar
-
-  const total = mods.reduce((a, b) => a + b, 0);
-  const rects: ReactElement[] = [];
-  let x = 0;
-  mods.forEach((w, i) => {
-    if (i % 2 === 0) rects.push(<rect key={i} x={x} width={w} height={100} fill="#17120f" />);
-    x += w;
-  });
-
+  let bars: ReturnType<typeof code128Bars> | null = null;
+  try { bars = code128Bars(value); } catch { bars = null; }
+  if (!bars) return null;
   return (
-    <svg viewBox={`0 0 ${total} 100`} preserveAspectRatio="none" className="w-full h-full" role="img" aria-label={`Barcode ${value}`}>
-      {rects}
+    <svg viewBox={`0 0 ${bars.width} 100`} preserveAspectRatio="none" shapeRendering="crispEdges" className="w-full h-full" role="img" aria-label={`Barcode ${value}`}>
+      {bars.bars.map(b => <rect key={b.x} x={b.x} width={b.w} height={100} fill="#17120f" />)}
     </svg>
   );
 }

@@ -886,3 +886,109 @@ model WebOrderLine {
 
   @@index([orderId])
 }
+
+// ─── POS sales (MF register) ─────────────────────────────────────────────
+// Recorded in the MF database only; DealPOS is not written to. Release.stock is
+// decremented on sale, but the DealPOS inventory sync overwrites it with DealPOS
+// OnHand on its next run.
+
+enum PosSaleStatus {
+  PENDING // waiting for an online payment (Xendit)
+  PAID
+  EXPIRED // online payment not completed in time; stock returned
+  VOIDED // cancelled by staff; stock returned
+}
+
+enum PosPaymentMethod {
+  CASH
+  EDC // bank card terminal; cashier records the slip
+  XENDIT // online gateway (QRIS, VA, e-wallet, card) via Xendit Invoice
+  OTHER // a DealPOS payment method (e.g. marketplace settlement)
+}
+
+enum PosPaymentStatus {
+  PENDING
+  PAID
+  EXPIRED
+  FAILED
+  VOIDED
+}
+
+enum PosDiscountKind {
+  PERCENT
+  FIXED_IDR
+}
+
+model PosSale {
+  id            String           @id @default(cuid())
+  number        String           @unique
+  status        PosSaleStatus    @default(PENDING)
+  cashierId     String?
+  customerName  String?
+  customerPhone String?
+  customerEmail String?
+  discountKind  PosDiscountKind?
+  discountValue Int?
+  voucherCode   String?
+  subtotalIdr   Int
+  discountIdr   Int              @default(0)
+  taxIdr        Int
+  totalIdr      Int
+  paidAt        DateTime?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  lines    PosSaleLine[]
+  payments PosPayment[]
+
+  @@index([status, createdAt])
+}
+
+model PosSaleLine {
+  id           String       @id @default(cuid())
+  saleId       String
+  releaseId    String
+  artist       String
+  title        String
+  format       RecordFormat
+  unitPriceIdr Int
+  qty          Int
+
+  sale PosSale @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([saleId])
+  @@index([releaseId])
+}
+
+model PosPayment {
+  id               String           @id @default(cuid())
+  saleId           String
+  method           PosPaymentMethod
+  status           PosPaymentStatus @default(PENDING)
+  amountIdr        Int
+  // CASH
+  tenderedIdr      Int?
+  changeIdr        Int?
+  // EDC (copied from the terminal slip)
+  edcBank          String?
+  edcApprovalCode  String?
+  edcRrn           String?
+  cardScheme       String?
+  cardLast4        String?
+  // XENDIT (Invoice API; the webhook moves it to PAID / EXPIRED)
+  xenditExternalId String?          @unique
+  xenditInvoiceId  String?          @unique
+  xenditInvoiceUrl String?
+  xenditChannel    String? // requested family: QRIS, VA, EWALLET, CARD
+  xenditPaidMethod String? // what the customer actually used, from the webhook
+  expiresAt        DateTime?
+  // OTHER
+  otherMethodName  String?
+  paidAt           DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  sale PosSale @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([saleId])
+}

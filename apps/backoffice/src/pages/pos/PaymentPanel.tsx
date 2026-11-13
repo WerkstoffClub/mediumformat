@@ -109,8 +109,6 @@ export function PaymentPanel({
             })}
           </div>
 
-          {xMethod === 'qris' && <QrisPanel total={total} />}
-          {xMethod === 'va' && <VaPanel />}
           {xMethod === 'ewallet' && (
             <div>
               <div className="grid grid-cols-4 gap-2">
@@ -130,14 +128,13 @@ export function PaymentPanel({
                   );
                 })}
               </div>
-              <div className="flex items-center gap-2.5 mt-3 px-3.5 py-3 border border-[var(--border)] rounded-md bg-[var(--bg-base)] text-[12.5px] text-[var(--text-secondary)]">
-                <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0 text-[var(--text-muted)]" fill="none" stroke="currentColor" strokeWidth={1.6}><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
-                Push notification sent — customer approves in the {ewallet} app.
-              </div>
             </div>
           )}
-          {xMethod === 'card' && <HostedCardPanel />}
-
+          <p className="mt-3 text-[12px] text-[var(--text-secondary)] leading-relaxed">
+            Charge creates a Xendit payment for {fmtIdr(total)}. The customer scans the code on this screen and pays
+            {xMethod === 'qris' ? ' with any QRIS app' : xMethod === 'va' ? ' by bank virtual account' : xMethod === 'ewallet' ? ` with ${ewallet}` : ' by card'} on
+            Xendit&apos;s page; the sale completes by itself when Xendit confirms.
+          </p>
           <SecuredNote>Secured by Xendit · PCI-DSS · 3-D Secure.</SecuredNote>
         </Family>
 
@@ -263,100 +260,6 @@ function SecuredNote({ children }: { children: React.ReactNode }) {
       <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2}><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
       {children}
     </p>
-  );
-}
-
-/* ── Xendit sub-panels ─────────────────────────────────────── */
-function QrisPanel({ total }: { total: number }) {
-  return (
-    <div className="flex gap-4 items-center p-4 border border-[var(--border)] rounded-lg bg-[var(--bg-base)]">
-      <span className="w-32 h-32 flex-shrink-0 rounded-md p-2.5 flex items-center justify-center bg-white">
-        <QrPlaceholder />
-      </span>
-      <div className="min-w-0">
-        <p className="text-[13.5px] font-semibold text-[var(--text-primary)]">Scan with any QRIS app</p>
-        <p className="text-[12px] text-[var(--text-secondary)] mt-0.5">GoPay · OVO · DANA · ShopeePay · mobile banking</p>
-        <p className="font-mono text-[17px] font-medium text-[var(--text-primary)] mt-2">{fmtIdr(total)}</p>
-        <p className="flex items-center gap-2 mt-2 text-[11.5px] text-[var(--text-secondary)]">
-          <span className="w-2 h-2 rounded-full bg-[var(--warning)] animate-pulse" />
-          Waiting for customer scan…
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/** Monochrome QR placeholder — deterministic pattern, black on the white QR box. */
-function QrPlaceholder() {
-  const cells: React.ReactNode[] = [];
-  const finder = (x: number, y: number) => (
-    <g key={`f-${x}-${y}`}>
-      <rect x={x} y={y} width={14} height={14} rx={2} fill="#000" />
-      <rect x={x + 2} y={y + 2} width={10} height={10} rx={1} fill="#fff" />
-      <rect x={x + 4} y={y + 4} width={6} height={6} rx={1} fill="#000" />
-    </g>
-  );
-  // pseudo-random but deterministic data modules
-  for (let y = 0; y < 42; y += 4) {
-    for (let x = 0; x < 42; x += 4) {
-      if ((x < 16 && y < 16) || (x > 24 && y < 16) || (x < 16 && y > 24)) continue;
-      if ((x * 7 + y * 13) % 5 < 2) cells.push(<rect key={`c-${x}-${y}`} x={x} y={y} width={4} height={4} rx={1} fill="#000" />);
-    }
-  }
-  return (
-    <svg viewBox="0 0 42 42" className="w-full h-full" aria-hidden="true">
-      {finder(2, 2)}{finder(26, 2)}{finder(2, 26)}
-      {cells}
-    </svg>
-  );
-}
-
-function VaPanel() {
-  const vas: Array<[string, string]> = [
-    ['BCA', '8808 0771 2450 0042'],
-    ['Mandiri', '8950 1177 2450 0042'],
-    ['BNI', '9881 0088 2450 0042'],
-  ];
-  return (
-    <div className="flex flex-col gap-2">
-      {vas.map(([bank, num]) => (
-        <div key={bank} className="flex items-center gap-3 px-3.5 py-3 border border-[var(--border)] rounded-md bg-[var(--bg-base)]">
-          <span className="w-16 flex-shrink-0 text-[12.5px] font-medium text-[var(--text-secondary)]">{bank}</span>
-          <span className="flex-1 font-mono text-[14px] font-medium text-[var(--text-primary)] tracking-wide truncate">{num}</span>
-        </div>
-      ))}
-      <p className="flex items-center gap-2 mt-1 text-[11.5px] text-[var(--text-secondary)]">
-        <span className="w-2 h-2 rounded-full bg-[var(--warning)] animate-pulse" />
-        Awaiting transfer · auto-confirms on receipt.
-      </p>
-    </div>
-  );
-}
-
-function HostedCardPanel() {
-  return (
-    <div className="flex flex-col gap-3">
-      <Field label="Card number" placeholder="4000 0000 0000 0000" />
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="Expiry" placeholder="MM / YY" />
-        <Field label="CVV" placeholder="•••" />
-      </div>
-      <Field label="Name on card" placeholder="Cardholder name" />
-      <p className="text-[11px] text-[var(--text-muted)]">Xendit-hosted form — the card never touches this device.</p>
-    </div>
-  );
-}
-
-function Field({ label, placeholder }: { label: string; placeholder: string }) {
-  return (
-    <label className="block">
-      <span className="block text-[10px] font-medium uppercase tracking-[0.04em] text-[var(--text-muted)] mb-1.5">{label}</span>
-      <input
-        className="w-full h-11 bg-[var(--bg-base)] border border-[var(--border)] rounded-md px-3.5 text-[14px] text-[var(--text-primary)] placeholder:text-[var(--text-faint)] outline-none focus:border-[var(--accent)] transition-colors"
-        placeholder={placeholder}
-        inputMode="numeric"
-      />
-    </label>
   );
 }
 
