@@ -815,7 +815,12 @@
     color: var(--ink);
     margin-bottom: 12px;
   }
-  .fbrand-name sup { font-size: 9px; font-weight: 500; }
+  .fbrand-name .mf-logo { height: 22px; }
+  /* Brand lockup: logogram + wordmark, never the wordmark alone */
+  .mf-logo { display: block; width: auto; }
+  .mf-logo-light { display: none; }
+  html[data-theme="light"] .mf-logo-dark { display: none; }
+  html[data-theme="light"] .mf-logo-light { display: block; }
   .ftagline {
     font-size: 13px;
     color: var(--body);

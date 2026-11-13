@@ -16,7 +16,7 @@
     .brand-wordmark-light{display:none;}
     html[data-theme="light"] .brand-wordmark-dark{display:none;}
     html[data-theme="light"] .brand-wordmark-light{display:block;}
-    .drawer-brand .brand-wordmark{height:20px;width:auto;max-width:150px;}
+    .drawer-brand .brand-wordmark{height:20px;width:auto;}
     .appbar-logo .brand-wordmark{height:16px;width:auto;}
 
     :root{
@@ -202,15 +202,15 @@
 
     /* sticky buy bar (above player + tab) */
     .buybar{position:absolute;left:0;right:0;bottom:calc(var(--player-h) + var(--tab-h));height:var(--buybar-h);z-index:28;
-      background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:center;gap:10px;padding:0 14px;box-shadow:var(--e2);}
-    .buybar .price{flex:1;}
-    .buybar .price .p{font-family:var(--ui);font-size:17px;font-weight:500;color:var(--ink);}
-    .buybar .price .u{font-family:var(--ui);font-size:11px;color:var(--mute);}
+      background:var(--surface);border-top:1px solid var(--hairline);display:flex;align-items:center;gap:10px;padding:0 14px;box-shadow:var(--e2);transition:bottom .2s ease;}
     .buy-wish{width:44px;height:44px;border-radius:var(--r-md);border:1px solid var(--hairline);background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .buy-wish.on svg{fill:var(--ink);}
     .buy-wish svg{width:19px;height:19px;}
-    .buy-add{background:var(--accent);color:var(--accent-text);border:none;border-radius:var(--r-md);height:44px;padding:0 20px;font-size:14px;font-weight:500;font-family:var(--ui);cursor:pointer;display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
+    .buy-add{background:var(--accent);color:var(--accent-text);border:none;border-radius:var(--r-md);height:44px;padding:0 20px;font-size:14px;font-weight:500;font-family:var(--ui);cursor:pointer;display:flex;align-items:center;gap:8px;text-decoration:none;flex:1;justify-content:center;}
     .buy-add svg{width:16px;height:16px;}
+    .rd-price-row{margin-top:14px;display:flex;align-items:baseline;gap:6px;}
+    .rd-price-row .p{font-family:var(--ui);font-size:22px;font-weight:500;color:var(--ink);}
+    .rd-price-row .u{font-family:var(--ui);font-size:12px;color:var(--mute);}
 
     /* player */
     .player{position:absolute;left:0;right:0;bottom:var(--tab-h);height:var(--player-h);z-index:30;
@@ -452,17 +452,9 @@
       <div class="rd-chips">
         <span class="chip fmt">LP</span><span class="chip fmt">180g</span><span class="chip">Jazz</span><span class="chip">Ambient</span>
       </div>
+      <div class="rd-price-row"><span class="p">Rp 450.000</span> <span class="u">≈ $28</span></div>
     </div>
 
-    <!-- Facts -->
-    <div class="rd-facts">
-      <div class="fact-row"><span class="fact-k">Format</span><span class="fact-v mono">Vinyl LP · 180g</span></div>
-      <div class="fact-row"><span class="fact-k">Label</span><span class="fact-v">Ninja Tune</span></div>
-      <div class="fact-row"><span class="fact-k">Catalogue no.</span><span class="fact-v mono">NTcd 269</span></div>
-      <div class="fact-row"><span class="fact-k">Country · Year</span><span class="fact-v">UK · 2021</span></div>
-      <div class="fact-row"><span class="fact-k">Barcode</span><span class="fact-v mono">5054429148251</span></div>
-      <div class="fact-row"><span class="fact-k">SKU</span><span class="fact-v mono">MF-VNL-0472</span></div>
-    </div>
 
     <!-- Tracklist -->
     <section class="sec">
@@ -499,10 +491,23 @@
 
     <!-- About -->
     <section class="sec">
-      <h2 class="sec-h2">About this pressing</h2>
+      <h2 class="sec-h2">About the record</h2>
       <div class="about-copy">
         <p><strong>Promises</strong> is the 2021 collaboration between Floating Points, the late Pharoah Sanders, and the London Symphony Orchestra — a single suite in nine movements built around a recurring seven-note motif.</p>
         <p>Original <strong>Ninja Tune</strong> UK pressing on 180g vinyl in a gatefold jacket. Media graded <strong>Mint</strong>; sleeve <strong>VG+</strong> with faint corner wear. Includes original inner sleeve and unused download card.</p>
+      </div>
+    </section>
+
+    <!-- Format details -->
+    <section class="sec">
+      <h2 class="sec-h2">Format details</h2>
+      <div class="rd-facts" style="margin:12px 0 0">
+        <div class="fact-row"><span class="fact-k">Format</span><span class="fact-v mono">Vinyl LP · 180g</span></div>
+        <div class="fact-row"><span class="fact-k">Label</span><span class="fact-v">Ninja Tune</span></div>
+        <div class="fact-row"><span class="fact-k">Catalogue no.</span><span class="fact-v mono">NTcd 269</span></div>
+        <div class="fact-row"><span class="fact-k">Country · Year</span><span class="fact-v">UK · 2021</span></div>
+        <div class="fact-row"><span class="fact-k">Barcode</span><span class="fact-v mono">5054429148251</span></div>
+        <div class="fact-row"><span class="fact-k">SKU</span><span class="fact-v mono">MF-VNL-0472</span></div>
       </div>
     </section>
 
@@ -576,7 +581,6 @@
 
   <!-- Sticky buy bar -->
   <div class="buybar">
-    <div class="price"><span class="p">Rp 450.000</span> <span class="u">≈ $28</span></div>
     <button class="buy-wish" id="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     </button>
@@ -794,9 +798,12 @@
     const playing = this.classList.toggle('playing');
     this.setAttribute('aria-label', playing ? 'Pause' : 'Play');
   });
-  document.getElementById('pclose-btn').addEventListener('click', () => {
-    document.getElementById('player').style.display = 'none';
-  });
+  // Closing the player drops the buy bar to sit on the tab bar; playing a track brings it back
+  function setPlayerOpen(open){
+    document.getElementById('player').style.display = open ? '' : 'none';
+    document.documentElement.style.setProperty('--player-h', open ? '62px' : '0px');
+  }
+  document.getElementById('pclose-btn').addEventListener('click', () => setPlayerOpen(false));
 
   // Wishlist
   document.getElementById('wishlist-btn').addEventListener('click', function(){
@@ -813,6 +820,7 @@
       tr.classList.add('playing');
       scrubTot.textContent = tr.dataset.dur;
       document.querySelector('.player .ptrack').textContent = tr.querySelector('.tk-name').textContent;
+      setPlayerOpen(true);
     });
   });
 

@@ -12,7 +12,8 @@ export function Footer() {
       <div className="fgrid">
         <div>
           <div className="fbrand-name">
-            Medium Format<sup>®</sup>
+            <img src="/MF_Lockup_White.svg" alt="Medium Format" className="mf-logo mf-logo-dark" />
+            <img src="/MF_Lockup_Black.svg" alt="Medium Format" className="mf-logo mf-logo-light" />
           </div>
           <div className="ftagline">
             Independent record shop based in Jakarta, Indonesia. Curating the finest in
