@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { ChannelsQueryDto, CustomersQueryDto, OrdersQueryDto } from './dto/ops-query.dto';
 import { fillMonths } from './customer-analytics';
+import { invoiceChannelSql, placeholderChannel, realCustomer, tagChannelSql } from './dealpos-channels';
 
 const num = (v: unknown): number => (v == null ? 0 : Number(v));
 
@@ -59,41 +60,123 @@ export class OpsService {
     };
   }
 
+  /** Status shown in the back-office, derived from the two DealPOS fields:
+   *  returned → returned; unpaid/partial → pending (awaiting payment or
+   *  marketplace settlement); paid but unsent → processing; else completed. */
+  private readonly statusSql = Prisma.sql`CASE
+      WHEN i."fulfillment" = 'Returned'                  THEN 'returned'
+      WHEN i."paymentStatus" IN ('Unpaid', 'Partial')    THEN 'pending'
+      WHEN i."fulfillment" = 'Unsent'                    THEN 'processing'
+      ELSE 'completed' END`;
+
+  private orderFilter(query: OrdersQueryDto, opts: { status?: boolean; channel?: boolean } = {}) {
+    const { status = true, channel = true } = opts;
+    const c: Prisma.Sql[] = [Prisma.sql`i."isVoid" = false`];
+    if (query.from) c.push(Prisma.sql`i."date" >= ${new Date(query.from)}`);
+    if (query.to) c.push(Prisma.sql`i."date" <= ${new Date(new Date(query.to).getTime() + 86_399_999)}`);
+    if (query.tag) c.push(Prisma.sql`i."tag" = ${query.tag}`);
+    if (query.payment) c.push(Prisma.sql`i."paymentStatus" = ${query.payment}`);
+    if (query.fulfillment) c.push(Prisma.sql`i."fulfillment" = ${query.fulfillment}`);
+    if (channel && query.channel) c.push(Prisma.sql`${invoiceChannelSql('i')} = ${query.channel}`);
+    if (status && query.status) c.push(Prisma.sql`${this.statusSql} = ${query.status}`);
+    if (query.q) {
+      const like = `%${query.q}%`;
+      c.push(Prisma.sql`(i."number" ILIKE ${like} OR i."customerName" ILIKE ${like})`);
+    }
+    return Prisma.join(c, ' AND ');
+  }
+
+  /** Orders inbox over the DealPOS mirror. Marketplace placeholder customers
+   *  ("TikTok", "Shopee") are remapped to their channel — the order carries
+   *  the channel and no customer, since the real buyer is not in DealPOS. */
   async orders(query: OrdersQueryDto) {
     const { page = 1, limit = 50 } = query;
-    const where: Prisma.DpInvoiceWhereInput = {
-      isVoid: false,
-      ...(query.from || query.to
-        ? {
-            date: {
-              ...(query.from ? { gte: new Date(query.from) } : {}),
-              ...(query.to ? { lte: new Date(new Date(query.to).getTime() + 86_399_999) } : {}),
-            },
-          }
-        : {}),
-      ...(query.tag ? { tag: query.tag } : {}),
-      ...(query.payment ? { paymentStatus: query.payment } : {}),
-      ...(query.fulfillment ? { fulfillment: query.fulfillment } : {}),
-      ...(query.q
-        ? {
-            OR: [
-              { number: { contains: query.q, mode: 'insensitive' } },
-              { customerName: { contains: query.q, mode: 'insensitive' } },
-            ],
-          }
-        : {}),
-    };
-    const [data, total] = await this.prisma.$transaction([
-      this.prisma.dpInvoice.findMany({
-        where,
-        orderBy: { date: 'desc' },
-        skip: (page - 1) * limit,
-        take: limit,
-        include: { _count: { select: { lines: true } } },
+    const where = this.orderFilter(query);
+    const rows = await this.prisma.$queryRaw<
+      Array<{
+        id: string; number: string; outlet: string | null; customerName: string | null; tag: string | null;
+        date: Date; created: Date; amount: unknown; paymentStatus: string | null; fulfillment: string | null;
+        channel: string; status: string; customerEmail: string | null; customerMobile: string | null; lines: bigint;
+      }>
+    >`
+      SELECT i."id", i."number", i."outlet", i."customerName", i."tag", i."date", i."created", i."amount",
+             i."paymentStatus", i."fulfillment",
+             ${invoiceChannelSql('i')} AS channel,
+             ${this.statusSql}         AS status,
+             cu."email"                AS "customerEmail",
+             cu."mobile"               AS "customerMobile",
+             (SELECT COUNT(*) FROM "DpInvoiceLine" l WHERE l."invoiceId" = i."id") AS lines
+      FROM "DpInvoice" i
+      LEFT JOIN LATERAL (
+        SELECT c."email", c."mobile" FROM "DpCustomer" c
+        WHERE lower(btrim(c."name")) = lower(btrim(i."customerName")) AND ${realCustomer('c')}
+        LIMIT 1
+      ) cu ON TRUE
+      WHERE ${where}
+      ORDER BY i."date" DESC
+      LIMIT ${limit} OFFSET ${(page - 1) * limit}`;
+    const [{ count }] = await this.prisma.$queryRaw<Array<{ count: bigint }>>`
+      SELECT COUNT(*) AS count FROM "DpInvoice" i WHERE ${where}`;
+
+    return {
+      data: rows.map(r => {
+        const marketplace = placeholderChannel(r.customerName);
+        return {
+          id: r.id,
+          number: r.number,
+          outlet: r.outlet,
+          customerName: marketplace ? null : r.customerName,
+          customerEmail: marketplace ? null : r.customerEmail,
+          customerMobile: marketplace ? null : r.customerMobile,
+          marketplace: Boolean(marketplace),
+          tag: r.tag,
+          channel: r.channel,
+          status: r.status,
+          date: r.date,
+          created: r.created,
+          amount: num(r.amount),
+          paymentStatus: r.paymentStatus,
+          fulfillment: r.fulfillment,
+          _count: { lines: Number(r.lines) },
+        };
       }),
-      this.prisma.dpInvoice.count({ where }),
-    ]);
-    return { data, total, page, limit };
+      total: Number(count),
+      page,
+      limit,
+    };
+  }
+
+  /** Counters for the Orders inbox: per derived status (with value), per
+   *  resolved channel, and today's orders. Respects q/from/to and, for the
+   *  status counts, the selected channel (and vice versa). */
+  async ordersSummary(query: OrdersQueryDto) {
+    const byStatusWhere = this.orderFilter(query, { status: false });
+    const byChannelWhere = this.orderFilter(query, { channel: false, status: false });
+    const statuses = await this.prisma.$queryRaw<Array<{ status: string; orders: bigint; amount: unknown }>>`
+      SELECT ${this.statusSql} AS status, COUNT(*) AS orders, COALESCE(SUM(i."amount"), 0) AS amount
+      FROM "DpInvoice" i WHERE ${byStatusWhere} GROUP BY 1`;
+    const channels = await this.prisma.$queryRaw<Array<{ channel: string; orders: bigint }>>`
+      SELECT ${invoiceChannelSql('i')} AS channel, COUNT(*) AS orders
+      FROM "DpInvoice" i WHERE ${byChannelWhere} GROUP BY 1 ORDER BY 2 DESC`;
+    const [today] = await this.prisma.$queryRaw<Array<{ orders: bigint; amount: unknown }>>`
+      SELECT COUNT(*) AS orders, COALESCE(SUM(i."amount"), 0) AS amount
+      FROM "DpInvoice" i
+      WHERE ${byStatusWhere} AND i."date" >= date_trunc('day', now() AT TIME ZONE 'Asia/Jakarta') AT TIME ZONE 'Asia/Jakarta'`;
+
+    const st = (k: string) => statuses.find(s => s.status === k);
+    const pack = (k: string) => ({ orders: Number(st(k)?.orders ?? 0), amount: num(st(k)?.amount) });
+    const byStatus = {
+      pending: pack('pending'),
+      processing: pack('processing'),
+      completed: pack('completed'),
+      returned: pack('returned'),
+    };
+    return {
+      total: Object.values(byStatus).reduce((t, s) => t + s.orders, 0),
+      byStatus,
+      channels: channels.map(c => ({ channel: c.channel, orders: Number(c.orders) })),
+      today: { orders: Number(today?.orders ?? 0), amount: num(today?.amount) },
+    };
   }
 
   async order(id: string) {
@@ -148,12 +231,12 @@ export class OpsService {
              COUNT(i."id")                                                        AS orders,
              COALESCE(SUM(i."amount"), 0)                                         AS lifetime,
              MAX(i."date")                                                        AS "lastOrderAt",
-             (array_agg(i."tag" ORDER BY i."date" ASC)
+             (array_agg(${tagChannelSql(Prisma.sql`i."tag"`)} ORDER BY i."date" ASC)
                 FILTER (WHERE i."tag" IS NOT NULL))[1]                            AS channel,
              (c."joinDate" >= date_trunc('month', now()))                         AS "isNew"
       FROM "DpCustomer" c
       ${this.custJoin}
-      WHERE ${search} ${newOnly}
+      WHERE ${realCustomer('c')} AND ${search} ${newOnly}
       GROUP BY c."id"
       ${having}
       ORDER BY lifetime DESC NULLS LAST, c."name" ASC
@@ -165,7 +248,7 @@ export class OpsService {
         SELECT c."id"
         FROM "DpCustomer" c
         ${this.custJoin}
-        WHERE ${search} ${newOnly}
+        WHERE ${realCustomer('c')} AND ${search} ${newOnly}
         GROUP BY c."id"
         ${having}
       ) s`;
@@ -200,6 +283,7 @@ export class OpsService {
                COALESCE(SUM(i."amount"), 0)  AS lifetime
         FROM "DpCustomer" c
         ${this.custJoin}
+        WHERE ${realCustomer('c')}
         GROUP BY c."id"
       )
       SELECT COUNT(*)                                                          AS total,
@@ -218,11 +302,12 @@ export class OpsService {
              COUNT(i."id")                                            AS orders,
              COALESCE(SUM(i."amount"), 0)                             AS lifetime,
              MAX(i."date")                                            AS "lastOrderAt",
-             (array_agg(i."tag" ORDER BY i."date" ASC)
+             (array_agg(${tagChannelSql(Prisma.sql`i."tag"`)} ORDER BY i."date" ASC)
                 FILTER (WHERE i."tag" IS NOT NULL))[1]                AS channel,
              (c."joinDate" >= date_trunc('month', now()))            AS "isNew"
       FROM "DpCustomer" c
       ${this.custJoin}
+      WHERE ${realCustomer('c')}
       GROUP BY c."id"
       HAVING COALESCE(SUM(i."amount"), 0) > 0
       ORDER BY lifetime DESC
@@ -231,10 +316,11 @@ export class OpsService {
     const acquisition = await this.prisma.$queryRaw<Array<{ channel: string | null; count: bigint }>>`
       WITH firsttag AS (
         SELECT c."id",
-               (array_agg(i."tag" ORDER BY i."date" ASC)
+               (array_agg(${tagChannelSql(Prisma.sql`i."tag"`)} ORDER BY i."date" ASC)
                   FILTER (WHERE i."tag" IS NOT NULL))[1] AS channel
         FROM "DpCustomer" c
         ${this.custJoin}
+        WHERE ${realCustomer('c')}
         GROUP BY c."id"
         HAVING COUNT(i."id") > 0
       )
@@ -269,7 +355,8 @@ export class OpsService {
       FROM "DpCustomer" c
       JOIN "DpInvoice" i
         ON i."isVoid" = false
-       AND lower(btrim(i."customerName")) = lower(btrim(c."name"))`;
+       AND lower(btrim(i."customerName")) = lower(btrim(c."name"))
+      WHERE ${realCustomer('c')}`;
 
     const trend = await this.prisma.$queryRaw<
       Array<{ month: string; active: bigint; fresh: bigint; returning: bigint; revenue: unknown }>
@@ -333,7 +420,7 @@ export class OpsService {
    *  orders — all matched to the DealPOS invoice stream by name, read-only. */
   async customerDetail(id: string) {
     const c = await this.prisma.dpCustomer.findUnique({ where: { id } });
-    if (!c) throw new NotFoundException('Customer not found');
+    if (!c || placeholderChannel(c.name)) throw new NotFoundException('Customer not found');
 
     const match = Prisma.sql`i."isVoid" = false AND lower(btrim(i."customerName")) = lower(btrim(${c.name}))`;
 
@@ -348,7 +435,7 @@ export class OpsService {
       WHERE ${match}`;
 
     const channels = await this.prisma.$queryRaw<Array<{ tag: string; orders: bigint; revenue: unknown }>>`
-      SELECT COALESCE(i."tag", 'Untagged') AS tag,
+      SELECT COALESCE(${tagChannelSql(Prisma.sql`i."tag"`)}, 'Untagged') AS tag,
              COUNT(*)                      AS orders,
              COALESCE(SUM(i."amount"), 0)  AS revenue
       FROM "DpInvoice" i

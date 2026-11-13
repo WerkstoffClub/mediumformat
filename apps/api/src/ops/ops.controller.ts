@@ -17,6 +17,11 @@ export class OpsController {
     return this.ops.orders(query);
   }
 
+  @Get('orders-summary')
+  ordersSummary(@Query() query: OrdersQueryDto) {
+    return this.ops.ordersSummary(query);
+  }
+
   @Get('orders/:id')
   order(@Param('id') id: string) {
     return this.ops.order(id);

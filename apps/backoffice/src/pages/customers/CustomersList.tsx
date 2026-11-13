@@ -1,8 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  channelColor,
-  customerLabel,
-  fmtIdrCompact,
   getCustomers,
   getCustomersAnalytics,
   getCustomersSummary,
@@ -10,11 +7,12 @@ import {
   type CustomerRow,
   type CustomersSummary,
 } from '../../api/ops';
-import { PageHeader, Stat, Widget } from '../../components/ui/Page';
+import { ChannelTag, PageHeader, Stat, TableFoot, Widget } from '../../components/ui/Page';
+import { fmtNum, fmtRpShort } from '../../lib/idFormat';
 import { BarChart, ShareList } from '../../components/ui/BarChart';
 import { CustomerDrawer } from './CustomerDrawer';
 
-const LIMIT = 50;
+const LIMIT = 10; // mockup: 10 rows per page
 
 type SegKey = 'all' | 'vip' | 'new';
 const SEGMENTS: Array<{ key: SegKey; label: string }> = [
@@ -26,8 +24,8 @@ const SEGMENTS: Array<{ key: SegKey; label: string }> = [
 const initials = (name: string) =>
   name.trim().split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase() ?? '').join('') || '—';
 
-const memberSince = (iso: string | null) =>
-  iso ? `Member since ${new Date(iso).getFullYear()}` : 'No join date';
+const memberSince = (iso: string | null, segment: CustomerRow['segment']) =>
+  segment === 'new' ? 'Joined this month' : iso ? `Member since ${new Date(iso).getFullYear()}` : 'No join date';
 
 const monthLabel = (ym: string) =>
   new Date(`${ym}-01T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' });
@@ -38,7 +36,7 @@ function CustomerAnalytics({ data }: { data: CustomersAnalytics | null }) {
   const active = months.reduce((s, m) => s + m.activeCustomers, 0);
   const returning = months.reduce((s, m) => s + m.returningCustomers, 0);
   return (
-    <div className="grid grid-cols-[2fr_1fr_1fr] gap-3.5 mb-3.5 max-[1200px]:grid-cols-1">
+    <div className="grid grid-cols-[2fr_1fr_1fr] gap-3.5 mt-3.5 max-[1200px]:grid-cols-1">
       <Widget title="Customer growth" note={active > 0 ? `12 months · ${Math.round((returning / active) * 100)}% returning` : '12 months'}>
         <div className="px-4 pt-4 pb-3.5">
           {months.length === 0 ? (
@@ -64,13 +62,19 @@ function CustomerAnalytics({ data }: { data: CustomersAnalytics | null }) {
   );
 }
 
-const shortDate = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '—';
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+/** "9 Nov" this year, "9 Nov 2025" otherwise (mockup date style). */
+const shortDate = (iso: string | null) => {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  const base = `${d.getDate()} ${MONTHS[d.getMonth()]}`;
+  return d.getFullYear() === new Date().getFullYear() ? base : `${base} ${d.getFullYear()}`;
+};
 
 function Avatar({ name, size = 34 }: { name: string; size?: number }) {
   return (
     <span
-      className="flex-shrink-0 rounded-full bg-[var(--bg-overlay)] border border-[var(--border)] flex items-center justify-center font-mono font-medium text-[var(--text-primary)]"
+      className="flex-shrink-0 rounded-full bg-[var(--bg-overlay)] border border-[var(--border)] flex items-center justify-center font-medium tracking-[0.02em] text-[var(--text-primary)]"
       style={{ width: size, height: size, fontSize: size >= 34 ? 12 : 11 }}
     >
       {initials(name)}
@@ -88,16 +92,6 @@ function SegBadge({ segment }: { segment: CustomerRow['segment'] }) {
       }`}
     >
       {vip ? 'VIP' : 'New'}
-    </span>
-  );
-}
-
-function ChannelTag({ channel }: { channel: string | null }) {
-  if (!channel) return <span className="text-[11px] text-[var(--text-faint)]">Direct</span>;
-  return (
-    <span className="inline-flex items-center gap-[5px] text-[11px] px-2 py-0.5 rounded-[4px] border border-[var(--border)] text-[var(--text-secondary)] whitespace-nowrap">
-      <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: channelColor(channel) }} />
-      {channel}
     </span>
   );
 }
@@ -142,8 +136,6 @@ export function CustomersList() {
     [summary],
   );
 
-  const acqMax = Math.max(...(summary?.acquisition.map(a => a.count) ?? [1]), 1);
-
   const exportCsv = () => {
     const blob = new Blob([toCsv(rows)], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -154,20 +146,19 @@ export function CustomersList() {
     URL.revokeObjectURL(url);
   };
 
-  const from = total > 0 ? (page - 1) * LIMIT + 1 : 0;
-  const to = Math.min(page * LIMIT, total);
+  const td = 'px-4 py-3 border-t border-[var(--border)] align-middle';
 
   return (
     <div>
       <PageHeader
         title="Customers"
-        sub={`${(summary?.totalCustomers ?? total).toLocaleString('en-GB')} people across every channel · Jakarta record shop`}
+        sub={`${fmtNum(summary?.totalCustomers ?? total)} people across every channel · Jakarta record shop`}
         actions={
           <div className="flex items-center gap-2.5">
             <button
               onClick={exportCsv}
               disabled={rows.length === 0}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-[6px] border border-[var(--border)] text-[13px] font-medium text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] disabled:opacity-40 transition-colors"
+              className="flex items-center gap-1.5 px-[13px] py-2 rounded-[6px] border border-[var(--border)] text-[13px] font-medium text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] disabled:opacity-40 transition-colors"
             >
               <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6}><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
               Export CSV
@@ -178,18 +169,18 @@ export function CustomersList() {
 
       {/* Summary strip */}
       <div className="grid grid-cols-4 gap-3 mb-3.5 max-[1200px]:grid-cols-2 max-md:grid-cols-1">
-        <Stat label="Total customers" value={(summary?.totalCustomers ?? 0).toLocaleString('en-GB')}>
+        <Stat label="Total customers" value={fmtNum(summary?.totalCustomers)}>
           <span className="text-[var(--success)] inline-flex items-center gap-1">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4}><path d="M18 15l-6-6-6 6" /></svg>
-            <span className="font-mono">{summary?.newThisMonth ?? 0}</span>
+            <span className="font-mono">{fmtNum(summary?.newThisMonth)}</span>
           </span>
           <span className="text-[var(--text-muted)]">new this month</span>
         </Stat>
-        <Stat label="Lifetime value · avg" value={fmtIdrCompact(summary?.avgLifetime)}>
-          <span className="font-mono text-[var(--text-primary)]">{(summary?.avgOrders ?? 0).toFixed(1)}</span>
+        <Stat label="Lifetime value · avg" value={fmtRpShort(summary?.avgLifetime)}>
+          <span className="font-mono text-[var(--text-primary)]">{(summary?.avgOrders ?? 0).toLocaleString('id-ID', { maximumFractionDigits: 1 })}</span>
           <span className="text-[var(--text-muted)]">orders per customer</span>
         </Stat>
-        <Stat label="VIP members" value={(summary?.vipCount ?? 0).toLocaleString('en-GB')}>
+        <Stat label="VIP members" value={fmtNum(summary?.vipCount)}>
           <span className="font-mono text-[var(--text-primary)]">{summary?.vipRevenueShare ?? 0}%</span>
           <span className="text-[var(--text-muted)]">of net revenue</span>
         </Stat>
@@ -197,8 +188,6 @@ export function CustomersList() {
           <span className="text-[var(--text-muted)]">bought more than once</span>
         </Stat>
       </div>
-
-      <CustomerAnalytics data={analytics} />
 
       {/* Toolbar */}
       <div className="flex items-center gap-3 mb-3.5 flex-wrap">
@@ -224,7 +213,7 @@ export function CustomersList() {
               >
                 {s.label}
                 <span className={`font-mono text-[11px] ${on ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'}`}>
-                  {segCounts[s.key].toLocaleString('en-GB')}
+                  {fmtNum(segCounts[s.key])}
                 </span>
               </button>
             );
@@ -234,15 +223,15 @@ export function CustomersList() {
 
       {/* Layout: table + side panel */}
       <div className="grid grid-cols-[1fr_300px] gap-3.5 items-start max-[1200px]:grid-cols-1">
-        <Widget title="Customer list" note={`${total.toLocaleString('en-GB')} total · sorted by lifetime value`}>
+        <Widget title="Customer list" note={`${fmtNum(total)} total · sorted by lifetime value`}>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
+            <table className="mf-stack-table w-full border-collapse">
               <thead>
                 <tr>
                   {['Customer', 'Email', 'Phone', 'Orders', 'Lifetime', 'Last order', 'Acquired via'].map((h, i) => (
                     <th
                       key={h}
-                      className={`text-[11px] uppercase tracking-[0.04em] text-[var(--text-muted)] font-semibold px-4 pt-[11px] pb-2.5 whitespace-nowrap ${i >= 3 && i <= 4 ? 'text-right' : 'text-left'}`}
+                      className={`${h === 'Phone' ? 'mf-col-phone ' : ''}text-[11px] uppercase tracking-[0.04em] text-[var(--text-muted)] font-semibold px-4 pt-[11px] pb-[9px] whitespace-nowrap ${i >= 3 && i <= 4 ? 'text-right' : 'text-left'}`}
                     >
                       {h}
                     </th>
@@ -251,45 +240,40 @@ export function CustomersList() {
               </thead>
               <tbody>
                 {loading && (
-                  <tr><td colSpan={7} className="px-4 py-10 text-center text-[12px] text-[var(--text-faint)]">Loading…</td></tr>
+                  <tr><td colSpan={7} className={`${td} py-10 text-center text-[12px] text-[var(--text-faint)]`}>Loading…</td></tr>
                 )}
                 {!loading && rows.length === 0 && (
-                  <tr><td colSpan={7} className="px-4 py-10 text-center text-[12px] text-[var(--text-faint)]">No customers match.</td></tr>
+                  <tr><td colSpan={7} className={`${td} py-10 text-center text-[12px] text-[var(--text-faint)]`}>No customers match.</td></tr>
                 )}
                 {!loading && rows.map(c => (
                   <tr
                     key={c.id}
                     onClick={() => setSelected(c.id)}
-                    className="border-t border-[var(--border)] cursor-pointer transition-colors hover:bg-[var(--bg-overlay)] hover:shadow-[inset_3px_0_0_var(--accent)]"
+                    className="group cursor-pointer transition-shadow hover:shadow-[inset_3px_0_0_var(--accent)] [&:hover>td]:bg-[var(--bg-overlay)]"
                   >
-                    <td className="px-4 py-3">
+                    <td className={td}>
                       <div className="flex items-center gap-[11px] min-w-0">
-                        <Avatar name={customerLabel(c.name)} />
+                        <Avatar name={c.name} />
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 text-[13px] font-medium text-[var(--text-primary)] truncate">
-                            {customerLabel(c.name)} <SegBadge segment={c.segment} />
+                            {c.name} <SegBadge segment={c.segment} />
                           </div>
-                          <div className="text-[11px] text-[var(--text-muted)] mt-px">{memberSince(c.joinDate)}</div>
+                          <div className="text-[11px] text-[var(--text-muted)] mt-px">{memberSince(c.joinDate, c.segment)}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-[12px] text-[var(--text-secondary)] max-w-[220px] truncate">{c.email ?? '—'}</td>
-                    <td className="px-4 py-3 font-mono text-[12px] text-[var(--text-muted)] whitespace-nowrap">{c.mobile ?? '—'}</td>
-                    <td className="px-4 py-3 font-mono text-[13px] text-right text-[var(--text-primary)]">{c.orders}</td>
-                    <td className="px-4 py-3 font-mono text-[13px] font-medium text-right text-[var(--text-primary)] whitespace-nowrap">{fmtIdrCompact(c.lifetime)}</td>
-                    <td className="px-4 py-3 font-mono text-[12px] text-[var(--text-secondary)] whitespace-nowrap">{shortDate(c.lastOrderAt)}</td>
-                    <td className="px-4 py-3"><ChannelTag channel={c.channel} /></td>
+                    <td data-k="Email" className={`${td} text-[12px] text-[var(--text-secondary)] max-w-[220px] truncate`}>{c.email ?? '—'}</td>
+                    <td data-k="Phone" className={`mf-col-phone ${td} text-[12px] text-[var(--text-secondary)] whitespace-nowrap [font-variant-numeric:tabular-nums]`}>{c.mobile ?? '—'}</td>
+                    <td data-k="Orders" className={`${td} text-[13px] text-right text-[var(--text-secondary)] [font-variant-numeric:tabular-nums]`}>{fmtNum(c.orders)}</td>
+                    <td data-k="Lifetime" className={`${td} text-[13px] font-medium text-right text-[var(--text-primary)] whitespace-nowrap [font-variant-numeric:tabular-nums]`}>{fmtRpShort(c.lifetime)}</td>
+                    <td data-k="Last order" className={`${td} text-[12px] text-[var(--text-secondary)] whitespace-nowrap`}>{shortDate(c.lastOrderAt)}</td>
+                    <td data-k="Acquired via" className={td}><ChannelTag channel={c.channel} empty="Direct" /></td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2.5 border-t border-[var(--border)] text-[11px] text-[var(--text-muted)]">
-            <span>Showing {from}–{to} of {total.toLocaleString('en-GB')} customers</span>
-            <div className="flex-1" />
-            <button disabled={page === 1} onClick={() => setPage(p => p - 1)} className="px-2 py-0.5 border border-[var(--border)] rounded disabled:opacity-30">‹</button>
-            <button disabled={page * LIMIT >= total} onClick={() => setPage(p => p + 1)} className="px-2 py-0.5 border border-[var(--border)] rounded disabled:opacity-30">›</button>
-          </div>
+          <TableFoot page={page} limit={LIMIT} total={total} noun="customers" note="sorted by lifetime value" onPage={setPage} />
         </Widget>
 
         {/* Side panel */}
@@ -305,13 +289,13 @@ export function CustomersList() {
                   onClick={() => setSelected(c.id)}
                   className="flex items-center gap-[11px] px-4 py-3 border-t border-[var(--border)] first:border-t-0 cursor-pointer hover:bg-[var(--bg-overlay)] transition-colors"
                 >
-                  <span className="font-mono text-[12px] text-[var(--text-muted)] w-4 text-right flex-shrink-0">{i + 1}</span>
-                  <Avatar name={customerLabel(c.name)} size={30} />
+                  <span className="text-[12px] text-[var(--text-muted)] w-4 text-right flex-shrink-0 [font-variant-numeric:tabular-nums]">{i + 1}</span>
+                  <Avatar name={c.name} size={30} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-[12px] font-medium text-[var(--text-primary)] truncate">{customerLabel(c.name)}</div>
-                    <div className="text-[11px] text-[var(--text-muted)] mt-px">{c.orders} orders · {c.channel ?? 'Direct'}</div>
+                    <div className="text-[12px] font-medium text-[var(--text-primary)] truncate">{c.name}</div>
+                    <div className="text-[11px] text-[var(--text-muted)] mt-px">{fmtNum(c.orders)} orders · {c.channel ?? 'Direct'}</div>
                   </div>
-                  <span className="font-mono text-[12px] font-medium text-[var(--text-primary)] flex-shrink-0">{fmtIdrCompact(c.lifetime)}</span>
+                  <span className="text-[12px] font-medium text-[var(--text-primary)] flex-shrink-0 [font-variant-numeric:tabular-nums]">{fmtRpShort(c.lifetime)}</span>
                 </div>
               ))}
             </div>
@@ -323,23 +307,18 @@ export function CustomersList() {
                 <p className="px-4 py-6 text-[11px] text-[var(--text-faint)] text-center">No channel data.</p>
               )}
               {summary?.acquisition.map(a => (
-                <div key={a.channel} className="px-4 py-3 border-t border-[var(--border)] first:border-t-0">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="inline-flex items-center gap-1.5 text-[12px] text-[var(--text-secondary)]">
-                      <span className="w-[6px] h-[6px] rounded-full" style={{ background: channelColor(a.channel === 'Direct' ? null : a.channel) }} />
-                      {a.channel}
-                    </span>
-                    <span className="font-mono text-[13px] font-medium text-[var(--text-primary)]">{a.count.toLocaleString('en-GB')}</span>
-                  </div>
-                  <span className="block h-[5px] rounded-full bg-[var(--neutral-t)] overflow-hidden">
-                    <span className="block h-full rounded-full bg-[var(--text-muted)]" style={{ width: `${(a.count / acqMax) * 100}%` }} />
-                  </span>
+                <div key={a.channel} className="flex items-center justify-between px-4 py-3.5 border-t border-[var(--border)] first:border-t-0">
+                  <span className="text-[12px] text-[var(--text-secondary)]">{a.channel}</span>
+                  <span className="text-[13px] font-medium text-[var(--text-primary)] [font-variant-numeric:tabular-nums]">{fmtNum(a.count)}</span>
                 </div>
               ))}
             </div>
           </Widget>
         </div>
       </div>
+
+      {/* Not in the mockup — kept below the list: 12-month trend, frequency, recency. */}
+      <CustomerAnalytics data={analytics} />
 
       {selected && <CustomerDrawer customerId={selected} onClose={() => setSelected(null)} />}
     </div>
