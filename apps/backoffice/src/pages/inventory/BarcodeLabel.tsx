@@ -4,7 +4,7 @@ import { code128Bars } from '../../lib/code128';
 import { ModalShell } from './release-edit/ModalShell';
 
 /* MF price/barcode label, 50 × 30 mm, the store's existing template (as printed
-   by the MF Label Printer): artist / title / price, format · year · genre, the
+   by the MF Label Printer): artist / title and price, format · year · genre, the
    MF mark and a Code 128 of the DealPOS variant code, then two machine-readable
    lines. Data comes from the DealPOS sync (variant Code → `barcode` for EANs,
    `catNumber` otherwise; UnitPrice → `priceIdr`).
@@ -108,17 +108,26 @@ function measure(text: string, weight: number, px: number): number {
   return measureCtx.measureText(text).width;
 }
 
-/** SVG text that never overflows `max` dots: first a smaller size (down to 70 %), then squeezed. Never cut. */
+/** Cut `text` with "…" so it fits in `max` dots (whole text when it already fits). */
+export function truncateToWidth(text: string, max: number, width: (t: string) => number): string {
+  if (width(text) <= max) return text;
+  let lo = 0, hi = text.length;
+  while (lo < hi) { // longest prefix whose "prefix…" fits
+    const mid = Math.ceil((lo + hi) / 2);
+    if (width(text.slice(0, mid).trimEnd() + '…') <= max) lo = mid; else hi = mid - 1;
+  }
+  return lo > 0 ? text.slice(0, lo).trimEnd() + '…' : '…';
+}
+
+/** SVG text limited to `max` dots: anything longer ends in "…". */
 function FitText({ x, y, max, size, weight, anchor = 'start', children }: {
   x: number; y: number; max: number; size: number; weight: number; anchor?: 'start' | 'end'; children: string;
 }) {
-  const w = measure(children, weight, size);
-  const px = w > max ? Math.max(size * 0.7, (size * max) / w) : size;
-  const squeeze = measure(children, weight, px) > max;
+  const text = truncateToWidth(children, max, t => measure(t, weight, size));
   return (
-    <text x={x} y={y} fontSize={px} fontWeight={weight} textAnchor={anchor}
-      {...(squeeze ? { textLength: max, lengthAdjust: 'spacingAndGlyphs' } : {})}>
-      {children}
+    <text x={x} y={y} fontSize={size} fontWeight={weight} textAnchor={anchor}>
+      {text !== children && <title>{children}</title>}
+      {text}
     </text>
   );
 }
@@ -127,6 +136,7 @@ const MF_MARK = 'M858.21,130.64c-53.14-66.98-130.64-83.97-212.83-81.02-25.27.91-
 
 /** The physical label (template layout, printer-dot coordinates). */
 function LabelPaper({ data, bars }: { data: LabelData; bars: NonNullable<ReturnType<typeof useBars>> }) {
+  const priceW = measure(data.price, 500, 24);
   const scale = bars.widthDots / (bars.width * bars.dots);
   return (
     <svg
@@ -137,10 +147,10 @@ function LabelPaper({ data, bars }: { data: LabelData; bars: NonNullable<ReturnT
       fill="#000"
     >
       <rect width={W} height={H} fill="#fff" />
-      <FitText x={LEFT} y={37} max={RIGHT - LEFT} size={24} weight={500}>{data.artist}</FitText>
-      <FitText x={LEFT} y={58} max={RIGHT - LEFT} size={19} weight={400}>{data.title}</FitText>
-      {/* Price on its own line under the album title, so long names never run into it. */}
-      <FitText x={LEFT} y={86} max={RIGHT - LEFT} size={24} weight={500}>{data.price}</FitText>
+      {/* Artist and title stop (with "…") before the price column. */}
+      <FitText x={LEFT} y={37} max={RIGHT - LEFT - priceW - 12} size={24} weight={500}>{data.artist}</FitText>
+      <FitText x={LEFT} y={58} max={RIGHT - LEFT - priceW - 12} size={19} weight={400}>{data.title}</FitText>
+      <text x={RIGHT} y={41} fontSize={24} fontWeight={500} textAnchor="end">{data.price}</text>
 
       <FitText x={LEFT} y={110} max={86} size={18} weight={400}>{data.format}</FitText>
       {data.year && <text x={113} y={110} fontSize={18}>{data.year}</text>}

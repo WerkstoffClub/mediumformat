@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { barsLayout, labelFromRelease, mrzField, mrzLine } from './BarcodeLabel';
+import { barsLayout, labelFromRelease, mrzField, mrzLine, truncateToWidth } from './BarcodeLabel';
 
 // The store's template label (mf-labels.pdf): Fontaines DC — Romance, CD, 2025.
 const fontaines = {
@@ -68,5 +68,18 @@ describe('barsLayout', () => {
   });
   it('flags codes too long for the space', () => {
     expect(barsLayout('MF-DISPLAY-B-STOCK-2026-0042')?.squeezed).toBe(true);
+  });
+});
+
+describe('truncateToWidth', () => {
+  const chars = (t: string) => t.length; // 1 dot per character
+  it('keeps text that fits', () => {
+    expect(truncateToWidth('Fontaines DC', 12, chars)).toBe('Fontaines DC');
+  });
+  it('cuts longer text with … inside the limit', () => {
+    const out = truncateToWidth('Godspeed You! Black Emperor', 15, chars);
+    expect(out).toBe('Godspeed You!…');
+    expect(out.length).toBeLessThanOrEqual(15);
+    expect(out.endsWith('…')).toBe(true);
   });
 });
