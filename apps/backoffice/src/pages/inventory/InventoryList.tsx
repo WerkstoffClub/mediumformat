@@ -5,6 +5,7 @@ import { getCatalogSummary } from '../../api/ops';
 import { Paginator } from '../../components/ui/Page';
 import { ReleaseCover } from '../../components/ui/Cover';
 import type { Release } from '@mf/shared';
+import { BarcodeLabelModal } from './BarcodeLabel';
 
 const USD_RATE = 16_300; // display-only approximation, like the prototype's "≈ $"
 const LOW_AT = 2;
@@ -31,33 +32,6 @@ function StockPill({ release }: { release: Release }) {
       {label}
     </span>
   );
-}
-
-/** Prototype's barcode-label print: black-on-white label in a print window. */
-function printBarcode(release: Release) {
-  const code = release.barcode ?? release.catNumber ?? release.id;
-  const win = window.open('', 'mf-label', 'width=420,height=320');
-  if (!win) return;
-  win.document.write(`<!doctype html><title>Label — ${code}</title>
-  <style>
-    body{font-family:"Geist","Helvetica Neue",Arial,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
-    .label{background:#fff;color:#000;border:1px solid #e4e4e4;border-radius:6px;padding:16px 20px;text-align:center;width:280px}
-    .a{font-size:13px;font-weight:600}.t{font-size:11px;color:#525252;margin-top:2px}
-    .bars{margin:12px auto 4px;height:44px;display:flex;align-items:stretch;justify-content:center;gap:0}
-    .bars i{display:block;background:#000}
-    .code{font-family:"Geist","Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.12em}
-    .price{font-family:"Geist","Helvetica Neue",Arial,sans-serif;font-size:13px;font-weight:500;margin-top:6px}
-    @media print{body{height:auto}.label{border:none}}
-  </style>
-  <div class="label">
-    <div class="a">${release.artist}</div>
-    <div class="t">${release.title}</div>
-    <div class="bars">${code.split('').map((ch, i) => `<i style="width:${(ch.charCodeAt(0) % 3) + 1}px;margin-right:${(i % 2) + 1}px"></i>`).join('')}</div>
-    <div class="code">${code}</div>
-    <div class="price">${idr.format(release.priceIdr)}</div>
-  </div>
-  <script>setTimeout(()=>window.print(),150)</script>`);
-  win.document.close();
 }
 
 function Chip({ on, children, onClick }: { on: boolean; children: React.ReactNode; onClick: () => void }) {
@@ -89,6 +63,7 @@ export function InventoryList({ onLoad }: { onLoad?: (rows: Release[], total: nu
   const [genres, setGenres] = useState<string[]>([]);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [labelFor, setLabelFor] = useState<Release | null>(null);
   const filterWrap = useRef<HTMLDivElement>(null);
 
   // Close the Filters popover on any click outside it.
@@ -266,7 +241,7 @@ export function InventoryList({ onLoad }: { onLoad?: (rows: Release[], total: nu
                   <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                     <button
                       type="button"
-                      onClick={e => { e.stopPropagation(); printBarcode(r); }}
+                      onClick={e => { e.stopPropagation(); setLabelFor(r); }}
                       title="Print barcode label"
                       aria-label="Print barcode label"
                       className="text-[var(--text-muted)] hover:text-[var(--text-primary)]"
@@ -289,6 +264,7 @@ export function InventoryList({ onLoad }: { onLoad?: (rows: Release[], total: nu
         </table>
         <Paginator page={page} limit={50} total={total} shown={releases.length} onPage={setPage} />
       </div>
+      {labelFor && <BarcodeLabelModal release={labelFor} onClose={() => setLabelFor(null)} />}
     </div>
   );
 }
