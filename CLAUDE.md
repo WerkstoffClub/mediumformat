@@ -78,6 +78,14 @@ Canonical spec: **`DESIGN.md`**. Tokens: **`design-system/tokens.json`** (W3C DT
   by tier/channel, sale phases), `mockup-checkin.html` (QR scan, manual entry, live count).
   Sample data = real Jakarta shows/venues (DD scrape); sold/check-in counts are demo;
   unpublished prices show "—" or a dashed `Sample` tag.
+- **Gater events guide (public)** — RA × Songkick-style guide of club nights, concerts, special
+  shows and festivals in Indonesian + Asian cities for 12 months, curated daily by DD's
+  `gater-curator` agent. `mockup-gater.html` (city + travel dates, type filters, Picks, Asia festival
+  calendar; `?city=&from=&to=&kind=`), `mockup-gater-event.html?id=<listing id>` (local time + viewer's
+  time, lineup, ticket box: buy on Gater or link to the official seller, .ics, trip planner).
+  Both are responsive (`-mobile` files redirect). Data sits between `/*GATER_DATA*/` markers — refresh
+  from the DD repo: `python -m scrapers.gater.export_mf <these two files> --demo-gater`. Jakarta
+  listings with a published price are demo "on Gater" (dashed `Sample` tag).
 - **Dealers = third-party physical-release shops** (records, cassettes, CDs) that run MF's
   POS and catalog; their transactions are visible in the back-office. `mockup-dealers.html`
   (shops, SKUs, stock, POS sales, sync), `mockup-dealer-detail.html` (POS transactions: txn
