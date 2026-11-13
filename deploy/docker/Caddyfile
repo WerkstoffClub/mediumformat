@@ -96,6 +96,10 @@
 	}
 
 	handle_errors {
+		# Never let a CDN or browser keep an error: without this, a 404 for a
+		# not-yet-uploaded .svg/.png inherits the week-long asset cache header
+		# below and Cloudflare serves that 404 long after the file exists.
+		header Cache-Control "no-store"
 		rewrite * /404.html
 		root * /srv/prototype
 		file_server
