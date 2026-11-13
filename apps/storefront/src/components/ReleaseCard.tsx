@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Release } from '../api/storefront';
 import { useCurrency } from '../hooks/useCurrency';
+import { useCart } from '../hooks/useCart';
 
 interface ReleaseCardProps {
   release: Release;
@@ -10,7 +11,7 @@ interface ReleaseCardProps {
   hasPreview?: boolean;
 }
 
-const FORMAT_LABEL: Record<string, string> = {
+export const FORMAT_LABEL: Record<string, string> = {
   LP: 'LP',
   TWO_LP: '2×LP',
   THREE_LP: '3×LP',
@@ -42,6 +43,9 @@ export function ReleaseCard({ release, hasPreview = false }: ReleaseCardProps) {
   const to = release.slug ? `/releases/${encodeURIComponent(release.slug)}` : '#';
   const [wished, setWished] = useState(false);
   const { formatPrice } = useCurrency();
+  const { add, lines } = useCart();
+  const inCart = lines.some(l => l.releaseId === release.id);
+  const soldOut = release.stock < 1;
 
   const formatLabel = FORMAT_LABEL[release.format] ?? release.format;
   const conditionLabel = CONDITION_SHORT[release.condition] ?? release.condition;
@@ -107,12 +111,14 @@ export function ReleaseCard({ release, hasPreview = false }: ReleaseCardProps) {
           <span className="rprice">{formatPrice(release.priceIdr)}</span>
           <button
             type="button"
-            className="add-btn"
-            aria-label="Add to cart — checkout coming soon"
-            title="Checkout coming soon"
+            className={inCart ? 'add-btn on' : 'add-btn'}
+            aria-label={soldOut ? 'Sold out' : inCart ? `Add another ${release.title} to cart` : `Add ${release.title} to cart`}
+            title={soldOut ? 'Sold out' : inCart ? 'In cart — add another' : 'Add to cart'}
+            disabled={soldOut}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
+              add(release);
             }}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>

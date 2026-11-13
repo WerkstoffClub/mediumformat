@@ -18,8 +18,9 @@ import { StorefrontModule } from './storefront/storefront.module';
 import { ImportsModule } from './imports/imports.module';
 import { CategoryPagesModule } from './category-pages/category-pages.module';
 import { AnalyticsModule } from './analytics/analytics.module';
+import { WebOrdersModule } from './web-orders/web-orders.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, UsersModule, InventoryModule, PostsModule, DealposModule, FinanceModule, SocialModule, OpsModule, LocationsModule, IntegrationsModule, PurchaseOrdersModule, PreordersModule, VouchersModule, NewsletterModule, StorefrontModule, CategoryPagesModule, ImportsModule, AnalyticsModule],
+  imports: [PrismaModule, AuthModule, UsersModule, InventoryModule, PostsModule, DealposModule, FinanceModule, SocialModule, OpsModule, LocationsModule, IntegrationsModule, PurchaseOrdersModule, PreordersModule, VouchersModule, NewsletterModule, StorefrontModule, CategoryPagesModule, ImportsModule, AnalyticsModule, WebOrdersModule],
 })
 export class AppModule {}

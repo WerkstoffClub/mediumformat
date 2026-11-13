@@ -4,6 +4,7 @@ import { getRelease } from '../api/storefront';
 import type { Release, ReleaseTrack } from '../api/storefront';
 import { formatIDR } from '../lib/idr';
 import { Cover } from '../components/ReleaseCard';
+import { AddToCart } from '../components/AddToCart';
 
 const FORMAT_LABEL: Record<string, string> = {
   LP: 'LP',
@@ -179,18 +180,7 @@ export default function ReleaseDetail() {
             <MetaRow label="Stock" value={String(release.stock)} mono />
           </dl>
 
-          <div className="flex gap-3 mb-6" title="Checkout coming soon">
-            <button
-              type="button"
-              className="btn-primary flex-1"
-              disabled
-              aria-disabled
-              title="Checkout coming soon"
-              style={{ opacity: 0.5, cursor: 'not-allowed' }}
-            >
-              Add to cart — checkout coming soon
-            </button>
-          </div>
+          <AddToCart release={release} />
 
           {release.notes && (
             <p className="text-[13px] leading-relaxed" style={{ color: 'var(--body)' }}>

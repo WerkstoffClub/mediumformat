@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 import { useCurrency } from '../hooks/useCurrency';
+import { useCart } from '../hooks/useCart';
 
 type MenuKey = 'shop' | 'formats' | 'style' | 'news' | null;
 
@@ -111,6 +112,7 @@ const MENUS: MegaConfig[] = [SHOP_MENU, FORMATS_MENU, STYLE_MENU, NEWS_MENU];
 export function Nav() {
   const { theme, toggle } = useTheme();
   const { currency, setCurrency } = useCurrency();
+  const { count: cartCount } = useCart();
   const [openMenu, setOpenMenu] = useState<MenuKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -253,20 +255,19 @@ export function Nav() {
             )}
           </button>
           <div className="mf-cart-wrap">
-            <button
-              type="button"
+            <Link
+              to="/cart"
               className="mf-icon-btn"
-              aria-label="Cart — checkout coming soon"
-              title="Checkout coming soon"
-              disabled
+              aria-label={cartCount ? `Cart, ${cartCount} item${cartCount === 1 ? '' : 's'}` : 'Cart, empty'}
+              title="Cart"
             >
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <path d="M3 6h18" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-            </button>
-            <span className="mf-cart-badge mono" aria-hidden>0</span>
+            </Link>
+            {cartCount > 0 && <span className="mf-cart-badge mono" aria-hidden>{cartCount}</span>}
           </div>
           <div className="mf-cur-switch" role="group" aria-label="Currency">
             <button
@@ -561,6 +562,7 @@ export function Nav() {
         .mf-icon-btn:disabled { cursor: not-allowed; }
         .mf-cart-wrap { position: relative; }
         .mf-cart-badge {
+          pointer-events: none;
           position: absolute;
           top: 4px; right: 4px;
           min-width: 15px; height: 15px;

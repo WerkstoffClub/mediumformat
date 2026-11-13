@@ -3,6 +3,7 @@
    colour = status (+ the channel colour key). No brand colour. */
 
 :root.dark {
+  color-scheme: dark;
   --bg-base:        #0F0F0F;   /* canvas  */
   --bg-surface:     #0E0E0E;   /* surface */
   --bg-overlay:     #1A1A1A;   /* raised  */
@@ -33,6 +34,7 @@
 }
 
 :root.light {
+  color-scheme: light;
   --bg-base:        #F0F0F0;
   --bg-surface:     #FFFFFF;
   --bg-overlay:     #F5F5F5;
