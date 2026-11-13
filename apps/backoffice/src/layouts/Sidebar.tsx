@@ -33,6 +33,10 @@ const icons = {
   newsletter: ic(<><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></>),
   social:     ic(<><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></>),
   cms:        ic(<><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></>),
+  venues:     ic(<><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></>),
+  tickets:    ic(<><path d="M3 8a2 2 0 002-2h14a2 2 0 002 2v2a2 2 0 000 4v2a2 2 0 00-2 2H5a2 2 0 00-2-2v-2a2 2 0 000-4z"/><line x1="13" y1="6" x2="13" y2="18" strokeDasharray="2 2"/></>),
+  checkin:    ic(<><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/></>),
+  dealers:    ic(<><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></>),
   settings:   ic(<><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></>),
 };
 
@@ -63,6 +67,18 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
         { label: 'Customers',       to: '/customers',       icon: icons.customers },
         { label: 'Channels',        to: '/channels',        icon: icons.channels, statusDot: true },
       ],
+    },
+    {
+      label: 'Peers · Venues',
+      items: [
+        { label: 'Venues',         to: '/peers',   icon: icons.venues },
+        { label: 'Shows & tickets', to: '/events',  icon: icons.tickets },
+        { label: 'Door check-in',  to: '/checkin', icon: icons.checkin },
+      ],
+    },
+    {
+      label: 'Dealers · Record shops',
+      items: [{ label: 'Dealers', to: '/dealers', icon: icons.dealers }],
     },
     {
       label: 'Shop',

@@ -53,6 +53,11 @@ const STATUS_COLORS: Record<string, string> = {
   Open: 'var(--info)', Allocated: 'var(--success)',
   // Newsletter
   Scheduled: 'var(--warning)', Active: 'var(--success)', Unsubscribed: 'var(--text-muted)',
+  // Peers (venues, shows, tickets) + Dealers
+  Live: 'var(--success)', Onboarding: 'var(--warning)', Paused: 'var(--text-muted)', Prospect: 'var(--text-muted)',
+  'On sale': 'var(--success)', 'Sold out': 'var(--info)', Ended: 'var(--text-muted)',
+  Valid: 'var(--success)', Void: 'var(--danger)', 'Checked in': 'var(--info)', Refunded: 'var(--danger)',
+  'Already checked in': 'var(--warning)', 'Wrong event': 'var(--danger)', 'Not a ticket code': 'var(--danger)',
 };
 
 export function StatusPill({ value }: { value: string | null }) {

@@ -662,3 +662,169 @@ model PageView {
 
   @@index([at])
 }
+
+// ── Peers (venues + ticketing) ─────────────────────────────────────────────
+// Never mixed with Dealers on one screen — see CLAUDE.md.
+
+enum VenueStatus {
+  ONBOARDING
+  LIVE
+  PAUSED
+}
+
+enum EventStatus {
+  DRAFT
+  SCHEDULED
+  ON_SALE
+  SOLD_OUT
+  ENDED
+  CANCELLED
+}
+
+enum TicketChannel {
+  BOX_OFFICE
+  ONLINE
+  COMP
+}
+
+enum TicketPayment {
+  CASH
+  QRIS
+  EDC
+  XENDIT
+  NONE
+}
+
+enum TicketStatus {
+  VALID
+  VOID
+}
+
+model Venue {
+  id        String      @id @default(cuid())
+  slug      String      @unique
+  name      String
+  kind      String?
+  area      String?
+  city      String      @default("Jakarta")
+  capacity  Int?
+  status    VenueStatus @default(ONBOARDING)
+  feePct    Decimal     @default(3) @db.Decimal(5, 2)
+  contact   String?
+  notes     String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  events    Event[]
+}
+
+model Event {
+  id        String       @id @default(cuid())
+  slug      String       @unique
+  title     String
+  lineup    String?
+  venueId   String
+  venue     Venue        @relation(fields: [venueId], references: [id], onDelete: Restrict)
+  startsAt  DateTime
+  doorsAt   DateTime?
+  endsAt    DateTime?
+  status    EventStatus  @default(DRAFT)
+  notes     String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  tiers     TicketTier[]
+  tickets   Ticket[]
+
+  @@index([venueId, startsAt])
+  @@index([startsAt])
+}
+
+model TicketTier {
+  id         String    @id @default(cuid())
+  eventId    String
+  event      Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name       String
+  priceIdr   Int
+  quota      Int
+  salesStart DateTime?
+  salesEnd   DateTime?
+  sortOrder  Int       @default(0)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  tickets    Ticket[]
+
+  @@index([eventId])
+}
+
+model Ticket {
+  id            String        @id @default(cuid())
+  code          String        @unique
+  eventId       String
+  event         Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  tierId        String
+  tier          TicketTier    @relation(fields: [tierId], references: [id], onDelete: Restrict)
+  holderName    String?
+  holderEmail   String?
+  channel       TicketChannel @default(BOX_OFFICE)
+  payment       TicketPayment @default(CASH)
+  priceIdr      Int
+  status        TicketStatus  @default(VALID)
+  soldById      String?
+  checkedInAt   DateTime?
+  checkedInById String?
+  gate          String?
+  createdAt     DateTime      @default(now())
+
+  @@index([eventId, checkedInAt])
+  @@index([tierId])
+}
+
+// ── Dealers (third-party record-shop POS) ──────────────────────────────────
+
+enum DealerStatus {
+  PROSPECT
+  ONBOARDING
+  LIVE
+  PAUSED
+}
+
+enum DealerTxnStatus {
+  PAID
+  REFUNDED
+}
+
+model Dealer {
+  id           String              @id @default(cuid())
+  slug         String              @unique
+  name         String
+  kind         String?
+  area         String?
+  city         String              @default("Jakarta")
+  status       DealerStatus        @default(PROSPECT)
+  feePct       Decimal             @default(2.5) @db.Decimal(5, 2)
+  contact      String?
+  notes        String?
+  lastSyncAt   DateTime?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  transactions DealerTransaction[]
+}
+
+model DealerTransaction {
+  id         String          @id @default(cuid())
+  dealerId   String
+  dealer     Dealer          @relation(fields: [dealerId], references: [id], onDelete: Cascade)
+  txnNo      String
+  occurredAt DateTime
+  /// [{ title, qty, priceIdr }]
+  items      Json
+  itemCount  Int
+  payment    String
+  cashier    String?
+  amountIdr  Int
+  status     DealerTxnStatus @default(PAID)
+  createdAt  DateTime        @default(now())
+
+  @@unique([dealerId, txnNo])
+  @@index([dealerId, occurredAt])
+  @@index([occurredAt])
+}

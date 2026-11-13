@@ -26,6 +26,13 @@ import { PostForm } from './pages/blog/PostForm';
 import { CategoryPageForm } from './pages/category-pages/CategoryPageForm';
 import { CmsHub } from './pages/cms/CmsHub';
 import { Visitors } from './pages/visitors/Visitors';
+import { Venues } from './pages/peers/Venues';
+import { VenueDetail } from './pages/peers/VenueDetail';
+import { Events } from './pages/peers/Events';
+import { EventDetail } from './pages/peers/EventDetail';
+import { Checkin } from './pages/peers/Checkin';
+import { Dealers } from './pages/dealers/Dealers';
+import { DealerDetail } from './pages/dealers/DealerDetail';
 
 function ProtectedRoutes() {
   const { user, loading } = useAuth();
@@ -68,6 +75,13 @@ export default function App() {
           <Route path="/consolidations"     element={<Navigate to="/purchase-orders?tab=consolidations" replace />} />
           <Route path="/consolidations/:id" element={<ConsolidationDetail />} />
           <Route path="/channels"           element={<Channels />} />
+          <Route path="/peers"              element={<Venues />} />
+          <Route path="/peers/:id"          element={<VenueDetail />} />
+          <Route path="/events"             element={<Events />} />
+          <Route path="/events/:id"         element={<EventDetail />} />
+          <Route path="/checkin"            element={<Checkin />} />
+          <Route path="/dealers"            element={<Dealers />} />
+          <Route path="/dealers/:id"        element={<DealerDetail />} />
           <Route path="/vouchers"           element={<Vouchers />} />
           <Route path="/newsletter"         element={<Newsletter />} />
           <Route path="/preferences"        element={<Preferences />} />
