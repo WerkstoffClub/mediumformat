@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { DealposClient } from './dealpos.client';
 import { DpProduct, mapVariantToRelease } from './dealpos.mapper';
+import { assignMissingReleaseSlugs } from '../inventory/release-slug';
 
 export const SYNC_ENTITIES = [
   'outlets',
@@ -247,6 +248,7 @@ export class DealposSyncService {
         }
       }
     }
+    await assignMissingReleaseSlugs(this.prisma);
     return { upserted, skipped };
   }
 

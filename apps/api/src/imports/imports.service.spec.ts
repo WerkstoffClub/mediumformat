@@ -348,6 +348,8 @@ function makeCommitMock(opts: { status?: string; lines: ReturnType<typeof makeCo
   let nextReleaseId = 100;
   const tx = {
     release: {
+      // assignMissingReleaseSlugs runs at the end of commit; no slug-less rows in these fixtures.
+      findMany: jest.fn(async () => []),
       update: jest.fn(async ({ where, data }: { where: { id: string }; data: Record<string, unknown> }) => {
         txCalls.releaseUpdates.push({ id: where.id, data });
         return { id: where.id, ...data };

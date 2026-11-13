@@ -7,6 +7,7 @@ import {
   RecordCondition, ReimbursementStatus, SalesChannel,
 } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { assignMissingReleaseSlugs } from '../inventory/release-slug';
 import { CreateImportDto } from './dto/create-import.dto';
 import { ImportFilterDto } from './dto/import-filter.dto';
 import { UpdateChannelPricingDto } from './dto/update-channel-pricing.dto';
@@ -431,6 +432,7 @@ export class ImportsService {
       }
 
       await tx.importOrder.update({ where: { id }, data: { status: ImportStatus.INVENTORY_UPDATED } });
+      await assignMissingReleaseSlugs(tx);
     });
 
     return { created, updated, importOrder: await this.findOne(id) };
