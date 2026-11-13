@@ -123,6 +123,33 @@ Either way: **copy folder → bring up stack → repoint DNS.** Done.
 
 ---
 
+## Deploy from GitHub Actions
+
+`.github/workflows/deploy.yml` runs `deploy-app.sh` from a GitHub runner, so a deploy can be started from
+anywhere (GitHub → Actions → **deploy** → Run workflow, or a Claude cloud session). dd-vps only takes SSH over
+Tailscale, so the runner joins the tailnet as `tag:ci` first. The script reads no local `.env` in CI; the
+secrets already live in `/opt/mediumformat/api.env`.
+
+One-time setup:
+
+1. **GitHub default branch → `main`** (Settings → General → Default branch). `workflow_dispatch` only lists
+   workflows that exist on the default branch.
+2. **Tailscale ACL** (admin console → Access controls): let `tag:ci` exist and reach dd-vps on port 22, e.g.
+   `"tagOwners": {"tag:ci": ["autogroup:admin"]}` and an ACL/grant from `tag:ci` to dd-vps `:22`.
+   If Tailscale SSH is enabled on dd-vps, also add an `ssh` rule allowing `tag:ci` as `root`.
+3. **Tailscale OAuth client** (Settings → OAuth clients → Generate): scopes *Devices Core* write and *Auth Keys*
+   write, tag `tag:ci`. Save as repo secrets `TS_OAUTH_CLIENT_ID` and `TS_OAUTH_SECRET`.
+4. **Deploy SSH key**, from a machine already on the tailnet:
+
+   ```bash
+   ssh-keygen -t ed25519 -N '' -C gha-deploy -f /tmp/mf-deploy
+   ssh-copy-id -i /tmp/mf-deploy.pub root@dd-vps.tail9b9f75.ts.net
+   gh secret set DEPLOY_SSH_KEY -R WerkstoffClub/mediumformat < /tmp/mf-deploy && rm /tmp/mf-deploy /tmp/mf-deploy.pub
+   ```
+
+Optional repo variables `DEPLOY_SSH_HOST` / `DEPLOY_SSH_USER` override `dd-vps.tail9b9f75.ts.net` / `root`.
+The job ends with a smoke check of `/`, `/backoffice/` and `/api/v1/storefront/releases`.
+
 ## Troubleshooting
 
 | Symptom | Fix |

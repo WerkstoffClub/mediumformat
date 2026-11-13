@@ -1,0 +1,76 @@
+name: deploy
+
+# Deploys the app (API + back-office + storefront) to dd-vps with
+# deploy/docker/deploy-app.sh — the same script used from a laptop.
+# dd-vps only accepts SSH over Tailscale, so the runner joins the tailnet first.
+#
+# Run it: GitHub → Actions → deploy → Run workflow (or the API / a Claude session).
+# One-time setup (secrets, Tailscale tag, SSH key): see deploy/docker/README.md → "Deploy from GitHub Actions".
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref to deploy
+        default: main
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SSH_HOST: ${{ vars.DEPLOY_SSH_HOST || 'dd-vps.tail9b9f75.ts.net' }}
+      SSH_USER: ${{ vars.DEPLOY_SSH_USER || 'root' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @mf/shared build
+
+      - name: Join the tailnet
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: SSH key and host
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          test -n "$DEPLOY_SSH_KEY" || { echo "::error::DEPLOY_SSH_KEY secret is missing"; exit 1; }
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          # Host key fetched over the tailnet (WireGuard-authenticated peer).
+          ssh-keyscan -T 20 "$SSH_HOST" >> ~/.ssh/known_hosts
+          ssh -o BatchMode=yes "$SSH_USER@$SSH_HOST" true
+
+      - name: Deploy
+        run: |
+          printf 'SSH_HOST=%s\nSSH_USER=%s\nSSH_PORT=22\nSTACK_DIR=/opt/mediumformat\n' "$SSH_HOST" "$SSH_USER" > deploy/docker/stack.env
+          ./deploy/docker/deploy-app.sh
+
+      - name: Smoke check
+        run: |
+          sleep 15
+          for url in https://mediumformat.info/ https://mediumformat.info/backoffice/ "https://mediumformat.info/api/v1/storefront/releases?limit=1"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --retry 6 --retry-delay 10 --retry-all-errors "$url")
+            echo "$code $url"
+            [ "$code" = 200 ] || exit 1
+          done
