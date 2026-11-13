@@ -4,6 +4,7 @@ import { CreateReleaseDto } from './dto/create-release.dto';
 import { UpdateReleaseDto } from './dto/update-release.dto';
 import { ReleaseFilterDto } from './dto/release-filter.dto';
 import { Prisma } from '@prisma/client';
+import { assignMissingReleaseSlugs } from './release-slug';
 
 @Injectable()
 export class InventoryService {
@@ -15,7 +16,10 @@ export class InventoryService {
       if (exists) throw new ConflictException('Barcode already in use');
     }
     // DTO array fields (tracks/sizing/channelListings) narrow to Prisma Json inputs
-    return this.prisma.release.create({ data: dto as unknown as Prisma.ReleaseUncheckedCreateInput });
+    const created = await this.prisma.release.create({ data: dto as unknown as Prisma.ReleaseUncheckedCreateInput });
+    if (created.slug) return created;
+    await assignMissingReleaseSlugs(this.prisma);
+    return this.prisma.release.findUniqueOrThrow({ where: { id: created.id } });
   }
 
   async findAll(filter: ReleaseFilterDto) {
