@@ -243,3 +243,59 @@ export async function subscribeNewsletter(email: string): Promise<NewsletterResu
     return unwrap(err, 'Subscription failed');
   }
 }
+
+// ---------------------------------------------------------------------------
+// Checkout — POST /storefront/orders (prices + stock resolved server-side)
+// ---------------------------------------------------------------------------
+
+export interface PlaceOrderInput {
+  customerName: string;
+  email: string;
+  phone: string;
+  fulfilment: 'PICKUP' | 'DELIVERY';
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  notes?: string;
+  voucherCode?: string;
+  lines: Array<{ releaseId: string; qty: number }>;
+}
+
+export interface PlacedOrder {
+  number: string;
+  status: string;
+  customerName: string;
+  fulfilment: 'PICKUP' | 'DELIVERY';
+  subtotalIdr: number;
+  discountIdr: number;
+  totalIdr: number;
+  voucherCode: string | null;
+  createdAt: string;
+  lines: Array<{ releaseId: string; artist: string; title: string; format: string; unitPriceIdr: number; qty: number }>;
+}
+
+/** Turns an API error into one sentence a shopper can act on. */
+export function checkoutErrorMessage(err: unknown): string {
+  if (err instanceof AxiosError) {
+    if (err.response?.status === 429) return 'Too many attempts. Wait a minute, then place the order again.';
+    // Only 400/409 carry messages written for shoppers (validation, stock, voucher).
+    const status = err.response?.status;
+    const msg = (err.response?.data as { message?: string | string[] } | undefined)?.message;
+    if (status === 400 && Array.isArray(msg)) return 'Check your details: ' + msg.join('; ') + '.';
+    if ((status === 400 || status === 409) && typeof msg === 'string') return msg;
+    if (!err.response) return 'Could not reach the shop. Check your connection and try again.';
+  }
+  return 'Something went wrong placing your order. Please try again.';
+}
+
+export async function placeOrder(input: PlaceOrderInput): Promise<PlacedOrder> {
+  const res = await api.post<PlacedOrder>('/storefront/orders', input);
+  return res.data;
+}
+
+export async function checkVoucher(code: string, subtotalIdr: number) {
+  const res = await api.post<{ valid: boolean; discountIdr: number; reason?: string }>(
+    '/storefront/vouchers/validate', { code, subtotalIdr },
+  );
+  return res.data;
+}

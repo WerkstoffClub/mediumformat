@@ -4,6 +4,7 @@ import { AppShell } from './layouts/AppShell';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import { OrdersList } from './pages/orders/OrdersList';
+import { WebOrders } from './pages/web-orders/WebOrders';
 import { OrderDetail } from './pages/orders/OrderDetail';
 import { CustomersList } from './pages/customers/CustomersList';
 import { PurchaseOrdersHub } from './pages/purchase-orders/PurchaseOrdersHub';
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="/pos/checkout"       element={<PosCheckout />} />
           </Route>
           <Route path="/orders"             element={<OrdersList />} />
+          <Route path="/web-orders"         element={<WebOrders />} />
           <Route path="/orders/:id"         element={<OrderDetail />} />
           <Route path="/customers"          element={<CustomersList />} />
           <Route path="/purchase-orders"    element={<PurchaseOrdersHub />} />

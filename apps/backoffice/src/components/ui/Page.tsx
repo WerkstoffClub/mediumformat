@@ -51,6 +51,8 @@ const STATUS_COLORS: Record<string, string> = {
   Matched: 'var(--success)', New: 'var(--info)', Ambiguous: 'var(--warning)',
   // Forwarder consolidations (ConsolidationStatus) — open until freight is allocated.
   Open: 'var(--info)', Allocated: 'var(--success)',
+  // Web orders (storefront checkout)
+  'Awaiting payment': 'var(--warning)', Shipped: 'var(--info)', Completed: 'var(--success)',
   // Newsletter
   Scheduled: 'var(--warning)', Active: 'var(--success)', Unsubscribed: 'var(--text-muted)',
 };
