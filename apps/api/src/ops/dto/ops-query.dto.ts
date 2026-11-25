@@ -17,6 +17,10 @@ export class OrdersQueryDto extends PagedQueryDto {
   @IsOptional() @IsString() tag?: string;
   @IsOptional() @IsString() payment?: string;
   @IsOptional() @IsString() fulfillment?: string;
+  /** Resolved channel label (placeholder customer → marketplace, else tag). */
+  @IsOptional() @IsString() channel?: string;
+  @IsOptional() @IsIn(['pending', 'processing', 'completed', 'returned'])
+  status?: 'pending' | 'processing' | 'completed' | 'returned';
 }
 
 export class ChannelsQueryDto {

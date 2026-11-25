@@ -168,3 +168,64 @@ export function Widget({ title, note, actions, children }: { title: string; note
     </div>
   );
 }
+
+/** Mockup `.channel-tag` (v2.1): neutral 4px-radius tag, small square dot in
+ *  the channel colour. Takes an already-resolved channel label or a raw tag. */
+export function ChannelTag({ channel, empty = '—' }: { channel: string | null | undefined; empty?: string }) {
+  if (!channel) return <span className="text-[11px] text-[var(--text-faint)]">{empty}</span>;
+  return (
+    <span className="inline-flex items-center gap-[5px] text-[11px] px-2 py-0.5 rounded-[4px] border border-[var(--border)] text-[var(--text-secondary)] whitespace-nowrap">
+      <span className="w-[5px] h-[5px] rounded-[1.5px] flex-shrink-0" style={{ background: channelColor(channel) }} />
+      {channelLabel(channel)}
+    </span>
+  );
+}
+
+/** Page numbers to show: 1 2 3 … 129 (with the current page kept visible). */
+function pageList(page: number, pages: number): Array<number | '…'> {
+  if (pages <= 7) return Array.from({ length: pages }, (_, i) => i + 1);
+  const set = new Set([1, 2, 3, page - 1, page, page + 1, pages].filter(p => p >= 1 && p <= pages));
+  const sorted = [...set].sort((a, b) => a - b);
+  const out: Array<number | '…'> = [];
+  sorted.forEach((p, i) => {
+    if (i > 0 && p - sorted[i - 1] > 1) out.push('…');
+    out.push(p);
+  });
+  return out;
+}
+
+/** Mockup `.mf-foot` table footer: "1–10 of 1.284 customers" + numbered pager. */
+export function TableFoot({ page, limit, total, noun, note, onPage }: {
+  page: number; limit: number; total: number; noun: string; note?: string; onPage: (p: number) => void;
+}) {
+  const pages = Math.max(1, Math.ceil(total / limit));
+  const from = total > 0 ? (page - 1) * limit + 1 : 0;
+  const to = Math.min(page * limit, total);
+  const nf = new Intl.NumberFormat('id-ID');
+  const btn = 'min-w-[30px] h-[30px] px-2 rounded-[6px] border text-[12px] [font-variant-numeric:tabular-nums] transition-colors';
+  return (
+    <div className="flex items-center justify-between gap-3 flex-wrap px-4 py-3 border-t border-[var(--border)]">
+      <span className="text-[12px] text-[var(--text-secondary)] [font-variant-numeric:tabular-nums]">
+        {nf.format(from)}–{nf.format(to)} of {nf.format(total)} {noun}{note ? ` · ${note}` : ''}
+      </span>
+      <div className="flex gap-1" role="navigation" aria-label="Pagination">
+        <button type="button" aria-label="Previous page" disabled={page <= 1} onClick={() => onPage(page - 1)}
+          className={`${btn} border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)] disabled:opacity-40 disabled:cursor-not-allowed`}>‹</button>
+        {pageList(page, pages).map((p, i) =>
+          p === '…' ? (
+            <button key={`gap${i}`} type="button" disabled className={`${btn} border-[var(--border)] text-[var(--text-secondary)] opacity-40`}>…</button>
+          ) : (
+            <button key={p} type="button" aria-current={p === page ? 'page' : undefined} onClick={() => onPage(p)}
+              className={`${btn} ${p === page
+                ? 'border-[var(--accent)] text-[var(--text-primary)] bg-[var(--bg-overlay)]'
+                : 'border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)] hover:text-[var(--text-primary)]'}`}>
+              {nf.format(p)}
+            </button>
+          ),
+        )}
+        <button type="button" aria-label="Next page" disabled={page >= pages} onClick={() => onPage(page + 1)}
+          className={`${btn} border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)] disabled:opacity-40 disabled:cursor-not-allowed`}>›</button>
+      </div>
+    </div>
+  );
+}

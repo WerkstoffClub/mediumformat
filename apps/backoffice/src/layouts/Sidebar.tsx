@@ -47,7 +47,7 @@ export function Sidebar({ open = false, onClose = () => {} }: { open?: boolean; 
   const [pendingWeb, setPendingWeb] = useState<number | null>(null);
 
   useEffect(() => {
-    getOrders({ payment: 'Unpaid', limit: 1 }).then(r => setPendingOrders(r.total)).catch(() => {});
+    getOrders({ status: 'pending', limit: 1 }).then(r => setPendingOrders(r.total)).catch(() => {});
     getWebOrders({ limit: 1 }).then(r => setPendingWeb(r.pending || null)).catch(() => {});
   }, []);
 

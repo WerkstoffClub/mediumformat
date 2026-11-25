@@ -27,3 +27,23 @@
     margin: 6mm;
   }
 }
+
+/* mockup-customers: the Phone column steps aside below 1600px so the table
+   fits next to the side panel (it stays in the drawer and on phones). */
+@media (min-width: 768px) and (max-width: 1600px) {
+  .mf-stack-table .mf-col-phone { display: none; }
+}
+
+/* Mockup data tables on phones (mockup-customers): rows become stacked cards,
+   each cell labelled from its data-k attribute. */
+@media (max-width: 767px) {
+  .mf-stack-table thead { display: none; }
+  .mf-stack-table, .mf-stack-table tbody, .mf-stack-table tr, .mf-stack-table td { display: block; width: 100%; }
+  .mf-stack-table tr { border-top: 1px solid var(--border); padding: 12px 4px; }
+  .mf-stack-table tbody tr:hover { box-shadow: none !important; }
+  .mf-stack-table td { border: none !important; padding: 4px 12px !important; text-align: left !important; }
+  .mf-stack-table td[data-k]::before {
+    content: attr(data-k); display: inline-block; width: 96px; font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted);
+  }
+}
