@@ -7,8 +7,8 @@ import {
   availableAt, commissionSplit, dayKeys, homeLocationId, pctChange, sellThrough,
 } from './location-stock';
 
-interface LocationStats { items: number; units: number; shelves: number; lowStock: number; valueIdr: number; }
-interface LocationSales { revenue: number; orders: number; avgOrder: number; units: number; windowDays: number; }
+export interface LocationStats { items: number; units: number; shelves: number; lowStock: number; valueIdr: number; }
+export interface LocationSales { revenue: number; orders: number; avgOrder: number; units: number; windowDays: number; }
 export type LocationWithStats = Location & { stats: LocationStats; sales: LocationSales };
 
 const DAY = 86_400_000;
