@@ -124,7 +124,7 @@ export function WebOrders() {
 }
 
 function OrderDetailRow({ order: o, busy, onMove }: { order: WebOrder; busy: boolean; onMove: (s: WebOrderStatus) => void }) {
-  const wa = o.phone.replace(/[^0-9]/g, '').replace(/^0/, '62');
+  const wa = o.phone?.replace(/[^0-9]/g, '').replace(/^0/, '62');
   return (
     <tr className="border-b border-[var(--border-sub)] bg-[var(--bg-base)]">
       <td colSpan={7} className="px-3.5 py-4">
@@ -132,8 +132,10 @@ function OrderDetailRow({ order: o, busy, onMove }: { order: WebOrder; busy: boo
           <div className="flex flex-col gap-1">
             <span className="text-[10px] uppercase tracking-[0.07em] text-[var(--text-faint)] font-semibold">Contact</span>
             <span className="text-[var(--text-primary)]">{o.customerName}</span>
-            <a className="text-[var(--text-secondary)] hover:underline" href={`mailto:${o.email}`}>{o.email}</a>
-            <a className="text-[var(--text-secondary)] hover:underline" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer">{o.phone} · WhatsApp</a>
+            {o.email && <a className="text-[var(--text-secondary)] hover:underline" href={`mailto:${o.email}`}>{o.email}</a>}
+            {o.phone && <a className="text-[var(--text-secondary)] hover:underline" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer">{o.phone} · WhatsApp</a>}
+            {!o.email && !o.phone && <span className="text-[var(--text-faint)]">No contact on file</span>}
+            <span className="text-[var(--text-muted)]">via {o.channel}</span>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-[10px] uppercase tracking-[0.07em] text-[var(--text-faint)] font-semibold">{o.fulfilment === 'PICKUP' ? 'Pick up in store' : 'Deliver to'}</span>

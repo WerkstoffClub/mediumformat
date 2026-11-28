@@ -4,7 +4,7 @@ import { STAFF_ROLES } from '@mf/shared';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { CreateWebOrderDto, UpdateWebOrderStatusDto, WebOrderFilterDto } from './dto/create-web-order.dto';
+import { CreateBackofficeOrderDto, CreateWebOrderDto, UpdateWebOrderStatusDto, WebOrderFilterDto } from './dto/create-web-order.dto';
 import { WebOrdersService } from './web-orders.service';
 
 /** Public checkout endpoint — lives under /storefront like the rest of the shop API. */
@@ -28,6 +28,13 @@ export class WebOrdersController {
   @Get()
   list(@Query() f: WebOrderFilterDto) {
     return this.svc.findAll(f);
+  }
+
+  /** Back-office "New order". */
+  @Roles(...STAFF_ROLES)
+  @Post()
+  create(@Body() body: CreateBackofficeOrderDto) {
+    return this.svc.createBackoffice(body);
   }
 
   @Roles(...STAFF_ROLES)

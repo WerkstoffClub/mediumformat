@@ -29,15 +29,34 @@ export interface OrderRow {
   marketplace?: boolean;
   customerEmail?: string | null;
   customerMobile?: string | null;
+  /** dealpos = DealPOS invoice; mf = website or back-office order. */
+  source?: 'dealpos' | 'mf';
+  courier?: string | null;
+  trackingNo?: string | null;
 }
 
-export type OrderStatus = 'pending' | 'processing' | 'completed' | 'returned';
+export const ORDER_STATUSES = [
+  'pending', 'processing', 'packed', 'shipped', 'delivered', 'completed', 'cancelled', 'returned',
+] as const;
+export type OrderStatus = (typeof ORDER_STATUSES)[number];
+export type TrackingStage = 'PACKED' | 'SHIPPED' | 'DELIVERED';
+
+export interface OrderTracking {
+  orderId: string;
+  stage: TrackingStage;
+  courier: string | null;
+  trackingNo: string | null;
+  packedAt: string | null;
+  shippedAt: string | null;
+  deliveredAt: string | null;
+}
 
 export interface OrdersSummary {
   total: number;
   byStatus: Record<OrderStatus, { orders: number; amount: number }>;
   channels: Array<{ channel: string; orders: number }>;
   today: { orders: number; amount: number };
+  activeCouriers: number;
 }
 
 export interface OrderLine {
@@ -63,9 +82,17 @@ export interface OrderPayment {
 export interface OrderDetail extends OrderRow {
   lines: OrderLine[];
   payments: OrderPayment[];
+  tracking: OrderTracking | null;
+  /** MF orders only */
+  email?: string | null;
+  phone?: string | null;
+  webStatus?: 'PENDING' | 'PAID' | 'SHIPPED' | 'COMPLETED' | 'CANCELLED';
+  fulfilment?: 'PICKUP' | 'DELIVERY';
+  address?: string | null;
+  notes?: string | null;
 }
 
-export type CustomerSegment = 'vip' | 'new' | null;
+export type CustomerSegment = 'wholesale' | 'vip' | 'new' | null;
 
 export interface CustomerRow {
   id: string;
@@ -79,12 +106,16 @@ export interface CustomerRow {
   lastOrderAt: string | null;
   channel: string | null;
   segment: CustomerSegment;
+  /** dealpos = synced from DealPOS (contact details read-only); mf = added in the back-office. */
+  source: 'dealpos' | 'mf';
+  wholesale: boolean;
 }
 
 export interface CustomersSummary {
   totalCustomers: number;
   newThisMonth: number;
   vipCount: number;
+  wholesaleCount: number;
   avgLifetime: number;
   avgOrders: number;
   repeatRate: number;
@@ -143,7 +174,7 @@ export async function getOrder(id: string): Promise<OrderDetail> {
 }
 
 export async function getCustomers(
-  filter: { q?: string; page?: number; limit?: number; segment?: 'vip' | 'new' | 'repeat' } = {},
+  filter: { q?: string; page?: number; limit?: number; segment?: 'vip' | 'new' | 'repeat' | 'wholesale' } = {},
 ): Promise<Paged<CustomerRow>> {
   const res = await api.get<Paged<CustomerRow>>('/customers-list', { params: filter });
   return res.data;
@@ -182,28 +213,49 @@ export interface CustomerOrderRow {
   amount: number;
   paymentStatus: string | null;
   fulfillment: string | null;
+  status: OrderStatus;
   lines: number;
 }
 
-export interface CustomerDetail {
-  id: string;
-  name: string;
-  code: string | null;
-  mobile: string | null;
-  email: string | null;
-  joinDate: string | null;
-  orders: number;
-  lifetime: number;
+export interface CustomerDetail extends CustomerRow {
+  notes: string | null;
   avgOrder: number;
   firstOrderAt: string | null;
-  lastOrderAt: string | null;
-  segment: CustomerSegment;
   channels: CustomerChannelStat[];
   recentOrders: CustomerOrderRow[];
 }
 
 export async function getCustomerDetail(id: string): Promise<CustomerDetail> {
   const res = await api.get<CustomerDetail>(`/customers/${id}`);
+  return res.data;
+}
+
+export interface CustomerInput {
+  name?: string;
+  email?: string;
+  phone?: string;
+  channel?: string;
+  wholesale?: boolean;
+  notes?: string;
+}
+
+/** Add a customer in the back-office (stored in MF; DealPOS is not written to). */
+export async function createCustomer(input: CustomerInput & { name: string }): Promise<CustomerDetail> {
+  const res = await api.post<CustomerDetail>('/customers', input);
+  return res.data;
+}
+
+/** Wholesale flag / notes on any customer; contact details on back-office customers only. */
+export async function updateCustomer(id: string, input: CustomerInput): Promise<CustomerDetail> {
+  const res = await api.patch<CustomerDetail>(`/customers/${id}`, input);
+  return res.data;
+}
+
+/** Record packing/shipping progress; stage null clears it. */
+export async function setOrderTracking(
+  id: string, input: { stage: TrackingStage | null; courier?: string; trackingNo?: string },
+): Promise<OrderTracking | null> {
+  const res = await api.patch<OrderTracking | null>(`/orders/${id}/tracking`, input);
   return res.data;
 }
 

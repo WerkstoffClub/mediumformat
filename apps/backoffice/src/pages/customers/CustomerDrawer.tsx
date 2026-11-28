@@ -2,9 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   channelColor, channelLabel, customerLabel, fmtDate, fmtIdr, fmtIdrCompact,
-  getCustomerDetail, type CustomerDetail,
+  getCustomerDetail, updateCustomer, type CustomerDetail,
 } from '../../api/ops';
-import { StatusPill } from '../../components/ui/Page';
+import { OrderStatusPill, SegmentBadge } from '../../components/ui/OrderStatus';
+import { Segmented, errMsg } from '../../components/ui/Drawer';
 
 const ANIM_MS = 220;
 
@@ -20,8 +21,26 @@ function Stat({ label, value, title }: { label: string; value: string; title?: s
   );
 }
 
-export function CustomerDrawer({ customerId, onClose }: { customerId: string; onClose: () => void }) {
+export function CustomerDrawer({ customerId, onClose, onChanged }: {
+  customerId: string; onClose: () => void; onChanged?: () => void;
+}) {
   const [detail, setDetail] = useState<CustomerDetail | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [saveErr, setSaveErr] = useState<string | null>(null);
+
+  async function setWholesale(wholesale: boolean) {
+    if (!detail || detail.wholesale === wholesale) return;
+    setSaving(true);
+    setSaveErr(null);
+    try {
+      setDetail(await updateCustomer(detail.id, { wholesale }));
+      onChanged?.();
+    } catch (e) {
+      setSaveErr(errMsg(e, 'Could not save.'));
+    } finally {
+      setSaving(false);
+    }
+  }
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -77,16 +96,10 @@ export function CustomerDrawer({ customerId, onClose }: { customerId: string; on
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <h2 className="text-[16px] font-semibold text-[var(--text-primary)] truncate">{detail ? name : 'Loading…'}</h2>
-              {detail?.segment && (
-                <span className={`text-[10px] font-semibold uppercase tracking-[0.04em] px-[7px] py-px rounded-[4px] border ${
-                  detail.segment === 'vip' ? 'text-[var(--text-primary)] border-[var(--accent)]' : 'text-[var(--text-muted)] border-[var(--border)]'
-                }`}>
-                  {detail.segment === 'vip' ? 'VIP' : 'New'}
-                </span>
-              )}
+              <SegmentBadge segment={detail?.segment} />
             </div>
             <p className="text-[11px] text-[var(--text-muted)] mt-0.5 font-mono">
-              {detail?.code ?? '—'}{detail?.joinDate ? ` · member since ${new Date(detail.joinDate).getFullYear()}` : ''}
+              {detail?.code ?? (detail?.source === 'mf' ? 'Added in back-office' : '—')}{detail?.joinDate ? ` · since ${new Date(detail.joinDate).getFullYear()}` : ''}
             </p>
           </div>
           <button
@@ -118,6 +131,24 @@ export function CustomerDrawer({ customerId, onClose }: { customerId: string; on
                   </div>
                 ))}
               </div>
+
+              {/* customer type (MF data; DealPOS has no wholesale flag) */}
+              <div className="px-5 py-4 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-[12px] text-[var(--text-primary)]">Customer type</p>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{saveErr ?? 'Wholesale buyers get their own segment.'}</p>
+                </div>
+                <div className={saving ? 'opacity-50 pointer-events-none' : ''}>
+                  <Segmented
+                    value={detail.wholesale ? 'wholesale' : 'retail'}
+                    onChange={v => setWholesale(v === 'wholesale')}
+                    options={[{ value: 'retail', label: 'Retail' }, { value: 'wholesale', label: 'Wholesale' }]}
+                  />
+                </div>
+              </div>
+              {detail.notes && (
+                <div className="px-5 py-3 text-[12px] text-[var(--text-secondary)] whitespace-pre-line">{detail.notes}</div>
+              )}
 
               {/* headline figures */}
               <div className="px-5 py-4 flex gap-2">
@@ -164,7 +195,7 @@ export function CustomerDrawer({ customerId, onClose }: { customerId: string; on
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
                           <span className="font-mono text-[12px] text-[var(--text-primary)] truncate">{o.number}</span>
-                          <StatusPill value={o.paymentStatus} />
+                          <OrderStatusPill status={o.status} />
                         </div>
                         <p className="text-[11px] text-[var(--text-muted)] mt-0.5">
                           {fmtDate(o.date)} · {o.lines} item{o.lines === 1 ? '' : 's'}{o.tag ? ` · ${channelLabel(o.tag)}` : ''}

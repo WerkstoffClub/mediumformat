@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { channelLabel, customerLabel, fmtDate, fmtIdr, getOrder, type OrderDetail as Order } from '../../api/ops';
-import { ChannelPill, Panel, StatusPill, tdCls, thCls } from '../../components/ui/Page';
+import {
+  channelLabel, customerLabel, fmtDate, fmtIdr, getOrder, setOrderTracking,
+  type OrderDetail as Order, type OrderTracking, type TrackingStage,
+} from '../../api/ops';
+import { ChannelTag, Panel, tdCls, thCls } from '../../components/ui/Page';
+import { OrderStatusPill } from '../../components/ui/OrderStatus';
+import { errMsg, inputCls } from '../../components/ui/Drawer';
 import { ReleaseCover } from '../../components/ui/Cover';
 import { ReceiptModal, type ReceiptData } from '../../components/ui/Receipt';
 import { STORE_ADDRESS } from '../../lib/store';
@@ -32,12 +37,17 @@ function LifecycleStepper({ order }: { order: Order }) {
   const paid = order.paymentStatus === 'Paid';
   const sent = order.fulfillment === 'Sent';
   const partial = order.fulfillment === 'Partial';
+  const t = order.tracking;
   let reached = 0;              // Placed always done
   if (partial) reached = 1;     // Packed
   if (sent) reached = 2;        // Shipped (handed to courier)
-  if (paid) reached = 4;        // Settled — payout implies delivery
+  // MF tracking (packed / shipped / delivered) when staff recorded it
+  if (t) reached = Math.max(reached, t.stage === 'PACKED' ? 1 : t.stage === 'SHIPPED' ? 2 : 3);
+  if (paid && (order.source !== 'mf' || t?.stage === 'DELIVERED' || order.webStatus === 'COMPLETED')) reached = 4;
+  const stamp = [null, t?.packedAt, t?.shippedAt, t?.deliveredAt];
   const subtitle = (i: number, done: boolean, current: boolean): string => {
     if (i === 0) return fmtTime(order.created ?? order.date);
+    if (done && stamp[i]) return fmtTime(stamp[i]);
     if (i === 4 && paid) return fmtTime(order.payments[0]?.date ?? order.date);
     return done ? '✓' : current ? 'in progress' : '—';
   };
@@ -66,8 +76,8 @@ function LifecycleStepper({ order }: { order: Order }) {
           );
         })}
       </div>
-      {order.paymentStatus === 'Unpaid' && (
-        <p className="text-[11px] text-[var(--warning)] mt-3">Awaiting settlement — {channelLabel(order.tag) || 'the marketplace'} pays out on its own schedule.</p>
+      {order.paymentStatus === 'Unpaid' && order.source !== 'mf' && (
+        <p className="text-[11px] text-[var(--warning)] mt-3">Awaiting settlement — {order.channel ?? (channelLabel(order.tag) || 'the marketplace')} pays out on its own schedule.</p>
       )}
     </div>
   );
@@ -106,6 +116,84 @@ function buildReceipt(order: Order, isWalkIn: boolean): ReceiptData {
   };
 }
 
+const STAGES: Array<{ key: TrackingStage; label: string }> = [
+  { key: 'PACKED', label: 'Packed' },
+  { key: 'SHIPPED', label: 'Shipped' },
+  { key: 'DELIVERED', label: 'Delivered' },
+];
+
+/** Packing & shipping progress — MF data (DealPOS only knows sent/unsent). */
+function TrackingPanel({ order, onSaved }: { order: Order; onSaved: (t: OrderTracking | null) => void }) {
+  const t = order.tracking;
+  const [stage, setStage] = useState<TrackingStage | null>(t?.stage ?? null);
+  const [courier, setCourier] = useState(t?.courier ?? '');
+  const [trackingNo, setTrackingNo] = useState(t?.trackingNo ?? '');
+  const [saving, setSaving] = useState(false);
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const dirty = stage !== (t?.stage ?? null) || courier !== (t?.courier ?? '') || trackingNo !== (t?.trackingNo ?? '');
+
+  async function save() {
+    setSaving(true);
+    setMsg(null);
+    try {
+      const saved = await setOrderTracking(order.id, { stage, courier, trackingNo });
+      onSaved(saved);
+      setMsg({ ok: true, text: 'Saved.' });
+    } catch (e) {
+      setMsg({ ok: false, text: errMsg(e, 'Could not save.') });
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <Panel title="Fulfilment" note={t ? `updated ${fmtTime(t.shippedAt && t.stage !== 'PACKED' ? (t.deliveredAt ?? t.shippedAt) : t.packedAt)}` : 'not tracked yet'}>
+      <div className="p-3.5 space-y-3">
+        <div className="grid grid-cols-3 gap-1.5">
+          {STAGES.map(s => {
+            const on = stage === s.key;
+            return (
+              <button
+                key={s.key}
+                type="button"
+                onClick={() => setStage(on ? null : s.key)}
+                className={`text-[12px] font-medium py-1.5 rounded-[6px] border transition-colors ${
+                  on ? 'bg-[var(--accent)] text-[var(--accent-text)] border-[var(--accent)]' : 'border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'
+                }`}
+              >
+                {s.label}
+              </button>
+            );
+          })}
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          <label className="block">
+            <span className="block text-[10px] uppercase tracking-[0.05em] text-[var(--text-muted)] mb-1">Courier</span>
+            <input className={inputCls} value={courier} onChange={e => setCourier(e.target.value)} placeholder="JNE, SiCepat, GoSend…" />
+          </label>
+          <label className="block">
+            <span className="block text-[10px] uppercase tracking-[0.05em] text-[var(--text-muted)] mb-1">Tracking no.</span>
+            <input className={`${inputCls} font-mono`} value={trackingNo} onChange={e => setTrackingNo(e.target.value)} />
+          </label>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className={`text-[11px] flex-1 ${msg ? (msg.ok ? 'text-[var(--success)]' : 'text-[var(--danger)]') : 'text-[var(--text-muted)]'}`}>
+            {msg?.text ?? 'Click a stage again to clear it.'}
+          </span>
+          <button
+            type="button"
+            disabled={!dirty || saving}
+            onClick={save}
+            className="text-[12px] px-3 py-1.5 rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] font-semibold disabled:opacity-40"
+          >
+            {saving ? 'Saving…' : 'Save'}
+          </button>
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
 export function OrderDetail() {
   const { id } = useParams<{ id: string }>();
   const [order, setOrder] = useState<Order | null>(null);
@@ -119,7 +207,11 @@ export function OrderDetail() {
   if (error) return <p className="text-[12px] text-[var(--danger)]">Order not found.</p>;
   if (!order) return <p className="text-[12px] text-[var(--text-faint)]">Loading…</p>;
 
-  const isWalkIn = !order.tag || /normal|offline|pos|store/i.test(order.tag);
+  const mf = order.source === 'mf';
+  const isWalkIn = !mf && (!order.tag || /normal|offline|pos|store/i.test(order.tag));
+  const reload = () => { if (id) getOrder(id).then(setOrder).catch(() => {}); };
+  const trackable = !isWalkIn || Boolean(order.tracking);
+  const closed = order.status === 'returned' || order.status === 'cancelled' || (mf && order.webStatus === 'PENDING');
   const subtotal = order.lines.reduce((sum, l) => sum + Number(l.price) * Number(l.quantity), 0);
   const discount = order.lines.reduce((sum, l) => sum + Number(l.discountAmount ?? 0), 0);
   const cogs = order.lines.reduce((sum, l) => sum + Number(l.cost ?? 0) * Number(l.quantity), 0);
@@ -128,15 +220,28 @@ export function OrderDetail() {
 
   /* timeline from what actually happened: sale created → payments received */
   const events: Array<{ title: string; meta: string; ok: boolean }> = [
-    { title: `Sale rung up${isWalkIn ? ' at the register' : ` on ${channelLabel(order.tag)}`}`, meta: fmtTime(order.created ?? order.date), ok: true },
+    {
+      title: mf
+        ? `Order entered — ${order.channel ?? 'back-office'}`
+        : `Sale rung up${isWalkIn ? ' at the register' : ` on ${channelLabel(order.channel ?? order.tag)}`}`,
+      meta: fmtTime(order.created ?? order.date),
+      ok: true,
+    },
     ...order.payments.map(p => ({
       title: `Payment received — ${p.method}`,
       meta: `${fmtIdr(p.amount)} · ${fmtTime(p.date)}`,
       ok: true,
     })),
     ...(order.paymentStatus === 'Unpaid'
-      ? [{ title: 'Awaiting settlement', meta: 'marketplace pays out on its own schedule', ok: false }]
+      ? [mf
+          ? { title: 'Awaiting payment', meta: 'mark it paid in Web orders once the transfer lands', ok: false }
+          : { title: 'Awaiting settlement', meta: 'marketplace pays out on its own schedule', ok: false }]
       : []),
+    ...(order.tracking?.packedAt ? [{ title: 'Packed', meta: fmtTime(order.tracking.packedAt), ok: true }] : []),
+    ...(order.tracking?.shippedAt
+      ? [{ title: `Shipped${order.tracking.courier ? ` — ${order.tracking.courier}` : ''}`, meta: [order.tracking.trackingNo, fmtTime(order.tracking.shippedAt)].filter(Boolean).join(' · '), ok: true }]
+      : []),
+    ...(order.tracking?.deliveredAt ? [{ title: 'Delivered', meta: fmtTime(order.tracking.deliveredAt), ok: true }] : []),
   ];
 
   return (
@@ -151,12 +256,11 @@ export function OrderDetail() {
           </div>
           <div className="flex items-center gap-2.5 flex-wrap">
             <h1 className="text-[24px] font-semibold tracking-[-0.04em] leading-8 text-[var(--text-primary)] font-mono">{order.number}</h1>
-            <ChannelPill tag={order.tag ?? 'POS'} />
-            <StatusPill value={order.paymentStatus} />
-            {!isWalkIn && <StatusPill value={order.fulfillment} />}
+            <ChannelTag channel={order.channel ?? order.tag ?? 'POS'} />
+            <OrderStatusPill status={order.status} />
           </div>
           <p className="text-[13px] text-[var(--text-muted)] mt-1">
-            {fmtDate(order.date)} · {order.outlet ?? 'MF Store'} · {isWalkIn ? 'in-store sale' : 'marketplace order'}
+            {fmtDate(order.date)} · {mf ? 'entered in Medium Format' : order.outlet ?? 'MF Store'} · {mf ? (order.fulfilment === 'PICKUP' ? 'pick up in store' : 'to ship') : isWalkIn ? 'in-store sale' : 'marketplace order'}
           </p>
         </div>
         <div className="flex flex-col items-end gap-2.5">
@@ -235,7 +339,7 @@ export function OrderDetail() {
               <tbody>
                 {order.payments.length === 0 && (
                   <tr><td colSpan={3} className={`${tdCls} text-[var(--text-faint)]`}>
-                    No payment recorded — {isWalkIn ? 'check the register in DealPOS' : 'settles via the marketplace'}.
+                    No payment recorded — {mf ? 'mark it paid in Web orders' : isWalkIn ? 'check the register in DealPOS' : 'settles via the marketplace'}.
                   </td></tr>
                 )}
                 {order.payments.map(p => (
@@ -255,9 +359,18 @@ export function OrderDetail() {
 
         {/* ── side column ── */}
         <div className="space-y-4">
+          {trackable && !closed && <TrackingPanel key={order.tracking?.stage ?? 'none'} order={order} onSaved={reload} />}
           <Panel title="Customer">
             <div className="p-3.5">
               <p className="text-[14px] font-medium text-[var(--text-primary)]">{customerLabel(order.customerName) || 'Walk-in customer'}</p>
+              {mf && (order.email || order.phone || order.address) && (
+                <div className="mt-2 space-y-0.5 text-[12px] text-[var(--text-secondary)]">
+                  {order.email && <p>{order.email}</p>}
+                  {order.phone && <p className="[font-variant-numeric:tabular-nums]">{order.phone}</p>}
+                  {order.address && <p className="text-[var(--text-muted)]">{order.address}</p>}
+                </div>
+              )}
+              {mf && order.notes && <p className="mt-2 text-[12px] text-[var(--text-muted)] whitespace-pre-line">{order.notes}</p>}
               <p className="text-[11px] text-[var(--text-muted)] mt-1">
                 {order.customerName
                   ? <Link to={`/customers?q=${encodeURIComponent(order.customerName)}`} className="underline hover:text-[var(--text-primary)]">View profile →</Link>
@@ -269,8 +382,8 @@ export function OrderDetail() {
           <Panel title="Sale summary">
             <div className="p-3.5 space-y-2 text-[12px]">
               {[
-                ['Channel', channelLabel(order.tag) || 'POS'],
-                ['Outlet', order.outlet ?? 'MF Store'],
+                ['Channel', order.channel ?? (channelLabel(order.tag) || 'POS')],
+                ['Outlet', mf ? 'Medium Format' : order.outlet ?? 'MF Store'],
                 ['Items', String(order.lines.reduce((sum, l) => sum + Number(l.quantity), 0))],
                 ['COGS', fmtIdr(cogs)],
                 ['Margin', `${fmtIdr(margin)}${Number(order.amount) > 0 ? ` · ${((margin / Number(order.amount)) * 100).toFixed(1)}%` : ''}`],
