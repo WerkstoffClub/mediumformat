@@ -32,19 +32,38 @@ jobs:
     steps:
       # Fail in seconds, with a clear list, when the one-time setup is not done yet.
       - name: Check deploy secrets
+        id: secrets
         env:
           TS_OAUTH_CLIENT_ID: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           TS_OAUTH_SECRET: ${{ secrets.TS_OAUTH_SECRET }}
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
         run: |
           missing=""
-          for n in TS_OAUTH_CLIENT_ID TS_OAUTH_SECRET DEPLOY_SSH_KEY; do
+          for n in TS_OAUTH_SECRET DEPLOY_SSH_KEY; do
             [ -n "${!n}" ] || missing="$missing $n"
           done
           if [ -n "$missing" ]; then
             echo "::error title=Deploy not set up::Missing repository secrets:$missing. Add them at https://github.com/${{ github.repository }}/settings/secrets/actions (Repository secrets). See deploy/docker/README.md → Deploy from GitHub Actions."
             exit 1
           fi
+          # TS_OAUTH_SECRET may hold an OAuth client secret (preferred: a fresh
+          # ephemeral tag:ci node per run) or a Tailscale auth key. Only the
+          # prefix is inspected; the value is never printed.
+          secret="$(printf '%s' "$TS_OAUTH_SECRET" | tr -d '[:space:]')"
+          case "$secret" in
+            tskey-client-*)
+              [ -n "$TS_OAUTH_CLIENT_ID" ] || { echo "::error title=Deploy not set up::TS_OAUTH_SECRET is an OAuth client secret, so TS_OAUTH_CLIENT_ID is needed too."; exit 1; }
+              echo "mode=oauth" >> "$GITHUB_OUTPUT" ;;
+            tskey-auth-*)
+              echo "::notice::TS_OAUTH_SECRET holds a Tailscale auth key; joining with it (an OAuth client is preferred, see deploy/docker/README.md)."
+              echo "mode=authkey" >> "$GITHUB_OUTPUT" ;;
+            tskey-api-*)
+              echo "::error title=Wrong Tailscale key::TS_OAUTH_SECRET holds a Tailscale API key (tskey-api-…). Use an OAuth client secret (tskey-client-…) from Tailscale → Settings → OAuth clients, or an auth key (tskey-auth-…)."
+              exit 1 ;;
+            *)
+              echo "::error title=Wrong Tailscale key::TS_OAUTH_SECRET is not a Tailscale OAuth client secret (tskey-client-…) or auth key (tskey-auth-…)."
+              exit 1 ;;
+          esac
           echo "All deploy secrets present."
 
       - uses: actions/checkout@v4
@@ -59,12 +78,30 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @mf/shared build
 
-      - name: Join the tailnet
+      - name: Join the tailnet (OAuth client)
+        if: steps.secrets.outputs.mode == 'oauth'
         uses: tailscale/github-action@v3
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
+
+      - name: Join the tailnet (auth key)
+        if: steps.secrets.outputs.mode == 'authkey'
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TS_OAUTH_SECRET }}
+          hostname: gha-deploy-${{ github.run_id }}
+
+      # tailscale/github-action reports success even when `tailscale up` never
+      # succeeded; fail here with a clear message instead of at SSH.
+      - name: Check tailnet connection
+        run: |
+          if ! sudo tailscale status >/dev/null 2>&1 || [ -z "$(sudo tailscale ip -4 2>/dev/null)" ]; then
+            echo "::error title=Tailscale join failed::The runner could not join the tailnet. Tailscale rejected TS_OAUTH_SECRET (expired, revoked, single-use and already used, or not a tskey-client-/tskey-auth- key) or the tag/ACL does not allow it."
+            exit 1
+          fi
+          sudo tailscale ping -c 3 "$SSH_HOST" || { echo "::error::Joined the tailnet but cannot reach $SSH_HOST."; exit 1; }
 
       - name: SSH key and host
         env:

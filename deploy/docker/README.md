@@ -138,7 +138,10 @@ One-time setup:
    `"tagOwners": {"tag:ci": ["autogroup:admin"]}` and an ACL/grant from `tag:ci` to dd-vps `:22`.
    If Tailscale SSH is enabled on dd-vps, also add an `ssh` rule allowing `tag:ci` as `root`.
 3. **Tailscale OAuth client** (Settings → OAuth clients → Generate): scopes *Devices Core* write and *Auth Keys*
-   write, tag `tag:ci`. Save as repo secrets `TS_OAUTH_CLIENT_ID` and `TS_OAUTH_SECRET`.
+   write, tag `tag:ci`. Save as repo secrets `TS_OAUTH_CLIENT_ID` and `TS_OAUTH_SECRET` (the secret starts
+   with `tskey-client-`). A reusable **auth key** (`tskey-auth-…`, Settings → Keys) in `TS_OAUTH_SECRET` also
+   works — the workflow detects the key type — but an OAuth client is better: each run gets a fresh ephemeral
+   `tag:ci` node and nothing expires after 90 days. An API key (`tskey-api-…`) does not work.
 4. **Deploy SSH key**, from a machine already on the tailnet:
 
    ```bash
