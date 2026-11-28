@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import {
-  ArrayMaxSize, ArrayMinSize, IsEmail, IsIn, IsInt, IsOptional, IsString,
+  ArrayMaxSize, ArrayMinSize, IsBoolean, IsEmail, IsIn, IsInt, IsOptional, IsString,
   Matches, MaxLength, Min, Max, MinLength, ValidateIf, ValidateNested,
 } from 'class-validator';
 
@@ -23,6 +23,27 @@ export class CreateWebOrderDto {
   @IsOptional() @IsString() @MaxLength(10) postalCode?: string;
   @IsOptional() @IsString() @MaxLength(600) notes?: string;
   @IsOptional() @IsString() @MaxLength(40) voucherCode?: string;
+
+  @ArrayMinSize(1) @ArrayMaxSize(MAX_LINES)
+  @ValidateNested({ each: true }) @Type(() => WebOrderLineDto)
+  lines!: WebOrderLineDto[];
+}
+
+/** Back-office order: contact details optional, channel picked by staff. */
+export class CreateBackofficeOrderDto {
+  @IsString() @MinLength(2) @MaxLength(120) customerName!: string;
+  @IsOptional() @ValidateIf((_, v) => v !== '') @IsEmail() @MaxLength(160) email?: string;
+  @IsOptional() @ValidateIf((_, v) => v !== '')
+  @Matches(/^\+?[0-9 ()-]{8,20}$/, { message: 'phone must be a valid phone number' }) phone?: string;
+  @IsString() @MinLength(2) @MaxLength(40) channel!: string;
+  @IsIn(['PICKUP', 'DELIVERY']) fulfilment!: 'PICKUP' | 'DELIVERY';
+
+  @ValidateIf(o => o.fulfilment === 'DELIVERY') @IsString() @MinLength(5) @MaxLength(400) address?: string;
+  @ValidateIf(o => o.fulfilment === 'DELIVERY') @IsString() @MinLength(2) @MaxLength(80) city?: string;
+  @IsOptional() @IsString() @MaxLength(10) postalCode?: string;
+  @IsOptional() @IsString() @MaxLength(600) notes?: string;
+  @IsOptional() @IsString() @MaxLength(40) voucherCode?: string;
+  @IsOptional() @IsBoolean() paid?: boolean;
 
   @ArrayMinSize(1) @ArrayMaxSize(MAX_LINES)
   @ValidateNested({ each: true }) @Type(() => WebOrderLineDto)

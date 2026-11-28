@@ -1,10 +1,12 @@
-import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role, STAFF_ROLES } from '@mf/shared';
 import { OpsService } from './ops.service';
-import { ChannelsQueryDto, CustomersQueryDto, OrdersQueryDto } from './dto/ops-query.dto';
+import {
+  ChannelsQueryDto, CreateCustomerDto, CustomersQueryDto, OrdersQueryDto, UpdateCustomerDto, UpdateTrackingDto,
+} from './dto/ops-query.dto';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(...STAFF_ROLES)
@@ -25,6 +27,21 @@ export class OpsController {
   @Get('orders/:id')
   order(@Param('id') id: string) {
     return this.ops.order(id);
+  }
+
+  @Patch('orders/:id/tracking')
+  setTracking(@Param('id') id: string, @Body() body: UpdateTrackingDto) {
+    return this.ops.setTracking(id, body);
+  }
+
+  @Post('customers')
+  createCustomer(@Body() body: CreateCustomerDto) {
+    return this.ops.createCustomer(body);
+  }
+
+  @Patch('customers/:id')
+  updateCustomer(@Param('id') id: string, @Body() body: UpdateCustomerDto) {
+    return this.ops.updateCustomer(id, body);
   }
 
   @Get('customers-list')

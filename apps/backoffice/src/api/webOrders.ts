@@ -11,9 +11,10 @@ export interface WebOrder {
   id: string;
   number: string;
   status: WebOrderStatus;
+  channel: string;
   customerName: string;
-  email: string;
-  phone: string;
+  email: string | null;
+  phone: string | null;
   fulfilment: 'PICKUP' | 'DELIVERY';
   address: string | null;
   city: string | null;
@@ -38,5 +39,26 @@ export async function getWebOrders(f: { status?: WebOrderStatus; q?: string; pag
 
 export async function setWebOrderStatus(id: string, status: WebOrderStatus) {
   const res = await api.patch<WebOrder>(`/web-orders/${id}/status`, { status });
+  return res.data;
+}
+
+export interface NewOrderInput {
+  customerName: string;
+  email?: string;
+  phone?: string;
+  channel: string;
+  fulfilment: 'PICKUP' | 'DELIVERY';
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  notes?: string;
+  voucherCode?: string;
+  paid?: boolean;
+  lines: Array<{ releaseId: string; qty: number }>;
+}
+
+/** Back-office "New order": priced and stock-reserved server-side, stored in MF. */
+export async function createBackofficeOrder(input: NewOrderInput) {
+  const res = await api.post<WebOrder>('/web-orders', input);
   return res.data;
 }

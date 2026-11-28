@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
+  ORDER_STATUSES,
   getOrders,
   getOrdersSummary,
   type OrderRow,
   type OrderStatus,
   type OrdersSummary,
 } from '../../api/ops';
+import { ORDER_STATUS, OrderStatusPill as StatusPill } from '../../components/ui/OrderStatus';
+import { NewOrderSheet } from './NewOrderSheet';
 import { ChannelTag, PageHeader, TableFoot } from '../../components/ui/Page';
 import { fmtNum, fmtRp, fmtRpShort } from '../../lib/idFormat';
 
@@ -17,29 +20,14 @@ import { fmtNum, fmtRp, fmtRpShort } from '../../lib/idFormat';
 
 const LIMIT = 10; // mockup: 10 rows per page
 
-type StatusKey = 'all' | OrderStatus;
-
-const STATUS: Record<OrderStatus, { label: string; color: string; tint: string }> = {
-  pending: { label: 'Pending', color: 'var(--warning)', tint: 'var(--warning-t)' },
-  processing: { label: 'Processing', color: 'var(--info)', tint: 'var(--info-t)' },
-  completed: { label: 'Completed', color: 'var(--success)', tint: 'var(--success-t)' },
-  returned: { label: 'Returned', color: 'var(--danger)', tint: 'var(--danger-t)' },
+type StatusKey = 'all' | OrderStatus | 'toShip' | 'review';
+/** Status rail order (mockup-orders). */
+const STATUS_TABS: OrderStatus[] = [...ORDER_STATUSES];
+/** Summary cards that cover several statuses filter by the first one. */
+const GROUPS: Partial<Record<StatusKey, OrderStatus[]>> = {
+  toShip: ['processing', 'packed'],
+  review: ['returned', 'cancelled'],
 };
-const STATUS_ORDER: OrderStatus[] = ['pending', 'processing', 'completed', 'returned'];
-
-function StatusPill({ status }: { status: OrderStatus | undefined }) {
-  if (!status) return <span className="text-[11px] text-[var(--text-faint)]">—</span>;
-  const s = STATUS[status];
-  return (
-    <span
-      className="inline-flex items-center gap-[5px] text-[11px] font-medium px-[9px] py-0.5 rounded-full whitespace-nowrap tracking-[0.01em]"
-      style={{ background: s.tint, color: s.color }}
-    >
-      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: s.color }} />
-      {s.label}
-    </span>
-  );
-}
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const fmtDay = (iso: string) => {
@@ -62,12 +50,13 @@ function Customer({ o, compact = false }: { o: OrderRow; compact?: boolean }) {
     : name
       ? o.customerEmail || o.customerMobile || 'no contact on file'
       : 'walk-in · POS';
+  const ship = o.courier || o.trackingNo ? [o.courier, o.trackingNo].filter(Boolean).join(' · ') : null;
   return (
     <span className="flex flex-col gap-0.5 min-w-0">
       <span className={`${compact ? 'font-medium' : ''} text-[13px] truncate ${name ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
         {name || (o.marketplace ? `${o.channel} buyer` : 'Walk-in')}
       </span>
-      <span className="text-[11px] text-[var(--text-muted)] truncate">{sub}</span>
+      <span className="text-[11px] text-[var(--text-muted)] truncate">{ship ? `${sub} · ${ship}` : sub}</span>
     </span>
   );
 }
@@ -98,48 +87,52 @@ export function OrdersList() {
   const [channel, setChannel] = useState('');
   const [summary, setSummary] = useState<OrdersSummary | null>(null);
   const [loading, setLoading] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [reload, setReload] = useState(0);
 
   // Status counts follow search + channel; channel chips follow search only.
   useEffect(() => {
     getOrdersSummary({ q: q || undefined, channel: channel || undefined })
       .then(setSummary)
       .catch(() => setSummary(null));
-  }, [q, channel]);
+  }, [q, channel, reload]);
 
   useEffect(() => {
     setLoading(true);
     getOrders({
       q: q || undefined,
       channel: channel || undefined,
-      status: status === 'all' ? undefined : status,
+      status: status === 'all' ? undefined : GROUPS[status]?.[0] ?? (status as OrderStatus),
       page,
       limit: LIMIT,
     })
       .then(r => { setRows(r.data); setTotal(r.total); })
       .catch(() => { setRows([]); setTotal(0); })
       .finally(() => setLoading(false));
-  }, [q, channel, status, page]);
+  }, [q, channel, status, page, reload]);
 
   const by = summary?.byStatus;
-  const count = (k: StatusKey) => (k === 'all' ? summary?.total : by?.[k].orders);
+  const count = (k: StatusKey) =>
+    k === 'all' ? summary?.total : GROUPS[k] ? GROUPS[k]!.reduce((t, x) => t + (by?.[x].orders ?? 0), 0) : by?.[k as OrderStatus].orders;
   const pick = (k: StatusKey) => { setStatus(k); setPage(1); };
 
+  const n = (k: OrderStatus) => by?.[k].orders ?? 0;
   const cards: Array<{ key: StatusKey; label: string; dot: string; value: number | undefined; meta: React.ReactNode }> = [
     {
       key: 'pending', label: 'Pending', dot: 'var(--warning)', value: by?.pending.orders,
-      meta: <><span className="font-medium text-[var(--text-primary)]">{fmtRpShort(by?.pending.amount)}</span> awaiting payment</>,
+      meta: <><span className="font-medium text-[var(--text-primary)]">{fmtRpShort(by?.pending.amount)}</span> awaiting action</>,
     },
     {
-      key: 'processing', label: 'To ship', dot: 'var(--info)', value: by?.processing.orders,
-      meta: <>paid · not yet sent</>,
+      key: 'toShip', label: 'To ship', dot: 'var(--info)', value: by ? n('processing') + n('packed') : undefined,
+      meta: <><span className="font-medium text-[var(--text-primary)]">{fmtNum(n('packed'))}</span> packed · <span className="font-medium text-[var(--text-primary)]">{fmtNum(n('processing'))}</span> processing</>,
     },
     {
-      key: 'all', label: 'Today', dot: 'var(--success)', value: summary?.today.orders,
-      meta: <><span className="font-medium text-[var(--text-primary)]">{fmtRpShort(summary?.today.amount)}</span> across channels</>,
+      key: 'shipped', label: 'In transit', dot: 'var(--info)', value: by?.shipped.orders,
+      meta: <><span className="font-medium text-[var(--text-primary)]">{fmtNum(summary?.activeCouriers)}</span> {summary?.activeCouriers === 1 ? 'courier' : 'couriers'} active</>,
     },
     {
-      key: 'returned', label: 'Needs review', dot: 'var(--danger)', value: by?.returned.orders,
-      meta: <>returned orders</>,
+      key: 'review', label: 'Needs review', dot: 'var(--danger)', value: by ? n('returned') + n('cancelled') : undefined,
+      meta: <><span className="font-medium text-[var(--text-primary)]">{fmtNum(n('returned'))}</span> returned · <span className="font-medium text-[var(--text-primary)]">{fmtNum(n('cancelled'))}</span> cancelled</>,
     },
   ];
 
@@ -152,6 +145,7 @@ export function OrdersList() {
         title="Orders"
         sub="Unified inbox — MF retail, Peers ticket sales and Dealer POS sales, kept separate"
         actions={
+          <div className="flex items-center gap-2.5">
           <button
             onClick={() => exportCsv(rows)}
             disabled={rows.length === 0}
@@ -160,6 +154,14 @@ export function OrdersList() {
             <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6}><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
             Export
           </button>
+          <button
+            onClick={() => setAdding(true)}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[13px] font-medium hover:opacity-90 transition-opacity"
+          >
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+            New order
+          </button>
+          </div>
         }
       />
 
@@ -180,7 +182,7 @@ export function OrdersList() {
         {/* Summary counters */}
         <div className="flex flex-col gap-2 max-[1100px]:grid max-[1100px]:grid-cols-4 max-[1100px]:gap-2.5 max-md:grid-cols-2">
           {cards.map(c => {
-            const on = c.key !== 'all' && status === c.key;
+            const on = status === c.key;
             return (
               <button
                 key={c.label}
@@ -208,7 +210,7 @@ export function OrdersList() {
           <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[8px] px-3.5 py-3 mb-3.5">
             <div className="flex items-center gap-3 flex-wrap">
               <div role="tablist" aria-label="Filter by status" className="flex gap-1 flex-wrap">
-                {(['all', ...STATUS_ORDER] as StatusKey[]).map(k => {
+                {(['all', ...STATUS_TABS] as StatusKey[]).map(k => {
                   const on = status === k;
                   const n = count(k);
                   return (
@@ -221,8 +223,8 @@ export function OrdersList() {
                         on ? 'border-[var(--accent)] text-[var(--text-primary)]' : 'border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
                       }`}
                     >
-                      {k !== 'all' && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: STATUS[k].color }} />}
-                      {k === 'all' ? 'All' : STATUS[k].label}
+                      {k !== 'all' && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: ORDER_STATUS[k as OrderStatus].color }} />}
+                      {k === 'all' ? 'All' : ORDER_STATUS[k as OrderStatus].label}
                       <span className={`text-[11px] [font-variant-numeric:tabular-nums] ${on ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'}`}>
                         {n == null ? '…' : fmtNum(n)}
                       </span>
@@ -340,6 +342,12 @@ export function OrdersList() {
           </div>
         </div>
       </div>
+      {adding && (
+        <NewOrderSheet
+          onClose={() => setAdding(false)}
+          onCreated={id => { setReload(r => r + 1); navigate(`/orders/${id}`); }}
+        />
+      )}
     </div>
   );
 }

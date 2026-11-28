@@ -11,21 +11,27 @@ import { ChannelTag, PageHeader, Stat, TableFoot, Widget } from '../../component
 import { fmtNum, fmtRpShort } from '../../lib/idFormat';
 import { BarChart, ShareList } from '../../components/ui/BarChart';
 import { CustomerDrawer } from './CustomerDrawer';
+import { AddCustomerSheet } from './AddCustomerSheet';
+import { SegmentBadge } from '../../components/ui/OrderStatus';
 
 const LIMIT = 10; // mockup: 10 rows per page
 
-type SegKey = 'all' | 'vip' | 'new';
+type SegKey = 'all' | 'vip' | 'wholesale' | 'new';
 const SEGMENTS: Array<{ key: SegKey; label: string }> = [
   { key: 'all', label: 'All' },
   { key: 'vip', label: 'VIP' },
+  { key: 'wholesale', label: 'Wholesale' },
   { key: 'new', label: 'New' },
 ];
 
 const initials = (name: string) =>
   name.trim().split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase() ?? '').join('') || '—';
 
-const memberSince = (iso: string | null, segment: CustomerRow['segment']) =>
-  segment === 'new' ? 'Joined this month' : iso ? `Member since ${new Date(iso).getFullYear()}` : 'No join date';
+const memberSince = (iso: string | null, segment: CustomerRow['segment']) => {
+  if (segment === 'new') return 'Joined this month';
+  if (!iso) return 'No join date';
+  return `${segment === 'wholesale' ? 'Partner' : 'Member'} since ${new Date(iso).getFullYear()}`;
+};
 
 const monthLabel = (ym: string) =>
   new Date(`${ym}-01T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' });
@@ -82,20 +88,6 @@ function Avatar({ name, size = 34 }: { name: string; size?: number }) {
   );
 }
 
-function SegBadge({ segment }: { segment: CustomerRow['segment'] }) {
-  if (!segment) return null;
-  const vip = segment === 'vip';
-  return (
-    <span
-      className={`inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.04em] px-[7px] py-px rounded-[4px] border ${
-        vip ? 'text-[var(--text-primary)] border-[var(--accent)]' : 'text-[var(--text-muted)] border-[var(--border)]'
-      }`}
-    >
-      {vip ? 'VIP' : 'New'}
-    </span>
-  );
-}
-
 function toCsv(rows: CustomerRow[]): string {
   const head = ['Name', 'Code', 'Email', 'Phone', 'Orders', 'Lifetime (IDR)', 'Last order', 'Acquired via', 'Segment'];
   const esc = (v: string | number | null) => `"${String(v ?? '').replace(/"/g, '""')}"`;
@@ -117,11 +109,13 @@ export function CustomersList() {
   const [summary, setSummary] = useState<CustomersSummary | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [analytics, setAnalytics] = useState<CustomersAnalytics | null>(null);
+  const [adding, setAdding] = useState(false);
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
     getCustomersSummary().then(setSummary).catch(() => setSummary(null));
     getCustomersAnalytics().then(setAnalytics).catch(() => setAnalytics({ months: [], frequency: [], recency: [] }));
-  }, []);
+  }, [reload]);
 
   useEffect(() => {
     setLoading(true);
@@ -129,10 +123,15 @@ export function CustomersList() {
       .then(r => { setRows(r.data); setTotal(r.total); })
       .catch(() => { setRows([]); setTotal(0); })
       .finally(() => setLoading(false));
-  }, [q, page, seg]);
+  }, [q, page, seg, reload]);
 
   const segCounts = useMemo(
-    () => ({ all: summary?.totalCustomers ?? 0, vip: summary?.vipCount ?? 0, new: summary?.newThisMonth ?? 0 }),
+    () => ({
+      all: summary?.totalCustomers ?? 0,
+      vip: summary?.vipCount ?? 0,
+      wholesale: summary?.wholesaleCount ?? 0,
+      new: summary?.newThisMonth ?? 0,
+    }),
     [summary],
   );
 
@@ -162,6 +161,13 @@ export function CustomersList() {
             >
               <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={1.6}><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
               Export CSV
+            </button>
+            <button
+              onClick={() => setAdding(true)}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] text-[13px] font-medium hover:opacity-90 transition-opacity"
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+              Add customer
             </button>
           </div>
         }
@@ -256,7 +262,7 @@ export function CustomersList() {
                         <Avatar name={c.name} />
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 text-[13px] font-medium text-[var(--text-primary)] truncate">
-                            {c.name} <SegBadge segment={c.segment} />
+                            {c.name} <SegmentBadge segment={c.segment} />
                           </div>
                           <div className="text-[11px] text-[var(--text-muted)] mt-px">{memberSince(c.joinDate, c.segment)}</div>
                         </div>
@@ -320,7 +326,15 @@ export function CustomersList() {
       {/* Not in the mockup — kept below the list: 12-month trend, frequency, recency. */}
       <CustomerAnalytics data={analytics} />
 
-      {selected && <CustomerDrawer customerId={selected} onClose={() => setSelected(null)} />}
+      {selected && (
+        <CustomerDrawer customerId={selected} onClose={() => setSelected(null)} onChanged={() => setReload(r => r + 1)} />
+      )}
+      {adding && (
+        <AddCustomerSheet
+          onClose={() => setAdding(false)}
+          onCreated={c => { setReload(r => r + 1); setSelected(c.id); }}
+        />
+      )}
     </div>
   );
 }

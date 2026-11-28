@@ -2,7 +2,7 @@ import { BadRequestException, ConflictException, Injectable, NotFoundException }
 import { Prisma, WebOrderStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { validateVoucher } from '../vouchers/vouchers.validator';
-import { CreateWebOrderDto, WebOrderFilterDto } from './dto/create-web-order.dto';
+import { CreateBackofficeOrderDto, CreateWebOrderDto, WebOrderFilterDto } from './dto/create-web-order.dto';
 import { orderNumber, priceLines } from './web-order.pricing';
 
 const PUBLIC_FIELDS = {
@@ -17,6 +17,25 @@ export class WebOrdersService {
 
   /** Public: place an order. Prices, stock and voucher are all resolved server-side. */
   async create(dto: CreateWebOrderDto) {
+    return this.place({ ...dto, channel: 'Website', status: 'PENDING' });
+  }
+
+  /** Staff: enter an order taken elsewhere (WhatsApp, Instagram, phone, walk-in…).
+   *  Same pricing, voucher and stock rules as checkout. Recorded in MF only —
+   *  DealPOS is not written to. Paid orders start as PAID. */
+  async createBackoffice(dto: CreateBackofficeOrderDto) {
+    const order = await this.place({
+      ...dto,
+      email: dto.email || undefined,
+      phone: dto.phone || undefined,
+      status: dto.paid ? 'PAID' : 'PENDING',
+    });
+    return this.prisma.webOrder.findUniqueOrThrow({ where: { number: order.number }, include: { lines: true } });
+  }
+
+  private async place(dto: Omit<CreateWebOrderDto, 'email' | 'phone'> & {
+    email?: string; phone?: string; channel: string; status: WebOrderStatus;
+  }) {
     const ids = [...new Set(dto.lines.map(l => l.releaseId))];
     return this.prisma.$transaction(async tx => {
       const releases = await tx.release.findMany({
@@ -51,9 +70,11 @@ export class WebOrdersService {
       return tx.webOrder.create({
         data: {
           number: orderNumber(new Date()),
+          status: dto.status,
+          channel: dto.channel.trim(),
           customerName: dto.customerName.trim(),
-          email: dto.email.trim().toLowerCase(),
-          phone: dto.phone.trim(),
+          email: dto.email?.trim().toLowerCase() || null,
+          phone: dto.phone?.trim() || null,
           fulfilment: dto.fulfilment,
           address: delivery ? dto.address?.trim() : null,
           city: delivery ? dto.city?.trim() : null,

@@ -852,9 +852,13 @@ model WebOrder {
   id           String         @id @default(cuid())
   number       String         @unique
   status       WebOrderStatus @default(PENDING)
+  /// Where the order came from: "Website" for storefront checkout, or the
+  /// channel staff picked when entering it in the back-office (WhatsApp, …).
+  channel      String         @default("Website")
   customerName String
-  email        String
-  phone        String
+  /// Optional for back-office orders (a WhatsApp buyer may give neither).
+  email        String?
+  phone        String?
   fulfilment   Fulfilment
   address      String?
   city         String?
@@ -991,4 +995,49 @@ model PosPayment {
   sale PosSale @relation(fields: [saleId], references: [id], onDelete: Cascade)
 
   @@index([saleId])
+}
+
+// ─── Back-office customers & fulfilment tracking ─────────────────────────
+// MF-owned data next to the read-only DealPOS mirror (DealPOS is not written to).
+
+enum CustomerSegment {
+  RETAIL
+  WHOLESALE
+}
+
+/// A customer added in the back-office (dpCustomerId null), or MF-side facts
+/// about a DealPOS customer (dpCustomerId set) such as the wholesale flag.
+model CustomerProfile {
+  id           String          @id @default(cuid())
+  dpCustomerId String?         @unique
+  name         String
+  email        String?
+  phone        String?
+  /// Acquisition channel for back-office customers (Website, POS, WhatsApp, …)
+  channel      String?
+  segment      CustomerSegment @default(RETAIL)
+  notes        String?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([name])
+}
+
+enum TrackingStage {
+  PACKED
+  SHIPPED
+  DELIVERED
+}
+
+/// Packing/shipping progress for any order — a DealPOS invoice (DpInvoice.id)
+/// or an MF order (WebOrder.id). DealPOS only knows paid/unpaid and sent/unsent.
+model OrderTracking {
+  orderId     String        @id
+  stage       TrackingStage
+  courier     String?
+  trackingNo  String?
+  packedAt    DateTime?
+  shippedAt   DateTime?
+  deliveredAt DateTime?
+  updatedAt   DateTime      @updatedAt
 }
