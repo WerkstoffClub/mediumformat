@@ -7,6 +7,7 @@ import { EdcOverlay, SuccessModal, XenditOverlay, summaryFromSale, type EdcResul
 import { createPosSale, saleErrorMessage, type PosPaymentInput, type PosSale, type XenditChannel } from '../../api/posSales';
 import { ProductCover } from './Cover';
 import { usePosStore, type DiscountKind } from './PosContext';
+import { getPosLocation } from '../../lib/posLocation';
 
 /**
  * POS Checkout — collects payment for the in-flight cart.
@@ -70,6 +71,7 @@ export function PosCheckout() {
         discount: !voucherCode && discount && discount.value > 0 ? discount : undefined,
         customer: customerInput.name || customerInput.phone || customerInput.email ? customerInput : undefined,
         payment,
+        locationId: getPosLocation() || undefined,
       });
       if (recorded.status === 'PENDING') setPendingXendit(recorded);
       else setSale(summaryFromSale(recorded));

@@ -8,7 +8,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
-import { CreatePosSaleDto, PosSaleFilterDto } from './dto/create-pos-sale.dto';
+import { ConsignmentReportDto, CreatePosSaleDto, PosSaleFilterDto } from './dto/create-pos-sale.dto';
 import { PosSalesService } from './pos-sales.service';
 import { XenditClient, callbackTokenValid, parseInvoiceEvent } from './xendit.client';
 
@@ -23,6 +23,13 @@ export class PosSalesController {
   @Post()
   create(@Body() body: CreatePosSaleDto, @CurrentUser() user: AuthUser) {
     return this.svc.create(body, user?.id ?? null);
+  }
+
+  /** Record items a consignment shop / event sold (no till there). */
+  @Roles(...STAFF_ROLES)
+  @Post('report')
+  report(@Body() body: ConsignmentReportDto, @CurrentUser() user: AuthUser) {
+    return this.svc.consignmentReport(body, user?.id ?? null);
   }
 
   @Roles(...STAFF_ROLES)

@@ -13,6 +13,7 @@ const CRUMBS: Array<[RegExp, string]> = [
   [/^\/orders/, 'Orders'],
   [/^\/inventory\/new/, 'Add release'],
   [/^\/inventory\/.+\/edit/, 'Edit release'],
+  [/^\/inventory\/locations\//, 'Location'],
   [/^\/inventory/, 'Inventory'],
   [/^\/customers/, 'Customers'],
   [/^\/channels/, 'Channels'],

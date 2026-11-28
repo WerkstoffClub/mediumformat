@@ -34,6 +34,7 @@ import { EventDetail } from './pages/peers/EventDetail';
 import { Checkin } from './pages/peers/Checkin';
 import { Dealers } from './pages/dealers/Dealers';
 import { DealerDetail } from './pages/dealers/DealerDetail';
+import { LocationDetail } from './pages/inventory/locations/LocationDetail';
 
 function ProtectedRoutes() {
   const { user, loading } = useAuth();
@@ -91,6 +92,7 @@ export default function App() {
           <Route path="/inventory"          element={<Inventory />} />
           <Route path="/inventory/new"      element={<ReleaseForm />} />
           <Route path="/inventory/:id/edit" element={<ReleaseForm />} />
+          <Route path="/inventory/locations/:id" element={<LocationDetail />} />
           <Route path="/cms"                         element={<CmsHub />} />
           <Route path="/blog"                        element={<Navigate to="/cms?tab=news" replace />} />
           <Route path="/blog/new"                    element={<PostForm />} />
