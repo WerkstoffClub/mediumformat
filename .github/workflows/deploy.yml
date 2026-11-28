@@ -128,3 +128,9 @@ jobs:
             echo "$code $url"
             [ "$code" = 200 ] || exit 1
           done
+
+      # An auth-key node is not ephemeral: log it out so runs leave no devices
+      # behind in the tailnet (OAuth runs use ephemeral nodes).
+      - name: Leave the tailnet
+        if: always() && steps.secrets.outputs.mode == 'authkey'
+        run: sudo tailscale logout || true
