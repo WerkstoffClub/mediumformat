@@ -17,6 +17,8 @@ export interface CreatePosSaleInput {
   voucherCode?: string;
   customer?: { name?: string; phone?: string; email?: string };
   payment: PosPaymentInput;
+  /** Where the sale happens; omitted = each item's home store. */
+  locationId?: string;
 }
 
 export interface PosSaleLine { id: string; releaseId: string; artist: string; title: string; format: string; unitPriceIdr: number; qty: number }

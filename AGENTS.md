@@ -156,3 +156,13 @@ Until both keys are set, Xendit endpoints answer 501 and the register shows "Xen
 - Optional `XENDIT_API_URL` (default `https://api.xendit.co`) for tests.
 
 Put the keys in the API stack's `api.env` on the VPS, never in the repo. Test with a `xnd_development_…` key first.
+
+## Stock by location, transfers & location reports (2026-11-28)
+
+Module `apps/api/src/locations` (migration `20261128100000_location_stock`); back-office Inventory → Locations & Events and `/inventory/locations/:id`.
+
+- **Model.** `Release.stock` stays the total (DealPOS OnHand). `LocationStock` holds the units of a release that are *away* from its home location — the Location whose `storeLocation` matches `Release.storeLocation` (else the first retail one). Home quantity = total − away. Consignment shops, pop-up events and other stores therefore always have explicit rows.
+- **Move stock** (`POST /stock-transfers`): direct move, no in-transit state; refuses more than the source holds; records `StockTransfer` (`TRF-YYMMDD-XXXXX`) + lines. Releases are row-locked during the move.
+- **Selling at a location.** POS has a "Selling at" picker (per device, `localStorage['mf-pos-location']`); `POST /pos/sales` takes `locationId` and draws stock from there; void/expiry returns it there. `POST /pos/sales/report` records what a consignment shop or a till-less event sold (PAID sale at that location, retail price, no PPN on top).
+- **Reports** (`GET /locations/:id/report?from&to`): sales excl. PPN from MF POS + DealPOS invoices matched by `matchKey` (tag/outlet substring or exact customer), trend vs the previous equal period, daily series, sell-through, top sellers, stock on hand/value, units in/out, recent transfers. Consignment locations carry `commissionPct` → commission and net.
+- A location that holds stock or has moves/sales can't be deleted — set it inactive.

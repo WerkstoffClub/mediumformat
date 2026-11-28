@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsEnum, IsBoolean, IsArray, IsInt, IsDateString, MinLength } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsBoolean, IsArray, IsInt, IsDateString, IsNumber, Max, Min, MinLength } from 'class-validator';
 import { LocationKind, StoreLocation } from '@prisma/client';
 
 export class UpdateLocationDto {
@@ -43,4 +43,11 @@ export class UpdateLocationDto {
   @IsOptional()
   @IsInt()
   sortOrder?: number;
+
+  /** Consignment partner's cut of sales, 0–100 (%). */
+  @IsOptional()
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Min(0)
+  @Max(100)
+  commissionPct?: number;
 }

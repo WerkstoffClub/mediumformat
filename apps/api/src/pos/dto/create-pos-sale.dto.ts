@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import {
-  ArrayMaxSize, ArrayMinSize, IsEmail, IsIn, IsInt, IsOptional, IsString,
+  ArrayMaxSize, ArrayMinSize, IsDateString, IsEmail, IsIn, IsInt, IsOptional, IsString,
   Matches, Max, MaxLength, Min, MinLength, ValidateIf, ValidateNested,
 } from 'class-validator';
 
@@ -51,6 +51,18 @@ export class CreatePosSaleDto {
   @IsOptional() @ValidateNested() @Type(() => PosCustomerDto) customer?: PosCustomerDto;
 
   @ValidateNested() @Type(() => PosPaymentDto) payment!: PosPaymentDto;
+
+  /** Where the sale happens (a Location id). Omitted: each item's home location. */
+  @IsOptional() @IsString() @MaxLength(64) locationId?: string;
+}
+
+export class ConsignmentReportDto {
+  @IsString() @MinLength(1) @MaxLength(64) locationId!: string;
+  @ArrayMinSize(1) @ArrayMaxSize(200)
+  @ValidateNested({ each: true }) @Type(() => PosSaleLineDto)
+  lines!: PosSaleLineDto[];
+  /** When the partner sold them (defaults to now). */
+  @IsOptional() @IsDateString() soldAt?: string;
 }
 
 export class PosSaleFilterDto {

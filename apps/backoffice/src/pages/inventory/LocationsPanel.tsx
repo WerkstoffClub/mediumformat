@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   createLocation, deleteLocation, formatDateRange, getLocations, updateLocation,
   type Location, type LocationInput, type LocationKind, type StoreLocationKey,
 } from '../../api/locations';
 import { fmtIdrCompact } from '../../api/ops';
+import { apiError } from '../../api/locations';
+import { MoveStockModal } from './locations/StockModals';
 
 const KIND_META: Record<LocationKind, { label: string; icon: React.ReactNode }> = {
   RETAIL: { label: 'Retail floor', icon: <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10" /> },
@@ -36,10 +38,11 @@ interface FormState {
   matchKey: string;
   storeLocation: StoreLocationKey | '';
   shelves: string[];
+  commissionPct: string;
 }
 
 const emptyForm: FormState = {
-  name: '', kind: 'RETAIL', active: true, address: '', startDate: '', endDate: '', matchKey: '', storeLocation: '', shelves: [],
+  name: '', kind: 'RETAIL', active: true, address: '', startDate: '', endDate: '', matchKey: '', storeLocation: '', shelves: [], commissionPct: '',
 };
 
 function toForm(l: Location): FormState {
@@ -53,11 +56,14 @@ function toForm(l: Location): FormState {
     matchKey: l.matchKey ?? '',
     storeLocation: l.storeLocation ?? '',
     shelves: [...l.shelves],
+    commissionPct: l.commissionPct != null ? String(l.commissionPct) : '',
   };
 }
 
 function toPayload(f: FormState): LocationInput {
   const isEvent = f.kind === 'TEMPORARY';
+  const matchable = isEvent || f.kind === 'CONSIGNMENT';
+  const pct = Number(f.commissionPct.replace(',', '.'));
   const shelves = f.shelves.map(s => s.trim()).filter(Boolean);
   return {
     name: f.name.trim(),
@@ -66,9 +72,10 @@ function toPayload(f: FormState): LocationInput {
     address: f.address.trim() || undefined,
     startDate: isEvent && f.startDate ? new Date(f.startDate).toISOString() : undefined,
     endDate: isEvent && f.endDate ? new Date(f.endDate).toISOString() : undefined,
-    matchKey: isEvent && f.matchKey.trim() ? f.matchKey.trim() : undefined,
+    matchKey: matchable && f.matchKey.trim() ? f.matchKey.trim() : undefined,
     storeLocation: !isEvent && f.storeLocation ? f.storeLocation : undefined,
     shelves,
+    commissionPct: f.kind === 'CONSIGNMENT' && f.commissionPct.trim() && Number.isFinite(pct) ? Math.min(100, Math.max(0, pct)) : undefined,
   };
 }
 
@@ -102,6 +109,9 @@ export function LocationsPanel() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [saving, setSaving] = useState(false);
   const [removing, setRemoving] = useState<Location | null>(null);
+  const [moving, setMoving] = useState<Location | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const navigate = useNavigate();
   const nameRef = useRef<HTMLInputElement>(null);
 
   const load = () => {
@@ -143,8 +153,8 @@ export function LocationsPanel() {
       await deleteLocation(removing.id);
       setRemoving(null);
       load();
-    } catch {
-      setError('Could not remove the location.');
+    } catch (e) {
+      setError(apiError(e, 'Could not remove the location.'));
       setRemoving(null);
     }
   };
@@ -154,6 +164,7 @@ export function LocationsPanel() {
 
   return (
     <div>
+      {notice && <div className="mb-3.5 text-[11px] text-[var(--success)] border border-[var(--success)] rounded-[6px] px-3 py-2 bg-[var(--success-t)]">{notice}</div>}
       {error && <div className="mb-3.5 text-[11px] text-[var(--danger)] border border-[var(--danger)] rounded-[6px] px-3 py-2 bg-[var(--danger-t)]">{error}</div>}
 
       <div className="flex items-center justify-between gap-3 mb-3.5">
@@ -180,7 +191,7 @@ export function LocationsPanel() {
                 <KindIcon kind={l.kind} />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <p className="text-[14px] font-semibold text-[var(--text-primary)] truncate">{l.name}</p>
+                    <Link to={`/inventory/locations/${l.id}`} className="text-[14px] font-semibold text-[var(--text-primary)] truncate hover:underline">{l.name}</Link>
                     {!l.active && <span className="text-[9px] uppercase tracking-[0.05em] px-1.5 py-px rounded-[4px] border border-[var(--border)] text-[var(--text-muted)]">Inactive</span>}
                   </div>
                   <p className="text-[11px] text-[var(--text-muted)] mt-0.5 truncate">{subtitle || '—'}</p>
@@ -197,19 +208,11 @@ export function LocationsPanel() {
               </div>
 
               <div className="flex gap-2 pt-3 border-t border-[var(--border-sub)]">
-                {l.kind === 'TEMPORARY' ? (
-                  <>
-                    <Fig k="Revenue" v={fmtIdrCompact(l.sales?.revenue ?? 0)} />
-                    <Fig k="Orders" v={l.sales?.orders ?? 0} />
-                    <Fig k="Avg order" v={fmtIdrCompact(l.sales?.avgOrder ?? 0)} />
-                  </>
-                ) : (
-                  <>
-                    <Fig k="Items" v={l.stats.items} />
-                    <Fig k="Shelves" v={Math.max(l.stats.shelves, l.shelves.length)} />
-                    <Fig k="Low stock" v={l.stats.lowStock} warn />
-                  </>
-                )}
+                <Fig k="Units" v={l.stats.units} />
+                <Fig k={l.kind === 'TEMPORARY' && (l.startDate || l.endDate) ? 'Sales · run' : 'Sales · 30D'} v={fmtIdrCompact(l.sales?.revenue ?? 0)} />
+                {l.kind === 'TEMPORARY' || l.kind === 'CONSIGNMENT'
+                  ? <Fig k="Sold" v={l.sales?.units ?? 0} />
+                  : <Fig k="Low stock" v={l.stats.lowStock} warn />}
               </div>
 
               {l.shelves.length > 0 && (
@@ -221,17 +224,23 @@ export function LocationsPanel() {
               )}
 
               <div className="flex items-center gap-2 mt-auto pt-1">
-                <Link
-                  to="/inventory?tab=catalogue"
+                <button
+                  onClick={() => navigate(`/inventory/locations/${l.id}`)}
+                  className="text-[12px] px-2.5 py-1.5 rounded-[6px] bg-[var(--accent)] text-[var(--accent-text)] hover:opacity-90 transition-opacity"
+                >
+                  Open
+                </button>
+                <button
+                  onClick={() => setMoving(l)}
                   className="text-[12px] px-2.5 py-1.5 rounded-[6px] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)] transition-colors"
                 >
-                  View items
-                </Link>
+                  Move stock
+                </button>
                 <button
                   onClick={() => openEdit(l)}
                   className="text-[12px] px-2.5 py-1.5 rounded-[6px] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)] transition-colors"
                 >
-                  Edit{l.kind !== 'TEMPORARY' ? ' · shelves' : ''}
+                  Edit
                 </button>
               </div>
             </div>
@@ -307,9 +316,20 @@ export function LocationsPanel() {
                     <input className={inputCls} value={form.matchKey} placeholder="DealPOS tag or outlet used for this event" onChange={e => set('matchKey', e.target.value)} />
                   </div>
                 </>
+              ) : form.kind === 'CONSIGNMENT' ? (
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelCls}>Partner commission %</label>
+                    <input className={inputCls} inputMode="decimal" value={form.commissionPct} placeholder="e.g. 25" onChange={e => set('commissionPct', e.target.value.replace(/[^0-9.,]/g, ''))} />
+                  </div>
+                  <div>
+                    <label className={labelCls}>Sales match key <span className="text-[var(--text-faint)] normal-case font-normal">· optional</span></label>
+                    <input className={inputCls} value={form.matchKey} placeholder="DealPOS tag, outlet or customer" onChange={e => set('matchKey', e.target.value)} />
+                  </div>
+                </div>
               ) : (
                 <div>
-                  <label className={labelCls}>Inventory link <span className="text-[var(--text-faint)] normal-case font-normal">· for item counts</span></label>
+                  <label className={labelCls}>Inventory link <span className="text-[var(--text-faint)] normal-case font-normal">· home of these items</span></label>
                   <select className={inputCls} value={form.storeLocation} onChange={e => set('storeLocation', e.target.value as StoreLocationKey | '')}>
                     <option value="">Not linked</option>
                     {STORE_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -358,6 +378,15 @@ export function LocationsPanel() {
         </div>
       )}
 
+      {moving && (
+        <MoveStockModal
+          locations={locations}
+          initialFrom={moving.id}
+          onClose={() => setMoving(null)}
+          onDone={t => { setMoving(null); setNotice(`${t.number}: moved ${t.lines.reduce((n, x) => n + x.qty, 0)} units from ${t.from.name} to ${t.to.name}.`); load(); }}
+        />
+      )}
+
       {/* Remove confirm */}
       {removing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60" onClick={() => setRemoving(null)}>
@@ -365,7 +394,7 @@ export function LocationsPanel() {
             <div className="px-5 py-4">
               <h3 className="text-[15px] font-semibold text-[var(--text-primary)]">Remove location?</h3>
               <p className="text-[12.5px] text-[var(--text-secondary)] mt-2 leading-relaxed">
-                Remove <b className="text-[var(--text-primary)]">{removing.name}</b>? This only deletes the location record{removing.stats.items > 0 ? `; the ${removing.stats.items} linked item${removing.stats.items === 1 ? '' : 's'} stay in the catalogue` : ''}. It can't be undone.
+                Remove <b className="text-[var(--text-primary)]">{removing.name}</b>? This only deletes the location record. A location that holds stock or has moves or sales on record can't be removed; set it inactive instead. It can't be undone.
               </p>
             </div>
             <div className="flex items-center justify-end gap-2 px-5 py-3.5 border-t border-[var(--border)]">

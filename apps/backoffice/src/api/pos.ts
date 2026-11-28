@@ -45,7 +45,7 @@ export function formatLabel(format: Release['format'] | string): string {
   return map[format] ?? format;
 }
 
-export function releaseToProduct(r: Release): PosProduct {
+export function releaseToProduct(r: Pick<Release, 'id' | 'artist' | 'title' | 'priceIdr' | 'format' | 'condition' | 'imageUrl' | 'stock'>): PosProduct {
   return {
     id: r.id,
     artist: r.artist,

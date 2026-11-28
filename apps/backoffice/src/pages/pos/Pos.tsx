@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { getReleases } from '../../api/inventory';
 import { fmtIdr } from '../../api/ops';
 import { releaseToProduct, type PosCategory, type PosProduct } from '../../api/pos';
+import { getLocations, getLocationStock, type Location } from '../../api/locations';
+import { getPosLocation, setPosLocation } from '../../lib/posLocation';
 import { ProductGrid } from './ProductGrid';
 import { Cart, type CartTotals } from './Cart';
 import { usePosStore } from './PosContext';
@@ -31,6 +33,26 @@ export function Pos() {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<PosCategory | 'all'>('all');
   const [cartSheetOpen, setCartSheetOpen] = useState(false);
+  const [locations, setLocations] = useState<Location[]>([]);
+  const [locationId, setLocationId] = useState(getPosLocation);
+
+  useEffect(() => {
+    getLocations().then(ls => {
+      const active = ls.filter(l => l.active);
+      setLocations(active);
+      // Forget a saved location that no longer exists or was switched off.
+      if (locationId && !active.some(l => l.id === locationId)) { setLocationId(''); setPosLocation(''); }
+    }).catch(() => setLocations([]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const chooseLocation = (id: string) => {
+    if (id === locationId) return;
+    if (cart.length > 0 && !confirm('Switching location empties the cart. Continue?')) return;
+    if (cart.length > 0) clearCart();
+    setLocationId(id);
+    setPosLocation(id);
+  };
 
   // The DealPOS-synced catalogue, searched on the server (artist, title, label,
   // cat# or barcode — so a scanned barcode finds its release). Debounced.
@@ -38,13 +60,19 @@ export function Pos() {
     let alive = true;
     setLoading(true);
     const t = setTimeout(() => {
-      getReleases({ q: search.trim() || undefined, limit: 60, sort: 'newest' })
-        .then(r => { if (alive) { setProducts(r.data.map(releaseToProduct)); setError(null); } })
+      // At a chosen location the register only offers what is there (event or
+      // consignment stock); otherwise the whole catalogue.
+      const load = locationId
+        ? getLocationStock(locationId, { q: search.trim() || undefined, limit: 60, inStock: true })
+            .then(rows => rows.map(r => releaseToProduct({ ...r, stock: r.locationQty } as Parameters<typeof releaseToProduct>[0])))
+        : getReleases({ q: search.trim() || undefined, limit: 60, sort: 'newest' }).then(r => r.data.map(releaseToProduct));
+      load
+        .then(p => { if (alive) { setProducts(p); setError(null); } })
         .catch(() => { if (alive) { setProducts([]); setError('Could not load the catalogue. Check the connection and try again.'); } })
         .finally(() => { if (alive) setLoading(false); });
     }, search ? 250 : 0);
     return () => { alive = false; clearTimeout(t); };
-  }, [search, reload]);
+  }, [search, reload, locationId]);
 
   // Cart.tsx expects a delta-based updater; adapt to the store's absolute
   // updateQty(id, qty).
@@ -83,7 +111,20 @@ export function Pos() {
     <div className="h-[calc(100vh-108px)] max-md:h-auto">
       <div className="grid grid-cols-[1fr_400px] max-lg:grid-cols-[1fr_360px] max-md:grid-cols-1 gap-3 h-full max-md:h-auto">
         {/* Left — product browser */}
-        <div className="min-h-0 max-md:min-h-[calc(100vh-200px)]">
+        <div className="min-h-0 max-md:min-h-[calc(100vh-200px)] flex flex-col gap-2">
+          <label className="flex items-center gap-2 bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3 py-2 flex-shrink-0">
+            <span className="text-[11px] uppercase tracking-[0.05em] font-semibold text-[var(--text-muted)] whitespace-nowrap">Selling at</span>
+            <select
+              aria-label="Selling at"
+              value={locationId}
+              onChange={e => chooseLocation(e.target.value)}
+              className="flex-1 min-w-0 bg-transparent text-[13px] text-[var(--text-primary)] outline-none cursor-pointer"
+            >
+              <option value="">Home store (each item's usual location)</option>
+              {locations.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
+            </select>
+          </label>
+          <div className="flex-1 min-h-0">
           <ProductGrid
             products={products}
             loading={loading}
@@ -96,6 +137,7 @@ export function Pos() {
             onAdd={addToCart}
             inCart={inCart}
           />
+          </div>
         </div>
 
         {/* Right — cart + charge (desktop only; mobile uses bottom sheet) */}

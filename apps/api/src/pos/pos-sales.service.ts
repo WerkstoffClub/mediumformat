@@ -6,8 +6,9 @@ import { Prisma, PosSaleStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { validateVoucher } from '../vouchers/vouchers.validator';
 import { priceLines } from '../web-orders/web-order.pricing';
-import { CreatePosSaleDto, PosSaleFilterDto } from './dto/create-pos-sale.dto';
+import { ConsignmentReportDto, CreatePosSaleDto, PosSaleFilterDto } from './dto/create-pos-sale.dto';
 import { posSaleNumber, saleTotals } from './pos-sale.pricing';
+import { LocationStockService } from '../locations/location-stock.service';
 import { XenditClient, XenditInvoiceEvent } from './xendit.client';
 
 const SALE_INCLUDE = { lines: true, payments: { orderBy: { createdAt: 'asc' } } } satisfies Prisma.PosSaleInclude;
@@ -16,7 +17,7 @@ const SALE_INCLUDE = { lines: true, payments: { orderBy: { createdAt: 'asc' } } 
 export class PosSalesService {
   private readonly logger = new Logger(PosSalesService.name);
 
-  constructor(private prisma: PrismaService, private xendit: XenditClient) {}
+  constructor(private prisma: PrismaService, private xendit: XenditClient, private stock: LocationStockService) {}
 
   /**
    * Record a till sale in the MF database. Prices, voucher, discount and PPN are
@@ -24,8 +25,12 @@ export class PosSalesService {
    * invoice is paid or expires). Cash, EDC and DealPOS methods are PAID on create;
    * Xendit starts PENDING and is settled by the invoice webhook.
    */
-  async create(dto: CreatePosSaleDto, cashierId: string | null) {
+  async create(dto: CreatePosSaleDto, cashierId: string | null, opts: { noTax?: boolean; soldAt?: Date } = {}) {
     const p = dto.payment;
+    const locationId = dto.locationId ?? null;
+    if (locationId && !(await this.prisma.location.findUnique({ where: { id: locationId } }))) {
+      throw new BadRequestException('Unknown sale location.');
+    }
     if (p.method === 'XENDIT' && !this.xendit.configured) {
       throw new NotImplementedException('Xendit is not configured yet (XENDIT_SECRET_KEY, XENDIT_CALLBACK_TOKEN).');
     }
@@ -50,12 +55,17 @@ export class PosSalesService {
         voucherDiscount = res.discountIdr;
         await tx.voucher.update({ where: { code }, data: { usageCount: { increment: 1 } } });
       }
-      const totals = saleTotals(priced.subtotalIdr, voucherCode ? null : dto.discount, voucherDiscount);
+      const base = saleTotals(priced.subtotalIdr, voucherCode ? null : dto.discount, voucherDiscount);
+      // A consignment report records the partner's retail sales: no PPN is added on top.
+      const totals = opts.noTax ? { ...base, taxIdr: 0, totalIdr: base.subtotalIdr - base.discountIdr } : base;
 
       if (p.method === 'CASH' && (p.tenderedIdr ?? 0) < totals.totalIdr) {
         throw new BadRequestException('Cash tendered is less than the total.');
       }
 
+      // Take the units from the sale's location (null = each item's home); this
+      // locks the releases and refuses more than that location holds.
+      await this.stock.take(tx, locationId, priced.lines.map(l => ({ releaseId: l.id, qty: l.qty })));
       for (const l of priced.lines) {
         const { count } = await tx.release.updateMany({
           where: { id: l.id, stock: { gte: l.qty } },
@@ -64,7 +74,7 @@ export class PosSalesService {
         if (count !== 1) throw new ConflictException(`${l.artist} — ${l.title} just sold out.`);
       }
 
-      const now = new Date();
+      const now = opts.soldAt ?? new Date();
       const paidNow = p.method !== 'XENDIT';
       const number = posSaleNumber(now);
       return tx.posSale.create({
@@ -72,6 +82,7 @@ export class PosSalesService {
           number,
           status: paidNow ? 'PAID' : 'PENDING',
           cashierId,
+          locationId,
           customerName: dto.customer?.name?.trim() || null,
           customerPhone: dto.customer?.phone?.trim() || null,
           customerEmail: dto.customer?.email?.trim().toLowerCase() || null,
@@ -158,6 +169,23 @@ export class PosSalesService {
     return { data, total, page, limit };
   }
 
+  /**
+   * Record what a consignment partner (or an event without a till) sold: a PAID
+   * sale at that location, at retail price, without PPN on top. Stock comes off
+   * that location.
+   */
+  async consignmentReport(dto: ConsignmentReportDto, cashierId: string | null) {
+    const loc = await this.prisma.location.findUnique({ where: { id: dto.locationId } });
+    if (!loc) throw new NotFoundException('Location not found');
+    const soldAt = dto.soldAt ? new Date(dto.soldAt) : undefined;
+    if (soldAt && soldAt.getTime() > Date.now() + 60_000) throw new BadRequestException('The sale date is in the future.');
+    return this.create({
+      lines: dto.lines,
+      locationId: loc.id,
+      payment: { method: 'OTHER', otherMethodName: `Sales report · ${loc.name}` },
+    } as CreatePosSaleDto, cashierId, { noTax: true, soldAt });
+  }
+
   /** Staff: cancel a sale and return its stock. A Xendit payment already received must be refunded in Xendit first. */
   async void(id: string) {
     const sale = await this.findOne(id);
@@ -208,6 +236,8 @@ export class PosSalesService {
       });
       if (count === 1) {
         const lines = await tx.posSaleLine.findMany({ where: { saleId: id } });
+        const sale = await tx.posSale.findUniqueOrThrow({ where: { id }, select: { locationId: true } });
+        await this.stock.put(tx, sale.locationId, lines.map(l => ({ releaseId: l.releaseId, qty: l.qty })));
         for (const l of lines) {
           await tx.release.updateMany({ where: { id: l.releaseId }, data: { stock: { increment: l.qty } } });
         }

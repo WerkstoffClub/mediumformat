@@ -8,12 +8,18 @@ export interface LocationStats {
   units: number;
   shelves: number;
   lowStock: number;
+  /** Units × retail price of the stock held here. */
+  valueIdr: number;
 }
 
-export interface EventSales {
+/** Sales excl. PPN (MF POS + matched DealPOS) in the location's window:
+ *  an event's run, else the last 30 days. */
+export interface LocationSales {
   revenue: number;
   orders: number;
   avgOrder: number;
+  units: number;
+  windowDays: number;
 }
 
 export interface LocationRecord {
@@ -28,14 +34,15 @@ export interface LocationRecord {
   matchKey: string | null;
   storeLocation: StoreLocationKey | null;
   sortOrder: number;
+  /** Consignment partner's cut of sales, 0–100. */
+  commissionPct: number | null;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface Location extends LocationRecord {
   stats: LocationStats;
-  /** Present for TEMPORARY (event) locations — sales taken during the run. */
-  sales?: EventSales;
+  sales: LocationSales;
 }
 
 export interface LocationInput {
@@ -49,6 +56,7 @@ export interface LocationInput {
   matchKey?: string;
   storeLocation?: StoreLocationKey | null;
   sortOrder?: number;
+  commissionPct?: number;
 }
 
 export async function getLocations(): Promise<Location[]> {
@@ -80,4 +88,81 @@ export function formatDateRange(start: string | null, end: string | null): strin
   const sameMonth = s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear();
   const startLabel = sameMonth ? String(s.getDate()) : s.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
   return `${startLabel}–${e.toLocaleDateString('en-GB', opts)}`;
+}
+
+// ─── Stock by location ─────────────────────────────────────────────────────
+
+export interface LocationStockRow {
+  id: string;
+  artist: string;
+  title: string;
+  catNumber: string | null;
+  barcode: string | null;
+  format: string;
+  condition: string;
+  priceIdr: number;
+  imageUrl: string | null;
+  stock: number;
+  /** Units of this release at the location. */
+  locationQty: number;
+}
+
+export async function getLocationStock(id: string, params: { q?: string; limit?: number; inStock?: boolean } = {}): Promise<LocationStockRow[]> {
+  const res = await api.get<LocationStockRow[]>(`/locations/${id}/stock`, {
+    params: { q: params.q || undefined, limit: params.limit, inStock: params.inStock ? 'true' : undefined },
+  });
+  return res.data;
+}
+
+export interface StockTransfer {
+  id: string;
+  number: string;
+  note: string | null;
+  createdAt: string;
+  from: { id: string; name: string };
+  to: { id: string; name: string };
+  lines: Array<{ id: string; releaseId: string; artist: string; title: string; qty: number }>;
+}
+
+export async function createTransfer(input: {
+  fromLocationId: string; toLocationId: string; lines: Array<{ releaseId: string; qty: number }>; note?: string;
+}): Promise<StockTransfer> {
+  return (await api.post<StockTransfer>('/stock-transfers', input)).data;
+}
+
+/** Record what a consignment shop / event sold (no till there): a PAID sale at that location, no PPN on top. */
+export async function recordLocationSales(input: {
+  locationId: string; lines: Array<{ releaseId: string; qty: number }>; soldAt?: string;
+}): Promise<{ id: string; number: string; totalIdr: number }> {
+  return (await api.post('/pos/sales/report', input)).data;
+}
+
+export interface LocationReport {
+  location: LocationRecord;
+  range: { from: string; to: string; previousFrom: string; previousTo: string };
+  sales: {
+    revenue: number; orders: number; units: number; avgOrder: number;
+    pos: { revenue: number; orders: number; units: number };
+    dealpos: { revenue: number; orders: number };
+    previousRevenue: number;
+    /** % vs the previous equal period; null when that period had no sales. */
+    changePct: number | null;
+    commissionPct: number; commissionIdr: number; netIdr: number;
+  };
+  sellThroughPct: number;
+  stock: LocationStats;
+  movement: { unitsIn: number; unitsOut: number };
+  daily: Array<{ date: string; posRevenue: number; dealposRevenue: number; units: number; orders: number }>;
+  topSellers: Array<{ releaseId: string; artist: string; title: string; units: number; revenue: number }>;
+  transfers: StockTransfer[];
+}
+
+export async function getLocationReport(id: string, range: { from?: string; to?: string } = {}): Promise<LocationReport> {
+  return (await api.get<LocationReport>(`/locations/${id}/report`, { params: range })).data;
+}
+
+/** The API's message for a failed request. */
+export function apiError(err: unknown, fallback: string): string {
+  const msg = (err as { response?: { data?: { message?: unknown } } })?.response?.data?.message;
+  return Array.isArray(msg) ? msg.join(' ') : typeof msg === 'string' ? msg : fallback;
 }

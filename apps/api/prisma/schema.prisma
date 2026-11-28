@@ -179,6 +179,7 @@ model Release {
   updatedAt         DateTime         @updatedAt
 
   purchaseOrderLines PurchaseOrderLine[]
+  locationStock      LocationStock[]
   importLines        ImportOrderLine[]
   channelPrices      ReleaseChannelPrice[]
   // barcode and discogsId already have implicit indexes via @unique
@@ -353,10 +354,69 @@ model Location {
   matchKey      String?
   storeLocation StoreLocation?
   sortOrder     Int            @default(0)
+  /// Consignment partner's cut of sales (0–100). Reports show gross, commission and net.
+  commissionPct Float?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 
+  stock        LocationStock[]
+  transfersOut StockTransfer[] @relation("TransferFrom")
+  transfersIn  StockTransfer[] @relation("TransferTo")
+  posSales     PosSale[]
+
   @@index([kind])
+}
+
+// ─── Stock by location ───────────────────────────────────────────────────
+// Release.stock stays the total (DealPOS OnHand). A LocationStock row holds the
+// units of a release that sit AWAY from its home location (the Location whose
+// storeLocation matches Release.storeLocation): consignment shops, pop-up events,
+// other stores. Home quantity = Release.stock − sum of its away rows.
+
+model LocationStock {
+  id         String   @id @default(cuid())
+  locationId String
+  releaseId  String
+  qty        Int      @default(0)
+  updatedAt  DateTime @updatedAt
+
+  location Location @relation(fields: [locationId], references: [id], onDelete: Restrict)
+  release  Release  @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+
+  @@unique([locationId, releaseId])
+  @@index([releaseId])
+}
+
+/// A direct move of stock between two locations (no in-transit state).
+model StockTransfer {
+  id             String   @id @default(cuid())
+  number         String   @unique
+  fromLocationId String
+  toLocationId   String
+  note           String?
+  createdById    String?
+  createdAt      DateTime @default(now())
+
+  from  Location            @relation("TransferFrom", fields: [fromLocationId], references: [id], onDelete: Restrict)
+  to    Location            @relation("TransferTo", fields: [toLocationId], references: [id], onDelete: Restrict)
+  lines StockTransferLine[]
+
+  @@index([fromLocationId, createdAt])
+  @@index([toLocationId, createdAt])
+}
+
+model StockTransferLine {
+  id         String @id @default(cuid())
+  transferId String
+  releaseId  String
+  artist     String
+  title      String
+  qty        Int
+
+  transfer StockTransfer @relation(fields: [transferId], references: [id], onDelete: Cascade)
+
+  @@index([transferId])
+  @@index([releaseId])
 }
 
 model PurchaseOrder {
@@ -939,13 +999,17 @@ model PosSale {
   taxIdr        Int
   totalIdr      Int
   paidAt        DateTime?
+  /// Where the sale happened (null = each item's home location).
+  locationId    String?
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @updatedAt
 
+  location Location?     @relation(fields: [locationId], references: [id], onDelete: SetNull)
   lines    PosSaleLine[]
   payments PosPayment[]
 
   @@index([status, createdAt])
+  @@index([locationId, createdAt])
 }
 
 model PosSaleLine {
